@@ -1,0 +1,9 @@
+# UpdateSalesInvoiceRequest
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Id`                                                                                    | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the item you want to perform this operation on.                       | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                           |
+| `RequestBody`                                                                           | [UpdateSalesInvoiceRequestBody](../../Models/Requests/UpdateSalesInvoiceRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |

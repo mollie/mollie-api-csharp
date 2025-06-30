@@ -1,0 +1,8 @@
+# ReleaseAuthorizationNotFoundLinks
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                 | [ReleaseAuthorizationNotFoundDocumentation](../../Models/Requests/ReleaseAuthorizationNotFoundDocumentation.md) | :heavy_check_mark:                                                                                              | The URL to the generic Mollie API error handling guide.                                                         |

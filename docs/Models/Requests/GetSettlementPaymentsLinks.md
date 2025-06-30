@@ -1,0 +1,13 @@
+# GetSettlementPaymentsLinks
+
+Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Self`                                                                                            | [GetSettlementPaymentsSelf](../../Models/Requests/GetSettlementPaymentsSelf.md)                   | :heavy_minus_sign:                                                                                | The URL to the current set of items.                                                              |
+| `Previous`                                                                                        | [GetSettlementPaymentsPrevious](../../Models/Requests/GetSettlementPaymentsPrevious.md)           | :heavy_minus_sign:                                                                                | The previous set of items, if available.                                                          |
+| `Next`                                                                                            | [GetSettlementPaymentsNext](../../Models/Requests/GetSettlementPaymentsNext.md)                   | :heavy_minus_sign:                                                                                | The next set of items, if available.                                                              |
+| `Documentation`                                                                                   | [GetSettlementPaymentsDocumentation](../../Models/Requests/GetSettlementPaymentsDocumentation.md) | :heavy_minus_sign:                                                                                | In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.        |

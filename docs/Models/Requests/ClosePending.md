@@ -1,0 +1,9 @@
+# ClosePending
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                          | [ClosePendingAmount](../../Models/Requests/ClosePendingAmount.md)                                 | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
+| `Subtotals`                                                                                       | List<[ClosePendingSubtotal2](../../Models/Requests/ClosePendingSubtotal2.md)>                     | :heavy_minus_sign:                                                                                | N/A                                                                                               |

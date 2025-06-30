@@ -1,0 +1,9 @@
+# UpdateProfileRequest
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             | pfl_QkEhN94Ba                                                                 |
+| `RequestBody`                                                                 | [UpdateProfileRequestBody](../../Models/Requests/UpdateProfileRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |                                                                               |

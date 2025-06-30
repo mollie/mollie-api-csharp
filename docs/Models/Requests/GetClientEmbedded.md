@@ -1,0 +1,10 @@
+# GetClientEmbedded
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Organization`                                                                          | [GetClientEmbeddedOrganization](../../Models/Requests/GetClientEmbeddedOrganization.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `Onboarding`                                                                            | [GetClientEmbeddedOnboarding](../../Models/Requests/GetClientEmbeddedOnboarding.md)     | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `Capabilities`                                                                          | [GetClientCapabilities](../../Models/Requests/GetClientCapabilities.md)                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |

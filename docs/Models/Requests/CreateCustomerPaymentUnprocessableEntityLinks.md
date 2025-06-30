@@ -1,0 +1,8 @@
+# CreateCustomerPaymentUnprocessableEntityLinks
+
+
+## Fields
+
+| Field                                                                                                                                   | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                                         | [CreateCustomerPaymentUnprocessableEntityDocumentation](../../Models/Requests/CreateCustomerPaymentUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                                      | The URL to the generic Mollie API error handling guide.                                                                                 |

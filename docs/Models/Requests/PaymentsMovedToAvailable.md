@@ -1,0 +1,9 @@
+# PaymentsMovedToAvailable
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                              | [PaymentsMovedToAvailableAmount](../../Models/Requests/PaymentsMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                    | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.     |
+| `Subtotals`                                                                                           | List<[PaymentsMovedToAvailableSubtotal2](../../Models/Requests/PaymentsMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |

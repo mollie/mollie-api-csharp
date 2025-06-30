@@ -1,0 +1,8 @@
+# UpdateSalesInvoiceUnprocessableEntityLinks
+
+
+## Fields
+
+| Field                                                                                                                             | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                                   | [UpdateSalesInvoiceUnprocessableEntityDocumentation](../../Models/Requests/UpdateSalesInvoiceUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                                | The URL to the generic Mollie API error handling guide.                                                                           |

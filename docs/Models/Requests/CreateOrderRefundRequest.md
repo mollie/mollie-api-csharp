@@ -1,0 +1,9 @@
+# CreateOrderRefundRequest
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `OrderId`                                                                             | *string*                                                                              | :heavy_check_mark:                                                                    | Provide the ID of the related order.                                                  | ord_5B8cwPMGnU                                                                        |
+| `RequestBody`                                                                         | [CreateOrderRefundRequestBody](../../Models/Requests/CreateOrderRefundRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |

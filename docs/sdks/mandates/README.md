@@ -1,0 +1,224 @@
+# Mandates
+(*Mandates*)
+
+## Overview
+
+### Available Operations
+
+* [Create](#create) - Create mandate
+* [List](#list) - List mandates
+* [Get](#get) - Get mandate
+* [Revoke](#revoke) - Revoke mandate
+
+## Create
+
+Create a mandate for a specific customer. Mandates allow you to charge a customer's card, PayPal account or bank account recurrently.
+
+It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create mandates for cards, your customers need to perform a 'first payment' with their card.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **mandates.write**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Mandates.CreateAsync(
+    customerId: "cst_5B8cwPMGnU",
+    requestBody: new CreateMandateRequestBody() {
+        Id = "mdt_5B8cwPMGnU",
+        Method = "directdebit",
+        ConsumerName = "John Doe",
+        ConsumerAccount = "NL55INGB0000000000",
+        ConsumerBic = "BANKBIC",
+        ConsumerEmail = "example@email.com",
+        SignatureDate = "2025-01-01",
+        MandateReference = "ID-1023892",
+        PaypalBillingAgreementId = "B-12A34567B8901234CD",
+        PayPalVaultId = "8kk8451t",
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `CustomerId`                                                                  | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the related customer.                                       | cst_5B8cwPMGnU                                                                |
+| `RequestBody`                                                                 | [CreateMandateRequestBody](../../Models/Requests/CreateMandateRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+
+### Response
+
+**[CreateMandateResponse](../../Models/Requests/CreateMandateResponse.md)**
+
+### Errors
+
+| Error Type                                            | Status Code                                           | Content Type                                          |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| MollieApi.Models.Errors.CreateMandateHalJSONException | 404                                                   | application/hal+json                                  |
+| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+
+## List
+
+Retrieve a list of all mandates.
+
+The results are paginated.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **mandates.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListMandatesRequest req = new ListMandatesRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    From = "mdt_5B8cwPMGnU",
+    Sort = "desc",
+    Testmode = false,
+};
+
+var res = await sdk.Mandates.ListAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [ListMandatesRequest](../../Models/Requests/ListMandatesRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+
+### Response
+
+**[ListMandatesResponse](../../Models/Requests/ListMandatesResponse.md)**
+
+### Errors
+
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListMandatesBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
+| MollieApi.Models.Errors.ListMandatesNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
+| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+
+## Get
+
+Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer's bank account details, card details, or PayPal account details.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **mandates.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Mandates.GetAsync(
+    customerId: "cst_5B8cwPMGnU",
+    mandateId: "mdt_5B8cwPMGnU",
+    testmode: false
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CustomerId`                                                                                                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
+| `MandateId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related mandate.                                                                                                                                                                                                                                                                                                                                                 | mdt_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+
+### Response
+
+**[GetMandateResponse](../../Models/Requests/GetMandateResponse.md)**
+
+### Errors
+
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| MollieApi.Models.Errors.GetMandateHalJSONException | 404                                                | application/hal+json                               |
+| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+
+## Revoke
+
+Revoke a customer's mandate. You will no longer be able to charge the customer's bank account or card with this mandate, and all connected subscriptions will be canceled.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **mandates.write**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Mandates.RevokeAsync(
+    customerId: "cst_5B8cwPMGnU",
+    mandateId: "mdt_5B8cwPMGnU",
+    requestBody: new RevokeMandateRequestBody() {
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `CustomerId`                                                                  | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the related customer.                                       | cst_5B8cwPMGnU                                                                |
+| `MandateId`                                                                   | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the related mandate.                                        | mdt_5B8cwPMGnU                                                                |
+| `RequestBody`                                                                 | [RevokeMandateRequestBody](../../Models/Requests/RevokeMandateRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+
+### Response
+
+**[RevokeMandateResponse](../../Models/Requests/RevokeMandateResponse.md)**
+
+### Errors
+
+| Error Type                                            | Status Code                                           | Content Type                                          |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| MollieApi.Models.Errors.RevokeMandateHalJSONException | 404                                                   | application/hal+json                                  |
+| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |

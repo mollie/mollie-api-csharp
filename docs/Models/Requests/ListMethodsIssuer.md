@@ -1,0 +1,11 @@
+# ListMethodsIssuer
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `Resource`                                                                | *string*                                                                  | :heavy_minus_sign:                                                        | N/A                                                                       |                                                                           |
+| `Id`                                                                      | *string*                                                                  | :heavy_check_mark:                                                        | N/A                                                                       | ideal_ABNANL2A                                                            |
+| `Name`                                                                    | *string*                                                                  | :heavy_check_mark:                                                        | The full name of the issuer.                                              | ING Bank                                                                  |
+| `Image`                                                                   | [ListMethodsIssuerImage](../../Models/Requests/ListMethodsIssuerImage.md) | :heavy_check_mark:                                                        | URLs of images representing the issuer. required: - size1x - size2x - svg |                                                                           |

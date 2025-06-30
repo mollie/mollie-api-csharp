@@ -1,0 +1,22 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Mollie API:
+        inputs:
+            - location: https://raw.githubusercontent.com/mollie/openapi-specs/main/specs.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/mollie-oom/mollie/mollie-api
+targets:
+    client:
+        target: csharp
+        source: Mollie API
+        publish:
+            nuget:
+                apiKey: $nuget_api_key
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/mollie-oom/mollie/mollie-api-csharp-code-samples
+            labelOverride:
+                fixedValue: Csharp (SDK)
+            blocking: false

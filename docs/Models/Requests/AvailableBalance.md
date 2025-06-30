@@ -1,0 +1,13 @@
+# AvailableBalance
+
+The available balance. Only available if grouping is `status-balances`.
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Open`                                                                                                | [AvailableBalanceOpen](../../Models/Requests/AvailableBalanceOpen.md)                                 | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `MovedFromPending`                                                                                    | [MovedFromPending](../../Models/Requests/MovedFromPending.md)                                         | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `ImmediatelyAvailable`                                                                                | [AvailableBalanceImmediatelyAvailable](../../Models/Requests/AvailableBalanceImmediatelyAvailable.md) | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `Close`                                                                                               | [AvailableBalanceClose](../../Models/Requests/AvailableBalanceClose.md)                               | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |

@@ -1,0 +1,9 @@
+# UpdatePaymentLinkRequest
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `PaymentLinkId`                                                                       | *string*                                                                              | :heavy_check_mark:                                                                    | Provide the ID of the related payment link.                                           | pl_d9fQur83kFdhH8hIhaZfq                                                              |
+| `RequestBody`                                                                         | [UpdatePaymentLinkRequestBody](../../Models/Requests/UpdatePaymentLinkRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |

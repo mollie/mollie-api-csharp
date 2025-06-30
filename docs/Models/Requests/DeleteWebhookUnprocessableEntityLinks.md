@@ -1,0 +1,8 @@
+# DeleteWebhookUnprocessableEntityLinks
+
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                         | [DeleteWebhookUnprocessableEntityDocumentation](../../Models/Requests/DeleteWebhookUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                      | The URL to the generic Mollie API error handling guide.                                                                 |

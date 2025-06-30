@@ -1,0 +1,9 @@
+# ChargebacksImmediatelyAvailable
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                                            | [ChargebacksImmediatelyAvailableAmount](../../Models/Requests/ChargebacksImmediatelyAvailableAmount.md)             | :heavy_minus_sign:                                                                                                  | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.                   |
+| `Subtotals`                                                                                                         | List<[ChargebacksImmediatelyAvailableSubtotal2](../../Models/Requests/ChargebacksImmediatelyAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |

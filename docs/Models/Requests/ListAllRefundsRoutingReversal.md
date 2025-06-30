@@ -1,0 +1,9 @@
+# ListAllRefundsRoutingReversal
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                            | [ListAllRefundsRoutingReversalAmount](../../Models/Requests/ListAllRefundsRoutingReversalAmount.md) | :heavy_minus_sign:                                                                                  | The amount that will be pulled back.                                                                |
+| `Source`                                                                                            | [ListAllRefundsSource](../../Models/Requests/ListAllRefundsSource.md)                               | :heavy_minus_sign:                                                                                  | Where the funds will be pulled back from.                                                           |

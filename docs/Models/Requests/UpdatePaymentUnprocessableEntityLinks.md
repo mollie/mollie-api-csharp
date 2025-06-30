@@ -1,0 +1,8 @@
+# UpdatePaymentUnprocessableEntityLinks
+
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                         | [UpdatePaymentUnprocessableEntityDocumentation](../../Models/Requests/UpdatePaymentUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                      | The URL to the generic Mollie API error handling guide.                                                                 |

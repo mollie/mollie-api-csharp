@@ -1,0 +1,9 @@
+# CreateCustomerPaymentResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                      | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `Object`                                                                                        | [CreateCustomerPaymentResponseBody](../../Models/Requests/CreateCustomerPaymentResponseBody.md) | :heavy_minus_sign:                                                                              | The newly created payment object.                                                               |

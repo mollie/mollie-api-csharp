@@ -1,0 +1,416 @@
+# Subscriptions
+(*Subscriptions*)
+
+## Overview
+
+### Available Operations
+
+* [Create](#create) - Create subscription
+* [List](#list) - List customer subscriptions
+* [Get](#get) - Get subscription
+* [Update](#update) - Update subscription
+* [Cancel](#cancel) - Cancel subscription
+* [All](#all) - List all subscriptions
+* [ListPayments](#listpayments) - List subscription payments
+
+## Create
+
+With subscriptions, you can schedule recurring payments to take place at regular intervals.
+
+For example, by simply specifying an `amount` and an `interval`, you can create an endless subscription to charge a monthly fee, until you cancel the subscription.
+
+Or, you could use the times parameter to only charge a limited number of times, for example to split a big transaction in multiple parts.
+
+A few example usages:
+
+`amount[currency]="EUR"` `amount[value]="5.00"` `interval="2 weeks"` Your customer will be charged €5 once every two weeks.
+
+`amount[currency]="EUR"` `amount[value]="20.00"` `interval="1 day" times=5` Your customer will be charged €20 every day, for five consecutive days.
+
+`amount[currency]="EUR"` `amount[value]="10.00"` `interval="1 month"` `startDate="2018-04-30"` Your customer will be charged €10 on the last day of each month, starting in April 2018.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.write**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Subscriptions.CreateAsync(
+    customerId: "cst_5B8cwPMGnU",
+    requestBody: new CreateSubscriptionRequestBody() {
+        Amount = new CreateSubscriptionAmountRequest() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Times = 6,
+        Interval = "1 month",
+        StartDate = "2025-01-01",
+        Description = "Subscription of streaming channel",
+        Method = "paypal",
+        ApplicationFee = new CreateSubscriptionApplicationFeeRequest() {
+            Amount = new CreateSubscriptionApplicationFeeAmountRequest() {
+                Currency = "EUR",
+                Value = "10.00",
+            },
+            Description = "Platform fee",
+        },
+        WebhookUrl = "https://example.com/webhook",
+        MandateId = "mdt_5B8cwPMGnU",
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
+| `RequestBody`                                                                           | [CreateSubscriptionRequestBody](../../Models/Requests/CreateSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+
+### Response
+
+**[CreateSubscriptionResponse](../../Models/Requests/CreateSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| MollieApi.Models.Errors.CreateSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
+| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+
+## List
+
+Retrieve all subscriptions of a customer.
+
+The results are paginated.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    From = "sub_5B8cwPMGnU",
+    Sort = "desc",
+    Testmode = false,
+};
+
+var res = await sdk.Subscriptions.ListAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [ListSubscriptionsRequest](../../Models/Requests/ListSubscriptionsRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+
+### Response
+
+**[ListSubscriptionsResponse](../../Models/Requests/ListSubscriptionsResponse.md)**
+
+### Errors
+
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListSubscriptionsBadRequestHalJSONException | 400                                                                 | application/hal+json                                                |
+| MollieApi.Models.Errors.ListSubscriptionsNotFoundHalJSONException   | 404                                                                 | application/hal+json                                                |
+| MollieApi.Models.Errors.APIException                                | 4XX, 5XX                                                            | \*/\*                                                               |
+
+## Get
+
+Retrieve a single subscription by its ID and the ID of its parent customer.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Subscriptions.GetAsync(
+    customerId: "cst_5B8cwPMGnU",
+    subscriptionId: "sub_5B8cwPMGnU",
+    testmode: false
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CustomerId`                                                                                                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
+| `SubscriptionId`                                                                                                                                                                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related subscription.                                                                                                                                                                                                                                                                                                                                            | sub_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+
+### Response
+
+**[GetSubscriptionResponse](../../Models/Requests/GetSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| MollieApi.Models.Errors.GetSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
+| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+
+## Update
+
+Update an existing subscription.
+
+Canceled subscriptions cannot be updated.
+
+For an in-depth explanation of each parameter, refer to the [Create subscription](create-subscription) endpoint.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.write**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Subscriptions.UpdateAsync(
+    customerId: "cst_5B8cwPMGnU",
+    subscriptionId: "sub_5B8cwPMGnU",
+    requestBody: new UpdateSubscriptionRequestBody() {
+        Amount = new UpdateSubscriptionAmountRequest() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Description = "Subscription of streaming channel",
+        Interval = "1 month",
+        StartDate = "2025-01-01",
+        Times = 6,
+        WebhookUrl = "https://example.com/webhook",
+        MandateId = "mdt_5B8cwPMGnU",
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
+| `SubscriptionId`                                                                        | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related subscription.                                             | sub_5B8cwPMGnU                                                                          |
+| `RequestBody`                                                                           | [UpdateSubscriptionRequestBody](../../Models/Requests/UpdateSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+
+### Response
+
+**[UpdateSubscriptionResponse](../../Models/Requests/UpdateSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| MollieApi.Models.Errors.UpdateSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
+| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+
+## Cancel
+
+Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.write**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Subscriptions.CancelAsync(
+    customerId: "cst_5B8cwPMGnU",
+    subscriptionId: "sub_5B8cwPMGnU",
+    requestBody: new CancelSubscriptionRequestBody() {
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
+| `SubscriptionId`                                                                        | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related subscription.                                             | sub_5B8cwPMGnU                                                                          |
+| `RequestBody`                                                                           | [CancelSubscriptionRequestBody](../../Models/Requests/CancelSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+
+### Response
+
+**[CancelSubscriptionResponse](../../Models/Requests/CancelSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| MollieApi.Models.Errors.CancelSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
+| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+
+## All
+
+Retrieve all subscriptions initiated across all your customers.
+
+The results are paginated.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
+    From = "tr_5B8cwPMGnU",
+    Sort = "desc",
+    ProfileId = "pfl_5B8cwPMGnU",
+    Testmode = false,
+};
+
+var res = await sdk.Subscriptions.AllAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [ListAllSubscriptionsRequest](../../Models/Requests/ListAllSubscriptionsRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+
+### Response
+
+**[ListAllSubscriptionsResponse](../../Models/Requests/ListAllSubscriptionsResponse.md)**
+
+### Errors
+
+| Error Type                                                   | Status Code                                                  | Content Type                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| MollieApi.Models.Errors.ListAllSubscriptionsHalJSONException | 400                                                          | application/hal+json                                         |
+| MollieApi.Models.Errors.APIException                         | 4XX, 5XX                                                     | \*/\*                                                        |
+
+## ListPayments
+
+Retrieve all payments of a specific subscription.
+
+The results are paginated.
+
+> 🔑 Access with
+>
+> [API key](/reference/authentication)
+>
+> [Access token with **subscriptions.read** **payments.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+using MollieApi.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Sort = "desc",
+    ProfileId = "pfl_5B8cwPMGnU",
+    Testmode = false,
+};
+
+var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [ListSubscriptionPaymentsRequest](../../Models/Requests/ListSubscriptionPaymentsRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+
+### Response
+
+**[ListSubscriptionPaymentsResponse](../../Models/Requests/ListSubscriptionPaymentsResponse.md)**
+
+### Errors
+
+| Error Type                                                       | Status Code                                                      | Content Type                                                     |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListSubscriptionPaymentsHalJSONException | 400                                                              | application/hal+json                                             |
+| MollieApi.Models.Errors.APIException                             | 4XX, 5XX                                                         | \*/\*                                                            |

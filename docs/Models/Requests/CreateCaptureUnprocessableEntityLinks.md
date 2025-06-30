@@ -1,0 +1,8 @@
+# CreateCaptureUnprocessableEntityLinks
+
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                         | [CreateCaptureUnprocessableEntityDocumentation](../../Models/Requests/CreateCaptureUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                      | The URL to the generic Mollie API error handling guide.                                                                 |

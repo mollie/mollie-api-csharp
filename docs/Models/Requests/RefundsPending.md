@@ -1,0 +1,9 @@
+# RefundsPending
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                          | [RefundsPendingAmount](../../Models/Requests/RefundsPendingAmount.md)                             | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
+| `Subtotals`                                                                                       | List<[RefundsPendingSubtotal2](../../Models/Requests/RefundsPendingSubtotal2.md)>                 | :heavy_minus_sign:                                                                                | N/A                                                                                               |

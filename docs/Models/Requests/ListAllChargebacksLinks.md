@@ -1,0 +1,13 @@
+# ListAllChargebacksLinks
+
+Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `Self`                                                                                      | [ListAllChargebacksSelf](../../Models/Requests/ListAllChargebacksSelf.md)                   | :heavy_minus_sign:                                                                          | The URL to the current set of items.                                                        |
+| `Previous`                                                                                  | [ListAllChargebacksPrevious](../../Models/Requests/ListAllChargebacksPrevious.md)           | :heavy_minus_sign:                                                                          | The previous set of items, if available.                                                    |
+| `Next`                                                                                      | [ListAllChargebacksNext](../../Models/Requests/ListAllChargebacksNext.md)                   | :heavy_minus_sign:                                                                          | The next set of items, if available.                                                        |
+| `Documentation`                                                                             | [ListAllChargebacksDocumentation](../../Models/Requests/ListAllChargebacksDocumentation.md) | :heavy_minus_sign:                                                                          | In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.  |

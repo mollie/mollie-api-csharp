@@ -1,0 +1,9 @@
+# DeleteCustomerRequest
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `CustomerId`                                                                    | *string*                                                                        | :heavy_check_mark:                                                              | Provide the ID of the related customer.                                         | cst_5B8cwPMGnU                                                                  |
+| `RequestBody`                                                                   | [DeleteCustomerRequestBody](../../Models/Requests/DeleteCustomerRequestBody.md) | :heavy_minus_sign:                                                              | N/A                                                                             |                                                                                 |

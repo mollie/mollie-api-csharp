@@ -1,0 +1,9 @@
+# ChargebacksMovedToAvailable
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                                    | [ChargebacksMovedToAvailableAmount](../../Models/Requests/ChargebacksMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                          | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.           |
+| `Subtotals`                                                                                                 | List<[ChargebacksMovedToAvailableSubtotal2](../../Models/Requests/ChargebacksMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                          | N/A                                                                                                         |

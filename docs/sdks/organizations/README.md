@@ -1,0 +1,126 @@
+# Organizations
+(*Organizations*)
+
+## Overview
+
+### Available Operations
+
+* [Get](#get) - Get organization
+* [GetCurrent](#getcurrent) - Get current organization
+* [GetPartner](#getpartner) - Get partner status
+
+## Get
+
+Retrieve a single organization by its ID.
+
+You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful for OAuth apps. See also [Get current organization](get-current-organization).
+
+If you have a *partner account*', you can retrieve organization details of connected organizations.
+
+> 🔑 Access with
+>
+> [Access token with **organizations.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Organizations.GetAsync(
+    id: "org_12345678",
+    testmode: false
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | org_12345678                                                                                                                                                                                                                                                                                                                                                                           |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+
+### Response
+
+**[GetOrganizationResponse](../../Models/Requests/GetOrganizationResponse.md)**
+
+### Errors
+
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| MollieApi.Models.Errors.GetOrganizationHalJSONException | 404                                                     | application/hal+json                                    |
+| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+
+## GetCurrent
+
+Retrieve the currently authenticated organization. A convenient alias of the [Get organization](get-organization) endpoint.
+
+For a complete reference of the organization object, refer to the [Get organization](get-organization) endpoint documentation.
+
+> 🔑 Access with
+>
+> [Access token with **organizations.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Organizations.GetCurrentAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetCurrentOrganizationResponse](../../Models/Requests/GetCurrentOrganizationResponse.md)**
+
+### Errors
+
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+
+## GetPartner
+
+Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner accounts*.
+
+> 🔑 Access with
+>
+> [Access token with **organizations.read**](/reference/authentication)
+
+### Example Usage
+
+```csharp
+using MollieApi;
+using MollieApi.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Organizations.GetPartnerAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetPartnerStatusResponse](../../Models/Requests/GetPartnerStatusResponse.md)**
+
+### Errors
+
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
