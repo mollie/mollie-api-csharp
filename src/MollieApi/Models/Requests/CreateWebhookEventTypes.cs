@@ -20,6 +20,14 @@ namespace MollieApi.Models.Requests
     {
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
+        [JsonProperty("sales-invoice.created")]
+        SalesInvoiceCreated,
+        [JsonProperty("sales-invoice.issued")]
+        SalesInvoiceIssued,
+        [JsonProperty("sales-invoice.canceled")]
+        SalesInvoiceCanceled,
+        [JsonProperty("sales-invoice.paid")]
+        SalesInvoicePaid,
     }
 
     public static class CreateWebhookEventTypesExtension

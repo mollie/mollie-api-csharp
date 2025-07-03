@@ -12,6 +12,7 @@ namespace MollieApi.Models.Requests
     using MollieApi.Models.Requests;
     using MollieApi.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// The webhook object.
@@ -59,7 +60,7 @@ namespace MollieApi.Models.Requests
         /// The events types that are subscribed.
         /// </summary>
         [JsonProperty("eventTypes")]
-        public string? EventTypes { get; set; }
+        public List<string>? EventTypes { get; set; }
 
         /// <summary>
         /// The subscription&apos;s current status.<br/>
@@ -71,6 +72,17 @@ namespace MollieApi.Models.Requests
         /// </summary>
         [JsonProperty("status")]
         public string? Status { get; set; }
+
+        /// <summary>
+        /// The subscription&apos;s mode.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// Possible values: `live` `test`
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("mode")]
+        public string? Mode { get; set; }
 
         /// <summary>
         /// The subscription&apos;s secret.
