@@ -10819,8 +10819,6 @@ paths:
         - oAuth:
             - payments.write
       description: |-
-        **This feature is currently in open beta. The final specification may still change.**
-
         Capture an *authorized* payment.
 
         Some payment methods allow you to first collect a customer's authorization, and capture the amount at a later point.
@@ -26741,8 +26739,16 @@ paths:
                   description: The list of events to enable for this webhook. You may specify `'*'` to add all events, except those that require explicit selection. Separate multiple event types with a comma.
                   enum: &ref_76
                     - payment-link.paid
+                    - sales-invoice.created
+                    - sales-invoice.issued
+                    - sales-invoice.canceled
+                    - sales-invoice.paid
                   x-enumDescriptions: &ref_75
                     payment-link.paid: A payment link has been paid.
+                    sales-invoice.created: A sales invoice has been created.
+                    sales-invoice.issued: A sales invoice has been issued.
+                    sales-invoice.canceled: A sales invoice has been canceled.
+                    sales-invoice.paid: A sales invoice has been paid.
                   example: payment-link.paid
                 testmode:
                   type: *ref_15
@@ -26793,9 +26799,12 @@ paths:
                     description: The subscription's name.
                     example: Profile Updates Webhook
                   eventTypes:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                     description: The events types that are subscribed.
-                    example: profile.create profile.blocked
+                    example:
+                      - sales-invoice.paid, sales-invoice.canceled
                   status:
                     type: string
                     description: |-
@@ -26803,6 +26812,13 @@ paths:
 
                       Possible values: `enabled` `blocked` `disabled`
                     example: enabled
+                  mode:
+                    type: string
+                    description: |-
+                      The subscription's mode.
+
+                      Possible values: `live` `test`
+                    example: live
                   webhookSecret:
                     type: string
                     description: The subscription's secret.
@@ -26828,7 +26844,10 @@ paths:
                     createdAt: '2024-12-06T10:09:56+00:00'
                     name: 'Webhook #1'
                     status: enabled
-                    eventTypes: payment.paid
+                    mode: live
+                    webhookSecret: VpQ3WukU6uSCGQ8TPTD3WPDpac3GyNEj
+                    eventTypes:
+                      - payment-link.paid
                     _links:
                       documentation:
                         href: https://docs.mollie.com/reference/create-webhook
@@ -26940,7 +26959,7 @@ paths:
           description: |-
             Used to filter out only the webhooks that are subscribed to certain types of events.
 
-            Possible values: `payment-link.paid`
+            Possible values: `payment-link.paid` `sales-invoice.created` `sales-invoice.issued` `sales-invoice.canceled` `sales-invoice.paid`
           in: query
           schema:
             type: string
@@ -27009,9 +27028,13 @@ paths:
                               description: The subscription's name.
                               example: Profile Updates Webhook
                             eventTypes:
-                              type: string
+                              type: array
+                              items:
+                                type: string
                               description: The events types that are subscribed.
-                              example: profile.create profile.blocked
+                              example:
+                                - profile.create
+                                - profile.blocked
                             status:
                               type: string
                               description: |-
@@ -27019,6 +27042,13 @@ paths:
 
                                 Possible values: `enabled` `blocked` `disabled`
                               example: enabled
+                            mode:
+                              type: string
+                              description: |-
+                                The subscription's mode.
+
+                                Possible values: `live` `test`
+                              example: live
                   _links:
                     type: object
                     description: Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
@@ -27035,16 +27065,21 @@ paths:
                           profileId: pfl_8XcSdLtrNK
                           createdAt: '2024-12-06T10:09:56+00:00'
                           name: 'Webhook #2'
-                          eventTypes: payment-link.paid,payment.failed
+                          eventTypes:
+                            - payment-link.paid
+                            - payment.failed
                           status: enabled
+                          mode: live
                         - resource: webhook
                           id: hook_qHknfTxaDx6s8JNhuGPzH
                           url: https://mollie.com
                           profileId: pfl_8XcSdLtrNK
                           createdAt: '2024-12-06T10:08:48+00:00'
                           name: 'Webhook #1'
-                          eventTypes: payment-link.paid
+                          eventTypes:
+                            - payment-link.paid
                           status: blocked
+                          mode: live
                     count: 2
                     _links:
                       documentation:
@@ -27182,7 +27217,10 @@ paths:
                     createdAt: '2024-12-06T10:09:56+00:00'
                     name: 'Webhook #1'
                     status: enabled
-                    eventTypes: payment.paid
+                    mode: live
+                    webhookSecret: VpQ3WukU6uSCGQ8TPTD3WPDpac3GyNEj
+                    eventTypes:
+                      - payment-link.paid
                     _links:
                       documentation:
                         href: https://docs.mollie.com/reference/create-webhook
@@ -27302,7 +27340,10 @@ paths:
                     createdAt: '2024-12-06T10:09:56+00:00'
                     name: 'Webhook #1'
                     status: enabled
-                    eventTypes: payment.expired,payment.paid
+                    mode: test
+                    eventTypes:
+                      - payment-link.paid
+                      - sales-invoice.paid
                     _links:
                       documentation:
                         href: https://docs.mollie.com/reference/get-webhook
@@ -27317,7 +27358,9 @@ paths:
                     createdAt: '2024-12-06T10:09:56+00:00'
                     name: 'Webhook #1'
                     status: deleted
-                    eventTypes: payment-link.paid
+                    mode: test
+                    eventTypes:
+                      - payment-link.paid
                     _links:
                       documentation:
                         href: https://docs.mollie.com/reference/get-webhook

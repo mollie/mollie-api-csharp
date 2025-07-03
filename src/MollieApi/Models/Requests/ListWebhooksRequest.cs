@@ -42,7 +42,7 @@ namespace MollieApi.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Possible values: `payment-link.paid`
+        /// Possible values: `payment-link.paid` `sales-invoice.created` `sales-invoice.issued` `sales-invoice.canceled` `sales-invoice.paid`
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=eventTypes")]

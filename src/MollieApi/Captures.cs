@@ -29,8 +29,6 @@ namespace MollieApi
         /// Create capture
         /// 
         /// <remarks>
-        /// **This feature is currently in open beta. The final specification may still change.**<br/>
-        /// <br/>
         /// Capture an *authorized* payment.<br/>
         /// <br/>
         /// Some payment methods allow you to first collect a customer&apos;s authorization, and capture the amount at a later point.<br/>
@@ -83,8 +81,8 @@ namespace MollieApi
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.640.3";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.648.5";
         private const string _openapiDocVersion = "1.0.0";
 
         public Captures(SDKConfig config)
