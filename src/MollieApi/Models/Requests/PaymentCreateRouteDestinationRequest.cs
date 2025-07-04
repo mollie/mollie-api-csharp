@@ -27,12 +27,12 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public string Type { get; set; } = default!;
 
         /// <summary>
         /// Required for destination type `organization`. The ID of the connected organization the funds should be routed to.
         /// </summary>
         [JsonProperty("organizationId")]
-        public string? OrganizationId { get; set; }
+        public string OrganizationId { get; set; } = default!;
     }
 }

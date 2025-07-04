@@ -26,18 +26,6 @@ namespace MollieApi.Models.Requests
         public PaymentListRoutesSelf? Self { get; set; }
 
         /// <summary>
-        /// The previous set of items, if available.
-        /// </summary>
-        [JsonProperty("previous")]
-        public PaymentListRoutesPrevious? Previous { get; set; } = null;
-
-        /// <summary>
-        /// The next set of items, if available.
-        /// </summary>
-        [JsonProperty("next")]
-        public PaymentListRoutesNext? Next { get; set; } = null;
-
-        /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]

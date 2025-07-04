@@ -26,42 +26,42 @@ namespace MollieApi.Models.Requests
         /// The identifier uniquely referring to this route. Mollie assigns this identifier at route creation time. Mollie will always refer to the route by this ID. Example: `crt_dyARQ3JzCgtPDhU2Pbq3J`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The unique identifier of the payment. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`. The full payment object can be retrieved via the payment URL in the `_links` object.
         /// </summary>
         [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
-
-        /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
-        /// </summary>
-        [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string PaymentId { get; set; } = default!;
 
         /// <summary>
         /// The amount of the route. That amount that will be routed to the specified destination.
         /// </summary>
         [JsonProperty("amount")]
-        public PaymentListRoutesAmount? Amount { get; set; }
+        public PaymentListRoutesAmount Amount { get; set; } = default!;
 
         /// <summary>
         /// The description of the route. This description is shown in the reports.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The destination of the route.
         /// </summary>
         [JsonProperty("destination")]
-        public PaymentListRoutesDestination? Destination { get; set; }
+        public PaymentListRoutesDestination Destination { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public RouteLinks? Links { get; set; }
+        public RouteLinks Links { get; set; } = default!;
+
+        /// <summary>
+        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// </summary>
+        [JsonProperty("createdAt")]
+        public string CreatedAt { get; set; } = default!;
     }
 }
