@@ -29,7 +29,7 @@ namespace MollieApi.Models.Requests
         /// The identifier uniquely referring to this terminal. Example: `term_7MgL4wea46qkRcoTZjWEH`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.<br/>
@@ -40,13 +40,13 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public string Mode { get; set; } = default!;
 
         /// <summary>
         /// A short description of the terminal. The description can be used as an identifier for the terminal. Currently, the description is set when the terminal is initially configured. It will be visible in the Mollie Dashboard, and it may be visible on the device itself depending on the device.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The status of the terminal.<br/>
@@ -57,7 +57,7 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public string Status { get; set; } = default!;
 
         /// <summary>
         /// The brand of the terminal.<br/>
@@ -67,8 +67,8 @@ namespace MollieApi.Models.Requests
         /// Possible values: `PAX`
         /// </remarks>
         /// </summary>
-        [JsonProperty("brand")]
-        public string? Brand { get; set; } = null;
+        [JsonProperty("brand", NullValueHandling = NullValueHandling.Include)]
+        public string? Brand { get; set; }
 
         /// <summary>
         /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.<br/>
@@ -78,20 +78,20 @@ namespace MollieApi.Models.Requests
         /// Possible values: `A35` `A77` `A920` `A920 Pro` `IM30`
         /// </remarks>
         /// </summary>
-        [JsonProperty("model")]
-        public string? Model { get; set; } = null;
+        [JsonProperty("model", NullValueHandling = NullValueHandling.Include)]
+        public string? Model { get; set; }
 
         /// <summary>
         /// The serial number of the terminal. The serial number is provided at terminal creation time.
         /// </summary>
-        [JsonProperty("serialNumber")]
-        public string? SerialNumber { get; set; } = null;
+        [JsonProperty("serialNumber", NullValueHandling = NullValueHandling.Include)]
+        public string? SerialNumber { get; set; }
 
         /// <summary>
         /// The currency configured on the terminal, in ISO 4217 format. Currently most of our terminals are bound to a specific currency, chosen during setup.
         /// </summary>
         [JsonProperty("currency")]
-        public string? Currency { get; set; }
+        public string Currency { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
@@ -102,24 +102,24 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
-        public string? ProfileId { get; set; }
+        public string ProfileId { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("updatedAt")]
-        public string? UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetTerminalLinks? Links { get; set; }
+        public GetTerminalLinks Links { get; set; } = default!;
     }
 }

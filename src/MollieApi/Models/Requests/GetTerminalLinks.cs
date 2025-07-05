@@ -23,12 +23,12 @@ namespace MollieApi.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetTerminalSelf? Self { get; set; }
+        public GetTerminalSelf Self { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetTerminalDocumentation? Documentation { get; set; }
+        public GetTerminalDocumentation Documentation { get; set; } = default!;
     }
 }
