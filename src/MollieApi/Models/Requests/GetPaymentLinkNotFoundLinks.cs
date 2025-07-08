@@ -20,6 +20,6 @@ namespace MollieApi.Models.Requests
         /// The URL to the generic Mollie API error handling guide.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetPaymentLinkNotFoundDocumentation Documentation { get; set; } = default!;
+        public GetPaymentLinkDocumentation Documentation { get; set; } = default!;
     }
 }

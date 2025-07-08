@@ -30,7 +30,7 @@ namespace MollieApi.Models.Requests
         /// The identifier uniquely referring to this payment link. Example: `pl_4Y0eZitmBnQ6IDoMqZQKh`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.<br/>
@@ -41,19 +41,19 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public string Mode { get; set; } = default!;
 
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the customer&apos;s bank or card statement when possible.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The amount of the payment link. If no amount is provided initially, the customer will be prompted to enter an amount.
         /// </summary>
-        [JsonProperty("amount")]
-        public GetPaymentLinkAmount? Amount { get; set; } = null;
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
+        public GetPaymentLinkAmount? Amount { get; set; }
 
         /// <summary>
         /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The customer will be prompted to enter a value greater than or equal to the minimum amount.
@@ -65,13 +65,13 @@ namespace MollieApi.Models.Requests
         /// Whether the payment link is archived. Customers will not be able to complete payments on archived payment links.
         /// </summary>
         [JsonProperty("archived")]
-        public bool? Archived { get; set; }
+        public bool Archived { get; set; } = default!;
 
         /// <summary>
         /// The URL your customer will be redirected to after completing the payment process. If no redirect URL is provided, the customer will be shown a generic message after completing the payment.
         /// </summary>
-        [JsonProperty("redirectUrl")]
-        public string? RedirectUrl { get; set; } = null;
+        [JsonProperty("redirectUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The webhook URL where we will send payment status updates to.<br/>
@@ -83,8 +83,8 @@ namespace MollieApi.Models.Requests
         /// The webhookUrl must be reachable from Mollie&apos;s point of view, so you cannot use `localhost`. If you want to use webhook during development on `localhost`, you must use a tool like ngrok to have the webhooks delivered to your local machine.
         /// </remarks>
         /// </summary>
-        [JsonProperty("webhookUrl")]
-        public string? WebhookUrl { get; set; } = null;
+        [JsonProperty("webhookUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? WebhookUrl { get; set; }
 
         /// <summary>
         /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item ordered and its price.<br/>
@@ -131,8 +131,8 @@ namespace MollieApi.Models.Requests
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
         /// </remarks>
         /// </summary>
-        [JsonProperty("profileId")]
-        public string? ProfileId { get; set; } = null;
+        [JsonProperty("profileId", NullValueHandling = NullValueHandling.Include)]
+        public string? ProfileId { get; set; }
 
         /// <summary>
         /// Indicates whether the payment link is reusable. If this field is set to `true`, customers can make multiple payments using the same link.<br/>
@@ -149,19 +149,19 @@ namespace MollieApi.Models.Requests
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The date and time the payment link became paid, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("paidAt")]
-        public string? PaidAt { get; set; } = null;
+        [JsonProperty("paidAt", NullValueHandling = NullValueHandling.Include)]
+        public string? PaidAt { get; set; }
 
         /// <summary>
         /// The date and time the payment link is set to expire, in ISO 8601 format. If no expiry date was provided up front, the payment link will not expire automatically.
         /// </summary>
-        [JsonProperty("expiresAt")]
-        public string? ExpiresAt { get; set; } = null;
+        [JsonProperty("expiresAt", NullValueHandling = NullValueHandling.Include)]
+        public string? ExpiresAt { get; set; }
 
         /// <summary>
         /// An array of payment methods that are allowed to be used for this payment link. When this parameter is not provided or is an empty array, all enabled payment methods will be available.<br/>
@@ -171,8 +171,8 @@ namespace MollieApi.Models.Requests
         /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;, &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;.
         /// </remarks>
         /// </summary>
-        [JsonProperty("allowedMethods")]
-        public List<string>? AllowedMethods { get; set; } = null;
+        [JsonProperty("allowedMethods", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? AllowedMethods { get; set; }
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie merchants.<br/>
@@ -189,6 +189,6 @@ namespace MollieApi.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetPaymentLinkLinks? Links { get; set; }
+        public GetPaymentLinkLinks Links { get; set; } = default!;
     }
 }

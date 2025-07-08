@@ -1,4 +1,4 @@
-# UpdatePaymentLinkDocumentation
+# EntityDocumentation
 
 In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
 

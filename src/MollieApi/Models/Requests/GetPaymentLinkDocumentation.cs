@@ -13,20 +13,14 @@ namespace MollieApi.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
+    /// The URL to the generic Mollie API error handling guide.
     /// </summary>
     public class GetPaymentLinkDocumentation
     {
 
-        /// <summary>
-        /// The actual URL string.
-        /// </summary>
         [JsonProperty("href")]
         public string Href { get; set; } = default!;
 
-        /// <summary>
-        /// The content type of the page or endpoint the URL points to.
-        /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; } = default!;
     }

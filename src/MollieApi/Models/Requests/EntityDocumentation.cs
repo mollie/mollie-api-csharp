@@ -15,7 +15,7 @@ namespace MollieApi.Models.Requests
     /// <summary>
     /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
     /// </summary>
-    public class PaymentLinkDocumentation
+    public class EntityDocumentation
     {
 
         /// <summary>

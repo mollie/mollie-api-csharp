@@ -33,12 +33,12 @@ namespace MollieApi.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
-        public CreatePaymentLinkApplicationFeeAmountRequest? Amount { get; set; }
+        public CreatePaymentLinkApplicationFeeAmountRequest Amount { get; set; } = default!;
 
         /// <summary>
         /// The description of the application fee. This will appear on settlement reports towards both you and the connected merchant.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
     }
 }
