@@ -168,7 +168,7 @@ namespace MollieApi.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;, &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;.
+        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;, &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;, &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
         /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods", NullValueHandling = NullValueHandling.Include)]

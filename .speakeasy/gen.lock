@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8f6f820e-f9b0-4d8c-8964-44774ced8540
 management:
-  docChecksum: 98aecf1db84f9267fe6b4aa960782f5d
+  docChecksum: c7afba05cd9a66e13606d23ac5d9b061
   docVersion: 1.0.0
-  speakeasyVersion: 1.576.1
-  generationVersion: 2.651.2
-  releaseVersion: 0.0.5
-  configChecksum: e43be94df3fcd601e5bf8b628450bbe9
+  speakeasyVersion: 1.580.0
+  generationVersion: 2.654.2
+  releaseVersion: 0.0.6
+  configChecksum: f1f70e6a79e1e1cdb78f042104906731
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
