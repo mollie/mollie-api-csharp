@@ -127,8 +127,8 @@ namespace MollieApi
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.6";
-        private const string _sdkGenVersion = "2.654.2";
+        private const string _sdkVersion = "0.0.7";
+        private const string _sdkGenVersion = "2.657.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)

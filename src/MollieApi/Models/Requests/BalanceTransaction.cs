@@ -17,10 +17,10 @@ namespace MollieApi.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a balance transaction object. Will always contain the string `balance_transaction` for this endpoint.
+        /// Indicates the response contains a balance transaction object. Will always contain the string `balance-transaction` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "balance_transaction";
+        public string? Resource { get; set; } = "balance-transaction";
 
         /// <summary>
         /// The identifier uniquely referring to this balance transaction.
