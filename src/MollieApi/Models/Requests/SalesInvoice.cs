@@ -190,6 +190,12 @@ namespace MollieApi.Models.Requests
         public string? IssuedAt { get; set; } = null;
 
         /// <summary>
+        /// If paid, the date when the sales invoice was paid, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// </summary>
+        [JsonProperty("paidAt")]
+        public string? PaidAt { get; set; } = null;
+
+        /// <summary>
         /// If issued, the date when the sales invoice payment is due, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("dueAt")]
