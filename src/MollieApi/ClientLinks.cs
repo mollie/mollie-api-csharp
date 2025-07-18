@@ -65,6 +65,10 @@ namespace MollieApi
         /// <br/>
         /// Error handling is also dealt with similar to the <a href="https://docs.mollie.com/reference/authorize">Authorize</a> endpoint: the customer is redirected back to your app&apos;s redirect URL with the `error` and `error_description` parameters added to the URL.<br/>
         /// <br/>
+        /// &gt; 🚧<br/>
+        /// &gt;<br/>
+        /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.<br/>
+        /// <br/>
         /// &gt; 🔑 Access with<br/>
         /// &gt;<br/>
         /// &gt; <a href="/reference/authentication">Access token with **clients.write**</a>
@@ -77,7 +81,7 @@ namespace MollieApi
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.8";
+        private const string _sdkVersion = "0.0.9";
         private const string _sdkGenVersion = "2.657.1";
         private const string _openapiDocVersion = "1.0.0";
 
