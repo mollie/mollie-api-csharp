@@ -1,8 +1,0 @@
-# GetSettlementCapturesBadRequestLinks
-
-
-## Fields
-
-| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                       | [GetSettlementCapturesBadRequestDocumentation](../../Models/Requests/GetSettlementCapturesBadRequestDocumentation.md) | :heavy_check_mark:                                                                                                    | The URL to the generic Mollie API error handling guide.                                                               |

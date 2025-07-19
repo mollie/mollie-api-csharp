@@ -9,10 +9,10 @@
 * [Get](#get) - Get settlement
 * [GetOpen](#getopen) - Get open settlement
 * [GetNext](#getnext) - Get next settlement
-* [ListPayments](#listpayments) - Get settlement payments
-* [ListCaptures](#listcaptures) - Get settlement captures
-* [ListRefunds](#listrefunds) - Get settlement refunds
-* [ListChargebacks](#listchargebacks) - Get settlement chargebacks
+* [ListPayments](#listpayments) - List settlement payments
+* [ListCaptures](#listcaptures) - List settlement captures
+* [ListRefunds](#listrefunds) - List settlement refunds
+* [ListChargebacks](#listchargebacks) - List settlement chargebacks
 
 ## List
 
@@ -211,7 +211,7 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-GetSettlementPaymentsRequest req = new GetSettlementPaymentsRequest() {
+ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "tr_5B8cwPMGnU",
     Sort = "desc",
@@ -226,20 +226,20 @@ var res = await sdk.Settlements.ListPaymentsAsync(req);
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `request`                                                                             | [GetSettlementPaymentsRequest](../../Models/Requests/GetSettlementPaymentsRequest.md) | :heavy_check_mark:                                                                    | The request object to use for the request.                                            |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [ListSettlementPaymentsRequest](../../Models/Requests/ListSettlementPaymentsRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 
-**[GetSettlementPaymentsResponse](../../Models/Requests/GetSettlementPaymentsResponse.md)**
+**[ListSettlementPaymentsResponse](../../Models/Requests/ListSettlementPaymentsResponse.md)**
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSettlementPaymentsHalJSONException | 400                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.APIException                          | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListSettlementPaymentsHalJSONException | 400                                                            | application/hal+json                                           |
+| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
 
 ## ListCaptures
 
@@ -262,10 +262,10 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-GetSettlementCapturesRequest req = new GetSettlementCapturesRequest() {
+ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
-    Embed = GetSettlementCapturesEmbed.Payment,
+    Embed = ListSettlementCapturesEmbed.Payment,
     Testmode = false,
 };
 
@@ -276,21 +276,21 @@ var res = await sdk.Settlements.ListCapturesAsync(req);
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `request`                                                                             | [GetSettlementCapturesRequest](../../Models/Requests/GetSettlementCapturesRequest.md) | :heavy_check_mark:                                                                    | The request object to use for the request.                                            |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [ListSettlementCapturesRequest](../../Models/Requests/ListSettlementCapturesRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 
-**[GetSettlementCapturesResponse](../../Models/Requests/GetSettlementCapturesResponse.md)**
+**[ListSettlementCapturesResponse](../../Models/Requests/ListSettlementCapturesResponse.md)**
 
 ### Errors
 
-| Error Type                                                              | Status Code                                                             | Content Type                                                            |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSettlementCapturesBadRequestHalJSONException | 400                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.GetSettlementCapturesNotFoundHalJSONException   | 404                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.APIException                                    | 4XX, 5XX                                                                | \*/\*                                                                   |
+| Error Type                                                               | Status Code                                                              | Content Type                                                             |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| MollieApi.Models.Errors.ListSettlementCapturesBadRequestHalJSONException | 400                                                                      | application/hal+json                                                     |
+| MollieApi.Models.Errors.ListSettlementCapturesNotFoundHalJSONException   | 404                                                                      | application/hal+json                                                     |
+| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
 
 ## ListRefunds
 
@@ -313,10 +313,10 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-GetSettlementRefundsRequest req = new GetSettlementRefundsRequest() {
+ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "re_5B8cwPMGnU",
-    Include = GetSettlementRefundsInclude.Payment,
+    Include = ListSettlementRefundsInclude.Payment,
     Testmode = false,
 };
 
@@ -327,21 +327,21 @@ var res = await sdk.Settlements.ListRefundsAsync(req);
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `request`                                                                           | [GetSettlementRefundsRequest](../../Models/Requests/GetSettlementRefundsRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `request`                                                                             | [ListSettlementRefundsRequest](../../Models/Requests/ListSettlementRefundsRequest.md) | :heavy_check_mark:                                                                    | The request object to use for the request.                                            |
 
 ### Response
 
-**[GetSettlementRefundsResponse](../../Models/Requests/GetSettlementRefundsResponse.md)**
+**[ListSettlementRefundsResponse](../../Models/Requests/ListSettlementRefundsResponse.md)**
 
 ### Errors
 
-| Error Type                                                             | Status Code                                                            | Content Type                                                           |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSettlementRefundsBadRequestHalJSONException | 400                                                                    | application/hal+json                                                   |
-| MollieApi.Models.Errors.GetSettlementRefundsNotFoundHalJSONException   | 404                                                                    | application/hal+json                                                   |
-| MollieApi.Models.Errors.APIException                                   | 4XX, 5XX                                                               | \*/\*                                                                  |
+| Error Type                                                              | Status Code                                                             | Content Type                                                            |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListSettlementRefundsBadRequestHalJSONException | 400                                                                     | application/hal+json                                                    |
+| MollieApi.Models.Errors.ListSettlementRefundsNotFoundHalJSONException   | 404                                                                     | application/hal+json                                                    |
+| MollieApi.Models.Errors.APIException                                    | 4XX, 5XX                                                                | \*/\*                                                                   |
 
 ## ListChargebacks
 
@@ -364,10 +364,10 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-GetSettlementChargebacksRequest req = new GetSettlementChargebacksRequest() {
+ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
-    Embed = GetSettlementChargebacksEmbed.Payment,
+    Embed = ListSettlementChargebacksEmbed.Payment,
     Testmode = false,
 };
 
@@ -378,18 +378,18 @@ var res = await sdk.Settlements.ListChargebacksAsync(req);
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `request`                                                                                   | [GetSettlementChargebacksRequest](../../Models/Requests/GetSettlementChargebacksRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `request`                                                                                     | [ListSettlementChargebacksRequest](../../Models/Requests/ListSettlementChargebacksRequest.md) | :heavy_check_mark:                                                                            | The request object to use for the request.                                                    |
 
 ### Response
 
-**[GetSettlementChargebacksResponse](../../Models/Requests/GetSettlementChargebacksResponse.md)**
+**[ListSettlementChargebacksResponse](../../Models/Requests/ListSettlementChargebacksResponse.md)**
 
 ### Errors
 
-| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSettlementChargebacksBadRequestHalJSONException | 400                                                                        | application/hal+json                                                       |
-| MollieApi.Models.Errors.GetSettlementChargebacksNotFoundHalJSONException   | 404                                                                        | application/hal+json                                                       |
-| MollieApi.Models.Errors.APIException                                       | 4XX, 5XX                                                                   | \*/\*                                                                      |
+| Error Type                                                                  | Status Code                                                                 | Content Type                                                                |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| MollieApi.Models.Errors.ListSettlementChargebacksBadRequestHalJSONException | 400                                                                         | application/hal+json                                                        |
+| MollieApi.Models.Errors.ListSettlementChargebacksNotFoundHalJSONException   | 404                                                                         | application/hal+json                                                        |
+| MollieApi.Models.Errors.APIException                                        | 4XX, 5XX                                                                    | \*/\*                                                                       |

@@ -1,9 +1,0 @@
-# GetSettlementPaymentsResponse
-
-
-## Fields
-
-| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `HttpMeta`                                                                                      | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `Object`                                                                                        | [GetSettlementPaymentsResponseBody](../../Models/Requests/GetSettlementPaymentsResponseBody.md) | :heavy_minus_sign:                                                                              | A list of payment objects.                                                                      |

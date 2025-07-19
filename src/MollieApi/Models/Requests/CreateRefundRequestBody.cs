@@ -37,7 +37,7 @@ namespace MollieApi.Models.Requests
         public CreateRefundMetadataRequestUnion? Metadata { get; set; } = null;
 
         [JsonProperty("externalReference")]
-        public CreateRefundExternalReferenceRequest? ExternalReference { get; set; }
+        public ExternalReferenceRequest? ExternalReference { get; set; }
 
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>

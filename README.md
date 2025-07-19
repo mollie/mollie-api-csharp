@@ -473,8 +473,6 @@ var res = await sdk.Payments.CreateAsync(
 * [List](docs/sdks/refunds/README.md#list) - List payment refunds
 * [Get](docs/sdks/refunds/README.md#get) - Get payment refund
 * [Cancel](docs/sdks/refunds/README.md#cancel) - Cancel payment refund
-* [CreateOrder](docs/sdks/refunds/README.md#createorder) - Create order refund
-* [ListForOrder](docs/sdks/refunds/README.md#listfororder) - List order refunds
 * [All](docs/sdks/refunds/README.md#all) - List all refunds
 
 ### [SalesInvoices](docs/sdks/salesinvoices/README.md)
@@ -491,10 +489,10 @@ var res = await sdk.Payments.CreateAsync(
 * [Get](docs/sdks/settlements/README.md#get) - Get settlement
 * [GetOpen](docs/sdks/settlements/README.md#getopen) - Get open settlement
 * [GetNext](docs/sdks/settlements/README.md#getnext) - Get next settlement
-* [ListPayments](docs/sdks/settlements/README.md#listpayments) - Get settlement payments
-* [ListCaptures](docs/sdks/settlements/README.md#listcaptures) - Get settlement captures
-* [ListRefunds](docs/sdks/settlements/README.md#listrefunds) - Get settlement refunds
-* [ListChargebacks](docs/sdks/settlements/README.md#listchargebacks) - Get settlement chargebacks
+* [ListPayments](docs/sdks/settlements/README.md#listpayments) - List settlement payments
+* [ListCaptures](docs/sdks/settlements/README.md#listcaptures) - List settlement captures
+* [ListRefunds](docs/sdks/settlements/README.md#listrefunds) - List settlement refunds
+* [ListChargebacks](docs/sdks/settlements/README.md#listchargebacks) - List settlement chargebacks
 
 ### [Subscriptions](docs/sdks/subscriptions/README.md)
 

@@ -96,7 +96,7 @@ namespace MollieApi
         Task<GetNextSettlementResponse> GetNextAsync(RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Get settlement payments
+        /// List settlement payments
         /// 
         /// <remarks>
         /// Retrieve all payments included in the given settlement.<br/>
@@ -110,10 +110,10 @@ namespace MollieApi
         /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
         /// </remarks>
         /// </summary>
-        Task<GetSettlementPaymentsResponse> ListPaymentsAsync(GetSettlementPaymentsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Get settlement captures
+        /// List settlement captures
         /// 
         /// <remarks>
         /// Retrieve all captures included in the given settlement.<br/>
@@ -125,10 +125,10 @@ namespace MollieApi
         /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
         /// </remarks>
         /// </summary>
-        Task<GetSettlementCapturesResponse> ListCapturesAsync(GetSettlementCapturesRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Get settlement refunds
+        /// List settlement refunds
         /// 
         /// <remarks>
         /// Retrieve all refunds &apos;deducted&apos; from the given settlement.<br/>
@@ -140,10 +140,10 @@ namespace MollieApi
         /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **refunds.read**</a>
         /// </remarks>
         /// </summary>
-        Task<GetSettlementRefundsResponse> ListRefundsAsync(GetSettlementRefundsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Get settlement chargebacks
+        /// List settlement chargebacks
         /// 
         /// <remarks>
         /// Retrieve all chargebacks &apos;deducted&apos; from the given settlement.<br/>
@@ -155,15 +155,15 @@ namespace MollieApi
         /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
         /// </remarks>
         /// </summary>
-        Task<GetSettlementChargebacksResponse> ListChargebacksAsync(GetSettlementChargebacksRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null);
     }
 
     public class Settlements: ISettlements
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.9";
-        private const string _sdkGenVersion = "2.657.1";
+        private const string _sdkVersion = "0.0.10";
+        private const string _sdkGenVersion = "2.658.3";
         private const string _openapiDocVersion = "1.0.0";
 
         public Settlements(SDKConfig config)
@@ -674,7 +674,7 @@ namespace MollieApi
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetSettlementPaymentsResponse> ListPaymentsAsync(GetSettlementPaymentsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request);
@@ -687,7 +687,7 @@ namespace MollieApi
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement-payments", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-payments", new List<string> {  }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -760,8 +760,8 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementPaymentsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new GetSettlementPaymentsResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementPaymentsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ListSettlementPaymentsResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -779,7 +779,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementPaymentsHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementPaymentsHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -802,7 +802,7 @@ namespace MollieApi
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetSettlementCapturesResponse> ListCapturesAsync(GetSettlementCapturesRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request);
@@ -815,7 +815,7 @@ namespace MollieApi
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement-captures", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-captures", new List<string> {  }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -888,8 +888,8 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementCapturesResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new GetSettlementCapturesResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementCapturesResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ListSettlementCapturesResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -907,7 +907,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementCapturesBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementCapturesBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -922,7 +922,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementCapturesNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementCapturesNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -945,7 +945,7 @@ namespace MollieApi
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetSettlementRefundsResponse> ListRefundsAsync(GetSettlementRefundsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request);
@@ -958,7 +958,7 @@ namespace MollieApi
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement-refunds", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-refunds", new List<string> {  }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1031,8 +1031,8 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementRefundsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new GetSettlementRefundsResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementRefundsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ListSettlementRefundsResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -1050,7 +1050,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementRefundsBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementRefundsBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -1065,7 +1065,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementRefundsNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementRefundsNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -1088,7 +1088,7 @@ namespace MollieApi
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetSettlementChargebacksResponse> ListChargebacksAsync(GetSettlementChargebacksRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/chargebacks", request);
@@ -1101,7 +1101,7 @@ namespace MollieApi
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement-chargebacks", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-chargebacks", new List<string> {  }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1174,8 +1174,8 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementChargebacksResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new GetSettlementChargebacksResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementChargebacksResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ListSettlementChargebacksResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -1193,7 +1193,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementChargebacksBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementChargebacksBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -1208,7 +1208,7 @@ namespace MollieApi
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetSettlementChargebacksNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ListSettlementChargebacksNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,

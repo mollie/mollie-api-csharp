@@ -9,8 +9,6 @@
 * [List](#list) - List payment refunds
 * [Get](#get) - Get payment refund
 * [Cancel](#cancel) - Cancel payment refund
-* [CreateOrder](#createorder) - Create order refund
-* [ListForOrder](#listfororder) - List order refunds
 * [All](#all) - List all refunds
 
 ## Create
@@ -43,7 +41,7 @@ var res = await sdk.Refunds.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
-        ExternalReference = new CreateRefundExternalReferenceRequest() {
+        ExternalReference = new ExternalReferenceRequest() {
             Type = "acquirer-reference",
             Id = "123456789012345",
         },
@@ -240,157 +238,6 @@ var res = await sdk.Refunds.CancelAsync(
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
 | MollieApi.Models.Errors.CancelRefundHalJSONException | 404                                                  | application/hal+json                                 |
 | MollieApi.Models.Errors.APIException                 | 4XX, 5XX                                             | \*/\*                                                |
-
-## CreateOrder
-
-When using the Orders API, refunds should be made for a specific order.
-
-If you want to refund arbitrary amounts, however, you can also use the [Create payment refund endpoint](create-refund) by creating a refund on the payment itself.
-
-If an order line is still in the `authorized` state, it cannot be refunded. You should cancel it instead. Order lines that are `paid`, `shipping` or `completed` can be refunded.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **refunds.write**](/reference/authentication)
-
-### Example Usage
-
-```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
-using System.Collections.Generic;
-
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-var res = await sdk.Refunds.CreateOrderAsync(
-    orderId: "ord_5B8cwPMGnU",
-    requestBody: new CreateOrderRefundRequestBody() {
-        Description = "Refunding a Chess Board",
-        Amount = new CreateOrderRefundAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        ExternalReference = new CreateOrderRefundExternalReferenceRequest() {
-            Type = "acquirer-reference",
-            Id = "123456789012345",
-        },
-        Testmode = false,
-        Lines = new List<LineInput>() {
-            new LineInput() {
-                Id = "odl_5B8cwPMGnU",
-                Name = "Chess Board",
-                Sku = "5702016116977",
-                Type = TypeRequest.Physical,
-                Status = StatusRequest.Created,
-                IsCancelable = false,
-                Quantity = 1,
-                QuantityShipped = 0,
-                AmountShipped = new AmountShippedRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                QuantityRefunded = 0,
-                AmountRefunded = new AmountRefundedRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                QuantityCanceled = 0,
-                AmountCanceled = new AmountCanceledRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Amount = new CreateOrderRefundLineAmount() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                ShippableQuantity = 0,
-                RefundableQuantity = 0,
-                CancelableQuantity = 0,
-                VatRate = "21.00",
-                CreatedAt = "2025-03-28T16:42:12+00:00",
-            },
-        },
-    }
-);
-
-// handle response
-```
-
-### Parameters
-
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `OrderId`                                                                             | *string*                                                                              | :heavy_check_mark:                                                                    | Provide the ID of the related order.                                                  | ord_5B8cwPMGnU                                                                        |
-| `RequestBody`                                                                         | [CreateOrderRefundRequestBody](../../Models/Requests/CreateOrderRefundRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |
-
-### Response
-
-**[CreateOrderRefundResponse](../../Models/Requests/CreateOrderRefundResponse.md)**
-
-### Errors
-
-| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateOrderRefundNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.CreateOrderRefundUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.APIException                                         | 4XX, 5XX                                                                     | \*/\*                                                                        |
-
-## ListForOrder
-
-Retrieve a list of all refunds created for a specific order.
-
-The results are paginated.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **refunds.read**](/reference/authentication)
-
-### Example Usage
-
-```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
-
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-ListOrderRefundsRequest req = new ListOrderRefundsRequest() {
-    OrderId = "ord_5B8cwPMGnU",
-    From = "re_4qqhO89gsT",
-    Include = "payment",
-    Testmode = false,
-};
-
-var res = await sdk.Refunds.ListForOrderAsync(req);
-
-// handle response
-```
-
-### Parameters
-
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `request`                                                                   | [ListOrderRefundsRequest](../../Models/Requests/ListOrderRefundsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
-
-### Response
-
-**[ListOrderRefundsResponse](../../Models/Requests/ListOrderRefundsResponse.md)**
-
-### Errors
-
-| Error Type                                               | Status Code                                              | Content Type                                             |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| MollieApi.Models.Errors.ListOrderRefundsHalJSONException | 400                                                      | application/hal+json                                     |
-| MollieApi.Models.Errors.APIException                     | 4XX, 5XX                                                 | \*/\*                                                    |
 
 ## All
 
