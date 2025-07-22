@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8f6f820e-f9b0-4d8c-8964-44774ced8540
 management:
-  docChecksum: da6de17d0d4db83d32464dbc756282f4
+  docChecksum: f51a106f33c07dcd085761324d555d0e
   docVersion: 1.0.0
-  speakeasyVersion: 1.583.0
-  generationVersion: 2.658.3
-  releaseVersion: 0.0.10
-  configChecksum: 7af3b4dc5b20bdf5caf28dd24ea2c6ac
+  speakeasyVersion: 1.584.0
+  generationVersion: 2.660.0
+  releaseVersion: 0.0.11
+  configChecksum: 50b7a9d2ed3f183fa73eea6957bb3626
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -268,6 +268,10 @@ generatedFiles:
   - docs/Models/Requests/CapitalPendingAmount.md
   - docs/Models/Requests/CapitalPendingSubTotal1.md
   - docs/Models/Requests/CapitalPendingSubtotal2.md
+  - docs/Models/Requests/CaptureCommision.md
+  - docs/Models/Requests/CaptureRollingReserveRelease.md
+  - docs/Models/Requests/ChargebackCompensation.md
+  - docs/Models/Requests/ChargebackReversal.md
   - docs/Models/Requests/ChargebacksImmediatelyAvailable.md
   - docs/Models/Requests/ChargebacksImmediatelyAvailableAmount.md
   - docs/Models/Requests/ChargebacksImmediatelyAvailableSubTotal1.md
@@ -703,6 +707,8 @@ generatedFiles:
   - docs/Models/Requests/Event.md
   - docs/Models/Requests/EventLinks.md
   - docs/Models/Requests/ExternalReferenceRequest.md
+  - docs/Models/Requests/FailedPayment.md
+  - docs/Models/Requests/FailedPaymentFee.md
   - docs/Models/Requests/FeePrepayments.md
   - docs/Models/Requests/FeePrepaymentsImmediatelyAvailable.md
   - docs/Models/Requests/FeePrepaymentsImmediatelyAvailableAmount.md
@@ -1240,6 +1246,7 @@ generatedFiles:
   - docs/Models/Requests/GetWebhookUnprocessableEntityLinks.md
   - docs/Models/Requests/GrossAmount.md
   - docs/Models/Requests/InitialAmount.md
+  - docs/Models/Requests/InvoiceCompensation.md
   - docs/Models/Requests/LinksEntity.md
   - docs/Models/Requests/ListAllChargebacksAmount.md
   - docs/Models/Requests/ListAllChargebacksBadRequestDocumentation.md
@@ -1366,6 +1373,7 @@ generatedFiles:
   - docs/Models/Requests/ListAllSubscriptionsTotalAmount.md
   - docs/Models/Requests/ListAllSubscriptionsUnitPrice.md
   - docs/Models/Requests/ListAllSubscriptionsVatAmount.md
+  - docs/Models/Requests/ListBalanceTransactionsApplicationFee.md
   - docs/Models/Requests/ListBalanceTransactionsBadRequestDocumentation.md
   - docs/Models/Requests/ListBalanceTransactionsBadRequestLinks.md
   - docs/Models/Requests/ListBalanceTransactionsCapture.md
@@ -1376,7 +1384,9 @@ generatedFiles:
   - docs/Models/Requests/ListBalanceTransactionsNext.md
   - docs/Models/Requests/ListBalanceTransactionsNotFoundDocumentation.md
   - docs/Models/Requests/ListBalanceTransactionsNotFoundLinks.md
+  - docs/Models/Requests/ListBalanceTransactionsPayment.md
   - docs/Models/Requests/ListBalanceTransactionsPrevious.md
+  - docs/Models/Requests/ListBalanceTransactionsRefund.md
   - docs/Models/Requests/ListBalanceTransactionsRequest.md
   - docs/Models/Requests/ListBalanceTransactionsResponse.md
   - docs/Models/Requests/ListBalanceTransactionsResponseBody.md
@@ -2035,6 +2045,7 @@ generatedFiles:
   - docs/Models/Requests/ListWebhooksResponse.md
   - docs/Models/Requests/ListWebhooksResponseBody.md
   - docs/Models/Requests/ListWebhooksSelf.md
+  - docs/Models/Requests/ManagedFee.md
   - docs/Models/Requests/MandateDocumentation.md
   - docs/Models/Requests/MandateLinks.md
   - docs/Models/Requests/MandateSelf.md
@@ -2054,6 +2065,7 @@ generatedFiles:
   - docs/Models/Requests/OpenPendingSubtotal2.md
   - docs/Models/Requests/OutgoingTransfer.md
   - docs/Models/Requests/Owner.md
+  - docs/Models/Requests/PaymentCommission.md
   - docs/Models/Requests/PaymentCreateRouteAmountRequest.md
   - docs/Models/Requests/PaymentCreateRouteAmountResponse.md
   - docs/Models/Requests/PaymentCreateRouteDestinationRequest.md
@@ -2067,6 +2079,7 @@ generatedFiles:
   - docs/Models/Requests/PaymentCreateRouteResponse.md
   - docs/Models/Requests/PaymentCreateRouteResponseBody.md
   - docs/Models/Requests/PaymentCreateRouteSelf.md
+  - docs/Models/Requests/PaymentFee.md
   - docs/Models/Requests/PaymentLinkLinks.md
   - docs/Models/Requests/PaymentLinkSelf.md
   - docs/Models/Requests/PaymentListRoutesAmount.md
@@ -2116,10 +2129,12 @@ generatedFiles:
   - docs/Models/Requests/PermissionSelf.md
   - docs/Models/Requests/PlatformPaymentChargeback.md
   - docs/Models/Requests/PlatformPaymentRefund.md
+  - docs/Models/Requests/PostPaymentSplitPayment.md
   - docs/Models/Requests/Pricing.md
   - docs/Models/Requests/ProfileDocumentation.md
   - docs/Models/Requests/ProfileLinks.md
   - docs/Models/Requests/ProfileSelf.md
+  - docs/Models/Requests/RefundCompensation.md
   - docs/Models/Requests/RefundsImmediatelyAvailable.md
   - docs/Models/Requests/RefundsImmediatelyAvailableAmount.md
   - docs/Models/Requests/RefundsImmediatelyAvailableSubTotal1.md
@@ -2132,6 +2147,7 @@ generatedFiles:
   - docs/Models/Requests/RefundsPendingAmount.md
   - docs/Models/Requests/RefundsPendingSubTotal1.md
   - docs/Models/Requests/RefundsPendingSubtotal2.md
+  - docs/Models/Requests/ReimbursementFee.md
   - docs/Models/Requests/ReleaseAuthorizationNotFoundDocumentation.md
   - docs/Models/Requests/ReleaseAuthorizationNotFoundLinks.md
   - docs/Models/Requests/ReleaseAuthorizationRequest.md
@@ -2144,8 +2160,13 @@ generatedFiles:
   - docs/Models/Requests/RequestApplePayPaymentSessionRequest.md
   - docs/Models/Requests/RequestApplePayPaymentSessionResponse.md
   - docs/Models/Requests/ResultAmount.md
+  - docs/Models/Requests/ReturnedManagedFee.md
+  - docs/Models/Requests/ReturnedPlatformPaymentRefund.md
   - docs/Models/Requests/ReturnedRefund.md
+  - docs/Models/Requests/ReturnedRefundCompensation.md
   - docs/Models/Requests/ReturnedTransfer.md
+  - docs/Models/Requests/ReversedChargebackCompensation.md
+  - docs/Models/Requests/ReversedPlatformPaymentChargeback.md
   - docs/Models/Requests/RevokeMandateDocumentation.md
   - docs/Models/Requests/RevokeMandateLinks.md
   - docs/Models/Requests/RevokeMandateRequest.md
@@ -2166,6 +2187,7 @@ generatedFiles:
   - docs/Models/Requests/SettlementSelf.md
   - docs/Models/Requests/Signuplink.md
   - docs/Models/Requests/SourceRequest.md
+  - docs/Models/Requests/SplitPayment.md
   - docs/Models/Requests/SubmitOnboardingDataAddress.md
   - docs/Models/Requests/SubmitOnboardingDataOrganization.md
   - docs/Models/Requests/SubmitOnboardingDataProfile.md
@@ -2213,6 +2235,7 @@ generatedFiles:
   - docs/Models/Requests/TransfersPendingAmount.md
   - docs/Models/Requests/TransfersPendingSubTotal1.md
   - docs/Models/Requests/TransfersPendingSubtotal2.md
+  - docs/Models/Requests/UnauthorizedDirectDebit.md
   - docs/Models/Requests/UpdateCustomerDashboard.md
   - docs/Models/Requests/UpdateCustomerDocumentation.md
   - docs/Models/Requests/UpdateCustomerLinks.md
@@ -2679,6 +2702,10 @@ generatedFiles:
   - src/MollieApi/Models/Requests/CapitalPendingAmount.cs
   - src/MollieApi/Models/Requests/CapitalPendingSubTotal1.cs
   - src/MollieApi/Models/Requests/CapitalPendingSubtotal2.cs
+  - src/MollieApi/Models/Requests/CaptureCommision.cs
+  - src/MollieApi/Models/Requests/CaptureRollingReserveRelease.cs
+  - src/MollieApi/Models/Requests/ChargebackCompensation.cs
+  - src/MollieApi/Models/Requests/ChargebackReversal.cs
   - src/MollieApi/Models/Requests/ChargebacksImmediatelyAvailable.cs
   - src/MollieApi/Models/Requests/ChargebacksImmediatelyAvailableAmount.cs
   - src/MollieApi/Models/Requests/ChargebacksImmediatelyAvailableSubTotal1.cs
@@ -3114,6 +3141,8 @@ generatedFiles:
   - src/MollieApi/Models/Requests/Event.cs
   - src/MollieApi/Models/Requests/EventLinks.cs
   - src/MollieApi/Models/Requests/ExternalReferenceRequest.cs
+  - src/MollieApi/Models/Requests/FailedPayment.cs
+  - src/MollieApi/Models/Requests/FailedPaymentFee.cs
   - src/MollieApi/Models/Requests/FeePrepayments.cs
   - src/MollieApi/Models/Requests/FeePrepaymentsImmediatelyAvailable.cs
   - src/MollieApi/Models/Requests/FeePrepaymentsImmediatelyAvailableAmount.cs
@@ -3651,6 +3680,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/GetWebhookUnprocessableEntityLinks.cs
   - src/MollieApi/Models/Requests/GrossAmount.cs
   - src/MollieApi/Models/Requests/InitialAmount.cs
+  - src/MollieApi/Models/Requests/InvoiceCompensation.cs
   - src/MollieApi/Models/Requests/LinksEntity.cs
   - src/MollieApi/Models/Requests/ListAllChargebacksAmount.cs
   - src/MollieApi/Models/Requests/ListAllChargebacksBadRequestDocumentation.cs
@@ -3777,6 +3807,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/ListAllSubscriptionsTotalAmount.cs
   - src/MollieApi/Models/Requests/ListAllSubscriptionsUnitPrice.cs
   - src/MollieApi/Models/Requests/ListAllSubscriptionsVatAmount.cs
+  - src/MollieApi/Models/Requests/ListBalanceTransactionsApplicationFee.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsBadRequestDocumentation.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsBadRequestLinks.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsCapture.cs
@@ -3787,7 +3818,9 @@ generatedFiles:
   - src/MollieApi/Models/Requests/ListBalanceTransactionsNext.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsNotFoundDocumentation.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsNotFoundLinks.cs
+  - src/MollieApi/Models/Requests/ListBalanceTransactionsPayment.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsPrevious.cs
+  - src/MollieApi/Models/Requests/ListBalanceTransactionsRefund.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsRequest.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsResponse.cs
   - src/MollieApi/Models/Requests/ListBalanceTransactionsResponseBody.cs
@@ -4446,6 +4479,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/ListWebhooksResponse.cs
   - src/MollieApi/Models/Requests/ListWebhooksResponseBody.cs
   - src/MollieApi/Models/Requests/ListWebhooksSelf.cs
+  - src/MollieApi/Models/Requests/ManagedFee.cs
   - src/MollieApi/Models/Requests/MandateDocumentation.cs
   - src/MollieApi/Models/Requests/MandateLinks.cs
   - src/MollieApi/Models/Requests/MandateSelf.cs
@@ -4465,6 +4499,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/OpenPendingSubtotal2.cs
   - src/MollieApi/Models/Requests/OutgoingTransfer.cs
   - src/MollieApi/Models/Requests/Owner.cs
+  - src/MollieApi/Models/Requests/PaymentCommission.cs
   - src/MollieApi/Models/Requests/PaymentCreateRouteAmountRequest.cs
   - src/MollieApi/Models/Requests/PaymentCreateRouteAmountResponse.cs
   - src/MollieApi/Models/Requests/PaymentCreateRouteDestinationRequest.cs
@@ -4478,6 +4513,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/PaymentCreateRouteResponse.cs
   - src/MollieApi/Models/Requests/PaymentCreateRouteResponseBody.cs
   - src/MollieApi/Models/Requests/PaymentCreateRouteSelf.cs
+  - src/MollieApi/Models/Requests/PaymentFee.cs
   - src/MollieApi/Models/Requests/PaymentLinkLinks.cs
   - src/MollieApi/Models/Requests/PaymentLinkSelf.cs
   - src/MollieApi/Models/Requests/PaymentListRoutesAmount.cs
@@ -4527,10 +4563,12 @@ generatedFiles:
   - src/MollieApi/Models/Requests/PermissionSelf.cs
   - src/MollieApi/Models/Requests/PlatformPaymentChargeback.cs
   - src/MollieApi/Models/Requests/PlatformPaymentRefund.cs
+  - src/MollieApi/Models/Requests/PostPaymentSplitPayment.cs
   - src/MollieApi/Models/Requests/Pricing.cs
   - src/MollieApi/Models/Requests/ProfileDocumentation.cs
   - src/MollieApi/Models/Requests/ProfileLinks.cs
   - src/MollieApi/Models/Requests/ProfileSelf.cs
+  - src/MollieApi/Models/Requests/RefundCompensation.cs
   - src/MollieApi/Models/Requests/RefundsImmediatelyAvailable.cs
   - src/MollieApi/Models/Requests/RefundsImmediatelyAvailableAmount.cs
   - src/MollieApi/Models/Requests/RefundsImmediatelyAvailableSubTotal1.cs
@@ -4543,6 +4581,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/RefundsPendingAmount.cs
   - src/MollieApi/Models/Requests/RefundsPendingSubTotal1.cs
   - src/MollieApi/Models/Requests/RefundsPendingSubtotal2.cs
+  - src/MollieApi/Models/Requests/ReimbursementFee.cs
   - src/MollieApi/Models/Requests/ReleaseAuthorizationNotFoundDocumentation.cs
   - src/MollieApi/Models/Requests/ReleaseAuthorizationNotFoundLinks.cs
   - src/MollieApi/Models/Requests/ReleaseAuthorizationRequest.cs
@@ -4555,8 +4594,13 @@ generatedFiles:
   - src/MollieApi/Models/Requests/RequestApplePayPaymentSessionRequest.cs
   - src/MollieApi/Models/Requests/RequestApplePayPaymentSessionResponse.cs
   - src/MollieApi/Models/Requests/ResultAmount.cs
+  - src/MollieApi/Models/Requests/ReturnedManagedFee.cs
+  - src/MollieApi/Models/Requests/ReturnedPlatformPaymentRefund.cs
   - src/MollieApi/Models/Requests/ReturnedRefund.cs
+  - src/MollieApi/Models/Requests/ReturnedRefundCompensation.cs
   - src/MollieApi/Models/Requests/ReturnedTransfer.cs
+  - src/MollieApi/Models/Requests/ReversedChargebackCompensation.cs
+  - src/MollieApi/Models/Requests/ReversedPlatformPaymentChargeback.cs
   - src/MollieApi/Models/Requests/RevokeMandateDocumentation.cs
   - src/MollieApi/Models/Requests/RevokeMandateLinks.cs
   - src/MollieApi/Models/Requests/RevokeMandateRequest.cs
@@ -4577,6 +4621,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/SettlementSelf.cs
   - src/MollieApi/Models/Requests/Signuplink.cs
   - src/MollieApi/Models/Requests/SourceRequest.cs
+  - src/MollieApi/Models/Requests/SplitPayment.cs
   - src/MollieApi/Models/Requests/SubmitOnboardingDataAddress.cs
   - src/MollieApi/Models/Requests/SubmitOnboardingDataOrganization.cs
   - src/MollieApi/Models/Requests/SubmitOnboardingDataProfile.cs
@@ -4624,6 +4669,7 @@ generatedFiles:
   - src/MollieApi/Models/Requests/TransfersPendingAmount.cs
   - src/MollieApi/Models/Requests/TransfersPendingSubTotal1.cs
   - src/MollieApi/Models/Requests/TransfersPendingSubtotal2.cs
+  - src/MollieApi/Models/Requests/UnauthorizedDirectDebit.cs
   - src/MollieApi/Models/Requests/UpdateCustomerDashboard.cs
   - src/MollieApi/Models/Requests/UpdateCustomerDocumentation.cs
   - src/MollieApi/Models/Requests/UpdateCustomerLinks.cs
@@ -7192,7 +7238,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"balance_transactions": [{"resource": "balance_transaction", "id": "baltr_QM24QwzUWR4ev4Xfgyt29d", "type": "payment", "resultAmount": {"currency": "EUR", "value": "10.00"}, "initialAmount": {"currency": "EUR", "value": "10.00"}, "deductions": {"currency": "EUR", "value": "10.00"}, "context": {"payment": "tr_aHbjjdrUdm", "capture": {"paymentId": "tr_5B8cwPMGnU", "captureId": "cpt_vytxeTZskVKR7C7WgdSP3d"}, "unauthorized-direct-debit": "tr_5B8cwPMGnU", "failed-payment": "tr_5B8cwPMGnU", "refund": "tr_5B8cwPMGnU", "returned-refund": {"paymentId": "tr_5B8cwPMGnU", "refundId": "re_5B8cwPMGnU"}, "chargeback": {"paymentId": "tr_5B8cwPMGnU", "chargebackId": "chb_xFzwUN4ci8HAmSGUACS4J"}, "chargeback-reversal": "tr_5B8cwPMGnU", "outgoing-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_5B8cwPMGnU"}, "canceled-outgoing-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_5B8cwPMGnU"}, "returned-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_s3hcSM2hKP"}, "invoice-compensation": "inv_aHbjjdrUdm", "application-fee": "tr_5B8cwPMGnU", "split-payment": "tr_5B8cwPMGnU", "platform-payment-refund": {"paymentId": "tr_5B8cwPMGnU", "refundId": "re_5B8cwPMGnU"}, "platform-payment-chargeback": {"paymentId": "tr_5B8cwPMGnU", "chargebackId": "chb_xFzwUN4ci8HAmSGUACS4J"}}, "createdAt": "2024-03-20T09:13:37.0Z"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"balance_transactions": [{"resource": "balance_transaction", "id": "baltr_QM24QwzUWR4ev4Xfgyt29d", "type": "payment", "resultAmount": {"currency": "EUR", "value": "10.00"}, "initialAmount": {"currency": "EUR", "value": "10.00"}, "deductions": {"currency": "EUR", "value": "10.00"}, "context": {"payment": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description"}, "capture": {"paymentId": "tr_5B8cwPMGnU", "captureId": "cpt_vytxeTZskVKR7C7WgdSP3d"}, "unauthorized-direct-debit": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description"}, "failed-payment": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description"}, "refund": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description", "refundId": "re_5B8cwPMGnU", "refundDescription": "Refund Description"}, "returned-refund": {"paymentId": "tr_5B8cwPMGnU", "refundId": "re_5B8cwPMGnU"}, "chargeback": {"paymentId": "tr_5B8cwPMGnU", "chargebackId": "chb_xFzwUN4ci8HAmSGUACS4J"}, "chargeback-reversal": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description", "chargebackId": "chb_xFzwUN4ci8HAmSGUACS4J", "chargebackDescription": "Chargeback Description"}, "outgoing-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_5B8cwPMGnU"}, "canceled-outgoing-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_5B8cwPMGnU"}, "returned-transfer": {"transferId": "trf_nyjwa2", "settlementId": "stl_s3hcSM2hKP"}, "invoice-compensation": {"invoiceId": "inv_aHbjjdrUdm"}, "application-fee": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description", "payingOwner": "org_1234567"}, "split-payment": {"paymentId": "tr_5B8cwPMGnU", "paymentDescription": "Payment Description", "paymentOnwer": "org_1234567"}, "platform-payment-refund": {"paymentId": "tr_5B8cwPMGnU", "refundId": "re_5B8cwPMGnU"}, "platform-payment-chargeback": {"paymentId": "tr_5B8cwPMGnU", "chargebackId": "chb_xFzwUN4ci8HAmSGUACS4J"}}, "createdAt": "2024-03-20T09:13:37.0Z"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "404":
@@ -7686,7 +7732,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": [], "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 5, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-settlement-refunds:
       parameters:
         path:

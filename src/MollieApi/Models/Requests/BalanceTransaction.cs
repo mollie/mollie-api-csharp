@@ -39,7 +39,7 @@ namespace MollieApi.Models.Requests
         /// * Invoicing: `invoice-compensation` `balance-correction`<br/>
         /// * Mollie Connect: `application-fee` `split-payment` `platform-payment-refund` `platform-payment-chargeback`<br/>
         /// <br/>
-        /// Possible values: `application-fee` `capture` `chargeback` `chargeback-reversal` `failed-payment-fee` `failed-payment` `invoice-compensation` `payment` `payment-fee` `payment-commission` `refund` `returned-refund` `returned-transfer` `split-payment` `outgoing-transfer` `capture-commission` `canceled-outgoing-transfer` `incoming-transfer` `api-payment-rolling-reserve-release` `capture-rolling-reserve-release` `reimbursement-fee` `balance-correction` `unauthorized-direct-debit` `bank-charged-failure-fee` `platform-payment-refund` `refund-compensation` `returned-refund-compensation` `returned-platform-payment-refund` `platform-payment-chargeback` `chargeback-compensation` `reversed-platform-payment-chargeback` `reversed-chargeback-compensation` `failed-split-payment-platform` `failed-split-payment-compensation` `cash-advance-repayment` `cash-advance-loan` `platform-connected-organizations-fee` `split-transaction` `managed-fee` `returned-managed-fee` `topup` `balance-reserve` `balance-reserve-return` `movement` `post-payment-split-payment` `cash-collateral-issuance` `cash-collateral-release`
+        /// Possible values: `application-fee` `capture` `chargeback` `chargeback-reversal` `failed-payment-fee` `failed-payment` `invoice-compensation` `payment` `payment-fee` `payment-commission` `refund` `returned-refund` `returned-transfer` `split-payment` `outgoing-transfer` `capture-commission` `canceled-outgoing-transfer` `incoming-transfer` `api-payment-rolling-reserve-release` `capture-rolling-reserve-release` `reimbursement-fee` `balance-correction` `unauthorized-direct-debit` `bank-charged-failure-fee` `platform-payment-refund` `refund-compensation` `returned-refund-compensation` `returned-platform-payment-refund` `platform-payment-chargeback` `chargeback-compensation` `reversed-platform-payment-chargeback` `reversed-chargeback-compensation` `failed-split-payment-platform` `failed-split-payment-compensation` `cash-advance-loan` `platform-connected-organizations-fee` `split-transaction` `managed-fee` `returned-managed-fee` `topup` `balance-reserve` `balance-reserve-return` `movement` `post-payment-split-payment` `cash-collateral-issuance` `cash-collateral-release`
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
@@ -69,29 +69,52 @@ namespace MollieApi.Models.Requests
         public Deductions? Deductions { get; set; } = null;
 
         /// <summary>
-        /// Depending on the type of the balance transaction, we will try to give more context about the specific event that triggered it. For example, the context object for a payment transaction will look like `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;}`.<br/>
+        /// Depending on the type of the balance transaction, we will try to give more context about the specific event that triggered it. For example, the context object for a payment transaction will look like `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
         /// 
         /// <remarks>
         /// <br/>
         /// Below is a complete list of the context values that each type of transaction will have.<br/>
         /// <br/>
-        /// * Type `payment`: `paymentId`<br/>
-        /// * Type `capture`: `paymentId` `captureId`<br/>
-        /// * Type `unauthorized-direct-debit`: `paymentId`<br/>
-        /// * Type `failed-payment`: `paymentId`<br/>
-        /// * Type `refund`: `paymentId` `refundId`<br/>
-        /// * Type `returned-refund`: `paymentId` `refundId`<br/>
-        /// * Type `chargeback`: `paymentId` `chargebackId`<br/>
-        /// * Type `chargeback-reversal`: `paymentId`<br/>
+        /// * Type `payment`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `capture`: `paymentId` `captureId`, `paymentDescription`, `captureDescription`<br/>
+        /// * Type `capture-commission`: `paymentId`, `paymentDescription`, `organizationId`<br/>
+        /// * Type `capture-rolling-reserve-release`: `paymentId`, `paymentDescription`, `captureId`, `captureDescription`<br/>
+        /// * Type `unauthorized-direct-debit`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `failed-payment`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `refund`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `refund-compensation`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `returned-refund`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `returned-refund-compensation`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `chargeback`: `paymentId` `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
+        /// * Type `chargeback-reversal`: `paymentId`, `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
+        /// * Type `chargeback-compensation`: `paymentId`, `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
+        /// * Type `reversed-chargeback-compensation`: `paymentId`, `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
         /// * Type `outgoing-transfer`: `settlementId` `transferId`<br/>
         /// * Type `canceled-outgoing-transfer`: `settlementId` `transferId`<br/>
         /// * Type `returned-transfer`: `settlementId` `transferId`<br/>
         /// * Type `invoice-compensation`: `invoiceId`<br/>
         /// * Type `balance-correction`: none<br/>
-        /// * Type `application-fee`: `paymentId`<br/>
-        /// * Type `split-payment`: `paymentId`<br/>
-        /// * Type `platform-payment-refund`: `paymentId` `refundId`<br/>
-        /// * Type `platform-payment-chargeback`: `paymentId` `chargebackId`
+        /// * Type `application-fee`: `paymentId`, `paymentDescription`, `payingOwner`<br/>
+        /// * Type `split-payment`: `paymentId`, `paymentDescription`, `paymentOwner`<br/>
+        /// * Type `platform-payment-refund`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `returned-platform-payment-refund`: `paymentId` `refundId`, `paymentDescription`, `refundDescription`<br/>
+        /// * Type `platform-payment-chargeback`: `paymentId` `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
+        /// * Type `reversed-platform-payment-chargeback`: `paymentId` `chargebackId`, `paymentDescription`, `chargebackDescription`<br/>
+        /// * Type `payment-commission`: `paymentId`, `paymentDescription`, `organizationId`<br/>
+        /// * Type `reimbursement-fee`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `failed-payment-fee`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `payment-fee`: `paymentId`, `paymentDescription`<br/>
+        /// * Type `cash-advance-loan`: none<br/>
+        /// * Type `platform-connected-organizations-fee`: none<br/>
+        /// * Type `managed-fee`: `feeType`, `&lt;name of the fee&gt;Id`<br/>
+        /// * Type `returned-managed-fee`:  `feeType`, `&lt;name of the fee&gt;Id`<br/>
+        /// * Type `topup`: none<br/>
+        /// * Type `balance-reserve`: none<br/>
+        /// * Type `balance-reserve-return`: none<br/>
+        /// * Type `movement`: none<br/>
+        /// * Type `post-payment-split-payment`: `paymentId`<br/>
+        /// * Type `cash-collateral-issuance`: none<br/>
+        /// * Type `cash-collateral-release`: none
         /// </remarks>
         /// </summary>
         [JsonProperty("context")]

@@ -18,7 +18,13 @@ namespace MollieApi.Models.Requests
         [JsonProperty("paymentId")]
         public string? PaymentId { get; set; }
 
+        [JsonProperty("paymentDescription")]
+        public string? PaymentDescription { get; set; }
+
         [JsonProperty("chargebackId")]
         public string? ChargebackId { get; set; }
+
+        [JsonProperty("chargebackDescription")]
+        public string? ChargebackDescription { get; set; }
     }
 }
