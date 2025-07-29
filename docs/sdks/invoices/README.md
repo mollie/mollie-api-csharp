@@ -20,10 +20,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -54,11 +55,11 @@ var res = await sdk.Invoices.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListInvoicesBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.ListInvoicesNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.ListInvoicesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.ListInvoicesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
 
 ## Get
 
@@ -72,9 +73,10 @@ If you want to retrieve the details of an invoice by its invoice number, call th
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -97,7 +99,7 @@ var res = await sdk.Invoices.GetAsync(id: "inv_FrvewDA3Pr");
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| MollieApi.Models.Errors.GetInvoiceHalJSONException | 404                                                | application/hal+json                               |
-| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Mollie.Models.Errors.GetInvoiceHalJSONException | 404                                             | application/hal+json                            |
+| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |

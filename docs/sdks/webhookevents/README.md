@@ -17,9 +17,10 @@ Retrieve a single webhook event object by its event ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-webhook-event" method="get" path="/events/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -42,7 +43,7 @@ var res = await sdk.WebhookEvents.GetAsync(id: "event_jd9v34P5YqN9pT8n3HJyH");
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| MollieApi.Models.Errors.GetWebhookEventHalJSONException | 404                                                     | application/hal+json                                    |
-| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Mollie.Models.Errors.GetWebhookEventHalJSONException | 404                                                  | application/hal+json                                 |
+| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |

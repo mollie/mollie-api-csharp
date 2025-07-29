@@ -30,10 +30,11 @@ If you specify the `method` parameter when creating a payment, optional addition
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -181,11 +182,11 @@ var res = await sdk.Payments.CreateAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## List
 
@@ -201,10 +202,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -234,10 +236,10 @@ var res = await sdk.Payments.ListAsync(req);
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| MollieApi.Models.Errors.ListPaymentsHalJSONException | 400                                                  | application/hal+json                                 |
-| MollieApi.Models.Errors.APIException                 | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Mollie.Models.Errors.ListPaymentsHalJSONException | 400                                               | application/hal+json                              |
+| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
 
 ## Get
 
@@ -251,10 +253,11 @@ Retrieve a single payment object by its payment ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/payments/{paymentId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -285,10 +288,10 @@ var res = await sdk.Payments.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| MollieApi.Models.Errors.GetPaymentHalJSONException | 404                                                | application/hal+json                               |
-| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Mollie.Models.Errors.GetPaymentHalJSONException | 404                                             | application/hal+json                            |
+| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
 
 ## Update
 
@@ -304,10 +307,11 @@ Updating the payment details will not result in a webhook call.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/payments/{paymentId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -374,11 +378,11 @@ var res = await sdk.Payments.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.UpdatePaymentNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.UpdatePaymentUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.UpdatePaymentNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.UpdatePaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## Cancel
 
@@ -396,10 +400,11 @@ The `isCancelable` property on the [Payment object](get-payment) will indicate i
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="cancel-payment" method="delete" path="/payments/{paymentId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -428,11 +433,11 @@ var res = await sdk.Payments.CancelAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.CancelPaymentNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.CancelPaymentUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.CancelPaymentNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.CancelPaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## ReleaseAuthorization
 
@@ -450,10 +455,11 @@ If the request does succeed, the payment status will change to `canceled` for pa
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="release-authorization" method="post" path="/payments/{paymentId}/release-authorization" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -483,8 +489,8 @@ var res = await sdk.Payments.ReleaseAuthorizationAsync(
 
 ### Errors
 
-| Error Type                                                                      | Status Code                                                                     | Content Type                                                                    |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ReleaseAuthorizationNotFoundHalJSONException            | 404                                                                             | application/hal+json                                                            |
-| MollieApi.Models.Errors.ReleaseAuthorizationUnprocessableEntityHalJSONException | 422                                                                             | application/hal+json                                                            |
-| MollieApi.Models.Errors.APIException                                            | 4XX, 5XX                                                                        | \*/\*                                                                           |
+| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Mollie.Models.Errors.ReleaseAuthorizationNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
+| Mollie.Models.Errors.ReleaseAuthorizationUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
+| Mollie.Models.Errors.APIException                                            | 4XX, 5XX                                                                     | \*/\*                                                                        |

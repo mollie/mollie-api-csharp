@@ -23,10 +23,11 @@ Creates a refund for a specific payment. The refunded amount is credited to your
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -78,12 +79,12 @@ var res = await sdk.Refunds.CreateAsync(
 
 ### Errors
 
-| Error Type                                                              | Status Code                                                             | Content Type                                                            |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateRefundNotFoundHalJSONException            | 404                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.ConflictHalJSONException                        | 409                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.CreateRefundUnprocessableEntityHalJSONException | 422                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.APIException                                    | 4XX, 5XX                                                                | \*/\*                                                                   |
+| Error Type                                                           | Status Code                                                          | Content Type                                                         |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreateRefundNotFoundHalJSONException            | 404                                                                  | application/hal+json                                                 |
+| Mollie.Models.Errors.ConflictHalJSONException                        | 409                                                                  | application/hal+json                                                 |
+| Mollie.Models.Errors.CreateRefundUnprocessableEntityHalJSONException | 422                                                                  | application/hal+json                                                 |
+| Mollie.Models.Errors.APIException                                    | 4XX, 5XX                                                             | \*/\*                                                                |
 
 ## List
 
@@ -99,10 +100,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-refunds" method="get" path="/payments/{paymentId}/refunds" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -132,11 +134,11 @@ var res = await sdk.Refunds.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListRefundsBadRequestHalJSONException | 400                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.ListRefundsNotFoundHalJSONException   | 404                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.APIException                          | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Mollie.Models.Errors.ListRefundsBadRequestHalJSONException | 400                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.ListRefundsNotFoundHalJSONException   | 404                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.APIException                          | 4XX, 5XX                                                   | \*/\*                                                      |
 
 ## Get
 
@@ -150,10 +152,11 @@ Retrieve a single payment refund by its ID and the ID of its parent payment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-refund" method="get" path="/payments/{paymentId}/refunds/{refundId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -184,10 +187,10 @@ var res = await sdk.Refunds.GetAsync(
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| MollieApi.Models.Errors.GetRefundHalJSONException | 404                                               | application/hal+json                              |
-| MollieApi.Models.Errors.APIException              | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                                     | Status Code                                    | Content Type                                   |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| Mollie.Models.Errors.GetRefundHalJSONException | 404                                            | application/hal+json                           |
+| Mollie.Models.Errors.APIException              | 4XX, 5XX                                       | \*/\*                                          |
 
 ## Cancel
 
@@ -203,9 +206,10 @@ A refund can only be canceled while its `status` field is either `queued` or `pe
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="cancel-refund" method="delete" path="/payments/{paymentId}/refunds/{refundId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -234,10 +238,10 @@ var res = await sdk.Refunds.CancelAsync(
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| MollieApi.Models.Errors.CancelRefundHalJSONException | 404                                                  | application/hal+json                                 |
-| MollieApi.Models.Errors.APIException                 | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Mollie.Models.Errors.CancelRefundHalJSONException | 404                                               | application/hal+json                              |
+| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
 
 ## All
 
@@ -253,10 +257,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-all-refunds" method="get" path="/refunds" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -287,7 +292,7 @@ var res = await sdk.Refunds.AllAsync(req);
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.ListAllRefundsHalJSONException | 400                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.ListAllRefundsHalJSONException | 400                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |

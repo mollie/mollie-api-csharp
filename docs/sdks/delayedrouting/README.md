@@ -18,10 +18,11 @@ Create a route for a specific payment. The routed amount is credited to the acco
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="payment-create-route" method="post" path="/payments/{paymentId}/routes" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -58,10 +59,10 @@ var res = await sdk.DelayedRouting.CreateAsync(
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| MollieApi.Models.Errors.PaymentCreateRouteHalJSONException | 404                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Mollie.Models.Errors.PaymentCreateRouteHalJSONException | 404                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
 
 ## List
 
@@ -73,9 +74,10 @@ Retrieve a list of all routes created for a specific payment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="payment-list-routes" method="get" path="/payments/{paymentId}/routes" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -98,7 +100,7 @@ var res = await sdk.DelayedRouting.ListAsync(paymentId: "tr_5B8cwPMGnU");
 
 ### Errors
 
-| Error Type                                                | Status Code                                               | Content Type                                              |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| MollieApi.Models.Errors.PaymentListRoutesHalJSONException | 404                                                       | application/hal+json                                      |
-| MollieApi.Models.Errors.APIException                      | 4XX, 5XX                                                  | \*/\*                                                     |
+| Error Type                                             | Status Code                                            | Content Type                                           |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| Mollie.Models.Errors.PaymentListRoutesHalJSONException | 404                                                    | application/hal+json                                   |
+| Mollie.Models.Errors.APIException                      | 4XX, 5XX                                               | \*/\*                                                  |

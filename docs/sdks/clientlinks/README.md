@@ -55,10 +55,11 @@ Error handling is also dealt with similar to the [Authorize](https://docs.mollie
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -99,8 +100,8 @@ var res = await sdk.ClientLinks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                                  | Status Code                                                                 | Content Type                                                                |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateClientLinkNotFoundHalJSONException            | 404                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.CreateClientLinkUnprocessableEntityHalJSONException | 422                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.APIException                                        | 4XX, 5XX                                                                    | \*/\*                                                                       |
+| Error Type                                                               | Status Code                                                              | Content Type                                                             |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Mollie.Models.Errors.CreateClientLinkNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.CreateClientLinkUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.APIException                                        | 4XX, 5XX                                                                 | \*/\*                                                                    |

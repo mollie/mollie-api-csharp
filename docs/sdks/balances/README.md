@@ -23,9 +23,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-balances" method="get" path="/balances" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -56,11 +57,11 @@ var res = await sdk.Balances.ListAsync(
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListBalancesBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.ListBalancesNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.ListBalancesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.ListBalancesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
 
 ## Get
 
@@ -79,9 +80,10 @@ With instant payment methods like iDEAL, payments are moved to the available bal
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-balance" method="get" path="/balances/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -108,10 +110,10 @@ var res = await sdk.Balances.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| MollieApi.Models.Errors.GetBalanceHalJSONException | 404                                                | application/hal+json                               |
-| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Mollie.Models.Errors.GetBalanceHalJSONException | 404                                             | application/hal+json                            |
+| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
 
 ## GetPrimary
 
@@ -125,9 +127,10 @@ This endpoint is a convenient alias of the [Get balance](get-balance) endpoint.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-primary-balance" method="get" path="/balances/primary" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -144,9 +147,9 @@ var res = await sdk.Balances.GetPrimaryAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
 
 ## GetReport
 
@@ -162,10 +165,11 @@ The alias `primary` can be used instead of the balance ID to refer to the organi
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-balance-report" method="get" path="/balances/{balanceId}/report" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -196,11 +200,11 @@ var res = await sdk.Balances.GetReportAsync(req);
 
 ### Errors
 
-| Error Type                                                                  | Status Code                                                                 | Content Type                                                                |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetBalanceReportNotFoundHalJSONException            | 404                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.GetBalanceReportUnprocessableEntityHalJSONException | 422                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.APIException                                        | 4XX, 5XX                                                                    | \*/\*                                                                       |
+| Error Type                                                               | Status Code                                                              | Content Type                                                             |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Mollie.Models.Errors.GetBalanceReportNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.GetBalanceReportUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.APIException                                        | 4XX, 5XX                                                                 | \*/\*                                                                    |
 
 ## ListTransactions
 
@@ -218,9 +222,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-balance-transactions" method="get" path="/balances/{balanceId}/transactions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -251,9 +256,9 @@ var res = await sdk.Balances.ListTransactionsAsync(
 
 ### Errors
 
-| Error Type                                                                | Status Code                                                               | Content Type                                                              |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListBalanceTransactionsBadRequestHalJSONException | 400                                                                       | application/hal+json                                                      |
-| MollieApi.Models.Errors.ListBalanceTransactionsNotFoundHalJSONException   | 404                                                                       | application/hal+json                                                      |
-| MollieApi.Models.Errors.TooManyRequestsHalJSONException                   | 429                                                                       | application/hal+json                                                      |
-| MollieApi.Models.Errors.APIException                                      | 4XX, 5XX                                                                  | \*/\*                                                                     |
+| Error Type                                                             | Status Code                                                            | Content Type                                                           |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Mollie.Models.Errors.ListBalanceTransactionsBadRequestHalJSONException | 400                                                                    | application/hal+json                                                   |
+| Mollie.Models.Errors.ListBalanceTransactionsNotFoundHalJSONException   | 404                                                                    | application/hal+json                                                   |
+| Mollie.Models.Errors.TooManyRequestsHalJSONException                   | 429                                                                    | application/hal+json                                                   |
+| Mollie.Models.Errors.APIException                                      | 4XX, 5XX                                                               | \*/\*                                                                  |

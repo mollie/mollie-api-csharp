@@ -24,10 +24,11 @@ Profiles are required for payment processing. Normally they are created via the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -64,10 +65,10 @@ var res = await sdk.Profiles.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.CreateProfileHalJSONException | 422                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.CreateProfileHalJSONException | 422                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## List
 
@@ -81,9 +82,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/profiles" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -110,10 +112,10 @@ var res = await sdk.Profiles.ListAsync(
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| MollieApi.Models.Errors.ListProfilesHalJSONException | 400                                                  | application/hal+json                                 |
-| MollieApi.Models.Errors.APIException                 | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Mollie.Models.Errors.ListProfilesHalJSONException | 400                                               | application/hal+json                              |
+| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
 
 ## Get
 
@@ -125,9 +127,10 @@ Retrieve a single profile by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -154,11 +157,11 @@ var res = await sdk.Profiles.GetAsync(
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| MollieApi.Models.Errors.GetProfileNotFoundHalJSONException | 404                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.GetProfileGoneHalJSONException     | 410                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Mollie.Models.Errors.GetProfileNotFoundHalJSONException | 404                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.GetProfileGoneHalJSONException     | 410                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
 
 ## Update
 
@@ -172,10 +175,11 @@ Profiles are required for payment processing. Normally they are created and upda
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -215,12 +219,12 @@ var res = await sdk.Profiles.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.UpdateProfileNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.UpdateProfileGoneHalJSONException                | 410                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.UpdateProfileUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.UpdateProfileNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.UpdateProfileGoneHalJSONException                | 410                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.UpdateProfileUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## Delete
 
@@ -232,9 +236,10 @@ Delete a profile. A deleted profile and its related credentials can no longer be
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="delete-profile" method="delete" path="/profiles/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -257,11 +262,11 @@ var res = await sdk.Profiles.DeleteAsync(id: "pfl_QkEhN94Ba");
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| MollieApi.Models.Errors.DeleteProfileNotFoundHalJSONException | 404                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.DeleteProfileGoneHalJSONException     | 410                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.APIException                          | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Mollie.Models.Errors.DeleteProfileNotFoundHalJSONException | 404                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.DeleteProfileGoneHalJSONException     | 410                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.APIException                          | 4XX, 5XX                                                   | \*/\*                                                      |
 
 ## GetCurrent
 
@@ -275,9 +280,10 @@ For a complete reference of the profile object, refer to the [Get profile](get-p
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-current-profile" method="get" path="/profiles/me" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -294,6 +300,6 @@ var res = await sdk.Profiles.GetCurrentAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |

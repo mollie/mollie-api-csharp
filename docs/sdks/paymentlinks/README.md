@@ -24,10 +24,11 @@ With the Payment links API you can generate payment links that by default, unlik
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/payment-links" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -134,11 +135,11 @@ var res = await sdk.PaymentLinks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreatePaymentLinkNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.CreatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.APIException                                         | 4XX, 5XX                                                                     | \*/\*                                                                        |
+| Error Type                                                                | Status Code                                                               | Content Type                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreatePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.CreatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
 
 ## List
 
@@ -154,9 +155,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-payment-links" method="get" path="/payment-links" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -185,10 +187,10 @@ var res = await sdk.PaymentLinks.ListAsync(
 
 ### Errors
 
-| Error Type                                               | Status Code                                              | Content Type                                             |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| MollieApi.Models.Errors.ListPaymentLinksHalJSONException | 400                                                      | application/hal+json                                     |
-| MollieApi.Models.Errors.APIException                     | 4XX, 5XX                                                 | \*/\*                                                    |
+| Error Type                                            | Status Code                                           | Content Type                                          |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| Mollie.Models.Errors.ListPaymentLinksHalJSONException | 400                                                   | application/hal+json                                  |
+| Mollie.Models.Errors.APIException                     | 4XX, 5XX                                              | \*/\*                                                 |
 
 ## Get
 
@@ -202,9 +204,10 @@ Retrieve a single payment link by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-payment-link" method="get" path="/payment-links/{paymentLinkId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -231,10 +234,10 @@ var res = await sdk.PaymentLinks.GetAsync(
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.GetPaymentLinkHalJSONException | 404                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.GetPaymentLinkHalJSONException | 404                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
 
 ## Update
 
@@ -248,10 +251,11 @@ Certain details of an existing payment link can be updated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-payment-link" method="patch" path="/payment-links/{paymentLinkId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -319,11 +323,11 @@ var res = await sdk.PaymentLinks.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.UpdatePaymentLinkNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.UpdatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.APIException                                         | 4XX, 5XX                                                                     | \*/\*                                                                        |
+| Error Type                                                                | Status Code                                                               | Content Type                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Mollie.Models.Errors.UpdatePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.UpdatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
 
 ## Delete
 
@@ -341,10 +345,11 @@ To simply disable a payment link without fully deleting it, you can use the `arc
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="delete-payment-link" method="delete" path="/payment-links/{paymentLinkId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -373,11 +378,11 @@ var res = await sdk.PaymentLinks.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.DeletePaymentLinkNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.DeletePaymentLinkUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
-| MollieApi.Models.Errors.APIException                                         | 4XX, 5XX                                                                     | \*/\*                                                                        |
+| Error Type                                                                | Status Code                                                               | Content Type                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Mollie.Models.Errors.DeletePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.DeletePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
+| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
 
 ## ListPayments
 
@@ -393,10 +398,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-payment-link-payments" method="get" path="/payment-links/{paymentLinkId}/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -426,7 +432,7 @@ var res = await sdk.PaymentLinks.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetPaymentLinkPaymentsHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.GetPaymentLinkPaymentsHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |

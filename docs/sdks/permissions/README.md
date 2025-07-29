@@ -20,9 +20,10 @@ The results are **not** paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-permissions" method="get" path="/permissions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -39,10 +40,10 @@ var res = await sdk.Permissions.ListAsync();
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| MollieApi.Models.Errors.ListPermissionsHalJSONException | 400                                                     | application/hal+json                                    |
-| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Mollie.Models.Errors.ListPermissionsHalJSONException | 400                                                  | application/hal+json                                 |
+| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
 
 ## Get
 
@@ -54,9 +55,10 @@ Retrieve a single permission by its ID, and see if the permission is granted to 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-permission" method="get" path="/permissions/{permissionId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -83,7 +85,7 @@ var res = await sdk.Permissions.GetAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.GetPermissionHalJSONException | 404                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.GetPermissionHalJSONException | 404                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |

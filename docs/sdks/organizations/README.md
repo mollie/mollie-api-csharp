@@ -23,9 +23,10 @@ If you have a *partner account*', you can retrieve organization details of conne
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-organization" method="get" path="/organizations/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -52,10 +53,10 @@ var res = await sdk.Organizations.GetAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| MollieApi.Models.Errors.GetOrganizationHalJSONException | 404                                                     | application/hal+json                                    |
-| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Mollie.Models.Errors.GetOrganizationHalJSONException | 404                                                  | application/hal+json                                 |
+| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
 
 ## GetCurrent
 
@@ -69,9 +70,10 @@ For a complete reference of the organization object, refer to the [Get organizat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-current-organization" method="get" path="/organizations/me" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -88,9 +90,9 @@ var res = await sdk.Organizations.GetCurrentAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
 
 ## GetPartner
 
@@ -102,9 +104,10 @@ Retrieve partnership details about the currently authenticated organization. Onl
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-partner-status" method="get" path="/organizations/me/partner" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -121,6 +124,6 @@ var res = await sdk.Organizations.GetPartnerAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |

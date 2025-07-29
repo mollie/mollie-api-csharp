@@ -25,10 +25,11 @@ By default, Mollie captures payments automatically. If however you configured yo
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -61,11 +62,11 @@ var res = await sdk.Captures.CreateAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.CreateCaptureNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.CreateCaptureUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreateCaptureNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.CreateCaptureUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## List
 
@@ -81,10 +82,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -114,11 +116,11 @@ var res = await sdk.Captures.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListCapturesBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.ListCapturesNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.ListCapturesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.ListCapturesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
 
 ## Get
 
@@ -132,10 +134,11 @@ Retrieve a single payment capture by its ID and the ID of its parent payment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -166,7 +169,7 @@ var res = await sdk.Captures.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| MollieApi.Models.Errors.GetCaptureHalJSONException | 404                                                | application/hal+json                               |
-| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Mollie.Models.Errors.GetCaptureHalJSONException | 404                                             | application/hal+json                            |
+| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |

@@ -20,9 +20,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-clients" method="get" path="/clients" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -51,11 +52,11 @@ var res = await sdk.Clients.ListAsync(
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListClientsBadRequestHalJSONException | 400                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.ListClientsNotFoundHalJSONException   | 404                                                           | application/hal+json                                          |
-| MollieApi.Models.Errors.APIException                          | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Mollie.Models.Errors.ListClientsBadRequestHalJSONException | 400                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.ListClientsNotFoundHalJSONException   | 404                                                        | application/hal+json                                       |
+| Mollie.Models.Errors.APIException                          | 4XX, 5XX                                                   | \*/\*                                                      |
 
 ## Get
 
@@ -67,9 +68,10 @@ Retrieve a single client by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -96,7 +98,7 @@ var res = await sdk.Clients.GetAsync(
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| MollieApi.Models.Errors.GetClientHalJSONException | 404                                               | application/hal+json                              |
-| MollieApi.Models.Errors.APIException              | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                                     | Status Code                                    | Content Type                                   |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| Mollie.Models.Errors.GetClientHalJSONException | 404                                            | application/hal+json                           |
+| Mollie.Models.Errors.APIException              | 4XX, 5XX                                       | \*/\*                                          |

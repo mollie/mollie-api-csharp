@@ -26,10 +26,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-settlements" method="get" path="/settlements" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -60,11 +61,11 @@ var res = await sdk.Settlements.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                        | Status Code                                                       | Content Type                                                      |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSettlementsBadRequestHalJSONException | 400                                                               | application/hal+json                                              |
-| MollieApi.Models.Errors.ListSettlementsNotFoundHalJSONException   | 404                                                               | application/hal+json                                              |
-| MollieApi.Models.Errors.APIException                              | 4XX, 5XX                                                          | \*/\*                                                             |
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| Mollie.Models.Errors.ListSettlementsBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
+| Mollie.Models.Errors.ListSettlementsNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
+| Mollie.Models.Errors.APIException                              | 4XX, 5XX                                                       | \*/\*                                                          |
 
 ## Get
 
@@ -84,9 +85,10 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-settlement" method="get" path="/settlements/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -109,10 +111,10 @@ var res = await sdk.Settlements.GetAsync(id: "stl_jDk30akdN");
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.GetSettlementHalJSONException | 404                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.GetSettlementHalJSONException | 404                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## GetOpen
 
@@ -128,9 +130,10 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-open-settlement" method="get" path="/settlements/open" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -147,9 +150,9 @@ var res = await sdk.Settlements.GetOpenAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
 
 ## GetNext
 
@@ -165,9 +168,10 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-next-settlement" method="get" path="/settlements/next" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -184,9 +188,9 @@ var res = await sdk.Settlements.GetNextAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
 
 ## ListPayments
 
@@ -202,10 +206,11 @@ For capture-based payment methods such as Klarna, the payments are not listed he
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -236,10 +241,10 @@ var res = await sdk.Settlements.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSettlementPaymentsHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.ListSettlementPaymentsHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
 
 ## ListCaptures
 
@@ -253,10 +258,11 @@ The response is in the same format as the response of the [List captures endpoin
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-settlement-captures" method="get" path="/settlements/{settlementId}/captures" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -286,11 +292,11 @@ var res = await sdk.Settlements.ListCapturesAsync(req);
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.ListSettlementCapturesBadRequestHalJSONException | 400                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.ListSettlementCapturesNotFoundHalJSONException   | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.ListSettlementCapturesBadRequestHalJSONException | 400                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.ListSettlementCapturesNotFoundHalJSONException   | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## ListRefunds
 
@@ -304,10 +310,11 @@ The response is in the same format as the response of the [List refunds endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -337,11 +344,11 @@ var res = await sdk.Settlements.ListRefundsAsync(req);
 
 ### Errors
 
-| Error Type                                                              | Status Code                                                             | Content Type                                                            |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSettlementRefundsBadRequestHalJSONException | 400                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.ListSettlementRefundsNotFoundHalJSONException   | 404                                                                     | application/hal+json                                                    |
-| MollieApi.Models.Errors.APIException                                    | 4XX, 5XX                                                                | \*/\*                                                                   |
+| Error Type                                                           | Status Code                                                          | Content Type                                                         |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Mollie.Models.Errors.ListSettlementRefundsBadRequestHalJSONException | 400                                                                  | application/hal+json                                                 |
+| Mollie.Models.Errors.ListSettlementRefundsNotFoundHalJSONException   | 404                                                                  | application/hal+json                                                 |
+| Mollie.Models.Errors.APIException                                    | 4XX, 5XX                                                             | \*/\*                                                                |
 
 ## ListChargebacks
 
@@ -355,10 +362,11 @@ The response is in the same format as the response of the [List chargebacks endp
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-settlement-chargebacks" method="get" path="/settlements/{settlementId}/chargebacks" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -388,8 +396,8 @@ var res = await sdk.Settlements.ListChargebacksAsync(req);
 
 ### Errors
 
-| Error Type                                                                  | Status Code                                                                 | Content Type                                                                |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSettlementChargebacksBadRequestHalJSONException | 400                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.ListSettlementChargebacksNotFoundHalJSONException   | 404                                                                         | application/hal+json                                                        |
-| MollieApi.Models.Errors.APIException                                        | 4XX, 5XX                                                                    | \*/\*                                                                       |
+| Error Type                                                               | Status Code                                                              | Content Type                                                             |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Mollie.Models.Errors.ListSettlementChargebacksBadRequestHalJSONException | 400                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.ListSettlementChargebacksNotFoundHalJSONException   | 404                                                                      | application/hal+json                                                     |
+| Mollie.Models.Errors.APIException                                        | 4XX, 5XX                                                                 | \*/\*                                                                    |

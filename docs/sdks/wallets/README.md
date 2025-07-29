@@ -27,10 +27,11 @@ Payment sessions cannot be requested directly from the browser. The request must
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="request-apple-pay-payment-session" method="post" path="/wallets/applepay/sessions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -59,7 +60,7 @@ var res = await sdk.Wallets.RequestApplePaySessionAsync(req);
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| MollieApi.Models.Errors.RequestApplePayPaymentSessionHalJSONException | 422                                                                   | application/hal+json                                                  |
-| MollieApi.Models.Errors.APIException                                  | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Mollie.Models.Errors.RequestApplePayPaymentSessionHalJSONException | 422                                                                | application/hal+json                                               |
+| Mollie.Models.Errors.APIException                                  | 4XX, 5XX                                                           | \*/\*                                                              |

@@ -27,10 +27,11 @@ Once registered, customers will also appear in your Mollie dashboard.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-customer" method="post" path="/customers" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -60,10 +61,10 @@ var res = await sdk.Customers.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.CreateCustomerHalJSONException | 404                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.CreateCustomerHalJSONException | 404                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
 
 ## List
 
@@ -79,9 +80,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-customers" method="get" path="/customers" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -112,11 +114,11 @@ var res = await sdk.Customers.ListAsync(
 
 ### Errors
 
-| Error Type                                                      | Status Code                                                     | Content Type                                                    |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListCustomersBadRequestHalJSONException | 400                                                             | application/hal+json                                            |
-| MollieApi.Models.Errors.ListCustomersNotFoundHalJSONException   | 404                                                             | application/hal+json                                            |
-| MollieApi.Models.Errors.APIException                            | 4XX, 5XX                                                        | \*/\*                                                           |
+| Error Type                                                   | Status Code                                                  | Content Type                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Mollie.Models.Errors.ListCustomersBadRequestHalJSONException | 400                                                          | application/hal+json                                         |
+| Mollie.Models.Errors.ListCustomersNotFoundHalJSONException   | 404                                                          | application/hal+json                                         |
+| Mollie.Models.Errors.APIException                            | 4XX, 5XX                                                     | \*/\*                                                        |
 
 ## Get
 
@@ -128,10 +130,11 @@ Retrieve a single customer by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-customer" method="get" path="/customers/{customerId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -160,10 +163,10 @@ var res = await sdk.Customers.GetAsync(
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| MollieApi.Models.Errors.GetCustomerHalJSONException | 404                                                 | application/hal+json                                |
-| MollieApi.Models.Errors.APIException                | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| Mollie.Models.Errors.GetCustomerHalJSONException | 404                                              | application/hal+json                             |
+| Mollie.Models.Errors.APIException                | 4XX, 5XX                                         | \*/\*                                            |
 
 ## Update
 
@@ -177,10 +180,11 @@ For an in-depth explanation of each parameter, refer to the [Create customer](cr
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-customer" method="patch" path="/customers/{customerId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -212,10 +216,10 @@ var res = await sdk.Customers.UpdateAsync(
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.UpdateCustomerHalJSONException | 404                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.UpdateCustomerHalJSONException | 404                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
 
 ## Delete
 
@@ -227,10 +231,11 @@ Delete a customer. All mandates and subscriptions created for this customer will
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="delete-customer" method="delete" path="/customers/{customerId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -259,10 +264,10 @@ var res = await sdk.Customers.DeleteAsync(
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.DeleteCustomerHalJSONException | 404                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.DeleteCustomerHalJSONException | 404                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
 
 ## CreatePayment
 
@@ -285,10 +290,11 @@ This endpoint is effectively an alias of the [Create payment endpoint](create-pa
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-customer-payment" method="post" path="/customers/{customerId}/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -436,11 +442,11 @@ var res = await sdk.Customers.CreatePaymentAsync(
 
 ### Errors
 
-| Error Type                                                                       | Status Code                                                                      | Content Type                                                                     |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateCustomerPaymentUnprocessableEntityHalJSONException | 422                                                                              | application/hal+json                                                             |
-| MollieApi.Models.Errors.CreateCustomerPaymentServiceUnavailableHalJSONException  | 503                                                                              | application/hal+json                                                             |
-| MollieApi.Models.Errors.APIException                                             | 4XX, 5XX                                                                         | \*/\*                                                                            |
+| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreateCustomerPaymentUnprocessableEntityHalJSONException | 422                                                                           | application/hal+json                                                          |
+| Mollie.Models.Errors.CreateCustomerPaymentServiceUnavailableHalJSONException  | 503                                                                           | application/hal+json                                                          |
+| Mollie.Models.Errors.APIException                                             | 4XX, 5XX                                                                      | \*/\*                                                                         |
 
 ## ListPayments
 
@@ -454,10 +460,11 @@ Retrieve all payments linked to the customer.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-customer-payments" method="get" path="/customers/{customerId}/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -488,7 +495,7 @@ var res = await sdk.Customers.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                   | Status Code                                                  | Content Type                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| MollieApi.Models.Errors.ListCustomerPaymentsHalJSONException | 400                                                          | application/hal+json                                         |
-| MollieApi.Models.Errors.APIException                         | 4XX, 5XX                                                     | \*/\*                                                        |
+| Error Type                                                | Status Code                                               | Content Type                                              |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| Mollie.Models.Errors.ListCustomerPaymentsHalJSONException | 400                                                       | application/hal+json                                      |
+| Mollie.Models.Errors.APIException                         | 4XX, 5XX                                                  | \*/\*                                                     |

@@ -23,10 +23,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -56,11 +57,11 @@ var res = await sdk.Chargebacks.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                        | Status Code                                                       | Content Type                                                      |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListChargebacksBadRequestHalJSONException | 400                                                               | application/hal+json                                              |
-| MollieApi.Models.Errors.ListChargebacksNotFoundHalJSONException   | 404                                                               | application/hal+json                                              |
-| MollieApi.Models.Errors.APIException                              | 4XX, 5XX                                                          | \*/\*                                                             |
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| Mollie.Models.Errors.ListChargebacksBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
+| Mollie.Models.Errors.ListChargebacksNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
+| Mollie.Models.Errors.APIException                              | 4XX, 5XX                                                       | \*/\*                                                          |
 
 ## Get
 
@@ -74,10 +75,11 @@ Retrieve a single payment chargeback by its ID and the ID of its parent payment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -108,10 +110,10 @@ var res = await sdk.Chargebacks.GetAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.GetChargebackHalJSONException | 404                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.GetChargebackHalJSONException | 404                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## All
 
@@ -127,10 +129,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -161,8 +164,8 @@ var res = await sdk.Chargebacks.AllAsync(req);
 
 ### Errors
 
-| Error Type                                                           | Status Code                                                          | Content Type                                                         |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListAllChargebacksBadRequestHalJSONException | 400                                                                  | application/hal+json                                                 |
-| MollieApi.Models.Errors.ListAllChargebacksNotFoundHalJSONException   | 404                                                                  | application/hal+json                                                 |
-| MollieApi.Models.Errors.APIException                                 | 4XX, 5XX                                                             | \*/\*                                                                |
+| Error Type                                                        | Status Code                                                       | Content Type                                                      |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Mollie.Models.Errors.ListAllChargebacksBadRequestHalJSONException | 400                                                               | application/hal+json                                              |
+| Mollie.Models.Errors.ListAllChargebacksNotFoundHalJSONException   | 404                                                               | application/hal+json                                              |
+| Mollie.Models.Errors.APIException                                 | 4XX, 5XX                                                          | \*/\*                                                             |

@@ -27,10 +27,11 @@ With the Sales Invoice API you can generate sales invoices to send to your custo
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-sales-invoice" method="post" path="/sales-invoices" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -95,11 +96,11 @@ var res = await sdk.SalesInvoices.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateSalesInvoiceNotFoundHalJSONException            | 404                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.CreateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.APIException                                          | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Mollie.Models.Errors.CreateSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.CreateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |
 
 ## List
 
@@ -119,9 +120,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-sales-invoices" method="get" path="/sales-invoices" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -150,10 +152,10 @@ var res = await sdk.SalesInvoices.ListAsync(
 
 ### Errors
 
-| Error Type                                                | Status Code                                               | Content Type                                              |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSalesInvoicesHalJSONException | 400                                                       | application/hal+json                                      |
-| MollieApi.Models.Errors.APIException                      | 4XX, 5XX                                                  | \*/\*                                                     |
+| Error Type                                             | Status Code                                            | Content Type                                           |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| Mollie.Models.Errors.ListSalesInvoicesHalJSONException | 400                                                    | application/hal+json                                   |
+| Mollie.Models.Errors.APIException                      | 4XX, 5XX                                               | \*/\*                                                  |
 
 ## Get
 
@@ -171,9 +173,10 @@ Retrieve a single sales invoice by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-sales-invoice" method="get" path="/sales-invoices/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -200,10 +203,10 @@ var res = await sdk.SalesInvoices.GetAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSalesInvoiceHalJSONException | 404                                                     | application/hal+json                                    |
-| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Mollie.Models.Errors.GetSalesInvoiceHalJSONException | 404                                                  | application/hal+json                                 |
+| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
 
 ## Update
 
@@ -221,10 +224,11 @@ Certain details of an existing sales invoice can be updated. For `draft` it is a
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-sales-invoice" method="patch" path="/sales-invoices/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -302,11 +306,11 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.UpdateSalesInvoiceNotFoundHalJSONException            | 404                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.UpdateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.APIException                                          | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Mollie.Models.Errors.UpdateSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.UpdateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |
 
 ## Delete
 
@@ -324,10 +328,11 @@ Sales invoices which are in status `draft` can be deleted. For all other statuse
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="delete-sales-invoice" method="delete" path="/sales-invoices/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -356,8 +361,8 @@ var res = await sdk.SalesInvoices.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| MollieApi.Models.Errors.DeleteSalesInvoiceNotFoundHalJSONException            | 404                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.DeleteSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                           | application/hal+json                                                          |
-| MollieApi.Models.Errors.APIException                                          | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Mollie.Models.Errors.DeleteSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.DeleteSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
+| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |

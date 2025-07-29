@@ -29,10 +29,11 @@ By default, only payment methods for the Euro currency are returned. If you wish
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -69,10 +70,10 @@ var res = await sdk.Methods.ListAsync(req);
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| MollieApi.Models.Errors.ListMethodsHalJSONException | 400                                                 | application/hal+json                                |
-| MollieApi.Models.Errors.APIException                | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| Mollie.Models.Errors.ListMethodsHalJSONException | 400                                              | application/hal+json                             |
+| Mollie.Models.Errors.APIException                | 4XX, 5XX                                         | \*/\*                                            |
 
 ## All
 
@@ -88,10 +89,11 @@ The list can optionally be filtered using a number of parameters described below
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -125,10 +127,10 @@ var res = await sdk.Methods.AllAsync(req);
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| MollieApi.Models.Errors.ListAllMethodsHalJSONException | 400                                                    | application/hal+json                                   |
-| MollieApi.Models.Errors.APIException                   | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Mollie.Models.Errors.ListAllMethodsHalJSONException | 400                                                 | application/hal+json                                |
+| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
 
 ## Get
 
@@ -148,10 +150,11 @@ Additionally, it is possible to check if wallet methods such as Apple Pay are en
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -183,8 +186,8 @@ var res = await sdk.Methods.GetAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| MollieApi.Models.Errors.GetMethodBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
-| MollieApi.Models.Errors.GetMethodNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
-| MollieApi.Models.Errors.APIException                        | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                                               | Status Code                                              | Content Type                                             |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| Mollie.Models.Errors.GetMethodBadRequestHalJSONException | 400                                                      | application/hal+json                                     |
+| Mollie.Models.Errors.GetMethodNotFoundHalJSONException   | 404                                                      | application/hal+json                                     |
+| Mollie.Models.Errors.APIException                        | 4XX, 5XX                                                 | \*/\*                                                    |

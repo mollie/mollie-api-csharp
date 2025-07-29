@@ -22,9 +22,10 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -55,10 +56,10 @@ var res = await sdk.Terminals.ListAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.ListTerminalsHalJSONException | 400                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.ListTerminalsHalJSONException | 400                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## Get
 
@@ -72,9 +73,10 @@ Retrieve a single terminal by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-terminal" method="get" path="/terminals/{terminalId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -101,7 +103,7 @@ var res = await sdk.Terminals.GetAsync(
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| MollieApi.Models.Errors.GetTerminalHalJSONException | 404                                                 | application/hal+json                                |
-| MollieApi.Models.Errors.APIException                | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| Mollie.Models.Errors.GetTerminalHalJSONException | 404                                              | application/hal+json                             |
+| Mollie.Models.Errors.APIException                | 4XX, 5XX                                         | \*/\*                                            |

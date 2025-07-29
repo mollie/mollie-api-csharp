@@ -24,10 +24,11 @@ It is only possible to create mandates for IBANs and PayPal billing agreements w
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -66,10 +67,10 @@ var res = await sdk.Mandates.CreateAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.CreateMandateHalJSONException | 404                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.CreateMandateHalJSONException | 404                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## List
 
@@ -85,10 +86,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/customers/{customerId}/mandates" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -118,11 +120,11 @@ var res = await sdk.Mandates.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListMandatesBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.ListMandatesNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| MollieApi.Models.Errors.APIException                           | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                                  | Status Code                                                 | Content Type                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Mollie.Models.Errors.ListMandatesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.ListMandatesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
 
 ## Get
 
@@ -136,9 +138,10 @@ Retrieve a single mandate by its ID. Depending on the type of mandate, the objec
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-mandate" method="get" path="/customers/{customerId}/mandates/{mandateId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -167,10 +170,10 @@ var res = await sdk.Mandates.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| MollieApi.Models.Errors.GetMandateHalJSONException | 404                                                | application/hal+json                               |
-| MollieApi.Models.Errors.APIException               | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Mollie.Models.Errors.GetMandateHalJSONException | 404                                             | application/hal+json                            |
+| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
 
 ## Revoke
 
@@ -184,10 +187,11 @@ Revoke a customer's mandate. You will no longer be able to charge the customer's
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="revoke-mandate" method="delete" path="/customers/{customerId}/mandates/{mandateId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -218,7 +222,7 @@ var res = await sdk.Mandates.RevokeAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.RevokeMandateHalJSONException | 404                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.RevokeMandateHalJSONException | 404                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |

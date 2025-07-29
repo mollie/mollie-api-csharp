@@ -22,10 +22,11 @@ A webhook must have a name, an url and a list of event types. You can also creat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-webhook" method="post" path="/webhooks" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -55,10 +56,10 @@ var res = await sdk.Webhooks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| MollieApi.Models.Errors.CreateWebhookHalJSONException | 422                                                   | application/hal+json                                  |
-| MollieApi.Models.Errors.APIException                  | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| Mollie.Models.Errors.CreateWebhookHalJSONException | 422                                                | application/hal+json                               |
+| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
 
 ## List
 
@@ -70,10 +71,11 @@ Returns a paginated list of your webhooks. If no webhook endpoints are available
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-webhooks" method="get" path="/webhooks" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -103,10 +105,10 @@ var res = await sdk.Webhooks.ListAsync(req);
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| MollieApi.Models.Errors.ListWebhooksHalJSONException | 400                                                  | application/hal+json                                 |
-| MollieApi.Models.Errors.APIException                 | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Mollie.Models.Errors.ListWebhooksHalJSONException | 400                                               | application/hal+json                              |
+| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
 
 ## Update
 
@@ -118,10 +120,11 @@ Updates the webhook. You may edit the name, url and the list of subscribed event
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/webhooks/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -153,11 +156,11 @@ var res = await sdk.Webhooks.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.UpdateWebhookNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.UpdateWebhookUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.UpdateWebhookNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.UpdateWebhookUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## Get
 
@@ -169,9 +172,10 @@ Retrieve a single webhook object by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -198,11 +202,11 @@ var res = await sdk.Webhooks.GetAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| MollieApi.Models.Errors.GetWebhookNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| MollieApi.Models.Errors.GetWebhookUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| MollieApi.Models.Errors.APIException                                  | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Mollie.Models.Errors.GetWebhookNotFoundHalJSONException            | 404                                                                | application/hal+json                                               |
+| Mollie.Models.Errors.GetWebhookUnprocessableEntityHalJSONException | 422                                                                | application/hal+json                                               |
+| Mollie.Models.Errors.APIException                                  | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## Delete
 
@@ -214,9 +218,10 @@ Delete a single webhook object by its webhook ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="delete-webhook" method="delete" path="/webhooks/{id}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -243,11 +248,11 @@ var res = await sdk.Webhooks.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| MollieApi.Models.Errors.DeleteWebhookNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.DeleteWebhookUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                                                            | Status Code                                                           | Content Type                                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Mollie.Models.Errors.DeleteWebhookNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.DeleteWebhookUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
 
 ## Test
 
@@ -259,10 +264,11 @@ Sends a test event to the webhook to verify the endpoint is working as expected.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="test-webhook" method="post" path="/webhooks/{id}/ping" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -291,8 +297,8 @@ var res = await sdk.Webhooks.TestAsync(
 
 ### Errors
 
-| Error Type                                                             | Status Code                                                            | Content Type                                                           |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| MollieApi.Models.Errors.TestWebhookNotFoundHalJSONException            | 404                                                                    | application/hal+json                                                   |
-| MollieApi.Models.Errors.TestWebhookUnprocessableEntityHalJSONException | 422                                                                    | application/hal+json                                                   |
-| MollieApi.Models.Errors.APIException                                   | 4XX, 5XX                                                               | \*/\*                                                                  |
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Mollie.Models.Errors.TestWebhookNotFoundHalJSONException            | 404                                                                 | application/hal+json                                                |
+| Mollie.Models.Errors.TestWebhookUnprocessableEntityHalJSONException | 422                                                                 | application/hal+json                                                |
+| Mollie.Models.Errors.APIException                                   | 4XX, 5XX                                                            | \*/\*                                                               |

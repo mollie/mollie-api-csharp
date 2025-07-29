@@ -27,9 +27,10 @@ For payments, regardless them being at the profile level, the capability is list
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-capabilities" method="get" path="/capabilities" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -46,6 +47,6 @@ var res = await sdk.Capabilities.ListAsync();
 
 ### Errors
 
-| Error Type                           | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| MollieApi.Models.Errors.APIException | 4XX, 5XX                             | \*/\*                                |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |

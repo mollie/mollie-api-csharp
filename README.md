@@ -1,9 +1,9 @@
-# MollieApi
+# Mollie
 
-Developer-friendly & type-safe Csharp SDK specifically catered to leverage *MollieApi* API.
+Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Mollie* API.
 
 <div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=mollie-api&utm_campaign=csharp"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+    <a href="https://www.speakeasy.com/?utm_source=mollie&utm_campaign=csharp"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
@@ -23,7 +23,7 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [MollieApi](#mollieapi)
+* [Mollie](#mollie)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -40,18 +40,9 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-### NuGet
-
-To add the [NuGet](https://www.nuget.org/) package to a .NET project:
-```bash
-dotnet add package MollieApi
-```
-
-### Locally
-
 To add a reference to a local instance of the SDK in a .NET project:
 ```bash
-dotnet add reference src/MollieApi/MollieApi.csproj
+dotnet add reference src/Mollie/Mollie.csproj
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -61,9 +52,9 @@ dotnet add reference src/MollieApi/MollieApi.csproj
 ### Example
 
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -213,9 +204,9 @@ This SDK supports the following security schemes globally:
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -536,9 +527,9 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply pass a `RetryConfig` to the call:
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -685,9 +676,9 @@ var res = await sdk.Payments.CreateAsync(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(
@@ -840,7 +831,7 @@ var res = await sdk.Payments.CreateAsync(
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an exception.
 
-By default, an API error will raise a `MollieApi.Models.Errors.APIException` exception, which has the following properties:
+By default, an API error will raise a `Mollie.Models.Errors.APIException` exception, which has the following properties:
 
 | Property      | Type                  | Description           |
 |---------------|-----------------------|-----------------------|
@@ -850,19 +841,19 @@ By default, an API error will raise a `MollieApi.Models.Errors.APIException` exc
 
 When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `CreateAsync` method throws the following exceptions:
 
-| Error Type                                                               | Status Code | Content Type         |
-| ------------------------------------------------------------------------ | ----------- | -------------------- |
-| MollieApi.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422         | application/hal+json |
-| MollieApi.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503         | application/hal+json |
-| MollieApi.Models.Errors.APIException                                     | 4XX, 5XX    | \*/\*                |
+| Error Type                                                            | Status Code | Content Type         |
+| --------------------------------------------------------------------- | ----------- | -------------------- |
+| Mollie.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422         | application/hal+json |
+| Mollie.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503         | application/hal+json |
+| Mollie.Models.Errors.APIException                                     | 4XX, 5XX    | \*/\*                |
 
 ### Example
 
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Errors;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Errors;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -1010,7 +1001,7 @@ catch (Exception ex)
         // Handle exception data
         throw;
     }
-    else if (ex is MollieApi.Models.Errors.APIException)
+    else if (ex is Mollie.Models.Errors.APIException)
     {
         // Handle default exception
         throw;
@@ -1026,9 +1017,9 @@ catch (Exception ex)
 
 The default server can be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(
@@ -1182,4 +1173,4 @@ looking for the latest version.
 While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
 We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=mollie-api&utm_campaign=csharp)
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=mollie&utm_campaign=csharp)

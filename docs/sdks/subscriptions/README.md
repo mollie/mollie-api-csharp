@@ -37,10 +37,11 @@ A few example usages:
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="create-subscription" method="post" path="/customers/{customerId}/subscriptions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -87,10 +88,10 @@ var res = await sdk.Subscriptions.CreateAsync(
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| MollieApi.Models.Errors.CreateSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Mollie.Models.Errors.CreateSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
 
 ## List
 
@@ -106,10 +107,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-subscriptions" method="get" path="/customers/{customerId}/subscriptions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -139,11 +141,11 @@ var res = await sdk.Subscriptions.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                          | Status Code                                                         | Content Type                                                        |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSubscriptionsBadRequestHalJSONException | 400                                                                 | application/hal+json                                                |
-| MollieApi.Models.Errors.ListSubscriptionsNotFoundHalJSONException   | 404                                                                 | application/hal+json                                                |
-| MollieApi.Models.Errors.APIException                                | 4XX, 5XX                                                            | \*/\*                                                               |
+| Error Type                                                       | Status Code                                                      | Content Type                                                     |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Mollie.Models.Errors.ListSubscriptionsBadRequestHalJSONException | 400                                                              | application/hal+json                                             |
+| Mollie.Models.Errors.ListSubscriptionsNotFoundHalJSONException   | 404                                                              | application/hal+json                                             |
+| Mollie.Models.Errors.APIException                                | 4XX, 5XX                                                         | \*/\*                                                            |
 
 ## Get
 
@@ -157,9 +159,10 @@ Retrieve a single subscription by its ID and the ID of its parent customer.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="get-subscription" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
+using Mollie;
+using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -188,10 +191,10 @@ var res = await sdk.Subscriptions.GetAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| MollieApi.Models.Errors.GetSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
-| MollieApi.Models.Errors.APIException                    | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Mollie.Models.Errors.GetSubscriptionHalJSONException | 404                                                  | application/hal+json                                 |
+| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
 
 ## Update
 
@@ -209,10 +212,11 @@ For an in-depth explanation of each parameter, refer to the [Create subscription
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="update-subscription" method="patch" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -253,10 +257,10 @@ var res = await sdk.Subscriptions.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| MollieApi.Models.Errors.UpdateSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Mollie.Models.Errors.UpdateSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
 
 ## Cancel
 
@@ -270,10 +274,11 @@ Cancel an existing subscription. Canceling a subscription has no effect on the m
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="cancel-subscription" method="delete" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -304,10 +309,10 @@ var res = await sdk.Subscriptions.CancelAsync(
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| MollieApi.Models.Errors.CancelSubscriptionHalJSONException | 404                                                        | application/hal+json                                       |
-| MollieApi.Models.Errors.APIException                       | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Mollie.Models.Errors.CancelSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
+| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
 
 ## All
 
@@ -323,10 +328,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -356,10 +362,10 @@ var res = await sdk.Subscriptions.AllAsync(req);
 
 ### Errors
 
-| Error Type                                                   | Status Code                                                  | Content Type                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| MollieApi.Models.Errors.ListAllSubscriptionsHalJSONException | 400                                                          | application/hal+json                                         |
-| MollieApi.Models.Errors.APIException                         | 4XX, 5XX                                                     | \*/\*                                                        |
+| Error Type                                                | Status Code                                               | Content Type                                              |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| Mollie.Models.Errors.ListAllSubscriptionsHalJSONException | 400                                                       | application/hal+json                                      |
+| Mollie.Models.Errors.APIException                         | 4XX, 5XX                                                  | \*/\*                                                     |
 
 ## ListPayments
 
@@ -375,10 +381,11 @@ The results are paginated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" -->
 ```csharp
-using MollieApi;
-using MollieApi.Models.Components;
-using MollieApi.Models.Requests;
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -410,7 +417,7 @@ var res = await sdk.Subscriptions.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                       | Status Code                                                      | Content Type                                                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| MollieApi.Models.Errors.ListSubscriptionPaymentsHalJSONException | 400                                                              | application/hal+json                                             |
-| MollieApi.Models.Errors.APIException                             | 4XX, 5XX                                                         | \*/\*                                                            |
+| Error Type                                                    | Status Code                                                   | Content Type                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Mollie.Models.Errors.ListSubscriptionPaymentsHalJSONException | 400                                                           | application/hal+json                                          |
+| Mollie.Models.Errors.APIException                             | 4XX, 5XX                                                      | \*/\*                                                         |
