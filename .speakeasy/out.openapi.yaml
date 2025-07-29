@@ -1,10 +1,14 @@
 openapi: 3.1.0
 info:
   title: Mollie API
+  description: Mollie's SDK for C#
   version: 1.0.0
   license:
     name: Attribution-NonCommercial-ShareAlike 4.0 International
     identifier: CC-BY-NC-SA-4.0
+externalDocs:
+  description: Mollie API Documentation
+  url: https://docs.mollie.com/reference/overview
 servers:
   - url: https://api.mollie.com/v2
 security:
