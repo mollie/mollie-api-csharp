@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// The newly created capture object. For a complete reference of the capture object, refer to the <a href="get-capture">Get capture endpoint</a> documentation.
+        /// The newly created capture object. For a complete reference of the<br/>
+        /// 
+        /// <remarks>
+        /// capture object, refer to the <a href="get-capture">Get capture endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public CreateCaptureResponseBody? Object { get; set; }
     }

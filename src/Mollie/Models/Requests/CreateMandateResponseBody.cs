@@ -32,28 +32,21 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public CreateMandateMode? Mode { get; set; }
 
         /// <summary>
         /// Payment method of the mandate.<br/>
         /// 
         /// <remarks>
         /// <br/>
-        /// SEPA Direct Debit and PayPal mandates can be created directly.<br/>
-        /// <br/>
-        /// Possible values: `creditcard` `directdebit` `paypal`
+        /// SEPA Direct Debit and PayPal mandates can be created directly.
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public string? Method { get; set; }
+        public CreateMandateMethodResponse? Method { get; set; }
 
         [JsonProperty("details")]
         public CreateMandateDetails? Details { get; set; }
@@ -65,21 +58,24 @@ namespace Mollie.Models.Requests
         public string? SignatureDate { get; set; } = null;
 
         /// <summary>
-        /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will decline Direct Debit payments if the mandate reference is not unique.
+        /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will<br/>
+        /// 
+        /// <remarks>
+        /// decline Direct Debit payments if the mandate reference is not unique.
+        /// </remarks>
         /// </summary>
         [JsonProperty("mandateReference")]
         public string? MandateReference { get; set; } = null;
 
         /// <summary>
-        /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or when we did not received the IBAN yet from the first payment.<br/>
+        /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `valid` `pending` `invalid`
+        /// when we did not received the IBAN yet from the first payment.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public CreateMandateStatus? Status { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-customer">customer</a> this mandate was linked to.

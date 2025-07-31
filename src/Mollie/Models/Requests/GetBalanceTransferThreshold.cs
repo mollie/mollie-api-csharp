@@ -13,7 +13,12 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds this threshold, the complete balance will be paid out to the transfer destination according to the configured frequency.
+    /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
+    /// 
+    /// <remarks>
+    /// this threshold, the complete balance will be paid out to the transfer destination according to the configured<br/>
+    /// frequency.
+    /// </remarks>
     /// </summary>
     public class GetBalanceTransferThreshold
     {

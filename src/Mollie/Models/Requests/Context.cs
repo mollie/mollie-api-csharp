@@ -14,9 +14,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Depending on the type of the balance transaction, we will try to give more context about the specific event that triggered it. For example, the context object for a payment transaction will look like `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
+    /// Depending on the type of the balance transaction, we will try to give more context about the specific event that<br/>
     /// 
     /// <remarks>
+    /// triggered it. For example, the context object for a payment transaction will look like<br/>
+    /// `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
     /// <br/>
     /// Below is a complete list of the context values that each type of transaction will have.<br/>
     /// <br/>

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -16,15 +17,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Specifies the reference type<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `acquirer-reference`
-        /// </remarks>
+        /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public GetRefundType? Type { get; set; }
 
         /// <summary>
         /// Unique reference from the payment provider

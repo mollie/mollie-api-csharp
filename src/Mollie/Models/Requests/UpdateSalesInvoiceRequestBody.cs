@@ -18,9 +18,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
         /// 
         /// <remarks>
+        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>
@@ -33,13 +34,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Dependent parameters: `paymentDetails` for `paid`, `emailDetails` for `issued` and `paid`.<br/>
-        /// <br/>
-        /// Possible values: `draft` `issued` `paid`
+        /// Dependent parameters: `paymentDetails` for `paid`, `emailDetails` for `issued` and `paid`.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public UpdateSalesInvoiceStatusRequest? Status { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -48,44 +47,57 @@ namespace Mollie.Models.Requests
         public string? Memo { get; set; } = null;
 
         /// <summary>
-        /// The payment term to be set on the invoice.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `7 days` `14 days` `30 days` `45 days` `60 days` `90 days` `120 days` (default: `30 days`)
-        /// </remarks>
+        /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public string? PaymentTerm { get; set; } = null;
+        public UpdateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = Mollie.Models.Requests.UpdateSalesInvoicePaymentTermRequest.Thirtydays;
 
         /// <summary>
-        /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the provided details. Required for `paid` status.
+        /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the<br/>
+        /// 
+        /// <remarks>
+        /// provided details. Required for `paid` status.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paymentDetails")]
         public UpdateSalesInvoicePaymentDetailsRequest? PaymentDetails { get; set; } = null;
 
         /// <summary>
-        /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the recipient with the provided `subject` and `body`. Required for `issued` status.
+        /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the<br/>
+        /// 
+        /// <remarks>
+        /// recipient with the provided `subject` and `body`. Required for `issued` status.
+        /// </remarks>
         /// </summary>
         [JsonProperty("emailDetails")]
         public UpdateSalesInvoiceEmailDetailsRequest? EmailDetails { get; set; } = null;
 
         /// <summary>
-        /// An identifier tied to the recipient data. This should be a unique value based on data your system contains, so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management is not required to send a first invoice to a recipient.
+        /// An identifier tied to the recipient data. This should be a unique value based on data your system contains,<br/>
+        /// 
+        /// <remarks>
+        /// so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management<br/>
+        /// is not required to send a first invoice to a recipient.
+        /// </remarks>
         /// </summary>
         [JsonProperty("recipientIdentifier")]
         public string? RecipientIdentifier { get; set; }
 
         /// <summary>
-        /// The recipient object should contain all the information relevant to create an invoice for an intended recipient. This data will be stored, updated, and re-used as appropriate, based on the `recipientIdentifier`.
+        /// The recipient object should contain all the information relevant to create an invoice for an intended<br/>
+        /// 
+        /// <remarks>
+        /// recipient. This data will be stored, updated, and re-used as appropriate, based on the `recipientIdentifier`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("recipient")]
         public UpdateSalesInvoiceRecipientRequest? Recipient { get; set; } = null;
 
         /// <summary>
-        /// Provide the line items for the invoice. Each line contains details such as a description of the item ordered and its price.<br/>
+        /// Provide the line items for the invoice. Each line contains details such as a description of the item<br/>
         /// 
         /// <remarks>
+        /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the invoice.
         /// </remarks>

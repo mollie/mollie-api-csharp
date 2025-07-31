@@ -40,6 +40,15 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+### NuGet
+
+To add the [NuGet](https://www.nuget.org/) package to a .NET project:
+```bash
+dotnet add package Mollie
+```
+
+### Locally
+
 To add a reference to a local instance of the SDK in a .NET project:
 ```bash
 dotnet add reference src/Mollie/Mollie.csproj
@@ -103,7 +112,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -141,12 +150,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -161,7 +170,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -177,7 +186,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -255,7 +263,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -293,12 +301,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -313,7 +321,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -329,7 +337,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -588,7 +595,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -626,12 +633,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -646,7 +653,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -662,7 +669,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -739,7 +745,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -777,12 +783,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -797,7 +803,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -813,7 +819,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -904,7 +909,7 @@ try
                     ProductUrl = "https://...",
                     Recurring = new CreatePaymentRecurringRequest() {
                         Description = "Gym subscription",
-                        Interval = "12 months",
+                        Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                         Amount = new CreatePaymentRecurringAmountRequest() {
                             Currency = "EUR",
                             Value = "10.00",
@@ -942,12 +947,12 @@ try
                 Region = "Noord-Holland",
                 Country = "NL",
             },
-            Locale = "en_US",
-            Method = "ideal",
+            Locale = CreatePaymentLocaleRequest.EnUS,
+            Method = CreatePaymentMethodRequest.Ideal,
             Issuer = "ideal_INGBNL2A",
             RestrictPaymentMethodsToCountry = "NL",
-            CaptureMode = "manual",
-            CaptureDelay = "8 hours",
+            CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+            CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
             ApplicationFee = new CreatePaymentApplicationFeeRequest() {
                 Amount = new CreatePaymentApplicationFeeAmountRequest() {
                     Currency = "EUR",
@@ -962,7 +967,7 @@ try
                         Value = "10.00",
                     },
                     Destination = new CreatePaymentDestinationRequest() {
-                        Type = "organization",
+                        Type = CreatePaymentRoutingTypeRequest.Organization,
                         OrganizationId = "org_1234567",
                     },
                     ReleaseDate = "2024-12-12",
@@ -978,7 +983,6 @@ try
                     },
                 },
             },
-            SequenceType = "oneoff",
             MandateId = "mdt_5B8cwPMGnU",
             CustomerId = "cst_5B8cwPMGnU",
             ProfileId = "pfl_5B8cwPMGnU",
@@ -1071,7 +1075,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -1109,12 +1113,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -1129,7 +1133,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -1145,7 +1149,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",

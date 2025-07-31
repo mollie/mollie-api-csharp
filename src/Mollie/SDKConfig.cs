@@ -42,7 +42,7 @@ namespace Mollie
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerIndex = 0;
-            UserAgent = "speakeasy-sdk/csharp 0.0.1 2.667.0 1.0.0 Mollie";
+            UserAgent = "speakeasy-sdk/csharp 0.0.2 2.668.4 1.0.0 Mollie";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Direct link to the onboarding process in the Mollie dashboard. The merchant can be redirected to this page to complete their onboarding.
+    /// Direct link to the onboarding process in the Mollie dashboard. The merchant can be redirected to this page to<br/>
+    /// 
+    /// <remarks>
+    /// complete their onboarding.
+    /// </remarks>
     /// </summary>
     public class GetOnboardingStatusDashboard
     {

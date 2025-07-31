@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="get-order">order</a> this payment was created for. Not present if not created for an order.
+    /// The API resource URL of the <a href="get-order">order</a> this payment was created for. Not present if not created for an<br/>
+    /// 
+    /// <remarks>
+    /// order.
+    /// </remarks>
     /// </summary>
     public class CreatePaymentOrder
     {

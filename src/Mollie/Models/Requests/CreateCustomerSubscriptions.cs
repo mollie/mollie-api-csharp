@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="list-subscriptions">subscriptions</a> linked to this customer. Omitted if no such subscriptions exist (yet).
+    /// The API resource URL of the <a href="list-subscriptions">subscriptions</a> linked to this customer. Omitted if no such<br/>
+    /// 
+    /// <remarks>
+    /// subscriptions exist (yet).
+    /// </remarks>
     /// </summary>
     public class CreateCustomerSubscriptions
     {

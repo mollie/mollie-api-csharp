@@ -15,15 +15,10 @@
 
 ## Create
 
-Creates a simple minimal representation of a customer. Payments, recurring mandates, and subscriptions can be linked to this customer object, which simplifies management of recurring payments.
+Creates a simple minimal representation of a customer. Payments, recurring mandates, and subscriptions can be linked
+to this customer object, which simplifies management of recurring payments.
 
 Once registered, customers will also appear in your Mollie dashboard.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **customers.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -40,7 +35,7 @@ var sdk = new Client(security: new Security() {
 CreateCustomerRequest req = new CreateCustomerRequest() {
     Name = "John Doe",
     Email = "example@email.com",
-    Locale = "en_US",
+    Locale = CreateCustomerLocaleRequest.EnUS,
     Testmode = false,
 };
 
@@ -72,18 +67,13 @@ Retrieve a list of all customers.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **customers.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-customers" method="get" path="/customers" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -92,7 +82,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Customers.ListAsync(
     fromP: "cst_5B8cwPMGnU",
     limit: 50,
-    sort: "desc",
+    sort: ListCustomersSort.Desc,
     testmode: false
 );
 
@@ -103,10 +93,10 @@ var res = await sdk.Customers.ListAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.                                                                                                                                                                                                                                                         | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
+| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
 | `Limit`                                                                                                                                                                                                                                                                                                                                                                                | *long*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                           | 50                                                                                                                                                                                                                                                                                                                                                                                     |
-| `Sort`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from newest to oldest.<br/><br/>Possible values: `asc` `desc` (default: `desc`)                                                                                                                                                                                        | desc                                                                                                                                                                                                                                                                                                                                                                                   |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Sort`                                                                                                                                                                                                                                                                                                                                                                                 | [ListCustomersSort](../../Models/Requests/ListCustomersSort.md)                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>newest to oldest.                                                                                                                                                                                                                                             | desc                                                                                                                                                                                                                                                                                                                                                                                   |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -123,10 +113,6 @@ var res = await sdk.Customers.ListAsync(
 ## Get
 
 Retrieve a single customer by its ID.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
 
 ### Example Usage
 
@@ -155,7 +141,7 @@ var res = await sdk.Customers.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CustomerId`                                                                                                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
 | `Include`                                                                                                                                                                                                                                                                                                                                                                              | [GetCustomerInclude](../../Models/Requests/GetCustomerInclude.md)                                                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to include additional information via the `include` query string parameter.                                                                                                                                                                                                                                                                                   | events                                                                                                                                                                                                                                                                                                                                                                                 |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -174,10 +160,6 @@ Update an existing customer.
 
 For an in-depth explanation of each parameter, refer to the [Create customer](create-customer) endpoint.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="update-customer" method="patch" path="/customers/{customerId}" -->
@@ -195,7 +177,7 @@ var res = await sdk.Customers.UpdateAsync(
     requestBody: new UpdateCustomerRequestBody() {
         Name = "John Doe",
         Email = "example@email.com",
-        Locale = "en_US",
+        Locale = UpdateCustomerLocaleRequest.EnUS,
         Testmode = false,
     }
 );
@@ -224,10 +206,6 @@ var res = await sdk.Customers.UpdateAsync(
 ## Delete
 
 Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
 
 ### Example Usage
 
@@ -280,13 +258,8 @@ Linking customers to payments enables you to:
 * Improve payment insights in the Mollie dashboard
 * Use recurring payments
 
-This endpoint is effectively an alias of the [Create payment endpoint](create-payment) with the `customerId` parameter predefined.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.write**](/reference/authentication)
+This endpoint is effectively an alias of the [Create payment endpoint](create-payment) with the `customerId`
+parameter predefined.
 
 ### Example Usage
 
@@ -343,7 +316,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreateCustomerPaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreateCustomerPaymentIntervalRequest.DotDotDotMonths,
                     Amount = new CreateCustomerPaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -381,12 +354,12 @@ var res = await sdk.Customers.CreatePaymentAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreateCustomerPaymentLocaleRequest.EnUS,
+        Method = CreateCustomerPaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreateCustomerPaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreateCustomerPaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreateCustomerPaymentApplicationFeeRequest() {
             Amount = new CreateCustomerPaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -401,7 +374,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
                     Value = "10.00",
                 },
                 Destination = new CreateCustomerPaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreateCustomerPaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -417,7 +390,6 @@ var res = await sdk.Customers.CreatePaymentAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -452,12 +424,6 @@ var res = await sdk.Customers.CreatePaymentAsync(
 
 Retrieve all payments linked to the customer.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-customer-payments" method="get" path="/customers/{customerId}/payments" -->
@@ -473,7 +439,6 @@ var sdk = new Client(security: new Security() {
 ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
-    Sort = "desc",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };

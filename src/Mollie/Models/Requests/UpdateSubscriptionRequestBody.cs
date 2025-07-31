@@ -24,9 +24,10 @@ namespace Mollie.Models.Requests
         public UpdateSubscriptionAmountRequest? Amount { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing up on the bank statement of the consumer.<br/>
+        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
         /// 
         /// <remarks>
+        /// up on the bank statement of the consumer.<br/>
         /// <br/>
         /// **Please note:** the description needs to be unique for the Customer in case it has multiple active subscriptions.
         /// </remarks>
@@ -39,13 +40,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
-        /// <br/>
-        /// Possible values: `... days` `... weeks` `... months`
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public string? Interval { get; set; }
+        public UpdateSubscriptionIntervalRequest? Interval { get; set; }
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.
@@ -54,9 +53,10 @@ namespace Mollie.Models.Requests
         public string? StartDate { get; set; }
 
         /// <summary>
-        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is considered completed.<br/>
+        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
         /// 
         /// <remarks>
+        /// considered completed.<br/>
         /// <br/>
         /// Test mode subscriptions will get canceled automatically after 10 payments.
         /// </remarks>
@@ -65,9 +65,11 @@ namespace Mollie.Models.Requests
         public long? Times { get; set; }
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.<br/>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the<br/>
         /// 
         /// <remarks>
+        /// entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to<br/>
+        /// approximately 1kB.<br/>
         /// <br/>
         /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
         /// </remarks>
@@ -80,7 +82,8 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as well. Be sure to verify the payment&apos;s subscription ID and its status.
+        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment<br/>
+        /// failures as well. Be sure to verify the payment&apos;s subscription ID and its status.
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
@@ -93,9 +96,10 @@ namespace Mollie.Models.Requests
         public string? MandateId { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
         /// 
         /// <remarks>
+        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

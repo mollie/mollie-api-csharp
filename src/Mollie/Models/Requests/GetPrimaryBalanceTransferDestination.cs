@@ -9,11 +9,16 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The destination where the available amount will be automatically transferred to according to the configured transfer frequency.
+    /// The destination where the available amount will be automatically transferred to according to the configured<br/>
+    /// 
+    /// <remarks>
+    /// transfer frequency.
+    /// </remarks>
     /// </summary>
     public class GetPrimaryBalanceTransferDestination
     {
@@ -23,13 +28,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// * `bank-account` — Transfer the balance amount to an external bank account<br/>
-        /// <br/>
-        /// Possible values: `bank-account`
+        /// * `bank-account` — Transfer the balance amount to an external bank account
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public GetPrimaryBalanceType? Type { get; set; }
 
         /// <summary>
         /// The configured bank account number of the beneficiary the balance amount is to be transferred to.

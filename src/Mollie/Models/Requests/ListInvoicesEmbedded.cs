@@ -18,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of invoice objects. For a complete reference of the invoice object, refer to the <a href="get-invoice">Get invoice endpoint</a> documentation.
+        /// An array of invoice objects. For a complete reference of<br/>
+        /// 
+        /// <remarks>
+        /// the invoice object, refer to the <a href="get-invoice">Get invoice endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         [JsonProperty("invoices")]
         public List<ListInvoicesInvoice>? Invoices { get; set; }

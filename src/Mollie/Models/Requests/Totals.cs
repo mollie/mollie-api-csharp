@@ -14,9 +14,10 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a typical grouping looks like.<br/>
+    /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>
     /// 
     /// <remarks>
+    /// typical grouping looks like.<br/>
     /// <br/>
     /// If grouping `status-balances` is chosen, the main grouping is as follows:<br/>
     /// <br/>
@@ -26,7 +27,9 @@ namespace Mollie.Models.Requests
     /// If grouping `transaction-categories` is chosen, the main grouping is as follows:<br/>
     /// <br/>
     /// * `open` and `close` groups, each containing a `pending` and `available` sub-group<br/>
-    /// * Transaction type groups such as `payments`, `refunds`, `chargebacks`, `capital`, `transfers`, `fee-prepayments`, `corrections`, `topups` each containing a `pending`, `movedToAvailable`, and `immediatelyAvailable` sub-group<br/>
+    /// * Transaction type groups such as `payments`, `refunds`, `chargebacks`, `capital`, `transfers`, `fee-prepayments`, `corrections`, `topups`<br/>
+    /// each containing a `pending`, `movedToAvailable`, and<br/>
+    /// `immediatelyAvailable` sub-group<br/>
     /// <br/>
     /// Each sub-group typically has:<br/>
     /// <br/>

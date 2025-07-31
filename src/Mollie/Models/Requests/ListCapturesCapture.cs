@@ -30,15 +30,10 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string Mode { get; set; } = default!;
+        public ListCapturesMode Mode { get; set; } = default!;
 
         /// <summary>
         /// The description of the capture.
@@ -53,47 +48,61 @@ namespace Mollie.Models.Requests
         public ListCapturesAmount? Amount { get; set; }
 
         /// <summary>
-        /// This optional field will contain the approximate amount that will be settled to your account, converted to the currency your account is settled in.<br/>
+        /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
         /// 
         /// <remarks>
+        /// currency your account is settled in.<br/>
         /// <br/>
-        /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
+        /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve<br/>
+        /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a><br/>
+        /// instead.
         /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
         public ListCapturesSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
-        /// The capture&apos;s status.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `pending` `succeeded` `failed`
-        /// </remarks>
+        /// The capture&apos;s status.
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; } = default!;
+        public ListCapturesStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public ListCapturesMetadataUnion? Metadata { get; set; } = null;
 
         /// <summary>
-        /// The unique identifier of the payment this capture was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`. The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// The unique identifier of the payment this capture was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>
+        /// 
+        /// <remarks>
+        /// The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string PaymentId { get; set; } = default!;
 
         /// <summary>
-        /// The unique identifier of the shipment that triggered the creation of this capture, if applicable. For example: `shp_gNapNy9qQTUFZYnCrCF7J`.
+        /// The unique identifier of the shipment that triggered the creation of this capture, if applicable. For example:<br/>
+        /// 
+        /// <remarks>
+        /// `shp_gNapNy9qQTUFZYnCrCF7J`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("shipmentId")]
         public string? ShipmentId { get; set; } = null;
 
         /// <summary>
-        /// The identifier referring to the settlement this capture was settled with. For example, `stl_BkEjN2eBb`. This field is omitted if the capture is not settled (yet).
+        /// The identifier referring to the settlement this capture was settled with. For example, `stl_BkEjN2eBb`. This field<br/>
+        /// 
+        /// <remarks>
+        /// is omitted if the capture is not settled (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlementId")]
         public string? SettlementId { get; set; } = null;

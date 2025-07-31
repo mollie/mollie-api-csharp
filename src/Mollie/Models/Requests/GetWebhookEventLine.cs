@@ -22,13 +22,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The `tip` payment line type is not available when creating a payment.<br/>
-        /// <br/>
-        /// Possible values: `physical` `digital` `shipping_fee` `discount` `store_credit` `gift_card` `surcharge` `tip` (default: `physical`)
+        /// The `tip` payment line type is not available when creating a payment.
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public GetWebhookEventType? Type { get; set; } = Mollie.Models.Requests.GetWebhookEventType.Physical;
 
         /// <summary>
         /// A description of the line item. For example *LEGO 4440 Forest Police Station*.
@@ -64,7 +62,11 @@ namespace Mollie.Models.Requests
         public GetWebhookEventUnitPrice UnitPrice { get; set; } = default!;
 
         /// <summary>
-        /// Any line-specific discounts, as a positive amount. Not relevant if the line itself is already a discount type.
+        /// Any line-specific discounts, as a positive amount. Not relevant if the line itself is already a discount<br/>
+        /// 
+        /// <remarks>
+        /// type.
+        /// </remarks>
         /// </summary>
         [JsonProperty("discountAmount")]
         public GetWebhookEventDiscountAmount? DiscountAmount { get; set; }
@@ -83,19 +85,25 @@ namespace Mollie.Models.Requests
         public GetWebhookEventTotalAmount TotalAmount { get; set; } = default!;
 
         /// <summary>
-        /// The VAT rate applied to the line, for example `21.00` for 21%. The vatRate should be passed as a string and not as a float, to ensure the correct number of decimals are passed.
+        /// The VAT rate applied to the line, for example `21.00` for 21%. The vatRate should be passed as a string and<br/>
+        /// 
+        /// <remarks>
+        /// not as a float, to ensure the correct number of decimals are passed.
+        /// </remarks>
         /// </summary>
         [JsonProperty("vatRate")]
         public string? VatRate { get; set; }
 
         /// <summary>
-        /// The amount of value-added tax on the line. The `totalAmount` field includes VAT, so the `vatAmount` can be calculated with the formula `totalAmount × (vatRate / (100 + vatRate))`.<br/>
+        /// The amount of value-added tax on the line. The `totalAmount` field includes VAT, so the `vatAmount` can be<br/>
         /// 
         /// <remarks>
+        /// calculated with the formula `totalAmount × (vatRate / (100 + vatRate))`.<br/>
         /// <br/>
         /// Any deviations from this will result in an error.<br/>
         /// <br/>
-        /// For example, for a `totalAmount` of SEK 100.00 with a 25.00% VAT rate, we expect a VAT amount of `SEK 100.00 × (25 / 125) = SEK 20.00`.
+        /// For example, for a `totalAmount` of SEK 100.00 with a 25.00% VAT rate, we expect a VAT amount of<br/>
+        /// `SEK 100.00 × (25 / 125) = SEK 20.00`.
         /// </remarks>
         /// </summary>
         [JsonProperty("vatAmount")]
@@ -108,7 +116,11 @@ namespace Mollie.Models.Requests
         public string? Sku { get; set; }
 
         /// <summary>
-        /// An array with the voucher categories, in case of a line eligible for a voucher. See the <a href="integrating-vouchers">Integrating Vouchers</a> guide for more information.
+        /// An array with the voucher categories, in case of a line eligible for a voucher. See the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="integrating-vouchers">Integrating Vouchers</a> guide for more information.
+        /// </remarks>
         /// </summary>
         [JsonProperty("categories")]
         public List<GetWebhookEventCategory>? Categories { get; set; }

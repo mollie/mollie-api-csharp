@@ -29,13 +29,9 @@ namespace Mollie
         /// Create payment link
         /// 
         /// <remarks>
-        /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire. The payment link can be shared with your customers and will redirect them to them the payment page where they can complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.write**</a>
+        /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire.<br/>
+        /// The payment link can be shared with your customers and will redirect them to them the payment page where they can<br/>
+        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
         /// </remarks>
         /// </summary>
         Task<CreatePaymentLinkResponse> CreateAsync(CreatePaymentLinkRequest? request = null, RetryConfig? retryConfig = null);
@@ -46,13 +42,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all payment links.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -61,13 +51,7 @@ namespace Mollie
         /// Get payment link
         /// 
         /// <remarks>
-        /// Retrieve a single payment link by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.read**</a>
+        /// Retrieve a single payment link by its ID.
         /// </remarks>
         /// </summary>
         Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -76,13 +60,7 @@ namespace Mollie
         /// Update payment link
         /// 
         /// <remarks>
-        /// Certain details of an existing payment link can be updated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.write**</a>
+        /// Certain details of an existing payment link can be updated.
         /// </remarks>
         /// </summary>
         Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -91,17 +69,13 @@ namespace Mollie
         /// Delete payment link
         /// 
         /// <remarks>
-        /// Payment links which have not been opened and no payments have been made yet can be deleted entirely. This can be useful for removing payment links that have been incorrectly configured or that are no longer relevant.<br/>
+        /// Payment links which have not been opened and no payments have been made yet can be deleted entirely.<br/>
+        /// This can be useful for removing payment links that have been incorrectly configured or that are no longer relevant.<br/>
         /// <br/>
         /// Once deleted, the payment link will no longer show up in the API or Mollie dashboard.<br/>
         /// <br/>
-        /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the <a href="update-payment-link">Update payment link</a> endpoint instead.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.write**</a>
+        /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the<br/>
+        /// <a href="update-payment-link">Update payment link</a> endpoint instead.
         /// </remarks>
         /// </summary>
         Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -112,13 +86,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve the list of payments for a specific payment link.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payment-links.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(GetPaymentLinkPaymentsRequest request, RetryConfig? retryConfig = null);
@@ -128,8 +96,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public PaymentLinks(SDKConfig config)

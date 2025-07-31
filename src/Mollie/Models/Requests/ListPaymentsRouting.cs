@@ -23,21 +23,20 @@ namespace Mollie.Models.Requests
         public string Resource { get; set; } = default!;
 
         /// <summary>
-        /// The identifier uniquely referring to this route. Mollie will always refer to the route by this ID. Example: `rt_5B8cwPMGnU6qLbRvo7qEZo`.
+        /// The identifier uniquely referring to this route. Mollie will always refer to the route by this ID.<br/>
+        /// 
+        /// <remarks>
+        /// Example: `rt_5B8cwPMGnU6qLbRvo7qEZo`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string Mode { get; set; } = default!;
+        public ListPaymentsRoutingMode Mode { get; set; } = default!;
 
         /// <summary>
         /// The portion of the total payment amount being routed. Currently only `EUR` payments can be routed.
@@ -58,9 +57,10 @@ namespace Mollie.Models.Requests
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The date must be given in `YYYY-MM-DD` format.<br/>
+        /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The<br/>
         /// 
         /// <remarks>
+        /// date must be given in `YYYY-MM-DD` format.<br/>
         /// <br/>
         /// If no date is given, the funds become available to the connected merchant as soon as the payment succeeds.
         /// </remarks>

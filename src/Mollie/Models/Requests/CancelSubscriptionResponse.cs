@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// The updated subscription object with status `canceled`. For a complete reference of the subscription object, refer to the <a href="get-subscription">Get subscription endpoint</a> documentation.
+        /// The updated subscription object with status `canceled`. For a complete reference of the subscription object,<br/>
+        /// 
+        /// <remarks>
+        /// refer to the <a href="get-subscription">Get subscription endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public CancelSubscriptionResponseBody? Object { get; set; }
     }

@@ -13,13 +13,16 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// For test mode payments in certain scenarios, a hosted interface is available to help you test different payment states.<br/>
+    /// For test mode payments in certain scenarios, a hosted interface is available to help you test different<br/>
     /// 
     /// <remarks>
+    /// payment states.<br/>
     /// <br/>
-    /// Firstly, for recurring test mode payments. Recurring payments do not have a checkout URL, because these payments are executed without any user interaction.<br/>
+    /// Firstly, for recurring test mode payments. Recurring payments do not have a checkout URL, because these<br/>
+    /// payments are executed without any user interaction.<br/>
     /// <br/>
-    /// Secondly, for paid test mode payments. The payment state screen will then allow you to create a refund or chargeback for the test payment.
+    /// Secondly, for paid test mode payments. The payment state screen will then allow you to create a refund or<br/>
+    /// chargeback for the test payment.
     /// </remarks>
     /// </summary>
     public class ListSettlementPaymentsChangePaymentState

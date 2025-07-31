@@ -18,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of settlement objects. For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.
+        /// An array of settlement objects. For a complete reference<br/>
+        /// 
+        /// <remarks>
+        /// of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlements")]
         public List<ListSettlementsSettlement>? Settlements { get; set; }

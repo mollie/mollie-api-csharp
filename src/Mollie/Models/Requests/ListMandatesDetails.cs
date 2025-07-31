@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -52,18 +53,17 @@ namespace Mollie.Models.Requests
         public string? CardExpiryDate { get; set; } = null;
 
         /// <summary>
-        /// The card&apos;s label. Available for card mandates, if the card label could be detected.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `American Express` `Carta Si` `Carte Bleue` `Dankort` `Diners Club` `Discover` `JCB` `Laser` `Maestro` `Mastercard` `Unionpay` `Visa`
-        /// </remarks>
+        /// The card&apos;s label. Available for card mandates, if the card label could be detected.
         /// </summary>
         [JsonProperty("cardLabel")]
-        public string? CardLabel { get; set; } = null;
+        public ListMandatesCardLabel? CardLabel { get; set; } = null;
 
         /// <summary>
-        /// Unique alphanumeric representation of this specific card. Available for card mandates. Can be used to identify returning customers.
+        /// Unique alphanumeric representation of this specific card. Available for card mandates. Can be used to identify<br/>
+        /// 
+        /// <remarks>
+        /// returning customers.
+        /// </remarks>
         /// </summary>
         [JsonProperty("cardFingerprint")]
         public string? CardFingerprint { get; set; } = null;

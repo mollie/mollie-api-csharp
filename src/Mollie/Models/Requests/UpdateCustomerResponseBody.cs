@@ -33,15 +33,10 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public UpdateCustomerMode? Mode { get; set; }
 
         /// <summary>
         /// The full name of the customer.
@@ -56,13 +51,21 @@ namespace Mollie.Models.Requests
         public string? Email { get; set; } = null;
 
         /// <summary>
-        /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
+        /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
+        /// 
+        /// <remarks>
+        /// absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
+        /// </remarks>
         /// </summary>
         [JsonProperty("locale")]
-        public string? Locale { get; set; } = null;
+        public UpdateCustomerLocaleResponse? Locale { get; set; } = null;
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public UpdateCustomerMetadataResponseUnion? Metadata { get; set; } = null;

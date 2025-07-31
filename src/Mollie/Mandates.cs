@@ -29,15 +29,11 @@ namespace Mollie
         /// Create mandate
         /// 
         /// <remarks>
-        /// Create a mandate for a specific customer. Mandates allow you to charge a customer&apos;s card, PayPal account or bank account recurrently.<br/>
+        /// Create a mandate for a specific customer. Mandates allow you to charge a customer&apos;s card, PayPal account or bank<br/>
+        /// account recurrently.<br/>
         /// <br/>
-        /// It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create mandates for cards, your customers need to perform a &apos;first payment&apos; with their card.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **mandates.write**</a>
+        /// It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create<br/>
+        /// mandates for cards, your customers need to perform a &apos;first payment&apos; with their card.
         /// </remarks>
         /// </summary>
         Task<CreateMandateResponse> CreateAsync(string customerId, CreateMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -48,13 +44,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all mandates.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **mandates.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListMandatesResponse> ListAsync(ListMandatesRequest request, RetryConfig? retryConfig = null);
@@ -63,13 +53,8 @@ namespace Mollie
         /// Get mandate
         /// 
         /// <remarks>
-        /// Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer&apos;s bank account details, card details, or PayPal account details.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **mandates.read**</a>
+        /// Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer&apos;s bank<br/>
+        /// account details, card details, or PayPal account details.
         /// </remarks>
         /// </summary>
         Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -78,13 +63,8 @@ namespace Mollie
         /// Revoke mandate
         /// 
         /// <remarks>
-        /// Revoke a customer&apos;s mandate. You will no longer be able to charge the customer&apos;s bank account or card with this mandate, and all connected subscriptions will be canceled.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **mandates.write**</a>
+        /// Revoke a customer&apos;s mandate. You will no longer be able to charge the customer&apos;s bank account or card with this<br/>
+        /// mandate, and all connected subscriptions will be canceled.
         /// </remarks>
         /// </summary>
         Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -94,8 +74,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Mandates(SDKConfig config)

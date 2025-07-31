@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// The current profile object. For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint documentation.
+        /// The current profile object. For a complete reference of the profile object, refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="get-profile">Get profile</a> endpoint documentation.
+        /// </remarks>
         /// </summary>
         public GetCurrentProfileResponseBody? Object { get; set; }
     }

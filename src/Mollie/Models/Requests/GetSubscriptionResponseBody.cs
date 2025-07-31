@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a subscription object. Will always contain the string `subscription` for this endpoint.
+        /// Indicates the response contains a subscription object. Will always contain the string `subscription` for this<br/>
+        /// 
+        /// <remarks>
+        /// endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "subscription";
@@ -33,37 +37,36 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public GetSubscriptionMode? Mode { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is enabling the subscription.<br/>
+        /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `pending` `active` `canceled` `suspended` `completed`
+        /// enabling the subscription.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public GetSubscriptionStatus? Status { get; set; }
 
         /// <summary>
-        /// The amount for each individual payment that is charged with this subscription. For example, for a monthly subscription of €10, the subscription amount should be set to €10.
+        /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
+        /// 
+        /// <remarks>
+        /// subscription of €10, the subscription amount should be set to €10.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public GetSubscriptionAmount? Amount { get; set; }
 
         /// <summary>
-        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is considered completed.<br/>
+        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
         /// 
         /// <remarks>
+        /// considered completed.<br/>
         /// <br/>
         /// Test mode subscriptions will get canceled automatically after 10 payments.
         /// </remarks>
@@ -82,13 +85,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
-        /// <br/>
-        /// Possible values: `... days` `... weeks` `... months`
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public string? Interval { get; set; }
+        public GetSubscriptionInterval? Interval { get; set; }
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.
@@ -97,15 +98,20 @@ namespace Mollie.Models.Requests
         public string? StartDate { get; set; }
 
         /// <summary>
-        /// The date of the next scheduled payment in `YYYY-MM-DD` format. If the subscription has been completed or canceled, this parameter will not be returned.
+        /// The date of the next scheduled payment in `YYYY-MM-DD` format. If the subscription has been completed or canceled,<br/>
+        /// 
+        /// <remarks>
+        /// this parameter will not be returned.
+        /// </remarks>
         /// </summary>
         [JsonProperty("nextPaymentDate")]
         public string? NextPaymentDate { get; set; } = null;
 
         /// <summary>
-        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing up on the bank statement of the consumer.<br/>
+        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
         /// 
         /// <remarks>
+        /// up on the bank statement of the consumer.<br/>
         /// <br/>
         /// **Please note:** the description needs to be unique for the Customer in case it has multiple active subscriptions.
         /// </remarks>
@@ -114,33 +120,32 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `creditcard` `directdebit` `paypal`
-        /// </remarks>
+        /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
         /// </summary>
         [JsonProperty("method")]
-        public string? Method { get; set; } = null;
+        public GetSubscriptionMethod? Method { get; set; } = null;
 
         /// <summary>
-        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie merchants.<br/>
+        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
         /// 
         /// <remarks>
+        /// merchants.<br/>
         /// <br/>
         /// Setting an application fee on the subscription will ensure this fee is charged on each individual payment.<br/>
         /// <br/>
-        /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more information.
+        /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more<br/>
+        /// information.
         /// </remarks>
         /// </summary>
         [JsonProperty("applicationFee")]
         public GetSubscriptionApplicationFee? ApplicationFee { get; set; }
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.<br/>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
         /// 
         /// <remarks>
+        /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+        /// 1kB.<br/>
         /// <br/>
         /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
         /// </remarks>
@@ -153,7 +158,8 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as well. Be sure to verify the payment&apos;s subscription ID and its status.
+        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as<br/>
+        /// well. Be sure to verify the payment&apos;s subscription ID and its status.
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
@@ -178,7 +184,11 @@ namespace Mollie.Models.Requests
         public string? CreatedAt { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s date and time of cancellation, in ISO 8601 format. This parameter is omitted if the subscription is not canceled (yet).
+        /// The subscription&apos;s date and time of cancellation, in ISO 8601 format. This parameter is omitted if the<br/>
+        /// 
+        /// <remarks>
+        /// subscription is not canceled (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("canceledAt")]
         public string? CanceledAt { get; set; } = null;

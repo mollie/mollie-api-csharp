@@ -32,54 +32,39 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string Mode { get; set; } = default!;
+        public GetTerminalMode Mode { get; set; } = default!;
 
         /// <summary>
-        /// A short description of the terminal. The description can be used as an identifier for the terminal. Currently, the description is set when the terminal is initially configured. It will be visible in the Mollie Dashboard, and it may be visible on the device itself depending on the device.
+        /// A short description of the terminal. The description can be used as an identifier for the terminal. Currently, the<br/>
+        /// 
+        /// <remarks>
+        /// description is set when the terminal is initially configured. It will be visible in the Mollie Dashboard, and it<br/>
+        /// may be visible on the device itself depending on the device.
+        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The status of the terminal.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `pending` `active` `inactive`
-        /// </remarks>
+        /// The status of the terminal.
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; } = default!;
+        public GetTerminalStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// The brand of the terminal.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `PAX`
-        /// </remarks>
+        /// The brand of the terminal.
         /// </summary>
         [JsonProperty("brand", NullValueHandling = NullValueHandling.Include)]
-        public string? Brand { get; set; }
+        public GetTerminalBrand? Brand { get; set; }
 
         /// <summary>
-        /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `A35` `A77` `A920` `A920 Pro` `IM30`
-        /// </remarks>
+        /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.
         /// </summary>
         [JsonProperty("model", NullValueHandling = NullValueHandling.Include)]
-        public string? Model { get; set; }
+        public GetTerminalModel? Model { get; set; }
 
         /// <summary>
         /// The serial number of the terminal. The serial number is provided at terminal creation time.
@@ -88,7 +73,11 @@ namespace Mollie.Models.Requests
         public string? SerialNumber { get; set; }
 
         /// <summary>
-        /// The currency configured on the terminal, in ISO 4217 format. Currently most of our terminals are bound to a specific currency, chosen during setup.
+        /// The currency configured on the terminal, in ISO 4217 format. Currently most of our terminals are bound to a<br/>
+        /// 
+        /// <remarks>
+        /// specific currency, chosen during setup.
+        /// </remarks>
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; } = default!;
@@ -98,7 +87,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]

@@ -18,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of balance objects. For a complete reference of the balance object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+        /// An array of balance objects. For a complete reference of<br/>
+        /// 
+        /// <remarks>
+        /// the balance object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         [JsonProperty("balances")]
         public List<Balance>? Balances { get; set; }

@@ -17,23 +17,23 @@
 
 With subscriptions, you can schedule recurring payments to take place at regular intervals.
 
-For example, by simply specifying an `amount` and an `interval`, you can create an endless subscription to charge a monthly fee, until you cancel the subscription.
+For example, by simply specifying an `amount` and an `interval`, you can create an endless subscription to charge a
+monthly fee, until you cancel the subscription.
 
-Or, you could use the times parameter to only charge a limited number of times, for example to split a big transaction in multiple parts.
+Or, you could use the times parameter to only charge a limited number of times, for example to split a big
+transaction in multiple parts.
 
 A few example usages:
 
-`amount[currency]="EUR"` `amount[value]="5.00"` `interval="2 weeks"` Your customer will be charged €5 once every two weeks.
+`amount[currency]="EUR"` `amount[value]="5.00"` `interval="2 weeks"`
+Your customer will be charged €5 once every two weeks.
 
-`amount[currency]="EUR"` `amount[value]="20.00"` `interval="1 day" times=5` Your customer will be charged €20 every day, for five consecutive days.
+`amount[currency]="EUR"` `amount[value]="20.00"` `interval="1 day" times=5`
+Your customer will be charged €20 every day, for five consecutive days.
 
-`amount[currency]="EUR"` `amount[value]="10.00"` `interval="1 month"` `startDate="2018-04-30"` Your customer will be charged €10 on the last day of each month, starting in April 2018.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.write**](/reference/authentication)
+`amount[currency]="EUR"` `amount[value]="10.00"` `interval="1 month"`
+`startDate="2018-04-30"`
+Your customer will be charged €10 on the last day of each month, starting in April 2018.
 
 ### Example Usage
 
@@ -55,10 +55,10 @@ var res = await sdk.Subscriptions.CreateAsync(
             Value = "10.00",
         },
         Times = 6,
-        Interval = "1 month",
+        Interval = CreateSubscriptionIntervalRequest.DotDotDotMonths,
         StartDate = "2025-01-01",
         Description = "Subscription of streaming channel",
-        Method = "paypal",
+        Method = CreateSubscriptionMethodRequest.Paypal,
         ApplicationFee = new CreateSubscriptionApplicationFeeRequest() {
             Amount = new CreateSubscriptionApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -99,12 +99,6 @@ Retrieve all subscriptions of a customer.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-subscriptions" method="get" path="/customers/{customerId}/subscriptions" -->
@@ -120,7 +114,6 @@ var sdk = new Client(security: new Security() {
 ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "sub_5B8cwPMGnU",
-    Sort = "desc",
     Testmode = false,
 };
 
@@ -151,12 +144,6 @@ var res = await sdk.Subscriptions.ListAsync(req);
 
 Retrieve a single subscription by its ID and the ID of its parent customer.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="get-subscription" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
@@ -183,7 +170,7 @@ var res = await sdk.Subscriptions.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CustomerId`                                                                                                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
 | `SubscriptionId`                                                                                                                                                                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related subscription.                                                                                                                                                                                                                                                                                                                                            | sub_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -203,12 +190,6 @@ Update an existing subscription.
 Canceled subscriptions cannot be updated.
 
 For an in-depth explanation of each parameter, refer to the [Create subscription](create-subscription) endpoint.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -231,7 +212,7 @@ var res = await sdk.Subscriptions.UpdateAsync(
             Value = "10.00",
         },
         Description = "Subscription of streaming channel",
-        Interval = "1 month",
+        Interval = UpdateSubscriptionIntervalRequest.DotDotDotWeeks,
         StartDate = "2025-01-01",
         Times = 6,
         WebhookUrl = "https://example.com/webhook",
@@ -265,12 +246,6 @@ var res = await sdk.Subscriptions.UpdateAsync(
 ## Cancel
 
 Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -320,12 +295,6 @@ Retrieve all subscriptions initiated across all your customers.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" -->
@@ -340,7 +309,6 @@ var sdk = new Client(security: new Security() {
 
 ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     From = "tr_5B8cwPMGnU",
-    Sort = "desc",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -373,12 +341,6 @@ Retrieve all payments of a specific subscription.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **subscriptions.read** **payments.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" -->
@@ -395,7 +357,6 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     SubscriptionId = "sub_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
-    Sort = "desc",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };

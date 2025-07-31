@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -37,14 +38,15 @@ namespace Mollie.Models.Requests
         public string FamilyName { get; set; } = default!;
 
         /// <summary>
-        /// Preset the language to be used for the login screen, if applicable. For the consent screen, the preferred language of the logged in merchant will be used and this parameter is ignored.<br/>
+        /// Preset the language to be used for the login screen, if applicable. For the consent screen, the preferred<br/>
         /// 
         /// <remarks>
+        /// language of the logged in merchant will be used and this parameter is ignored.<br/>
         /// <br/>
         /// When this parameter is omitted, the browser language will be used instead.
         /// </remarks>
         /// </summary>
         [JsonProperty("locale")]
-        public string? Locale { get; set; } = null;
+        public CreateClientLinkLocale? Locale { get; set; } = null;
     }
 }

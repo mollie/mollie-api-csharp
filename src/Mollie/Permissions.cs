@@ -31,11 +31,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all permissions available to the current access token.<br/>
         /// <br/>
-        /// The results are **not** paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token</a>
+        /// The results are **not** paginated.
         /// </remarks>
         /// </summary>
         Task<ListPermissionsResponse> ListAsync(RetryConfig? retryConfig = null);
@@ -44,11 +40,7 @@ namespace Mollie
         /// Get permission
         /// 
         /// <remarks>
-        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token</a>
+        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.
         /// </remarks>
         /// </summary>
         Task<GetPermissionResponse> GetAsync(string permissionId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -58,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Permissions(SDKConfig config)

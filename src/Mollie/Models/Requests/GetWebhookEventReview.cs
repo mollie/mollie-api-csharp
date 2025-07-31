@@ -9,24 +9,25 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved automatically, unless a switch to a live profile has been requested. The review object will therefore usually be `null` in test mode.
+    /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
+    /// 
+    /// <remarks>
+    /// automatically, unless a switch to a live profile has been requested. The review object will therefore usually be<br/>
+    /// `null` in test mode.
+    /// </remarks>
     /// </summary>
     public class GetWebhookEventReview
     {
 
         /// <summary>
-        /// The status of the requested changes.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `pending` `rejected`
-        /// </remarks>
+        /// The status of the requested changes.
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public GetWebhookEventReviewStatus? Status { get; set; }
     }
 }

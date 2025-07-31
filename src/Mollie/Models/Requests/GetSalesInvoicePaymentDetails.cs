@@ -9,28 +9,32 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the provided details. Required for `paid` status.
+    /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the<br/>
+    /// 
+    /// <remarks>
+    /// provided details. Required for `paid` status.
+    /// </remarks>
     /// </summary>
     public class GetSalesInvoicePaymentDetails
     {
 
         /// <summary>
-        /// The way through which the invoice is to be set to paid.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `manual` `payment-link` `payment`
-        /// </remarks>
+        /// The way through which the invoice is to be set to paid.
         /// </summary>
         [JsonProperty("source")]
-        public string Source { get; set; } = default!;
+        public GetSalesInvoiceSource Source { get; set; } = default!;
 
         /// <summary>
-        /// A reference to the payment the sales invoice is paid by. Required for `source` values `payment-link` and `payment`.
+        /// A reference to the payment the sales invoice is paid by. Required for `source` values `payment-link` and<br/>
+        /// 
+        /// <remarks>
+        /// `payment`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("sourceReference")]
         public string? SourceReference { get; set; } = null;

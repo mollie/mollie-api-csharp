@@ -16,9 +16,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
         /// 
         /// <remarks>
+        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

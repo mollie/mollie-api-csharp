@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class GetBalanceReportRequest
@@ -21,34 +22,47 @@ namespace Mollie.Models.Requests
         public string BalanceId { get; set; } = default!;
 
         /// <summary>
-        /// The start date of the report, in `YYYY-MM-DD` format. The from date is &apos;inclusive&apos;, and in Central European Time. This means a report with for example `from=2024-01-01` will include transactions from 2024-01-01 0:00:00 CET and onwards.
+        /// The start date of the report, in `YYYY-MM-DD` format. The from date is<br/>
+        /// 
+        /// <remarks>
+        /// &apos;inclusive&apos;, and in Central European Time. This means a report with for example `from=2024-01-01` will<br/>
+        /// include transactions from 2024-01-01 0:00:00 CET and onwards.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string From { get; set; } = default!;
 
         /// <summary>
-        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time. This means a report with for example `until=2024-02-01` will include transactions up until 2024-01-31 23:59:59 CET.
+        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time.<br/>
+        /// 
+        /// <remarks>
+        /// This means a report with for example `until=2024-02-01` will include transactions up until<br/>
+        /// 2024-01-31 23:59:59 CET.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=until")]
         public string Until { get; set; } = default!;
 
         /// <summary>
-        /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by status (e.g. `pending`, `available`), then by transaction type, and then by other sub-groupings where available (e.g. payment method).<br/>
+        /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped<br/>
         /// 
         /// <remarks>
+        /// by status (e.g. `pending`, `available`), then by transaction type, and then by other sub-groupings where<br/>
+        /// available (e.g. payment method).<br/>
         /// <br/>
-        /// With the `transaction-categories` format, transactions are grouped by transaction type, then by status, and then again by other sub-groupings where available.<br/>
-        /// <br/>
-        /// Possible values: `status-balances` `transaction-categories` (default: `status-balances`)
+        /// With the `transaction-categories` format, transactions are grouped by<br/>
+        /// transaction type, then by status, and then again by other sub-groupings where available.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=grouping")]
-        public string? Grouping { get; set; } = null;
+        public QueryParamGrouping? Grouping { get; set; } = Mollie.Models.Requests.QueryParamGrouping.StatusBalances;
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// 
         /// <remarks>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

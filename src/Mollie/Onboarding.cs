@@ -29,11 +29,7 @@ namespace Mollie
         /// Get onboarding status
         /// 
         /// <remarks>
-        /// Retrieve the onboarding status of the currently authenticated organization.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **onboarding.read**</a>
+        /// Retrieve the onboarding status of the currently authenticated organization.
         /// </remarks>
         /// </summary>
         Task<GetOnboardingStatusResponse> GetAsync(RetryConfig? retryConfig = null);
@@ -42,13 +38,12 @@ namespace Mollie
         /// Submit onboarding data
         /// 
         /// <remarks>
-        /// **⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the onboarding process for your merchants.**<br/>
+        /// **⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the<br/>
+        /// onboarding process for your merchants.**<br/>
         /// <br/>
-        /// Submit data that will be prefilled in the merchant&apos;s onboarding. The data you submit will only be processed when the onboarding status is `needs-data`. Information that the merchant has entered in their dashboard will not be overwritten.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **onboarding.write**</a>
+        /// Submit data that will be prefilled in the merchant&apos;s onboarding. The data you submit will only be processed when the<br/>
+        /// onboarding status is `needs-data`.  <br/>
+        /// Information that the merchant has entered in their dashboard will not be overwritten.
         /// </remarks>
         /// </summary>
         Task<SubmitOnboardingDataResponse> SubmitAsync(SubmitOnboardingDataRequest? request = null, RetryConfig? retryConfig = null);
@@ -58,8 +53,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Onboarding(SDKConfig config)

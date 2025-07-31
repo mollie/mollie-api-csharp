@@ -13,11 +13,13 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and conversion.<br/>
+    /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
     /// 
     /// <remarks>
+    /// conversion.<br/>
     /// <br/>
-    /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and `country`.<br/>
+    /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+    /// `country`.<br/>
     /// <br/>
     /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
     /// </remarks>
@@ -32,9 +34,10 @@ namespace Mollie.Models.Requests
         public string? Title { get; set; }
 
         /// <summary>
-        /// The given name (first name) of the person should be at least two characters and cannot contain only numbers.<br/>
+        /// The given name (first name) of the person should be at least two characters and cannot contain only<br/>
         /// 
         /// <remarks>
+        /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>
@@ -43,9 +46,10 @@ namespace Mollie.Models.Requests
         public string? GivenName { get; set; }
 
         /// <summary>
-        /// The given family name (surname) of the person should be at least two characters and cannot contain only numbers.<br/>
+        /// The given family name (surname) of the person should be at least two characters and cannot contain only<br/>
         /// 
         /// <remarks>
+        /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>
@@ -92,7 +96,8 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
+        /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions<br/>
+        /// email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>

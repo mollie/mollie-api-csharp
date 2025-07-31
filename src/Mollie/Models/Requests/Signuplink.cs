@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The URL that can be used to have new organizations sign up and be automatically linked to this partner. Will be omitted if the partner is not of type `signuplink`.
+    /// The URL that can be used to have new organizations sign up and be automatically linked to this<br/>
+    /// 
+    /// <remarks>
+    /// partner. Will be omitted if the partner is not of type `signuplink`.
+    /// </remarks>
     /// </summary>
     public class Signuplink
     {

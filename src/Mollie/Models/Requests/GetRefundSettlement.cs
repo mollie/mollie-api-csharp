@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="get-settlement">settlement</a> this refund has been settled with. Not present if not yet settled.
+    /// The API resource URL of the <a href="get-settlement">settlement</a> this refund has been settled with. Not present if not<br/>
+    /// 
+    /// <remarks>
+    /// yet settled.
+    /// </remarks>
     /// </summary>
     public class GetRefundSettlement
     {

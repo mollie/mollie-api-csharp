@@ -32,19 +32,31 @@ namespace Mollie.Models.Requests
         public GetCustomerDashboard? Dashboard { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments exist (yet).
+        /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments<br/>
+        /// 
+        /// <remarks>
+        /// exist (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("payments")]
         public GetCustomerPayments? Payments { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-mandates">mandates</a> linked to this customer. Omitted if no such mandates exist (yet).
+        /// The API resource URL of the <a href="list-mandates">mandates</a> linked to this customer. Omitted if no such mandates<br/>
+        /// 
+        /// <remarks>
+        /// exist (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("mandates")]
         public GetCustomerMandates? Mandates { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-subscriptions">subscriptions</a> linked to this customer. Omitted if no such subscriptions exist (yet).
+        /// The API resource URL of the <a href="list-subscriptions">subscriptions</a> linked to this customer. Omitted if no such<br/>
+        /// 
+        /// <remarks>
+        /// subscriptions exist (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("subscriptions")]
         public GetCustomerSubscriptions? Subscriptions { get; set; } = null;

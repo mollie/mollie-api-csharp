@@ -14,7 +14,11 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// This endpoint allows you to include additional information via the `include` query string parameter.
+    /// This endpoint allows you to include additional information via the<br/>
+    /// 
+    /// <remarks>
+    /// `include` query string parameter.
+    /// </remarks>
     /// </summary>
     public enum ListMethodsInclude
     {

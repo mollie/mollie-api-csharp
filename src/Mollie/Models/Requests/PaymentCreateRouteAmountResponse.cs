@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The amount of the route. That amount that will be routed to the specified destination.
+    /// The amount of the route.<br/>
+    /// 
+    /// <remarks>
+    /// That amount that will be routed to the specified destination.
+    /// </remarks>
     /// </summary>
     public class PaymentCreateRouteAmountResponse
     {

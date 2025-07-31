@@ -16,11 +16,8 @@
 
 Create a profile to process payments on.
 
-Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you can use this endpoint to automate profile creation.
-
-> 🔑 Access with
->
-> [Access token with **profiles.write**](/reference/authentication)
+Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you
+can use this endpoint to automate profile creation.
 
 ### Example Usage
 
@@ -76,10 +73,6 @@ Retrieve a list of all of your profiles.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [Access token with **profiles.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/profiles" -->
@@ -103,7 +96,7 @@ var res = await sdk.Profiles.ListAsync(
 
 | Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    | Example                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `From`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set. | pfl_QkEhN94Ba                                                                                                                  |
+| `From`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set. | pfl_QkEhN94Ba                                                                                                                  |
 | `Limit`                                                                                                                        | *long*                                                                                                                         | :heavy_minus_sign:                                                                                                             | The maximum number of items to return. Defaults to 50 items.                                                                   | 50                                                                                                                             |
 
 ### Response
@@ -120,10 +113,6 @@ var res = await sdk.Profiles.ListAsync(
 ## Get
 
 Retrieve a single profile by its ID.
-
-> 🔑 Access with
->
-> [Access token with **profiles.read**](/reference/authentication)
 
 ### Example Usage
 
@@ -149,7 +138,7 @@ var res = await sdk.Profiles.GetAsync(
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | pfl_QkEhN94Ba                                                                                                                                                                                                                                                                                                                                                                          |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -167,11 +156,8 @@ var res = await sdk.Profiles.GetAsync(
 
 Update an existing profile.
 
-Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard. Alternatively, you can use this endpoint to automate profile management.
-
-> 🔑 Access with
->
-> [Access token with **profiles.write**](/reference/authentication)
+Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.
+Alternatively, you can use this endpoint to automate profile management.
 
 ### Example Usage
 
@@ -199,7 +185,7 @@ var res = await sdk.Profiles.UpdateAsync(
             "GB",
         },
         BusinessCategory = "OTHER_MERCHANDISE",
-        Mode = "live",
+        Mode = ModeRequest.Live,
     }
 );
 
@@ -229,10 +215,6 @@ var res = await sdk.Profiles.UpdateAsync(
 ## Delete
 
 Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
-
-> 🔑 Access with
->
-> [Access token with **profiles.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -270,13 +252,11 @@ var res = await sdk.Profiles.DeleteAsync(id: "pfl_QkEhN94Ba");
 
 ## GetCurrent
 
-Retrieve the currently authenticated profile. A convenient alias of the [Get profile](get-profile) endpoint.
+Retrieve the currently authenticated profile. A convenient alias of the [Get profile](get-profile)
+endpoint.
 
-For a complete reference of the profile object, refer to the [Get profile](get-profile) endpoint documentation.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
+For a complete reference of the profile object, refer to the [Get profile](get-profile) endpoint
+documentation.
 
 ### Example Usage
 

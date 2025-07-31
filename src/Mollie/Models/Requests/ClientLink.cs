@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The link you can send your customer to, where they can either log in and link their account, or sign up and proceed with onboarding.
+    /// The link you can send your customer to, where they can either log in and link their account, or sign up and<br/>
+    /// 
+    /// <remarks>
+    /// proceed with onboarding.
+    /// </remarks>
     /// </summary>
     public class ClientLink
     {

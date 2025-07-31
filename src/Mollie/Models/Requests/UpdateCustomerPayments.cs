@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments exist (yet).
+    /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments<br/>
+    /// 
+    /// <remarks>
+    /// exist (yet).
+    /// </remarks>
     /// </summary>
     public class UpdateCustomerPayments
     {

@@ -13,7 +13,14 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// URLs of images representing the issuer. required: - size1x - size2x - svg
+    /// URLs of images representing the issuer.<br/>
+    /// 
+    /// <remarks>
+    /// required:<br/>
+    ///   - size1x<br/>
+    ///   - size2x<br/>
+    ///   - svg
+    /// </remarks>
     /// </summary>
     public class ListMethodsIssuerImage
     {
@@ -31,7 +38,11 @@ namespace Mollie.Models.Requests
         public string? Size2x { get; set; }
 
         /// <summary>
-        /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can scale to any desired size without compromising visual quality.
+        /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can<br/>
+        /// 
+        /// <remarks>
+        /// scale to any desired size without compromising visual quality.
+        /// </remarks>
         /// </summary>
         [JsonProperty("svg")]
         public string? Svg { get; set; }

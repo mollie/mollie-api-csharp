@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -17,13 +18,21 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or application.
+        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or<br/>
+        /// 
+        /// <remarks>
+        /// application.
+        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are allowed.
+        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs<br/>
+        /// 
+        /// <remarks>
+        /// are allowed.
+        /// </remarks>
         /// </summary>
         [JsonProperty("website")]
         public string? Website { get; set; } = null;
@@ -47,26 +56,33 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; } = null;
 
         /// <summary>
-        /// A list of countries where you expect that the majority of the profile&apos;s customers reside, in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// A list of countries where you expect that the majority of the profile&apos;s customers reside,<br/>
+        /// 
+        /// <remarks>
+        /// in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// </remarks>
         /// </summary>
         [JsonProperty("countriesOfActivity")]
         public List<string>? CountriesOfActivity { get; set; } = null;
 
         /// <summary>
-        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the <a href="common-data-types">business category list</a> for all possible options.
+        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="common-data-types">business category list</a> for all possible options.
+        /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; } = null;
 
         /// <summary>
-        /// Updating a profile from `test` mode to `live` mode will trigger a verification process, where we review the profile before it can start accepting payments.<br/>
+        /// Updating a profile from `test` mode to `live` mode will trigger a verification process, where we review<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
+        /// the profile before it can start accepting payments.
         /// </remarks>
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; } = null;
+        public ModeRequest? Mode { get; set; } = null;
     }
 }

@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment amount.
+    /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment<br/>
+    /// 
+    /// <remarks>
+    /// amount.
+    /// </remarks>
     /// </summary>
     public class CreateRefundAmountResponse
     {

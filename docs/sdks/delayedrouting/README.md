@@ -10,11 +10,8 @@
 
 ## Create
 
-Create a route for a specific payment. The routed amount is credited to the account of your customer.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
+Create a route for a specific payment.
+The routed amount is credited to the account of your customer.
 
 ### Example Usage
 
@@ -37,7 +34,7 @@ var res = await sdk.DelayedRouting.CreateAsync(
         },
         Description = "Payment for Order #12345",
         Destination = new PaymentCreateRouteDestinationRequest() {
-            Type = "organization",
+            Type = PaymentCreateRouteTypeRequest.Organization,
             OrganizationId = "org_1234567",
         },
     }
@@ -67,10 +64,6 @@ var res = await sdk.DelayedRouting.CreateAsync(
 ## List
 
 Retrieve a list of all routes created for a specific payment.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
 
 ### Example Usage
 

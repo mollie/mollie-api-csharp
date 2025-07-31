@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -19,18 +20,17 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The type of destination. Currently only the destination type `organization` is supported.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `organization`
-        /// </remarks>
+        /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        public CreatePaymentRoutingTypeRequest Type { get; set; } = default!;
 
         /// <summary>
-        /// Required for destination type `organization`. The ID of the connected organization the funds should be routed to.
+        /// Required for destination type `organization`. The ID of the connected organization the funds should be<br/>
+        /// 
+        /// <remarks>
+        /// routed to.
+        /// </remarks>
         /// </summary>
         [JsonProperty("organizationId")]
         public string OrganizationId { get; set; } = default!;

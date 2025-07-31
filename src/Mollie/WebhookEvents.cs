@@ -29,11 +29,7 @@ namespace Mollie
         /// Get a Webhook Event
         /// 
         /// <remarks>
-        /// Retrieve a single webhook event object by its event ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **events.read**</a>
+        /// Retrieve a single webhook event object by its event ID.
         /// </remarks>
         /// </summary>
         Task<GetWebhookEventResponse> GetAsync(string id, RetryConfig? retryConfig = null);
@@ -43,8 +39,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public WebhookEvents(SDKConfig config)

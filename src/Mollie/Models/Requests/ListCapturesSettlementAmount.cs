@@ -13,11 +13,14 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// This optional field will contain the approximate amount that will be settled to your account, converted to the currency your account is settled in.<br/>
+    /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
     /// 
     /// <remarks>
+    /// currency your account is settled in.<br/>
     /// <br/>
-    /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
+    /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve<br/>
+    /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a><br/>
+    /// instead.
     /// </remarks>
     /// </summary>
     public class ListCapturesSettlementAmount

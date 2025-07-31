@@ -41,7 +41,11 @@ namespace Mollie.Models.Requests
         public string? RegistrationNumber { get; set; } = null;
 
         /// <summary>
-        /// The VAT number of the organization, if based in the European Union. VAT numbers are verified against the international registry *VIES*.
+        /// The VAT number of the organization, if based in the European Union. VAT numbers are verified against the<br/>
+        /// 
+        /// <remarks>
+        /// international registry *VIES*.
+        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;

@@ -17,7 +17,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains an onboarding status object. Will always contain the string `onboarding` for this resource type.
+        /// Indicates the response contains an onboarding status object. Will always contain the string `onboarding` for this<br/>
+        /// 
+        /// <remarks>
+        /// resource type.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "onboarding";
@@ -35,13 +39,11 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// * `needs-data` — The merchant needs to provide additional information<br/>
         /// * `in-review` — The merchant provided all information, awaiting review from Mollie<br/>
-        /// * `completed` — The onboarding is completed<br/>
-        /// <br/>
-        /// Possible values: `needs-data` `in-review` `completed`
+        /// * `completed` — The onboarding is completed
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public GetClientOnboardingStatus? Status { get; set; }
 
         /// <summary>
         /// Whether the organization can receive payments.

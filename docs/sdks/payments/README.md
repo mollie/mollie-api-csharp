@@ -14,19 +14,18 @@
 
 ## Create
 
-Payment creation is elemental to the Mollie API: this is where most payment implementations start off.
+Payment creation is elemental to the Mollie API: this is where most payment
+implementations start off.
 
-Once you have created a payment, you should redirect your customer to the URL in the `_links.checkout` property from the response.
+Once you have created a payment, you should redirect your customer to the
+URL in the `_links.checkout` property from the response.
 
-To wrap your head around the payment process, an explanation and flow charts can be found in the 'Accepting payments' guide.
+To wrap your head around the payment process, an explanation and flow charts
+can be found in the 'Accepting payments' guide.
 
-If you specify the `method` parameter when creating a payment, optional additional parameters may be available for the payment method that are not listed below. Please refer to the guide on [method-specific parameters](extra-payment-parameters).
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.write**](/reference/authentication)
+If you specify the `method` parameter when creating a payment, optional
+additional parameters may be available for the payment method that are not listed below. Please refer to the
+guide on [method-specific parameters](extra-payment-parameters).
 
 ### Example Usage
 
@@ -83,7 +82,7 @@ var res = await sdk.Payments.CreateAsync(
                 ProductUrl = "https://...",
                 Recurring = new CreatePaymentRecurringRequest() {
                     Description = "Gym subscription",
-                    Interval = "12 months",
+                    Interval = CreatePaymentIntervalRequest.DotDotDotDays,
                     Amount = new CreatePaymentRecurringAmountRequest() {
                         Currency = "EUR",
                         Value = "10.00",
@@ -121,12 +120,12 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = "en_US",
-        Method = "ideal",
+        Locale = CreatePaymentLocaleRequest.EnUS,
+        Method = CreatePaymentMethodRequest.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = "manual",
-        CaptureDelay = "8 hours",
+        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureDelay = CreatePaymentCaptureDelayRequest.DotDotDotDays,
         ApplicationFee = new CreatePaymentApplicationFeeRequest() {
             Amount = new CreatePaymentApplicationFeeAmountRequest() {
                 Currency = "EUR",
@@ -141,7 +140,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = "organization",
+                    Type = CreatePaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
@@ -157,7 +156,6 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        SequenceType = "oneoff",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -194,12 +192,6 @@ Retrieve all payments created with the current website profile.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/payments" -->
@@ -214,7 +206,6 @@ var sdk = new Client(security: new Security() {
 
 ListPaymentsRequest req = new ListPaymentsRequest() {
     From = "tr_5B8cwPMGnU",
-    Sort = "desc",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -245,12 +236,6 @@ var res = await sdk.Payments.ListAsync(req);
 
 Retrieve a single payment object by its payment ID.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/payments/{paymentId}" -->
@@ -279,8 +264,8 @@ var res = await sdk.Payments.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PaymentId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                 | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
 | `Include`                                                                                                                                                                                                                                                                                                                                                                              | [GetPaymentInclude](../../Models/Requests/GetPaymentInclude.md)                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to include additional information via the `include` query string parameter.                                                                                                                                                                                                                                                                                   | details.qrCode                                                                                                                                                                                                                                                                                                                                                                         |
-| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetPaymentEmbed](../../Models/Requests/GetPaymentEmbed.md)                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string parameter.                                                                                                                                                                                                                                                             | captures                                                                                                                                                                                                                                                                                                                                                                               |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetPaymentEmbed](../../Models/Requests/GetPaymentEmbed.md)                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the<br/>following values via the `embed` query string parameter.                                                                                                                                                                                                                                                         | captures                                                                                                                                                                                                                                                                                                                                                                               |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -298,12 +283,6 @@ var res = await sdk.Payments.GetAsync(
 Certain details of an existing payment can be updated.
 
 Updating the payment details will not result in a webhook call.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -324,8 +303,8 @@ var res = await sdk.Payments.UpdateAsync(
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Method = "ideal",
-        Locale = "en_US",
+        Method = UpdatePaymentMethodRequest.Ideal,
+        Locale = UpdatePaymentLocaleRequest.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
@@ -386,17 +365,12 @@ var res = await sdk.Payments.UpdateAsync(
 
 ## Cancel
 
-Depending on the payment method, you may be able to cancel a payment for a certain amount of time — usually until the next business day or as long as the payment status is open.
+Depending on the payment method, you may be able to cancel a payment for a certain amount of time — usually until
+the next business day or as long as the payment status is open.
 
 Payments may also be canceled manually from the Mollie Dashboard.
 
 The `isCancelable` property on the [Payment object](get-payment) will indicate if the payment can be canceled.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.write**](/reference/authentication)
 
 ### Example Usage
 
@@ -441,17 +415,14 @@ var res = await sdk.Payments.CancelAsync(
 
 ## ReleaseAuthorization
 
-Releases the full remaining authorized amount. Call this endpoint when you will not be making any additional captures. Payment authorizations may also be released manually from the Mollie Dashboard.
+Releases the full remaining authorized amount. Call this endpoint when you will not be making any additional
+captures. Payment authorizations may also be released manually from the Mollie Dashboard.
 
-Mollie will do its best to process release requests, but it is not guaranteed that it will succeed. It is up to the issuing bank if and when the hold will be released.
+Mollie will do its best to process release requests, but it is not guaranteed that it will succeed. It is up to
+the issuing bank if and when the hold will be released.
 
-If the request does succeed, the payment status will change to `canceled` for payments without captures. If there is a successful capture, the payment will transition to `paid`.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **payments.write**](/reference/authentication)
+If the request does succeed, the payment status will change to `canceled` for payments without captures.
+If there is a successful capture, the payment will transition to `paid`.
 
 ### Example Usage
 

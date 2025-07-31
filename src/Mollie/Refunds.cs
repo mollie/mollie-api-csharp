@@ -29,13 +29,8 @@ namespace Mollie
         /// Create payment refund
         /// 
         /// <remarks>
-        /// Creates a refund for a specific payment. The refunded amount is credited to your customer usually either via a bank transfer or by refunding the amount to your customer&apos;s credit card.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **refunds.write**</a>
+        /// Creates a refund for a specific payment. The refunded amount is credited to your customer usually either via a bank<br/>
+        /// transfer or by refunding the amount to your customer&apos;s credit card.
         /// </remarks>
         /// </summary>
         Task<CreateRefundResponse> CreateAsync(string paymentId, CreateRefundRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -46,13 +41,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all refunds created for a specific payment.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **refunds.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListRefundsResponse> ListAsync(ListRefundsRequest request, RetryConfig? retryConfig = null);
@@ -61,13 +50,7 @@ namespace Mollie
         /// Get payment refund
         /// 
         /// <remarks>
-        /// Retrieve a single payment refund by its ID and the ID of its parent payment.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **refunds.read**</a>
+        /// Retrieve a single payment refund by its ID and the ID of its parent payment.
         /// </remarks>
         /// </summary>
         Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -76,15 +59,11 @@ namespace Mollie
         /// Cancel payment refund
         /// 
         /// <remarks>
-        /// Refunds will be executed with a delay of two hours. Until that time, refunds may be canceled manually via the Mollie Dashboard, or by using this endpoint.<br/>
+        /// Refunds will be executed with a delay of two hours. Until that time, refunds may be canceled manually via the<br/>
+        /// Mollie Dashboard, or by using this endpoint.<br/>
         /// <br/>
-        /// A refund can only be canceled while its `status` field is either `queued` or `pending`. See the <a href="get-refund">Get refund endpoint</a> for more information.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **refunds.write**</a>
+        /// A refund can only be canceled while its `status` field is either `queued` or `pending`. See the<br/>
+        /// <a href="get-refund">Get refund endpoint</a> for more information.
         /// </remarks>
         /// </summary>
         Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -95,13 +74,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all of your refunds.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **refunds.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListAllRefundsResponse> AllAsync(ListAllRefundsRequest? request = null, RetryConfig? retryConfig = null);
@@ -111,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)

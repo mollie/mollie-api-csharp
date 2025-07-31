@@ -40,7 +40,11 @@ namespace Mollie.Models.Errors
         public string Detail { get; set; } = default!;
 
         /// <summary>
-        /// If the error was caused by a value provided by you in a specific field, the `field` property will contain the name of the field that caused the issue.
+        /// If the error was caused by a value provided by you in a specific field, the `field` property will contain the name<br/>
+        /// 
+        /// <remarks>
+        /// of the field that caused the issue.
+        /// </remarks>
         /// </summary>
         [JsonProperty("field")]
         public string? Field { get; set; }

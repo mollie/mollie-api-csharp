@@ -29,19 +29,18 @@ namespace Mollie
         /// Create payment
         /// 
         /// <remarks>
-        /// Payment creation is elemental to the Mollie API: this is where most payment implementations start off.<br/>
+        /// Payment creation is elemental to the Mollie API: this is where most payment<br/>
+        /// implementations start off.<br/>
         /// <br/>
-        /// Once you have created a payment, you should redirect your customer to the URL in the `_links.checkout` property from the response.<br/>
+        /// Once you have created a payment, you should redirect your customer to the<br/>
+        /// URL in the `_links.checkout` property from the response.<br/>
         /// <br/>
-        /// To wrap your head around the payment process, an explanation and flow charts can be found in the &apos;Accepting payments&apos; guide.<br/>
+        /// To wrap your head around the payment process, an explanation and flow charts<br/>
+        /// can be found in the &apos;Accepting payments&apos; guide.<br/>
         /// <br/>
-        /// If you specify the `method` parameter when creating a payment, optional additional parameters may be available for the payment method that are not listed below. Please refer to the guide on <a href="extra-payment-parameters">method-specific parameters</a>.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// If you specify the `method` parameter when creating a payment, optional<br/>
+        /// additional parameters may be available for the payment method that are not listed below. Please refer to the<br/>
+        /// guide on <a href="extra-payment-parameters">method-specific parameters</a>.
         /// </remarks>
         /// </summary>
         Task<CreatePaymentResponse> CreateAsync(CreatePaymentInclude? include = null, CreatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -52,13 +51,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all payments created with the current website profile.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListPaymentsResponse> ListAsync(ListPaymentsRequest? request = null, RetryConfig? retryConfig = null);
@@ -67,13 +60,7 @@ namespace Mollie
         /// Get payment
         /// 
         /// <remarks>
-        /// Retrieve a single payment object by its payment ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// Retrieve a single payment object by its payment ID.
         /// </remarks>
         /// </summary>
         Task<GetPaymentResponse> GetAsync(string paymentId, GetPaymentInclude? include = null, GetPaymentEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -84,13 +71,7 @@ namespace Mollie
         /// <remarks>
         /// Certain details of an existing payment can be updated.<br/>
         /// <br/>
-        /// Updating the payment details will not result in a webhook call.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// Updating the payment details will not result in a webhook call.
         /// </remarks>
         /// </summary>
         Task<UpdatePaymentResponse> UpdateAsync(string paymentId, UpdatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -99,17 +80,12 @@ namespace Mollie
         /// Cancel payment
         /// 
         /// <remarks>
-        /// Depending on the payment method, you may be able to cancel a payment for a certain amount of time — usually until the next business day or as long as the payment status is open.<br/>
+        /// Depending on the payment method, you may be able to cancel a payment for a certain amount of time — usually until<br/>
+        /// the next business day or as long as the payment status is open.<br/>
         /// <br/>
         /// Payments may also be canceled manually from the Mollie Dashboard.<br/>
         /// <br/>
-        /// The `isCancelable` property on the <a href="get-payment">Payment object</a> will indicate if the payment can be canceled.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// The `isCancelable` property on the <a href="get-payment">Payment object</a> will indicate if the payment can be canceled.
         /// </remarks>
         /// </summary>
         Task<CancelPaymentResponse> CancelAsync(string paymentId, CancelPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -118,17 +94,14 @@ namespace Mollie
         /// Release payment authorization
         /// 
         /// <remarks>
-        /// Releases the full remaining authorized amount. Call this endpoint when you will not be making any additional captures. Payment authorizations may also be released manually from the Mollie Dashboard.<br/>
+        /// Releases the full remaining authorized amount. Call this endpoint when you will not be making any additional<br/>
+        /// captures. Payment authorizations may also be released manually from the Mollie Dashboard.<br/>
         /// <br/>
-        /// Mollie will do its best to process release requests, but it is not guaranteed that it will succeed. It is up to the issuing bank if and when the hold will be released.<br/>
+        /// Mollie will do its best to process release requests, but it is not guaranteed that it will succeed. It is up to<br/>
+        /// the issuing bank if and when the hold will be released.<br/>
         /// <br/>
-        /// If the request does succeed, the payment status will change to `canceled` for payments without captures. If there is a successful capture, the payment will transition to `paid`.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// If the request does succeed, the payment status will change to `canceled` for payments without captures.<br/>
+        /// If there is a successful capture, the payment will transition to `paid`.
         /// </remarks>
         /// </summary>
         Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(string paymentId, ReleaseAuthorizationRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -138,8 +111,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Payments(SDKConfig config)

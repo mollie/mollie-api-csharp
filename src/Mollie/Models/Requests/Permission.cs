@@ -17,7 +17,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a permission object. Will always contain the string `permission` for this endpoint.
+        /// Indicates the response contains a permission object. Will always contain the string `permission` for this<br/>
+        /// 
+        /// <remarks>
+        /// endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "permission";

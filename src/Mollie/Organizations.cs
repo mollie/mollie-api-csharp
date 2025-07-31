@@ -31,13 +31,10 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single organization by its ID.<br/>
         /// <br/>
-        /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
+        /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful<br/>
+        /// for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
         /// <br/>
-        /// If you have a *partner account*&apos;, you can retrieve organization details of connected organizations.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **organizations.read**</a>
+        /// If you have a *partner account*&apos;, you can retrieve organization details of connected organizations.
         /// </remarks>
         /// </summary>
         Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -46,13 +43,11 @@ namespace Mollie
         /// Get current organization
         /// 
         /// <remarks>
-        /// Retrieve the currently authenticated organization. A convenient alias of the <a href="get-organization">Get organization</a> endpoint.<br/>
+        /// Retrieve the currently authenticated organization. A convenient alias of the <a href="get-organization">Get organization</a><br/>
+        /// endpoint.<br/>
         /// <br/>
-        /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint documentation.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **organizations.read**</a>
+        /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint<br/>
+        /// documentation.
         /// </remarks>
         /// </summary>
         Task<GetCurrentOrganizationResponse> GetCurrentAsync(RetryConfig? retryConfig = null);
@@ -61,11 +56,8 @@ namespace Mollie
         /// Get partner status
         /// 
         /// <remarks>
-        /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner accounts*.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **organizations.read**</a>
+        /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner<br/>
+        /// accounts*.
         /// </remarks>
         /// </summary>
         Task<GetPartnerStatusResponse> GetPartnerAsync(RetryConfig? retryConfig = null);
@@ -75,8 +67,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Organizations(SDKConfig config)

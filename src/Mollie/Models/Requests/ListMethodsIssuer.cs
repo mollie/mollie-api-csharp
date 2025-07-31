@@ -29,7 +29,14 @@ namespace Mollie.Models.Requests
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// URLs of images representing the issuer. required: - size1x - size2x - svg
+        /// URLs of images representing the issuer.<br/>
+        /// 
+        /// <remarks>
+        /// required:<br/>
+        ///   - size1x<br/>
+        ///   - size2x<br/>
+        ///   - svg
+        /// </remarks>
         /// </summary>
         [JsonProperty("image")]
         public ListMethodsIssuerImage Image { get; set; } = default!;

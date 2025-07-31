@@ -31,28 +31,16 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all physical point-of-sale devices.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **terminals.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = 50, string? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = 50, ListTerminalsSort? sort = Mollie.Models.Requests.ListTerminalsSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get terminal
         /// 
         /// <remarks>
-        /// Retrieve a single terminal by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **terminals.read**</a>
+        /// Retrieve a single terminal by its ID.
         /// </remarks>
         /// </summary>
         Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -62,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Terminals(SDKConfig config)
@@ -71,7 +59,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = 50, string? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = 50, ListTerminalsSort? sort = Mollie.Models.Requests.ListTerminalsSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new ListTerminalsRequest()
             {

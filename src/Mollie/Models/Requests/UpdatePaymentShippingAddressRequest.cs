@@ -22,9 +22,10 @@ namespace Mollie.Models.Requests
         public string? Title { get; set; }
 
         /// <summary>
-        /// The given name (first name) of the person should be at least two characters and cannot contain only numbers.<br/>
+        /// The given name (first name) of the person should be at least two characters and cannot contain only<br/>
         /// 
         /// <remarks>
+        /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>
@@ -33,9 +34,10 @@ namespace Mollie.Models.Requests
         public string? GivenName { get; set; }
 
         /// <summary>
-        /// The given family name (surname) of the person should be at least two characters and cannot contain only numbers.<br/>
+        /// The given family name (surname) of the person should be at least two characters and cannot contain only<br/>
         /// 
         /// <remarks>
+        /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>
@@ -82,7 +84,8 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
+        /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions<br/>
+        /// email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
         /// </remarks>

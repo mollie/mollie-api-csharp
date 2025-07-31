@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of balance objects. For a complete reference of the balance object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+        /// A list of balance objects. For a complete reference of the balance<br/>
+        /// 
+        /// <remarks>
+        /// object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public ListBalancesResponseBody? Object { get; set; }
     }

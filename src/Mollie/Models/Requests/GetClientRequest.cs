@@ -21,13 +21,17 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string parameter.<br/>
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
         /// 
         /// <remarks>
+        /// parameter.<br/>
         /// <br/>
-        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth` partners with the `organizations.read` scope.<br/>
-        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth` partners with the `onboarding.read` scope.<br/>
-        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization. Available for *oauth* partners with the `onboarding.read` scope.
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]

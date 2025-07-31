@@ -18,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a payment link object. Will always contain the string `payment-link` for this endpoint.
+        /// Indicates the response contains a payment link object. Will always contain the string `payment-link` for this<br/>
+        /// 
+        /// <remarks>
+        /// endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "payment-link";
@@ -30,30 +34,37 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string Mode { get; set; } = default!;
+        public ListPaymentLinksMode Mode { get; set; } = default!;
 
         /// <summary>
-        /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the customer&apos;s bank or card statement when possible.
+        /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the<br/>
+        /// 
+        /// <remarks>
+        /// customer&apos;s bank or card statement when possible.
+        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The amount of the payment link. If no amount is provided initially, the customer will be prompted to enter an amount.
+        /// The amount of the payment link. If no amount is provided initially, the customer will be prompted to enter an<br/>
+        /// 
+        /// <remarks>
+        /// amount.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
         public ListPaymentLinksAmount? Amount { get; set; }
 
         /// <summary>
-        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The customer will be prompted to enter a value greater than or equal to the minimum amount.
+        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The<br/>
+        /// 
+        /// <remarks>
+        /// customer will be prompted to enter a value greater than or equal to the minimum amount.
+        /// </remarks>
         /// </summary>
         [JsonProperty("minimumAmount")]
         public ListPaymentLinksMinimumAmount? MinimumAmount { get; set; } = null;
@@ -65,7 +76,11 @@ namespace Mollie.Models.Requests
         public bool Archived { get; set; } = default!;
 
         /// <summary>
-        /// The URL your customer will be redirected to after completing the payment process. If no redirect URL is provided, the customer will be shown a generic message after completing the payment.
+        /// The URL your customer will be redirected to after completing the payment process. If no redirect URL is provided,<br/>
+        /// 
+        /// <remarks>
+        /// the customer will be shown a generic message after completing the payment.
+        /// </remarks>
         /// </summary>
         [JsonProperty("redirectUrl", NullValueHandling = NullValueHandling.Include)]
         public string? RedirectUrl { get; set; }
@@ -75,18 +90,22 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The webhookUrl is optional, but without a webhook you will miss out on important status changes to any payments resulting from the payment link.<br/>
+        /// The webhookUrl is optional, but without a webhook you will miss out on important status changes to any payments<br/>
+        /// resulting from the payment link.<br/>
         /// <br/>
-        /// The webhookUrl must be reachable from Mollie&apos;s point of view, so you cannot use `localhost`. If you want to use webhook during development on `localhost`, you must use a tool like ngrok to have the webhooks delivered to your local machine.
+        /// The webhookUrl must be reachable from Mollie&apos;s point of view, so you cannot use `localhost`. If you want to use<br/>
+        /// webhook during development on `localhost`, you must use a tool like ngrok to have the webhooks delivered to your<br/>
+        /// local machine.
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl", NullValueHandling = NullValueHandling.Include)]
         public string? WebhookUrl { get; set; }
 
         /// <summary>
-        /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item ordered and its price.<br/>
+        /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item<br/>
         /// 
         /// <remarks>
+        /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the payment.<br/>
         /// <br/>
@@ -97,11 +116,13 @@ namespace Mollie.Models.Requests
         public List<ListPaymentLinksLine>? Lines { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and conversion.<br/>
+        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
         /// 
         /// <remarks>
+        /// conversion.<br/>
         /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and `country`.<br/>
+        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+        /// `country`.<br/>
         /// <br/>
         /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
         /// </remarks>
@@ -110,11 +131,13 @@ namespace Mollie.Models.Requests
         public ListPaymentLinksBillingAddress? BillingAddress { get; set; }
 
         /// <summary>
-        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and conversion.<br/>
+        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and<br/>
         /// 
         /// <remarks>
+        /// conversion.<br/>
         /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and `country`.
+        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+        /// `country`.
         /// </remarks>
         /// </summary>
         [JsonProperty("shippingAddress")]
@@ -125,16 +148,19 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId", NullValueHandling = NullValueHandling.Include)]
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// Indicates whether the payment link is reusable. If this field is set to `true`, customers can make multiple payments using the same link.<br/>
+        /// Indicates whether the payment link is reusable. If this field is set to `true`, customers can make multiple<br/>
         /// 
         /// <remarks>
+        /// payments using the same link.<br/>
         /// <br/>
         /// If no value is specified, the field defaults to `false`, allowing only a single payment per link.
         /// </remarks>
@@ -155,28 +181,38 @@ namespace Mollie.Models.Requests
         public string? PaidAt { get; set; }
 
         /// <summary>
-        /// The date and time the payment link is set to expire, in ISO 8601 format. If no expiry date was provided up front, the payment link will not expire automatically.
+        /// The date and time the payment link is set to expire, in ISO 8601 format. If no expiry date was provided up front,<br/>
+        /// 
+        /// <remarks>
+        /// the payment link will not expire automatically.
+        /// </remarks>
         /// </summary>
         [JsonProperty("expiresAt", NullValueHandling = NullValueHandling.Include)]
         public string? ExpiresAt { get; set; }
 
         /// <summary>
-        /// An array of payment methods that are allowed to be used for this payment link. When this parameter is not provided or is an empty array, all enabled payment methods will be available.<br/>
+        /// An array of payment methods that are allowed to be used for this payment link. When this parameter is<br/>
         /// 
         /// <remarks>
+        /// not provided or is an empty array, all enabled payment methods will be available.<br/>
         /// <br/>
-        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;, &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;, &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
+        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;,<br/>
+        /// &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;,<br/>
+        /// &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
         /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods", NullValueHandling = NullValueHandling.Include)]
         public List<string>? AllowedMethods { get; set; }
 
         /// <summary>
-        /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie merchants.<br/>
+        /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie<br/>
         /// 
         /// <remarks>
+        /// merchants.<br/>
         /// <br/>
-        /// If you use OAuth to create payment links on a connected merchant&apos;s account, you can charge a fee using this `applicationFee` parameter. If a payment on the payment link succeeds, the fee will be deducted from the merchant&apos;s balance and sent to your own account balance.
+        /// If you use OAuth to create payment links on a connected merchant&apos;s account, you can charge a fee using this<br/>
+        /// `applicationFee` parameter. If a payment on the payment link succeeds, the fee will be deducted from the merchant&apos;s balance and sent<br/>
+        /// to your own account balance.
         /// </remarks>
         /// </summary>
         [JsonProperty("applicationFee")]

@@ -18,15 +18,20 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The amount for each individual payment that is charged with this subscription. For example, for a monthly subscription of €10, the subscription amount should be set to €10.
+        /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
+        /// 
+        /// <remarks>
+        /// subscription of €10, the subscription amount should be set to €10.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public CreateSubscriptionAmountRequest Amount { get; set; } = default!;
 
         /// <summary>
-        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is considered completed.<br/>
+        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
         /// 
         /// <remarks>
+        /// considered completed.<br/>
         /// <br/>
         /// Test mode subscriptions will get canceled automatically after 10 payments.
         /// </remarks>
@@ -39,13 +44,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
-        /// <br/>
-        /// Possible values: `... days` `... weeks` `... months`
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public string Interval { get; set; } = default!;
+        public CreateSubscriptionIntervalRequest Interval { get; set; } = default!;
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.
@@ -54,9 +57,10 @@ namespace Mollie.Models.Requests
         public string? StartDate { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing up on the bank statement of the consumer.<br/>
+        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
         /// 
         /// <remarks>
+        /// up on the bank statement of the consumer.<br/>
         /// <br/>
         /// **Please note:** the description needs to be unique for the Customer in case it has multiple active subscriptions.
         /// </remarks>
@@ -65,33 +69,32 @@ namespace Mollie.Models.Requests
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `creditcard` `directdebit` `paypal`
-        /// </remarks>
+        /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
         /// </summary>
         [JsonProperty("method")]
-        public string? Method { get; set; } = null;
+        public CreateSubscriptionMethodRequest? Method { get; set; } = null;
 
         /// <summary>
-        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie merchants.<br/>
+        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
         /// 
         /// <remarks>
+        /// merchants.<br/>
         /// <br/>
         /// Setting an application fee on the subscription will ensure this fee is charged on each individual payment.<br/>
         /// <br/>
-        /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more information.
+        /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more<br/>
+        /// information.
         /// </remarks>
         /// </summary>
         [JsonProperty("applicationFee")]
         public CreateSubscriptionApplicationFeeRequest? ApplicationFee { get; set; }
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.<br/>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
         /// 
         /// <remarks>
+        /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+        /// 1kB.<br/>
         /// <br/>
         /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
         /// </remarks>
@@ -104,7 +107,8 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as well. Be sure to verify the payment&apos;s subscription ID and its status.
+        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as<br/>
+        /// well. Be sure to verify the payment&apos;s subscription ID and its status.
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
@@ -121,7 +125,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]

@@ -33,13 +33,7 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// With the Sales Invoice API you can generate sales invoices to send to your customers.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **sales-invoices.write**</a>
+        /// With the Sales Invoice API you can generate sales invoices to send to your customers.
         /// </remarks>
         /// </summary>
         Task<CreateSalesInvoiceResponse> CreateAsync(CreateSalesInvoiceRequest? request = null, RetryConfig? retryConfig = null);
@@ -54,13 +48,7 @@ namespace Mollie
         /// <br/>
         /// Retrieve a list of all sales invoices created through the API.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **sales-invoices.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -73,13 +61,7 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// Retrieve a single sales invoice by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **sales-invoice.read**</a>
+        /// Retrieve a single sales invoice by its ID.
         /// </remarks>
         /// </summary>
         Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -92,13 +74,9 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`, respectively).<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **sales-invoices.write**</a>
+        /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for<br/>
+        /// statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,<br/>
+        /// respectively).
         /// </remarks>
         /// </summary>
         Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, UpdateSalesInvoiceRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -111,13 +89,8 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **sales-invoices.write**</a>
+        /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the<br/>
+        /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.
         /// </remarks>
         /// </summary>
         Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, DeleteSalesInvoiceRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -127,8 +100,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)

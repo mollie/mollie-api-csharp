@@ -13,13 +13,15 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The amount of value-added tax on the line. The `totalAmount` field includes VAT, so the `vatAmount` can be calculated with the formula `totalAmount × (vatRate / (100 + vatRate))`.<br/>
+    /// The amount of value-added tax on the line. The `totalAmount` field includes VAT, so the `vatAmount` can be<br/>
     /// 
     /// <remarks>
+    /// calculated with the formula `totalAmount × (vatRate / (100 + vatRate))`.<br/>
     /// <br/>
     /// Any deviations from this will result in an error.<br/>
     /// <br/>
-    /// For example, for a `totalAmount` of SEK 100.00 with a 25.00% VAT rate, we expect a VAT amount of `SEK 100.00 × (25 / 125) = SEK 20.00`.
+    /// For example, for a `totalAmount` of SEK 100.00 with a 25.00% VAT rate, we expect a VAT amount of<br/>
+    /// `SEK 100.00 × (25 / 125) = SEK 20.00`.
     /// </remarks>
     /// </summary>
     public class UpdatePaymentLinkVatAmountRequest

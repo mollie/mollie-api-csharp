@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A settlement object describing your current balance. For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement</a> endpoint documentation.
+        /// A settlement object describing your current balance. For a complete reference of the settlement object, refer to<br/>
+        /// 
+        /// <remarks>
+        /// the <a href="get-settlement">Get settlement</a> endpoint documentation.
+        /// </remarks>
         /// </summary>
         public GetOpenSettlementResponseBody? Object { get; set; }
     }

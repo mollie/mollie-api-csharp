@@ -19,7 +19,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Required for source type `organization`. The ID of the connected organization the funds should be pulled back from.
+        /// Required for source type `organization`. The ID of the connected organization the funds should be pulled<br/>
+        /// 
+        /// <remarks>
+        /// back from.
+        /// </remarks>
         /// </summary>
         [JsonProperty("organizationId")]
         public string? OrganizationId { get; set; }

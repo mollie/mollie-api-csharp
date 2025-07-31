@@ -35,7 +35,11 @@ namespace Mollie.Models.Requests
         public ListClientsCommission? Commission { get; set; } = null;
 
         /// <summary>
-        /// The date and time the client organization was created, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The date and time the client organization was created, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
+        /// 
+        /// <remarks>
+        /// format.
+        /// </remarks>
         /// </summary>
         [JsonProperty("organizationCreatedAt")]
         public string? OrganizationCreatedAt { get; set; }

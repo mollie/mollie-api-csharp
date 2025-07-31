@@ -32,7 +32,11 @@ namespace Mollie.Models.Requests
         public ListAllChargebacksPayment Payment { get; set; } = default!;
 
         /// <summary>
-        /// The API resource URL of the <a href="get-settlement">settlement</a> this chargeback has been settled with. Not present if not yet settled.
+        /// The API resource URL of the <a href="get-settlement">settlement</a> this chargeback has been settled with. Not present if<br/>
+        /// 
+        /// <remarks>
+        /// not yet settled.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlement")]
         public ListAllChargebacksSettlement? Settlement { get; set; } = null;

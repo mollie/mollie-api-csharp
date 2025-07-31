@@ -30,7 +30,7 @@ namespace Mollie.Models.Requests
         public string? Name { get; set; }
 
         [JsonProperty("status")]
-        public ListClientsStatus? Status { get; set; }
+        public ListClientsCapabilitiesStatus? Status { get; set; }
 
         [JsonProperty("statusReason")]
         public ListClientsStatusReason? StatusReason { get; set; } = null;

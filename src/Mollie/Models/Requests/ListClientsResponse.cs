@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of client objects. For a complete reference of the client object, refer to the <a href="get-client">Get client endpoint</a> documentation.
+        /// A list of client objects. For a complete reference of the client object, refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="get-client">Get client endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public ListClientsResponseBody? Object { get; set; }
     }

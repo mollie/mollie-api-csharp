@@ -30,24 +30,27 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public ListProfilesMode? Mode { get; set; }
 
         /// <summary>
-        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or application.
+        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or<br/>
+        /// 
+        /// <remarks>
+        /// application.
+        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are allowed.
+        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are<br/>
+        /// 
+        /// <remarks>
+        /// allowed.
+        /// </remarks>
         /// </summary>
         [JsonProperty("website")]
         public string? Website { get; set; }
@@ -71,13 +74,21 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// A list of countries where you expect that the majority of the profile&apos;s customers reside, in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// A list of countries where you expect that the majority of the profile&apos;s customers reside,<br/>
+        /// 
+        /// <remarks>
+        /// in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// </remarks>
         /// </summary>
         [JsonProperty("countriesOfActivity")]
         public List<string>? CountriesOfActivity { get; set; }
 
         /// <summary>
-        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the <a href="common-data-types#business-category">business category list</a> for all possible options.
+        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="common-data-types#business-category">business category list</a> for all possible options.
+        /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; }
@@ -89,16 +100,19 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// * `unverified`: The profile has not been verified yet and can only be used to create test payments.<br/>
         /// * `verified`: The profile has been verified and can be used to create live payments and test payments.<br/>
-        /// * `blocked`: The profile is blocked and can no longer be used or changed.<br/>
-        /// <br/>
-        /// Possible values: `unverified` `verified` `blocked`
+        /// * `blocked`: The profile is blocked and can no longer be used or changed.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public ListProfilesStatus? Status { get; set; }
 
         /// <summary>
-        /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved automatically, unless a switch to a live profile has been requested. The review object will therefore usually be `null` in test mode.
+        /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
+        /// 
+        /// <remarks>
+        /// automatically, unless a switch to a live profile has been requested. The review object will therefore usually be<br/>
+        /// `null` in test mode.
+        /// </remarks>
         /// </summary>
         [JsonProperty("review")]
         public ListProfilesReview? Review { get; set; }

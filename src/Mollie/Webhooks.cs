@@ -29,11 +29,7 @@ namespace Mollie
         /// Create a webhook
         /// 
         /// <remarks>
-        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.write**</a>
+        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.
         /// </remarks>
         /// </summary>
         Task<CreateWebhookResponse> CreateAsync(CreateWebhookRequest? request = null, RetryConfig? retryConfig = null);
@@ -42,11 +38,7 @@ namespace Mollie
         /// List all webhooks
         /// 
         /// <remarks>
-        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.read**</a>
+        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.
         /// </remarks>
         /// </summary>
         Task<ListWebhooksResponse> ListAsync(ListWebhooksRequest? request = null, RetryConfig? retryConfig = null);
@@ -55,11 +47,7 @@ namespace Mollie
         /// Update a webhook
         /// 
         /// <remarks>
-        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.write**</a>
+        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.
         /// </remarks>
         /// </summary>
         Task<UpdateWebhookResponse> UpdateAsync(string id, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -68,11 +56,7 @@ namespace Mollie
         /// Get a webhook
         /// 
         /// <remarks>
-        /// Retrieve a single webhook object by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.read**</a>
+        /// Retrieve a single webhook object by its ID.
         /// </remarks>
         /// </summary>
         Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -81,11 +65,7 @@ namespace Mollie
         /// Delete a webhook
         /// 
         /// <remarks>
-        /// Delete a single webhook object by its webhook ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.write**</a>
+        /// Delete a single webhook object by its webhook ID.
         /// </remarks>
         /// </summary>
         Task<DeleteWebhookResponse> DeleteAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -94,11 +74,7 @@ namespace Mollie
         /// Test a webhook
         /// 
         /// <remarks>
-        /// Sends a test event to the webhook to verify the endpoint is working as expected.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **webhooks.write**</a>
+        /// Sends a test event to the webhook to verify the endpoint is working as expected.
         /// </remarks>
         /// </summary>
         Task<TestWebhookResponse> TestAsync(string id, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -108,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Webhooks(SDKConfig config)

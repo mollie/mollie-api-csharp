@@ -25,7 +25,11 @@ namespace Mollie.Models.Requests
         public string? StreetAndNumber { get; set; } = null;
 
         /// <summary>
-        /// The postal code of the organization. Required if a street address is provided and if the country has a postal code system.
+        /// The postal code of the organization. Required if a street address is provided and if the country has a postal<br/>
+        /// 
+        /// <remarks>
+        /// code system.
+        /// </remarks>
         /// </summary>
         [JsonProperty("postalCode")]
         public string? PostalCode { get; set; } = null;
@@ -37,7 +41,11 @@ namespace Mollie.Models.Requests
         public string? City { get; set; } = null;
 
         /// <summary>
-        /// The country of the address in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// The country of the address in<br/>
+        /// 
+        /// <remarks>
+        /// <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
+        /// </remarks>
         /// </summary>
         [JsonProperty("country")]
         public string Country { get; set; } = default!;

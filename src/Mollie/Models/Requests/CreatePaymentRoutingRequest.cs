@@ -29,9 +29,10 @@ namespace Mollie.Models.Requests
         public CreatePaymentDestinationRequest Destination { get; set; } = default!;
 
         /// <summary>
-        /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The date must be given in `YYYY-MM-DD` format.<br/>
+        /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The<br/>
         /// 
         /// <remarks>
+        /// date must be given in `YYYY-MM-DD` format.<br/>
         /// <br/>
         /// If no date is given, the funds become available to the connected merchant as soon as the payment succeeds.
         /// </remarks>

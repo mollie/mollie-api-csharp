@@ -13,11 +13,13 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The total amount of deductions withheld from the movement. For example, if we charge a €0.29 fee on a €10 payment, the deductions amount will be `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;-0.29&quot;}`.<br/>
+    /// The total amount of deductions withheld from the movement. For example, if we charge a €0.29 fee on a €10 payment,<br/>
     /// 
     /// <remarks>
+    /// the deductions amount will be `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;-0.29&quot;}`.<br/>
     /// <br/>
-    /// When moving funds to a balance, we always round the deduction to a &apos;real&apos; amount. Any differences between these real-time rounded amounts and the final invoice will be compensated when the invoice is generated.
+    /// When moving funds to a balance, we always round the deduction to a &apos;real&apos; amount. Any differences between these<br/>
+    /// real-time rounded amounts and the final invoice will be compensated when the invoice is generated.
     /// </remarks>
     /// </summary>
     public class Deductions
