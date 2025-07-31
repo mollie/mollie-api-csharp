@@ -44,7 +44,11 @@ namespace Mollie.Models.Requests
         public GetSubscriptionProfile? Profile { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-payments">payments</a> created for this subscription. Omitted if no such payments exist (yet).
+        /// The API resource URL of the <a href="list-payments">payments</a> created for this subscription. Omitted if no such<br/>
+        /// 
+        /// <remarks>
+        /// payments exist (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("payments")]
         public GetSubscriptionPayments? Payments { get; set; } = null;

@@ -14,17 +14,23 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// A list of refund objects. For a complete reference of the refund object, refer to the <a href="get-refund">Get refund endpoint</a> documentation.
+    /// A list of refund objects. For a complete reference of the refund object, refer to the<br/>
+    /// 
+    /// <remarks>
+    /// <a href="get-refund">Get refund endpoint</a> documentation.
+    /// </remarks>
     /// </summary>
     public class ListAllRefundsResponseBody
     {
 
         /// <summary>
-        /// The number of items in this result set. If more items are available, a `_links.next` URL will be present in the result as well.<br/>
+        /// The number of items in this result set. If more items are available, a `_links.next` URL will be present in the result<br/>
         /// 
         /// <remarks>
+        /// as well.<br/>
         /// <br/>
-        /// The maximum number of items per result set is controlled by the `limit` property provided in the request. The default limit is 50 items.
+        /// The maximum number of items per result set is controlled by the `limit` property provided in the request. The default<br/>
+        /// limit is 50 items.
         /// </remarks>
         /// </summary>
         [JsonProperty("count")]

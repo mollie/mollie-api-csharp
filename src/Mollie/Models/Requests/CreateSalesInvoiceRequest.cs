@@ -22,7 +22,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
@@ -33,7 +35,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
@@ -44,39 +48,37 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
+        /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
+        /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
+        /// mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
         /// <br/>
-        /// A status value that cannot be set but can be returned is `canceled`, for invoices which were issued, but then canceled. Currently this can only be done for invoices created in the dashboard.<br/>
+        /// A status value that cannot be set but can be returned is `canceled`, for invoices which were<br/>
+        /// issued, but then canceled. Currently this can only be done for invoices created in the dashboard.<br/>
         /// <br/>
-        /// Dependent parameters: - `paymentDetails` is required if invoice should be set directly to `paid` - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid` - `emailDetails` optional for `issued` and `paid` to send the invoice by email<br/>
-        /// <br/>
-        /// Possible values: `draft` `issued` `paid`
+        /// Dependent parameters:<br/>
+        ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
+        ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
+        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; } = default!;
+        public CreateSalesInvoiceStatusRequest Status { get; set; } = default!;
 
         /// <summary>
-        /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `standard` `one-stop-shop` (default: `standard`)
-        /// </remarks>
+        /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]
-        public string? VatScheme { get; set; }
+        public VatSchemeRequest? VatScheme { get; set; } = Mollie.Models.Requests.VatSchemeRequest.Standard;
 
         /// <summary>
-        /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.<br/>
+        /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `exclusive` `inclusive` (default: `exclusive`)
+        /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
         /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
-        public string? VatMode { get; set; }
+        public VatModeRequest? VatMode { get; set; } = Mollie.Models.Requests.VatModeRequest.Exclusive;
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -85,48 +87,68 @@ namespace Mollie.Models.Requests
         public string? Memo { get; set; } = null;
 
         /// <summary>
-        /// Provide any data you like as a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like as a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public CreateSalesInvoiceMetadataRequest? Metadata { get; set; } = null;
 
         /// <summary>
-        /// The payment term to be set on the invoice.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `7 days` `14 days` `30 days` `45 days` `60 days` `90 days` `120 days` (default: `30 days`)
-        /// </remarks>
+        /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public string? PaymentTerm { get; set; } = null;
+        public CreateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = Mollie.Models.Requests.CreateSalesInvoicePaymentTermRequest.Thirtydays;
 
         /// <summary>
-        /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the provided details. Required for `paid` status.
+        /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the<br/>
+        /// 
+        /// <remarks>
+        /// provided details. Required for `paid` status.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paymentDetails")]
         public CreateSalesInvoicePaymentDetailsRequest? PaymentDetails { get; set; } = null;
 
         /// <summary>
-        /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the recipient with the provided `subject` and `body`. Required for `issued` status.
+        /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the<br/>
+        /// 
+        /// <remarks>
+        /// recipient with the provided `subject` and `body`. Required for `issued` status.
+        /// </remarks>
         /// </summary>
         [JsonProperty("emailDetails")]
         public CreateSalesInvoiceEmailDetailsRequest? EmailDetails { get; set; } = null;
 
         /// <summary>
-        /// The identifier referring to the <a href="get-customer">customer</a> you want to attempt an automated payment for. If provided, `mandateId` becomes required as well. Only allowed for invoices with status `paid`.
+        /// The identifier referring to the <a href="get-customer">customer</a> you want to attempt an automated payment for. If<br/>
+        /// 
+        /// <remarks>
+        /// provided, `mandateId` becomes required as well. Only allowed for invoices with status `paid`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }
 
         /// <summary>
-        /// The identifier referring to the <a href="get-mandate">mandate</a> you want to use for the automated payment. If provided, `customerId` becomes required as well. Only allowed for invoices with status `paid`.
+        /// The identifier referring to the <a href="get-mandate">mandate</a> you want to use for the automated payment. If provided,<br/>
+        /// 
+        /// <remarks>
+        /// `customerId` becomes required as well. Only allowed for invoices with status `paid`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
 
         /// <summary>
-        /// An identifier tied to the recipient data. This should be a unique value based on data your system contains, so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management is not required to send a first invoice to a recipient.
+        /// An identifier tied to the recipient data. This should be a unique value based on data your system contains,<br/>
+        /// 
+        /// <remarks>
+        /// so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management<br/>
+        /// is not required to send a first invoice to a recipient.
+        /// </remarks>
         /// </summary>
         [JsonProperty("recipientIdentifier")]
         public string RecipientIdentifier { get; set; } = default!;
@@ -135,9 +157,10 @@ namespace Mollie.Models.Requests
         public CreateSalesInvoiceRecipientRequest? Recipient { get; set; }
 
         /// <summary>
-        /// Provide the line items for the invoice. Each line contains details such as a description of the item ordered and its price.<br/>
+        /// Provide the line items for the invoice. Each line contains details such as a description of the item<br/>
         /// 
         /// <remarks>
+        /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the invoice.
         /// </remarks>

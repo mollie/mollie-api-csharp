@@ -26,7 +26,11 @@ namespace Mollie.Models.Requests
         public GetClientOnboardingSelf? Self { get; set; }
 
         /// <summary>
-        /// Direct link to the onboarding process in the Mollie dashboard. The merchant can be redirected to this page to complete their onboarding.
+        /// Direct link to the onboarding process in the Mollie dashboard. The merchant can be redirected to this page to<br/>
+        /// 
+        /// <remarks>
+        /// complete their onboarding.
+        /// </remarks>
         /// </summary>
         [JsonProperty("dashboard")]
         public GetClientOnboardingDashboard? Dashboard { get; set; }

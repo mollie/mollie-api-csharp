@@ -60,7 +60,11 @@ namespace Mollie.Models.Requests
 
 
     /// <summary>
-    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(GetCaptureMetadataUnion.GetCaptureMetadataUnionConverter))]
     public class GetCaptureMetadataUnion {

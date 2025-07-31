@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// The next settlement object. For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement</a> endpoint documentation.
+        /// The next settlement object. For a complete reference of the settlement object, refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="get-settlement">Get settlement</a> endpoint documentation.
+        /// </remarks>
         /// </summary>
         public GetNextSettlementResponseBody? Object { get; set; }
     }

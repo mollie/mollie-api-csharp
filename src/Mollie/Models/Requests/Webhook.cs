@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -17,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a webhook subscription object. Will always contain the string `webhook` for this endpoint.
+        /// Indicates the response contains a webhook subscription object.<br/>
+        /// 
+        /// <remarks>
+        /// Will always contain the string `webhook` for this endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "webhook";
@@ -59,25 +64,15 @@ namespace Mollie.Models.Requests
         public List<string>? EventTypes { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s current status.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `enabled` `blocked` `disabled`
-        /// </remarks>
+        /// The subscription&apos;s current status.
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public ListWebhooksStatus? Status { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// The subscription&apos;s mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public ListWebhooksMode? Mode { get; set; }
     }
 }

@@ -20,10 +20,6 @@ Retrieve a list of all your settlements.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [Access token with **settlements.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-settlements" method="get" path="/settlements" -->
@@ -41,7 +37,7 @@ ListSettlementsRequest req = new ListSettlementsRequest() {
     BalanceId = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Year = "2025",
     Month = "1",
-    Currencies = "EUR",
+    Currencies = Currencies.Eur,
 };
 
 var res = await sdk.Settlements.ListAsync(req);
@@ -71,17 +67,16 @@ var res = await sdk.Settlements.ListAsync(req);
 
 Retrieve a single settlement by its ID.
 
-To lookup settlements by their bank reference, replace the ID in the URL by a reference. For example: `1234567.2404.03`.
+To lookup settlements by their bank reference, replace the ID in the URL by
+a reference. For example: `1234567.2404.03`.
 
 A settlement represents a transfer of your balance funds to your external bank account.
 
-Settlements will typically include a report that details what balance transactions have taken place between this settlement and the previous one.
+Settlements will typically include a report that details what balance transactions have taken place between this
+settlement and the previous one.
 
-For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the [balance transactions](list-balance-transactions) endpoint.
-
-> 🔑 Access with
->
-> [Access token with **settlements.read**](/reference/authentication)
+For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the
+[balance transactions](list-balance-transactions) endpoint.
 
 ### Example Usage
 
@@ -118,15 +113,14 @@ var res = await sdk.Settlements.GetAsync(id: "stl_jDk30akdN");
 
 ## GetOpen
 
-Retrieve the details of the open balance of the organization. This will return a settlement object representing your organization's balance.
+Retrieve the details of the open balance of the organization. This will return a settlement object representing your
+organization's balance.
 
-For a complete reference of the settlement object, refer to the [Get settlement endpoint](get-settlement) documentation.
+For a complete reference of the settlement object, refer to the [Get settlement endpoint](get-settlement)
+documentation.
 
-For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the [balance transactions](list-balance-transactions) endpoint.
-
-> 🔑 Access with
->
-> [Access token with **settlements.read**](/reference/authentication)
+For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the
+[balance transactions](list-balance-transactions) endpoint.
 
 ### Example Usage
 
@@ -158,13 +152,11 @@ var res = await sdk.Settlements.GetOpenAsync();
 
 Retrieve the details of the current settlement, that has not yet been paid out.
 
-For a complete reference of the settlement object, refer to the [Get settlement endpoint](get-settlement) documentation.
+For a complete reference of the settlement object, refer to the [Get settlement endpoint](get-settlement)
+documentation.
 
-For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the [balance transactions](list-balance-transactions) endpoint.
-
-> 🔑 Access with
->
-> [Access token with **settlements.read**](/reference/authentication)
+For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the
+[balance transactions](list-balance-transactions) endpoint.
 
 ### Example Usage
 
@@ -198,11 +190,8 @@ Retrieve all payments included in the given settlement.
 
 The response is in the same format as the response of the [List payments endpoint](list-payments).
 
-For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the [List captures endpoint](list-captures) endpoint instead.
-
-> 🔑 Access with
->
-> [Access token with **settlements.read** **payments.read**](/reference/authentication)
+For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the
+[List captures endpoint](list-captures) endpoint instead.
 
 ### Example Usage
 
@@ -219,7 +208,6 @@ var sdk = new Client(security: new Security() {
 ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "tr_5B8cwPMGnU",
-    Sort = "desc",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -251,10 +239,6 @@ var res = await sdk.Settlements.ListPaymentsAsync(req);
 Retrieve all captures included in the given settlement.
 
 The response is in the same format as the response of the [List captures endpoint](list-captures).
-
-> 🔑 Access with
->
-> [Access token with **settlements.read** **payments.read**](/reference/authentication)
 
 ### Example Usage
 
@@ -304,10 +288,6 @@ Retrieve all refunds 'deducted' from the given settlement.
 
 The response is in the same format as the response of the [List refunds endpoint](list-refunds).
 
-> 🔑 Access with
->
-> [Access token with **settlements.read** **refunds.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" -->
@@ -355,10 +335,6 @@ var res = await sdk.Settlements.ListRefundsAsync(req);
 Retrieve all chargebacks 'deducted' from the given settlement.
 
 The response is in the same format as the response of the [List chargebacks endpoint](list-chargebacks).
-
-> 🔑 Access with
->
-> [Access token with **settlements.read** **payments.read**](/reference/authentication)
 
 ### Example Usage
 

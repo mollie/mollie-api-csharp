@@ -18,9 +18,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the customer&apos;s bank or card statement when possible.<br/>
+        /// A short description of the payment link. The description is visible in the Dashboard and will be shown<br/>
         /// 
         /// <remarks>
+        /// on the customer&apos;s bank or card statement when possible.<br/>
         /// <br/>
         /// Updating the description does not affect any previously existing payments created for this payment link.
         /// </remarks>
@@ -29,32 +30,44 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The customer will be prompted to enter a value greater than or equal to the minimum amount.
+        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided.<br/>
+        /// 
+        /// <remarks>
+        /// The customer will be prompted to enter a value greater than or equal to the minimum amount.
+        /// </remarks>
         /// </summary>
         [JsonProperty("minimumAmount")]
         public UpdatePaymentLinkMinimumAmountRequest? MinimumAmount { get; set; }
 
         /// <summary>
-        /// Whether the payment link is archived. Customers will not be able to complete payments on archived payment links.
+        /// Whether the payment link is archived. Customers will not be able to complete payments on archived<br/>
+        /// 
+        /// <remarks>
+        /// payment links.
+        /// </remarks>
         /// </summary>
         [JsonProperty("archived")]
         public bool? Archived { get; set; }
 
         /// <summary>
-        /// An array of payment methods that are allowed to be used for this payment link. When this parameter is not provided or is an empty array, all enabled payment methods will be available.<br/>
+        /// An array of payment methods that are allowed to be used for this payment link. When this parameter is<br/>
         /// 
         /// <remarks>
+        /// not provided or is an empty array, all enabled payment methods will be available.<br/>
         /// <br/>
-        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;, &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;, &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
+        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;,<br/>
+        /// &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;,<br/>
+        /// &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
         /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods")]
         public List<string>? AllowedMethods { get; set; } = null;
 
         /// <summary>
-        /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item ordered and its price.<br/>
+        /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item<br/>
         /// 
         /// <remarks>
+        /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the payment.<br/>
         /// <br/>
@@ -65,11 +78,13 @@ namespace Mollie.Models.Requests
         public List<UpdatePaymentLinkLineRequest>? Lines { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and conversion.<br/>
+        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
         /// 
         /// <remarks>
+        /// conversion.<br/>
         /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and `country`.<br/>
+        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+        /// `country`.<br/>
         /// <br/>
         /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
         /// </remarks>
@@ -78,20 +93,23 @@ namespace Mollie.Models.Requests
         public UpdatePaymentLinkBillingAddressRequest? BillingAddress { get; set; }
 
         /// <summary>
-        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and conversion.<br/>
+        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and<br/>
         /// 
         /// <remarks>
+        /// conversion.<br/>
         /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and `country`.
+        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+        /// `country`.
         /// </remarks>
         /// </summary>
         [JsonProperty("shippingAddress")]
         public UpdatePaymentLinkShippingAddressRequest? ShippingAddress { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
         /// 
         /// <remarks>
+        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

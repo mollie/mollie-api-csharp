@@ -31,11 +31,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of the organization&apos;s balances, including the primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **balances.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListBalancesResponse> ListAsync(string? currency = null, string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -44,18 +40,21 @@ namespace Mollie
         /// Get balance
         /// 
         /// <remarks>
-        /// When processing payments with Mollie, we put all pending funds — usually minus Mollie fees — on a balance. Once you have linked a bank account to your Mollie account, we can pay out your balance towards this bank account.<br/>
+        /// When processing payments with Mollie, we put all pending funds — usually<br/>
+        /// minus Mollie fees — on a balance. Once you have linked a bank account to your Mollie account, we can pay out your<br/>
+        /// balance towards this bank account.<br/>
         /// <br/>
-        /// With the Balances API you can retrieve your current balance. The response includes two amounts:<br/>
+        /// With the Balances API you can retrieve your current balance. The response<br/>
+        /// includes two amounts:<br/>
         /// <br/>
-        /// * The *pending amount*. These are payments that have been marked as `paid`, but are not yet available on your balance.<br/>
-        /// * The *available amount*. This is the amount that you can get paid out to your bank account, or use for refunds.<br/>
+        /// * The *pending amount*. These are payments that have been marked as `paid`,<br/>
+        /// but are not yet available on your balance.<br/>
+        /// * The *available amount*. This is the amount that you can get paid out to<br/>
+        /// your bank account, or use for refunds.<br/>
         /// <br/>
-        /// With instant payment methods like iDEAL, payments are moved to the available balance instantly. With slower payment methods, like credit card for example, it can take a few days before the funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **balances.read**</a>
+        /// With instant payment methods like iDEAL, payments are moved to the available<br/>
+        /// balance instantly. With slower payment methods, like credit card for example, it can take a few days before the<br/>
+        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
         /// </remarks>
         /// </summary>
         Task<GetBalanceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -64,13 +63,11 @@ namespace Mollie
         /// Get primary balance
         /// 
         /// <remarks>
-        /// Retrieve the primary balance. This is the balance of your account&apos;s primary currency, where all payments are settled to by default.<br/>
+        /// Retrieve the primary balance. This is the balance of your account&apos;s primary<br/>
+        /// currency, where all payments are settled to by default.<br/>
         /// <br/>
-        /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **balances.read**</a>
+        /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a><br/>
+        /// endpoint.
         /// </remarks>
         /// </summary>
         Task<GetPrimaryBalanceResponse> GetPrimaryAsync(RetryConfig? retryConfig = null);
@@ -81,13 +78,11 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a summarized report for all transactions on a given balance within a given timeframe.<br/>
         /// <br/>
-        /// The API also provides a detailed report on all &apos;prepayments&apos; for Mollie fees that were deducted from your balance during the reported period, ahead of your Mollie invoice.<br/>
+        /// The API also provides a detailed report on all &apos;prepayments&apos; for Mollie fees that were deducted from your balance<br/>
+        /// during the reported period, ahead of your Mollie invoice.<br/>
         /// <br/>
-        /// The alias `primary` can be used instead of the balance ID to refer to the organization&apos;s primary balance.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **balance-reports.read**</a>
+        /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
+        /// organization&apos;s primary balance.
         /// </remarks>
         /// </summary>
         Task<GetBalanceReportResponse> GetReportAsync(GetBalanceReportRequest request, RetryConfig? retryConfig = null);
@@ -96,17 +91,16 @@ namespace Mollie
         /// List balance transactions
         /// 
         /// <remarks>
-        /// Retrieve a list of all balance transactions. Transactions include for example payments, refunds, chargebacks, and settlements.<br/>
+        /// Retrieve a list of all balance transactions. Transactions include for<br/>
+        /// example payments, refunds, chargebacks, and settlements.<br/>
         /// <br/>
-        /// For an aggregated report of these balance transactions, refer to the <a href="get-balance-report">Get balance report</a> endpoint.<br/>
+        /// For an aggregated report of these balance transactions, refer to the [Get<br/>
+        /// balance report](get-balance-report) endpoint.<br/>
         /// <br/>
-        /// The alias `primary` can be used instead of the balance ID to refer to the organization&apos;s primary balance.<br/>
+        /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
+        /// organization&apos;s primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **balances.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListBalanceTransactionsResponse> ListTransactionsAsync(string balanceId, string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -116,8 +110,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Balances(SDKConfig config)

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -19,15 +20,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The type of discount.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `amount` `percentage`
-        /// </remarks>
+        /// The type of discount.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        public UpdateSalesInvoiceLineTypeResponse Type { get; set; } = default!;
 
         /// <summary>
         /// A string containing an exact monetary amount in the given currency, or the percentage.

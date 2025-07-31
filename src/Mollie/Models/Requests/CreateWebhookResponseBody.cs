@@ -63,26 +63,16 @@ namespace Mollie.Models.Requests
         public List<string>? EventTypes { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s current status.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `enabled` `blocked` `disabled`
-        /// </remarks>
+        /// The subscription&apos;s current status.
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public CreateWebhookStatus? Status { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// The subscription&apos;s mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public CreateWebhookMode? Mode { get; set; }
 
         /// <summary>
         /// The subscription&apos;s secret.

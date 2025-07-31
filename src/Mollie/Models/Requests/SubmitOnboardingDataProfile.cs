@@ -16,13 +16,21 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or application.
+        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website<br/>
+        /// 
+        /// <remarks>
+        /// or application.
+        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are allowed.
+        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@`<br/>
+        /// 
+        /// <remarks>
+        /// signs are allowed.
+        /// </remarks>
         /// </summary>
         [JsonProperty("url")]
         public string? Url { get; set; }
@@ -46,7 +54,11 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; } = null;
 
         /// <summary>
-        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the <a href="common-data-types">business category list</a> for all possible options.
+        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="common-data-types">business category list</a> for all possible options.
+        /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; }

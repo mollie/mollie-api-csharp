@@ -14,13 +14,15 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie merchants.<br/>
+    /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
     /// 
     /// <remarks>
+    /// merchants.<br/>
     /// <br/>
     /// Setting an application fee on the subscription will ensure this fee is charged on each individual payment.<br/>
     /// <br/>
-    /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more information.
+    /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more<br/>
+    /// information.
     /// </remarks>
     /// </summary>
     public class GetSubscriptionApplicationFee

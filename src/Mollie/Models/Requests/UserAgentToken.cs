@@ -28,7 +28,11 @@ namespace Mollie.Models.Requests
         public string? StartsAt { get; set; }
 
         /// <summary>
-        /// The date until when the token will be active, in ISO 8601 format. Will be `null` if the token does not have an end date (yet).
+        /// The date until when the token will be active, in ISO 8601 format. Will be `null` if the token<br/>
+        /// 
+        /// <remarks>
+        /// does not have an end date (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("endsAt")]
         public string? EndsAt { get; set; } = null;

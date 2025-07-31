@@ -14,7 +14,11 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// This endpoint allows you to embed additional information via the `embed` query string parameter.
+    /// This endpoint allows you to embed additional information via the<br/>
+    /// 
+    /// <remarks>
+    /// `embed` query string parameter.
+    /// </remarks>
     /// </summary>
     public enum ListAllChargebacksEmbed
     {

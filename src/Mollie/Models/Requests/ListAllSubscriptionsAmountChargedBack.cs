@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The total amount that was charged back for this payment. Only available when the total charged back amount is not zero.
+    /// The total amount that was charged back for this payment. Only available when the total charged back amount is not<br/>
+    /// 
+    /// <remarks>
+    /// zero.
+    /// </remarks>
     /// </summary>
     public class ListAllSubscriptionsAmountChargedBack
     {

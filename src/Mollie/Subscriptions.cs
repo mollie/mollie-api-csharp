@@ -31,23 +31,23 @@ namespace Mollie
         /// <remarks>
         /// With subscriptions, you can schedule recurring payments to take place at regular intervals.<br/>
         /// <br/>
-        /// For example, by simply specifying an `amount` and an `interval`, you can create an endless subscription to charge a monthly fee, until you cancel the subscription.<br/>
+        /// For example, by simply specifying an `amount` and an `interval`, you can create an endless subscription to charge a<br/>
+        /// monthly fee, until you cancel the subscription.<br/>
         /// <br/>
-        /// Or, you could use the times parameter to only charge a limited number of times, for example to split a big transaction in multiple parts.<br/>
+        /// Or, you could use the times parameter to only charge a limited number of times, for example to split a big<br/>
+        /// transaction in multiple parts.<br/>
         /// <br/>
         /// A few example usages:<br/>
         /// <br/>
-        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;5.00&quot;` `interval=&quot;2 weeks&quot;` Your customer will be charged €5 once every two weeks.<br/>
+        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;5.00&quot;` `interval=&quot;2 weeks&quot;`<br/>
+        /// Your customer will be charged €5 once every two weeks.<br/>
         /// <br/>
-        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;20.00&quot;` `interval=&quot;1 day&quot; times=5` Your customer will be charged €20 every day, for five consecutive days.<br/>
+        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;20.00&quot;` `interval=&quot;1 day&quot; times=5`<br/>
+        /// Your customer will be charged €20 every day, for five consecutive days.<br/>
         /// <br/>
-        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;10.00&quot;` `interval=&quot;1 month&quot;` `startDate=&quot;2018-04-30&quot;` Your customer will be charged €10 on the last day of each month, starting in April 2018.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.write**</a>
+        /// `amount[currency]=&quot;EUR&quot;` `amount[value]=&quot;10.00&quot;` `interval=&quot;1 month&quot;`<br/>
+        /// `startDate=&quot;2018-04-30&quot;`<br/>
+        /// Your customer will be charged €10 on the last day of each month, starting in April 2018.
         /// </remarks>
         /// </summary>
         Task<CreateSubscriptionResponse> CreateAsync(string customerId, CreateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -58,13 +58,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all subscriptions of a customer.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null);
@@ -73,13 +67,7 @@ namespace Mollie
         /// Get subscription
         /// 
         /// <remarks>
-        /// Retrieve a single subscription by its ID and the ID of its parent customer.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.read**</a>
+        /// Retrieve a single subscription by its ID and the ID of its parent customer.
         /// </remarks>
         /// </summary>
         Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -92,13 +80,7 @@ namespace Mollie
         /// <br/>
         /// Canceled subscriptions cannot be updated.<br/>
         /// <br/>
-        /// For an in-depth explanation of each parameter, refer to the <a href="create-subscription">Create subscription</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.write**</a>
+        /// For an in-depth explanation of each parameter, refer to the <a href="create-subscription">Create subscription</a> endpoint.
         /// </remarks>
         /// </summary>
         Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -107,13 +89,7 @@ namespace Mollie
         /// Cancel subscription
         /// 
         /// <remarks>
-        /// Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.write**</a>
+        /// Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.
         /// </remarks>
         /// </summary>
         Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -124,13 +100,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all subscriptions initiated across all your customers.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null);
@@ -141,13 +111,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all payments of a specific subscription.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **subscriptions.read** **payments.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null);
@@ -157,8 +121,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Subscriptions(SDKConfig config)

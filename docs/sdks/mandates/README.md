@@ -12,15 +12,11 @@
 
 ## Create
 
-Create a mandate for a specific customer. Mandates allow you to charge a customer's card, PayPal account or bank account recurrently.
+Create a mandate for a specific customer. Mandates allow you to charge a customer's card, PayPal account or bank
+account recurrently.
 
-It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create mandates for cards, your customers need to perform a 'first payment' with their card.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **mandates.write**](/reference/authentication)
+It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create
+mandates for cards, your customers need to perform a 'first payment' with their card.
 
 ### Example Usage
 
@@ -38,7 +34,7 @@ var res = await sdk.Mandates.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
     requestBody: new CreateMandateRequestBody() {
         Id = "mdt_5B8cwPMGnU",
-        Method = "directdebit",
+        Method = CreateMandateMethodRequest.Directdebit,
         ConsumerName = "John Doe",
         ConsumerAccount = "NL55INGB0000000000",
         ConsumerBic = "BANKBIC",
@@ -78,12 +74,6 @@ Retrieve a list of all mandates.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **mandates.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/customers/{customerId}/mandates" -->
@@ -99,7 +89,6 @@ var sdk = new Client(security: new Security() {
 ListMandatesRequest req = new ListMandatesRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "mdt_5B8cwPMGnU",
-    Sort = "desc",
     Testmode = false,
 };
 
@@ -128,13 +117,8 @@ var res = await sdk.Mandates.ListAsync(req);
 
 ## Get
 
-Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer's bank account details, card details, or PayPal account details.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **mandates.read**](/reference/authentication)
+Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer's bank
+account details, card details, or PayPal account details.
 
 ### Example Usage
 
@@ -162,7 +146,7 @@ var res = await sdk.Mandates.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CustomerId`                                                                                                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
 | `MandateId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related mandate.                                                                                                                                                                                                                                                                                                                                                 | mdt_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                         |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -177,13 +161,8 @@ var res = await sdk.Mandates.GetAsync(
 
 ## Revoke
 
-Revoke a customer's mandate. You will no longer be able to charge the customer's bank account or card with this mandate, and all connected subscriptions will be canceled.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **mandates.write**](/reference/authentication)
+Revoke a customer's mandate. You will no longer be able to charge the customer's bank account or card with this
+mandate, and all connected subscriptions will be canceled.
 
 ### Example Usage
 

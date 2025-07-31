@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the recipient with the provided `subject` and `body`. Required for `issued` status.
+    /// Used when setting an invoice to status of either `issued` or `paid`. Will be used to issue the invoice to the<br/>
+    /// 
+    /// <remarks>
+    /// recipient with the provided `subject` and `body`. Required for `issued` status.
+    /// </remarks>
     /// </summary>
     public class UpdateSalesInvoiceEmailDetailsRequest
     {

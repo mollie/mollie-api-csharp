@@ -9,13 +9,18 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class ListSettlementsRequest
     {
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// 
+        /// <remarks>
+        /// result set.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -27,7 +32,11 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// Provide the token of the balance to filter the settlements by. This is the balance token that the settlement was settled to.
+        /// Provide the token of the balance to filter the settlements by. This is<br/>
+        /// 
+        /// <remarks>
+        /// the balance token that the settlement was settled to.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=balanceId")]
         public string? BalanceId { get; set; } = null;
@@ -45,14 +54,9 @@ namespace Mollie.Models.Requests
         public string? Month { get; set; } = null;
 
         /// <summary>
-        /// Provides the currencies to retrieve the settlements. It accepts multiple currencies in a comma-separated format.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `EUR` `GBP` `CHF` `DKK` `NOK` `PLN` `SEK` `USD` `CZK` `HUF` `AUD` `CAD`
-        /// </remarks>
+        /// Provides the currencies to retrieve the settlements. It accepts multiple currencies in a comma-separated format.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=currencies")]
-        public string? Currencies { get; set; } = null;
+        public Currencies? Currencies { get; set; } = null;
     }
 }

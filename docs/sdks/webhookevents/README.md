@@ -11,10 +11,6 @@
 
 Retrieve a single webhook event object by its event ID.
 
-> 🔑 Access with
->
-> [Access token with **events.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="get-webhook-event" method="get" path="/events/{id}" -->

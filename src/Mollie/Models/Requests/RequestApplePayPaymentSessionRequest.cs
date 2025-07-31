@@ -16,18 +16,26 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The validationUrl you got from the <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepayvalidatemerchantevent">ApplePayValidateMerchant event</a>.<br/>
+        /// The validationUrl you got from the<br/>
         /// 
         /// <remarks>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepayvalidatemerchantevent">ApplePayValidateMerchant event</a>.<br/>
         /// <br/>
-        /// A list of all <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/setting_up_your_server">valid host names</a> for merchant validation is available. You should white list these in your application and reject any `validationUrl`s that have a host name not in the list.
+        /// A list of all<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/setting_up_your_server">valid host names</a><br/>
+        /// for merchant validation is available. You should white list these in your application and reject any<br/>
+        /// `validationUrl`s that have a host name not in the list.
         /// </remarks>
         /// </summary>
         [JsonProperty("validationUrl")]
         public string ValidationUrl { get; set; } = default!;
 
         /// <summary>
-        /// The domain of your web shop, that is visible in the browser&apos;s location bar. For example `pay.myshop.com`.
+        /// The domain of your web shop, that is visible in the browser&apos;s location bar. For example<br/>
+        /// 
+        /// <remarks>
+        /// `pay.myshop.com`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; set; } = default!;
@@ -37,7 +45,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in<br/>
+        /// the creation request. For organization-level credentials such as OAuth access tokens however, the<br/>
+        /// `profileId` parameter is required.
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]

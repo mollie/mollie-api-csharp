@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="get-terminal">terminal</a> this payment was created for. Only present for point-of-sale payments.
+    /// The API resource URL of the <a href="get-terminal">terminal</a> this payment was created for. Only present for<br/>
+    /// 
+    /// <remarks>
+    /// point-of-sale payments.
+    /// </remarks>
     /// </summary>
     public class GetPaymentTerminal
     {

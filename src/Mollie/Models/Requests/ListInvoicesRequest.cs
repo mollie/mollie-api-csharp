@@ -9,13 +9,18 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class ListInvoicesRequest
     {
 
         /// <summary>
-        /// Filter for an invoice with a specific invoice reference, for example `2024.10000`.
+        /// Filter for an invoice with a specific invoice reference, for example<br/>
+        /// 
+        /// <remarks>
+        /// `2024.10000`.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=reference")]
         public string? Reference { get; set; } = null;
@@ -33,7 +38,11 @@ namespace Mollie.Models.Requests
         public string? Month { get; set; } = null;
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// 
+        /// <remarks>
+        /// result set.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;
@@ -45,14 +54,13 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from newest to oldest.<br/>
+        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `asc` `desc` (default: `desc`)
+        /// newest to oldest.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public string? Sort { get; set; } = null;
+        public ListInvoicesSort? Sort { get; set; } = Mollie.Models.Requests.ListInvoicesSort.Desc;
     }
 }

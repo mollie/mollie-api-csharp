@@ -9,13 +9,18 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class ListWebhooksRequest
     {
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// 
+        /// <remarks>
+        /// result set.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -27,31 +32,27 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from newest to oldest.<br/>
+        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `asc` `desc` (default: `desc`)
+        /// newest to oldest.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public string? Sort { get; set; } = null;
+        public ListWebhooksSort? Sort { get; set; } = Mollie.Models.Requests.ListWebhooksSort.Desc;
 
         /// <summary>
-        /// Used to filter out only the webhooks that are subscribed to certain types of events.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `payment-link.paid` `sales-invoice.created` `sales-invoice.issued` `sales-invoice.canceled` `sales-invoice.paid`
-        /// </remarks>
+        /// Used to filter out only the webhooks that are subscribed to certain types of events.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=eventTypes")]
-        public string? EventTypes { get; set; }
+        public ListWebhooksEventTypes? EventTypes { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// 
         /// <remarks>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -26,13 +27,11 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// SEPA Direct Debit and PayPal mandates can be created directly.<br/>
-        /// <br/>
-        /// Possible values: `creditcard` `directdebit` `paypal`
+        /// SEPA Direct Debit and PayPal mandates can be created directly.
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public string Method { get; set; } = default!;
+        public CreateMandateMethodRequest Method { get; set; } = default!;
 
         /// <summary>
         /// The customer&apos;s name.
@@ -65,19 +64,31 @@ namespace Mollie.Models.Requests
         public string? SignatureDate { get; set; } = null;
 
         /// <summary>
-        /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will decline Direct Debit payments if the mandate reference is not unique.
+        /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will<br/>
+        /// 
+        /// <remarks>
+        /// decline Direct Debit payments if the mandate reference is not unique.
+        /// </remarks>
         /// </summary>
         [JsonProperty("mandateReference")]
         public string? MandateReference { get; set; } = null;
 
         /// <summary>
-        /// The billing agreement ID given by PayPal. For example: `B-12A34567B8901234CD`. Required for PayPal mandates. Must provide either this field or `payPalVaultId`, but not both.
+        /// The billing agreement ID given by PayPal. For example: `B-12A34567B8901234CD`. Required for PayPal mandates.<br/>
+        /// 
+        /// <remarks>
+        /// Must provide either this field or `payPalVaultId`, but not both.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paypalBillingAgreementId")]
         public string? PaypalBillingAgreementId { get; set; } = null;
 
         /// <summary>
-        /// The Vault ID given by PayPal. For example: `8kk8451t`. Required for PayPal mandates. Must provide either this field or `paypalBillingAgreementId`, but not both.
+        /// The Vault ID given by PayPal. For example: `8kk8451t`. Required for PayPal mandates.<br/>
+        /// 
+        /// <remarks>
+        /// Must provide either this field or `paypalBillingAgreementId`, but not both.
+        /// </remarks>
         /// </summary>
         [JsonProperty("payPalVaultId")]
         public string? PayPalVaultId { get; set; } = null;
@@ -87,7 +98,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]

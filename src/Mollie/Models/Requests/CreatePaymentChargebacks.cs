@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="list-payment-chargebacks">chargebacks</a> that belong to this payment.
+    /// The API resource URL of the <a href="list-payment-chargebacks">chargebacks</a> that belong to this<br/>
+    /// 
+    /// <remarks>
+    /// payment.
+    /// </remarks>
     /// </summary>
     public class CreatePaymentChargebacks
     {

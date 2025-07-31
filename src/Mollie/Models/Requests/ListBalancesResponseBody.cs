@@ -14,17 +14,23 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// A list of balance objects. For a complete reference of the balance object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+    /// A list of balance objects. For a complete reference of the balance<br/>
+    /// 
+    /// <remarks>
+    /// object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
+    /// </remarks>
     /// </summary>
     public class ListBalancesResponseBody
     {
 
         /// <summary>
-        /// The number of items in this result set. If more items are available, a `_links.next` URL will be present in the result as well.<br/>
+        /// The number of items in this result set. If more items are available, a `_links.next` URL will be present in the result<br/>
         /// 
         /// <remarks>
+        /// as well.<br/>
         /// <br/>
-        /// The maximum number of items per result set is controlled by the `limit` property provided in the request. The default limit is 50 items.
+        /// The maximum number of items per result set is controlled by the `limit` property provided in the request. The default<br/>
+        /// limit is 50 items.
         /// </remarks>
         /// </summary>
         [JsonProperty("count")]

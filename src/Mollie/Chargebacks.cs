@@ -31,13 +31,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve the chargebacks initiated for a specific payment.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListChargebacksResponse> ListAsync(ListChargebacksRequest request, RetryConfig? retryConfig = null);
@@ -46,13 +40,7 @@ namespace Mollie
         /// Get payment chargeback
         /// 
         /// <remarks>
-        /// Retrieve a single payment chargeback by its ID and the ID of its parent payment.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// Retrieve a single payment chargeback by its ID and the ID of its parent payment.
         /// </remarks>
         /// </summary>
         Task<GetChargebackResponse> GetAsync(string paymentId, string chargebackId, GetChargebackEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -63,13 +51,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all chargebacks initiated for all your payments.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListAllChargebacksResponse> AllAsync(ListAllChargebacksRequest? request = null, RetryConfig? retryConfig = null);
@@ -79,8 +61,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Chargebacks(SDKConfig config)

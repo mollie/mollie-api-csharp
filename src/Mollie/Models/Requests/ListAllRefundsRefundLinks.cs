@@ -32,7 +32,11 @@ namespace Mollie.Models.Requests
         public ListAllRefundsPayment? Payment { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="get-settlement">settlement</a> this refund has been settled with. Not present if not yet settled.
+        /// The API resource URL of the <a href="get-settlement">settlement</a> this refund has been settled with. Not present if not<br/>
+        /// 
+        /// <remarks>
+        /// yet settled.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlement")]
         public ListAllRefundsSettlement? Settlement { get; set; } = null;

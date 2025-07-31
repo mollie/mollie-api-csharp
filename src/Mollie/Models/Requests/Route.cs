@@ -23,19 +23,31 @@ namespace Mollie.Models.Requests
         public string? Resource { get; set; } = "route";
 
         /// <summary>
-        /// The identifier uniquely referring to this route. Mollie assigns this identifier at route creation time. Mollie will always refer to the route by this ID. Example: `crt_dyARQ3JzCgtPDhU2Pbq3J`.
+        /// The identifier uniquely referring to this route. Mollie assigns this identifier at route creation time. Mollie<br/>
+        /// 
+        /// <remarks>
+        /// will always refer to the route by this ID. Example: `crt_dyARQ3JzCgtPDhU2Pbq3J`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The unique identifier of the payment. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`. The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// The unique identifier of the payment. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>
+        /// 
+        /// <remarks>
+        /// The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string PaymentId { get; set; } = default!;
 
         /// <summary>
-        /// The amount of the route. That amount that will be routed to the specified destination.
+        /// The amount of the route.<br/>
+        /// 
+        /// <remarks>
+        /// That amount that will be routed to the specified destination.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public PaymentListRoutesAmount Amount { get; set; } = default!;

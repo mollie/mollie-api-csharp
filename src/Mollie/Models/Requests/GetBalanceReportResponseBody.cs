@@ -20,7 +20,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a balance report object. Will always contain the string `balance-report` for this endpoint.
+        /// Indicates the response contains a balance report object. Will always contain the string `balance-report` for this<br/>
+        /// 
+        /// <remarks>
+        /// endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "balance-report";
@@ -38,36 +42,48 @@ namespace Mollie.Models.Requests
         public string? TimeZone { get; set; }
 
         /// <summary>
-        /// The start date of the report, in `YYYY-MM-DD` format. The from date is &apos;inclusive&apos;, and in Central European Time. This means a report with for example `from=2024-01-01` will include movements of 2024-01-01 00:00:00 CET and onwards.
+        /// The start date of the report, in `YYYY-MM-DD` format. The from date is &apos;inclusive&apos;, and in Central European Time.<br/>
+        /// 
+        /// <remarks>
+        /// This means a report with for example `from=2024-01-01` will include movements of 2024-01-01 00:00:00 CET and<br/>
+        /// onwards.
+        /// </remarks>
         /// </summary>
         [JsonProperty("from")]
         public string? From { get; set; }
 
         /// <summary>
-        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time. This means a report with for example `until=2024-02-01` will include movements up until 2024-01-31 23:59:59 CET.
+        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time.<br/>
+        /// 
+        /// <remarks>
+        /// This means a report with for example `until=2024-02-01` will include movements up until 2024-01-31 23:59:59 CET.
+        /// </remarks>
         /// </summary>
         [JsonProperty("until")]
         public string? Until { get; set; }
 
         /// <summary>
-        /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by status (e.g. `pending`, `available`), then by direction of movement (e.g. moved from pending to available), then by transaction type, and then by other sub-groupings where available (e.g. payment method).<br/>
+        /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by<br/>
         /// 
         /// <remarks>
+        /// status (e.g. `pending`, `available`), then by direction of movement (e.g. moved from pending to available), then<br/>
+        /// by transaction type, and then by other sub-groupings where available (e.g. payment method).<br/>
         /// <br/>
-        /// With the `transaction-categories` format, transactions are grouped by transaction type, then by direction of movement, and then again by other sub-groupings where available.<br/>
+        /// With the `transaction-categories` format, transactions are grouped by transaction type, then by direction of<br/>
+        /// movement, and then again by other sub-groupings where available.<br/>
         /// <br/>
-        /// Both reporting formats will always contain opening and closing amounts that correspond to the start and end dates of the report.<br/>
-        /// <br/>
-        /// Possible values: `status-balances` `transaction-categories` (default: `status-balances`)
+        /// Both reporting formats will always contain opening and closing amounts that correspond to the start and end dates<br/>
+        /// of the report.
         /// </remarks>
         /// </summary>
         [JsonProperty("grouping")]
-        public string? Grouping { get; set; }
+        public GroupingResponse? Grouping { get; set; } = Mollie.Models.Requests.GroupingResponse.StatusBalances;
 
         /// <summary>
-        /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a typical grouping looks like.<br/>
+        /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>
         /// 
         /// <remarks>
+        /// typical grouping looks like.<br/>
         /// <br/>
         /// If grouping `status-balances` is chosen, the main grouping is as follows:<br/>
         /// <br/>
@@ -77,7 +93,9 @@ namespace Mollie.Models.Requests
         /// If grouping `transaction-categories` is chosen, the main grouping is as follows:<br/>
         /// <br/>
         /// * `open` and `close` groups, each containing a `pending` and `available` sub-group<br/>
-        /// * Transaction type groups such as `payments`, `refunds`, `chargebacks`, `capital`, `transfers`, `fee-prepayments`, `corrections`, `topups` each containing a `pending`, `movedToAvailable`, and `immediatelyAvailable` sub-group<br/>
+        /// * Transaction type groups such as `payments`, `refunds`, `chargebacks`, `capital`, `transfers`, `fee-prepayments`, `corrections`, `topups`<br/>
+        /// each containing a `pending`, `movedToAvailable`, and<br/>
+        /// `immediatelyAvailable` sub-group<br/>
         /// <br/>
         /// Each sub-group typically has:<br/>
         /// <br/>

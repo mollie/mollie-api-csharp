@@ -9,25 +9,29 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The recipient object should contain all the information relevant to create an invoice for an intended recipient. This data will be stored, updated, and re-used as appropriate, based on the `recipientIdentifier`.
+    /// The recipient object should contain all the information relevant to create an invoice for an intended<br/>
+    /// 
+    /// <remarks>
+    /// recipient. This data will be stored, updated, and re-used as appropriate, based on the `recipientIdentifier`.
+    /// </remarks>
     /// </summary>
     public class UpdateSalesInvoiceRecipientRequest
     {
 
         /// <summary>
-        /// The type of recipient, either `consumer` or `business`. This will determine what further fields are required on the `recipient` object.<br/>
+        /// The type of recipient, either `consumer` or `business`. This will determine what further fields are<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `consumer` `business`
+        /// required on the `recipient` object.
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        public UpdateSalesInvoiceRecipientTypeRequest Type { get; set; } = default!;
 
         /// <summary>
         /// The title of the `consumer` type recipient, for example Mr. or Mrs..
@@ -36,13 +40,21 @@ namespace Mollie.Models.Requests
         public string? Title { get; set; } = null;
 
         /// <summary>
-        /// The given name (first name) of the `consumer` type recipient should be at least two characters and cannot contain only numbers.
+        /// The given name (first name) of the `consumer` type recipient should be at least two characters and cannot contain<br/>
+        /// 
+        /// <remarks>
+        /// only numbers.
+        /// </remarks>
         /// </summary>
         [JsonProperty("givenName")]
         public string? GivenName { get; set; } = null;
 
         /// <summary>
-        /// The given name (last name) of the `consumer` type recipient should be at least two characters and cannot contain only numbers.
+        /// The given name (last name) of the `consumer` type recipient should be at least two characters and cannot contain<br/>
+        /// 
+        /// <remarks>
+        /// only numbers.
+        /// </remarks>
         /// </summary>
         [JsonProperty("familyName")]
         public string? FamilyName { get; set; } = null;
@@ -54,13 +66,21 @@ namespace Mollie.Models.Requests
         public string? OrganizationName { get; set; } = null;
 
         /// <summary>
-        /// The Chamber of Commerce number of the organization for a `business` type recipient. Either this or `vatNumber` has to be provided.
+        /// The Chamber of Commerce number of the organization for a `business` type recipient. Either this or `vatNumber`<br/>
+        /// 
+        /// <remarks>
+        /// has to be provided.
+        /// </remarks>
         /// </summary>
         [JsonProperty("organizationNumber")]
         public string? OrganizationNumber { get; set; } = null;
 
         /// <summary>
-        /// The VAT number of the organization for a `business` type recipient. Either this or `organizationNumber` has to be provided.
+        /// The VAT number of the organization for a `business` type recipient. Either this or `organizationNumber`<br/>
+        /// 
+        /// <remarks>
+        /// has to be provided.
+        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;
@@ -114,14 +134,9 @@ namespace Mollie.Models.Requests
         public string Country { get; set; } = default!;
 
         /// <summary>
-        /// The locale for the recipient, to be used for translations in PDF generation and payment pages.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `en_US` `en_GB` `nl_NL` `nl_BE` `de_DE` `de_AT` `de_CH` `fr_FR` `fr_BE`
-        /// </remarks>
+        /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
         /// </summary>
         [JsonProperty("locale")]
-        public string Locale { get; set; } = default!;
+        public UpdateSalesInvoiceLocaleRequest Locale { get; set; } = default!;
     }
 }

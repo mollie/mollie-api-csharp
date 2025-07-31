@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates that the response contains an invoice object. Will always contain the string `invoice` for this endpoint.
+        /// Indicates that the response contains an invoice object.<br/>
+        /// 
+        /// <remarks>
+        /// Will always contain the string `invoice` for this endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "invoice";
@@ -51,13 +55,11 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// * `open` — The invoice is not paid yet.<br/>
         /// * `paid` — The invoice is paid.<br/>
-        /// * `overdue` — Payment of the invoice is overdue.<br/>
-        /// <br/>
-        /// Possible values: `open` `paid` `overdue`
+        /// * `overdue` — Payment of the invoice is overdue.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public GetInvoiceStatus? Status { get; set; }
 
         /// <summary>
         /// Total amount of the invoice, excluding VAT.
@@ -66,7 +68,12 @@ namespace Mollie.Models.Requests
         public NetAmount? NetAmount { get; set; }
 
         /// <summary>
-        /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside the EU, no VAT will be charged.
+        /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
+        /// 
+        /// <remarks>
+        /// be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside<br/>
+        /// the EU, no VAT will be charged.
+        /// </remarks>
         /// </summary>
         [JsonProperty("vatAmount")]
         public GetInvoiceVatAmount? VatAmount { get; set; }

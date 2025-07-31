@@ -23,15 +23,10 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The payment method, if applicable<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `alma` `bacs` `applepay` `bancomatpay` `bancontact` `banktransfer` `belfius` `billie` `bizum` `bitcoin` `blik` `creditcard` `directdebit` `eps` `giftcard` `giropay` `googlepay` `ideal` `in3` `inghomepay` `kbc` `klarnapaylater` `klarnapaynow` `klarnasliceit` `klarna` `mbway` `multibanco` `mybank` `paybybank` `payconiq` `paypal` `paysafecard` `przelewy24` `riverty` `satispay` `podiumcadeaukaart` `pointofsale` `sofort` `swish` `trustly` `twint` `voucher`
-        /// </remarks>
+        /// The payment method, if applicable
         /// </summary>
         [JsonProperty("method")]
-        public string? Method { get; set; } = null;
+        public GetSettlementCostMethod? Method { get; set; } = null;
 
         /// <summary>
         /// The number of fees

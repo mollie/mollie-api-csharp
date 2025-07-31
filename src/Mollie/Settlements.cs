@@ -31,11 +31,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all your settlements.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListSettlementsResponse> ListAsync(ListSettlementsRequest? request = null, RetryConfig? retryConfig = null);
@@ -46,17 +42,16 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single settlement by its ID.<br/>
         /// <br/>
-        /// To lookup settlements by their bank reference, replace the ID in the URL by a reference. For example: `1234567.2404.03`.<br/>
+        /// To lookup settlements by their bank reference, replace the ID in the URL by<br/>
+        /// a reference. For example: `1234567.2404.03`.<br/>
         /// <br/>
         /// A settlement represents a transfer of your balance funds to your external bank account.<br/>
         /// <br/>
-        /// Settlements will typically include a report that details what balance transactions have taken place between this settlement and the previous one.<br/>
+        /// Settlements will typically include a report that details what balance transactions have taken place between this<br/>
+        /// settlement and the previous one.<br/>
         /// <br/>
-        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read**</a>
+        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
         Task<GetSettlementResponse> GetAsync(string id, RetryConfig? retryConfig = null);
@@ -65,15 +60,14 @@ namespace Mollie
         /// Get open settlement
         /// 
         /// <remarks>
-        /// Retrieve the details of the open balance of the organization. This will return a settlement object representing your organization&apos;s balance.<br/>
+        /// Retrieve the details of the open balance of the organization. This will return a settlement object representing your<br/>
+        /// organization&apos;s balance.<br/>
         /// <br/>
-        /// For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.<br/>
+        /// For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a><br/>
+        /// documentation.<br/>
         /// <br/>
-        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read**</a>
+        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
         Task<GetOpenSettlementResponse> GetOpenAsync(RetryConfig? retryConfig = null);
@@ -84,13 +78,11 @@ namespace Mollie
         /// <remarks>
         /// Retrieve the details of the current settlement, that has not yet been paid out.<br/>
         /// <br/>
-        /// For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.<br/>
+        /// For a complete reference of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a><br/>
+        /// documentation.<br/>
         /// <br/>
-        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read**</a>
+        /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
         Task<GetNextSettlementResponse> GetNextAsync(RetryConfig? retryConfig = null);
@@ -103,11 +95,8 @@ namespace Mollie
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-payments">List payments endpoint</a>.<br/>
         /// <br/>
-        /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the <a href="list-captures">List captures endpoint</a> endpoint instead.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
+        /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the<br/>
+        /// <a href="list-captures">List captures endpoint</a> endpoint instead.
         /// </remarks>
         /// </summary>
         Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null);
@@ -118,11 +107,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all captures included in the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
+        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.
         /// </remarks>
         /// </summary>
         Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null);
@@ -133,11 +118,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all refunds &apos;deducted&apos; from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **refunds.read**</a>
+        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.
         /// </remarks>
         /// </summary>
         Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null);
@@ -148,11 +129,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all chargebacks &apos;deducted&apos; from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **settlements.read** **payments.read**</a>
+        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.
         /// </remarks>
         /// </summary>
         Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null);
@@ -162,8 +139,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Settlements(SDKConfig config)

@@ -19,12 +19,6 @@
 
 With the Sales Invoice API you can generate sales invoices to send to your customers.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **sales-invoices.write**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="create-sales-invoice" method="post" path="/sales-invoices" -->
@@ -41,10 +35,10 @@ var sdk = new Client(security: new Security() {
 CreateSalesInvoiceRequest req = new CreateSalesInvoiceRequest() {
     Testmode = false,
     ProfileId = "pfl_QkEhN94Ba",
-    Status = "draft",
+    Status = CreateSalesInvoiceStatusRequest.Draft,
     Memo = "This is a memo!",
     PaymentDetails = new CreateSalesInvoicePaymentDetailsRequest() {
-        Source = "payment-link",
+        Source = CreateSalesInvoiceSourceRequest.PaymentLink,
         SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
     },
     EmailDetails = new CreateSalesInvoiceEmailDetailsRequest() {
@@ -55,7 +49,7 @@ CreateSalesInvoiceRequest req = new CreateSalesInvoiceRequest() {
     MandateId = "mdt_pWUnw6pkBN",
     RecipientIdentifier = "customer-xyz-0123",
     Recipient = new CreateSalesInvoiceRecipientRequest() {
-        Type = "consumer",
+        Type = CreateSalesInvoiceRecipientTypeRequest.Consumer,
         Title = "Mrs.",
         GivenName = "Jane",
         FamilyName = "Doe",
@@ -70,11 +64,11 @@ CreateSalesInvoiceRequest req = new CreateSalesInvoiceRequest() {
         City = "Amsterdam",
         Region = "Noord-Holland",
         Country = "NL",
-        Locale = "nl_NL",
+        Locale = CreateSalesInvoiceLocaleRequest.Nlnl,
     },
     Lines = new List<CreateSalesInvoiceLineRequest>() {},
     Discount = new CreateSalesInvoiceDiscountRequest() {
-        Type = "amount",
+        Type = CreateSalesInvoiceDiscountTypeRequest.Amount,
         Value = "10.00",
     },
 };
@@ -112,12 +106,6 @@ Retrieve a list of all sales invoices created through the API.
 
 The results are paginated.
 
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **sales-invoices.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="list-sales-invoices" method="get" path="/sales-invoices" -->
@@ -142,9 +130,9 @@ var res = await sdk.SalesInvoices.ListAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.                                                                                                                                                                                                                                                         | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                                                                                                                                                                                                                                                                                                                          |
+| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                                                                                                                                                                                                                                                                                                                          |
 | `Limit`                                                                                                                                                                                                                                                                                                                                                                                | *long*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                           | 50                                                                                                                                                                                                                                                                                                                                                                                     |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -164,12 +152,6 @@ var res = await sdk.SalesInvoices.ListAsync(
 > This feature is currently in beta testing, and the final specification may still change.
 
 Retrieve a single sales invoice by its ID.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **sales-invoice.read**](/reference/authentication)
 
 ### Example Usage
 
@@ -195,7 +177,7 @@ var res = await sdk.SalesInvoices.GetAsync(
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                                                                                                                                                                                                                                                                                                                          |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -214,13 +196,9 @@ var res = await sdk.SalesInvoices.GetAsync(
 >
 > This feature is currently in beta testing, and the final specification may still change.
 
-Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`, respectively).
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **sales-invoices.write**](/reference/authentication)
+Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for
+statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,
+respectively).
 
 ### Example Usage
 
@@ -239,10 +217,10 @@ var res = await sdk.SalesInvoices.UpdateAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     requestBody: new UpdateSalesInvoiceRequestBody() {
         Testmode = false,
-        Status = "paid",
+        Status = UpdateSalesInvoiceStatusRequest.Paid,
         Memo = "An updated memo!",
         PaymentDetails = new UpdateSalesInvoicePaymentDetailsRequest() {
-            Source = "payment-link",
+            Source = UpdateSalesInvoiceSourceRequest.PaymentLink,
             SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
         },
         EmailDetails = new UpdateSalesInvoiceEmailDetailsRequest() {
@@ -251,7 +229,7 @@ var res = await sdk.SalesInvoices.UpdateAsync(
         },
         RecipientIdentifier = "customer-xyz-0123",
         Recipient = new UpdateSalesInvoiceRecipientRequest() {
-            Type = "consumer",
+            Type = UpdateSalesInvoiceRecipientTypeRequest.Consumer,
             Title = "Mrs.",
             GivenName = "Jane",
             FamilyName = "Doe",
@@ -266,7 +244,7 @@ var res = await sdk.SalesInvoices.UpdateAsync(
             City = "Amsterdam",
             Region = "Noord-Holland",
             Country = "NL",
-            Locale = "nl_NL",
+            Locale = UpdateSalesInvoiceLocaleRequest.Nlnl,
         },
         Lines = new List<UpdateSalesInvoiceLineRequest>() {
             new UpdateSalesInvoiceLineRequest() {
@@ -278,13 +256,13 @@ var res = await sdk.SalesInvoices.UpdateAsync(
                     Value = "10.00",
                 },
                 Discount = new UpdateSalesInvoiceLineDiscountRequest() {
-                    Type = "amount",
+                    Type = UpdateSalesInvoiceLineTypeRequest.Amount,
                     Value = "10.00",
                 },
             },
         },
         Discount = new UpdateSalesInvoiceDiscountRequest() {
-            Type = "amount",
+            Type = UpdateSalesInvoiceDiscountTypeRequest.Amount,
             Value = "10.00",
         },
     }
@@ -318,13 +296,8 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 >
 > This feature is currently in beta testing, and the final specification may still change.
 
-Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the [Update sales invoice](update-sales-invoice) endpoint instead.
-
-> 🔑 Access with
->
-> [API key](/reference/authentication)
->
-> [Access token with **sales-invoices.write**](/reference/authentication)
+Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the
+[Update sales invoice](update-sales-invoice) endpoint instead.
 
 ### Example Usage
 

@@ -31,15 +31,12 @@ namespace Mollie
         /// <remarks>
         /// Capture an *authorized* payment.<br/>
         /// <br/>
-        /// Some payment methods allow you to first collect a customer&apos;s authorization, and capture the amount at a later point.<br/>
+        /// Some payment methods allow you to first collect a customer&apos;s authorization,<br/>
+        /// and capture the amount at a later point.<br/>
         /// <br/>
-        /// By default, Mollie captures payments automatically. If however you configured your payment with `captureMode: manual`, you can capture the payment using this endpoint after having collected the customer&apos;s authorization.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// By default, Mollie captures payments automatically. If however you<br/>
+        /// configured your payment with `captureMode: manual`, you can capture the payment using this endpoint after<br/>
+        /// having collected the customer&apos;s authorization.
         /// </remarks>
         /// </summary>
         Task<CreateCaptureResponse> CreateAsync(string paymentId, CreateCaptureRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -50,13 +47,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all captures created for a specific payment.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListCapturesResponse> ListAsync(ListCapturesRequest request, RetryConfig? retryConfig = null);
@@ -65,13 +56,8 @@ namespace Mollie
         /// Get capture
         /// 
         /// <remarks>
-        /// Retrieve a single payment capture by its ID and the ID of its parent payment.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// Retrieve a single payment capture by its ID and the ID of its parent<br/>
+        /// payment.
         /// </remarks>
         /// </summary>
         Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, GetCaptureEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -81,8 +67,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Captures(SDKConfig config)

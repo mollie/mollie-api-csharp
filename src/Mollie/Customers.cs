@@ -29,15 +29,10 @@ namespace Mollie
         /// Create customer
         /// 
         /// <remarks>
-        /// Creates a simple minimal representation of a customer. Payments, recurring mandates, and subscriptions can be linked to this customer object, which simplifies management of recurring payments.<br/>
+        /// Creates a simple minimal representation of a customer. Payments, recurring mandates, and subscriptions can be linked<br/>
+        /// to this customer object, which simplifies management of recurring payments.<br/>
         /// <br/>
-        /// Once registered, customers will also appear in your Mollie dashboard.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **customers.write**</a>
+        /// Once registered, customers will also appear in your Mollie dashboard.
         /// </remarks>
         /// </summary>
         Task<CreateCustomerResponse> CreateAsync(CreateCustomerRequest? request = null, RetryConfig? retryConfig = null);
@@ -48,26 +43,16 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all customers.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **customers.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, string? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, ListCustomersSort? sort = Mollie.Models.Requests.ListCustomersSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get customer
         /// 
         /// <remarks>
-        /// Retrieve a single customer by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// Retrieve a single customer by its ID.
         /// </remarks>
         /// </summary>
         Task<GetCustomerResponse> GetAsync(string customerId, GetCustomerInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -78,11 +63,7 @@ namespace Mollie
         /// <remarks>
         /// Update an existing customer.<br/>
         /// <br/>
-        /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.
         /// </remarks>
         /// </summary>
         Task<UpdateCustomerResponse> UpdateAsync(string customerId, UpdateCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -91,11 +72,7 @@ namespace Mollie
         /// Delete customer
         /// 
         /// <remarks>
-        /// Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.
         /// </remarks>
         /// </summary>
         Task<DeleteCustomerResponse> DeleteAsync(string customerId, DeleteCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -113,13 +90,8 @@ namespace Mollie
         /// * Improve payment insights in the Mollie dashboard<br/>
         /// * Use recurring payments<br/>
         /// <br/>
-        /// This endpoint is effectively an alias of the <a href="create-payment">Create payment endpoint</a> with the `customerId` parameter predefined.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// This endpoint is effectively an alias of the <a href="create-payment">Create payment endpoint</a> with the `customerId`<br/>
+        /// parameter predefined.
         /// </remarks>
         /// </summary>
         Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, CreateCustomerPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -128,13 +100,7 @@ namespace Mollie
         /// List customer payments
         /// 
         /// <remarks>
-        /// Retrieve all payments linked to the customer.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// Retrieve all payments linked to the customer.
         /// </remarks>
         /// </summary>
         Task<ListCustomerPaymentsResponse> ListPaymentsAsync(ListCustomerPaymentsRequest request, RetryConfig? retryConfig = null);
@@ -144,8 +110,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Customers(SDKConfig config)
@@ -288,7 +254,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, string? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, ListCustomersSort? sort = Mollie.Models.Requests.ListCustomersSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new ListCustomersRequest()
             {

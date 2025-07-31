@@ -29,13 +29,10 @@ namespace Mollie
         /// List invoices
         /// 
         /// <remarks>
-        /// Retrieve a list of all your invoices, optionally filtered by year or by invoice reference.<br/>
+        /// Retrieve a list of all your invoices, optionally filtered by year or by<br/>
+        /// invoice reference.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **invoices.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListInvoicesResponse> ListAsync(ListInvoicesRequest? request = null, RetryConfig? retryConfig = null);
@@ -46,11 +43,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single invoice by its ID.<br/>
         /// <br/>
-        /// If you want to retrieve the details of an invoice by its invoice number, call the <a href="list-invoices">List invoices</a> endpoint with the `reference` parameter.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **invoices.read**</a>
+        /// If you want to retrieve the details of an invoice by its invoice number,<br/>
+        /// call the <a href="list-invoices">List invoices</a> endpoint with the `reference` parameter.
         /// </remarks>
         /// </summary>
         Task<GetInvoiceResponse> GetAsync(string id, RetryConfig? retryConfig = null);
@@ -60,8 +54,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Invoices(SDKConfig config)

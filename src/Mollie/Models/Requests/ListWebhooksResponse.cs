@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of webhooks. For a complete reference of the webhook object, refer to the <a href="get-webhook">Get hook endpoint</a> documentation.
+        /// A list of webhooks. For a complete reference of the webhook<br/>
+        /// 
+        /// <remarks>
+        /// object, refer to the <a href="get-webhook">Get hook endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public ListWebhooksResponseBody? Object { get; set; }
     }

@@ -17,9 +17,11 @@ namespace Mollie.Models.Requests
     /// 
     /// <remarks>
     /// <br/>
-    /// You can find the minimum and maximum amounts per payment method in our help center. Additionally, they can be retrieved using the Get method endpoint.<br/>
+    /// You can find the minimum and maximum amounts per payment method in our help center. Additionally, they can be<br/>
+    /// retrieved using the Get method endpoint.<br/>
     /// <br/>
-    /// If a tip was added for a Point-of-Sale payment, the amount will be updated to reflect the initial amount plus the tip amount.
+    /// If a tip was added for a Point-of-Sale payment, the amount will be updated to reflect the initial amount plus the<br/>
+    /// tip amount.
     /// </remarks>
     /// </summary>
     public class ListAllSubscriptionsAmount

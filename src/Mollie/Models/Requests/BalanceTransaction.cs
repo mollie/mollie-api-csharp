@@ -17,7 +17,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a balance transaction object. Will always contain the string `balance-transaction` for this endpoint.
+        /// Indicates the response contains a balance transaction object. Will always contain the string `balance-transaction`<br/>
+        /// 
+        /// <remarks>
+        /// for this endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "balance-transaction";
@@ -29,49 +33,60 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// The type of transaction, for example `payment` or `refund`. Values include the below examples, although this list is not definitive.<br/>
+        /// The type of transaction, for example `payment` or `refund`. Values include the below examples, although this list<br/>
         /// 
         /// <remarks>
+        /// is not definitive.<br/>
         /// <br/>
         /// * Regular payment processing: `payment` `capture` `unauthorized-direct-debit` `failed-payment`<br/>
         /// * Refunds and chargebacks: `refund` `returned-refund` `chargeback` `chargeback-reversal`<br/>
         /// * Settlements: `outgoing-transfer` `canceled-outgoing-transfer` `returned-transfer`<br/>
         /// * Invoicing: `invoice-compensation` `balance-correction`<br/>
-        /// * Mollie Connect: `application-fee` `split-payment` `platform-payment-refund` `platform-payment-chargeback`<br/>
-        /// <br/>
-        /// Possible values: `application-fee` `capture` `chargeback` `chargeback-reversal` `failed-payment-fee` `failed-payment` `invoice-compensation` `payment` `payment-fee` `payment-commission` `refund` `returned-refund` `returned-transfer` `split-payment` `outgoing-transfer` `capture-commission` `canceled-outgoing-transfer` `incoming-transfer` `api-payment-rolling-reserve-release` `capture-rolling-reserve-release` `reimbursement-fee` `balance-correction` `unauthorized-direct-debit` `bank-charged-failure-fee` `platform-payment-refund` `refund-compensation` `returned-refund-compensation` `returned-platform-payment-refund` `platform-payment-chargeback` `chargeback-compensation` `reversed-platform-payment-chargeback` `reversed-chargeback-compensation` `failed-split-payment-platform` `failed-split-payment-compensation` `cash-advance-loan` `platform-connected-organizations-fee` `split-transaction` `managed-fee` `returned-managed-fee` `topup` `balance-reserve` `balance-reserve-return` `movement` `post-payment-split-payment` `cash-collateral-issuance` `cash-collateral-release`
+        /// * Mollie Connect: `application-fee` `split-payment` `platform-payment-refund` `platform-payment-chargeback`
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public ListBalanceTransactionsType? Type { get; set; }
 
         /// <summary>
-        /// The final amount that was moved to or from the balance. If the transaction moves funds away from the balance, for example when it concerns a refund, the amount will be negative.
+        /// The final amount that was moved to or from the balance. If the transaction moves funds away from the balance, for<br/>
+        /// 
+        /// <remarks>
+        /// example when it concerns a refund, the amount will be negative.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resultAmount")]
         public ResultAmount? ResultAmount { get; set; }
 
         /// <summary>
-        /// The amount that was to be moved to or from the balance, excluding deductions. If the transaction moves funds away from the balance, for example when it concerns a refund, the amount will be negative.
+        /// The amount that was to be moved to or from the balance, excluding deductions. If the transaction moves funds away<br/>
+        /// 
+        /// <remarks>
+        /// from the balance, for example when it concerns a refund, the amount will be negative.
+        /// </remarks>
         /// </summary>
         [JsonProperty("initialAmount")]
         public InitialAmount? InitialAmount { get; set; }
 
         /// <summary>
-        /// The total amount of deductions withheld from the movement. For example, if we charge a €0.29 fee on a €10 payment, the deductions amount will be `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;-0.29&quot;}`.<br/>
+        /// The total amount of deductions withheld from the movement. For example, if we charge a €0.29 fee on a €10 payment,<br/>
         /// 
         /// <remarks>
+        /// the deductions amount will be `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;-0.29&quot;}`.<br/>
         /// <br/>
-        /// When moving funds to a balance, we always round the deduction to a &apos;real&apos; amount. Any differences between these real-time rounded amounts and the final invoice will be compensated when the invoice is generated.
+        /// When moving funds to a balance, we always round the deduction to a &apos;real&apos; amount. Any differences between these<br/>
+        /// real-time rounded amounts and the final invoice will be compensated when the invoice is generated.
         /// </remarks>
         /// </summary>
         [JsonProperty("deductions")]
         public Deductions? Deductions { get; set; } = null;
 
         /// <summary>
-        /// Depending on the type of the balance transaction, we will try to give more context about the specific event that triggered it. For example, the context object for a payment transaction will look like `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
+        /// Depending on the type of the balance transaction, we will try to give more context about the specific event that<br/>
         /// 
         /// <remarks>
+        /// triggered it. For example, the context object for a payment transaction will look like<br/>
+        /// `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
         /// <br/>
         /// Below is a complete list of the context values that each type of transaction will have.<br/>
         /// <br/>

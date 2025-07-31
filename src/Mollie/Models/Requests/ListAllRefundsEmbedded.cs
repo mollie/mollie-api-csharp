@@ -18,7 +18,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of refund objects. For a complete reference of the refund object, refer to the <a href="get-refund">Get refund endpoint</a> documentation.
+        /// An array of refund objects. For a complete reference of the refund object, refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="get-refund">Get refund endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         [JsonProperty("refunds")]
         public List<ListAllRefundsRefund>? Refunds { get; set; }

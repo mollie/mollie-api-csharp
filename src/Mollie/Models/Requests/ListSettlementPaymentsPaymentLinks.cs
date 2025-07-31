@@ -38,13 +38,16 @@ namespace Mollie.Models.Requests
         public ListSettlementPaymentsMobileAppCheckout? MobileAppCheckout { get; set; }
 
         /// <summary>
-        /// For test mode payments in certain scenarios, a hosted interface is available to help you test different payment states.<br/>
+        /// For test mode payments in certain scenarios, a hosted interface is available to help you test different<br/>
         /// 
         /// <remarks>
+        /// payment states.<br/>
         /// <br/>
-        /// Firstly, for recurring test mode payments. Recurring payments do not have a checkout URL, because these payments are executed without any user interaction.<br/>
+        /// Firstly, for recurring test mode payments. Recurring payments do not have a checkout URL, because these<br/>
+        /// payments are executed without any user interaction.<br/>
         /// <br/>
-        /// Secondly, for paid test mode payments. The payment state screen will then allow you to create a refund or chargeback for the test payment.
+        /// Secondly, for paid test mode payments. The payment state screen will then allow you to create a refund or<br/>
+        /// chargeback for the test payment.
         /// </remarks>
         /// </summary>
         [JsonProperty("changePaymentState")]
@@ -63,7 +66,11 @@ namespace Mollie.Models.Requests
         public ListSettlementPaymentsRefunds? Refunds { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="list-payment-chargebacks">chargebacks</a> that belong to this payment.
+        /// The API resource URL of the <a href="list-payment-chargebacks">chargebacks</a> that belong to this<br/>
+        /// 
+        /// <remarks>
+        /// payment.
+        /// </remarks>
         /// </summary>
         [JsonProperty("chargebacks")]
         public ListSettlementPaymentsChargebacks? Chargebacks { get; set; }
@@ -75,7 +82,11 @@ namespace Mollie.Models.Requests
         public ListSettlementPaymentsCaptures? Captures { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="get-settlement">settlement</a> this payment has been settled with. Not present if not yet settled.
+        /// The API resource URL of the <a href="get-settlement">settlement</a> this payment has been settled with.<br/>
+        /// 
+        /// <remarks>
+        /// Not present if not yet settled.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlement")]
         public ListSettlementPaymentsSettlement? Settlement { get; set; }
@@ -99,13 +110,21 @@ namespace Mollie.Models.Requests
         public ListSettlementPaymentsSubscription? Subscription { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="get-order">order</a> this payment was created for. Not present if not created for an order.
+        /// The API resource URL of the <a href="get-order">order</a> this payment was created for. Not present if not created for an<br/>
+        /// 
+        /// <remarks>
+        /// order.
+        /// </remarks>
         /// </summary>
         [JsonProperty("order")]
         public ListSettlementPaymentsOrder? Order { get; set; }
 
         /// <summary>
-        /// The API resource URL of the <a href="get-terminal">terminal</a> this payment was created for. Only present for point-of-sale payments.
+        /// The API resource URL of the <a href="get-terminal">terminal</a> this payment was created for. Only present for<br/>
+        /// 
+        /// <remarks>
+        /// point-of-sale payments.
+        /// </remarks>
         /// </summary>
         [JsonProperty("terminal")]
         public ListSettlementPaymentsTerminal? Terminal { get; set; }

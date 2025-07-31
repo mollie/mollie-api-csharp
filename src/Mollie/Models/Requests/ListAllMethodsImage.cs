@@ -31,7 +31,11 @@ namespace Mollie.Models.Requests
         public string Size2x { get; set; } = default!;
 
         /// <summary>
-        /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can scale to any desired size without compromising visual quality.
+        /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can<br/>
+        /// 
+        /// <remarks>
+        /// scale to any desired size without compromising visual quality.
+        /// </remarks>
         /// </summary>
         [JsonProperty("svg")]
         public string Svg { get; set; } = default!;

@@ -17,21 +17,25 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The name of this requirement, referring to the task to be fulfilled by the organization to enable or re-enable the capability. The name is unique among other requirements of the same capability.
+        /// The name of this requirement, referring to the task to be fulfilled by the organization<br/>
+        /// 
+        /// <remarks>
+        /// to enable or re-enable the capability. The name is unique among other requirements<br/>
+        /// of the same capability.
+        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// The status of the requirement depends on its due date. If no due date is given, the status will be `requested`.<br/>
+        /// The status of the requirement depends on its due date.<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `currently-due` `past-due` `requested`
+        /// If no due date is given, the status will be `requested`.
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public ListCapabilitiesRequirementStatus? Status { get; set; }
 
         /// <summary>
         /// Due date until the requirement must be fulfilled, if any. The date is shown in ISO-8601 format.

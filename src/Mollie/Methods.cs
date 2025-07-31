@@ -29,21 +29,22 @@ namespace Mollie
         /// List payment methods
         /// 
         /// <remarks>
-        /// Retrieve all enabled payment methods. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
+        /// Retrieve all enabled payment methods. The results of this endpoint are<br/>
+        /// **not** paginated — unlike most other list endpoints in our API.<br/>
         /// <br/>
-        /// For test mode, all pending and enabled payment methods are returned. If no payment methods are requested yet, the most popular payment methods are returned in the test mode. For live mode, only fully enabled payment methods are returned.<br/>
+        /// For test mode, all pending and enabled payment methods are returned. If no<br/>
+        /// payment methods are requested yet, the most popular payment methods are returned in the test mode. For live<br/>
+        /// mode, only fully enabled payment methods are returned.<br/>
         /// <br/>
-        /// Payment methods can be requested and enabled via the Mollie Dashboard, or via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API.<br/>
+        /// Payment methods can be requested and enabled via the Mollie Dashboard, or<br/>
+        /// via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API.<br/>
         /// <br/>
-        /// The list can optionally be filtered using a number of parameters described below.<br/>
+        /// The list can optionally be filtered using a number of parameters described<br/>
+        /// below.<br/>
         /// <br/>
-        /// By default, only payment methods for the Euro currency are returned. If you wish to retrieve payment methods which exclusively support other currencies (e.g. Twint), you need to use the `amount` parameters.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// By default, only payment methods for the Euro currency are returned. If you<br/>
+        /// wish to retrieve payment methods which exclusively support other currencies (e.g. Twint), you need to use the<br/>
+        /// `amount` parameters.
         /// </remarks>
         /// </summary>
         Task<ListMethodsResponse> ListAsync(ListMethodsRequest? request = null, RetryConfig? retryConfig = null);
@@ -52,15 +53,10 @@ namespace Mollie
         /// List all payment methods
         /// 
         /// <remarks>
-        /// Retrieve all payment methods that Mollie offers, regardless of the eligibility of the organization for the specific method. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
+        /// Retrieve all payment methods that Mollie offers, regardless of the eligibility of the organization for the specific<br/>
+        /// method. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
         /// <br/>
-        /// The list can optionally be filtered using a number of parameters described below.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// The list can optionally be filtered using a number of parameters described below.
         /// </remarks>
         /// </summary>
         Task<ListAllMethodsResponse> AllAsync(ListAllMethodsRequest? request = null, RetryConfig? retryConfig = null);
@@ -71,17 +67,16 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single payment method by its ID.<br/>
         /// <br/>
-        /// If a method is not available on this profile, a `404 Not Found` response is returned. If the method is available but not enabled yet, a status `403 Forbidden` is returned. You can enable payments methods via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API, or via the Mollie Dashboard.<br/>
+        /// If a method is not available on this profile, a `404 Not Found` response is<br/>
+        /// returned. If the method is available but not enabled yet, a status `403 Forbidden` is returned. You can enable<br/>
+        /// payments methods via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API, or via<br/>
+        /// the Mollie Dashboard.<br/>
         /// <br/>
-        /// If you do not know the method&apos;s ID, you can use the <a href="list-methods">methods list endpoint</a> to retrieve all payment methods that are available.<br/>
+        /// If you do not know the method&apos;s ID, you can use the [methods list<br/>
+        /// endpoint](list-methods) to retrieve all payment methods that are available.<br/>
         /// <br/>
-        /// Additionally, it is possible to check if wallet methods such as Apple Pay are enabled by passing the wallet ID (`applepay`) as the method ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.read**</a>
+        /// Additionally, it is possible to check if wallet methods such as Apple Pay<br/>
+        /// are enabled by passing the wallet ID (`applepay`) as the method ID.
         /// </remarks>
         /// </summary>
         Task<GetMethodResponse> GetAsync(GetMethodRequest request, RetryConfig? retryConfig = null);
@@ -91,8 +86,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Methods(SDKConfig config)

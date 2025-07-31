@@ -13,7 +13,12 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside the EU, no VAT will be charged.
+    /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
+    /// 
+    /// <remarks>
+    /// be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside<br/>
+    /// the EU, no VAT will be charged.
+    /// </remarks>
     /// </summary>
     public class GetInvoiceVatAmount
     {

@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of payment method objects. For a complete reference of the payment method object, refer to the <a href="get-method">Get payment method endpoint</a> documentation.
+        /// A list of payment method objects. For a complete reference of the<br/>
+        /// 
+        /// <remarks>
+        /// payment method object, refer to the <a href="get-method">Get payment method endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public ListAllMethodsResponseBody? Object { get; set; }
     }

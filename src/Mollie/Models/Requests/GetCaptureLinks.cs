@@ -32,13 +32,21 @@ namespace Mollie.Models.Requests
         public GetCapturePayment Payment { get; set; } = default!;
 
         /// <summary>
-        /// The API resource URL of the <a href="get-settlement">settlement</a> this capture has been settled with. Not present if not yet settled.
+        /// The API resource URL of the <a href="get-settlement">settlement</a> this capture has been settled with. Not present if<br/>
+        /// 
+        /// <remarks>
+        /// not yet settled.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlement")]
         public GetCaptureSettlement? Settlement { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="get-shipment">shipment</a> this capture is associated with. Not present if it isn&apos;t associated with a shipment.
+        /// The API resource URL of the <a href="get-shipment">shipment</a> this capture is associated with. Not present if<br/>
+        /// 
+        /// <remarks>
+        /// it isn&apos;t associated with a shipment.
+        /// </remarks>
         /// </summary>
         [JsonProperty("shipment")]
         public GetCaptureShipment? Shipment { get; set; } = null;

@@ -18,7 +18,12 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of payment method objects. For a complete reference of the payment method object, refer to the <a href="get-method">Get payment method endpoint</a> documentation.
+        /// An array of payment method objects. For a complete<br/>
+        /// 
+        /// <remarks>
+        /// reference of the payment method object, refer to the <a href="get-method">Get payment method endpoint</a><br/>
+        /// documentation.
+        /// </remarks>
         /// </summary>
         [JsonProperty("methods")]
         public List<ListAllMethodsMethod> Methods { get; set; } = default!;

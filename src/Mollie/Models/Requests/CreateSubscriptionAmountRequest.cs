@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The amount for each individual payment that is charged with this subscription. For example, for a monthly subscription of €10, the subscription amount should be set to €10.
+    /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
+    /// 
+    /// <remarks>
+    /// subscription of €10, the subscription amount should be set to €10.
+    /// </remarks>
     /// </summary>
     public class CreateSubscriptionAmountRequest
     {

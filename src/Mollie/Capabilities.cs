@@ -38,11 +38,9 @@ namespace Mollie
         /// <br/>
         /// Capabilities are at the organization level, indicating if the organization can perform a given capability.<br/>
         /// <br/>
-        /// For payments, regardless them being at the profile level, the capability is listed at the organization level. This means that if at least one of the clients&apos;s profiles can receive payments, the payments capability is enabled, communicating that the organization can indeed receive payments.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **onboarding.read**</a>
+        /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
+        /// This means that if at least one of the clients&apos;s profiles can receive payments,<br/>
+        /// the payments capability is enabled, communicating that the organization can indeed receive payments.
         /// </remarks>
         /// </summary>
         Task<ListCapabilitiesResponse> ListAsync(RetryConfig? retryConfig = null);
@@ -52,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Capabilities(SDKConfig config)

@@ -31,11 +31,8 @@ namespace Mollie
         /// <remarks>
         /// Create a profile to process payments on.<br/>
         /// <br/>
-        /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you can use this endpoint to automate profile creation.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **profiles.write**</a>
+        /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you<br/>
+        /// can use this endpoint to automate profile creation.
         /// </remarks>
         /// </summary>
         Task<CreateProfileResponse> CreateAsync(CreateProfileRequest request, RetryConfig? retryConfig = null);
@@ -46,11 +43,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all of your profiles.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **profiles.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = 50, RetryConfig? retryConfig = null);
@@ -59,11 +52,7 @@ namespace Mollie
         /// Get profile
         /// 
         /// <remarks>
-        /// Retrieve a single profile by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **profiles.read**</a>
+        /// Retrieve a single profile by its ID.
         /// </remarks>
         /// </summary>
         Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
@@ -74,11 +63,8 @@ namespace Mollie
         /// <remarks>
         /// Update an existing profile.<br/>
         /// <br/>
-        /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard. Alternatively, you can use this endpoint to automate profile management.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **profiles.write**</a>
+        /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.<br/>
+        /// Alternatively, you can use this endpoint to automate profile management.
         /// </remarks>
         /// </summary>
         Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, RetryConfig? retryConfig = null);
@@ -87,11 +73,7 @@ namespace Mollie
         /// Delete profile
         /// 
         /// <remarks>
-        /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **profiles.write**</a>
+        /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
         /// </remarks>
         /// </summary>
         Task<DeleteProfileResponse> DeleteAsync(string id, RetryConfig? retryConfig = null);
@@ -100,13 +82,11 @@ namespace Mollie
         /// Get current profile
         /// 
         /// <remarks>
-        /// Retrieve the currently authenticated profile. A convenient alias of the <a href="get-profile">Get profile</a> endpoint.<br/>
+        /// Retrieve the currently authenticated profile. A convenient alias of the <a href="get-profile">Get profile</a><br/>
+        /// endpoint.<br/>
         /// <br/>
-        /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint documentation.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint<br/>
+        /// documentation.
         /// </remarks>
         /// </summary>
         Task<GetCurrentProfileResponse> GetCurrentAsync(RetryConfig? retryConfig = null);
@@ -116,8 +96,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)

@@ -16,7 +16,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// 
+        /// <remarks>
+        /// result set.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -28,39 +32,47 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// This endpoint allows you to embed additional information via the `embed` query string parameter.
+        /// This endpoint allows you to embed additional information via the<br/>
+        /// 
+        /// <remarks>
+        /// `embed` query string parameter.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public ListAllChargebacksEmbed? Embed { get; set; }
 
         /// <summary>
-        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from newest to oldest.<br/>
+        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `asc` `desc` (default: `desc`)
+        /// newest to oldest.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public string? Sort { get; set; } = null;
+        public ListAllChargebacksSort? Sort { get; set; } = Mollie.Models.Requests.ListAllChargebacksSort.Desc;
 
         /// <summary>
-        /// The identifier referring to the <a href="get-profile">profile</a> you wish to retrieve chargebacks for.<br/>
+        /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
         /// 
         /// <remarks>
+        /// retrieve chargebacks for.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` is already implied.<br/>
+        /// Most API credentials are linked to a single profile. In these cases the<br/>
+        /// `profileId` is already implied.<br/>
         /// <br/>
-        /// To retrieve all chargebacks across the organization, use an organization-level API credential and omit the `profileId` parameter.
+        /// To retrieve all chargebacks across the organization, use an<br/>
+        /// organization-level API credential and omit the `profileId` parameter.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
         public string? ProfileId { get; set; } = null;
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// 
         /// <remarks>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

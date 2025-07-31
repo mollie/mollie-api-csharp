@@ -13,7 +13,12 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The total amount that is already refunded. Only available when refunds are available for this payment. For some payment methods, this amount may be higher than the payment amount, for example to allow reimbursement of the costs for a return shipment to the customer.
+    /// The total amount that is already refunded. Only available when refunds are available for this payment. For some<br/>
+    /// 
+    /// <remarks>
+    /// payment methods, this amount may be higher than the payment amount, for example to allow reimbursement of the<br/>
+    /// costs for a return shipment to the customer.
+    /// </remarks>
     /// </summary>
     public class ListCustomerPaymentsAmountRefunded
     {

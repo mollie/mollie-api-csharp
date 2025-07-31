@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The customer will be prompted to enter a value greater than or equal to the minimum amount.
+    /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The<br/>
+    /// 
+    /// <remarks>
+    /// customer will be prompted to enter a value greater than or equal to the minimum amount.
+    /// </remarks>
     /// </summary>
     public class UpdatePaymentLinkMinimumAmountResponse
     {

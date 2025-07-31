@@ -12,10 +12,6 @@
 
 Retrieve the onboarding status of the currently authenticated organization.
 
-> 🔑 Access with
->
-> [Access token with **onboarding.read**](/reference/authentication)
-
 ### Example Usage
 
 <!-- UsageSnippet language="csharp" operationID="get-onboarding-status" method="get" path="/onboarding/me" -->
@@ -44,13 +40,12 @@ var res = await sdk.Onboarding.GetAsync();
 
 ## Submit
 
-**⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the onboarding process for your merchants.**
+**⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the
+onboarding process for your merchants.**
 
-Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the onboarding status is `needs-data`. Information that the merchant has entered in their dashboard will not be overwritten.
-
-> 🔑 Access with
->
-> [Access token with **onboarding.write**](/reference/authentication)
+Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the
+onboarding status is `needs-data`.  
+Information that the merchant has entered in their dashboard will not be overwritten.
 
 ### Example Usage
 
@@ -69,7 +64,7 @@ SubmitOnboardingDataRequest req = new SubmitOnboardingDataRequest() {
         Name = "Mollie B.V.",
         RegistrationNumber = "30204462",
         VatNumber = "NL815839091B01",
-        VatRegulation = "dutch",
+        VatRegulation = SubmitOnboardingDataVatRegulation.Dutch,
     },
     Profile = new SubmitOnboardingDataProfile() {
         Name = "Mollie",

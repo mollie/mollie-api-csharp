@@ -16,7 +16,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// 
+        /// <remarks>
+        /// result set.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -28,37 +32,44 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from newest to oldest.<br/>
+        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `asc` `desc` (default: `desc`)
+        /// newest to oldest.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public string? Sort { get; set; } = null;
+        public ListAllRefundsSort? Sort { get; set; } = Mollie.Models.Requests.ListAllRefundsSort.Desc;
 
         /// <summary>
-        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string parameter.
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+        /// 
+        /// <remarks>
+        /// parameter.
+        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public ListAllRefundsEmbed? Embed { get; set; }
 
         /// <summary>
-        /// The identifier referring to the <a href="get-profile">profile</a> you wish to retrieve the resources for.<br/>
+        /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
         /// 
         /// <remarks>
+        /// retrieve the resources for.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
+        /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// 
         /// <remarks>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

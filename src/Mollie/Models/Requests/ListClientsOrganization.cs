@@ -17,7 +17,11 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains an organization object. Will always contain the string `organization` for this resource type.
+        /// Indicates the response contains an organization object. Will always contain the string `organization` for this<br/>
+        /// 
+        /// <remarks>
+        /// resource type.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "organization";
@@ -44,7 +48,7 @@ namespace Mollie.Models.Requests
         /// The preferred locale of the merchant, as set in their Mollie dashboard.
         /// </summary>
         [JsonProperty("locale")]
-        public string? Locale { get; set; }
+        public ListClientsLocale? Locale { get; set; }
 
         /// <summary>
         /// The address of the organization.
@@ -59,9 +63,10 @@ namespace Mollie.Models.Requests
         public string? RegistrationNumber { get; set; }
 
         /// <summary>
-        /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are verified against the international registry *VIES*.<br/>
+        /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are<br/>
         /// 
         /// <remarks>
+        /// verified against the international registry *VIES*.<br/>
         /// <br/>
         /// The field is not present for merchants residing in other countries.
         /// </remarks>
@@ -70,17 +75,16 @@ namespace Mollie.Models.Requests
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
-        /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United Kingdom, and shifted VAT for merchants in the European Union.<br/>
+        /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
         /// 
         /// <remarks>
+        /// Kingdom, and shifted VAT for merchants in the European Union.<br/>
         /// <br/>
-        /// The field is not present for merchants residing in other countries.<br/>
-        /// <br/>
-        /// Possible values: `dutch` `british` `shifted`
+        /// The field is not present for merchants residing in other countries.
         /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
-        public string? VatRegulation { get; set; } = null;
+        public ListClientsVatRegulation? VatRegulation { get; set; } = null;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

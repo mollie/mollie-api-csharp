@@ -17,7 +17,8 @@ namespace Mollie.Models.Requests
     /// 
     /// <remarks>
     /// <br/>
-    /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge a €0.99 fee on a €1.00 payment.
+    /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge<br/>
+    /// a €0.99 fee on a €1.00 payment.
     /// </remarks>
     /// </summary>
     public class CancelPaymentApplicationFeeAmount

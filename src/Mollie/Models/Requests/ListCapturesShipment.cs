@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="get-shipment">shipment</a> this capture is associated with. Not present if it isn&apos;t associated with a shipment.
+    /// The API resource URL of the <a href="get-shipment">shipment</a> this capture is associated with. Not present if<br/>
+    /// 
+    /// <remarks>
+    /// it isn&apos;t associated with a shipment.
+    /// </remarks>
     /// </summary>
     public class ListCapturesShipment
     {

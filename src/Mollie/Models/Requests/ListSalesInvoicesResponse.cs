@@ -21,7 +21,11 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of sales invoice objects. For a complete reference of the sales invoice object, refer to the <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
+        /// A list of sales invoice objects. For a complete reference of the sales invoice object, refer to the<br/>
+        /// 
+        /// <remarks>
+        /// <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
+        /// </remarks>
         /// </summary>
         public ListSalesInvoicesResponseBody? Object { get; set; }
     }

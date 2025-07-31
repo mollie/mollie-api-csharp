@@ -31,11 +31,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all clients linked to your account.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **clients.read**</a>
+        /// The results are paginated.
         /// </remarks>
         /// </summary>
         Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = 50, RetryConfig? retryConfig = null);
@@ -44,11 +40,7 @@ namespace Mollie
         /// Get client
         /// 
         /// <remarks>
-        /// Retrieve a single client by its ID.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **clients.read**</a>
+        /// Retrieve a single client by its ID.
         /// </remarks>
         /// </summary>
         Task<GetClientResponse> GetAsync(string id, string? embed = null, RetryConfig? retryConfig = null);
@@ -58,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Clients(SDKConfig config)

@@ -13,11 +13,13 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// This object offers details about the status of a payment. Currently it is only available for point-of-sale payments.<br/>
+    /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>
     /// 
     /// <remarks>
+    /// payments.<br/>
     /// <br/>
-    /// You can find more information about the possible values of this object on <a href="status-reasons">this page</a>.**
+    /// You can find more information about the possible values of this object on<br/>
+    /// <a href="status-reasons">this page</a>.**
     /// </remarks>
     /// </summary>
     public class ListSettlementPaymentsStatusReason

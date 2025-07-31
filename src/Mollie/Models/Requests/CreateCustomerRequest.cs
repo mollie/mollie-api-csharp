@@ -30,13 +30,21 @@ namespace Mollie.Models.Requests
         public string? Email { get; set; } = null;
 
         /// <summary>
-        /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
+        /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
+        /// 
+        /// <remarks>
+        /// absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
+        /// </remarks>
         /// </summary>
         [JsonProperty("locale")]
-        public string? Locale { get; set; } = null;
+        public CreateCustomerLocaleRequest? Locale { get; set; } = null;
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public CreateCustomerMetadataRequestUnion? Metadata { get; set; } = null;
@@ -46,7 +54,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]

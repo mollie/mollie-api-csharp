@@ -21,21 +21,24 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Indicates the response contains a partner status object. Will always contain the string `partner` for this endpoint.
+        /// Indicates the response contains a partner status object. Will always contain the string `partner` for<br/>
+        /// 
+        /// <remarks>
+        /// this endpoint.
+        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string? Resource { get; set; } = "partner";
 
         /// <summary>
-        /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not enrolled as a partner.<br/>
+        /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>
         /// 
         /// <remarks>
-        /// <br/>
-        /// Possible values: `oauth` `signuplink` `useragent`
+        /// enrolled as a partner.
         /// </remarks>
         /// </summary>
         [JsonProperty("partnerType", NullValueHandling = NullValueHandling.Include)]
-        public string? PartnerType { get; set; }
+        public PartnerType? PartnerType { get; set; }
 
         /// <summary>
         /// Whether the current organization is receiving commissions.
@@ -44,13 +47,21 @@ namespace Mollie.Models.Requests
         public bool? IsCommissionPartner { get; set; }
 
         /// <summary>
-        /// Array of User-Agent token objects. Present if the organization is a partner of type `useragent`, or if they were in the past.
+        /// Array of User-Agent token objects. Present if the organization is a partner of type `useragent`, or if<br/>
+        /// 
+        /// <remarks>
+        /// they were in the past.
+        /// </remarks>
         /// </summary>
         [JsonProperty("userAgentTokens")]
         public List<UserAgentToken>? UserAgentTokens { get; set; }
 
         /// <summary>
-        /// The date the partner contract was signed, in ISO 8601 format. Omitted if no contract has been signed (yet).
+        /// The date the partner contract was signed, in ISO 8601 format. Omitted if no contract has been signed<br/>
+        /// 
+        /// <remarks>
+        /// (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("partnerContractSignedAt")]
         public string? PartnerContractSignedAt { get; set; } = null;
@@ -62,7 +73,11 @@ namespace Mollie.Models.Requests
         public bool? PartnerContractUpdateAvailable { get; set; }
 
         /// <summary>
-        /// The expiration date of the signed partner contract, in ISO 8601 format. Omitted if contract has no expiration date (yet).
+        /// The expiration date of the signed partner contract, in ISO 8601 format. Omitted if contract has no<br/>
+        /// 
+        /// <remarks>
+        /// expiration date (yet).
+        /// </remarks>
         /// </summary>
         [JsonProperty("partnerContractExpiresAt")]
         public string? PartnerContractExpiresAt { get; set; }

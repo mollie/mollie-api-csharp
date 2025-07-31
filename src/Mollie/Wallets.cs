@@ -29,21 +29,25 @@ namespace Mollie
         /// Request Apple Pay payment session
         /// 
         /// <remarks>
-        /// When integrating Apple Pay in your own checkout on the web, you need to <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/providing_merchant_validation">provide merchant validation</a>. This is normally done using Apple&apos;s <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/requesting_an_apple_pay_payment_session">Requesting an Apple Pay Session</a>. The merchant validation proves to Apple that a validated merchant is calling the Apple Pay Javascript APIs.<br/>
+        /// When integrating Apple Pay in your own checkout on the web, you need to<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/providing_merchant_validation">provide merchant validation</a>.<br/>
+        /// This is normally done using Apple&apos;s<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/requesting_an_apple_pay_payment_session">Requesting an Apple Pay Session</a>.<br/>
+        /// The merchant validation proves to Apple that a validated merchant is calling the Apple Pay Javascript APIs.<br/>
         /// <br/>
-        /// To integrate Apple Pay via Mollie, you will have to call the Mollie API instead of Apple&apos;s API. The response of this API call can then be passed as-is to the completion method, `completeMerchantValidation`.<br/>
+        /// To integrate Apple Pay via Mollie, you will have to call the Mollie API instead of Apple&apos;s API. The response of this<br/>
+        /// API call can then be passed as-is to the completion method, `completeMerchantValidation`.<br/>
         /// <br/>
-        /// Before requesting an Apple Pay Payment Session, you must place the domain validation file on your server at: `https://[domain]/.well-known/apple-developer-merchantid-domain-association`. Without this file, it will not be possible to use Apple Pay on your domain.<br/>
+        /// Before requesting an Apple Pay Payment Session, you must place the domain validation file on your server at:<br/>
+        /// `https://[domain]/.well-known/apple-developer-merchantid-domain-association`. Without this file, it will not be<br/>
+        /// possible to use Apple Pay on your domain.<br/>
         /// <br/>
-        /// Each new transaction requires a new payment session object. Merchant session objects are not reusable, and they expire after five minutes.<br/>
+        /// Each new transaction requires a new payment session object. Merchant session objects are not reusable, and they<br/>
+        /// expire after five minutes.<br/>
         /// <br/>
-        /// Payment sessions cannot be requested directly from the browser. The request must be sent from your server. For the full documentation, see the official <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a><br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">Access token with **payments.write**</a>
+        /// Payment sessions cannot be requested directly from the browser. The request must be sent from your server. For the<br/>
+        /// full documentation, see the official<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
         /// </remarks>
         /// </summary>
         Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(RequestApplePayPaymentSessionRequest? request = null, RetryConfig? retryConfig = null);
@@ -53,8 +57,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public Wallets(SDKConfig config)

@@ -14,13 +14,17 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie merchants.<br/>
+    /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
     /// 
     /// <remarks>
+    /// merchants.<br/>
     /// <br/>
-    /// If you use OAuth to create payments on a connected merchant&apos;s account, you can charge a fee using this `applicationFee` parameter. If the payment succeeds, the fee will be deducted from the merchant&apos;s balance and sent to your own account balance.<br/>
+    /// If you use OAuth to create payments on a connected merchant&apos;s account, you can charge a fee using this<br/>
+    /// `applicationFee` parameter. If the payment succeeds, the fee will be deducted from the merchant&apos;s balance and sent<br/>
+    /// to your own account balance.<br/>
     /// <br/>
-    /// If instead you want to split a payment on your own account between yourself and a connected merchant, refer to the `routing` parameter.
+    /// If instead you want to split a payment on your own account between yourself and a connected merchant, refer to the<br/>
+    /// `routing` parameter.
     /// </remarks>
     /// </summary>
     public class ListCustomerPaymentsApplicationFee
@@ -31,14 +35,19 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge a €0.99 fee on a €1.00 payment.
+        /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge<br/>
+        /// a €0.99 fee on a €1.00 payment.
         /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public ListCustomerPaymentsApplicationFeeAmount? Amount { get; set; }
 
         /// <summary>
-        /// The description of the application fee. This will appear on settlement reports towards both you and the connected merchant.
+        /// The description of the application fee. This will appear on settlement reports towards both you and the<br/>
+        /// 
+        /// <remarks>
+        /// connected merchant.
+        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; }

@@ -29,15 +29,10 @@ namespace Mollie.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public ListBalancesMode? Mode { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -58,31 +53,30 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The status of the balance.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `active` `inactive`
-        /// </remarks>
+        /// The status of the balance.
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public ListBalancesStatus? Status { get; set; }
 
         /// <summary>
-        /// The frequency with which the available amount on the balance will be settled to the configured transfer destination.<br/>
+        /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
         /// 
         /// <remarks>
+        /// destination.<br/>
         /// <br/>
-        /// Settlements created during weekends or on bank holidays will take place on the next business day.<br/>
-        /// <br/>
-        /// Possible values: `daily` `every-monday` `every-tuesday` `every-wednesday` `every-thursday` `every-friday` `monthly` `never`
+        /// Settlements created during weekends or on bank holidays will take place on the next business day.
         /// </remarks>
         /// </summary>
         [JsonProperty("transferFrequency")]
-        public string? TransferFrequency { get; set; }
+        public ListBalancesTransferFrequency? TransferFrequency { get; set; }
 
         /// <summary>
-        /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds this threshold, the complete balance will be paid out to the transfer destination according to the configured frequency.
+        /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
+        /// 
+        /// <remarks>
+        /// this threshold, the complete balance will be paid out to the transfer destination according to the configured<br/>
+        /// frequency.
+        /// </remarks>
         /// </summary>
         [JsonProperty("transferThreshold")]
         public ListBalancesTransferThreshold? TransferThreshold { get; set; }
@@ -94,7 +88,11 @@ namespace Mollie.Models.Requests
         public string? TransferReference { get; set; } = null;
 
         /// <summary>
-        /// The destination where the available amount will be automatically transferred to according to the configured transfer frequency.
+        /// The destination where the available amount will be automatically transferred to according to the configured<br/>
+        /// 
+        /// <remarks>
+        /// transfer frequency.
+        /// </remarks>
         /// </summary>
         [JsonProperty("transferDestination")]
         public ListBalancesTransferDestination? TransferDestination { get; set; } = null;
@@ -106,7 +104,11 @@ namespace Mollie.Models.Requests
         public ListBalancesAvailableAmount? AvailableAmount { get; set; }
 
         /// <summary>
-        /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a few days to clear.
+        /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
+        /// 
+        /// <remarks>
+        /// few days to clear.
+        /// </remarks>
         /// </summary>
         [JsonProperty("pendingAmount")]
         public ListBalancesPendingAmount? PendingAmount { get; set; }

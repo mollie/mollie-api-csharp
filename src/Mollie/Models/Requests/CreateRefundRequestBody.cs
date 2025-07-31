@@ -25,13 +25,21 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment amount.
+        /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment<br/>
+        /// 
+        /// <remarks>
+        /// amount.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public CreateRefundAmountRequest Amount { get; set; } = default!;
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public CreateRefundMetadataRequestUnion? Metadata { get; set; } = null;
@@ -44,11 +52,13 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie merchants, by providing the `routing` object during <a href="create-payment">payment creation</a>.<br/>
+        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
+        /// merchants, by providing the `routing` object during <a href="create-payment">payment creation</a>.<br/>
         /// <br/>
         /// When creating refunds for these *routed* payments, by default the full amount is deducted from your balance.<br/>
         /// <br/>
-        /// If you want to pull back the funds that were routed to the connected merchant(s), you can set this parameter to `true` when issuing a full refund.<br/>
+        /// If you want to pull back the funds that were routed to the connected merchant(s), you can set this parameter to<br/>
+        /// `true` when issuing a full refund.<br/>
         /// <br/>
         /// For more fine-grained control and for partial refunds, use the `routingReversals` parameter instead.
         /// </remarks>
@@ -63,7 +73,8 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// When creating refunds for *routed* payments, by default the full amount is deducted from your balance.<br/>
         /// <br/>
-        /// If you want to pull back funds from the connected merchant(s), you can use this parameter to specify what amount needs to be reversed from which merchant(s).<br/>
+        /// If you want to pull back funds from the connected merchant(s), you can use this parameter to specify what amount<br/>
+        /// needs to be reversed from which merchant(s).<br/>
         /// <br/>
         /// If you simply want to fully reverse the routed funds, you can also use the `reverseRouting` parameter instead.
         /// </remarks>
@@ -76,7 +87,9 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]

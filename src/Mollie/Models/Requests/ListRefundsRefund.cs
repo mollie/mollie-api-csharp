@@ -25,21 +25,20 @@ namespace Mollie.Models.Requests
         public string? Resource { get; set; } = "refund";
 
         /// <summary>
-        /// The identifier uniquely referring to this refund. Mollie assigns this identifier at refund creation time. Mollie will always refer to the refund by this ID. Example: `re_4qqhO89gsT`.
+        /// The identifier uniquely referring to this refund. Mollie assigns this identifier at refund creation time. Mollie<br/>
+        /// 
+        /// <remarks>
+        /// will always refer to the refund by this ID. Example: `re_4qqhO89gsT`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// Whether this entity was created in live mode or in test mode.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `live` `test`
-        /// </remarks>
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public string? Mode { get; set; }
+        public ListRefundsMode? Mode { get; set; }
 
         /// <summary>
         /// The description of the refund that may be shown to your customer, depending on the payment method used.
@@ -48,36 +47,52 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment amount.
+        /// The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment<br/>
+        /// 
+        /// <remarks>
+        /// amount.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
         public ListRefundsAmount? Amount { get; set; }
 
         /// <summary>
-        /// This optional field will contain the approximate amount that will be deducted from your account balance, converted to the currency your account is settled in.<br/>
+        /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
         /// 
         /// <remarks>
+        /// to the currency your account is settled in.<br/>
         /// <br/>
         /// The amount is a **negative** amount.<br/>
         /// <br/>
-        /// If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be zero.<br/>
+        /// If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be<br/>
+        /// zero.<br/>
         /// <br/>
-        /// Since the field contains an estimated amount during refund processing, it may change over time. For example, while the refund is queued the settlement amount is likely not yet available.<br/>
+        /// Since the field contains an estimated amount during refund processing, it may change over time. For example, while<br/>
+        /// the refund is queued the settlement amount is likely not yet available.<br/>
         /// <br/>
-        /// To retrieve accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
+        /// To retrieve accurate settlement amounts we recommend using the<br/>
+        /// <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
         /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
         public ListRefundsSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// 
+        /// <remarks>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public ListRefundsMetadataUnion? Metadata { get; set; } = null;
 
         /// <summary>
-        /// The unique identifier of the payment this refund was created for. The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// The unique identifier of the payment this refund was created for.<br/>
+        /// 
+        /// <remarks>
+        /// The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string? PaymentId { get; set; }
@@ -89,15 +104,10 @@ namespace Mollie.Models.Requests
         public string? SettlementId { get; set; } = null;
 
         /// <summary>
-        /// Refunds may take some time to get confirmed.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Possible values: `queued` `pending` `processing` `refunded` `failed` `canceled`
-        /// </remarks>
+        /// Refunds may take some time to get confirmed.
         /// </summary>
         [JsonProperty("status")]
-        public string? Status { get; set; }
+        public ListRefundsStatus? Status { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -115,7 +125,8 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// When creating refunds for *routed* payments, by default the full amount is deducted from your balance.<br/>
         /// <br/>
-        /// If you want to pull back funds from the connected merchant(s), you can use this parameter to specify what amount needs to be reversed from which merchant(s).<br/>
+        /// If you want to pull back funds from the connected merchant(s), you can use this parameter to specify what amount<br/>
+        /// needs to be reversed from which merchant(s).<br/>
         /// <br/>
         /// If you simply want to fully reverse the routed funds, you can also use the `reverseRouting` parameter instead.
         /// </remarks>

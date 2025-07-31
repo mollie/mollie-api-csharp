@@ -13,7 +13,11 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// If known, a deep link to the Mollie dashboard of the client, where the requirement can be fulfilled. For example, where necessary documents are to be uploaded.
+    /// If known, a deep link to the Mollie dashboard of the client, where the requirement can be fulfilled.<br/>
+    /// 
+    /// <remarks>
+    /// For example, where necessary documents are to be uploaded.
+    /// </remarks>
     /// </summary>
     public class ListClientsCapabilitiesDashboard
     {

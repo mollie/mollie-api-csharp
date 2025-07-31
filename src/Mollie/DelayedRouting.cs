@@ -29,11 +29,8 @@ namespace Mollie
         /// Create a delayed route
         /// 
         /// <remarks>
-        /// Create a route for a specific payment. The routed amount is credited to the account of your customer.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// Create a route for a specific payment.<br/>
+        /// The routed amount is credited to the account of your customer.
         /// </remarks>
         /// </summary>
         Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, PaymentCreateRouteRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -42,11 +39,7 @@ namespace Mollie
         /// List payment routes
         /// 
         /// <remarks>
-        /// Retrieve a list of all routes created for a specific payment.<br/>
-        /// <br/>
-        /// &gt; 🔑 Access with<br/>
-        /// &gt;<br/>
-        /// &gt; <a href="/reference/authentication">API key</a>
+        /// Retrieve a list of all routes created for a specific payment.
         /// </remarks>
         /// </summary>
         Task<PaymentListRoutesResponse> ListAsync(string paymentId, RetryConfig? retryConfig = null);
@@ -56,8 +49,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.1";
-        private const string _sdkGenVersion = "2.667.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.668.4";
         private const string _openapiDocVersion = "1.0.0";
 
         public DelayedRouting(SDKConfig config)
