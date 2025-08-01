@@ -226,7 +226,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("captureMode")]
-        public CreatePaymentCaptureModeRequest? CaptureMode { get; set; } = Mollie.Models.Requests.CreatePaymentCaptureModeRequest.Automatic;
+        public CreatePaymentCaptureModeRequest? CaptureMode { get; set; } = null;
 
         /// <summary>
         /// **Only relevant if you wish to manage authorization and capturing separately.**<br/>
@@ -242,11 +242,13 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// To schedule an automatic capture, the `captureMode` must be set to `automatic`.<br/>
         /// <br/>
-        /// The maximum delay is 7 days (168 hours).
+        /// The maximum delay is 7 days (168 hours).<br/>
+        /// <br/>
+        /// Possible values: `... hours` `... days`
         /// </remarks>
         /// </summary>
         [JsonProperty("captureDelay")]
-        public CreatePaymentCaptureDelayRequest? CaptureDelay { get; set; } = null;
+        public string? CaptureDelay { get; set; } = null;
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
