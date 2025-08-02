@@ -16,6 +16,7 @@ this field reflects that choice.
 | `Banktransfer` | banktransfer   |
 | `Belfius`      | belfius        |
 | `Billie`       | billie         |
+| `Bizum`        | bizum          |
 | `Blik`         | blik           |
 | `Creditcard`   | creditcard     |
 | `Directdebit`  | directdebit    |
@@ -28,6 +29,7 @@ this field reflects that choice.
 | `Mbway`        | mbway          |
 | `Multibanco`   | multibanco     |
 | `Mybank`       | mybank         |
+| `Paybybank`    | paybybank      |
 | `Payconiq`     | payconiq       |
 | `Paypal`       | paypal         |
 | `Paysafecard`  | paysafecard    |

@@ -21,6 +21,7 @@ payment methods from a specific country to your customer `['bancontact', 'belfiu
 | `Banktransfer` | banktransfer   |
 | `Belfius`      | belfius        |
 | `Billie`       | billie         |
+| `Bizum`        | bizum          |
 | `Blik`         | blik           |
 | `Creditcard`   | creditcard     |
 | `Directdebit`  | directdebit    |
@@ -33,6 +34,7 @@ payment methods from a specific country to your customer `['bancontact', 'belfiu
 | `Mbway`        | mbway          |
 | `Multibanco`   | multibanco     |
 | `Mybank`       | mybank         |
+| `Paybybank`    | paybybank      |
 | `Payconiq`     | payconiq       |
 | `Paypal`       | paypal         |
 | `Paysafecard`  | paysafecard    |
