@@ -31,13 +31,13 @@ namespace Mollie.Models.Requests
         /// The identifier uniquely referring to this subscription. Example: `sub_rVKGtNd6s3`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public ListSubscriptionsMode? Mode { get; set; }
+        public ListSubscriptionsMode Mode { get; set; } = default!;
 
         /// <summary>
         /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
@@ -47,7 +47,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public ListSubscriptionsStatus? Status { get; set; }
+        public ListSubscriptionsStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
@@ -57,7 +57,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("amount")]
-        public ListSubscriptionsAmount? Amount { get; set; }
+        public ListSubscriptionsAmount Amount { get; set; } = default!;
 
         /// <summary>
         /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
@@ -68,14 +68,14 @@ namespace Mollie.Models.Requests
         /// Test mode subscriptions will get canceled automatically after 10 payments.
         /// </remarks>
         /// </summary>
-        [JsonProperty("times")]
-        public long? Times { get; set; } = null;
+        [JsonProperty("times", NullValueHandling = NullValueHandling.Include)]
+        public long? Times { get; set; }
 
         /// <summary>
         /// Number of payments left for the subscription.
         /// </summary>
         [JsonProperty("timesRemaining")]
-        public long? TimesRemaining { get; set; }
+        public long TimesRemaining { get; set; } = default!;
 
         /// <summary>
         /// Interval to wait between payments, for example `1 month` or `14 days`.<br/>
@@ -86,13 +86,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public ListSubscriptionsInterval? Interval { get; set; }
+        public ListSubscriptionsInterval Interval { get; set; } = default!;
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.
         /// </summary>
         [JsonProperty("startDate")]
-        public string? StartDate { get; set; }
+        public string StartDate { get; set; } = default!;
 
         /// <summary>
         /// The date of the next scheduled payment in `YYYY-MM-DD` format. If the subscription has been completed or canceled,<br/>
@@ -114,13 +114,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
         /// </summary>
-        [JsonProperty("method")]
-        public ListSubscriptionsMethod? Method { get; set; } = null;
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
+        public ListSubscriptionsMethod? Method { get; set; }
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
@@ -147,8 +147,8 @@ namespace Mollie.Models.Requests
         /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
         /// </remarks>
         /// </summary>
-        [JsonProperty("metadata")]
-        public ListSubscriptionsMetadataUnion? Metadata { get; set; } = null;
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
+        public ListSubscriptionsMetadataUnion? Metadata { get; set; }
 
         /// <summary>
         /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>
@@ -160,13 +160,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
-        public string? WebhookUrl { get; set; }
+        public string WebhookUrl { get; set; } = default!;
 
         /// <summary>
         /// The customer this subscription belongs to.
         /// </summary>
         [JsonProperty("customerId")]
-        public string? CustomerId { get; set; }
+        public string CustomerId { get; set; } = default!;
 
         /// <summary>
         /// The mandate used for this subscription, if any.
@@ -178,7 +178,7 @@ namespace Mollie.Models.Requests
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The subscription&apos;s date and time of cancellation, in ISO 8601 format. This parameter is omitted if the<br/>
@@ -194,6 +194,6 @@ namespace Mollie.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public SubscriptionLinks? Links { get; set; }
+        public ListSubscriptionsSubscriptionLinks? Links { get; set; }
     }
 }

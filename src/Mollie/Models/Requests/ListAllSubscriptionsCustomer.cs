@@ -13,7 +13,7 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The API resource URL of the <a href="get-customer">customer</a>.
+    /// The API resource URL of the <a href="get-customer">customer</a> this subscription was created for.
     /// </summary>
     public class ListAllSubscriptionsCustomer
     {
@@ -22,12 +22,12 @@ namespace Mollie.Models.Requests
         /// The actual URL string.
         /// </summary>
         [JsonProperty("href")]
-        public string Href { get; set; } = default!;
+        public string? Href { get; set; }
 
         /// <summary>
         /// The content type of the page or endpoint the URL points to.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        public string? Type { get; set; }
     }
 }

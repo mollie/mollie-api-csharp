@@ -14,7 +14,7 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// A list of payment objects.
+    /// A list of subscription objects.
     /// </summary>
     public class ListAllSubscriptionsResponseBody
     {

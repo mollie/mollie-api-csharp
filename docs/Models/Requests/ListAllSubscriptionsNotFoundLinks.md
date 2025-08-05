@@ -1,0 +1,8 @@
+# ListAllSubscriptionsNotFoundLinks
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Documentation`                                                                                                 | [ListAllSubscriptionsNotFoundDocumentation](../../Models/Requests/ListAllSubscriptionsNotFoundDocumentation.md) | :heavy_check_mark:                                                                                              | The URL to the generic Mollie API error handling guide.                                                         |

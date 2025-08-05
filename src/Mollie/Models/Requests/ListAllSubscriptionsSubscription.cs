@@ -9,25 +9,191 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    /// <summary>
-    /// The API resource URL of the <a href="get-subscription">subscription</a>.
-    /// </summary>
     public class ListAllSubscriptionsSubscription
     {
 
         /// <summary>
-        /// The actual URL string.
+        /// Indicates the response contains a subscription object. Will always contain the string `subscription` for this<br/>
+        /// 
+        /// <remarks>
+        /// endpoint.
+        /// </remarks>
         /// </summary>
-        [JsonProperty("href")]
-        public string Href { get; set; } = default!;
+        [JsonProperty("resource")]
+        public string? Resource { get; set; } = "subscription";
 
         /// <summary>
-        /// The content type of the page or endpoint the URL points to.
+        /// The identifier uniquely referring to this subscription. Example: `sub_rVKGtNd6s3`.
         /// </summary>
-        [JsonProperty("type")]
-        public string Type { get; set; } = default!;
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
+
+        /// <summary>
+        /// Whether this entity was created in live mode or in test mode.
+        /// </summary>
+        [JsonProperty("mode")]
+        public ListAllSubscriptionsMode Mode { get; set; } = default!;
+
+        /// <summary>
+        /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
+        /// 
+        /// <remarks>
+        /// enabling the subscription.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("status")]
+        public ListAllSubscriptionsStatus Status { get; set; } = default!;
+
+        /// <summary>
+        /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
+        /// 
+        /// <remarks>
+        /// subscription of €10, the subscription amount should be set to €10.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("amount")]
+        public ListAllSubscriptionsAmount Amount { get; set; } = default!;
+
+        /// <summary>
+        /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
+        /// 
+        /// <remarks>
+        /// considered completed.<br/>
+        /// <br/>
+        /// Test mode subscriptions will get canceled automatically after 10 payments.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("times", NullValueHandling = NullValueHandling.Include)]
+        public long? Times { get; set; }
+
+        /// <summary>
+        /// Number of payments left for the subscription.
+        /// </summary>
+        [JsonProperty("timesRemaining")]
+        public long TimesRemaining { get; set; } = default!;
+
+        /// <summary>
+        /// Interval to wait between payments, for example `1 month` or `14 days`.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("interval")]
+        public ListAllSubscriptionsInterval Interval { get; set; } = default!;
+
+        /// <summary>
+        /// The start date of the subscription in `YYYY-MM-DD` format.
+        /// </summary>
+        [JsonProperty("startDate")]
+        public string StartDate { get; set; } = default!;
+
+        /// <summary>
+        /// The date of the next scheduled payment in `YYYY-MM-DD` format. If the subscription has been completed or canceled,<br/>
+        /// 
+        /// <remarks>
+        /// this parameter will not be returned.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("nextPaymentDate")]
+        public string? NextPaymentDate { get; set; } = null;
+
+        /// <summary>
+        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
+        /// 
+        /// <remarks>
+        /// up on the bank statement of the consumer.<br/>
+        /// <br/>
+        /// **Please note:** the description needs to be unique for the Customer in case it has multiple active subscriptions.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; } = default!;
+
+        /// <summary>
+        /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
+        /// </summary>
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
+        public ListAllSubscriptionsMethod? Method { get; set; }
+
+        /// <summary>
+        /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
+        /// 
+        /// <remarks>
+        /// merchants.<br/>
+        /// <br/>
+        /// Setting an application fee on the subscription will ensure this fee is charged on each individual payment.<br/>
+        /// <br/>
+        /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more<br/>
+        /// information.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("applicationFee")]
+        public ListAllSubscriptionsApplicationFee? ApplicationFee { get; set; }
+
+        /// <summary>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
+        /// 
+        /// <remarks>
+        /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+        /// 1kB.<br/>
+        /// <br/>
+        /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
+        public ListAllSubscriptionsMetadataUnion? Metadata { get; set; }
+
+        /// <summary>
+        /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment failures as<br/>
+        /// well. Be sure to verify the payment&apos;s subscription ID and its status.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("webhookUrl")]
+        public string WebhookUrl { get; set; } = default!;
+
+        /// <summary>
+        /// The customer this subscription belongs to.
+        /// </summary>
+        [JsonProperty("customerId")]
+        public string CustomerId { get; set; } = default!;
+
+        /// <summary>
+        /// The mandate used for this subscription, if any.
+        /// </summary>
+        [JsonProperty("mandateId")]
+        public string? MandateId { get; set; } = null;
+
+        /// <summary>
+        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// </summary>
+        [JsonProperty("createdAt")]
+        public string CreatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// The subscription&apos;s date and time of cancellation, in ISO 8601 format. This parameter is omitted if the<br/>
+        /// 
+        /// <remarks>
+        /// subscription is not canceled (yet).
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("canceledAt")]
+        public string? CanceledAt { get; set; } = null;
+
+        /// <summary>
+        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+        /// </summary>
+        [JsonProperty("_links")]
+        public ListAllSubscriptionsSubscriptionLinks? Links { get; set; }
     }
 }

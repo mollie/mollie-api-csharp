@@ -23,13 +23,13 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetSubscriptionSelf? Self { get; set; }
+        public GetSubscriptionSelf Self { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the <a href="get-customer">customer</a> this subscription was created for.
         /// </summary>
-        [JsonProperty("customer")]
-        public GetSubscriptionCustomer? Customer { get; set; } = null;
+        [JsonProperty("customer", NullValueHandling = NullValueHandling.Include)]
+        public GetSubscriptionCustomer? Customer { get; set; }
 
         /// <summary>
         /// The API resource URL of the <a href="get-mandate">mandate</a> this subscription was created for.
@@ -40,8 +40,8 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The API resource URL of the <a href="get-profile">profile</a> this subscription was created for.
         /// </summary>
-        [JsonProperty("profile")]
-        public GetSubscriptionProfile? Profile { get; set; } = null;
+        [JsonProperty("profile", NullValueHandling = NullValueHandling.Include)]
+        public GetSubscriptionProfile? Profile { get; set; }
 
         /// <summary>
         /// The API resource URL of the <a href="list-payments">payments</a> created for this subscription. Omitted if no such<br/>
@@ -57,6 +57,6 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetSubscriptionDocumentation? Documentation { get; set; }
+        public GetSubscriptionDocumentation Documentation { get; set; } = default!;
     }
 }

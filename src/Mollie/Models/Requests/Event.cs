@@ -20,16 +20,16 @@ namespace Mollie.Models.Requests
         public string? Resource { get; set; } = "event";
 
         [JsonProperty("type")]
-        public long? Type { get; set; }
+        public long Type { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         [JsonProperty("message")]
-        public string? Message { get; set; }
+        public string Message { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

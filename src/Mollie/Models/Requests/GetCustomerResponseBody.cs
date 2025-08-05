@@ -31,25 +31,25 @@ namespace Mollie.Models.Requests
         /// The identifier uniquely referring to this customer. Example: `cst_vsKJpSsabw`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public GetCustomerMode? Mode { get; set; }
+        public GetCustomerMode Mode { get; set; } = default!;
 
         /// <summary>
         /// The full name of the customer.
         /// </summary>
-        [JsonProperty("name")]
-        public string? Name { get; set; } = null;
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
+        public string? Name { get; set; }
 
         /// <summary>
         /// The email address of the customer.
         /// </summary>
-        [JsonProperty("email")]
-        public string? Email { get; set; } = null;
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Include)]
+        public string? Email { get; set; }
 
         /// <summary>
         /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
@@ -58,8 +58,8 @@ namespace Mollie.Models.Requests
         /// absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
         /// </remarks>
         /// </summary>
-        [JsonProperty("locale")]
-        public GetCustomerLocale? Locale { get; set; } = null;
+        [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
+        public GetCustomerLocale? Locale { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
@@ -68,20 +68,20 @@ namespace Mollie.Models.Requests
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </remarks>
         /// </summary>
-        [JsonProperty("metadata")]
-        public GetCustomerMetadataUnion? Metadata { get; set; } = null;
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
+        public GetCustomerMetadataUnion? Metadata { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetCustomerLinks? Links { get; set; }
+        public GetCustomerLinks Links { get; set; } = default!;
 
         [JsonProperty("events")]
         public List<Event>? Events { get; set; }

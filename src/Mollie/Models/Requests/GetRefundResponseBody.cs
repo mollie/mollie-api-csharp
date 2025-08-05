@@ -25,7 +25,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a refund object. Will always contain the string `refund` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "refund";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this refund. Mollie assigns this identifier at refund creation time. Mollie<br/>

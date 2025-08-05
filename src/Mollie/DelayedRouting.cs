@@ -42,14 +42,14 @@ namespace Mollie
         /// Retrieve a list of all routes created for a specific payment.
         /// </remarks>
         /// </summary>
-        Task<PaymentListRoutesResponse> ListAsync(string paymentId, RetryConfig? retryConfig = null);
+        Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, RetryConfig? retryConfig = null);
     }
 
     public class DelayedRouting: IDelayedRouting
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.4";
+        private const string _sdkVersion = "0.0.5";
         private const string _sdkGenVersion = "2.672.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -197,11 +197,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<PaymentListRoutesResponse> ListAsync(string paymentId, RetryConfig? retryConfig = null)
+        public async Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new PaymentListRoutesRequest()
             {
                 PaymentId = paymentId,
+                Testmode = testmode,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/routes", request);

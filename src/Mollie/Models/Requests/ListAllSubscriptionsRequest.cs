@@ -9,17 +9,16 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class ListAllSubscriptionsRequest
     {
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate<br/>
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
         /// 
         /// <remarks>
-        /// the result set.
+        /// result set.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
@@ -32,27 +31,18 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = 50;
 
         /// <summary>
-        /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
+        /// The identifier referring to the <a href="get-profile">profile</a> you wish to retrieve subscriptions for.<br/>
         /// 
         /// <remarks>
-        /// newest to oldest.
-        /// </remarks>
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListAllSubscriptionsSort? Sort { get; set; } = Mollie.Models.Requests.ListAllSubscriptionsSort.Desc;
-
-        /// <summary>
-        /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
-        /// 
-        /// <remarks>
-        /// retrieve the resources for.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
-        /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` is already implied.<br/>
+        /// <br/>
+        /// To retrieve all subscriptions across the organization, use an organization-level API credential and omit the<br/>
+        /// `profileId` parameter.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
-        public string? ProfileId { get; set; }
+        public string? ProfileId { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

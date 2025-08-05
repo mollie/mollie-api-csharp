@@ -13,13 +13,7 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The fee that you wish to charge.<br/>
-    /// 
-    /// <remarks>
-    /// <br/>
-    /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge<br/>
-    /// a €0.99 fee on a €1.00 payment.
-    /// </remarks>
+    /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
     /// </summary>
     public class ListAllSubscriptionsApplicationFeeAmount
     {

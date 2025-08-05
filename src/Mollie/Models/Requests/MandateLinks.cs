@@ -23,18 +23,18 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public MandateSelf? Self { get; set; }
+        public MandateSelf Self { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the <a href="get-customer">customer</a> that this mandate belongs to.
         /// </summary>
         [JsonProperty("customer")]
-        public ListMandatesCustomer? Customer { get; set; }
+        public ListMandatesCustomer Customer { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public MandateDocumentation? Documentation { get; set; }
+        public MandateDocumentation Documentation { get; set; } = default!;
     }
 }

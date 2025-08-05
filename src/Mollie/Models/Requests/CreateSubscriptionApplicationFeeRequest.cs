@@ -32,9 +32,9 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public CreateSubscriptionApplicationFeeAmountRequest? Amount { get; set; }
+        public CreateSubscriptionApplicationFeeAmountRequest Amount { get; set; } = default!;
 
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
     }
 }

@@ -38,6 +38,8 @@ namespace Mollie.Models.Requests
         Belfius,
         [JsonProperty("billie")]
         Billie,
+        [JsonProperty("bizum")]
+        Bizum,
         [JsonProperty("blik")]
         Blik,
         [JsonProperty("creditcard")]
@@ -62,12 +64,22 @@ namespace Mollie.Models.Requests
         Klarnapaynow,
         [JsonProperty("klarnasliceit")]
         Klarnasliceit,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
         [JsonProperty("mybank")]
         Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
         [JsonProperty("paypal")]
         Paypal,
         [JsonProperty("paysafecard")]
         Paysafecard,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
         [JsonProperty("przelewy24")]
         Przelewy24,
         [JsonProperty("riverty")]

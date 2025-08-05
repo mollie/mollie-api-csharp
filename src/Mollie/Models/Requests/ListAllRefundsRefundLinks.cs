@@ -23,13 +23,13 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public ListAllRefundsRefundSelf? Self { get; set; }
+        public ListAllRefundsRefundSelf Self { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the <a href="get-payment">payment</a> that this refund belongs to.
         /// </summary>
         [JsonProperty("payment")]
-        public ListAllRefundsPayment? Payment { get; set; }
+        public ListAllRefundsPayment Payment { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the <a href="get-settlement">settlement</a> this refund has been settled with. Not present if not<br/>
@@ -45,6 +45,6 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public ListAllRefundsRefundDocumentation? Documentation { get; set; }
+        public ListAllRefundsRefundDocumentation Documentation { get; set; } = default!;
     }
 }

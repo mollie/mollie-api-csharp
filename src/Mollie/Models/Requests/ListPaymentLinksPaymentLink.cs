@@ -219,6 +219,33 @@ namespace Mollie.Models.Requests
         public ListPaymentLinksApplicationFee? ApplicationFee { get; set; }
 
         /// <summary>
+        /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// Defaults to `oneoff`, which is a regular payment link and will not establish a mandate after payment.<br/>
+        /// <br/>
+        /// The mandate ID can be retrieved by making a call to the<br/>
+        /// <a href="get-payment-link-payments">Payment Link Payments Endpoint</a>.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("sequenceType")]
+        public ListPaymentLinksSequenceType? SequenceType { get; set; } = null;
+
+        /// <summary>
+        /// **Only relevant when `sequenceType` is set to `first`**<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// The ID of the <a href="get-customer">customer</a> the payment link is being created for. If a value is not provided,<br/>
+        /// the customer will be required to input relevant information which will be used to establish a mandate after<br/>
+        /// the payment is made.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("customerId")]
+        public string? CustomerId { get; set; } = null;
+
+        /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]

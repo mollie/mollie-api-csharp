@@ -13,15 +13,10 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The amount that you want to charge, e.g. `{currency:&quot;EUR&quot;, value:&quot;1000.00&quot;}` if you would want to charge €1000.00.<br/>
+    /// The amount for each individual payment that is charged with this subscription. For example, for a monthly<br/>
     /// 
     /// <remarks>
-    /// <br/>
-    /// You can find the minimum and maximum amounts per payment method in our help center. Additionally, they can be<br/>
-    /// retrieved using the Get method endpoint.<br/>
-    /// <br/>
-    /// If a tip was added for a Point-of-Sale payment, the amount will be updated to reflect the initial amount plus the<br/>
-    /// tip amount.
+    /// subscription of €10, the subscription amount should be set to €10.
     /// </remarks>
     /// </summary>
     public class ListAllSubscriptionsAmount

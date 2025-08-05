@@ -58,6 +58,12 @@ namespace Mollie.Models.Requests
         Kbc,
         [JsonProperty("klarna")]
         Klarna,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
         [JsonProperty("mbway")]
         Mbway,
         [JsonProperty("multibanco")]

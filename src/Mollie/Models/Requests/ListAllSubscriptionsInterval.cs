@@ -14,16 +14,21 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// Cadence unit of the recurring item. For example: `12 months`, `52 weeks` or `365 days`.
+    /// Interval to wait between payments, for example `1 month` or `14 days`.<br/>
+    /// 
+    /// <remarks>
+    /// <br/>
+    /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
+    /// </remarks>
     /// </summary>
     public enum ListAllSubscriptionsInterval
     {
-        [JsonProperty("... months")]
-        DotDotDotMonths,
-        [JsonProperty("... weeks")]
-        DotDotDotWeeks,
         [JsonProperty("... days")]
         DotDotDotDays,
+        [JsonProperty("... weeks")]
+        DotDotDotWeeks,
+        [JsonProperty("... months")]
+        DotDotDotMonths,
     }
 
     public static class ListAllSubscriptionsIntervalExtension

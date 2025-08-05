@@ -29,13 +29,13 @@ namespace Mollie.Models.Requests
         /// The identifier uniquely referring to this mandate. Example: `mdt_pWUnw6pkBN`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public CreateMandateMode? Mode { get; set; }
+        public CreateMandateMode Mode { get; set; } = default!;
 
         /// <summary>
         /// Payment method of the mandate.<br/>
@@ -46,16 +46,16 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public CreateMandateMethodResponse? Method { get; set; }
+        public CreateMandateMethodResponse Method { get; set; } = default!;
 
         [JsonProperty("details")]
-        public CreateMandateDetails? Details { get; set; }
+        public CreateMandateDetails Details { get; set; } = default!;
 
         /// <summary>
         /// The date when the mandate was signed in `YYYY-MM-DD` format.
         /// </summary>
-        [JsonProperty("signatureDate")]
-        public string? SignatureDate { get; set; } = null;
+        [JsonProperty("signatureDate", NullValueHandling = NullValueHandling.Include)]
+        public string? SignatureDate { get; set; }
 
         /// <summary>
         /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will<br/>
@@ -64,8 +64,8 @@ namespace Mollie.Models.Requests
         /// decline Direct Debit payments if the mandate reference is not unique.
         /// </remarks>
         /// </summary>
-        [JsonProperty("mandateReference")]
-        public string? MandateReference { get; set; } = null;
+        [JsonProperty("mandateReference", NullValueHandling = NullValueHandling.Include)]
+        public string? MandateReference { get; set; }
 
         /// <summary>
         /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
@@ -75,24 +75,24 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public CreateMandateStatus? Status { get; set; }
+        public CreateMandateStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the <a href="get-customer">customer</a> this mandate was linked to.
         /// </summary>
         [JsonProperty("customerId")]
-        public string? CustomerId { get; set; }
+        public string CustomerId { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public CreateMandateLinks? Links { get; set; }
+        public CreateMandateLinks Links { get; set; } = default!;
     }
 }

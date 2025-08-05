@@ -21,7 +21,7 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of payment objects.
+        /// A list of subscription objects.
         /// </summary>
         public ListAllSubscriptionsResponseBody? Object { get; set; }
     }

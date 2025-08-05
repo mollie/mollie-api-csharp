@@ -23,13 +23,13 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetCustomerSelf? Self { get; set; }
+        public GetCustomerSelf Self { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("dashboard")]
-        public GetCustomerDashboard? Dashboard { get; set; }
+        public GetCustomerDashboard Dashboard { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments<br/>
@@ -65,6 +65,6 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetCustomerDocumentation? Documentation { get; set; }
+        public GetCustomerDocumentation Documentation { get; set; } = default!;
     }
 }

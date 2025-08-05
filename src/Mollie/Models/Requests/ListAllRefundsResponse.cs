@@ -21,11 +21,7 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of refund objects. For a complete reference of the refund object, refer to the<br/>
-        /// 
-        /// <remarks>
-        /// <a href="get-refund">Get refund endpoint</a> documentation.
-        /// </remarks>
+        /// A list of refund objects
         /// </summary>
         public ListAllRefundsResponseBody? Object { get; set; }
     }

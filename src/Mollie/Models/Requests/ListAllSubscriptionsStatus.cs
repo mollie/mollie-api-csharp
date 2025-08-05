@@ -14,28 +14,24 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
+    /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// 
     /// <remarks>
-    /// statuses occur at what point.
+    /// enabling the subscription.
     /// </remarks>
     /// </summary>
     public enum ListAllSubscriptionsStatus
     {
-        [JsonProperty("open")]
-        Open,
         [JsonProperty("pending")]
         Pending,
-        [JsonProperty("authorized")]
-        Authorized,
-        [JsonProperty("paid")]
-        Paid,
+        [JsonProperty("active")]
+        Active,
         [JsonProperty("canceled")]
         Canceled,
-        [JsonProperty("expired")]
-        Expired,
-        [JsonProperty("failed")]
-        Failed,
+        [JsonProperty("suspended")]
+        Suspended,
+        [JsonProperty("completed")]
+        Completed,
     }
 
     public static class ListAllSubscriptionsStatusExtension

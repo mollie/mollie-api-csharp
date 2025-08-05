@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: fc8d8d1ce875187ae052a9d3cc59b7eb
+  docChecksum: 82a22b5d0571b2fbad2cc1df7bb63b84
   docVersion: 1.0.0
-  speakeasyVersion: 1.596.0
+  speakeasyVersion: 1.596.1
   generationVersion: 2.672.0
-  releaseVersion: 0.0.4
-  configChecksum: d36337c301dcd0e11daf1f3c5cd112d0
+  releaseVersion: 0.0.5
+  configChecksum: cf6a4e11d5a1ef68d7220cb6e56f21ff
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -99,7 +99,8 @@ generatedFiles:
   - docs/Models/Errors/ListAllChargebacksNotFoundHalJSONException.md
   - docs/Models/Errors/ListAllMethodsHalJSONException.md
   - docs/Models/Errors/ListAllRefundsHalJSONException.md
-  - docs/Models/Errors/ListAllSubscriptionsHalJSONException.md
+  - docs/Models/Errors/ListAllSubscriptionsBadRequestHalJSONException.md
+  - docs/Models/Errors/ListAllSubscriptionsNotFoundHalJSONException.md
   - docs/Models/Errors/ListBalanceTransactionsBadRequestHalJSONException.md
   - docs/Models/Errors/ListBalanceTransactionsNotFoundHalJSONException.md
   - docs/Models/Errors/ListBalancesBadRequestHalJSONException.md
@@ -750,6 +751,8 @@ generatedFiles:
   - docs/Models/Requests/CreatePaymentLinkResponse.md
   - docs/Models/Requests/CreatePaymentLinkResponseBody.md
   - docs/Models/Requests/CreatePaymentLinkSelf.md
+  - docs/Models/Requests/CreatePaymentLinkSequenceTypeRequest.md
+  - docs/Models/Requests/CreatePaymentLinkSequenceTypeResponse.md
   - docs/Models/Requests/CreatePaymentLinkShippingAddressRequest.md
   - docs/Models/Requests/CreatePaymentLinkShippingAddressResponse.md
   - docs/Models/Requests/CreatePaymentLinkTotalAmountRequest.md
@@ -1425,6 +1428,7 @@ generatedFiles:
   - docs/Models/Requests/GetPaymentLinkResponse.md
   - docs/Models/Requests/GetPaymentLinkResponseBody.md
   - docs/Models/Requests/GetPaymentLinkSelf.md
+  - docs/Models/Requests/GetPaymentLinkSequenceType.md
   - docs/Models/Requests/GetPaymentLinkShippingAddress.md
   - docs/Models/Requests/GetPaymentLinkTotalAmount.md
   - docs/Models/Requests/GetPaymentLinkType.md
@@ -1656,6 +1660,7 @@ generatedFiles:
   - docs/Models/Requests/GetWebhookEventReview.md
   - docs/Models/Requests/GetWebhookEventReviewStatus.md
   - docs/Models/Requests/GetWebhookEventSelf.md
+  - docs/Models/Requests/GetWebhookEventSequenceType.md
   - docs/Models/Requests/GetWebhookEventShippingAddress.md
   - docs/Models/Requests/GetWebhookEventStatus.md
   - docs/Models/Requests/GetWebhookEventTotalAmount.md
@@ -1757,71 +1762,35 @@ generatedFiles:
   - docs/Models/Requests/ListAllRefundsStatus.md
   - docs/Models/Requests/ListAllRefundsType.md
   - docs/Models/Requests/ListAllSubscriptionsAmount.md
-  - docs/Models/Requests/ListAllSubscriptionsAmountCaptured.md
-  - docs/Models/Requests/ListAllSubscriptionsAmountChargedBack.md
-  - docs/Models/Requests/ListAllSubscriptionsAmountRefunded.md
-  - docs/Models/Requests/ListAllSubscriptionsAmountRemaining.md
   - docs/Models/Requests/ListAllSubscriptionsApplicationFee.md
   - docs/Models/Requests/ListAllSubscriptionsApplicationFeeAmount.md
   - docs/Models/Requests/ListAllSubscriptionsBadRequestDocumentation.md
   - docs/Models/Requests/ListAllSubscriptionsBadRequestLinks.md
-  - docs/Models/Requests/ListAllSubscriptionsBillingAddress.md
-  - docs/Models/Requests/ListAllSubscriptionsCaptureMode.md
-  - docs/Models/Requests/ListAllSubscriptionsCaptures.md
-  - docs/Models/Requests/ListAllSubscriptionsCategory.md
-  - docs/Models/Requests/ListAllSubscriptionsChangePaymentState.md
-  - docs/Models/Requests/ListAllSubscriptionsChargebacks.md
-  - docs/Models/Requests/ListAllSubscriptionsCheckout.md
   - docs/Models/Requests/ListAllSubscriptionsCustomer.md
-  - docs/Models/Requests/ListAllSubscriptionsDashboard.md
-  - docs/Models/Requests/ListAllSubscriptionsDestination.md
-  - docs/Models/Requests/ListAllSubscriptionsDiscountAmount.md
   - docs/Models/Requests/ListAllSubscriptionsDocumentation.md
   - docs/Models/Requests/ListAllSubscriptionsEmbedded.md
   - docs/Models/Requests/ListAllSubscriptionsInterval.md
-  - docs/Models/Requests/ListAllSubscriptionsLine.md
-  - docs/Models/Requests/ListAllSubscriptionsLineType.md
   - docs/Models/Requests/ListAllSubscriptionsLinks.md
-  - docs/Models/Requests/ListAllSubscriptionsLocale.md
   - docs/Models/Requests/ListAllSubscriptionsMandate.md
   - docs/Models/Requests/ListAllSubscriptionsMetadata.md
   - docs/Models/Requests/ListAllSubscriptionsMetadataUnion.md
   - docs/Models/Requests/ListAllSubscriptionsMethod.md
-  - docs/Models/Requests/ListAllSubscriptionsMobileAppCheckout.md
   - docs/Models/Requests/ListAllSubscriptionsMode.md
   - docs/Models/Requests/ListAllSubscriptionsNext.md
-  - docs/Models/Requests/ListAllSubscriptionsOrder.md
-  - docs/Models/Requests/ListAllSubscriptionsPaymentDocumentation.md
-  - docs/Models/Requests/ListAllSubscriptionsPaymentLinks.md
-  - docs/Models/Requests/ListAllSubscriptionsPaymentOutput.md
-  - docs/Models/Requests/ListAllSubscriptionsPaymentSelf.md
+  - docs/Models/Requests/ListAllSubscriptionsNotFoundDocumentation.md
+  - docs/Models/Requests/ListAllSubscriptionsNotFoundLinks.md
+  - docs/Models/Requests/ListAllSubscriptionsPayments.md
   - docs/Models/Requests/ListAllSubscriptionsPrevious.md
-  - docs/Models/Requests/ListAllSubscriptionsRecurring.md
-  - docs/Models/Requests/ListAllSubscriptionsRecurringAmount.md
-  - docs/Models/Requests/ListAllSubscriptionsRefunds.md
+  - docs/Models/Requests/ListAllSubscriptionsProfile.md
   - docs/Models/Requests/ListAllSubscriptionsRequest.md
   - docs/Models/Requests/ListAllSubscriptionsResponse.md
   - docs/Models/Requests/ListAllSubscriptionsResponseBody.md
-  - docs/Models/Requests/ListAllSubscriptionsRouting.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingAmount.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingLinks.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingMode.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingPayment.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingSelf.md
-  - docs/Models/Requests/ListAllSubscriptionsRoutingType.md
   - docs/Models/Requests/ListAllSubscriptionsSelf.md
-  - docs/Models/Requests/ListAllSubscriptionsSequenceType.md
-  - docs/Models/Requests/ListAllSubscriptionsSettlement.md
-  - docs/Models/Requests/ListAllSubscriptionsSettlementAmount.md
-  - docs/Models/Requests/ListAllSubscriptionsShippingAddress.md
-  - docs/Models/Requests/ListAllSubscriptionsSort.md
   - docs/Models/Requests/ListAllSubscriptionsStatus.md
-  - docs/Models/Requests/ListAllSubscriptionsStatusReason.md
   - docs/Models/Requests/ListAllSubscriptionsSubscription.md
-  - docs/Models/Requests/ListAllSubscriptionsTerminal.md
-  - docs/Models/Requests/ListAllSubscriptionsTotalAmount.md
-  - docs/Models/Requests/ListAllSubscriptionsUnitPrice.md
-  - docs/Models/Requests/ListAllSubscriptionsVatAmount.md
+  - docs/Models/Requests/ListAllSubscriptionsSubscriptionDocumentation.md
+  - docs/Models/Requests/ListAllSubscriptionsSubscriptionLinks.md
+  - docs/Models/Requests/ListAllSubscriptionsSubscriptionSelf.md
   - docs/Models/Requests/ListBalanceTransactionsApplicationFee.md
   - docs/Models/Requests/ListBalanceTransactionsBadRequestDocumentation.md
   - docs/Models/Requests/ListBalanceTransactionsBadRequestLinks.md
@@ -2125,6 +2094,7 @@ generatedFiles:
   - docs/Models/Requests/ListPaymentLinksResponse.md
   - docs/Models/Requests/ListPaymentLinksResponseBody.md
   - docs/Models/Requests/ListPaymentLinksSelf.md
+  - docs/Models/Requests/ListPaymentLinksSequenceType.md
   - docs/Models/Requests/ListPaymentLinksShippingAddress.md
   - docs/Models/Requests/ListPaymentLinksTotalAmount.md
   - docs/Models/Requests/ListPaymentLinksType.md
@@ -2570,6 +2540,9 @@ generatedFiles:
   - docs/Models/Requests/ListSubscriptionsSort.md
   - docs/Models/Requests/ListSubscriptionsStatus.md
   - docs/Models/Requests/ListSubscriptionsSubscription.md
+  - docs/Models/Requests/ListSubscriptionsSubscriptionDocumentation.md
+  - docs/Models/Requests/ListSubscriptionsSubscriptionLinks.md
+  - docs/Models/Requests/ListSubscriptionsSubscriptionSelf.md
   - docs/Models/Requests/ListTerminalsBadRequestDocumentation.md
   - docs/Models/Requests/ListTerminalsBadRequestLinks.md
   - docs/Models/Requests/ListTerminalsBrand.md
@@ -2941,9 +2914,6 @@ generatedFiles:
   - docs/Models/Requests/SubmitOnboardingDataRequest.md
   - docs/Models/Requests/SubmitOnboardingDataResponse.md
   - docs/Models/Requests/SubmitOnboardingDataVatRegulation.md
-  - docs/Models/Requests/SubscriptionDocumentation.md
-  - docs/Models/Requests/SubscriptionLinks.md
-  - docs/Models/Requests/SubscriptionSelf.md
   - docs/Models/Requests/TerminalDocumentation.md
   - docs/Models/Requests/TerminalLinks.md
   - docs/Models/Requests/TerminalSelf.md
@@ -3135,6 +3105,7 @@ generatedFiles:
   - docs/Models/Requests/UpdatePaymentLinkResponse.md
   - docs/Models/Requests/UpdatePaymentLinkResponseBody.md
   - docs/Models/Requests/UpdatePaymentLinkSelf.md
+  - docs/Models/Requests/UpdatePaymentLinkSequenceType.md
   - docs/Models/Requests/UpdatePaymentLinkShippingAddressRequest.md
   - docs/Models/Requests/UpdatePaymentLinkShippingAddressResponse.md
   - docs/Models/Requests/UpdatePaymentLinkTotalAmountRequest.md
@@ -3412,7 +3383,8 @@ generatedFiles:
   - src/Mollie/Models/Errors/ListAllChargebacksNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/ListAllMethodsHalJSONException.cs
   - src/Mollie/Models/Errors/ListAllRefundsHalJSONException.cs
-  - src/Mollie/Models/Errors/ListAllSubscriptionsHalJSONException.cs
+  - src/Mollie/Models/Errors/ListAllSubscriptionsBadRequestHalJSONException.cs
+  - src/Mollie/Models/Errors/ListAllSubscriptionsNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/ListBalanceTransactionsBadRequestHalJSONException.cs
   - src/Mollie/Models/Errors/ListBalanceTransactionsNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/ListBalancesBadRequestHalJSONException.cs
@@ -4063,6 +4035,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreatePaymentLinkResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentLinkResponseBody.cs
   - src/Mollie/Models/Requests/CreatePaymentLinkSelf.cs
+  - src/Mollie/Models/Requests/CreatePaymentLinkSequenceTypeRequest.cs
+  - src/Mollie/Models/Requests/CreatePaymentLinkSequenceTypeResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentLinkShippingAddressRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentLinkShippingAddressResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentLinkTotalAmountRequest.cs
@@ -4738,6 +4712,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetPaymentLinkResponse.cs
   - src/Mollie/Models/Requests/GetPaymentLinkResponseBody.cs
   - src/Mollie/Models/Requests/GetPaymentLinkSelf.cs
+  - src/Mollie/Models/Requests/GetPaymentLinkSequenceType.cs
   - src/Mollie/Models/Requests/GetPaymentLinkShippingAddress.cs
   - src/Mollie/Models/Requests/GetPaymentLinkTotalAmount.cs
   - src/Mollie/Models/Requests/GetPaymentLinkType.cs
@@ -4969,6 +4944,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetWebhookEventReview.cs
   - src/Mollie/Models/Requests/GetWebhookEventReviewStatus.cs
   - src/Mollie/Models/Requests/GetWebhookEventSelf.cs
+  - src/Mollie/Models/Requests/GetWebhookEventSequenceType.cs
   - src/Mollie/Models/Requests/GetWebhookEventShippingAddress.cs
   - src/Mollie/Models/Requests/GetWebhookEventStatus.cs
   - src/Mollie/Models/Requests/GetWebhookEventTotalAmount.cs
@@ -5070,71 +5046,35 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListAllRefundsStatus.cs
   - src/Mollie/Models/Requests/ListAllRefundsType.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsAmount.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsAmountCaptured.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsAmountChargedBack.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsAmountRefunded.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsAmountRemaining.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsApplicationFee.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsApplicationFeeAmount.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsBadRequestDocumentation.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsBadRequestLinks.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsBillingAddress.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsCaptureMode.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsCaptures.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsCategory.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsChangePaymentState.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsChargebacks.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsCheckout.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsCustomer.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsDashboard.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsDestination.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsDiscountAmount.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsDocumentation.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsEmbedded.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsInterval.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsLine.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsLineType.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsLinks.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsLocale.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsMandate.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsMetadata.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsMetadataUnion.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsMethod.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsMobileAppCheckout.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsMode.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsNext.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsOrder.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsPaymentDocumentation.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsPaymentLinks.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsPaymentOutput.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsPaymentSelf.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsNotFoundDocumentation.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsNotFoundLinks.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsPayments.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsPrevious.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRecurring.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRecurringAmount.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRefunds.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsProfile.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsRequest.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsResponse.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsResponseBody.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRouting.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingAmount.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingLinks.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingMode.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingPayment.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingSelf.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsRoutingType.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsSelf.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsSequenceType.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsSettlement.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsSettlementAmount.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsShippingAddress.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsSort.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsStatus.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsStatusReason.cs
   - src/Mollie/Models/Requests/ListAllSubscriptionsSubscription.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsTerminal.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsTotalAmount.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsUnitPrice.cs
-  - src/Mollie/Models/Requests/ListAllSubscriptionsVatAmount.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsSubscriptionDocumentation.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsSubscriptionLinks.cs
+  - src/Mollie/Models/Requests/ListAllSubscriptionsSubscriptionSelf.cs
   - src/Mollie/Models/Requests/ListBalanceTransactionsApplicationFee.cs
   - src/Mollie/Models/Requests/ListBalanceTransactionsBadRequestDocumentation.cs
   - src/Mollie/Models/Requests/ListBalanceTransactionsBadRequestLinks.cs
@@ -5438,6 +5378,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListPaymentLinksResponse.cs
   - src/Mollie/Models/Requests/ListPaymentLinksResponseBody.cs
   - src/Mollie/Models/Requests/ListPaymentLinksSelf.cs
+  - src/Mollie/Models/Requests/ListPaymentLinksSequenceType.cs
   - src/Mollie/Models/Requests/ListPaymentLinksShippingAddress.cs
   - src/Mollie/Models/Requests/ListPaymentLinksTotalAmount.cs
   - src/Mollie/Models/Requests/ListPaymentLinksType.cs
@@ -5883,6 +5824,9 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListSubscriptionsSort.cs
   - src/Mollie/Models/Requests/ListSubscriptionsStatus.cs
   - src/Mollie/Models/Requests/ListSubscriptionsSubscription.cs
+  - src/Mollie/Models/Requests/ListSubscriptionsSubscriptionDocumentation.cs
+  - src/Mollie/Models/Requests/ListSubscriptionsSubscriptionLinks.cs
+  - src/Mollie/Models/Requests/ListSubscriptionsSubscriptionSelf.cs
   - src/Mollie/Models/Requests/ListTerminalsBadRequestDocumentation.cs
   - src/Mollie/Models/Requests/ListTerminalsBadRequestLinks.cs
   - src/Mollie/Models/Requests/ListTerminalsBrand.cs
@@ -6254,9 +6198,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/SubmitOnboardingDataRequest.cs
   - src/Mollie/Models/Requests/SubmitOnboardingDataResponse.cs
   - src/Mollie/Models/Requests/SubmitOnboardingDataVatRegulation.cs
-  - src/Mollie/Models/Requests/SubscriptionDocumentation.cs
-  - src/Mollie/Models/Requests/SubscriptionLinks.cs
-  - src/Mollie/Models/Requests/SubscriptionSelf.cs
   - src/Mollie/Models/Requests/TerminalDocumentation.cs
   - src/Mollie/Models/Requests/TerminalLinks.cs
   - src/Mollie/Models/Requests/TerminalSelf.cs
@@ -6448,6 +6389,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdatePaymentLinkResponse.cs
   - src/Mollie/Models/Requests/UpdatePaymentLinkResponseBody.cs
   - src/Mollie/Models/Requests/UpdatePaymentLinkSelf.cs
+  - src/Mollie/Models/Requests/UpdatePaymentLinkSequenceType.cs
   - src/Mollie/Models/Requests/UpdatePaymentLinkShippingAddressRequest.cs
   - src/Mollie/Models/Requests/UpdatePaymentLinkShippingAddressResponse.cs
   - src/Mollie/Models/Requests/UpdatePaymentLinkTotalAmountRequest.cs
@@ -7156,7 +7098,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": ["<value 1>"], "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": ["<value 1>"], "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-refunds:
       parameters:
         path:
@@ -7223,7 +7165,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": "<value>", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": "<value>", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-all-refunds:
       parameters:
         query:
@@ -7507,34 +7449,34 @@ examples:
   create-payment-link:
     create-payment-link-201-1:
       requestBody:
-        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}}
+        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd"}
       responses:
         "201":
-          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
     create-payment-link-201-2:
       requestBody:
-        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}}
+        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd"}
       responses:
         "201":
-          application/hal+json: {"resource": "payment-link", "id": "pl_O5gN36aL3KzQo4GNXJoRl", "mode": "test", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_85dxyKqNHa", "reusable": false, "createdAt": "2022-01-03T15:04:02+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/O5gN36aL3KzQo4GNXJoRl/", "type": "text/html"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_O5gN36aL3KzQo4GNXJoRl", "mode": "test", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_85dxyKqNHa", "reusable": false, "createdAt": "2022-01-03T15:04:02+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/O5gN36aL3KzQo4GNXJoRl/", "type": "text/html"}}}
     create-payment-link-201-3:
       requestBody:
-        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}}
+        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd"}
       responses:
         "201":
-          application/hal+json: {"resource": "payment-link", "id": "pl_64LiUHdgE1i8pPx6f0YFz", "mode": "live", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2022-01-19T13:38:26+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "1.50"}, "description": "Platform fee"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/64LiUHdgE1i8pPx6f0YFz/", "type": "text/html"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_64LiUHdgE1i8pPx6f0YFz", "mode": "live", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2022-01-19T13:38:26+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "1.50"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/64LiUHdgE1i8pPx6f0YFz/", "type": "text/html"}}}
     create-payment-link-201-4:
       requestBody:
-        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}}
+        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd"}
       responses:
         "201":
           application/hal+json: {"resource": "payment-link", "id": "pl_O5gN36aL3KzQo4GNXJoRl", "mode": "test", "description": "This is the description of the payment", "amount": null, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_85dxyKqNHa", "reusable": false, "createdAt": "2022-01-03T15:04:02+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/O5gN36aL3KzQo4GNXJoRl/", "type": "text/html"}}}
     speakeasy-default-create-payment-link:
       requestBody:
-        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}}
+        application/json: {"description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd"}
       responses:
         "201":
-          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": null, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": null, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -7548,7 +7490,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 1, "_embedded": {"payment_links": [{"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payment-links?from=pl_ayGNzD4TYuQtUaxNyu8aH&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"payment_links": [{"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payment-links?from=pl_ayGNzD4TYuQtUaxNyu8aH&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     list-payment-links-200-2:
       parameters:
         query:
@@ -7557,7 +7499,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 3, "_embedded": {"payment_links": [{"resource": "payment-link", "id": "pl_64LiUHdgE1i8pPx6f0YFz", "mode": "live", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2022-01-19T13:38:26+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": ["creditcard"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/64LiUHdgE1i8pPx6f0YFz/", "type": "text/html"}}}, {"resource": "payment-link", "id": "pl_wDW1JeAnCnPsh04jsfRSb", "mode": "live", "description": "test", "amount": {"currency": "EUR", "value": "20.00"}, "archived": false, "redirectUrl": null, "webhookUrl": null, "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2021-09-29T13:34:49+00:00", "paidAt": null, "expiresAt": null, "allowedMethods": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/wDW1JeAnCnPsh04jsfRSb/", "type": "text/html"}}}, {"resource": "payment-link", "id": "pl_Fht9cI7qi52h2RWjnfilj", "mode": "live", "description": "Testbla", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": null, "webhookUrl": null, "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2021-08-25T11:29:05+00:00", "paidAt": null, "expiresAt": null, "allowedMethods": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/Fht9cI7qi52h2RWjnfilj/", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": null, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 3, "_embedded": {"payment_links": [{"resource": "payment-link", "id": "pl_64LiUHdgE1i8pPx6f0YFz", "mode": "live", "description": "This is the description of the payment", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://example.com/landing_page", "webhookUrl": "https://example.com/redirect", "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2022-01-19T13:38:26+00:00", "paidAt": null, "expiresAt": "2029-12-24T11:00:16+00:00", "allowedMethods": ["creditcard"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/64LiUHdgE1i8pPx6f0YFz/", "type": "text/html"}}}, {"resource": "payment-link", "id": "pl_wDW1JeAnCnPsh04jsfRSb", "mode": "live", "description": "test", "amount": {"currency": "EUR", "value": "20.00"}, "archived": false, "redirectUrl": null, "webhookUrl": null, "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2021-09-29T13:34:49+00:00", "paidAt": null, "expiresAt": null, "allowedMethods": null, "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/wDW1JeAnCnPsh04jsfRSb/", "type": "text/html"}}}, {"resource": "payment-link", "id": "pl_Fht9cI7qi52h2RWjnfilj", "mode": "live", "description": "Testbla", "amount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": null, "webhookUrl": null, "profileId": "pfl_zcfJRjkf6P", "reusable": false, "createdAt": "2021-08-25T11:29:05+00:00", "paidAt": null, "expiresAt": null, "allowedMethods": null, "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/Fht9cI7qi52h2RWjnfilj/", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": null, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-payment-links:
       parameters:
         query:
@@ -7578,7 +7520,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": false, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["ideal"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
     speakeasy-default-get-payment-link:
       parameters:
         path:
@@ -7587,7 +7529,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": null, "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": null, "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": null, "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-payment-link:
@@ -7599,7 +7541,7 @@ examples:
         application/json: {"description": "Chess Board", "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "allowedMethods": ["ideal"], "lines": null, "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": true, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["creditcard"], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_4Y0eZitmBnQ6IDoMqZQKh", "mode": "live", "description": "Bicycle tires", "amount": {"currency": "EUR", "value": "24.95"}, "archived": true, "redirectUrl": "https://webshop.example.org/thanks", "webhookUrl": "https://webshop.example.org/payment-links/webhook", "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2021-03-20T09:29:56.0Z", "paidAt": "2022-03-20T09:29:56.0Z", "expiresAt": "2023-06-06T11:00:00.0Z", "allowedMethods": ["creditcard"], "sequenceType": "oneoff", "customerId": null, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://payment-links.mollie.com/payment/4Y0eZitmBnQ6IDoMqZQKh", "type": "text/html"}}}
     speakeasy-default-update-payment-link:
       parameters:
         path:
@@ -7608,7 +7550,7 @@ examples:
         application/json: {"description": "Chess Board", "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "allowedMethods": ["ideal"], "lines": null, "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "payment-link", "id": "pl_d9fQur83kFdhH8hIhaZfq", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "minimumAmount": {"currency": "EUR", "value": "10.00"}, "archived": false, "redirectUrl": "https://webshop.example.org/payment-links/redirect/", "webhookUrl": "https://webshop.example.org/payment-links/webhook/", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://..."}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "profileId": "pfl_QkEhN94Ba", "reusable": false, "createdAt": "2024-03-20T09:13:37.0Z", "paidAt": "2025-12-24T11:00:16+00:00", "expiresAt": "2025-12-24T11:00:16+00:00", "allowedMethods": ["ideal"], "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "sequenceType": "oneoff", "customerId": "cst_XimFHuaEzd", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "paymentLink": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -7714,7 +7656,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}}
+        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -7723,7 +7665,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}}
+        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -7734,6 +7676,8 @@ examples:
       parameters:
         path:
           paymentId: "tr_5B8cwPMGnU"
+        query:
+          testmode: false
       responses:
         "200":
           application/hal+json: {"count": 3, "_embedded": {"routes": [{"resource": "route", "id": "crt_kSq9CDTa6FzW7c6gpYq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "1.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}, "createdAt": "2024-05-22T15:11:19+02:00"}, {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "2.00"}, "description": "Payment for Order #12346", "destination": {"type": "organization", "organizationId": "org_456"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}, "createdAt": "2024-05-22T15:11:19+02:00"}, {"resource": "route", "id": "crt_tntKsr6tffuVdqnEvhq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "3.00"}, "description": "Payment for Order #12347", "destination": {"type": "organization", "organizationId": "org_789"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}, "createdAt": "2024-05-22T15:11:19+02:00"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -7741,6 +7685,8 @@ examples:
       parameters:
         path:
           paymentId: "tr_5B8cwPMGnU"
+        query:
+          testmode: false
       responses:
         "200":
           application/hal+json: {"count": 5, "_embedded": {"routes": [{"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "createdAt": "2024-03-20T09:13:37.0Z"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -7758,7 +7704,7 @@ examples:
         application/json: {"name": "John Doe", "email": "example@email.com", "locale": "en_US", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": null, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": {}, "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": null, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-customers:
@@ -7771,7 +7717,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"customers": [{"resource": "customer", "id": "cst_8wmqcHMN4U", "mode": "live", "name": "John Doe", "email": "customer@example.org", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}}}, {"resource": "customer"}, {"resource": "customer"}, {"resource": "customer"}, {"resource": "customer"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/customers?from=cst_stTC2WHAuS&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"customers": [{"resource": "customer", "id": "cst_8wmqcHMN4U", "mode": "live", "name": "John Doe", "email": "customer@example.org", "locale": "nl_NL", "metadata": null, "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_13514547/customers/cst_tKt44u85MM", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/customers?from=cst_stTC2WHAuS&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-customers:
       parameters:
         query:
@@ -7781,7 +7727,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"customers": [{"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"customers": [{"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": "<value>", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "404":
@@ -7806,7 +7752,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "events": [{"resource": "event", "type": 200, "createdAt": "2024-03-20T09:13:37.0Z", "message": "Customer created", "_links": {"url": {"href": "https://...", "type": "application/hal+json"}}}]}
+          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": ["<value 1>", "<value 2>", "<value 3>"], "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "events": [{"resource": "event", "type": 200, "createdAt": "2024-03-20T09:13:37.0Z", "message": "Customer created", "_links": {"url": {"href": "https://...", "type": "application/hal+json"}}}]}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-customer:
@@ -7818,7 +7764,7 @@ examples:
         application/json: {"name": "John Doe", "email": "example@email.com", "locale": "en_US", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "customer", "id": "cst_8wmqcHMN4U", "mode": "live", "name": "Jane Doe", "email": "jane@example.org", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "customer", "id": "cst_8wmqcHMN4U", "mode": "live", "name": "Jane Doe", "email": "jane@example.org", "locale": "nl_NL", "metadata": null, "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     update-customer-200-2:
       parameters:
         path:
@@ -7836,7 +7782,7 @@ examples:
         application/json: {"name": "John Doe", "email": "example@email.com", "locale": "en_US", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": null, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": "<value>", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": null, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   delete-customer:
@@ -8070,7 +8016,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"mandates": [{"resource": "mandate", "id": "mdt_h3gAaD5zP", "mode": "live", "method": "directdebit", "details": {}, "signatureDate": "2023-05-07", "mandateReference": "EXAMPLE-CORP-MD13804", "status": "valid", "customerId": "cst_4qqhO89gsT", "createdAt": "2023-05-07T10:49:08.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_4qqhO89gsT", "type": "application/hal+json"}}}, {"resource": "mandate"}, {"resource": "mandate"}, {"resource": "mandate"}, {"resource": "mandate"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/mandates?from=mdt_pWUnw6pkBN&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"mandates": [{"resource": "mandate", "id": "mdt_h3gAaD5zP", "mode": "live", "method": "directdebit", "details": {}, "signatureDate": "2023-05-07", "mandateReference": "EXAMPLE-CORP-MD13804", "status": "valid", "customerId": "cst_4qqhO89gsT", "createdAt": "2023-05-07T10:49:08.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_4qqhO89gsT", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/mandates?from=mdt_pWUnw6pkBN&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-mandates:
       parameters:
         path:
@@ -8132,7 +8078,7 @@ examples:
         application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "... months", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-create-subscription:
       parameters:
         path:
@@ -8141,7 +8087,7 @@ examples:
         application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "... months", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... days", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... days", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": ["<value 1>"], "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-subscriptions:
@@ -8156,7 +8102,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... days", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}}}, {"resource": "subscription"}, {"resource": "subscription"}, {"resource": "subscription"}, {"resource": "subscription"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/subscriptions?from=sub_mnXbwhMfvo&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... days", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/subscriptions?from=sub_mnXbwhMfvo&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-subscriptions:
       parameters:
         path:
@@ -8168,7 +8114,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... weeks", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... weeks", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": {}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "404":
@@ -8183,7 +8129,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... weeks", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... weeks", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-get-subscription:
       parameters:
         path:
@@ -8193,7 +8139,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... months", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... months", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": [], "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-subscription:
@@ -8206,7 +8152,7 @@ examples:
         application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Subscription of streaming channel", "interval": "... weeks", "startDate": "2025-01-01", "times": 6, "webhookUrl": "https://example.com/webhook", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 10, "timesRemaining": 10, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 10, "timesRemaining": 10, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     update-subscription-200-2:
       parameters:
         path:
@@ -8226,7 +8172,7 @@ examples:
         application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Subscription of streaming channel", "interval": "... weeks", "startDate": "2025-01-01", "times": 6, "webhookUrl": "https://example.com/webhook", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... weeks", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... weeks", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": [], "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   cancel-subscription:
@@ -8239,7 +8185,7 @@ examples:
         application/json: {"testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "canceled", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": null, "description": "Quarterly payment", "method": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "canceled", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... months", "startDate": "2023-06-01", "nextPaymentDate": null, "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-cancel-subscription:
       parameters:
         path:
@@ -8249,7 +8195,7 @@ examples:
         application/json: {"testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... months", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": null, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... months", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": [], "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": null, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-all-subscriptions:
@@ -8289,16 +8235,28 @@ examples:
     speakeasy-default-list-all-subscriptions:
       parameters:
         query:
-          from: "tr_5B8cwPMGnU"
+          from: "sub_rVKGtNd6s3"
           limit: 50
           sort: "desc"
-          profileId: "pfl_5B8cwPMGnU"
+          profileId: "pfl_QkEhN94Ba"
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"payments": [{"resource": "payment", "id": "tr_5B8cwPMGnU", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "amountRefunded": {"currency": "EUR", "value": "10.00"}, "amountRemaining": {"currency": "EUR", "value": "10.00"}, "amountCaptured": {"currency": "EUR", "value": "10.00"}, "amountChargedBack": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://example.org/redirect", "cancelUrl": "https://example.org/cancel", "webhookUrl": "https://example.org/webhooks", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://...", "recurring": {"description": "Gym subscription", "interval": "... days", "amount": {"currency": "EUR", "value": "10.00"}, "times": 1, "startDate": "2024-12-12"}}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "locale": "en_US", "countryCode": "BE", "method": "ideal", "restrictPaymentMethodsToCountry": "NL", "captureMode": "manual", "captureDelay": "... hours", "captureBefore": "2024-03-20T09:28:37.0Z", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "10"}, "routing": [{"resource": "route", "id": "rt_5B8cwPMGnU", "mode": "live", "amount": {"currency": "EUR", "value": "10.00"}, "destination": {"type": "organization", "organizationId": "org_1234567"}, "createdAt": "2024-12-12T10:00:00Z", "releaseDate": "2024-12-12", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}], "sequenceType": "oneoff", "subscriptionId": "sub_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "customerId": "cst_5B8cwPMGnU", "profileId": "pfl_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "orderId": "ord_5B8cwPMGnU", "status": "open", "statusReason": {"code": "insufficient_funds", "message": "The account associated with the card has insufficient funds. The shopper should use another payment method or\ncontact their bank."}, "isCancelable": true, "createdAt": "2024-03-20T09:13:37.0Z", "authorizedAt": "2024-03-20T09:28:37.0Z", "paidAt": "2024-03-20T09:28:37.0Z", "canceledAt": "2024-03-20T09:28:37.0Z", "expiresAt": "2024-03-20T09:28:37.0Z", "expiredAt": "2024-03-20T09:28:37.0Z", "failedAt": "2024-03-20T09:28:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "checkout": {"href": "https://...", "type": "application/hal+json"}, "mobileAppCheckout": {"href": "https://...", "type": "application/hal+json"}, "changePaymentState": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "refunds": {"href": "https://...", "type": "application/hal+json"}, "chargebacks": {"href": "https://...", "type": "application/hal+json"}, "captures": {"href": "https://...", "type": "application/hal+json"}, "settlement": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "subscription": {"href": "https://...", "type": "application/hal+json"}, "order": {"href": "https://...", "type": "application/hal+json"}, "terminal": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "... days", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "metadata": ["<value 1>", "<value 2>", "<value 3>"], "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+    list-subscriptions-200-1:
+      parameters:
+        query:
+          from: "sub_rVKGtNd6s3"
+          limit: 50
+          profileId: "pfl_QkEhN94Ba"
+          testmode: false
+      responses:
+        "200":
+          application/hal+json: {"count": 1, "_embedded": {"subscriptions": [{"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "... days", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/subscriptions?from=sub_mnXbwhMfvo&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
   list-subscription-payments:
     list-payments-200-1:
       parameters:
@@ -9132,7 +9090,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}, {"resource": "refund"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-list-settlement-refunds:
       parameters:
         path:

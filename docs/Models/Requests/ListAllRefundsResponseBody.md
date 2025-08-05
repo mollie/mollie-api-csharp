@@ -1,7 +1,6 @@
 # ListAllRefundsResponseBody
 
-A list of refund objects. For a complete reference of the refund object, refer to the
-[Get refund endpoint](get-refund) documentation.
+A list of refund objects
 
 
 ## Fields

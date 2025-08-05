@@ -19,37 +19,22 @@ namespace Mollie.Models.Requests
     /// <remarks>
     /// merchants.<br/>
     /// <br/>
-    /// If you use OAuth to create payments on a connected merchant&apos;s account, you can charge a fee using this<br/>
-    /// `applicationFee` parameter. If the payment succeeds, the fee will be deducted from the merchant&apos;s balance and sent<br/>
-    /// to your own account balance.<br/>
+    /// Setting an application fee on the subscription will ensure this fee is charged on each individual payment.<br/>
     /// <br/>
-    /// If instead you want to split a payment on your own account between yourself and a connected merchant, refer to the<br/>
-    /// `routing` parameter.
+    /// Refer to the `applicationFee` parameter on the <a href="get-payment">Get payment endpoint</a> documentation for more<br/>
+    /// information.
     /// </remarks>
     /// </summary>
     public class ListAllSubscriptionsApplicationFee
     {
 
         /// <summary>
-        /// The fee that you wish to charge.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Be careful to leave enough space for Mollie&apos;s own fees to be deducted as well. For example, you cannot charge<br/>
-        /// a €0.99 fee on a €1.00 payment.
-        /// </remarks>
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public ListAllSubscriptionsApplicationFeeAmount? Amount { get; set; }
+        public ListAllSubscriptionsApplicationFeeAmount Amount { get; set; } = default!;
 
-        /// <summary>
-        /// The description of the application fee. This will appear on settlement reports towards both you and the<br/>
-        /// 
-        /// <remarks>
-        /// connected merchant.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
     }
 }

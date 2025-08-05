@@ -18,9 +18,9 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// An array of payment objects.
+        /// A list of subscription objects.
         /// </summary>
-        [JsonProperty("payments")]
-        public List<ListAllSubscriptionsPaymentOutput>? Payments { get; set; }
+        [JsonProperty("subscriptions")]
+        public List<ListAllSubscriptionsSubscription>? Subscriptions { get; set; }
     }
 }

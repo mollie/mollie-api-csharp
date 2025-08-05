@@ -112,6 +112,8 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
         },
         Description = "Platform fee",
     },
+    SequenceType = CreatePaymentLinkSequenceTypeRequest.Oneoff,
+    CustomerId = "cst_XimFHuaEzd",
 };
 
 var res = await sdk.PaymentLinks.CreateAsync(req);

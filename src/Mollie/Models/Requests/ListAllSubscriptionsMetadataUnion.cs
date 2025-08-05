@@ -60,10 +60,13 @@ namespace Mollie.Models.Requests
 
 
     /// <summary>
-    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
     /// 
     /// <remarks>
-    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+    /// 1kB.<br/>
+    /// <br/>
+    /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(ListAllSubscriptionsMetadataUnion.ListAllSubscriptionsMetadataUnionConverter))]

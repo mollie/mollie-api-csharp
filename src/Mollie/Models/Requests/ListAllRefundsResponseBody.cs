@@ -14,11 +14,7 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     
     /// <summary>
-    /// A list of refund objects. For a complete reference of the refund object, refer to the<br/>
-    /// 
-    /// <remarks>
-    /// <a href="get-refund">Get refund endpoint</a> documentation.
-    /// </remarks>
+    /// A list of refund objects
     /// </summary>
     public class ListAllRefundsResponseBody
     {
