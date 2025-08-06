@@ -303,7 +303,7 @@ var sdk = new Client(security: new Security() {
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "re_5B8cwPMGnU",
-    Include = ListSettlementRefundsInclude.Payment,
+    Embed = ListSettlementRefundsEmbed.Payment,
     Testmode = false,
 };
 

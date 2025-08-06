@@ -14,24 +14,28 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// This endpoint allows you to include additional information via the `include` query string parameter.
+    /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+    /// 
+    /// <remarks>
+    /// parameter.
+    /// </remarks>
     /// </summary>
-    public enum ListSettlementRefundsInclude
+    public enum ListRefundsEmbed
     {
         [JsonProperty("payment")]
         Payment,
     }
 
-    public static class ListSettlementRefundsIncludeExtension
+    public static class ListRefundsEmbedExtension
     {
-        public static string Value(this ListSettlementRefundsInclude value)
+        public static string Value(this ListRefundsEmbed value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static ListSettlementRefundsInclude ToEnum(this string value)
+        public static ListRefundsEmbed ToEnum(this string value)
         {
-            foreach(var field in typeof(ListSettlementRefundsInclude).GetFields())
+            foreach(var field in typeof(ListRefundsEmbed).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -44,14 +48,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is ListSettlementRefundsInclude)
+                    if (enumVal is ListRefundsEmbed)
                     {
-                        return (ListSettlementRefundsInclude)enumVal;
+                        return (ListRefundsEmbed)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum ListSettlementRefundsInclude");
+            throw new Exception($"Unknown value {value} for enum ListRefundsEmbed");
         }
     }
 

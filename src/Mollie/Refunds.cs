@@ -53,7 +53,7 @@ namespace Mollie
         /// Retrieve a single payment refund by its ID and the ID of its parent payment.
         /// </remarks>
         /// </summary>
-        Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Cancel payment refund
@@ -84,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.5";
-        private const string _sdkGenVersion = "2.672.0";
+        private const string _sdkVersion = "0.0.6";
+        private const string _sdkGenVersion = "2.674.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)
@@ -405,13 +405,13 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new GetRefundRequest()
             {
                 PaymentId = paymentId,
                 RefundId = refundId,
-                Include = include,
+                Embed = embed,
                 Testmode = testmode,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

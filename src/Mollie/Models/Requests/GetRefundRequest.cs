@@ -28,10 +28,14 @@ namespace Mollie.Models.Requests
         public string RefundId { get; set; } = default!;
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the `include` query string parameter.
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+        /// 
+        /// <remarks>
+        /// parameter.
+        /// </remarks>
         /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public GetRefundInclude? Include { get; set; } = null;
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
+        public GetRefundEmbed? Embed { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

@@ -14,24 +14,28 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// This endpoint allows you to include additional information via the `include` query string parameter.
+    /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+    /// 
+    /// <remarks>
+    /// parameter.
+    /// </remarks>
     /// </summary>
-    public enum GetRefundInclude
+    public enum GetRefundEmbed
     {
         [JsonProperty("payment")]
         Payment,
     }
 
-    public static class GetRefundIncludeExtension
+    public static class GetRefundEmbedExtension
     {
-        public static string Value(this GetRefundInclude value)
+        public static string Value(this GetRefundEmbed value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static GetRefundInclude ToEnum(this string value)
+        public static GetRefundEmbed ToEnum(this string value)
         {
-            foreach(var field in typeof(GetRefundInclude).GetFields())
+            foreach(var field in typeof(GetRefundEmbed).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -44,14 +48,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is GetRefundInclude)
+                    if (enumVal is GetRefundEmbed)
                     {
-                        return (GetRefundInclude)enumVal;
+                        return (GetRefundEmbed)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum GetRefundInclude");
+            throw new Exception($"Unknown value {value} for enum GetRefundEmbed");
         }
     }
 
