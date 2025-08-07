@@ -20,6 +20,8 @@ namespace Mollie.Models.Requests
     {
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
+        [JsonProperty("balance-transaction.created")]
+        BalanceTransactionCreated,
         [JsonProperty("sales-invoice.created")]
         SalesInvoiceCreated,
         [JsonProperty("sales-invoice.issued")]

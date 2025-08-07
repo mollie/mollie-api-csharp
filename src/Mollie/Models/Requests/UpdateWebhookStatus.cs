@@ -24,6 +24,8 @@ namespace Mollie.Models.Requests
         Blocked,
         [JsonProperty("disabled")]
         Disabled,
+        [JsonProperty("deleted")]
+        Deleted,
     }
 
     public static class UpdateWebhookStatusExtension
