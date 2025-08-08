@@ -10,27 +10,21 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
     
-    public class GetWebhookEventRequest
+    public class DeleteWebhookRequestBody
     {
 
         /// <summary>
-        /// Provide the ID of the item you want to perform this operation on.
-        /// </summary>
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
-        public string Id { get; set; } = default!;
-
-        /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
         /// 
         /// <remarks>
-        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
+        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>
         /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
+        [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;
     }
 }

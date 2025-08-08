@@ -32,15 +32,15 @@ namespace Mollie
         /// Retrieve a single webhook event object by its event ID.
         /// </remarks>
         /// </summary>
-        Task<GetWebhookEventResponse> GetAsync(string id, RetryConfig? retryConfig = null);
+        Task<GetWebhookEventResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
     }
 
     public class WebhookEvents: IWebhookEvents
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.7";
-        private const string _sdkGenVersion = "2.674.3";
+        private const string _sdkVersion = "0.0.8";
+        private const string _sdkGenVersion = "2.675.0";
         private const string _openapiDocVersion = "1.0.0";
 
         public WebhookEvents(SDKConfig config)
@@ -48,11 +48,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetWebhookEventResponse> GetAsync(string id, RetryConfig? retryConfig = null)
+        public async Task<GetWebhookEventResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new GetWebhookEventRequest()
             {
                 Id = id,
+                Testmode = testmode,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/events/{id}", request);

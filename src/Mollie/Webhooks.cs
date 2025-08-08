@@ -68,7 +68,7 @@ namespace Mollie
         /// Delete a single webhook object by its webhook ID.
         /// </remarks>
         /// </summary>
-        Task<DeleteWebhookResponse> DeleteAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<DeleteWebhookResponse> DeleteAsync(string id, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Test a webhook
@@ -84,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.7";
-        private const string _sdkGenVersion = "2.674.3";
+        private const string _sdkVersion = "0.0.8";
+        private const string _sdkGenVersion = "2.675.0";
         private const string _openapiDocVersion = "1.0.0";
 
         public Webhooks(SDKConfig config)
@@ -658,18 +658,24 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<DeleteWebhookResponse> DeleteAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<DeleteWebhookResponse> DeleteAsync(string id, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new DeleteWebhookRequest()
             {
                 Id = id,
-                Testmode = testmode,
+                RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
 
             if (SDKConfiguration.SecuritySource != null)
             {
