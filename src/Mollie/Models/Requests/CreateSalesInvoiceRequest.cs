@@ -68,7 +68,7 @@ namespace Mollie.Models.Requests
         /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]
-        public VatSchemeRequest? VatScheme { get; set; } = Mollie.Models.Requests.VatSchemeRequest.Standard;
+        public VatSchemeRequest? VatScheme { get; set; }
 
         /// <summary>
         /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -78,7 +78,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
-        public VatModeRequest? VatMode { get; set; } = Mollie.Models.Requests.VatModeRequest.Exclusive;
+        public VatModeRequest? VatMode { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -100,7 +100,7 @@ namespace Mollie.Models.Requests
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public CreateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = Mollie.Models.Requests.CreateSalesInvoicePaymentTermRequest.Thirtydays;
+        public CreateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = null;
 
         /// <summary>
         /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the<br/>

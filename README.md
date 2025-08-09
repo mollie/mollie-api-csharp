@@ -83,6 +83,7 @@ var res = await sdk.Payments.CreateAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreatePaymentLineRequest>() {
             new CreatePaymentLineRequest() {
+                Type = CreatePaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -186,6 +187,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
+        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -234,6 +236,7 @@ var res = await sdk.Payments.CreateAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreatePaymentLineRequest>() {
             new CreatePaymentLineRequest() {
+                Type = CreatePaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -337,6 +340,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
+        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -566,6 +570,7 @@ var res = await sdk.Payments.CreateAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreatePaymentLineRequest>() {
             new CreatePaymentLineRequest() {
+                Type = CreatePaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -669,6 +674,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
+        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -716,6 +722,7 @@ var res = await sdk.Payments.CreateAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreatePaymentLineRequest>() {
             new CreatePaymentLineRequest() {
+                Type = CreatePaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -819,6 +826,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
+        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -880,6 +888,7 @@ try
             WebhookUrl = "https://example.org/webhooks",
             Lines = new List<CreatePaymentLineRequest>() {
                 new CreatePaymentLineRequest() {
+                    Type = CreatePaymentLineTypeRequest.Physical,
                     Description = "LEGO 4440 Forest Police Station",
                     Quantity = 1,
                     QuantityUnit = "pcs",
@@ -983,6 +992,7 @@ try
                     },
                 },
             },
+            SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
             MandateId = "mdt_5B8cwPMGnU",
             CustomerId = "cst_5B8cwPMGnU",
             ProfileId = "pfl_5B8cwPMGnU",
@@ -1046,6 +1056,7 @@ var res = await sdk.Payments.CreateAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreatePaymentLineRequest>() {
             new CreatePaymentLineRequest() {
+                Type = CreatePaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -1149,6 +1160,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
+        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",

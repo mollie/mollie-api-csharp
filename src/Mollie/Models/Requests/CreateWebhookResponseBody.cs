@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a webhook subscription object. Will always contain the string `webhook` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "webhook";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this subscription.

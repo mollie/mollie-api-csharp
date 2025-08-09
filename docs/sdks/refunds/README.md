@@ -102,6 +102,7 @@ var sdk = new Client(security: new Security() {
 ListRefundsRequest req = new ListRefundsRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "re_5B8cwPMGnU",
+    Limit = 50,
     Embed = ListRefundsEmbed.Payment,
     Testmode = false,
 };
@@ -242,6 +243,8 @@ var sdk = new Client(security: new Security() {
 
 ListAllRefundsRequest req = new ListAllRefundsRequest() {
     From = "re_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListAllRefundsSort.Desc,
     Embed = ListAllRefundsEmbed.Payment,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,

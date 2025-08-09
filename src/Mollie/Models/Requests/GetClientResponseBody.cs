@@ -23,7 +23,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a client object. Will always contain the string `client` for this resource type.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "client";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this client. Example: `org_12345678`.

@@ -27,7 +27,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "client-link";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this client link. Example: `cl_vZCnNQsV2UtfXxYifWKWH`.

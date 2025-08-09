@@ -22,7 +22,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.0.8
+  version: 0.1.0
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: ClientError

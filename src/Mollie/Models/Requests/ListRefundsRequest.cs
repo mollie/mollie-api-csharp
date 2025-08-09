@@ -35,7 +35,7 @@ namespace Mollie.Models.Requests
         /// The maximum number of items to return. Defaults to 50 items.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
-        public long? Limit { get; set; } = 50;
+        public long? Limit { get; set; } = null;
 
         /// <summary>
         /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>

@@ -312,7 +312,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("sequenceType")]
-        public CreatePaymentSequenceTypeRequest? SequenceType { get; set; } = Mollie.Models.Requests.CreatePaymentSequenceTypeRequest.Oneoff;
+        public CreatePaymentSequenceTypeRequest? SequenceType { get; set; } = null;
 
         /// <summary>
         /// **Only relevant for recurring payments.**<br/>

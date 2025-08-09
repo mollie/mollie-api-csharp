@@ -20,7 +20,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a mandate object. Will always contain the string `mandate` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "mandate";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this mandate. Example: `mdt_pWUnw6pkBN`.

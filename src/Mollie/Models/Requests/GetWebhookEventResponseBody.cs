@@ -23,7 +23,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a webhook event object. Will always contain the string `event` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "event";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this event.

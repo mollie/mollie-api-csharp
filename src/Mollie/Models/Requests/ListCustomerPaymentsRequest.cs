@@ -35,7 +35,7 @@ namespace Mollie.Models.Requests
         /// The maximum number of items to return. Defaults to 50 items.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
-        public long? Limit { get; set; } = 50;
+        public long? Limit { get; set; } = null;
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
@@ -45,7 +45,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListCustomerPaymentsSort? Sort { get; set; } = Mollie.Models.Requests.ListCustomerPaymentsSort.Desc;
+        public ListCustomerPaymentsSort? Sort { get; set; } = null;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>

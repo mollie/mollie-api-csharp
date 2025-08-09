@@ -114,6 +114,8 @@ var sdk = new Client(security: new Security() {
 ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "sub_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListSubscriptionsSort.Desc,
     Testmode = false,
 };
 
@@ -359,6 +361,8 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     SubscriptionId = "sub_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListSubscriptionPaymentsSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };

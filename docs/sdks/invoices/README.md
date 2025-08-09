@@ -32,6 +32,8 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     Year = "2024",
     Month = "01",
     From = "inv_xBEbP9rvAq",
+    Limit = 50,
+    Sort = ListInvoicesSort.Desc,
 };
 
 var res = await sdk.Invoices.ListAsync(req);

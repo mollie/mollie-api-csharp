@@ -75,6 +75,8 @@ var sdk = new Client(security: new Security() {
 
 ListWebhooksRequest req = new ListWebhooksRequest() {
     From = "hook_B2EyhTH5N4KWUnoYPcgiH",
+    Limit = 50,
+    Sort = ListWebhooksSort.Desc,
     EventTypes = ListWebhooksEventTypes.PaymentLinkPaid,
     Testmode = false,
 };

@@ -28,7 +28,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "partner";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>

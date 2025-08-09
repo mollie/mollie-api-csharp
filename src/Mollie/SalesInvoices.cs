@@ -51,7 +51,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get sales invoice
@@ -100,8 +100,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.8";
-        private const string _sdkGenVersion = "2.675.0";
+        private const string _sdkVersion = "0.1.0";
+        private const string _sdkGenVersion = "2.677.3";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)
@@ -259,7 +259,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = 50, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new ListSalesInvoicesRequest()
             {

@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a customer object. Will always contain the string `customer` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "customer";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this customer. Example: `cst_vsKJpSsabw`.

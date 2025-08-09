@@ -20,7 +20,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a balance object. Will always contain the string `balance` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "balance";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this balance.

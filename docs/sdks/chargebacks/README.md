@@ -30,6 +30,7 @@ var sdk = new Client(security: new Security() {
 ListChargebacksRequest req = new ListChargebacksRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
     Embed = ListChargebacksEmbed.Payment,
     Testmode = false,
 };
@@ -123,7 +124,9 @@ var sdk = new Client(security: new Security() {
 
 ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
     Embed = ListAllChargebacksEmbed.Payment,
+    Sort = ListAllChargebacksSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };

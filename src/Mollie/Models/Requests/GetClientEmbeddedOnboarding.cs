@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "onboarding";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The name of the organization.

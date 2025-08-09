@@ -86,6 +86,7 @@ var sdk = new Client(security: new Security() {
 ListCapturesRequest req = new ListCapturesRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
     Embed = ListCapturesEmbed.Payment,
     Testmode = false,
 };

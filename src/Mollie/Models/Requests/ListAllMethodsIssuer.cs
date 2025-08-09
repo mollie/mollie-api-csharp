@@ -17,7 +17,7 @@ namespace Mollie.Models.Requests
     {
 
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "issuer";
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
         public string Id { get; set; } = default!;

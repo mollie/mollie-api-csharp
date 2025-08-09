@@ -26,7 +26,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
-        public ListMethodsSequenceType? SequenceType { get; set; } = Mollie.Models.Requests.ListMethodsSequenceType.Oneoff;
+        public ListMethodsSequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// Passing a locale will sort the payment methods in the preferred order<br/>
@@ -64,7 +64,7 @@ namespace Mollie.Models.Requests
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=resource")]
-        public Resource? Resource { get; set; } = Mollie.Models.Requests.Resource.Payments;
+        public Resource? Resource { get; set; }
 
         /// <summary>
         /// The country taken from your customer&apos;s billing address in ISO 3166-1 alpha-2 format. This parameter can be used<br/>

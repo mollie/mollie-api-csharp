@@ -41,11 +41,13 @@ var sdk = new Client(security: new Security() {
 });
 
 ListMethodsRequest req = new ListMethodsRequest() {
+    SequenceType = ListMethodsSequenceType.Oneoff,
     Locale = ListMethodsLocale.EnUS,
     Amount = new ListMethodsAmount() {
         Currency = "EUR",
         Value = "10.00",
     },
+    Resource = Resource.Payments,
     BillingCountry = "DE",
     IncludeWallets = IncludeWallets.Applepay,
     OrderLineCategories = OrderLineCategories.Eco,
@@ -102,6 +104,7 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
         Value = "10.00",
     },
     Include = ListAllMethodsInclude.Issuers,
+    SequenceType = ListAllMethodsSequenceType.Oneoff,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -161,6 +164,7 @@ GetMethodRequest req = new GetMethodRequest() {
     Currency = "EUR",
     ProfileId = "pfl_5B8cwPMGnU",
     Include = GetMethodInclude.Issuers,
+    SequenceType = GetMethodSequenceType.Oneoff,
     Testmode = false,
 };
 

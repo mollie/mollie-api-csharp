@@ -57,7 +57,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
-        public ListAllMethodsSequenceType? SequenceType { get; set; } = Mollie.Models.Requests.ListAllMethodsSequenceType.Oneoff;
+        public ListAllMethodsSequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>

@@ -28,7 +28,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "invoice";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this invoice. Example: `inv_FrvewDA3Pr`.

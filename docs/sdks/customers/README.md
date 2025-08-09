@@ -287,6 +287,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<CreateCustomerPaymentLineRequest>() {
             new CreateCustomerPaymentLineRequest() {
+                Type = CreateCustomerPaymentLineTypeRequest.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -390,6 +391,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
                 },
             },
         },
+        SequenceType = CreateCustomerPaymentSequenceTypeRequest.Oneoff,
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
@@ -439,6 +441,8 @@ var sdk = new Client(security: new Security() {
 ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListCustomerPaymentsSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };

@@ -46,7 +46,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, ListCustomersSort? sort = Mollie.Models.Requests.ListCustomersSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListCustomersSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get customer
@@ -110,8 +110,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.8";
-        private const string _sdkGenVersion = "2.675.0";
+        private const string _sdkVersion = "0.1.0";
+        private const string _sdkGenVersion = "2.677.3";
         private const string _openapiDocVersion = "1.0.0";
 
         public Customers(SDKConfig config)
@@ -254,7 +254,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = 50, ListCustomersSort? sort = Mollie.Models.Requests.ListCustomersSort.Desc, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListCustomersSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new ListCustomersRequest()
             {

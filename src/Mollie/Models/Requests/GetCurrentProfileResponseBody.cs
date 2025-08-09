@@ -28,7 +28,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a profile object. Will always contain the string `profile` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "profile";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this profile. Example: `pfl_v9hTwCvYqw`.

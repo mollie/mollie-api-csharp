@@ -45,6 +45,7 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
     WebhookUrl = "https://webshop.example.org/payment-links/webhook/",
     Lines = new List<CreatePaymentLinkLineRequest>() {
         new CreatePaymentLinkLineRequest() {
+            Type = CreatePaymentLinkTypeRequest.Physical,
             Description = "LEGO 4440 Forest Police Station",
             Quantity = 1,
             QuantityUnit = "pcs",
@@ -103,6 +104,7 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
         Country = "NL",
     },
     ProfileId = "pfl_QkEhN94Ba",
+    Reusable = false,
     ExpiresAt = "2025-12-24T11:00:16+00:00",
     AllowedMethods = null,
     ApplicationFee = new CreatePaymentLinkApplicationFeeRequest() {
@@ -381,6 +383,8 @@ var sdk = new Client(security: new Security() {
 GetPaymentLinkPaymentsRequest req = new GetPaymentLinkPaymentsRequest() {
     PaymentLinkId = "pl_d9fQur83kFdhH8hIhaZfq",
     From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = GetPaymentLinkPaymentsSort.Desc,
     Testmode = false,
 };
 

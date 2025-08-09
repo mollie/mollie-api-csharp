@@ -23,7 +23,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a terminal object. Will always contain the string `terminal` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "terminal";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this terminal. Example: `term_7MgL4wea46qkRcoTZjWEH`.

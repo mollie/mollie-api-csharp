@@ -28,7 +28,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "payment-link";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this payment link. Example: `pl_4Y0eZitmBnQ6IDoMqZQKh`.
@@ -168,8 +168,8 @@ namespace Mollie.Models.Requests
         /// If no value is specified, the field defaults to `false`, allowing only a single payment per link.
         /// </remarks>
         /// </summary>
-        [JsonProperty("reusable")]
-        public bool? Reusable { get; set; } = false;
+        [JsonProperty("reusable", NullValueHandling = NullValueHandling.Include)]
+        public bool? Reusable { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

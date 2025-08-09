@@ -89,6 +89,8 @@ var sdk = new Client(security: new Security() {
 ListMandatesRequest req = new ListMandatesRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "mdt_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListMandatesSort.Desc,
     Testmode = false,
 };
 

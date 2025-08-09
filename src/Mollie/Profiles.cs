@@ -46,7 +46,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = 50, RetryConfig? retryConfig = null);
+        Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get profile
@@ -96,8 +96,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.8";
-        private const string _sdkGenVersion = "2.675.0";
+        private const string _sdkVersion = "0.1.0";
+        private const string _sdkGenVersion = "2.677.3";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)
@@ -240,7 +240,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = 50, RetryConfig? retryConfig = null)
+        public async Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, RetryConfig? retryConfig = null)
         {
             var request = new ListProfilesRequest()
             {

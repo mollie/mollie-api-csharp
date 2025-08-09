@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "balance-transaction";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this balance transaction.

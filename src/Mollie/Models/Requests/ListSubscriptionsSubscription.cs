@@ -25,7 +25,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "subscription";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this subscription. Example: `sub_rVKGtNd6s3`.

@@ -138,7 +138,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("reusable")]
-        public bool? Reusable { get; set; } = false;
+        public bool? Reusable { get; set; } = null;
 
         /// <summary>
         /// The date and time the payment link is set to expire, in ISO 8601 format. If no expiry date was provided up front,<br/>

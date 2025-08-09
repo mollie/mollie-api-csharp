@@ -23,7 +23,7 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a route object. Will always contain the string `route` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "route";
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this route. Mollie assigns this identifier at route creation time. Mollie<br/>

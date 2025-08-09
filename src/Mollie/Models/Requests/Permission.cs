@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "permission";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this permission. Example: `payments.read`.

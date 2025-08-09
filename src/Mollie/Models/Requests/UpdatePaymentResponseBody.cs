@@ -377,8 +377,8 @@ namespace Mollie.Models.Requests
         /// are set up correctly for recurring payments.
         /// </remarks>
         /// </summary>
-        [JsonProperty("sequenceType")]
-        public UpdatePaymentSequenceType? SequenceType { get; set; } = Mollie.Models.Requests.UpdatePaymentSequenceType.Oneoff;
+        [JsonProperty("sequenceType", NullValueHandling = NullValueHandling.Include)]
+        public UpdatePaymentSequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// If the payment was automatically created via a subscription, the ID of the <a href="get-subscription">subscription</a> will<br/>

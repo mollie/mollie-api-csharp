@@ -29,7 +29,7 @@ namespace Mollie.Models.Requests
         /// The maximum number of items to return. Defaults to 50 items.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
-        public long? Limit { get; set; } = 50;
+        public long? Limit { get; set; } = null;
 
         /// <summary>
         /// Provide the token of the balance to filter the settlements by. This is<br/>

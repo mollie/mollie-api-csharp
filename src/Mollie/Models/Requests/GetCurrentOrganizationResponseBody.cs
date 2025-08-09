@@ -27,7 +27,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "organization";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The identifier uniquely referring to this organization. Example: `org_12345678`.

@@ -34,6 +34,7 @@ var sdk = new Client(security: new Security() {
 
 ListSettlementsRequest req = new ListSettlementsRequest() {
     From = "stl_jDk30akdN",
+    Limit = 50,
     BalanceId = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Year = "2025",
     Month = "1",
@@ -208,6 +209,8 @@ var sdk = new Client(security: new Security() {
 ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = ListSettlementPaymentsSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -255,6 +258,7 @@ var sdk = new Client(security: new Security() {
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
     Embed = ListSettlementCapturesEmbed.Payment,
     Testmode = false,
 };
@@ -303,6 +307,7 @@ var sdk = new Client(security: new Security() {
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "re_5B8cwPMGnU",
+    Limit = 50,
     Embed = ListSettlementRefundsEmbed.Payment,
     Testmode = false,
 };
@@ -351,6 +356,7 @@ var sdk = new Client(security: new Security() {
 ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
     Embed = ListSettlementChargebacksEmbed.Payment,
     Testmode = false,
 };

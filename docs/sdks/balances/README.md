@@ -174,6 +174,7 @@ GetBalanceReportRequest req = new GetBalanceReportRequest() {
     BalanceId = "bal_gVMhHKqSSRYJyPsuoPNFH",
     From = "2024-01-01",
     Until = "2024-02-01",
+    Grouping = QueryParamGrouping.StatusBalances,
     Testmode = false,
 };
 

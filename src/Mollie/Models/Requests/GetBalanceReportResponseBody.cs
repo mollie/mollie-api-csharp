@@ -27,7 +27,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; } = "balance-report";
+        public string? Resource { get; set; }
 
         /// <summary>
         /// The ID of the balance this report is generated for.
@@ -77,7 +77,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("grouping")]
-        public GroupingResponse? Grouping { get; set; } = Mollie.Models.Requests.GroupingResponse.StatusBalances;
+        public GroupingResponse? Grouping { get; set; }
 
         /// <summary>
         /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>

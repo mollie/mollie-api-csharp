@@ -50,7 +50,7 @@ namespace Mollie.Models.Requests
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public UpdateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = Mollie.Models.Requests.UpdateSalesInvoicePaymentTermRequest.Thirtydays;
+        public UpdateSalesInvoicePaymentTermRequest? PaymentTerm { get; set; } = null;
 
         /// <summary>
         /// Used when setting an invoice to status of `paid`, and will store a payment that fully pays the invoice with the<br/>
