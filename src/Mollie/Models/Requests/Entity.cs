@@ -24,7 +24,7 @@ namespace Mollie.Models.Requests
         private EntityType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        public static EntityType GetWebhookEventPaymentLink { get { return new EntityType("get_webhook_event_payment-link"); } }
+        public static EntityType GetWebhookEventPaymentLinkOutput { get { return new EntityType("get_webhook_event_payment-link_output"); } }
         
         public static EntityType GetWebhookEventProfile { get { return new EntityType("get_webhook_event_profile"); } }
         
@@ -34,7 +34,7 @@ namespace Mollie.Models.Requests
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
             switch(v) {
-                case "get_webhook_event_payment-link": return GetWebhookEventPaymentLink;
+                case "get_webhook_event_payment-link_output": return GetWebhookEventPaymentLinkOutput;
                 case "get_webhook_event_profile": return GetWebhookEventProfile;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for EntityType");
@@ -63,7 +63,7 @@ namespace Mollie.Models.Requests
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public GetWebhookEventPaymentLink? GetWebhookEventPaymentLink { get; set; }
+        public GetWebhookEventPaymentLinkOutput? GetWebhookEventPaymentLinkOutput { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public GetWebhookEventProfile? GetWebhookEventProfile { get; set; }
@@ -71,11 +71,11 @@ namespace Mollie.Models.Requests
         public EntityType Type { get; set; }
 
 
-        public static Entity CreateGetWebhookEventPaymentLink(GetWebhookEventPaymentLink getWebhookEventPaymentLink) {
-            EntityType typ = EntityType.GetWebhookEventPaymentLink;
+        public static Entity CreateGetWebhookEventPaymentLinkOutput(GetWebhookEventPaymentLinkOutput getWebhookEventPaymentLinkOutput) {
+            EntityType typ = EntityType.GetWebhookEventPaymentLinkOutput;
 
             Entity res = new Entity(typ);
-            res.GetWebhookEventPaymentLink = getWebhookEventPaymentLink;
+            res.GetWebhookEventPaymentLinkOutput = getWebhookEventPaymentLinkOutput;
             return res;
         }
 
@@ -131,14 +131,14 @@ namespace Mollie.Models.Requests
 
                 try
                 {
-                    return new Entity(EntityType.GetWebhookEventPaymentLink)
+                    return new Entity(EntityType.GetWebhookEventPaymentLinkOutput)
                     {
-                        GetWebhookEventPaymentLink = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<GetWebhookEventPaymentLink>(json)
+                        GetWebhookEventPaymentLinkOutput = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<GetWebhookEventPaymentLinkOutput>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(GetWebhookEventPaymentLink), new Entity(EntityType.GetWebhookEventPaymentLink), "GetWebhookEventPaymentLink"));
+                    fallbackCandidates.Add((typeof(GetWebhookEventPaymentLinkOutput), new Entity(EntityType.GetWebhookEventPaymentLinkOutput), "GetWebhookEventPaymentLinkOutput"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -184,9 +184,9 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
-                if (res.GetWebhookEventPaymentLink != null)
+                if (res.GetWebhookEventPaymentLinkOutput != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.GetWebhookEventPaymentLink));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.GetWebhookEventPaymentLinkOutput));
                     return;
                 }
                 if (res.GetWebhookEventProfile != null)

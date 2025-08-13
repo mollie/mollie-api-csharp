@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### GetWebhookEventPaymentLink
+### GetWebhookEventPaymentLinkOutput
 
 ```csharp
-Entity.CreateGetWebhookEventPaymentLink(/* values here */);
+Entity.CreateGetWebhookEventPaymentLinkOutput(/* values here */);
 ```
 
 ### GetWebhookEventProfile

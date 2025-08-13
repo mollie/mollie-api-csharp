@@ -116,6 +116,7 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
     },
     SequenceType = CreatePaymentLinkSequenceTypeRequest.Oneoff,
     CustomerId = "cst_XimFHuaEzd",
+    Testmode = false,
 };
 
 var res = await sdk.PaymentLinks.CreateAsync(req);

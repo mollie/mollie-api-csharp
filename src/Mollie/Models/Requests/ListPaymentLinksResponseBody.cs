@@ -30,15 +30,15 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         [JsonProperty("_embedded")]
-        public ListPaymentLinksEmbedded? Embedded { get; set; }
+        public ListPaymentLinksEmbedded Embedded { get; set; } = default!;
 
         /// <summary>
         /// Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public ListPaymentLinksLinks? Links { get; set; }
+        public ListPaymentLinksLinks Links { get; set; } = default!;
     }
 }

@@ -14,7 +14,7 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
     using System.Collections.Generic;
     
-    public class ListPaymentLinksPaymentLink
+    public class ListPaymentLinksPaymentLinkOutput
     {
 
         /// <summary>
