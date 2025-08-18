@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class UpdatePaymentMetadataRequest
+
+    public class UpdatePaymentMetadataRequestType
     {
+        private UpdatePaymentMetadataRequestType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static UpdatePaymentMetadataRequestType Str { get { return new UpdatePaymentMetadataRequestType("str"); } }
+        
+        public static UpdatePaymentMetadataRequestType MapOfAny { get { return new UpdatePaymentMetadataRequestType("mapOfAny"); } }
+        
+        public static UpdatePaymentMetadataRequestType ArrayOfStr { get { return new UpdatePaymentMetadataRequestType("arrayOfStr"); } }
+        
+        public static UpdatePaymentMetadataRequestType Null { get { return new UpdatePaymentMetadataRequestType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(UpdatePaymentMetadataRequestType v) { return v.Value; }
+        public static UpdatePaymentMetadataRequestType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for UpdatePaymentMetadataRequestType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((UpdatePaymentMetadataRequestType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(UpdatePaymentMetadataRequest.UpdatePaymentMetadataRequestConverter))]
+    public class UpdatePaymentMetadataRequest {
+        public UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public UpdatePaymentMetadataRequestType Type { get; set; }
+
+
+        public static UpdatePaymentMetadataRequest CreateStr(string str) {
+            UpdatePaymentMetadataRequestType typ = UpdatePaymentMetadataRequestType.Str;
+
+            UpdatePaymentMetadataRequest res = new UpdatePaymentMetadataRequest(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static UpdatePaymentMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            UpdatePaymentMetadataRequestType typ = UpdatePaymentMetadataRequestType.MapOfAny;
+
+            UpdatePaymentMetadataRequest res = new UpdatePaymentMetadataRequest(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static UpdatePaymentMetadataRequest CreateArrayOfStr(List<string> arrayOfStr) {
+            UpdatePaymentMetadataRequestType typ = UpdatePaymentMetadataRequestType.ArrayOfStr;
+
+            UpdatePaymentMetadataRequest res = new UpdatePaymentMetadataRequest(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static UpdatePaymentMetadataRequest CreateNull() {
+            UpdatePaymentMetadataRequestType typ = UpdatePaymentMetadataRequestType.Null;
+            return new UpdatePaymentMetadataRequest(typ);
+        }
+
+        public class UpdatePaymentMetadataRequestConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(UpdatePaymentMetadataRequest);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new UpdatePaymentMetadataRequest(UpdatePaymentMetadataRequestType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                UpdatePaymentMetadataRequest res = (UpdatePaymentMetadataRequest)value;
+                if (UpdatePaymentMetadataRequestType.FromString(res.Type).Equals(UpdatePaymentMetadataRequestType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

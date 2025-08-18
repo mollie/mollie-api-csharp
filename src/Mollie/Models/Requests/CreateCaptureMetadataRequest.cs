@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CreateCaptureMetadataRequest
+
+    public class CreateCaptureMetadataRequestType
     {
+        private CreateCaptureMetadataRequestType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static CreateCaptureMetadataRequestType Str { get { return new CreateCaptureMetadataRequestType("str"); } }
+        
+        public static CreateCaptureMetadataRequestType MapOfAny { get { return new CreateCaptureMetadataRequestType("mapOfAny"); } }
+        
+        public static CreateCaptureMetadataRequestType ArrayOfStr { get { return new CreateCaptureMetadataRequestType("arrayOfStr"); } }
+        
+        public static CreateCaptureMetadataRequestType Null { get { return new CreateCaptureMetadataRequestType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(CreateCaptureMetadataRequestType v) { return v.Value; }
+        public static CreateCaptureMetadataRequestType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CreateCaptureMetadataRequestType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CreateCaptureMetadataRequestType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(CreateCaptureMetadataRequest.CreateCaptureMetadataRequestConverter))]
+    public class CreateCaptureMetadataRequest {
+        public CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public CreateCaptureMetadataRequestType Type { get; set; }
+
+
+        public static CreateCaptureMetadataRequest CreateStr(string str) {
+            CreateCaptureMetadataRequestType typ = CreateCaptureMetadataRequestType.Str;
+
+            CreateCaptureMetadataRequest res = new CreateCaptureMetadataRequest(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static CreateCaptureMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            CreateCaptureMetadataRequestType typ = CreateCaptureMetadataRequestType.MapOfAny;
+
+            CreateCaptureMetadataRequest res = new CreateCaptureMetadataRequest(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static CreateCaptureMetadataRequest CreateArrayOfStr(List<string> arrayOfStr) {
+            CreateCaptureMetadataRequestType typ = CreateCaptureMetadataRequestType.ArrayOfStr;
+
+            CreateCaptureMetadataRequest res = new CreateCaptureMetadataRequest(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static CreateCaptureMetadataRequest CreateNull() {
+            CreateCaptureMetadataRequestType typ = CreateCaptureMetadataRequestType.Null;
+            return new CreateCaptureMetadataRequest(typ);
+        }
+
+        public class CreateCaptureMetadataRequestConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateCaptureMetadataRequest);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new CreateCaptureMetadataRequest(CreateCaptureMetadataRequestType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CreateCaptureMetadataRequest res = (CreateCaptureMetadataRequest)value;
+                if (CreateCaptureMetadataRequestType.FromString(res.Type).Equals(CreateCaptureMetadataRequestType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

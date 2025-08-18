@@ -10,8 +10,229 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CreateSubscriptionMetadataRequest
+
+    public class CreateSubscriptionMetadataRequestType
     {
+        private CreateSubscriptionMetadataRequestType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static CreateSubscriptionMetadataRequestType Str { get { return new CreateSubscriptionMetadataRequestType("str"); } }
+        
+        public static CreateSubscriptionMetadataRequestType MapOfAny { get { return new CreateSubscriptionMetadataRequestType("mapOfAny"); } }
+        
+        public static CreateSubscriptionMetadataRequestType ArrayOfStr { get { return new CreateSubscriptionMetadataRequestType("arrayOfStr"); } }
+        
+        public static CreateSubscriptionMetadataRequestType Null { get { return new CreateSubscriptionMetadataRequestType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(CreateSubscriptionMetadataRequestType v) { return v.Value; }
+        public static CreateSubscriptionMetadataRequestType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CreateSubscriptionMetadataRequestType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CreateSubscriptionMetadataRequestType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
+    /// 
+    /// <remarks>
+    /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+    /// 1kB.<br/>
+    /// <br/>
+    /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(CreateSubscriptionMetadataRequest.CreateSubscriptionMetadataRequestConverter))]
+    public class CreateSubscriptionMetadataRequest {
+        public CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public CreateSubscriptionMetadataRequestType Type { get; set; }
+
+
+        public static CreateSubscriptionMetadataRequest CreateStr(string str) {
+            CreateSubscriptionMetadataRequestType typ = CreateSubscriptionMetadataRequestType.Str;
+
+            CreateSubscriptionMetadataRequest res = new CreateSubscriptionMetadataRequest(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static CreateSubscriptionMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            CreateSubscriptionMetadataRequestType typ = CreateSubscriptionMetadataRequestType.MapOfAny;
+
+            CreateSubscriptionMetadataRequest res = new CreateSubscriptionMetadataRequest(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static CreateSubscriptionMetadataRequest CreateArrayOfStr(List<string> arrayOfStr) {
+            CreateSubscriptionMetadataRequestType typ = CreateSubscriptionMetadataRequestType.ArrayOfStr;
+
+            CreateSubscriptionMetadataRequest res = new CreateSubscriptionMetadataRequest(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static CreateSubscriptionMetadataRequest CreateNull() {
+            CreateSubscriptionMetadataRequestType typ = CreateSubscriptionMetadataRequestType.Null;
+            return new CreateSubscriptionMetadataRequest(typ);
+        }
+
+        public class CreateSubscriptionMetadataRequestConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateSubscriptionMetadataRequest);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new CreateSubscriptionMetadataRequest(CreateSubscriptionMetadataRequestType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CreateSubscriptionMetadataRequest res = (CreateSubscriptionMetadataRequest)value;
+                if (CreateSubscriptionMetadataRequestType.FromString(res.Type).Equals(CreateSubscriptionMetadataRequestType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

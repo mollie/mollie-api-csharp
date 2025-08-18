@@ -42,7 +42,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public CreateRefundMetadataRequestUnion? Metadata { get; set; } = null;
+        public CreateRefundMetadataRequest? Metadata { get; set; } = null;
 
         [JsonProperty("externalReference")]
         public ExternalReferenceRequest? ExternalReference { get; set; }

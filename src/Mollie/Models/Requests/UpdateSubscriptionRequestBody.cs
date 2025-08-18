@@ -75,7 +75,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public UpdateSubscriptionMetadataRequestUnion? Metadata { get; set; } = null;
+        public UpdateSubscriptionMetadataRequest? Metadata { get; set; } = null;
 
         /// <summary>
         /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>

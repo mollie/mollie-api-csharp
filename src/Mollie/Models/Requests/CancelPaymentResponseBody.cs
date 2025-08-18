@@ -270,7 +270,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public CancelPaymentMetadataUnion? Metadata { get; set; } = null;
+        public CancelPaymentMetadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>

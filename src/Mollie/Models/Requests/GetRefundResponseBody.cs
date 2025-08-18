@@ -88,7 +88,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public GetRefundMetadataUnion? Metadata { get; set; } = null;
+        public GetRefundMetadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// The unique identifier of the payment this refund was created for.<br/>

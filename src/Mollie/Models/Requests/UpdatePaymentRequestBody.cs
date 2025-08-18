@@ -86,7 +86,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public UpdatePaymentMetadataRequestUnion? Metadata { get; set; } = null;
+        public UpdatePaymentMetadataRequest? Metadata { get; set; } = null;
 
         /// <summary>
         /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>

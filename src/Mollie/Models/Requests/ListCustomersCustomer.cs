@@ -65,7 +65,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
-        public ListCustomersMetadataUnion? Metadata { get; set; }
+        public ListCustomersMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

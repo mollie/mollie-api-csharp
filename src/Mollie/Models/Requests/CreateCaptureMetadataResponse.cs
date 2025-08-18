@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CreateCaptureMetadataResponse
+
+    public class CreateCaptureMetadataResponseType
     {
+        private CreateCaptureMetadataResponseType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static CreateCaptureMetadataResponseType Str { get { return new CreateCaptureMetadataResponseType("str"); } }
+        
+        public static CreateCaptureMetadataResponseType MapOfAny { get { return new CreateCaptureMetadataResponseType("mapOfAny"); } }
+        
+        public static CreateCaptureMetadataResponseType ArrayOfStr { get { return new CreateCaptureMetadataResponseType("arrayOfStr"); } }
+        
+        public static CreateCaptureMetadataResponseType Null { get { return new CreateCaptureMetadataResponseType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(CreateCaptureMetadataResponseType v) { return v.Value; }
+        public static CreateCaptureMetadataResponseType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CreateCaptureMetadataResponseType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CreateCaptureMetadataResponseType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(CreateCaptureMetadataResponse.CreateCaptureMetadataResponseConverter))]
+    public class CreateCaptureMetadataResponse {
+        public CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public CreateCaptureMetadataResponseType Type { get; set; }
+
+
+        public static CreateCaptureMetadataResponse CreateStr(string str) {
+            CreateCaptureMetadataResponseType typ = CreateCaptureMetadataResponseType.Str;
+
+            CreateCaptureMetadataResponse res = new CreateCaptureMetadataResponse(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static CreateCaptureMetadataResponse CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            CreateCaptureMetadataResponseType typ = CreateCaptureMetadataResponseType.MapOfAny;
+
+            CreateCaptureMetadataResponse res = new CreateCaptureMetadataResponse(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static CreateCaptureMetadataResponse CreateArrayOfStr(List<string> arrayOfStr) {
+            CreateCaptureMetadataResponseType typ = CreateCaptureMetadataResponseType.ArrayOfStr;
+
+            CreateCaptureMetadataResponse res = new CreateCaptureMetadataResponse(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static CreateCaptureMetadataResponse CreateNull() {
+            CreateCaptureMetadataResponseType typ = CreateCaptureMetadataResponseType.Null;
+            return new CreateCaptureMetadataResponse(typ);
+        }
+
+        public class CreateCaptureMetadataResponseConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateCaptureMetadataResponse);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new CreateCaptureMetadataResponse(CreateCaptureMetadataResponseType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CreateCaptureMetadataResponse res = (CreateCaptureMetadataResponse)value;
+                if (CreateCaptureMetadataResponseType.FromString(res.Type).Equals(CreateCaptureMetadataResponseType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

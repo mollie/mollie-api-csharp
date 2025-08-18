@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CreateCustomerPaymentMetadataResponse
+
+    public class CreateCustomerPaymentMetadataResponseType
     {
+        private CreateCustomerPaymentMetadataResponseType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static CreateCustomerPaymentMetadataResponseType Str { get { return new CreateCustomerPaymentMetadataResponseType("str"); } }
+        
+        public static CreateCustomerPaymentMetadataResponseType MapOfAny { get { return new CreateCustomerPaymentMetadataResponseType("mapOfAny"); } }
+        
+        public static CreateCustomerPaymentMetadataResponseType ArrayOfStr { get { return new CreateCustomerPaymentMetadataResponseType("arrayOfStr"); } }
+        
+        public static CreateCustomerPaymentMetadataResponseType Null { get { return new CreateCustomerPaymentMetadataResponseType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(CreateCustomerPaymentMetadataResponseType v) { return v.Value; }
+        public static CreateCustomerPaymentMetadataResponseType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CreateCustomerPaymentMetadataResponseType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CreateCustomerPaymentMetadataResponseType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(CreateCustomerPaymentMetadataResponse.CreateCustomerPaymentMetadataResponseConverter))]
+    public class CreateCustomerPaymentMetadataResponse {
+        public CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public CreateCustomerPaymentMetadataResponseType Type { get; set; }
+
+
+        public static CreateCustomerPaymentMetadataResponse CreateStr(string str) {
+            CreateCustomerPaymentMetadataResponseType typ = CreateCustomerPaymentMetadataResponseType.Str;
+
+            CreateCustomerPaymentMetadataResponse res = new CreateCustomerPaymentMetadataResponse(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static CreateCustomerPaymentMetadataResponse CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            CreateCustomerPaymentMetadataResponseType typ = CreateCustomerPaymentMetadataResponseType.MapOfAny;
+
+            CreateCustomerPaymentMetadataResponse res = new CreateCustomerPaymentMetadataResponse(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static CreateCustomerPaymentMetadataResponse CreateArrayOfStr(List<string> arrayOfStr) {
+            CreateCustomerPaymentMetadataResponseType typ = CreateCustomerPaymentMetadataResponseType.ArrayOfStr;
+
+            CreateCustomerPaymentMetadataResponse res = new CreateCustomerPaymentMetadataResponse(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static CreateCustomerPaymentMetadataResponse CreateNull() {
+            CreateCustomerPaymentMetadataResponseType typ = CreateCustomerPaymentMetadataResponseType.Null;
+            return new CreateCustomerPaymentMetadataResponse(typ);
+        }
+
+        public class CreateCustomerPaymentMetadataResponseConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateCustomerPaymentMetadataResponse);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new CreateCustomerPaymentMetadataResponse(CreateCustomerPaymentMetadataResponseType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CreateCustomerPaymentMetadataResponse res = (CreateCustomerPaymentMetadataResponse)value;
+                if (CreateCustomerPaymentMetadataResponseType.FromString(res.Type).Equals(CreateCustomerPaymentMetadataResponseType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

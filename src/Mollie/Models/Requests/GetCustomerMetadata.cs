@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class GetCustomerMetadata
+
+    public class GetCustomerMetadataType
     {
+        private GetCustomerMetadataType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static GetCustomerMetadataType Str { get { return new GetCustomerMetadataType("str"); } }
+        
+        public static GetCustomerMetadataType MapOfAny { get { return new GetCustomerMetadataType("mapOfAny"); } }
+        
+        public static GetCustomerMetadataType ArrayOfStr { get { return new GetCustomerMetadataType("arrayOfStr"); } }
+        
+        public static GetCustomerMetadataType Null { get { return new GetCustomerMetadataType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(GetCustomerMetadataType v) { return v.Value; }
+        public static GetCustomerMetadataType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for GetCustomerMetadataType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((GetCustomerMetadataType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(GetCustomerMetadata.GetCustomerMetadataConverter))]
+    public class GetCustomerMetadata {
+        public GetCustomerMetadata(GetCustomerMetadataType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public GetCustomerMetadataType Type { get; set; }
+
+
+        public static GetCustomerMetadata CreateStr(string str) {
+            GetCustomerMetadataType typ = GetCustomerMetadataType.Str;
+
+            GetCustomerMetadata res = new GetCustomerMetadata(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static GetCustomerMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            GetCustomerMetadataType typ = GetCustomerMetadataType.MapOfAny;
+
+            GetCustomerMetadata res = new GetCustomerMetadata(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static GetCustomerMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+            GetCustomerMetadataType typ = GetCustomerMetadataType.ArrayOfStr;
+
+            GetCustomerMetadata res = new GetCustomerMetadata(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static GetCustomerMetadata CreateNull() {
+            GetCustomerMetadataType typ = GetCustomerMetadataType.Null;
+            return new GetCustomerMetadata(typ);
+        }
+
+        public class GetCustomerMetadataConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(GetCustomerMetadata);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new GetCustomerMetadata(GetCustomerMetadataType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new GetCustomerMetadata(GetCustomerMetadataType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new GetCustomerMetadata(GetCustomerMetadataType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new GetCustomerMetadata(GetCustomerMetadataType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new GetCustomerMetadata(GetCustomerMetadataType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                GetCustomerMetadata res = (GetCustomerMetadata)value;
+                if (GetCustomerMetadataType.FromString(res.Type).Equals(GetCustomerMetadataType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

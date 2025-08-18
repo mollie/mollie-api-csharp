@@ -1,7 +1,28 @@
 # UpdateSubscriptionMetadataRequest
 
+Provide any data you like, for example a string or a JSON object. We will save the data alongside the
+entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to
+approximately 1kB.
 
-## Fields
+Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+
+## Supported Types
+
+### Str
+
+```csharp
+UpdateSubscriptionMetadataRequest.CreateStr(/* values here */);
+```
+
+### MapOfAny
+
+```csharp
+UpdateSubscriptionMetadataRequest.CreateMapOfAny(/* values here */);
+```
+
+### ArrayOfStr
+
+```csharp
+UpdateSubscriptionMetadataRequest.CreateArrayOfStr(/* values here */);
+```

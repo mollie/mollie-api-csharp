@@ -10,8 +10,226 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class ListAllRefundsMetadata
+
+    public class ListAllRefundsMetadataType
     {
+        private ListAllRefundsMetadataType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static ListAllRefundsMetadataType Str { get { return new ListAllRefundsMetadataType("str"); } }
+        
+        public static ListAllRefundsMetadataType MapOfAny { get { return new ListAllRefundsMetadataType("mapOfAny"); } }
+        
+        public static ListAllRefundsMetadataType ArrayOfStr { get { return new ListAllRefundsMetadataType("arrayOfStr"); } }
+        
+        public static ListAllRefundsMetadataType Null { get { return new ListAllRefundsMetadataType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(ListAllRefundsMetadataType v) { return v.Value; }
+        public static ListAllRefundsMetadataType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for ListAllRefundsMetadataType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((ListAllRefundsMetadataType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+    /// 
+    /// <remarks>
+    /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(ListAllRefundsMetadata.ListAllRefundsMetadataConverter))]
+    public class ListAllRefundsMetadata {
+        public ListAllRefundsMetadata(ListAllRefundsMetadataType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public ListAllRefundsMetadataType Type { get; set; }
+
+
+        public static ListAllRefundsMetadata CreateStr(string str) {
+            ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.Str;
+
+            ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static ListAllRefundsMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.MapOfAny;
+
+            ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static ListAllRefundsMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+            ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.ArrayOfStr;
+
+            ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static ListAllRefundsMetadata CreateNull() {
+            ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.Null;
+            return new ListAllRefundsMetadata(typ);
+        }
+
+        public class ListAllRefundsMetadataConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(ListAllRefundsMetadata);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new ListAllRefundsMetadata(ListAllRefundsMetadataType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new ListAllRefundsMetadata(ListAllRefundsMetadataType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new ListAllRefundsMetadata(ListAllRefundsMetadataType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ListAllRefundsMetadata(ListAllRefundsMetadataType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new ListAllRefundsMetadata(ListAllRefundsMetadataType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                ListAllRefundsMetadata res = (ListAllRefundsMetadata)value;
+                if (ListAllRefundsMetadataType.FromString(res.Type).Equals(ListAllRefundsMetadataType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

@@ -82,7 +82,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public CreateCaptureMetadataResponseUnion? Metadata { get; set; } = null;
+        public CreateCaptureMetadataResponse? Metadata { get; set; } = null;
 
         /// <summary>
         /// The unique identifier of the payment this capture was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>

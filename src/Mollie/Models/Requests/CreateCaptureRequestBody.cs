@@ -37,6 +37,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public CreateCaptureMetadataRequestUnion? Metadata { get; set; } = null;
+        public CreateCaptureMetadataRequest? Metadata { get; set; } = null;
     }
 }

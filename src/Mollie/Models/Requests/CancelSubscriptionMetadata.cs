@@ -10,8 +10,229 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CancelSubscriptionMetadata
+
+    public class CancelSubscriptionMetadataType
     {
+        private CancelSubscriptionMetadataType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+        public static CancelSubscriptionMetadataType Str { get { return new CancelSubscriptionMetadataType("str"); } }
+        
+        public static CancelSubscriptionMetadataType MapOfAny { get { return new CancelSubscriptionMetadataType("mapOfAny"); } }
+        
+        public static CancelSubscriptionMetadataType ArrayOfStr { get { return new CancelSubscriptionMetadataType("arrayOfStr"); } }
+        
+        public static CancelSubscriptionMetadataType Null { get { return new CancelSubscriptionMetadataType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(CancelSubscriptionMetadataType v) { return v.Value; }
+        public static CancelSubscriptionMetadataType FromString(string v) {
+            switch(v) {
+                case "str": return Str;
+                case "mapOfAny": return MapOfAny;
+                case "arrayOfStr": return ArrayOfStr;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CancelSubscriptionMetadataType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CancelSubscriptionMetadataType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity.<br/>
+    /// 
+    /// <remarks>
+    /// Whenever you fetch the entity with our API, we will also include the metadata. You can use up to approximately<br/>
+    /// 1kB.<br/>
+    /// <br/>
+    /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
+    /// </remarks>
+    /// </summary>
+    [JsonConverter(typeof(CancelSubscriptionMetadata.CancelSubscriptionMetadataConverter))]
+    public class CancelSubscriptionMetadata {
+        public CancelSubscriptionMetadata(CancelSubscriptionMetadataType type) {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public string? Str { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Dictionary<string, object>? MapOfAny { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<string>? ArrayOfStr { get; set; }
+
+        public CancelSubscriptionMetadataType Type { get; set; }
+
+
+        public static CancelSubscriptionMetadata CreateStr(string str) {
+            CancelSubscriptionMetadataType typ = CancelSubscriptionMetadataType.Str;
+
+            CancelSubscriptionMetadata res = new CancelSubscriptionMetadata(typ);
+            res.Str = str;
+            return res;
+        }
+
+        public static CancelSubscriptionMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+            CancelSubscriptionMetadataType typ = CancelSubscriptionMetadataType.MapOfAny;
+
+            CancelSubscriptionMetadata res = new CancelSubscriptionMetadata(typ);
+            res.MapOfAny = mapOfAny;
+            return res;
+        }
+
+        public static CancelSubscriptionMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+            CancelSubscriptionMetadataType typ = CancelSubscriptionMetadataType.ArrayOfStr;
+
+            CancelSubscriptionMetadata res = new CancelSubscriptionMetadata(typ);
+            res.ArrayOfStr = arrayOfStr;
+            return res;
+        }
+
+        public static CancelSubscriptionMetadata CreateNull() {
+            CancelSubscriptionMetadataType typ = CancelSubscriptionMetadataType.Null;
+            return new CancelSubscriptionMetadata(typ);
+        }
+
+        public class CancelSubscriptionMetadataConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CancelSubscriptionMetadata);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                if (json[0] == '"' && json[^1] == '"'){
+                    return new CancelSubscriptionMetadata(CancelSubscriptionMetadataType.Str)
+                    {
+                        Str = json[1..^1]
+                    };
+                }
+
+                try
+                {
+                    return new CancelSubscriptionMetadata(CancelSubscriptionMetadataType.MapOfAny)
+                    {
+                        MapOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Dictionary<string, object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Dictionary<string, object>), new CancelSubscriptionMetadata(CancelSubscriptionMetadataType.MapOfAny), "MapOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CancelSubscriptionMetadata(CancelSubscriptionMetadataType.ArrayOfStr)
+                    {
+                        ArrayOfStr = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<string>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<string>), new CancelSubscriptionMetadata(CancelSubscriptionMetadataType.ArrayOfStr), "ArrayOfStr"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CancelSubscriptionMetadata res = (CancelSubscriptionMetadata)value;
+                if (CancelSubscriptionMetadataType.FromString(res.Type).Equals(CancelSubscriptionMetadataType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.Str != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+                if (res.MapOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
+                    return;
+                }
+                if (res.ArrayOfStr != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

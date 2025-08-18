@@ -155,7 +155,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
-        public CancelSubscriptionMetadataUnion? Metadata { get; set; }
+        public CancelSubscriptionMetadata? Metadata { get; set; }
 
         /// <summary>
         /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>

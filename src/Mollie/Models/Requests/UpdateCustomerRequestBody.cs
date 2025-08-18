@@ -47,7 +47,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public UpdateCustomerMetadataRequestUnion? Metadata { get; set; } = null;
+        public UpdateCustomerMetadataRequest? Metadata { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
