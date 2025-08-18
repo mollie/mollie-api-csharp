@@ -119,7 +119,7 @@ namespace Mollie.Models.Requests
         /// An array with the voucher categories, in case of a line eligible for a voucher. See the<br/>
         /// 
         /// <remarks>
-        /// <a href="integrating-vouchers">Integrating Vouchers</a> guide for more information.
+        /// <a href="https://docs.mollie.com/docs/integrating-vouchers/">Integrating Vouchers</a> guide for more information.
         /// </remarks>
         /// </summary>
         [JsonProperty("categories")]

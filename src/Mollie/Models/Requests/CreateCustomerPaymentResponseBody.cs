@@ -448,7 +448,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public CreateCustomerPaymentStatus Status { get; set; } = default!;
+        public CreateCustomerPaymentStatusEnum Status { get; set; } = default!;
 
         /// <summary>
         /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>
@@ -478,7 +478,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("details")]
-        public Dictionary<string, object>? Details { get; set; } = null;
+        public CreateCustomerPaymentDetails? Details { get; set; } = null;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

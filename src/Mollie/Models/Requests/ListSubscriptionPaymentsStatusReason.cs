@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -25,11 +26,8 @@ namespace Mollie.Models.Requests
     public class ListSubscriptionPaymentsStatusReason
     {
 
-        /// <summary>
-        /// A machine-readable code that indicates the reason for the payment&apos;s status.
-        /// </summary>
         [JsonProperty("code")]
-        public string Code { get; set; } = default!;
+        public ListSubscriptionPaymentsCode Code { get; set; } = default!;
 
         /// <summary>
         /// A description of the status reason, localized according to the payment `locale`.

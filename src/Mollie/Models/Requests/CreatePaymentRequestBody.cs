@@ -13,6 +13,7 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using NodaTime;
     using System.Collections.Generic;
     
     public class CreatePaymentRequestBody
@@ -370,5 +371,113 @@ namespace Mollie.Models.Requests
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;
+
+        /// <summary>
+        /// The Apple Pay Payment token object (encoded as JSON) that is part of the result of authorizing a payment request.<br/>
+        /// 
+        /// <remarks>
+        /// The token contains the payment information needed to authorize the payment.<br/>
+        /// <br/>
+        /// The object should be passed encoded in a JSON string.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("applePayPaymentToken")]
+        public string? ApplePayPaymentToken { get; set; }
+
+        /// <summary>
+        /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the organization<br/>
+        /// 
+        /// <remarks>
+        /// that is completing the payment. It is recommended to include these parameters up front for a seamless flow.<br/>
+        /// Otherwise, Billie will ask the customer to complete the missing fields during checkout.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("company")]
+        public CreatePaymentCompany? Company { get; set; }
+
+        /// <summary>
+        /// When creating credit card payments using Mollie Components, you need to provide the card token you received from<br/>
+        /// 
+        /// <remarks>
+        /// the card component in this field. The token represents the customer&apos;s card information needed to complete the<br/>
+        /// payment. Note: field only valid for oneoff and first payments. For recurring payments, the customerId alone is<br/>
+        /// enough.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("cardToken")]
+        public string? CardToken { get; set; }
+
+        /// <summary>
+        /// The card token you received from the card component of Mollie Components. The token represents the customer&apos;s card<br/>
+        /// 
+        /// <remarks>
+        /// information needed to complete the payment.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("voucherNumber")]
+        public string? VoucherNumber { get; set; }
+
+        /// <summary>
+        /// The PIN on the gift card. You can supply this to prefill the PIN, if the card has any.
+        /// </summary>
+        [JsonProperty("voucherPin")]
+        public string? VoucherPin { get; set; }
+
+        /// <summary>
+        /// The customer&apos;s date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it during<br/>
+        /// 
+        /// <remarks>
+        /// the payment process.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("consumerDateOfBirth")]
+        public LocalDate? ConsumerDateOfBirth { get; set; }
+
+        /// <summary>
+        /// For some industries, additional purchase information can be sent to Klarna to increase the authorization rate.<br/>
+        /// 
+        /// <remarks>
+        /// You can submit your extra data in this field if you have agreed upon this with Klarna. This field should be an<br/>
+        /// object containing any of the allowed keys and sub-objects described at the Klarna Developer Documentation.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("extraMerchantData")]
+        public Dictionary<string, object>? ExtraMerchantData { get; set; }
+
+        /// <summary>
+        /// The unique ID you have used for the PayPal fraud library. You should include this if you use PayPal for an<br/>
+        /// 
+        /// <remarks>
+        /// on-demand payment.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("sessionId")]
+        public string? SessionId { get; set; }
+
+        /// <summary>
+        /// Indicate if you are about to deliver digital goods, such as for example a software license. Setting this parameter<br/>
+        /// 
+        /// <remarks>
+        /// can have consequences for your PayPal Seller Protection. Refer to PayPal&apos;s documentation for more information.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("digitalGoods")]
+        public bool? DigitalGoods { get; set; }
+
+        /// <summary>
+        /// Used by paysafecard for customer identification across payments. When you generate a customer reference yourself,<br/>
+        /// 
+        /// <remarks>
+        /// make sure not to put personal identifiable information or IP addresses in the customer reference directly.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("customerReference")]
+        public string? CustomerReference { get; set; }
+
+        /// <summary>
+        /// The ID of the terminal device where you want to initiate the payment on.
+        /// </summary>
+        [JsonProperty("terminalId")]
+        public string? TerminalId { get; set; }
     }
 }

@@ -3,6 +3,7 @@
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -132,6 +133,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 

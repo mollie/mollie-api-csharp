@@ -134,5 +134,25 @@ namespace Mollie.Models.Requests
         /// </summary>
         [JsonProperty("documentation")]
         public CreatePaymentDocumentation? Documentation { get; set; }
+
+        /// <summary>
+        /// Link to customer-facing page showing the status of the bank transfer (to verify if the transaction was<br/>
+        /// 
+        /// <remarks>
+        /// successful).
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("status")]
+        public CreatePaymentLinksStatus? Status { get; set; }
+
+        /// <summary>
+        /// Link to Mollie Checkout page allowing customers to select a different payment method instead of legacy<br/>
+        /// 
+        /// <remarks>
+        /// bank transfer.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("payOnline")]
+        public CreatePaymentPayOnline? PayOnline { get; set; }
     }
 }

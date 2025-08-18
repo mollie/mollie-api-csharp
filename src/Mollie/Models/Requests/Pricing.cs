@@ -30,7 +30,7 @@ namespace Mollie.Models.Requests
         /// The fixed price charged per payment.
         /// </summary>
         [JsonProperty("fixed")]
-        public ListAllMethodsFixed Fixed { get; set; } = default!;
+        public Fixed Fixed { get; set; } = default!;
 
         /// <summary>
         /// The variable price charged per payment, as a percentage string.

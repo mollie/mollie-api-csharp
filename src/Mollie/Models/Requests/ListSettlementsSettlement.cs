@@ -12,6 +12,7 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class ListSettlementsSettlement
     {
@@ -96,7 +97,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("periods")]
-        public ListSettlementsPeriods? Periods { get; set; }
+        public Dictionary<string, object>? Periods { get; set; }
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

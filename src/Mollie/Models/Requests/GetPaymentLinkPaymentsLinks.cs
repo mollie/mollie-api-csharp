@@ -23,24 +23,24 @@ namespace Mollie.Models.Requests
         /// The URL to the current set of items.
         /// </summary>
         [JsonProperty("self")]
-        public GetPaymentLinkPaymentsSelf? Self { get; set; }
+        public GetPaymentLinkPaymentsSelf Self { get; set; } = default!;
 
         /// <summary>
         /// The previous set of items, if available.
         /// </summary>
-        [JsonProperty("previous")]
-        public GetPaymentLinkPaymentsPrevious? Previous { get; set; } = null;
+        [JsonProperty("previous", NullValueHandling = NullValueHandling.Include)]
+        public GetPaymentLinkPaymentsPrevious? Previous { get; set; }
 
         /// <summary>
         /// The next set of items, if available.
         /// </summary>
-        [JsonProperty("next")]
-        public GetPaymentLinkPaymentsNext? Next { get; set; } = null;
+        [JsonProperty("next", NullValueHandling = NullValueHandling.Include)]
+        public GetPaymentLinkPaymentsNext? Next { get; set; }
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetPaymentLinkPaymentsDocumentation? Documentation { get; set; }
+        public GetPaymentLinkPaymentsDocumentation Documentation { get; set; } = default!;
     }
 }

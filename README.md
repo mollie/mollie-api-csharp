@@ -64,6 +64,7 @@ dotnet add reference src/Mollie/Mollie.csproj
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -193,6 +194,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 
@@ -217,6 +230,7 @@ You can set the security parameters through the `security` optional parameter wh
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -346,6 +360,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 
@@ -541,6 +567,7 @@ To change the default retry strategy for a single API call, simply pass a `Retry
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -680,6 +707,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 
@@ -691,6 +730,7 @@ If you'd like to override the default retry strategy for all operations that sup
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(
@@ -832,6 +872,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 
@@ -867,6 +919,7 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Errors;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -998,6 +1051,18 @@ try
             ProfileId = "pfl_5B8cwPMGnU",
             DueDate = "2025-01-01",
             Testmode = false,
+            ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+            Company = new CreatePaymentCompany() {
+                RegistrationNumber = "12345678",
+                VatNumber = "NL123456789B01",
+            },
+            CardToken = "tkn_12345",
+            VoucherNumber = "1234567890",
+            VoucherPin = "1234",
+            ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+            DigitalGoods = true,
+            CustomerReference = "1234567890",
+            TerminalId = "term_1234567890",
         }
     );
 
@@ -1034,6 +1099,7 @@ The default server can be overridden globally by passing a URL to the `serverUrl
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using NodaTime;
 using System.Collections.Generic;
 
 var sdk = new Client(
@@ -1166,6 +1232,18 @@ var res = await sdk.Payments.CreateAsync(
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new CreatePaymentCompany() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
     }
 );
 
