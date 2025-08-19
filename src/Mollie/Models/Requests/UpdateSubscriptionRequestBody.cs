@@ -40,11 +40,13 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
+        /// <br/>
+        /// Possible values: `... days`, `... weeks`, `... months`.
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public UpdateSubscriptionIntervalRequest? Interval { get; set; }
+        public string? Interval { get; set; }
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.

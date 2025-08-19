@@ -30,10 +30,15 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// Cadence unit of the recurring item. For example: `12 months`, `52 weeks` or `365 days`.
+        /// Cadence unit of the recurring item. For example: `12 months`, `52 weeks` or `365 days`.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// Possible values: `... days`, `... weeks`, `... months`.
+        /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public CreatePaymentIntervalResponse Interval { get; set; } = default!;
+        public string Interval { get; set; } = default!;
 
         /// <summary>
         /// Total amount and currency of the recurring item.

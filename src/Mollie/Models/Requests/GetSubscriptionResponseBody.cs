@@ -77,19 +77,21 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// Number of payments left for the subscription.
         /// </summary>
-        [JsonProperty("timesRemaining")]
-        public long TimesRemaining { get; set; } = default!;
+        [JsonProperty("timesRemaining", NullValueHandling = NullValueHandling.Include)]
+        public long? TimesRemaining { get; set; }
 
         /// <summary>
         /// Interval to wait between payments, for example `1 month` or `14 days`.<br/>
         /// 
         /// <remarks>
         /// <br/>
-        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).
+        /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
+        /// <br/>
+        /// Possible values: `... days`, `... weeks`, `... months`.
         /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
-        public GetSubscriptionInterval Interval { get; set; } = default!;
+        public string Interval { get; set; } = default!;
 
         /// <summary>
         /// The start date of the subscription in `YYYY-MM-DD` format.
@@ -197,6 +199,6 @@ namespace Mollie.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetSubscriptionLinks? Links { get; set; }
+        public GetSubscriptionLinks Links { get; set; } = default!;
     }
 }
