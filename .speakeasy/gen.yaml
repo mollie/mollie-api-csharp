@@ -29,7 +29,7 @@ csharp:
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIException
   disableNamespacePascalCasingApr2024: true
-  dotnetVersion: net8.0
+  dotnetVersion: net6.0
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
