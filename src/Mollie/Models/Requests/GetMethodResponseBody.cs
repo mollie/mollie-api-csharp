@@ -76,8 +76,8 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The payment method&apos;s activation status for this profile.
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Include)]
-        public GetMethodStatus? Status { get; set; }
+        [JsonProperty("status")]
+        public GetMethodStatus Status { get; set; } = default!;
 
         /// <summary>
         /// **Optional include.** Array of objects for each &apos;issuer&apos; that is available for this payment method. Only relevant<br/>

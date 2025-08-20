@@ -47,7 +47,7 @@ namespace Mollie.Models.Requests
         /// Example: `/v2/methods?amount[value]=100.00&amp;amount[currency]=USD`
         /// </remarks>
         /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=amount")]
+        [SpeakeasyMetadata("queryParam:style=deepObject,explode=true,name=amount")]
         public ListMethodsAmount? Amount { get; set; }
 
         /// <summary>
