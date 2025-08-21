@@ -20,6 +20,8 @@ namespace Mollie.Models.Requests
     {
         [JsonProperty("PAX")]
         Pax,
+        [JsonProperty("Tap")]
+        Tap,
     }
 
     public static class GetTerminalBrandExtension

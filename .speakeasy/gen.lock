@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 8acf17d3241327b1beafce478d9bc643
+  docChecksum: 48456f665cac7aa7053a6d2f11db0ec7
   docVersion: 1.0.0
   speakeasyVersion: 1.606.0
   generationVersion: 2.686.7
-  releaseVersion: 0.1.5
-  configChecksum: 3ed54a094ea2978333804ac77e34417f
+  releaseVersion: 0.1.6
+  configChecksum: 1a059d73e8011909125d7a45a4f269e0
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -9439,4 +9439,6 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## SDK Changes Detected:\n* `Client.Methods.List()`: \n  *  `request.Amount` **Changed**\n  *  `response.Embedded.Methods.[].Status` **Changed** **Breaking** :warning:\n* `Client.Methods.All()`: \n  *  `request.Amount` **Changed**\n  *  `response.Embedded.Methods.[].Status` **Changed** **Breaking** :warning:\n* `Client.Methods.Get()`:  `response.status` **Changed** **Breaking** :warning:\n"
+releaseNotes: |
+  ## SDK Changes Detected:
+  * `Client.Terminals.List()`:  `response` **Changed**

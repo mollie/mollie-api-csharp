@@ -24,10 +24,12 @@ namespace Mollie.Models.Requests
         A77,
         [JsonProperty("A920")]
         A920,
-        [JsonProperty("A920 Pro")]
+        [JsonProperty("A920Pro")]
         A920Pro,
         [JsonProperty("IM30")]
         Im30,
+        [JsonProperty("Tap")]
+        Tap,
     }
 
     public static class ListTerminalsModelExtension
