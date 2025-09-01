@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum RefundsPendingSubtotalCardAudience2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class RefundsPendingSubtotalCardAudience2 : IEquatable<RefundsPendingSubtotalCardAudience2>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly RefundsPendingSubtotalCardAudience2 Corporate = new RefundsPendingSubtotalCardAudience2("corporate");
+        public static readonly RefundsPendingSubtotalCardAudience2 Other = new RefundsPendingSubtotalCardAudience2("other");
 
-    public static class RefundsPendingSubtotalCardAudience2Extension
-    {
-        public static string Value(this RefundsPendingSubtotalCardAudience2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static RefundsPendingSubtotalCardAudience2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(RefundsPendingSubtotalCardAudience2).GetFields())
+        private static readonly Dictionary <string, RefundsPendingSubtotalCardAudience2> _knownValues =
+            new Dictionary <string, RefundsPendingSubtotalCardAudience2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, RefundsPendingSubtotalCardAudience2> _values =
+            new ConcurrentDictionary<string, RefundsPendingSubtotalCardAudience2>(_knownValues);
 
-                    if (enumVal is RefundsPendingSubtotalCardAudience2)
-                    {
-                        return (RefundsPendingSubtotalCardAudience2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum RefundsPendingSubtotalCardAudience2");
+        private RefundsPendingSubtotalCardAudience2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static RefundsPendingSubtotalCardAudience2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new RefundsPendingSubtotalCardAudience2(value));
+        }
+
+        public static implicit operator RefundsPendingSubtotalCardAudience2(string value) => Of(value);
+        public static implicit operator string(RefundsPendingSubtotalCardAudience2 refundspendingsubtotalcardaudience2) => refundspendingsubtotalcardaudience2.Value;
+
+        public static RefundsPendingSubtotalCardAudience2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as RefundsPendingSubtotalCardAudience2);
+
+        public bool Equals(RefundsPendingSubtotalCardAudience2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

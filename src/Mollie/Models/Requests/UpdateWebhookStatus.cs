@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status.
     /// </summary>
-    public enum UpdateWebhookStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class UpdateWebhookStatus : IEquatable<UpdateWebhookStatus>
     {
-        [JsonProperty("enabled")]
-        Enabled,
-        [JsonProperty("blocked")]
-        Blocked,
-        [JsonProperty("disabled")]
-        Disabled,
-        [JsonProperty("deleted")]
-        Deleted,
-    }
+        public static readonly UpdateWebhookStatus Enabled = new UpdateWebhookStatus("enabled");
+        public static readonly UpdateWebhookStatus Blocked = new UpdateWebhookStatus("blocked");
+        public static readonly UpdateWebhookStatus Disabled = new UpdateWebhookStatus("disabled");
+        public static readonly UpdateWebhookStatus Deleted = new UpdateWebhookStatus("deleted");
 
-    public static class UpdateWebhookStatusExtension
-    {
-        public static string Value(this UpdateWebhookStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static UpdateWebhookStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(UpdateWebhookStatus).GetFields())
+        private static readonly Dictionary <string, UpdateWebhookStatus> _knownValues =
+            new Dictionary <string, UpdateWebhookStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["enabled"] = Enabled,
+                ["blocked"] = Blocked,
+                ["disabled"] = Disabled,
+                ["deleted"] = Deleted
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, UpdateWebhookStatus> _values =
+            new ConcurrentDictionary<string, UpdateWebhookStatus>(_knownValues);
 
-                    if (enumVal is UpdateWebhookStatus)
-                    {
-                        return (UpdateWebhookStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum UpdateWebhookStatus");
+        private UpdateWebhookStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static UpdateWebhookStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new UpdateWebhookStatus(value));
+        }
+
+        public static implicit operator UpdateWebhookStatus(string value) => Of(value);
+        public static implicit operator string(UpdateWebhookStatus updatewebhookstatus) => updatewebhookstatus.Value;
+
+        public static UpdateWebhookStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as UpdateWebhookStatus);
+
+        public bool Equals(UpdateWebhookStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

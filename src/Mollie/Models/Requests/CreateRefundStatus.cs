@@ -12,57 +12,75 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Refunds may take some time to get confirmed.
     /// </summary>
-    public enum CreateRefundStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateRefundStatus : IEquatable<CreateRefundStatus>
     {
-        [JsonProperty("queued")]
-        Queued,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("processing")]
-        Processing,
-        [JsonProperty("refunded")]
-        Refunded,
-        [JsonProperty("failed")]
-        Failed,
-        [JsonProperty("canceled")]
-        Canceled,
-    }
+        public static readonly CreateRefundStatus Queued = new CreateRefundStatus("queued");
+        public static readonly CreateRefundStatus Pending = new CreateRefundStatus("pending");
+        public static readonly CreateRefundStatus Processing = new CreateRefundStatus("processing");
+        public static readonly CreateRefundStatus Refunded = new CreateRefundStatus("refunded");
+        public static readonly CreateRefundStatus Failed = new CreateRefundStatus("failed");
+        public static readonly CreateRefundStatus Canceled = new CreateRefundStatus("canceled");
 
-    public static class CreateRefundStatusExtension
-    {
-        public static string Value(this CreateRefundStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateRefundStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateRefundStatus).GetFields())
+        private static readonly Dictionary <string, CreateRefundStatus> _knownValues =
+            new Dictionary <string, CreateRefundStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["queued"] = Queued,
+                ["pending"] = Pending,
+                ["processing"] = Processing,
+                ["refunded"] = Refunded,
+                ["failed"] = Failed,
+                ["canceled"] = Canceled
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateRefundStatus> _values =
+            new ConcurrentDictionary<string, CreateRefundStatus>(_knownValues);
 
-                    if (enumVal is CreateRefundStatus)
-                    {
-                        return (CreateRefundStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateRefundStatus");
+        private CreateRefundStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateRefundStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateRefundStatus(value));
+        }
+
+        public static implicit operator CreateRefundStatus(string value) => Of(value);
+        public static implicit operator string(CreateRefundStatus createrefundstatus) => createrefundstatus.Value;
+
+        public static CreateRefundStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateRefundStatus);
+
+        public bool Equals(CreateRefundStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

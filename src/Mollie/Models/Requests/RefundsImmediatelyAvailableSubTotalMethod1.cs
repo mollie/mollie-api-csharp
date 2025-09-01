@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum RefundsImmediatelyAvailableSubTotalMethod1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class RefundsImmediatelyAvailableSubTotalMethod1 : IEquatable<RefundsImmediatelyAvailableSubTotalMethod1>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Alma = new RefundsImmediatelyAvailableSubTotalMethod1("alma");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Bacs = new RefundsImmediatelyAvailableSubTotalMethod1("bacs");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Applepay = new RefundsImmediatelyAvailableSubTotalMethod1("applepay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Bancomatpay = new RefundsImmediatelyAvailableSubTotalMethod1("bancomatpay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Bancontact = new RefundsImmediatelyAvailableSubTotalMethod1("bancontact");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Banktransfer = new RefundsImmediatelyAvailableSubTotalMethod1("banktransfer");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Belfius = new RefundsImmediatelyAvailableSubTotalMethod1("belfius");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Billie = new RefundsImmediatelyAvailableSubTotalMethod1("billie");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Bizum = new RefundsImmediatelyAvailableSubTotalMethod1("bizum");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Bitcoin = new RefundsImmediatelyAvailableSubTotalMethod1("bitcoin");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Blik = new RefundsImmediatelyAvailableSubTotalMethod1("blik");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Creditcard = new RefundsImmediatelyAvailableSubTotalMethod1("creditcard");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Directdebit = new RefundsImmediatelyAvailableSubTotalMethod1("directdebit");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Eps = new RefundsImmediatelyAvailableSubTotalMethod1("eps");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Giftcard = new RefundsImmediatelyAvailableSubTotalMethod1("giftcard");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Giropay = new RefundsImmediatelyAvailableSubTotalMethod1("giropay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Googlepay = new RefundsImmediatelyAvailableSubTotalMethod1("googlepay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Ideal = new RefundsImmediatelyAvailableSubTotalMethod1("ideal");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 In3 = new RefundsImmediatelyAvailableSubTotalMethod1("in3");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Inghomepay = new RefundsImmediatelyAvailableSubTotalMethod1("inghomepay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Kbc = new RefundsImmediatelyAvailableSubTotalMethod1("kbc");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Klarnapaylater = new RefundsImmediatelyAvailableSubTotalMethod1("klarnapaylater");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Klarnapaynow = new RefundsImmediatelyAvailableSubTotalMethod1("klarnapaynow");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Klarnasliceit = new RefundsImmediatelyAvailableSubTotalMethod1("klarnasliceit");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Klarna = new RefundsImmediatelyAvailableSubTotalMethod1("klarna");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Mbway = new RefundsImmediatelyAvailableSubTotalMethod1("mbway");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Multibanco = new RefundsImmediatelyAvailableSubTotalMethod1("multibanco");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Mybank = new RefundsImmediatelyAvailableSubTotalMethod1("mybank");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Paybybank = new RefundsImmediatelyAvailableSubTotalMethod1("paybybank");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Payconiq = new RefundsImmediatelyAvailableSubTotalMethod1("payconiq");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Paypal = new RefundsImmediatelyAvailableSubTotalMethod1("paypal");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Paysafecard = new RefundsImmediatelyAvailableSubTotalMethod1("paysafecard");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Przelewy24 = new RefundsImmediatelyAvailableSubTotalMethod1("przelewy24");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Riverty = new RefundsImmediatelyAvailableSubTotalMethod1("riverty");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Satispay = new RefundsImmediatelyAvailableSubTotalMethod1("satispay");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Podiumcadeaukaart = new RefundsImmediatelyAvailableSubTotalMethod1("podiumcadeaukaart");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Pointofsale = new RefundsImmediatelyAvailableSubTotalMethod1("pointofsale");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Sofort = new RefundsImmediatelyAvailableSubTotalMethod1("sofort");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Swish = new RefundsImmediatelyAvailableSubTotalMethod1("swish");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Trustly = new RefundsImmediatelyAvailableSubTotalMethod1("trustly");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Twint = new RefundsImmediatelyAvailableSubTotalMethod1("twint");
+        public static readonly RefundsImmediatelyAvailableSubTotalMethod1 Voucher = new RefundsImmediatelyAvailableSubTotalMethod1("voucher");
 
-    public static class RefundsImmediatelyAvailableSubTotalMethod1Extension
-    {
-        public static string Value(this RefundsImmediatelyAvailableSubTotalMethod1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static RefundsImmediatelyAvailableSubTotalMethod1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(RefundsImmediatelyAvailableSubTotalMethod1).GetFields())
+        private static readonly Dictionary <string, RefundsImmediatelyAvailableSubTotalMethod1> _knownValues =
+            new Dictionary <string, RefundsImmediatelyAvailableSubTotalMethod1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, RefundsImmediatelyAvailableSubTotalMethod1> _values =
+            new ConcurrentDictionary<string, RefundsImmediatelyAvailableSubTotalMethod1>(_knownValues);
 
-                    if (enumVal is RefundsImmediatelyAvailableSubTotalMethod1)
-                    {
-                        return (RefundsImmediatelyAvailableSubTotalMethod1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum RefundsImmediatelyAvailableSubTotalMethod1");
+        private RefundsImmediatelyAvailableSubTotalMethod1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static RefundsImmediatelyAvailableSubTotalMethod1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new RefundsImmediatelyAvailableSubTotalMethod1(value));
+        }
+
+        public static implicit operator RefundsImmediatelyAvailableSubTotalMethod1(string value) => Of(value);
+        public static implicit operator string(RefundsImmediatelyAvailableSubTotalMethod1 refundsimmediatelyavailablesubtotalmethod1) => refundsimmediatelyavailablesubtotalmethod1.Value;
+
+        public static RefundsImmediatelyAvailableSubTotalMethod1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as RefundsImmediatelyAvailableSubTotalMethod1);
+
+        public bool Equals(RefundsImmediatelyAvailableSubTotalMethod1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

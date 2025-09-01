@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The brand of the terminal.
     /// </summary>
-    public enum GetTerminalBrand
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetTerminalBrand : IEquatable<GetTerminalBrand>
     {
-        [JsonProperty("PAX")]
-        Pax,
-        [JsonProperty("Tap")]
-        Tap,
-    }
+        public static readonly GetTerminalBrand Pax = new GetTerminalBrand("PAX");
+        public static readonly GetTerminalBrand Tap = new GetTerminalBrand("Tap");
 
-    public static class GetTerminalBrandExtension
-    {
-        public static string Value(this GetTerminalBrand value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetTerminalBrand ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetTerminalBrand).GetFields())
+        private static readonly Dictionary <string, GetTerminalBrand> _knownValues =
+            new Dictionary <string, GetTerminalBrand> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["PAX"] = Pax,
+                ["Tap"] = Tap
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetTerminalBrand> _values =
+            new ConcurrentDictionary<string, GetTerminalBrand>(_knownValues);
 
-                    if (enumVal is GetTerminalBrand)
-                    {
-                        return (GetTerminalBrand)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetTerminalBrand");
+        private GetTerminalBrand(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetTerminalBrand Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetTerminalBrand(value));
+        }
+
+        public static implicit operator GetTerminalBrand(string value) => Of(value);
+        public static implicit operator string(GetTerminalBrand getterminalbrand) => getterminalbrand.Value;
+
+        public static GetTerminalBrand[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetTerminalBrand);
+
+        public bool Equals(GetTerminalBrand? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

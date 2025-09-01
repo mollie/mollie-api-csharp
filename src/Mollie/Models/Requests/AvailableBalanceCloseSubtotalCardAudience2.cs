@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum AvailableBalanceCloseSubtotalCardAudience2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AvailableBalanceCloseSubtotalCardAudience2 : IEquatable<AvailableBalanceCloseSubtotalCardAudience2>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly AvailableBalanceCloseSubtotalCardAudience2 Corporate = new AvailableBalanceCloseSubtotalCardAudience2("corporate");
+        public static readonly AvailableBalanceCloseSubtotalCardAudience2 Other = new AvailableBalanceCloseSubtotalCardAudience2("other");
 
-    public static class AvailableBalanceCloseSubtotalCardAudience2Extension
-    {
-        public static string Value(this AvailableBalanceCloseSubtotalCardAudience2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static AvailableBalanceCloseSubtotalCardAudience2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(AvailableBalanceCloseSubtotalCardAudience2).GetFields())
+        private static readonly Dictionary <string, AvailableBalanceCloseSubtotalCardAudience2> _knownValues =
+            new Dictionary <string, AvailableBalanceCloseSubtotalCardAudience2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AvailableBalanceCloseSubtotalCardAudience2> _values =
+            new ConcurrentDictionary<string, AvailableBalanceCloseSubtotalCardAudience2>(_knownValues);
 
-                    if (enumVal is AvailableBalanceCloseSubtotalCardAudience2)
-                    {
-                        return (AvailableBalanceCloseSubtotalCardAudience2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AvailableBalanceCloseSubtotalCardAudience2");
+        private AvailableBalanceCloseSubtotalCardAudience2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AvailableBalanceCloseSubtotalCardAudience2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AvailableBalanceCloseSubtotalCardAudience2(value));
+        }
+
+        public static implicit operator AvailableBalanceCloseSubtotalCardAudience2(string value) => Of(value);
+        public static implicit operator string(AvailableBalanceCloseSubtotalCardAudience2 availablebalanceclosesubtotalcardaudience2) => availablebalanceclosesubtotalcardaudience2.Value;
+
+        public static AvailableBalanceCloseSubtotalCardAudience2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceCloseSubtotalCardAudience2);
+
+        public bool Equals(AvailableBalanceCloseSubtotalCardAudience2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

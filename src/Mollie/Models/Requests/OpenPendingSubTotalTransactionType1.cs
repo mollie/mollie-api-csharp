@@ -12,123 +12,141 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Represents the transaction type
     /// </summary>
-    public enum OpenPendingSubTotalTransactionType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class OpenPendingSubTotalTransactionType1 : IEquatable<OpenPendingSubTotalTransactionType1>
     {
-        [JsonProperty("payment")]
-        Payment,
-        [JsonProperty("split-payment")]
-        SplitPayment,
-        [JsonProperty("failed-payment")]
-        FailedPayment,
-        [JsonProperty("failed-platform-split-payment")]
-        FailedPlatformSplitPayment,
-        [JsonProperty("failed-split-payment-compensation")]
-        FailedSplitPaymentCompensation,
-        [JsonProperty("capture")]
-        Capture,
-        [JsonProperty("split-transaction")]
-        SplitTransaction,
-        [JsonProperty("refund")]
-        Refund,
-        [JsonProperty("platform-payment-refund")]
-        PlatformPaymentRefund,
-        [JsonProperty("returned-platform-payment-refund")]
-        ReturnedPlatformPaymentRefund,
-        [JsonProperty("refund-compensation")]
-        RefundCompensation,
-        [JsonProperty("returned-refund-compensation")]
-        ReturnedRefundCompensation,
-        [JsonProperty("returned-refund")]
-        ReturnedRefund,
-        [JsonProperty("chargeback")]
-        Chargeback,
-        [JsonProperty("chargeback-reversal")]
-        ChargebackReversal,
-        [JsonProperty("chargeback-compensation")]
-        ChargebackCompensation,
-        [JsonProperty("reversed-chargeback-compensation")]
-        ReversedChargebackCompensation,
-        [JsonProperty("platform-payment-chargeback")]
-        PlatformPaymentChargeback,
-        [JsonProperty("reversed-platform-payment-chargeback")]
-        ReversedPlatformPaymentChargeback,
-        [JsonProperty("fee-prepayment")]
-        FeePrepayment,
-        [JsonProperty("outgoing-transfer")]
-        OutgoingTransfer,
-        [JsonProperty("incoming-transfer")]
-        IncomingTransfer,
-        [JsonProperty("canceled-transfer")]
-        CanceledTransfer,
-        [JsonProperty("returned-transfer")]
-        ReturnedTransfer,
-        [JsonProperty("balance-reserve")]
-        BalanceReserve,
-        [JsonProperty("balance-reserve-return")]
-        BalanceReserveReturn,
-        [JsonProperty("invoice-rounding-compensation")]
-        InvoiceRoundingCompensation,
-        [JsonProperty("rolling-reserve-hold")]
-        RollingReserveHold,
-        [JsonProperty("rolling-reserve-release")]
-        RollingReserveRelease,
-        [JsonProperty("balance-correction")]
-        BalanceCorrection,
-        [JsonProperty("repayment")]
-        Repayment,
-        [JsonProperty("loan")]
-        Loan,
-        [JsonProperty("balance-topup")]
-        BalanceTopup,
-        [JsonProperty("cash-collateral-issuance';")]
-        CashCollateralIssuance,
-        [JsonProperty("cash-collateral-release")]
-        CashCollateralRelease,
-        [JsonProperty("pending-rolling-reserve")]
-        PendingRollingReserve,
-        [JsonProperty("to-be-released-rolling-reserve")]
-        ToBeReleasedRollingReserve,
-        [JsonProperty("held-rolling-reserve")]
-        HeldRollingReserve,
-        [JsonProperty("released-rolling-reserve")]
-        ReleasedRollingReserve,
-    }
+        public static readonly OpenPendingSubTotalTransactionType1 Payment = new OpenPendingSubTotalTransactionType1("payment");
+        public static readonly OpenPendingSubTotalTransactionType1 SplitPayment = new OpenPendingSubTotalTransactionType1("split-payment");
+        public static readonly OpenPendingSubTotalTransactionType1 FailedPayment = new OpenPendingSubTotalTransactionType1("failed-payment");
+        public static readonly OpenPendingSubTotalTransactionType1 FailedPlatformSplitPayment = new OpenPendingSubTotalTransactionType1("failed-platform-split-payment");
+        public static readonly OpenPendingSubTotalTransactionType1 FailedSplitPaymentCompensation = new OpenPendingSubTotalTransactionType1("failed-split-payment-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 Capture = new OpenPendingSubTotalTransactionType1("capture");
+        public static readonly OpenPendingSubTotalTransactionType1 SplitTransaction = new OpenPendingSubTotalTransactionType1("split-transaction");
+        public static readonly OpenPendingSubTotalTransactionType1 Refund = new OpenPendingSubTotalTransactionType1("refund");
+        public static readonly OpenPendingSubTotalTransactionType1 PlatformPaymentRefund = new OpenPendingSubTotalTransactionType1("platform-payment-refund");
+        public static readonly OpenPendingSubTotalTransactionType1 ReturnedPlatformPaymentRefund = new OpenPendingSubTotalTransactionType1("returned-platform-payment-refund");
+        public static readonly OpenPendingSubTotalTransactionType1 RefundCompensation = new OpenPendingSubTotalTransactionType1("refund-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 ReturnedRefundCompensation = new OpenPendingSubTotalTransactionType1("returned-refund-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 ReturnedRefund = new OpenPendingSubTotalTransactionType1("returned-refund");
+        public static readonly OpenPendingSubTotalTransactionType1 Chargeback = new OpenPendingSubTotalTransactionType1("chargeback");
+        public static readonly OpenPendingSubTotalTransactionType1 ChargebackReversal = new OpenPendingSubTotalTransactionType1("chargeback-reversal");
+        public static readonly OpenPendingSubTotalTransactionType1 ChargebackCompensation = new OpenPendingSubTotalTransactionType1("chargeback-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 ReversedChargebackCompensation = new OpenPendingSubTotalTransactionType1("reversed-chargeback-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 PlatformPaymentChargeback = new OpenPendingSubTotalTransactionType1("platform-payment-chargeback");
+        public static readonly OpenPendingSubTotalTransactionType1 ReversedPlatformPaymentChargeback = new OpenPendingSubTotalTransactionType1("reversed-platform-payment-chargeback");
+        public static readonly OpenPendingSubTotalTransactionType1 FeePrepayment = new OpenPendingSubTotalTransactionType1("fee-prepayment");
+        public static readonly OpenPendingSubTotalTransactionType1 OutgoingTransfer = new OpenPendingSubTotalTransactionType1("outgoing-transfer");
+        public static readonly OpenPendingSubTotalTransactionType1 IncomingTransfer = new OpenPendingSubTotalTransactionType1("incoming-transfer");
+        public static readonly OpenPendingSubTotalTransactionType1 CanceledTransfer = new OpenPendingSubTotalTransactionType1("canceled-transfer");
+        public static readonly OpenPendingSubTotalTransactionType1 ReturnedTransfer = new OpenPendingSubTotalTransactionType1("returned-transfer");
+        public static readonly OpenPendingSubTotalTransactionType1 BalanceReserve = new OpenPendingSubTotalTransactionType1("balance-reserve");
+        public static readonly OpenPendingSubTotalTransactionType1 BalanceReserveReturn = new OpenPendingSubTotalTransactionType1("balance-reserve-return");
+        public static readonly OpenPendingSubTotalTransactionType1 InvoiceRoundingCompensation = new OpenPendingSubTotalTransactionType1("invoice-rounding-compensation");
+        public static readonly OpenPendingSubTotalTransactionType1 RollingReserveHold = new OpenPendingSubTotalTransactionType1("rolling-reserve-hold");
+        public static readonly OpenPendingSubTotalTransactionType1 RollingReserveRelease = new OpenPendingSubTotalTransactionType1("rolling-reserve-release");
+        public static readonly OpenPendingSubTotalTransactionType1 BalanceCorrection = new OpenPendingSubTotalTransactionType1("balance-correction");
+        public static readonly OpenPendingSubTotalTransactionType1 Repayment = new OpenPendingSubTotalTransactionType1("repayment");
+        public static readonly OpenPendingSubTotalTransactionType1 Loan = new OpenPendingSubTotalTransactionType1("loan");
+        public static readonly OpenPendingSubTotalTransactionType1 BalanceTopup = new OpenPendingSubTotalTransactionType1("balance-topup");
+        public static readonly OpenPendingSubTotalTransactionType1 CashCollateralIssuance = new OpenPendingSubTotalTransactionType1("cash-collateral-issuance';");
+        public static readonly OpenPendingSubTotalTransactionType1 CashCollateralRelease = new OpenPendingSubTotalTransactionType1("cash-collateral-release");
+        public static readonly OpenPendingSubTotalTransactionType1 PendingRollingReserve = new OpenPendingSubTotalTransactionType1("pending-rolling-reserve");
+        public static readonly OpenPendingSubTotalTransactionType1 ToBeReleasedRollingReserve = new OpenPendingSubTotalTransactionType1("to-be-released-rolling-reserve");
+        public static readonly OpenPendingSubTotalTransactionType1 HeldRollingReserve = new OpenPendingSubTotalTransactionType1("held-rolling-reserve");
+        public static readonly OpenPendingSubTotalTransactionType1 ReleasedRollingReserve = new OpenPendingSubTotalTransactionType1("released-rolling-reserve");
 
-    public static class OpenPendingSubTotalTransactionType1Extension
-    {
-        public static string Value(this OpenPendingSubTotalTransactionType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static OpenPendingSubTotalTransactionType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(OpenPendingSubTotalTransactionType1).GetFields())
+        private static readonly Dictionary <string, OpenPendingSubTotalTransactionType1> _knownValues =
+            new Dictionary <string, OpenPendingSubTotalTransactionType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment"] = Payment,
+                ["split-payment"] = SplitPayment,
+                ["failed-payment"] = FailedPayment,
+                ["failed-platform-split-payment"] = FailedPlatformSplitPayment,
+                ["failed-split-payment-compensation"] = FailedSplitPaymentCompensation,
+                ["capture"] = Capture,
+                ["split-transaction"] = SplitTransaction,
+                ["refund"] = Refund,
+                ["platform-payment-refund"] = PlatformPaymentRefund,
+                ["returned-platform-payment-refund"] = ReturnedPlatformPaymentRefund,
+                ["refund-compensation"] = RefundCompensation,
+                ["returned-refund-compensation"] = ReturnedRefundCompensation,
+                ["returned-refund"] = ReturnedRefund,
+                ["chargeback"] = Chargeback,
+                ["chargeback-reversal"] = ChargebackReversal,
+                ["chargeback-compensation"] = ChargebackCompensation,
+                ["reversed-chargeback-compensation"] = ReversedChargebackCompensation,
+                ["platform-payment-chargeback"] = PlatformPaymentChargeback,
+                ["reversed-platform-payment-chargeback"] = ReversedPlatformPaymentChargeback,
+                ["fee-prepayment"] = FeePrepayment,
+                ["outgoing-transfer"] = OutgoingTransfer,
+                ["incoming-transfer"] = IncomingTransfer,
+                ["canceled-transfer"] = CanceledTransfer,
+                ["returned-transfer"] = ReturnedTransfer,
+                ["balance-reserve"] = BalanceReserve,
+                ["balance-reserve-return"] = BalanceReserveReturn,
+                ["invoice-rounding-compensation"] = InvoiceRoundingCompensation,
+                ["rolling-reserve-hold"] = RollingReserveHold,
+                ["rolling-reserve-release"] = RollingReserveRelease,
+                ["balance-correction"] = BalanceCorrection,
+                ["repayment"] = Repayment,
+                ["loan"] = Loan,
+                ["balance-topup"] = BalanceTopup,
+                ["cash-collateral-issuance';"] = CashCollateralIssuance,
+                ["cash-collateral-release"] = CashCollateralRelease,
+                ["pending-rolling-reserve"] = PendingRollingReserve,
+                ["to-be-released-rolling-reserve"] = ToBeReleasedRollingReserve,
+                ["held-rolling-reserve"] = HeldRollingReserve,
+                ["released-rolling-reserve"] = ReleasedRollingReserve
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, OpenPendingSubTotalTransactionType1> _values =
+            new ConcurrentDictionary<string, OpenPendingSubTotalTransactionType1>(_knownValues);
 
-                    if (enumVal is OpenPendingSubTotalTransactionType1)
-                    {
-                        return (OpenPendingSubTotalTransactionType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum OpenPendingSubTotalTransactionType1");
+        private OpenPendingSubTotalTransactionType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static OpenPendingSubTotalTransactionType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new OpenPendingSubTotalTransactionType1(value));
+        }
+
+        public static implicit operator OpenPendingSubTotalTransactionType1(string value) => Of(value);
+        public static implicit operator string(OpenPendingSubTotalTransactionType1 openpendingsubtotaltransactiontype1) => openpendingsubtotaltransactiontype1.Value;
+
+        public static OpenPendingSubTotalTransactionType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as OpenPendingSubTotalTransactionType1);
+
+        public bool Equals(OpenPendingSubTotalTransactionType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

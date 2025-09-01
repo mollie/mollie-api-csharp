@@ -20,7 +20,7 @@ namespace Mollie.Models.Requests
         /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public TypeAcquirerReferenceRequest? Type { get; set; }
+        public TypeAcquirerReference? Type { get; set; }
 
         /// <summary>
         /// Unique reference from the payment provider

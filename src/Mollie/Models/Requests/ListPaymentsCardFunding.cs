@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The card type.
     /// </summary>
-    public enum ListPaymentsCardFunding
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListPaymentsCardFunding : IEquatable<ListPaymentsCardFunding>
     {
-        [JsonProperty("debit")]
-        Debit,
-        [JsonProperty("credit")]
-        Credit,
-        [JsonProperty("prepaid")]
-        Prepaid,
-        [JsonProperty("deferred-debit")]
-        DeferredDebit,
-    }
+        public static readonly ListPaymentsCardFunding Debit = new ListPaymentsCardFunding("debit");
+        public static readonly ListPaymentsCardFunding Credit = new ListPaymentsCardFunding("credit");
+        public static readonly ListPaymentsCardFunding Prepaid = new ListPaymentsCardFunding("prepaid");
+        public static readonly ListPaymentsCardFunding DeferredDebit = new ListPaymentsCardFunding("deferred-debit");
 
-    public static class ListPaymentsCardFundingExtension
-    {
-        public static string Value(this ListPaymentsCardFunding value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListPaymentsCardFunding ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListPaymentsCardFunding).GetFields())
+        private static readonly Dictionary <string, ListPaymentsCardFunding> _knownValues =
+            new Dictionary <string, ListPaymentsCardFunding> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["debit"] = Debit,
+                ["credit"] = Credit,
+                ["prepaid"] = Prepaid,
+                ["deferred-debit"] = DeferredDebit
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListPaymentsCardFunding> _values =
+            new ConcurrentDictionary<string, ListPaymentsCardFunding>(_knownValues);
 
-                    if (enumVal is ListPaymentsCardFunding)
-                    {
-                        return (ListPaymentsCardFunding)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListPaymentsCardFunding");
+        private ListPaymentsCardFunding(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListPaymentsCardFunding Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListPaymentsCardFunding(value));
+        }
+
+        public static implicit operator ListPaymentsCardFunding(string value) => Of(value);
+        public static implicit operator string(ListPaymentsCardFunding listpaymentscardfunding) => listpaymentscardfunding.Value;
+
+        public static ListPaymentsCardFunding[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListPaymentsCardFunding);
+
+        public bool Equals(ListPaymentsCardFunding? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

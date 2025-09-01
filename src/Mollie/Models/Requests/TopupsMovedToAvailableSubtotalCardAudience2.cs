@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum TopupsMovedToAvailableSubtotalCardAudience2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class TopupsMovedToAvailableSubtotalCardAudience2 : IEquatable<TopupsMovedToAvailableSubtotalCardAudience2>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly TopupsMovedToAvailableSubtotalCardAudience2 Corporate = new TopupsMovedToAvailableSubtotalCardAudience2("corporate");
+        public static readonly TopupsMovedToAvailableSubtotalCardAudience2 Other = new TopupsMovedToAvailableSubtotalCardAudience2("other");
 
-    public static class TopupsMovedToAvailableSubtotalCardAudience2Extension
-    {
-        public static string Value(this TopupsMovedToAvailableSubtotalCardAudience2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static TopupsMovedToAvailableSubtotalCardAudience2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(TopupsMovedToAvailableSubtotalCardAudience2).GetFields())
+        private static readonly Dictionary <string, TopupsMovedToAvailableSubtotalCardAudience2> _knownValues =
+            new Dictionary <string, TopupsMovedToAvailableSubtotalCardAudience2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, TopupsMovedToAvailableSubtotalCardAudience2> _values =
+            new ConcurrentDictionary<string, TopupsMovedToAvailableSubtotalCardAudience2>(_knownValues);
 
-                    if (enumVal is TopupsMovedToAvailableSubtotalCardAudience2)
-                    {
-                        return (TopupsMovedToAvailableSubtotalCardAudience2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum TopupsMovedToAvailableSubtotalCardAudience2");
+        private TopupsMovedToAvailableSubtotalCardAudience2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static TopupsMovedToAvailableSubtotalCardAudience2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new TopupsMovedToAvailableSubtotalCardAudience2(value));
+        }
+
+        public static implicit operator TopupsMovedToAvailableSubtotalCardAudience2(string value) => Of(value);
+        public static implicit operator string(TopupsMovedToAvailableSubtotalCardAudience2 topupsmovedtoavailablesubtotalcardaudience2) => topupsmovedtoavailablesubtotalcardaudience2.Value;
+
+        public static TopupsMovedToAvailableSubtotalCardAudience2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as TopupsMovedToAvailableSubtotalCardAudience2);
+
+        public bool Equals(TopupsMovedToAvailableSubtotalCardAudience2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

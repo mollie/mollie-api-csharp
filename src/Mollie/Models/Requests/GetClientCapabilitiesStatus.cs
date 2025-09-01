@@ -12,50 +12,68 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum GetClientCapabilitiesStatus
-    {
-        [JsonProperty("unrequested")]
-        Unrequested,
-        [JsonProperty("enabled")]
-        Enabled,
-        [JsonProperty("disabled")]
-        Disabled,
-        [JsonProperty("pending")]
-        Pending,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class GetClientCapabilitiesStatusExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetClientCapabilitiesStatus : IEquatable<GetClientCapabilitiesStatus>
     {
-        public static string Value(this GetClientCapabilitiesStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly GetClientCapabilitiesStatus Unrequested = new GetClientCapabilitiesStatus("unrequested");
+        public static readonly GetClientCapabilitiesStatus Enabled = new GetClientCapabilitiesStatus("enabled");
+        public static readonly GetClientCapabilitiesStatus Disabled = new GetClientCapabilitiesStatus("disabled");
+        public static readonly GetClientCapabilitiesStatus Pending = new GetClientCapabilitiesStatus("pending");
 
-        public static GetClientCapabilitiesStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetClientCapabilitiesStatus).GetFields())
+        private static readonly Dictionary <string, GetClientCapabilitiesStatus> _knownValues =
+            new Dictionary <string, GetClientCapabilitiesStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["unrequested"] = Unrequested,
+                ["enabled"] = Enabled,
+                ["disabled"] = Disabled,
+                ["pending"] = Pending
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetClientCapabilitiesStatus> _values =
+            new ConcurrentDictionary<string, GetClientCapabilitiesStatus>(_knownValues);
 
-                    if (enumVal is GetClientCapabilitiesStatus)
-                    {
-                        return (GetClientCapabilitiesStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetClientCapabilitiesStatus");
+        private GetClientCapabilitiesStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetClientCapabilitiesStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetClientCapabilitiesStatus(value));
+        }
+
+        public static implicit operator GetClientCapabilitiesStatus(string value) => Of(value);
+        public static implicit operator string(GetClientCapabilitiesStatus getclientcapabilitiesstatus) => getclientcapabilitiesstatus.Value;
+
+        public static GetClientCapabilitiesStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetClientCapabilitiesStatus);
+
+        public bool Equals(GetClientCapabilitiesStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

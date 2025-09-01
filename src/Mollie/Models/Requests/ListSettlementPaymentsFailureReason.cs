@@ -12,75 +12,93 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// A failure code to help understand why the payment failed.
     /// </summary>
-    public enum ListSettlementPaymentsFailureReason
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSettlementPaymentsFailureReason : IEquatable<ListSettlementPaymentsFailureReason>
     {
-        [JsonProperty("authentication_abandoned")]
-        AuthenticationAbandoned,
-        [JsonProperty("authentication_failed")]
-        AuthenticationFailed,
-        [JsonProperty("authentication_required")]
-        AuthenticationRequired,
-        [JsonProperty("authentication_unavailable_acs")]
-        AuthenticationUnavailableAcs,
-        [JsonProperty("card_declined")]
-        CardDeclined,
-        [JsonProperty("card_expired")]
-        CardExpired,
-        [JsonProperty("inactive_card")]
-        InactiveCard,
-        [JsonProperty("insufficient_funds")]
-        InsufficientFunds,
-        [JsonProperty("invalid_cvv")]
-        InvalidCvv,
-        [JsonProperty("invalid_card_holder_name")]
-        InvalidCardHolderName,
-        [JsonProperty("invalid_card_number")]
-        InvalidCardNumber,
-        [JsonProperty("invalid_card_type")]
-        InvalidCardType,
-        [JsonProperty("possible_fraud")]
-        PossibleFraud,
-        [JsonProperty("refused_by_issuer")]
-        RefusedByIssuer,
-        [JsonProperty("unknown_reason")]
-        UnknownReason,
-    }
+        public static readonly ListSettlementPaymentsFailureReason AuthenticationAbandoned = new ListSettlementPaymentsFailureReason("authentication_abandoned");
+        public static readonly ListSettlementPaymentsFailureReason AuthenticationFailed = new ListSettlementPaymentsFailureReason("authentication_failed");
+        public static readonly ListSettlementPaymentsFailureReason AuthenticationRequired = new ListSettlementPaymentsFailureReason("authentication_required");
+        public static readonly ListSettlementPaymentsFailureReason AuthenticationUnavailableAcs = new ListSettlementPaymentsFailureReason("authentication_unavailable_acs");
+        public static readonly ListSettlementPaymentsFailureReason CardDeclined = new ListSettlementPaymentsFailureReason("card_declined");
+        public static readonly ListSettlementPaymentsFailureReason CardExpired = new ListSettlementPaymentsFailureReason("card_expired");
+        public static readonly ListSettlementPaymentsFailureReason InactiveCard = new ListSettlementPaymentsFailureReason("inactive_card");
+        public static readonly ListSettlementPaymentsFailureReason InsufficientFunds = new ListSettlementPaymentsFailureReason("insufficient_funds");
+        public static readonly ListSettlementPaymentsFailureReason InvalidCvv = new ListSettlementPaymentsFailureReason("invalid_cvv");
+        public static readonly ListSettlementPaymentsFailureReason InvalidCardHolderName = new ListSettlementPaymentsFailureReason("invalid_card_holder_name");
+        public static readonly ListSettlementPaymentsFailureReason InvalidCardNumber = new ListSettlementPaymentsFailureReason("invalid_card_number");
+        public static readonly ListSettlementPaymentsFailureReason InvalidCardType = new ListSettlementPaymentsFailureReason("invalid_card_type");
+        public static readonly ListSettlementPaymentsFailureReason PossibleFraud = new ListSettlementPaymentsFailureReason("possible_fraud");
+        public static readonly ListSettlementPaymentsFailureReason RefusedByIssuer = new ListSettlementPaymentsFailureReason("refused_by_issuer");
+        public static readonly ListSettlementPaymentsFailureReason UnknownReason = new ListSettlementPaymentsFailureReason("unknown_reason");
 
-    public static class ListSettlementPaymentsFailureReasonExtension
-    {
-        public static string Value(this ListSettlementPaymentsFailureReason value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSettlementPaymentsFailureReason ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSettlementPaymentsFailureReason).GetFields())
+        private static readonly Dictionary <string, ListSettlementPaymentsFailureReason> _knownValues =
+            new Dictionary <string, ListSettlementPaymentsFailureReason> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["authentication_abandoned"] = AuthenticationAbandoned,
+                ["authentication_failed"] = AuthenticationFailed,
+                ["authentication_required"] = AuthenticationRequired,
+                ["authentication_unavailable_acs"] = AuthenticationUnavailableAcs,
+                ["card_declined"] = CardDeclined,
+                ["card_expired"] = CardExpired,
+                ["inactive_card"] = InactiveCard,
+                ["insufficient_funds"] = InsufficientFunds,
+                ["invalid_cvv"] = InvalidCvv,
+                ["invalid_card_holder_name"] = InvalidCardHolderName,
+                ["invalid_card_number"] = InvalidCardNumber,
+                ["invalid_card_type"] = InvalidCardType,
+                ["possible_fraud"] = PossibleFraud,
+                ["refused_by_issuer"] = RefusedByIssuer,
+                ["unknown_reason"] = UnknownReason
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsFailureReason> _values =
+            new ConcurrentDictionary<string, ListSettlementPaymentsFailureReason>(_knownValues);
 
-                    if (enumVal is ListSettlementPaymentsFailureReason)
-                    {
-                        return (ListSettlementPaymentsFailureReason)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsFailureReason");
+        private ListSettlementPaymentsFailureReason(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSettlementPaymentsFailureReason Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsFailureReason(value));
+        }
+
+        public static implicit operator ListSettlementPaymentsFailureReason(string value) => Of(value);
+        public static implicit operator string(ListSettlementPaymentsFailureReason listsettlementpaymentsfailurereason) => listsettlementpaymentsfailurereason.Value;
+
+        public static ListSettlementPaymentsFailureReason[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsFailureReason);
+
+        public bool Equals(ListSettlementPaymentsFailureReason? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

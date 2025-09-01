@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum FeePrepaymentsMovedToAvailableSubTotalCardAudience1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class FeePrepaymentsMovedToAvailableSubTotalCardAudience1 : IEquatable<FeePrepaymentsMovedToAvailableSubTotalCardAudience1>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardAudience1 Corporate = new FeePrepaymentsMovedToAvailableSubTotalCardAudience1("corporate");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardAudience1 Other = new FeePrepaymentsMovedToAvailableSubTotalCardAudience1("other");
 
-    public static class FeePrepaymentsMovedToAvailableSubTotalCardAudience1Extension
-    {
-        public static string Value(this FeePrepaymentsMovedToAvailableSubTotalCardAudience1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static FeePrepaymentsMovedToAvailableSubTotalCardAudience1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(FeePrepaymentsMovedToAvailableSubTotalCardAudience1).GetFields())
+        private static readonly Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalCardAudience1> _knownValues =
+            new Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalCardAudience1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalCardAudience1> _values =
+            new ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalCardAudience1>(_knownValues);
 
-                    if (enumVal is FeePrepaymentsMovedToAvailableSubTotalCardAudience1)
-                    {
-                        return (FeePrepaymentsMovedToAvailableSubTotalCardAudience1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum FeePrepaymentsMovedToAvailableSubTotalCardAudience1");
+        private FeePrepaymentsMovedToAvailableSubTotalCardAudience1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static FeePrepaymentsMovedToAvailableSubTotalCardAudience1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new FeePrepaymentsMovedToAvailableSubTotalCardAudience1(value));
+        }
+
+        public static implicit operator FeePrepaymentsMovedToAvailableSubTotalCardAudience1(string value) => Of(value);
+        public static implicit operator string(FeePrepaymentsMovedToAvailableSubTotalCardAudience1 feeprepaymentsmovedtoavailablesubtotalcardaudience1) => feeprepaymentsmovedtoavailablesubtotalcardaudience1.Value;
+
+        public static FeePrepaymentsMovedToAvailableSubTotalCardAudience1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsMovedToAvailableSubTotalCardAudience1);
+
+        public bool Equals(FeePrepaymentsMovedToAvailableSubTotalCardAudience1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum AvailableBalanceImmediatelyAvailableSubtotalCardAudience2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 : IEquatable<AvailableBalanceImmediatelyAvailableSubtotalCardAudience2>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 Corporate = new AvailableBalanceImmediatelyAvailableSubtotalCardAudience2("corporate");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 Other = new AvailableBalanceImmediatelyAvailableSubtotalCardAudience2("other");
 
-    public static class AvailableBalanceImmediatelyAvailableSubtotalCardAudience2Extension
-    {
-        public static string Value(this AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(AvailableBalanceImmediatelyAvailableSubtotalCardAudience2).GetFields())
+        private static readonly Dictionary <string, AvailableBalanceImmediatelyAvailableSubtotalCardAudience2> _knownValues =
+            new Dictionary <string, AvailableBalanceImmediatelyAvailableSubtotalCardAudience2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubtotalCardAudience2> _values =
+            new ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubtotalCardAudience2>(_knownValues);
 
-                    if (enumVal is AvailableBalanceImmediatelyAvailableSubtotalCardAudience2)
-                    {
-                        return (AvailableBalanceImmediatelyAvailableSubtotalCardAudience2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AvailableBalanceImmediatelyAvailableSubtotalCardAudience2");
+        private AvailableBalanceImmediatelyAvailableSubtotalCardAudience2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AvailableBalanceImmediatelyAvailableSubtotalCardAudience2(value));
+        }
+
+        public static implicit operator AvailableBalanceImmediatelyAvailableSubtotalCardAudience2(string value) => Of(value);
+        public static implicit operator string(AvailableBalanceImmediatelyAvailableSubtotalCardAudience2 availablebalanceimmediatelyavailablesubtotalcardaudience2) => availablebalanceimmediatelyavailablesubtotalcardaudience2.Value;
+
+        public static AvailableBalanceImmediatelyAvailableSubtotalCardAudience2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceImmediatelyAvailableSubtotalCardAudience2);
+
+        public bool Equals(AvailableBalanceImmediatelyAvailableSubtotalCardAudience2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

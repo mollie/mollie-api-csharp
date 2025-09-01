@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    public enum ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 : IEquatable<ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2>
     {
-        [JsonProperty("fee")]
-        Fee,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-vat")]
-        FeeVat,
-        [JsonProperty("fee-rounding-compensation")]
-        FeeRoundingCompensation,
-    }
+        public static readonly ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 Fee = new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2("fee");
+        public static readonly ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 FeeReimbursement = new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2("fee-reimbursement");
+        public static readonly ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 FeeDiscount = new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2("fee-discount");
+        public static readonly ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 FeeVat = new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2("fee-vat");
+        public static readonly ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 FeeRoundingCompensation = new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2("fee-rounding-compensation");
 
-    public static class ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2Extension
-    {
-        public static string Value(this ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2).GetFields())
+        private static readonly Dictionary <string, ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2> _knownValues =
+            new Dictionary <string, ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["fee"] = Fee,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-vat"] = FeeVat,
+                ["fee-rounding-compensation"] = FeeRoundingCompensation
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2> _values =
+            new ConcurrentDictionary<string, ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2>(_knownValues);
 
-                    if (enumVal is ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2)
-                    {
-                        return (ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2");
+        private ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2(value));
+        }
+
+        public static implicit operator ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2(string value) => Of(value);
+        public static implicit operator string(ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2 chargebacksimmediatelyavailablesubtotalprepaymentparttype2) => chargebacksimmediatelyavailablesubtotalprepaymentparttype2.Value;
+
+        public static ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2);
+
+        public bool Equals(ChargebacksImmediatelyAvailableSubtotalPrepaymentPartType2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

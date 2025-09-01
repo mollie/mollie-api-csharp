@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
     /// 
@@ -20,113 +23,128 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    public enum ListSettlementPaymentsMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSettlementPaymentsMethod : IEquatable<ListSettlementPaymentsMethod>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly ListSettlementPaymentsMethod Alma = new ListSettlementPaymentsMethod("alma");
+        public static readonly ListSettlementPaymentsMethod Applepay = new ListSettlementPaymentsMethod("applepay");
+        public static readonly ListSettlementPaymentsMethod Bacs = new ListSettlementPaymentsMethod("bacs");
+        public static readonly ListSettlementPaymentsMethod Bancomatpay = new ListSettlementPaymentsMethod("bancomatpay");
+        public static readonly ListSettlementPaymentsMethod Bancontact = new ListSettlementPaymentsMethod("bancontact");
+        public static readonly ListSettlementPaymentsMethod Banktransfer = new ListSettlementPaymentsMethod("banktransfer");
+        public static readonly ListSettlementPaymentsMethod Belfius = new ListSettlementPaymentsMethod("belfius");
+        public static readonly ListSettlementPaymentsMethod Billie = new ListSettlementPaymentsMethod("billie");
+        public static readonly ListSettlementPaymentsMethod Bizum = new ListSettlementPaymentsMethod("bizum");
+        public static readonly ListSettlementPaymentsMethod Blik = new ListSettlementPaymentsMethod("blik");
+        public static readonly ListSettlementPaymentsMethod Creditcard = new ListSettlementPaymentsMethod("creditcard");
+        public static readonly ListSettlementPaymentsMethod Directdebit = new ListSettlementPaymentsMethod("directdebit");
+        public static readonly ListSettlementPaymentsMethod Eps = new ListSettlementPaymentsMethod("eps");
+        public static readonly ListSettlementPaymentsMethod Giftcard = new ListSettlementPaymentsMethod("giftcard");
+        public static readonly ListSettlementPaymentsMethod Ideal = new ListSettlementPaymentsMethod("ideal");
+        public static readonly ListSettlementPaymentsMethod In3 = new ListSettlementPaymentsMethod("in3");
+        public static readonly ListSettlementPaymentsMethod Kbc = new ListSettlementPaymentsMethod("kbc");
+        public static readonly ListSettlementPaymentsMethod Klarna = new ListSettlementPaymentsMethod("klarna");
+        public static readonly ListSettlementPaymentsMethod Klarnapaylater = new ListSettlementPaymentsMethod("klarnapaylater");
+        public static readonly ListSettlementPaymentsMethod Klarnapaynow = new ListSettlementPaymentsMethod("klarnapaynow");
+        public static readonly ListSettlementPaymentsMethod Klarnasliceit = new ListSettlementPaymentsMethod("klarnasliceit");
+        public static readonly ListSettlementPaymentsMethod Mbway = new ListSettlementPaymentsMethod("mbway");
+        public static readonly ListSettlementPaymentsMethod Multibanco = new ListSettlementPaymentsMethod("multibanco");
+        public static readonly ListSettlementPaymentsMethod Mybank = new ListSettlementPaymentsMethod("mybank");
+        public static readonly ListSettlementPaymentsMethod Paybybank = new ListSettlementPaymentsMethod("paybybank");
+        public static readonly ListSettlementPaymentsMethod Payconiq = new ListSettlementPaymentsMethod("payconiq");
+        public static readonly ListSettlementPaymentsMethod Paypal = new ListSettlementPaymentsMethod("paypal");
+        public static readonly ListSettlementPaymentsMethod Paysafecard = new ListSettlementPaymentsMethod("paysafecard");
+        public static readonly ListSettlementPaymentsMethod Pointofsale = new ListSettlementPaymentsMethod("pointofsale");
+        public static readonly ListSettlementPaymentsMethod Przelewy24 = new ListSettlementPaymentsMethod("przelewy24");
+        public static readonly ListSettlementPaymentsMethod Riverty = new ListSettlementPaymentsMethod("riverty");
+        public static readonly ListSettlementPaymentsMethod Satispay = new ListSettlementPaymentsMethod("satispay");
+        public static readonly ListSettlementPaymentsMethod Swish = new ListSettlementPaymentsMethod("swish");
+        public static readonly ListSettlementPaymentsMethod Trustly = new ListSettlementPaymentsMethod("trustly");
+        public static readonly ListSettlementPaymentsMethod Twint = new ListSettlementPaymentsMethod("twint");
+        public static readonly ListSettlementPaymentsMethod Voucher = new ListSettlementPaymentsMethod("voucher");
 
-    public static class ListSettlementPaymentsMethodExtension
-    {
-        public static string Value(this ListSettlementPaymentsMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSettlementPaymentsMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSettlementPaymentsMethod).GetFields())
+        private static readonly Dictionary <string, ListSettlementPaymentsMethod> _knownValues =
+            new Dictionary <string, ListSettlementPaymentsMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["applepay"] = Applepay,
+                ["bacs"] = Bacs,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["kbc"] = Kbc,
+                ["klarna"] = Klarna,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsMethod> _values =
+            new ConcurrentDictionary<string, ListSettlementPaymentsMethod>(_knownValues);
 
-                    if (enumVal is ListSettlementPaymentsMethod)
-                    {
-                        return (ListSettlementPaymentsMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsMethod");
+        private ListSettlementPaymentsMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSettlementPaymentsMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsMethod(value));
+        }
+
+        public static implicit operator ListSettlementPaymentsMethod(string value) => Of(value);
+        public static implicit operator string(ListSettlementPaymentsMethod listsettlementpaymentsmethod) => listsettlementpaymentsmethod.Value;
+
+        public static ListSettlementPaymentsMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsMethod);
+
+        public bool Equals(ListSettlementPaymentsMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

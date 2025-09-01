@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    public enum OpenPendingSubTotalCardIssuer1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class OpenPendingSubTotalCardIssuer1 : IEquatable<OpenPendingSubTotalCardIssuer1>
     {
-        [JsonProperty("amex")]
-        Amex,
-        [JsonProperty("maestro")]
-        Maestro,
-        [JsonProperty("carte-bancaire")]
-        CarteBancaire,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly OpenPendingSubTotalCardIssuer1 Amex = new OpenPendingSubTotalCardIssuer1("amex");
+        public static readonly OpenPendingSubTotalCardIssuer1 Maestro = new OpenPendingSubTotalCardIssuer1("maestro");
+        public static readonly OpenPendingSubTotalCardIssuer1 CarteBancaire = new OpenPendingSubTotalCardIssuer1("carte-bancaire");
+        public static readonly OpenPendingSubTotalCardIssuer1 Other = new OpenPendingSubTotalCardIssuer1("other");
 
-    public static class OpenPendingSubTotalCardIssuer1Extension
-    {
-        public static string Value(this OpenPendingSubTotalCardIssuer1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static OpenPendingSubTotalCardIssuer1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(OpenPendingSubTotalCardIssuer1).GetFields())
+        private static readonly Dictionary <string, OpenPendingSubTotalCardIssuer1> _knownValues =
+            new Dictionary <string, OpenPendingSubTotalCardIssuer1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["amex"] = Amex,
+                ["maestro"] = Maestro,
+                ["carte-bancaire"] = CarteBancaire,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, OpenPendingSubTotalCardIssuer1> _values =
+            new ConcurrentDictionary<string, OpenPendingSubTotalCardIssuer1>(_knownValues);
 
-                    if (enumVal is OpenPendingSubTotalCardIssuer1)
-                    {
-                        return (OpenPendingSubTotalCardIssuer1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum OpenPendingSubTotalCardIssuer1");
+        private OpenPendingSubTotalCardIssuer1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static OpenPendingSubTotalCardIssuer1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new OpenPendingSubTotalCardIssuer1(value));
+        }
+
+        public static implicit operator OpenPendingSubTotalCardIssuer1(string value) => Of(value);
+        public static implicit operator string(OpenPendingSubTotalCardIssuer1 openpendingsubtotalcardissuer1) => openpendingsubtotalcardissuer1.Value;
+
+        public static OpenPendingSubTotalCardIssuer1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as OpenPendingSubTotalCardIssuer1);
+
+        public bool Equals(OpenPendingSubTotalCardIssuer1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

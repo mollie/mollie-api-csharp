@@ -12,69 +12,87 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The card&apos;s label. Available for card mandates, if the card label could be detected.
     /// </summary>
-    public enum CreateMandateCardLabel
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateMandateCardLabel : IEquatable<CreateMandateCardLabel>
     {
-        [JsonProperty("American Express")]
-        AmericanExpress,
-        [JsonProperty("Carta Si")]
-        CartaSi,
-        [JsonProperty("Carte Bleue")]
-        CarteBleue,
-        [JsonProperty("Dankort")]
-        Dankort,
-        [JsonProperty("Diners Club")]
-        DinersClub,
-        [JsonProperty("Discover")]
-        Discover,
-        [JsonProperty("JCB")]
-        Jcb,
-        [JsonProperty("Laser")]
-        Laser,
-        [JsonProperty("Maestro")]
-        Maestro,
-        [JsonProperty("Mastercard")]
-        Mastercard,
-        [JsonProperty("Unionpay")]
-        Unionpay,
-        [JsonProperty("Visa")]
-        Visa,
-    }
+        public static readonly CreateMandateCardLabel AmericanExpress = new CreateMandateCardLabel("American Express");
+        public static readonly CreateMandateCardLabel CartaSi = new CreateMandateCardLabel("Carta Si");
+        public static readonly CreateMandateCardLabel CarteBleue = new CreateMandateCardLabel("Carte Bleue");
+        public static readonly CreateMandateCardLabel Dankort = new CreateMandateCardLabel("Dankort");
+        public static readonly CreateMandateCardLabel DinersClub = new CreateMandateCardLabel("Diners Club");
+        public static readonly CreateMandateCardLabel Discover = new CreateMandateCardLabel("Discover");
+        public static readonly CreateMandateCardLabel Jcb = new CreateMandateCardLabel("JCB");
+        public static readonly CreateMandateCardLabel Laser = new CreateMandateCardLabel("Laser");
+        public static readonly CreateMandateCardLabel Maestro = new CreateMandateCardLabel("Maestro");
+        public static readonly CreateMandateCardLabel Mastercard = new CreateMandateCardLabel("Mastercard");
+        public static readonly CreateMandateCardLabel Unionpay = new CreateMandateCardLabel("Unionpay");
+        public static readonly CreateMandateCardLabel Visa = new CreateMandateCardLabel("Visa");
 
-    public static class CreateMandateCardLabelExtension
-    {
-        public static string Value(this CreateMandateCardLabel value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateMandateCardLabel ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateMandateCardLabel).GetFields())
+        private static readonly Dictionary <string, CreateMandateCardLabel> _knownValues =
+            new Dictionary <string, CreateMandateCardLabel> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["American Express"] = AmericanExpress,
+                ["Carta Si"] = CartaSi,
+                ["Carte Bleue"] = CarteBleue,
+                ["Dankort"] = Dankort,
+                ["Diners Club"] = DinersClub,
+                ["Discover"] = Discover,
+                ["JCB"] = Jcb,
+                ["Laser"] = Laser,
+                ["Maestro"] = Maestro,
+                ["Mastercard"] = Mastercard,
+                ["Unionpay"] = Unionpay,
+                ["Visa"] = Visa
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateMandateCardLabel> _values =
+            new ConcurrentDictionary<string, CreateMandateCardLabel>(_knownValues);
 
-                    if (enumVal is CreateMandateCardLabel)
-                    {
-                        return (CreateMandateCardLabel)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateMandateCardLabel");
+        private CreateMandateCardLabel(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateMandateCardLabel Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateMandateCardLabel(value));
+        }
+
+        public static implicit operator CreateMandateCardLabel(string value) => Of(value);
+        public static implicit operator string(CreateMandateCardLabel createmandatecardlabel) => createmandatecardlabel.Value;
+
+        public static CreateMandateCardLabel[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateMandateCardLabel);
+
+        public bool Equals(CreateMandateCardLabel? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

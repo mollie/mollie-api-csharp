@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
     /// 
@@ -24,45 +27,60 @@ namespace Mollie.Models.Requests
     /// <a href="get-payment-link-payments">Payment Link Payments Endpoint</a>.
     /// </remarks>
     /// </summary>
-    public enum ListPaymentLinksSequenceType
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListPaymentLinksSequenceType : IEquatable<ListPaymentLinksSequenceType>
     {
-        [JsonProperty("oneoff")]
-        Oneoff,
-        [JsonProperty("first")]
-        First,
-    }
+        public static readonly ListPaymentLinksSequenceType Oneoff = new ListPaymentLinksSequenceType("oneoff");
+        public static readonly ListPaymentLinksSequenceType First = new ListPaymentLinksSequenceType("first");
 
-    public static class ListPaymentLinksSequenceTypeExtension
-    {
-        public static string Value(this ListPaymentLinksSequenceType value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListPaymentLinksSequenceType ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListPaymentLinksSequenceType).GetFields())
+        private static readonly Dictionary <string, ListPaymentLinksSequenceType> _knownValues =
+            new Dictionary <string, ListPaymentLinksSequenceType> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["oneoff"] = Oneoff,
+                ["first"] = First
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListPaymentLinksSequenceType> _values =
+            new ConcurrentDictionary<string, ListPaymentLinksSequenceType>(_knownValues);
 
-                    if (enumVal is ListPaymentLinksSequenceType)
-                    {
-                        return (ListPaymentLinksSequenceType)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListPaymentLinksSequenceType");
+        private ListPaymentLinksSequenceType(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListPaymentLinksSequenceType Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListPaymentLinksSequenceType(value));
+        }
+
+        public static implicit operator ListPaymentLinksSequenceType(string value) => Of(value);
+        public static implicit operator string(ListPaymentLinksSequenceType listpaymentlinkssequencetype) => listpaymentlinkssequencetype.Value;
+
+        public static ListPaymentLinksSequenceType[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListPaymentLinksSequenceType);
+
+        public bool Equals(ListPaymentLinksSequenceType? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

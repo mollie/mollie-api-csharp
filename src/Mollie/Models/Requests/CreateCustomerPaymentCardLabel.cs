@@ -12,71 +12,89 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The card&apos;s label, if known.
     /// </summary>
-    public enum CreateCustomerPaymentCardLabel
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentCardLabel : IEquatable<CreateCustomerPaymentCardLabel>
     {
-        [JsonProperty("American Express")]
-        AmericanExpress,
-        [JsonProperty("Carta Si")]
-        CartaSi,
-        [JsonProperty("Carte Bleue")]
-        CarteBleue,
-        [JsonProperty("Dankort")]
-        Dankort,
-        [JsonProperty("Diners Club")]
-        DinersClub,
-        [JsonProperty("Discover")]
-        Discover,
-        [JsonProperty("JCB")]
-        Jcb,
-        [JsonProperty("Laser")]
-        Laser,
-        [JsonProperty("Maestro")]
-        Maestro,
-        [JsonProperty("Mastercard")]
-        Mastercard,
-        [JsonProperty("Unionpay")]
-        Unionpay,
-        [JsonProperty("Visa")]
-        Visa,
-        [JsonProperty("Vpay")]
-        Vpay,
-    }
+        public static readonly CreateCustomerPaymentCardLabel AmericanExpress = new CreateCustomerPaymentCardLabel("American Express");
+        public static readonly CreateCustomerPaymentCardLabel CartaSi = new CreateCustomerPaymentCardLabel("Carta Si");
+        public static readonly CreateCustomerPaymentCardLabel CarteBleue = new CreateCustomerPaymentCardLabel("Carte Bleue");
+        public static readonly CreateCustomerPaymentCardLabel Dankort = new CreateCustomerPaymentCardLabel("Dankort");
+        public static readonly CreateCustomerPaymentCardLabel DinersClub = new CreateCustomerPaymentCardLabel("Diners Club");
+        public static readonly CreateCustomerPaymentCardLabel Discover = new CreateCustomerPaymentCardLabel("Discover");
+        public static readonly CreateCustomerPaymentCardLabel Jcb = new CreateCustomerPaymentCardLabel("JCB");
+        public static readonly CreateCustomerPaymentCardLabel Laser = new CreateCustomerPaymentCardLabel("Laser");
+        public static readonly CreateCustomerPaymentCardLabel Maestro = new CreateCustomerPaymentCardLabel("Maestro");
+        public static readonly CreateCustomerPaymentCardLabel Mastercard = new CreateCustomerPaymentCardLabel("Mastercard");
+        public static readonly CreateCustomerPaymentCardLabel Unionpay = new CreateCustomerPaymentCardLabel("Unionpay");
+        public static readonly CreateCustomerPaymentCardLabel Visa = new CreateCustomerPaymentCardLabel("Visa");
+        public static readonly CreateCustomerPaymentCardLabel Vpay = new CreateCustomerPaymentCardLabel("Vpay");
 
-    public static class CreateCustomerPaymentCardLabelExtension
-    {
-        public static string Value(this CreateCustomerPaymentCardLabel value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCustomerPaymentCardLabel ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentCardLabel).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentCardLabel> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentCardLabel> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["American Express"] = AmericanExpress,
+                ["Carta Si"] = CartaSi,
+                ["Carte Bleue"] = CarteBleue,
+                ["Dankort"] = Dankort,
+                ["Diners Club"] = DinersClub,
+                ["Discover"] = Discover,
+                ["JCB"] = Jcb,
+                ["Laser"] = Laser,
+                ["Maestro"] = Maestro,
+                ["Mastercard"] = Mastercard,
+                ["Unionpay"] = Unionpay,
+                ["Visa"] = Visa,
+                ["Vpay"] = Vpay
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentCardLabel> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentCardLabel>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentCardLabel)
-                    {
-                        return (CreateCustomerPaymentCardLabel)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentCardLabel");
+        private CreateCustomerPaymentCardLabel(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentCardLabel Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentCardLabel(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentCardLabel(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentCardLabel createcustomerpaymentcardlabel) => createcustomerpaymentcardlabel.Value;
+
+        public static CreateCustomerPaymentCardLabel[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentCardLabel);
+
+        public bool Equals(CreateCustomerPaymentCardLabel? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

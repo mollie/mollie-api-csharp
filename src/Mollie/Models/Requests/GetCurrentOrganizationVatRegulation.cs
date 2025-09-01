@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
     /// 
@@ -22,47 +25,62 @@ namespace Mollie.Models.Requests
     /// The field is not present for merchants residing in other countries.
     /// </remarks>
     /// </summary>
-    public enum GetCurrentOrganizationVatRegulation
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetCurrentOrganizationVatRegulation : IEquatable<GetCurrentOrganizationVatRegulation>
     {
-        [JsonProperty("dutch")]
-        Dutch,
-        [JsonProperty("british")]
-        British,
-        [JsonProperty("shifted")]
-        Shifted,
-    }
+        public static readonly GetCurrentOrganizationVatRegulation Dutch = new GetCurrentOrganizationVatRegulation("dutch");
+        public static readonly GetCurrentOrganizationVatRegulation British = new GetCurrentOrganizationVatRegulation("british");
+        public static readonly GetCurrentOrganizationVatRegulation Shifted = new GetCurrentOrganizationVatRegulation("shifted");
 
-    public static class GetCurrentOrganizationVatRegulationExtension
-    {
-        public static string Value(this GetCurrentOrganizationVatRegulation value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetCurrentOrganizationVatRegulation ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetCurrentOrganizationVatRegulation).GetFields())
+        private static readonly Dictionary <string, GetCurrentOrganizationVatRegulation> _knownValues =
+            new Dictionary <string, GetCurrentOrganizationVatRegulation> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["dutch"] = Dutch,
+                ["british"] = British,
+                ["shifted"] = Shifted
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetCurrentOrganizationVatRegulation> _values =
+            new ConcurrentDictionary<string, GetCurrentOrganizationVatRegulation>(_knownValues);
 
-                    if (enumVal is GetCurrentOrganizationVatRegulation)
-                    {
-                        return (GetCurrentOrganizationVatRegulation)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetCurrentOrganizationVatRegulation");
+        private GetCurrentOrganizationVatRegulation(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetCurrentOrganizationVatRegulation Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetCurrentOrganizationVatRegulation(value));
+        }
+
+        public static implicit operator GetCurrentOrganizationVatRegulation(string value) => Of(value);
+        public static implicit operator string(GetCurrentOrganizationVatRegulation getcurrentorganizationvatregulation) => getcurrentorganizationvatregulation.Value;
+
+        public static GetCurrentOrganizationVatRegulation[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetCurrentOrganizationVatRegulation);
+
+        public bool Equals(GetCurrentOrganizationVatRegulation? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

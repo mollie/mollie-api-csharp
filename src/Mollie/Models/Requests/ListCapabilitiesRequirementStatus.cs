@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the requirement depends on its due date.<br/>
     /// 
@@ -20,47 +23,62 @@ namespace Mollie.Models.Requests
     /// If no due date is given, the status will be `requested`.
     /// </remarks>
     /// </summary>
-    public enum ListCapabilitiesRequirementStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListCapabilitiesRequirementStatus : IEquatable<ListCapabilitiesRequirementStatus>
     {
-        [JsonProperty("currently-due")]
-        CurrentlyDue,
-        [JsonProperty("past-due")]
-        PastDue,
-        [JsonProperty("requested")]
-        Requested,
-    }
+        public static readonly ListCapabilitiesRequirementStatus CurrentlyDue = new ListCapabilitiesRequirementStatus("currently-due");
+        public static readonly ListCapabilitiesRequirementStatus PastDue = new ListCapabilitiesRequirementStatus("past-due");
+        public static readonly ListCapabilitiesRequirementStatus Requested = new ListCapabilitiesRequirementStatus("requested");
 
-    public static class ListCapabilitiesRequirementStatusExtension
-    {
-        public static string Value(this ListCapabilitiesRequirementStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListCapabilitiesRequirementStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListCapabilitiesRequirementStatus).GetFields())
+        private static readonly Dictionary <string, ListCapabilitiesRequirementStatus> _knownValues =
+            new Dictionary <string, ListCapabilitiesRequirementStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["currently-due"] = CurrentlyDue,
+                ["past-due"] = PastDue,
+                ["requested"] = Requested
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListCapabilitiesRequirementStatus> _values =
+            new ConcurrentDictionary<string, ListCapabilitiesRequirementStatus>(_knownValues);
 
-                    if (enumVal is ListCapabilitiesRequirementStatus)
-                    {
-                        return (ListCapabilitiesRequirementStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListCapabilitiesRequirementStatus");
+        private ListCapabilitiesRequirementStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListCapabilitiesRequirementStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListCapabilitiesRequirementStatus(value));
+        }
+
+        public static implicit operator ListCapabilitiesRequirementStatus(string value) => Of(value);
+        public static implicit operator string(ListCapabilitiesRequirementStatus listcapabilitiesrequirementstatus) => listcapabilitiesrequirementstatus.Value;
+
+        public static ListCapabilitiesRequirementStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListCapabilitiesRequirementStatus);
+
+        public bool Equals(ListCapabilitiesRequirementStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

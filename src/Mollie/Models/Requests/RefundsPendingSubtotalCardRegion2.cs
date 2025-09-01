@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum RefundsPendingSubtotalCardRegion2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class RefundsPendingSubtotalCardRegion2 : IEquatable<RefundsPendingSubtotalCardRegion2>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly RefundsPendingSubtotalCardRegion2 IntraEea = new RefundsPendingSubtotalCardRegion2("intra-eea");
+        public static readonly RefundsPendingSubtotalCardRegion2 IntraEu = new RefundsPendingSubtotalCardRegion2("intra-eu");
+        public static readonly RefundsPendingSubtotalCardRegion2 Domestic = new RefundsPendingSubtotalCardRegion2("domestic");
+        public static readonly RefundsPendingSubtotalCardRegion2 Other = new RefundsPendingSubtotalCardRegion2("other");
 
-    public static class RefundsPendingSubtotalCardRegion2Extension
-    {
-        public static string Value(this RefundsPendingSubtotalCardRegion2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static RefundsPendingSubtotalCardRegion2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(RefundsPendingSubtotalCardRegion2).GetFields())
+        private static readonly Dictionary <string, RefundsPendingSubtotalCardRegion2> _knownValues =
+            new Dictionary <string, RefundsPendingSubtotalCardRegion2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, RefundsPendingSubtotalCardRegion2> _values =
+            new ConcurrentDictionary<string, RefundsPendingSubtotalCardRegion2>(_knownValues);
 
-                    if (enumVal is RefundsPendingSubtotalCardRegion2)
-                    {
-                        return (RefundsPendingSubtotalCardRegion2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum RefundsPendingSubtotalCardRegion2");
+        private RefundsPendingSubtotalCardRegion2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static RefundsPendingSubtotalCardRegion2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new RefundsPendingSubtotalCardRegion2(value));
+        }
+
+        public static implicit operator RefundsPendingSubtotalCardRegion2(string value) => Of(value);
+        public static implicit operator string(RefundsPendingSubtotalCardRegion2 refundspendingsubtotalcardregion2) => refundspendingsubtotalcardregion2.Value;
+
+        public static RefundsPendingSubtotalCardRegion2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as RefundsPendingSubtotalCardRegion2);
+
+        public bool Equals(RefundsPendingSubtotalCardRegion2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

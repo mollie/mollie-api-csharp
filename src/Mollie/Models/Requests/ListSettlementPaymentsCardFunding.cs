@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The card type.
     /// </summary>
-    public enum ListSettlementPaymentsCardFunding
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSettlementPaymentsCardFunding : IEquatable<ListSettlementPaymentsCardFunding>
     {
-        [JsonProperty("debit")]
-        Debit,
-        [JsonProperty("credit")]
-        Credit,
-        [JsonProperty("prepaid")]
-        Prepaid,
-        [JsonProperty("deferred-debit")]
-        DeferredDebit,
-    }
+        public static readonly ListSettlementPaymentsCardFunding Debit = new ListSettlementPaymentsCardFunding("debit");
+        public static readonly ListSettlementPaymentsCardFunding Credit = new ListSettlementPaymentsCardFunding("credit");
+        public static readonly ListSettlementPaymentsCardFunding Prepaid = new ListSettlementPaymentsCardFunding("prepaid");
+        public static readonly ListSettlementPaymentsCardFunding DeferredDebit = new ListSettlementPaymentsCardFunding("deferred-debit");
 
-    public static class ListSettlementPaymentsCardFundingExtension
-    {
-        public static string Value(this ListSettlementPaymentsCardFunding value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSettlementPaymentsCardFunding ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSettlementPaymentsCardFunding).GetFields())
+        private static readonly Dictionary <string, ListSettlementPaymentsCardFunding> _knownValues =
+            new Dictionary <string, ListSettlementPaymentsCardFunding> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["debit"] = Debit,
+                ["credit"] = Credit,
+                ["prepaid"] = Prepaid,
+                ["deferred-debit"] = DeferredDebit
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsCardFunding> _values =
+            new ConcurrentDictionary<string, ListSettlementPaymentsCardFunding>(_knownValues);
 
-                    if (enumVal is ListSettlementPaymentsCardFunding)
-                    {
-                        return (ListSettlementPaymentsCardFunding)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsCardFunding");
+        private ListSettlementPaymentsCardFunding(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSettlementPaymentsCardFunding Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsCardFunding(value));
+        }
+
+        public static implicit operator ListSettlementPaymentsCardFunding(string value) => Of(value);
+        public static implicit operator string(ListSettlementPaymentsCardFunding listsettlementpaymentscardfunding) => listsettlementpaymentscardfunding.Value;
+
+        public static ListSettlementPaymentsCardFunding[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsCardFunding);
+
+        public bool Equals(ListSettlementPaymentsCardFunding? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

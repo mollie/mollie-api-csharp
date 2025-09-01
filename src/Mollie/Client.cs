@@ -22,6 +22,18 @@ namespace Mollie
 
     public interface IClient
     {
+        public IBalances Balances { get; }
+        public ISettlements Settlements { get; }
+        public IInvoices Invoices { get; }
+        public IPermissions Permissions { get; }
+        public IOrganizations Organizations { get; }
+        public IProfiles Profiles { get; }
+        public IOnboarding Onboarding { get; }
+        public ICapabilities Capabilities { get; }
+        public IClients Clients { get; }
+        public IClientLinks ClientLinks { get; }
+        public IWebhooks Webhooks { get; }
+        public IWebhookEvents WebhookEvents { get; }
         public IPayments Payments { get; }
         public IMethods Methods { get; }
         public IRefunds Refunds { get; }
@@ -34,18 +46,6 @@ namespace Mollie
         public ICustomers Customers { get; }
         public IMandates Mandates { get; }
         public ISubscriptions Subscriptions { get; }
-        public IPermissions Permissions { get; }
-        public IOrganizations Organizations { get; }
-        public IProfiles Profiles { get; }
-        public IOnboarding Onboarding { get; }
-        public ICapabilities Capabilities { get; }
-        public IClients Clients { get; }
-        public IClientLinks ClientLinks { get; }
-        public IWebhooks Webhooks { get; }
-        public IWebhookEvents WebhookEvents { get; }
-        public IBalances Balances { get; }
-        public ISettlements Settlements { get; }
-        public IInvoices Invoices { get; }
         public ISalesInvoices SalesInvoices { get; }
     }
 
@@ -55,9 +55,21 @@ namespace Mollie
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.0";
+        private const string _sdkVersion = "0.3.0";
         private const string _sdkGenVersion = "2.687.13";
         private const string _openapiDocVersion = "1.0.0";
+        public IBalances Balances { get; private set; }
+        public ISettlements Settlements { get; private set; }
+        public IInvoices Invoices { get; private set; }
+        public IPermissions Permissions { get; private set; }
+        public IOrganizations Organizations { get; private set; }
+        public IProfiles Profiles { get; private set; }
+        public IOnboarding Onboarding { get; private set; }
+        public ICapabilities Capabilities { get; private set; }
+        public IClients Clients { get; private set; }
+        public IClientLinks ClientLinks { get; private set; }
+        public IWebhooks Webhooks { get; private set; }
+        public IWebhookEvents WebhookEvents { get; private set; }
         public IPayments Payments { get; private set; }
         public IMethods Methods { get; private set; }
         public IRefunds Refunds { get; private set; }
@@ -70,24 +82,36 @@ namespace Mollie
         public ICustomers Customers { get; private set; }
         public IMandates Mandates { get; private set; }
         public ISubscriptions Subscriptions { get; private set; }
-        public IPermissions Permissions { get; private set; }
-        public IOrganizations Organizations { get; private set; }
-        public IProfiles Profiles { get; private set; }
-        public IOnboarding Onboarding { get; private set; }
-        public ICapabilities Capabilities { get; private set; }
-        public IClients Clients { get; private set; }
-        public IClientLinks ClientLinks { get; private set; }
-        public IWebhooks Webhooks { get; private set; }
-        public IWebhookEvents WebhookEvents { get; private set; }
-        public IBalances Balances { get; private set; }
-        public ISettlements Settlements { get; private set; }
-        public IInvoices Invoices { get; private set; }
         public ISalesInvoices SalesInvoices { get; private set; }
 
         public Client(SDKConfig config)
         {
             SDKConfiguration = config;
             InitHooks();
+
+            Balances = new Balances(SDKConfiguration);
+
+            Settlements = new Settlements(SDKConfiguration);
+
+            Invoices = new Invoices(SDKConfiguration);
+
+            Permissions = new Permissions(SDKConfiguration);
+
+            Organizations = new Organizations(SDKConfiguration);
+
+            Profiles = new Profiles(SDKConfiguration);
+
+            Onboarding = new Onboarding(SDKConfiguration);
+
+            Capabilities = new Capabilities(SDKConfiguration);
+
+            Clients = new Clients(SDKConfiguration);
+
+            ClientLinks = new ClientLinks(SDKConfiguration);
+
+            Webhooks = new Webhooks(SDKConfiguration);
+
+            WebhookEvents = new WebhookEvents(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
 
@@ -112,30 +136,6 @@ namespace Mollie
             Mandates = new Mandates(SDKConfiguration);
 
             Subscriptions = new Subscriptions(SDKConfiguration);
-
-            Permissions = new Permissions(SDKConfiguration);
-
-            Organizations = new Organizations(SDKConfiguration);
-
-            Profiles = new Profiles(SDKConfiguration);
-
-            Onboarding = new Onboarding(SDKConfiguration);
-
-            Capabilities = new Capabilities(SDKConfiguration);
-
-            Clients = new Clients(SDKConfiguration);
-
-            ClientLinks = new ClientLinks(SDKConfiguration);
-
-            Webhooks = new Webhooks(SDKConfiguration);
-
-            WebhookEvents = new WebhookEvents(SDKConfiguration);
-
-            Balances = new Balances(SDKConfiguration);
-
-            Settlements = new Settlements(SDKConfiguration);
-
-            Invoices = new Invoices(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
         }
@@ -182,6 +182,30 @@ namespace Mollie
 
             InitHooks();
 
+            Balances = new Balances(SDKConfiguration);
+
+            Settlements = new Settlements(SDKConfiguration);
+
+            Invoices = new Invoices(SDKConfiguration);
+
+            Permissions = new Permissions(SDKConfiguration);
+
+            Organizations = new Organizations(SDKConfiguration);
+
+            Profiles = new Profiles(SDKConfiguration);
+
+            Onboarding = new Onboarding(SDKConfiguration);
+
+            Capabilities = new Capabilities(SDKConfiguration);
+
+            Clients = new Clients(SDKConfiguration);
+
+            ClientLinks = new ClientLinks(SDKConfiguration);
+
+            Webhooks = new Webhooks(SDKConfiguration);
+
+            WebhookEvents = new WebhookEvents(SDKConfiguration);
+
             Payments = new Payments(SDKConfiguration);
 
             Methods = new Methods(SDKConfiguration);
@@ -205,30 +229,6 @@ namespace Mollie
             Mandates = new Mandates(SDKConfiguration);
 
             Subscriptions = new Subscriptions(SDKConfiguration);
-
-            Permissions = new Permissions(SDKConfiguration);
-
-            Organizations = new Organizations(SDKConfiguration);
-
-            Profiles = new Profiles(SDKConfiguration);
-
-            Onboarding = new Onboarding(SDKConfiguration);
-
-            Capabilities = new Capabilities(SDKConfiguration);
-
-            Clients = new Clients(SDKConfiguration);
-
-            ClientLinks = new ClientLinks(SDKConfiguration);
-
-            Webhooks = new Webhooks(SDKConfiguration);
-
-            WebhookEvents = new WebhookEvents(SDKConfiguration);
-
-            Balances = new Balances(SDKConfiguration);
-
-            Settlements = new Settlements(SDKConfiguration);
-
-            Invoices = new Invoices(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
         }

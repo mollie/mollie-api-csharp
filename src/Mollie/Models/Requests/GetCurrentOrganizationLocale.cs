@@ -12,89 +12,107 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The preferred locale of the merchant, as set in their Mollie dashboard.
     /// </summary>
-    public enum GetCurrentOrganizationLocale
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetCurrentOrganizationLocale : IEquatable<GetCurrentOrganizationLocale>
     {
-        [JsonProperty("en_US")]
-        EnUS,
-        [JsonProperty("en_GB")]
-        EnGB,
-        [JsonProperty("nl_NL")]
-        Nlnl,
-        [JsonProperty("nl_BE")]
-        NlBE,
-        [JsonProperty("de_DE")]
-        Dede,
-        [JsonProperty("de_AT")]
-        DeAT,
-        [JsonProperty("de_CH")]
-        DeCH,
-        [JsonProperty("fr_FR")]
-        Frfr,
-        [JsonProperty("fr_BE")]
-        FrBE,
-        [JsonProperty("es_ES")]
-        Eses,
-        [JsonProperty("ca_ES")]
-        CaES,
-        [JsonProperty("pt_PT")]
-        Ptpt,
-        [JsonProperty("it_IT")]
-        Itit,
-        [JsonProperty("nb_NO")]
-        NbNO,
-        [JsonProperty("sv_SE")]
-        SvSE,
-        [JsonProperty("fi_FI")]
-        Fifi,
-        [JsonProperty("da_DK")]
-        DaDK,
-        [JsonProperty("is_IS")]
-        Isis,
-        [JsonProperty("hu_HU")]
-        Huhu,
-        [JsonProperty("pl_PL")]
-        Plpl,
-        [JsonProperty("lv_LV")]
-        Lvlv,
-        [JsonProperty("lt_LT")]
-        Ltlt,
-    }
+        public static readonly GetCurrentOrganizationLocale EnUS = new GetCurrentOrganizationLocale("en_US");
+        public static readonly GetCurrentOrganizationLocale EnGB = new GetCurrentOrganizationLocale("en_GB");
+        public static readonly GetCurrentOrganizationLocale Nlnl = new GetCurrentOrganizationLocale("nl_NL");
+        public static readonly GetCurrentOrganizationLocale NlBE = new GetCurrentOrganizationLocale("nl_BE");
+        public static readonly GetCurrentOrganizationLocale Dede = new GetCurrentOrganizationLocale("de_DE");
+        public static readonly GetCurrentOrganizationLocale DeAT = new GetCurrentOrganizationLocale("de_AT");
+        public static readonly GetCurrentOrganizationLocale DeCH = new GetCurrentOrganizationLocale("de_CH");
+        public static readonly GetCurrentOrganizationLocale Frfr = new GetCurrentOrganizationLocale("fr_FR");
+        public static readonly GetCurrentOrganizationLocale FrBE = new GetCurrentOrganizationLocale("fr_BE");
+        public static readonly GetCurrentOrganizationLocale Eses = new GetCurrentOrganizationLocale("es_ES");
+        public static readonly GetCurrentOrganizationLocale CaES = new GetCurrentOrganizationLocale("ca_ES");
+        public static readonly GetCurrentOrganizationLocale Ptpt = new GetCurrentOrganizationLocale("pt_PT");
+        public static readonly GetCurrentOrganizationLocale Itit = new GetCurrentOrganizationLocale("it_IT");
+        public static readonly GetCurrentOrganizationLocale NbNO = new GetCurrentOrganizationLocale("nb_NO");
+        public static readonly GetCurrentOrganizationLocale SvSE = new GetCurrentOrganizationLocale("sv_SE");
+        public static readonly GetCurrentOrganizationLocale Fifi = new GetCurrentOrganizationLocale("fi_FI");
+        public static readonly GetCurrentOrganizationLocale DaDK = new GetCurrentOrganizationLocale("da_DK");
+        public static readonly GetCurrentOrganizationLocale Isis = new GetCurrentOrganizationLocale("is_IS");
+        public static readonly GetCurrentOrganizationLocale Huhu = new GetCurrentOrganizationLocale("hu_HU");
+        public static readonly GetCurrentOrganizationLocale Plpl = new GetCurrentOrganizationLocale("pl_PL");
+        public static readonly GetCurrentOrganizationLocale Lvlv = new GetCurrentOrganizationLocale("lv_LV");
+        public static readonly GetCurrentOrganizationLocale Ltlt = new GetCurrentOrganizationLocale("lt_LT");
 
-    public static class GetCurrentOrganizationLocaleExtension
-    {
-        public static string Value(this GetCurrentOrganizationLocale value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetCurrentOrganizationLocale ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetCurrentOrganizationLocale).GetFields())
+        private static readonly Dictionary <string, GetCurrentOrganizationLocale> _knownValues =
+            new Dictionary <string, GetCurrentOrganizationLocale> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["en_US"] = EnUS,
+                ["en_GB"] = EnGB,
+                ["nl_NL"] = Nlnl,
+                ["nl_BE"] = NlBE,
+                ["de_DE"] = Dede,
+                ["de_AT"] = DeAT,
+                ["de_CH"] = DeCH,
+                ["fr_FR"] = Frfr,
+                ["fr_BE"] = FrBE,
+                ["es_ES"] = Eses,
+                ["ca_ES"] = CaES,
+                ["pt_PT"] = Ptpt,
+                ["it_IT"] = Itit,
+                ["nb_NO"] = NbNO,
+                ["sv_SE"] = SvSE,
+                ["fi_FI"] = Fifi,
+                ["da_DK"] = DaDK,
+                ["is_IS"] = Isis,
+                ["hu_HU"] = Huhu,
+                ["pl_PL"] = Plpl,
+                ["lv_LV"] = Lvlv,
+                ["lt_LT"] = Ltlt
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetCurrentOrganizationLocale> _values =
+            new ConcurrentDictionary<string, GetCurrentOrganizationLocale>(_knownValues);
 
-                    if (enumVal is GetCurrentOrganizationLocale)
-                    {
-                        return (GetCurrentOrganizationLocale)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetCurrentOrganizationLocale");
+        private GetCurrentOrganizationLocale(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetCurrentOrganizationLocale Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetCurrentOrganizationLocale(value));
+        }
+
+        public static implicit operator GetCurrentOrganizationLocale(string value) => Of(value);
+        public static implicit operator string(GetCurrentOrganizationLocale getcurrentorganizationlocale) => getcurrentorganizationlocale.Value;
+
+        public static GetCurrentOrganizationLocale[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetCurrentOrganizationLocale);
+
+        public bool Equals(GetCurrentOrganizationLocale? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
     /// 
@@ -20,113 +23,128 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    public enum CreateCustomerPaymentMethodResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentMethodResponse : IEquatable<CreateCustomerPaymentMethodResponse>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly CreateCustomerPaymentMethodResponse Alma = new CreateCustomerPaymentMethodResponse("alma");
+        public static readonly CreateCustomerPaymentMethodResponse Applepay = new CreateCustomerPaymentMethodResponse("applepay");
+        public static readonly CreateCustomerPaymentMethodResponse Bacs = new CreateCustomerPaymentMethodResponse("bacs");
+        public static readonly CreateCustomerPaymentMethodResponse Bancomatpay = new CreateCustomerPaymentMethodResponse("bancomatpay");
+        public static readonly CreateCustomerPaymentMethodResponse Bancontact = new CreateCustomerPaymentMethodResponse("bancontact");
+        public static readonly CreateCustomerPaymentMethodResponse Banktransfer = new CreateCustomerPaymentMethodResponse("banktransfer");
+        public static readonly CreateCustomerPaymentMethodResponse Belfius = new CreateCustomerPaymentMethodResponse("belfius");
+        public static readonly CreateCustomerPaymentMethodResponse Billie = new CreateCustomerPaymentMethodResponse("billie");
+        public static readonly CreateCustomerPaymentMethodResponse Bizum = new CreateCustomerPaymentMethodResponse("bizum");
+        public static readonly CreateCustomerPaymentMethodResponse Blik = new CreateCustomerPaymentMethodResponse("blik");
+        public static readonly CreateCustomerPaymentMethodResponse Creditcard = new CreateCustomerPaymentMethodResponse("creditcard");
+        public static readonly CreateCustomerPaymentMethodResponse Directdebit = new CreateCustomerPaymentMethodResponse("directdebit");
+        public static readonly CreateCustomerPaymentMethodResponse Eps = new CreateCustomerPaymentMethodResponse("eps");
+        public static readonly CreateCustomerPaymentMethodResponse Giftcard = new CreateCustomerPaymentMethodResponse("giftcard");
+        public static readonly CreateCustomerPaymentMethodResponse Ideal = new CreateCustomerPaymentMethodResponse("ideal");
+        public static readonly CreateCustomerPaymentMethodResponse In3 = new CreateCustomerPaymentMethodResponse("in3");
+        public static readonly CreateCustomerPaymentMethodResponse Kbc = new CreateCustomerPaymentMethodResponse("kbc");
+        public static readonly CreateCustomerPaymentMethodResponse Klarna = new CreateCustomerPaymentMethodResponse("klarna");
+        public static readonly CreateCustomerPaymentMethodResponse Klarnapaylater = new CreateCustomerPaymentMethodResponse("klarnapaylater");
+        public static readonly CreateCustomerPaymentMethodResponse Klarnapaynow = new CreateCustomerPaymentMethodResponse("klarnapaynow");
+        public static readonly CreateCustomerPaymentMethodResponse Klarnasliceit = new CreateCustomerPaymentMethodResponse("klarnasliceit");
+        public static readonly CreateCustomerPaymentMethodResponse Mbway = new CreateCustomerPaymentMethodResponse("mbway");
+        public static readonly CreateCustomerPaymentMethodResponse Multibanco = new CreateCustomerPaymentMethodResponse("multibanco");
+        public static readonly CreateCustomerPaymentMethodResponse Mybank = new CreateCustomerPaymentMethodResponse("mybank");
+        public static readonly CreateCustomerPaymentMethodResponse Paybybank = new CreateCustomerPaymentMethodResponse("paybybank");
+        public static readonly CreateCustomerPaymentMethodResponse Payconiq = new CreateCustomerPaymentMethodResponse("payconiq");
+        public static readonly CreateCustomerPaymentMethodResponse Paypal = new CreateCustomerPaymentMethodResponse("paypal");
+        public static readonly CreateCustomerPaymentMethodResponse Paysafecard = new CreateCustomerPaymentMethodResponse("paysafecard");
+        public static readonly CreateCustomerPaymentMethodResponse Pointofsale = new CreateCustomerPaymentMethodResponse("pointofsale");
+        public static readonly CreateCustomerPaymentMethodResponse Przelewy24 = new CreateCustomerPaymentMethodResponse("przelewy24");
+        public static readonly CreateCustomerPaymentMethodResponse Riverty = new CreateCustomerPaymentMethodResponse("riverty");
+        public static readonly CreateCustomerPaymentMethodResponse Satispay = new CreateCustomerPaymentMethodResponse("satispay");
+        public static readonly CreateCustomerPaymentMethodResponse Swish = new CreateCustomerPaymentMethodResponse("swish");
+        public static readonly CreateCustomerPaymentMethodResponse Trustly = new CreateCustomerPaymentMethodResponse("trustly");
+        public static readonly CreateCustomerPaymentMethodResponse Twint = new CreateCustomerPaymentMethodResponse("twint");
+        public static readonly CreateCustomerPaymentMethodResponse Voucher = new CreateCustomerPaymentMethodResponse("voucher");
 
-    public static class CreateCustomerPaymentMethodResponseExtension
-    {
-        public static string Value(this CreateCustomerPaymentMethodResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCustomerPaymentMethodResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentMethodResponse).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentMethodResponse> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentMethodResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["applepay"] = Applepay,
+                ["bacs"] = Bacs,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["kbc"] = Kbc,
+                ["klarna"] = Klarna,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentMethodResponse> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentMethodResponse>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentMethodResponse)
-                    {
-                        return (CreateCustomerPaymentMethodResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentMethodResponse");
+        private CreateCustomerPaymentMethodResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentMethodResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentMethodResponse(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentMethodResponse(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentMethodResponse createcustomerpaymentmethodresponse) => createcustomerpaymentmethodresponse.Value;
+
+        public static CreateCustomerPaymentMethodResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentMethodResponse);
+
+        public bool Equals(CreateCustomerPaymentMethodResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

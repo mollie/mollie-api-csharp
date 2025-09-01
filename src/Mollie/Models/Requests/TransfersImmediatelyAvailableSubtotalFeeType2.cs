@@ -12,99 +12,117 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    public enum TransfersImmediatelyAvailableSubtotalFeeType2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class TransfersImmediatelyAvailableSubtotalFeeType2 : IEquatable<TransfersImmediatelyAvailableSubtotalFeeType2>
     {
-        [JsonProperty("payment-fee")]
-        PaymentFee,
-        [JsonProperty("direct-debit-failure-fee")]
-        DirectDebitFailureFee,
-        [JsonProperty("unauthorized-direct-debit-fee")]
-        UnauthorizedDirectDebitFee,
-        [JsonProperty("bank-charged-direct-debit-failure-fee")]
-        BankChargedDirectDebitFailureFee,
-        [JsonProperty("partner-commission")]
-        PartnerCommission,
-        [JsonProperty("application-fee")]
-        ApplicationFee,
-        [JsonProperty("capture-fee")]
-        CaptureFee,
-        [JsonProperty("refund-fee")]
-        RefundFee,
-        [JsonProperty("chargeback-fee")]
-        ChargebackFee,
-        [JsonProperty("payment-notification-fee")]
-        PaymentNotificationFee,
-        [JsonProperty("transfer-notification-fee")]
-        TransferNotificationFee,
-        [JsonProperty("payout-fee")]
-        PayoutFee,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("platform-volume-fee")]
-        PlatformVolumeFee,
-        [JsonProperty("platform-connected-organizations-fee")]
-        PlatformConnectedOrganizationsFee,
-        [JsonProperty("balance-charge-fee")]
-        BalanceChargeFee,
-        [JsonProperty("3ds-authentication-attempt-fee")]
-        ThreedsAuthenticationAttemptFee,
-        [JsonProperty("terminal-monthly-fee")]
-        TerminalMonthlyFee,
-        [JsonProperty("acceptance-risk-fee")]
-        AcceptanceRiskFee,
-        [JsonProperty("top-up-fee")]
-        TopUpFee,
-        [JsonProperty("payment-gateway-fee")]
-        PaymentGatewayFee,
-        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
-        MastercardSpecialtyMerchantProgramProcessingFee,
-        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
-        MastercardSpecialtyMerchantProgramRegistrationFee,
-        [JsonProperty("visa-integrity-risk-program-processing-fee")]
-        VisaIntegrityRiskProgramProcessingFee,
-        [JsonProperty("visa-integrity-risk-program-registration-fee")]
-        VisaIntegrityRiskProgramRegistrationFee,
-        [JsonProperty("minimum-invoice-amount-fee")]
-        MinimumInvoiceAmountFee,
-    }
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PaymentFee = new TransfersImmediatelyAvailableSubtotalFeeType2("payment-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 DirectDebitFailureFee = new TransfersImmediatelyAvailableSubtotalFeeType2("direct-debit-failure-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 UnauthorizedDirectDebitFee = new TransfersImmediatelyAvailableSubtotalFeeType2("unauthorized-direct-debit-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 BankChargedDirectDebitFailureFee = new TransfersImmediatelyAvailableSubtotalFeeType2("bank-charged-direct-debit-failure-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PartnerCommission = new TransfersImmediatelyAvailableSubtotalFeeType2("partner-commission");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 ApplicationFee = new TransfersImmediatelyAvailableSubtotalFeeType2("application-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 CaptureFee = new TransfersImmediatelyAvailableSubtotalFeeType2("capture-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 RefundFee = new TransfersImmediatelyAvailableSubtotalFeeType2("refund-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 ChargebackFee = new TransfersImmediatelyAvailableSubtotalFeeType2("chargeback-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PaymentNotificationFee = new TransfersImmediatelyAvailableSubtotalFeeType2("payment-notification-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 TransferNotificationFee = new TransfersImmediatelyAvailableSubtotalFeeType2("transfer-notification-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PayoutFee = new TransfersImmediatelyAvailableSubtotalFeeType2("payout-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 FeeDiscount = new TransfersImmediatelyAvailableSubtotalFeeType2("fee-discount");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 FeeReimbursement = new TransfersImmediatelyAvailableSubtotalFeeType2("fee-reimbursement");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PlatformVolumeFee = new TransfersImmediatelyAvailableSubtotalFeeType2("platform-volume-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PlatformConnectedOrganizationsFee = new TransfersImmediatelyAvailableSubtotalFeeType2("platform-connected-organizations-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 BalanceChargeFee = new TransfersImmediatelyAvailableSubtotalFeeType2("balance-charge-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 ThreedsAuthenticationAttemptFee = new TransfersImmediatelyAvailableSubtotalFeeType2("3ds-authentication-attempt-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 TerminalMonthlyFee = new TransfersImmediatelyAvailableSubtotalFeeType2("terminal-monthly-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 AcceptanceRiskFee = new TransfersImmediatelyAvailableSubtotalFeeType2("acceptance-risk-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 TopUpFee = new TransfersImmediatelyAvailableSubtotalFeeType2("top-up-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 PaymentGatewayFee = new TransfersImmediatelyAvailableSubtotalFeeType2("payment-gateway-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 MastercardSpecialtyMerchantProgramProcessingFee = new TransfersImmediatelyAvailableSubtotalFeeType2("mastercard-specialty-merchant-program-processing-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 MastercardSpecialtyMerchantProgramRegistrationFee = new TransfersImmediatelyAvailableSubtotalFeeType2("mastercard-specialty-merchant-program-registration-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 VisaIntegrityRiskProgramProcessingFee = new TransfersImmediatelyAvailableSubtotalFeeType2("visa-integrity-risk-program-processing-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 VisaIntegrityRiskProgramRegistrationFee = new TransfersImmediatelyAvailableSubtotalFeeType2("visa-integrity-risk-program-registration-fee");
+        public static readonly TransfersImmediatelyAvailableSubtotalFeeType2 MinimumInvoiceAmountFee = new TransfersImmediatelyAvailableSubtotalFeeType2("minimum-invoice-amount-fee");
 
-    public static class TransfersImmediatelyAvailableSubtotalFeeType2Extension
-    {
-        public static string Value(this TransfersImmediatelyAvailableSubtotalFeeType2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static TransfersImmediatelyAvailableSubtotalFeeType2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(TransfersImmediatelyAvailableSubtotalFeeType2).GetFields())
+        private static readonly Dictionary <string, TransfersImmediatelyAvailableSubtotalFeeType2> _knownValues =
+            new Dictionary <string, TransfersImmediatelyAvailableSubtotalFeeType2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment-fee"] = PaymentFee,
+                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
+                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
+                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
+                ["partner-commission"] = PartnerCommission,
+                ["application-fee"] = ApplicationFee,
+                ["capture-fee"] = CaptureFee,
+                ["refund-fee"] = RefundFee,
+                ["chargeback-fee"] = ChargebackFee,
+                ["payment-notification-fee"] = PaymentNotificationFee,
+                ["transfer-notification-fee"] = TransferNotificationFee,
+                ["payout-fee"] = PayoutFee,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["platform-volume-fee"] = PlatformVolumeFee,
+                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
+                ["balance-charge-fee"] = BalanceChargeFee,
+                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
+                ["terminal-monthly-fee"] = TerminalMonthlyFee,
+                ["acceptance-risk-fee"] = AcceptanceRiskFee,
+                ["top-up-fee"] = TopUpFee,
+                ["payment-gateway-fee"] = PaymentGatewayFee,
+                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
+                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
+                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
+                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
+                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, TransfersImmediatelyAvailableSubtotalFeeType2> _values =
+            new ConcurrentDictionary<string, TransfersImmediatelyAvailableSubtotalFeeType2>(_knownValues);
 
-                    if (enumVal is TransfersImmediatelyAvailableSubtotalFeeType2)
-                    {
-                        return (TransfersImmediatelyAvailableSubtotalFeeType2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum TransfersImmediatelyAvailableSubtotalFeeType2");
+        private TransfersImmediatelyAvailableSubtotalFeeType2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static TransfersImmediatelyAvailableSubtotalFeeType2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new TransfersImmediatelyAvailableSubtotalFeeType2(value));
+        }
+
+        public static implicit operator TransfersImmediatelyAvailableSubtotalFeeType2(string value) => Of(value);
+        public static implicit operator string(TransfersImmediatelyAvailableSubtotalFeeType2 transfersimmediatelyavailablesubtotalfeetype2) => transfersimmediatelyavailablesubtotalfeetype2.Value;
+
+        public static TransfersImmediatelyAvailableSubtotalFeeType2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as TransfersImmediatelyAvailableSubtotalFeeType2);
+
+        public bool Equals(TransfersImmediatelyAvailableSubtotalFeeType2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

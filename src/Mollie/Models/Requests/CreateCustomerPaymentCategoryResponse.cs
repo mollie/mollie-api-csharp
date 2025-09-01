@@ -12,50 +12,68 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum CreateCustomerPaymentCategoryResponse
-    {
-        [JsonProperty("meal")]
-        Meal,
-        [JsonProperty("eco")]
-        Eco,
-        [JsonProperty("gift")]
-        Gift,
-        [JsonProperty("sport_culture")]
-        SportCulture,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class CreateCustomerPaymentCategoryResponseExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentCategoryResponse : IEquatable<CreateCustomerPaymentCategoryResponse>
     {
-        public static string Value(this CreateCustomerPaymentCategoryResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly CreateCustomerPaymentCategoryResponse Meal = new CreateCustomerPaymentCategoryResponse("meal");
+        public static readonly CreateCustomerPaymentCategoryResponse Eco = new CreateCustomerPaymentCategoryResponse("eco");
+        public static readonly CreateCustomerPaymentCategoryResponse Gift = new CreateCustomerPaymentCategoryResponse("gift");
+        public static readonly CreateCustomerPaymentCategoryResponse SportCulture = new CreateCustomerPaymentCategoryResponse("sport_culture");
 
-        public static CreateCustomerPaymentCategoryResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentCategoryResponse).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentCategoryResponse> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentCategoryResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["meal"] = Meal,
+                ["eco"] = Eco,
+                ["gift"] = Gift,
+                ["sport_culture"] = SportCulture
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentCategoryResponse> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentCategoryResponse>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentCategoryResponse)
-                    {
-                        return (CreateCustomerPaymentCategoryResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentCategoryResponse");
+        private CreateCustomerPaymentCategoryResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentCategoryResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentCategoryResponse(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentCategoryResponse(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentCategoryResponse createcustomerpaymentcategoryresponse) => createcustomerpaymentcategoryresponse.Value;
+
+        public static CreateCustomerPaymentCategoryResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentCategoryResponse);
+
+        public bool Equals(CreateCustomerPaymentCategoryResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

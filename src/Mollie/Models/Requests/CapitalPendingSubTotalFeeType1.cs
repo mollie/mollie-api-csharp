@@ -12,99 +12,117 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    public enum CapitalPendingSubTotalFeeType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CapitalPendingSubTotalFeeType1 : IEquatable<CapitalPendingSubTotalFeeType1>
     {
-        [JsonProperty("payment-fee")]
-        PaymentFee,
-        [JsonProperty("direct-debit-failure-fee")]
-        DirectDebitFailureFee,
-        [JsonProperty("unauthorized-direct-debit-fee")]
-        UnauthorizedDirectDebitFee,
-        [JsonProperty("bank-charged-direct-debit-failure-fee")]
-        BankChargedDirectDebitFailureFee,
-        [JsonProperty("partner-commission")]
-        PartnerCommission,
-        [JsonProperty("application-fee")]
-        ApplicationFee,
-        [JsonProperty("capture-fee")]
-        CaptureFee,
-        [JsonProperty("refund-fee")]
-        RefundFee,
-        [JsonProperty("chargeback-fee")]
-        ChargebackFee,
-        [JsonProperty("payment-notification-fee")]
-        PaymentNotificationFee,
-        [JsonProperty("transfer-notification-fee")]
-        TransferNotificationFee,
-        [JsonProperty("payout-fee")]
-        PayoutFee,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("platform-volume-fee")]
-        PlatformVolumeFee,
-        [JsonProperty("platform-connected-organizations-fee")]
-        PlatformConnectedOrganizationsFee,
-        [JsonProperty("balance-charge-fee")]
-        BalanceChargeFee,
-        [JsonProperty("3ds-authentication-attempt-fee")]
-        ThreedsAuthenticationAttemptFee,
-        [JsonProperty("terminal-monthly-fee")]
-        TerminalMonthlyFee,
-        [JsonProperty("acceptance-risk-fee")]
-        AcceptanceRiskFee,
-        [JsonProperty("top-up-fee")]
-        TopUpFee,
-        [JsonProperty("payment-gateway-fee")]
-        PaymentGatewayFee,
-        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
-        MastercardSpecialtyMerchantProgramProcessingFee,
-        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
-        MastercardSpecialtyMerchantProgramRegistrationFee,
-        [JsonProperty("visa-integrity-risk-program-processing-fee")]
-        VisaIntegrityRiskProgramProcessingFee,
-        [JsonProperty("visa-integrity-risk-program-registration-fee")]
-        VisaIntegrityRiskProgramRegistrationFee,
-        [JsonProperty("minimum-invoice-amount-fee")]
-        MinimumInvoiceAmountFee,
-    }
+        public static readonly CapitalPendingSubTotalFeeType1 PaymentFee = new CapitalPendingSubTotalFeeType1("payment-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 DirectDebitFailureFee = new CapitalPendingSubTotalFeeType1("direct-debit-failure-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 UnauthorizedDirectDebitFee = new CapitalPendingSubTotalFeeType1("unauthorized-direct-debit-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 BankChargedDirectDebitFailureFee = new CapitalPendingSubTotalFeeType1("bank-charged-direct-debit-failure-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 PartnerCommission = new CapitalPendingSubTotalFeeType1("partner-commission");
+        public static readonly CapitalPendingSubTotalFeeType1 ApplicationFee = new CapitalPendingSubTotalFeeType1("application-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 CaptureFee = new CapitalPendingSubTotalFeeType1("capture-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 RefundFee = new CapitalPendingSubTotalFeeType1("refund-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 ChargebackFee = new CapitalPendingSubTotalFeeType1("chargeback-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 PaymentNotificationFee = new CapitalPendingSubTotalFeeType1("payment-notification-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 TransferNotificationFee = new CapitalPendingSubTotalFeeType1("transfer-notification-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 PayoutFee = new CapitalPendingSubTotalFeeType1("payout-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 FeeDiscount = new CapitalPendingSubTotalFeeType1("fee-discount");
+        public static readonly CapitalPendingSubTotalFeeType1 FeeReimbursement = new CapitalPendingSubTotalFeeType1("fee-reimbursement");
+        public static readonly CapitalPendingSubTotalFeeType1 PlatformVolumeFee = new CapitalPendingSubTotalFeeType1("platform-volume-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 PlatformConnectedOrganizationsFee = new CapitalPendingSubTotalFeeType1("platform-connected-organizations-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 BalanceChargeFee = new CapitalPendingSubTotalFeeType1("balance-charge-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 ThreedsAuthenticationAttemptFee = new CapitalPendingSubTotalFeeType1("3ds-authentication-attempt-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 TerminalMonthlyFee = new CapitalPendingSubTotalFeeType1("terminal-monthly-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 AcceptanceRiskFee = new CapitalPendingSubTotalFeeType1("acceptance-risk-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 TopUpFee = new CapitalPendingSubTotalFeeType1("top-up-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 PaymentGatewayFee = new CapitalPendingSubTotalFeeType1("payment-gateway-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 MastercardSpecialtyMerchantProgramProcessingFee = new CapitalPendingSubTotalFeeType1("mastercard-specialty-merchant-program-processing-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 MastercardSpecialtyMerchantProgramRegistrationFee = new CapitalPendingSubTotalFeeType1("mastercard-specialty-merchant-program-registration-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 VisaIntegrityRiskProgramProcessingFee = new CapitalPendingSubTotalFeeType1("visa-integrity-risk-program-processing-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 VisaIntegrityRiskProgramRegistrationFee = new CapitalPendingSubTotalFeeType1("visa-integrity-risk-program-registration-fee");
+        public static readonly CapitalPendingSubTotalFeeType1 MinimumInvoiceAmountFee = new CapitalPendingSubTotalFeeType1("minimum-invoice-amount-fee");
 
-    public static class CapitalPendingSubTotalFeeType1Extension
-    {
-        public static string Value(this CapitalPendingSubTotalFeeType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CapitalPendingSubTotalFeeType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(CapitalPendingSubTotalFeeType1).GetFields())
+        private static readonly Dictionary <string, CapitalPendingSubTotalFeeType1> _knownValues =
+            new Dictionary <string, CapitalPendingSubTotalFeeType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment-fee"] = PaymentFee,
+                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
+                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
+                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
+                ["partner-commission"] = PartnerCommission,
+                ["application-fee"] = ApplicationFee,
+                ["capture-fee"] = CaptureFee,
+                ["refund-fee"] = RefundFee,
+                ["chargeback-fee"] = ChargebackFee,
+                ["payment-notification-fee"] = PaymentNotificationFee,
+                ["transfer-notification-fee"] = TransferNotificationFee,
+                ["payout-fee"] = PayoutFee,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["platform-volume-fee"] = PlatformVolumeFee,
+                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
+                ["balance-charge-fee"] = BalanceChargeFee,
+                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
+                ["terminal-monthly-fee"] = TerminalMonthlyFee,
+                ["acceptance-risk-fee"] = AcceptanceRiskFee,
+                ["top-up-fee"] = TopUpFee,
+                ["payment-gateway-fee"] = PaymentGatewayFee,
+                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
+                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
+                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
+                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
+                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CapitalPendingSubTotalFeeType1> _values =
+            new ConcurrentDictionary<string, CapitalPendingSubTotalFeeType1>(_knownValues);
 
-                    if (enumVal is CapitalPendingSubTotalFeeType1)
-                    {
-                        return (CapitalPendingSubTotalFeeType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CapitalPendingSubTotalFeeType1");
+        private CapitalPendingSubTotalFeeType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CapitalPendingSubTotalFeeType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CapitalPendingSubTotalFeeType1(value));
+        }
+
+        public static implicit operator CapitalPendingSubTotalFeeType1(string value) => Of(value);
+        public static implicit operator string(CapitalPendingSubTotalFeeType1 capitalpendingsubtotalfeetype1) => capitalpendingsubtotalfeetype1.Value;
+
+        public static CapitalPendingSubTotalFeeType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CapitalPendingSubTotalFeeType1);
+
+        public bool Equals(CapitalPendingSubTotalFeeType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

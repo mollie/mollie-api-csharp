@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum ChargebacksPendingSubtotalMethod2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ChargebacksPendingSubtotalMethod2 : IEquatable<ChargebacksPendingSubtotalMethod2>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly ChargebacksPendingSubtotalMethod2 Alma = new ChargebacksPendingSubtotalMethod2("alma");
+        public static readonly ChargebacksPendingSubtotalMethod2 Bacs = new ChargebacksPendingSubtotalMethod2("bacs");
+        public static readonly ChargebacksPendingSubtotalMethod2 Applepay = new ChargebacksPendingSubtotalMethod2("applepay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Bancomatpay = new ChargebacksPendingSubtotalMethod2("bancomatpay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Bancontact = new ChargebacksPendingSubtotalMethod2("bancontact");
+        public static readonly ChargebacksPendingSubtotalMethod2 Banktransfer = new ChargebacksPendingSubtotalMethod2("banktransfer");
+        public static readonly ChargebacksPendingSubtotalMethod2 Belfius = new ChargebacksPendingSubtotalMethod2("belfius");
+        public static readonly ChargebacksPendingSubtotalMethod2 Billie = new ChargebacksPendingSubtotalMethod2("billie");
+        public static readonly ChargebacksPendingSubtotalMethod2 Bizum = new ChargebacksPendingSubtotalMethod2("bizum");
+        public static readonly ChargebacksPendingSubtotalMethod2 Bitcoin = new ChargebacksPendingSubtotalMethod2("bitcoin");
+        public static readonly ChargebacksPendingSubtotalMethod2 Blik = new ChargebacksPendingSubtotalMethod2("blik");
+        public static readonly ChargebacksPendingSubtotalMethod2 Creditcard = new ChargebacksPendingSubtotalMethod2("creditcard");
+        public static readonly ChargebacksPendingSubtotalMethod2 Directdebit = new ChargebacksPendingSubtotalMethod2("directdebit");
+        public static readonly ChargebacksPendingSubtotalMethod2 Eps = new ChargebacksPendingSubtotalMethod2("eps");
+        public static readonly ChargebacksPendingSubtotalMethod2 Giftcard = new ChargebacksPendingSubtotalMethod2("giftcard");
+        public static readonly ChargebacksPendingSubtotalMethod2 Giropay = new ChargebacksPendingSubtotalMethod2("giropay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Googlepay = new ChargebacksPendingSubtotalMethod2("googlepay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Ideal = new ChargebacksPendingSubtotalMethod2("ideal");
+        public static readonly ChargebacksPendingSubtotalMethod2 In3 = new ChargebacksPendingSubtotalMethod2("in3");
+        public static readonly ChargebacksPendingSubtotalMethod2 Inghomepay = new ChargebacksPendingSubtotalMethod2("inghomepay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Kbc = new ChargebacksPendingSubtotalMethod2("kbc");
+        public static readonly ChargebacksPendingSubtotalMethod2 Klarnapaylater = new ChargebacksPendingSubtotalMethod2("klarnapaylater");
+        public static readonly ChargebacksPendingSubtotalMethod2 Klarnapaynow = new ChargebacksPendingSubtotalMethod2("klarnapaynow");
+        public static readonly ChargebacksPendingSubtotalMethod2 Klarnasliceit = new ChargebacksPendingSubtotalMethod2("klarnasliceit");
+        public static readonly ChargebacksPendingSubtotalMethod2 Klarna = new ChargebacksPendingSubtotalMethod2("klarna");
+        public static readonly ChargebacksPendingSubtotalMethod2 Mbway = new ChargebacksPendingSubtotalMethod2("mbway");
+        public static readonly ChargebacksPendingSubtotalMethod2 Multibanco = new ChargebacksPendingSubtotalMethod2("multibanco");
+        public static readonly ChargebacksPendingSubtotalMethod2 Mybank = new ChargebacksPendingSubtotalMethod2("mybank");
+        public static readonly ChargebacksPendingSubtotalMethod2 Paybybank = new ChargebacksPendingSubtotalMethod2("paybybank");
+        public static readonly ChargebacksPendingSubtotalMethod2 Payconiq = new ChargebacksPendingSubtotalMethod2("payconiq");
+        public static readonly ChargebacksPendingSubtotalMethod2 Paypal = new ChargebacksPendingSubtotalMethod2("paypal");
+        public static readonly ChargebacksPendingSubtotalMethod2 Paysafecard = new ChargebacksPendingSubtotalMethod2("paysafecard");
+        public static readonly ChargebacksPendingSubtotalMethod2 Przelewy24 = new ChargebacksPendingSubtotalMethod2("przelewy24");
+        public static readonly ChargebacksPendingSubtotalMethod2 Riverty = new ChargebacksPendingSubtotalMethod2("riverty");
+        public static readonly ChargebacksPendingSubtotalMethod2 Satispay = new ChargebacksPendingSubtotalMethod2("satispay");
+        public static readonly ChargebacksPendingSubtotalMethod2 Podiumcadeaukaart = new ChargebacksPendingSubtotalMethod2("podiumcadeaukaart");
+        public static readonly ChargebacksPendingSubtotalMethod2 Pointofsale = new ChargebacksPendingSubtotalMethod2("pointofsale");
+        public static readonly ChargebacksPendingSubtotalMethod2 Sofort = new ChargebacksPendingSubtotalMethod2("sofort");
+        public static readonly ChargebacksPendingSubtotalMethod2 Swish = new ChargebacksPendingSubtotalMethod2("swish");
+        public static readonly ChargebacksPendingSubtotalMethod2 Trustly = new ChargebacksPendingSubtotalMethod2("trustly");
+        public static readonly ChargebacksPendingSubtotalMethod2 Twint = new ChargebacksPendingSubtotalMethod2("twint");
+        public static readonly ChargebacksPendingSubtotalMethod2 Voucher = new ChargebacksPendingSubtotalMethod2("voucher");
 
-    public static class ChargebacksPendingSubtotalMethod2Extension
-    {
-        public static string Value(this ChargebacksPendingSubtotalMethod2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ChargebacksPendingSubtotalMethod2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ChargebacksPendingSubtotalMethod2).GetFields())
+        private static readonly Dictionary <string, ChargebacksPendingSubtotalMethod2> _knownValues =
+            new Dictionary <string, ChargebacksPendingSubtotalMethod2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ChargebacksPendingSubtotalMethod2> _values =
+            new ConcurrentDictionary<string, ChargebacksPendingSubtotalMethod2>(_knownValues);
 
-                    if (enumVal is ChargebacksPendingSubtotalMethod2)
-                    {
-                        return (ChargebacksPendingSubtotalMethod2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ChargebacksPendingSubtotalMethod2");
+        private ChargebacksPendingSubtotalMethod2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ChargebacksPendingSubtotalMethod2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ChargebacksPendingSubtotalMethod2(value));
+        }
+
+        public static implicit operator ChargebacksPendingSubtotalMethod2(string value) => Of(value);
+        public static implicit operator string(ChargebacksPendingSubtotalMethod2 chargebackspendingsubtotalmethod2) => chargebackspendingsubtotalmethod2.Value;
+
+        public static ChargebacksPendingSubtotalMethod2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ChargebacksPendingSubtotalMethod2);
+
+        public bool Equals(ChargebacksPendingSubtotalMethod2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

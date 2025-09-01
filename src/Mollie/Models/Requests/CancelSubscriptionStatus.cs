@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// 
@@ -20,51 +23,66 @@ namespace Mollie.Models.Requests
     /// enabling the subscription.
     /// </remarks>
     /// </summary>
-    public enum CancelSubscriptionStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CancelSubscriptionStatus : IEquatable<CancelSubscriptionStatus>
     {
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("active")]
-        Active,
-        [JsonProperty("canceled")]
-        Canceled,
-        [JsonProperty("suspended")]
-        Suspended,
-        [JsonProperty("completed")]
-        Completed,
-    }
+        public static readonly CancelSubscriptionStatus Pending = new CancelSubscriptionStatus("pending");
+        public static readonly CancelSubscriptionStatus Active = new CancelSubscriptionStatus("active");
+        public static readonly CancelSubscriptionStatus Canceled = new CancelSubscriptionStatus("canceled");
+        public static readonly CancelSubscriptionStatus Suspended = new CancelSubscriptionStatus("suspended");
+        public static readonly CancelSubscriptionStatus Completed = new CancelSubscriptionStatus("completed");
 
-    public static class CancelSubscriptionStatusExtension
-    {
-        public static string Value(this CancelSubscriptionStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CancelSubscriptionStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(CancelSubscriptionStatus).GetFields())
+        private static readonly Dictionary <string, CancelSubscriptionStatus> _knownValues =
+            new Dictionary <string, CancelSubscriptionStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["pending"] = Pending,
+                ["active"] = Active,
+                ["canceled"] = Canceled,
+                ["suspended"] = Suspended,
+                ["completed"] = Completed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CancelSubscriptionStatus> _values =
+            new ConcurrentDictionary<string, CancelSubscriptionStatus>(_knownValues);
 
-                    if (enumVal is CancelSubscriptionStatus)
-                    {
-                        return (CancelSubscriptionStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CancelSubscriptionStatus");
+        private CancelSubscriptionStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CancelSubscriptionStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CancelSubscriptionStatus(value));
+        }
+
+        public static implicit operator CancelSubscriptionStatus(string value) => Of(value);
+        public static implicit operator string(CancelSubscriptionStatus cancelsubscriptionstatus) => cancelsubscriptionstatus.Value;
+
+        public static CancelSubscriptionStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CancelSubscriptionStatus);
+
+        public bool Equals(CancelSubscriptionStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

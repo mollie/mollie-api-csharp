@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum PaymentsImmediatelyAvailableSubtotalCardRegion2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PaymentsImmediatelyAvailableSubtotalCardRegion2 : IEquatable<PaymentsImmediatelyAvailableSubtotalCardRegion2>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly PaymentsImmediatelyAvailableSubtotalCardRegion2 IntraEea = new PaymentsImmediatelyAvailableSubtotalCardRegion2("intra-eea");
+        public static readonly PaymentsImmediatelyAvailableSubtotalCardRegion2 IntraEu = new PaymentsImmediatelyAvailableSubtotalCardRegion2("intra-eu");
+        public static readonly PaymentsImmediatelyAvailableSubtotalCardRegion2 Domestic = new PaymentsImmediatelyAvailableSubtotalCardRegion2("domestic");
+        public static readonly PaymentsImmediatelyAvailableSubtotalCardRegion2 Other = new PaymentsImmediatelyAvailableSubtotalCardRegion2("other");
 
-    public static class PaymentsImmediatelyAvailableSubtotalCardRegion2Extension
-    {
-        public static string Value(this PaymentsImmediatelyAvailableSubtotalCardRegion2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PaymentsImmediatelyAvailableSubtotalCardRegion2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(PaymentsImmediatelyAvailableSubtotalCardRegion2).GetFields())
+        private static readonly Dictionary <string, PaymentsImmediatelyAvailableSubtotalCardRegion2> _knownValues =
+            new Dictionary <string, PaymentsImmediatelyAvailableSubtotalCardRegion2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PaymentsImmediatelyAvailableSubtotalCardRegion2> _values =
+            new ConcurrentDictionary<string, PaymentsImmediatelyAvailableSubtotalCardRegion2>(_knownValues);
 
-                    if (enumVal is PaymentsImmediatelyAvailableSubtotalCardRegion2)
-                    {
-                        return (PaymentsImmediatelyAvailableSubtotalCardRegion2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PaymentsImmediatelyAvailableSubtotalCardRegion2");
+        private PaymentsImmediatelyAvailableSubtotalCardRegion2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PaymentsImmediatelyAvailableSubtotalCardRegion2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PaymentsImmediatelyAvailableSubtotalCardRegion2(value));
+        }
+
+        public static implicit operator PaymentsImmediatelyAvailableSubtotalCardRegion2(string value) => Of(value);
+        public static implicit operator string(PaymentsImmediatelyAvailableSubtotalCardRegion2 paymentsimmediatelyavailablesubtotalcardregion2) => paymentsimmediatelyavailablesubtotalcardregion2.Value;
+
+        public static PaymentsImmediatelyAvailableSubtotalCardRegion2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PaymentsImmediatelyAvailableSubtotalCardRegion2);
+
+        public bool Equals(PaymentsImmediatelyAvailableSubtotalCardRegion2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

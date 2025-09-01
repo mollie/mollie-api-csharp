@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    public enum CorrectionsPendingSubTotalPrepaymentPartType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CorrectionsPendingSubTotalPrepaymentPartType1 : IEquatable<CorrectionsPendingSubTotalPrepaymentPartType1>
     {
-        [JsonProperty("fee")]
-        Fee,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-vat")]
-        FeeVat,
-        [JsonProperty("fee-rounding-compensation")]
-        FeeRoundingCompensation,
-    }
+        public static readonly CorrectionsPendingSubTotalPrepaymentPartType1 Fee = new CorrectionsPendingSubTotalPrepaymentPartType1("fee");
+        public static readonly CorrectionsPendingSubTotalPrepaymentPartType1 FeeReimbursement = new CorrectionsPendingSubTotalPrepaymentPartType1("fee-reimbursement");
+        public static readonly CorrectionsPendingSubTotalPrepaymentPartType1 FeeDiscount = new CorrectionsPendingSubTotalPrepaymentPartType1("fee-discount");
+        public static readonly CorrectionsPendingSubTotalPrepaymentPartType1 FeeVat = new CorrectionsPendingSubTotalPrepaymentPartType1("fee-vat");
+        public static readonly CorrectionsPendingSubTotalPrepaymentPartType1 FeeRoundingCompensation = new CorrectionsPendingSubTotalPrepaymentPartType1("fee-rounding-compensation");
 
-    public static class CorrectionsPendingSubTotalPrepaymentPartType1Extension
-    {
-        public static string Value(this CorrectionsPendingSubTotalPrepaymentPartType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CorrectionsPendingSubTotalPrepaymentPartType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(CorrectionsPendingSubTotalPrepaymentPartType1).GetFields())
+        private static readonly Dictionary <string, CorrectionsPendingSubTotalPrepaymentPartType1> _knownValues =
+            new Dictionary <string, CorrectionsPendingSubTotalPrepaymentPartType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["fee"] = Fee,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-vat"] = FeeVat,
+                ["fee-rounding-compensation"] = FeeRoundingCompensation
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CorrectionsPendingSubTotalPrepaymentPartType1> _values =
+            new ConcurrentDictionary<string, CorrectionsPendingSubTotalPrepaymentPartType1>(_knownValues);
 
-                    if (enumVal is CorrectionsPendingSubTotalPrepaymentPartType1)
-                    {
-                        return (CorrectionsPendingSubTotalPrepaymentPartType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CorrectionsPendingSubTotalPrepaymentPartType1");
+        private CorrectionsPendingSubTotalPrepaymentPartType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CorrectionsPendingSubTotalPrepaymentPartType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CorrectionsPendingSubTotalPrepaymentPartType1(value));
+        }
+
+        public static implicit operator CorrectionsPendingSubTotalPrepaymentPartType1(string value) => Of(value);
+        public static implicit operator string(CorrectionsPendingSubTotalPrepaymentPartType1 correctionspendingsubtotalprepaymentparttype1) => correctionspendingsubtotalprepaymentparttype1.Value;
+
+        public static CorrectionsPendingSubTotalPrepaymentPartType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CorrectionsPendingSubTotalPrepaymentPartType1);
+
+        public bool Equals(CorrectionsPendingSubTotalPrepaymentPartType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

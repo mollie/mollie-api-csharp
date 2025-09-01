@@ -12,65 +12,83 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The applicable card fee region.
     /// </summary>
-    public enum CreatePaymentFeeRegion
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreatePaymentFeeRegion : IEquatable<CreatePaymentFeeRegion>
     {
-        [JsonProperty("american-express")]
-        AmericanExpress,
-        [JsonProperty("amex-intra-eea")]
-        AmexIntraEea,
-        [JsonProperty("carte-bancaire")]
-        CarteBancaire,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("intra-eu-corporate")]
-        IntraEuCorporate,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("maestro")]
-        Maestro,
-        [JsonProperty("other")]
-        Other,
-        [JsonProperty("inter")]
-        Inter,
-        [JsonProperty("intra_eea")]
-        IntraEea,
-    }
+        public static readonly CreatePaymentFeeRegion AmericanExpress = new CreatePaymentFeeRegion("american-express");
+        public static readonly CreatePaymentFeeRegion AmexIntraEea = new CreatePaymentFeeRegion("amex-intra-eea");
+        public static readonly CreatePaymentFeeRegion CarteBancaire = new CreatePaymentFeeRegion("carte-bancaire");
+        public static readonly CreatePaymentFeeRegion IntraEu = new CreatePaymentFeeRegion("intra-eu");
+        public static readonly CreatePaymentFeeRegion IntraEuCorporate = new CreatePaymentFeeRegion("intra-eu-corporate");
+        public static readonly CreatePaymentFeeRegion Domestic = new CreatePaymentFeeRegion("domestic");
+        public static readonly CreatePaymentFeeRegion Maestro = new CreatePaymentFeeRegion("maestro");
+        public static readonly CreatePaymentFeeRegion Other = new CreatePaymentFeeRegion("other");
+        public static readonly CreatePaymentFeeRegion Inter = new CreatePaymentFeeRegion("inter");
+        public static readonly CreatePaymentFeeRegion IntraEea = new CreatePaymentFeeRegion("intra_eea");
 
-    public static class CreatePaymentFeeRegionExtension
-    {
-        public static string Value(this CreatePaymentFeeRegion value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreatePaymentFeeRegion ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreatePaymentFeeRegion).GetFields())
+        private static readonly Dictionary <string, CreatePaymentFeeRegion> _knownValues =
+            new Dictionary <string, CreatePaymentFeeRegion> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["american-express"] = AmericanExpress,
+                ["amex-intra-eea"] = AmexIntraEea,
+                ["carte-bancaire"] = CarteBancaire,
+                ["intra-eu"] = IntraEu,
+                ["intra-eu-corporate"] = IntraEuCorporate,
+                ["domestic"] = Domestic,
+                ["maestro"] = Maestro,
+                ["other"] = Other,
+                ["inter"] = Inter,
+                ["intra_eea"] = IntraEea
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreatePaymentFeeRegion> _values =
+            new ConcurrentDictionary<string, CreatePaymentFeeRegion>(_knownValues);
 
-                    if (enumVal is CreatePaymentFeeRegion)
-                    {
-                        return (CreatePaymentFeeRegion)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreatePaymentFeeRegion");
+        private CreatePaymentFeeRegion(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreatePaymentFeeRegion Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreatePaymentFeeRegion(value));
+        }
+
+        public static implicit operator CreatePaymentFeeRegion(string value) => Of(value);
+        public static implicit operator string(CreatePaymentFeeRegion createpaymentfeeregion) => createpaymentfeeregion.Value;
+
+        public static CreatePaymentFeeRegion[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreatePaymentFeeRegion);
+
+        public bool Equals(CreatePaymentFeeRegion? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

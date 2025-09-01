@@ -12,57 +12,75 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.
     /// </summary>
-    public enum GetTerminalModel
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetTerminalModel : IEquatable<GetTerminalModel>
     {
-        [JsonProperty("A35")]
-        A35,
-        [JsonProperty("A77")]
-        A77,
-        [JsonProperty("A920")]
-        A920,
-        [JsonProperty("A920Pro")]
-        A920Pro,
-        [JsonProperty("IM30")]
-        Im30,
-        [JsonProperty("Tap")]
-        Tap,
-    }
+        public static readonly GetTerminalModel A35 = new GetTerminalModel("A35");
+        public static readonly GetTerminalModel A77 = new GetTerminalModel("A77");
+        public static readonly GetTerminalModel A920 = new GetTerminalModel("A920");
+        public static readonly GetTerminalModel A920Pro = new GetTerminalModel("A920Pro");
+        public static readonly GetTerminalModel Im30 = new GetTerminalModel("IM30");
+        public static readonly GetTerminalModel Tap = new GetTerminalModel("Tap");
 
-    public static class GetTerminalModelExtension
-    {
-        public static string Value(this GetTerminalModel value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetTerminalModel ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetTerminalModel).GetFields())
+        private static readonly Dictionary <string, GetTerminalModel> _knownValues =
+            new Dictionary <string, GetTerminalModel> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["A35"] = A35,
+                ["A77"] = A77,
+                ["A920"] = A920,
+                ["A920Pro"] = A920Pro,
+                ["IM30"] = Im30,
+                ["Tap"] = Tap
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetTerminalModel> _values =
+            new ConcurrentDictionary<string, GetTerminalModel>(_knownValues);
 
-                    if (enumVal is GetTerminalModel)
-                    {
-                        return (GetTerminalModel)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetTerminalModel");
+        private GetTerminalModel(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetTerminalModel Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetTerminalModel(value));
+        }
+
+        public static implicit operator GetTerminalModel(string value) => Of(value);
+        public static implicit operator string(GetTerminalModel getterminalmodel) => getterminalmodel.Value;
+
+        public static GetTerminalModel[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetTerminalModel);
+
+        public bool Equals(GetTerminalModel? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

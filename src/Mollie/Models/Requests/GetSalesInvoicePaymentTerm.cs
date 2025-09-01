@@ -12,59 +12,77 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment term to be set on the invoice.
     /// </summary>
-    public enum GetSalesInvoicePaymentTerm
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetSalesInvoicePaymentTerm : IEquatable<GetSalesInvoicePaymentTerm>
     {
-        [JsonProperty("7 days")]
-        Sevendays,
-        [JsonProperty("14 days")]
-        Fourteendays,
-        [JsonProperty("30 days")]
-        Thirtydays,
-        [JsonProperty("45 days")]
-        FortyFivedays,
-        [JsonProperty("60 days")]
-        Sixtydays,
-        [JsonProperty("90 days")]
-        Ninetydays,
-        [JsonProperty("120 days")]
-        OneHundredAndTwentydays,
-    }
+        public static readonly GetSalesInvoicePaymentTerm Sevendays = new GetSalesInvoicePaymentTerm("7 days");
+        public static readonly GetSalesInvoicePaymentTerm Fourteendays = new GetSalesInvoicePaymentTerm("14 days");
+        public static readonly GetSalesInvoicePaymentTerm Thirtydays = new GetSalesInvoicePaymentTerm("30 days");
+        public static readonly GetSalesInvoicePaymentTerm FortyFivedays = new GetSalesInvoicePaymentTerm("45 days");
+        public static readonly GetSalesInvoicePaymentTerm Sixtydays = new GetSalesInvoicePaymentTerm("60 days");
+        public static readonly GetSalesInvoicePaymentTerm Ninetydays = new GetSalesInvoicePaymentTerm("90 days");
+        public static readonly GetSalesInvoicePaymentTerm OneHundredAndTwentydays = new GetSalesInvoicePaymentTerm("120 days");
 
-    public static class GetSalesInvoicePaymentTermExtension
-    {
-        public static string Value(this GetSalesInvoicePaymentTerm value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetSalesInvoicePaymentTerm ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetSalesInvoicePaymentTerm).GetFields())
+        private static readonly Dictionary <string, GetSalesInvoicePaymentTerm> _knownValues =
+            new Dictionary <string, GetSalesInvoicePaymentTerm> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["7 days"] = Sevendays,
+                ["14 days"] = Fourteendays,
+                ["30 days"] = Thirtydays,
+                ["45 days"] = FortyFivedays,
+                ["60 days"] = Sixtydays,
+                ["90 days"] = Ninetydays,
+                ["120 days"] = OneHundredAndTwentydays
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetSalesInvoicePaymentTerm> _values =
+            new ConcurrentDictionary<string, GetSalesInvoicePaymentTerm>(_knownValues);
 
-                    if (enumVal is GetSalesInvoicePaymentTerm)
-                    {
-                        return (GetSalesInvoicePaymentTerm)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetSalesInvoicePaymentTerm");
+        private GetSalesInvoicePaymentTerm(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetSalesInvoicePaymentTerm Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetSalesInvoicePaymentTerm(value));
+        }
+
+        public static implicit operator GetSalesInvoicePaymentTerm(string value) => Of(value);
+        public static implicit operator string(GetSalesInvoicePaymentTerm getsalesinvoicepaymentterm) => getsalesinvoicepaymentterm.Value;
+
+        public static GetSalesInvoicePaymentTerm[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetSalesInvoicePaymentTerm);
+
+        public bool Equals(GetSalesInvoicePaymentTerm? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

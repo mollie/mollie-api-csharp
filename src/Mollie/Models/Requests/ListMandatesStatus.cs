@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
     /// 
@@ -20,47 +23,62 @@ namespace Mollie.Models.Requests
     /// when we did not received the IBAN yet from the first payment.
     /// </remarks>
     /// </summary>
-    public enum ListMandatesStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListMandatesStatus : IEquatable<ListMandatesStatus>
     {
-        [JsonProperty("valid")]
-        Valid,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("invalid")]
-        Invalid,
-    }
+        public static readonly ListMandatesStatus Valid = new ListMandatesStatus("valid");
+        public static readonly ListMandatesStatus Pending = new ListMandatesStatus("pending");
+        public static readonly ListMandatesStatus Invalid = new ListMandatesStatus("invalid");
 
-    public static class ListMandatesStatusExtension
-    {
-        public static string Value(this ListMandatesStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListMandatesStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListMandatesStatus).GetFields())
+        private static readonly Dictionary <string, ListMandatesStatus> _knownValues =
+            new Dictionary <string, ListMandatesStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["valid"] = Valid,
+                ["pending"] = Pending,
+                ["invalid"] = Invalid
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListMandatesStatus> _values =
+            new ConcurrentDictionary<string, ListMandatesStatus>(_knownValues);
 
-                    if (enumVal is ListMandatesStatus)
-                    {
-                        return (ListMandatesStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListMandatesStatus");
+        private ListMandatesStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListMandatesStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListMandatesStatus(value));
+        }
+
+        public static implicit operator ListMandatesStatus(string value) => Of(value);
+        public static implicit operator string(ListMandatesStatus listmandatesstatus) => listmandatesstatus.Value;
+
+        public static ListMandatesStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListMandatesStatus);
+
+        public bool Equals(ListMandatesStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
     /// 
@@ -22,45 +25,60 @@ namespace Mollie.Models.Requests
     /// This field needs to be set to `manual` for method `riverty`.
     /// </remarks>
     /// </summary>
-    public enum ListSubscriptionPaymentsCaptureMode
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionPaymentsCaptureMode : IEquatable<ListSubscriptionPaymentsCaptureMode>
     {
-        [JsonProperty("automatic")]
-        Automatic,
-        [JsonProperty("manual")]
-        Manual,
-    }
+        public static readonly ListSubscriptionPaymentsCaptureMode Automatic = new ListSubscriptionPaymentsCaptureMode("automatic");
+        public static readonly ListSubscriptionPaymentsCaptureMode Manual = new ListSubscriptionPaymentsCaptureMode("manual");
 
-    public static class ListSubscriptionPaymentsCaptureModeExtension
-    {
-        public static string Value(this ListSubscriptionPaymentsCaptureMode value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionPaymentsCaptureMode ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionPaymentsCaptureMode).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionPaymentsCaptureMode> _knownValues =
+            new Dictionary <string, ListSubscriptionPaymentsCaptureMode> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["automatic"] = Automatic,
+                ["manual"] = Manual
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsCaptureMode> _values =
+            new ConcurrentDictionary<string, ListSubscriptionPaymentsCaptureMode>(_knownValues);
 
-                    if (enumVal is ListSubscriptionPaymentsCaptureMode)
-                    {
-                        return (ListSubscriptionPaymentsCaptureMode)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsCaptureMode");
+        private ListSubscriptionPaymentsCaptureMode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionPaymentsCaptureMode Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsCaptureMode(value));
+        }
+
+        public static implicit operator ListSubscriptionPaymentsCaptureMode(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionPaymentsCaptureMode listsubscriptionpaymentscapturemode) => listsubscriptionpaymentscapturemode.Value;
+
+        public static ListSubscriptionPaymentsCaptureMode[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsCaptureMode);
+
+        public bool Equals(ListSubscriptionPaymentsCaptureMode? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

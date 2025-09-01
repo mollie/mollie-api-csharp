@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
     /// 
@@ -20,113 +23,128 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    public enum GetPaymentMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPaymentMethod : IEquatable<GetPaymentMethod>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly GetPaymentMethod Alma = new GetPaymentMethod("alma");
+        public static readonly GetPaymentMethod Applepay = new GetPaymentMethod("applepay");
+        public static readonly GetPaymentMethod Bacs = new GetPaymentMethod("bacs");
+        public static readonly GetPaymentMethod Bancomatpay = new GetPaymentMethod("bancomatpay");
+        public static readonly GetPaymentMethod Bancontact = new GetPaymentMethod("bancontact");
+        public static readonly GetPaymentMethod Banktransfer = new GetPaymentMethod("banktransfer");
+        public static readonly GetPaymentMethod Belfius = new GetPaymentMethod("belfius");
+        public static readonly GetPaymentMethod Billie = new GetPaymentMethod("billie");
+        public static readonly GetPaymentMethod Bizum = new GetPaymentMethod("bizum");
+        public static readonly GetPaymentMethod Blik = new GetPaymentMethod("blik");
+        public static readonly GetPaymentMethod Creditcard = new GetPaymentMethod("creditcard");
+        public static readonly GetPaymentMethod Directdebit = new GetPaymentMethod("directdebit");
+        public static readonly GetPaymentMethod Eps = new GetPaymentMethod("eps");
+        public static readonly GetPaymentMethod Giftcard = new GetPaymentMethod("giftcard");
+        public static readonly GetPaymentMethod Ideal = new GetPaymentMethod("ideal");
+        public static readonly GetPaymentMethod In3 = new GetPaymentMethod("in3");
+        public static readonly GetPaymentMethod Kbc = new GetPaymentMethod("kbc");
+        public static readonly GetPaymentMethod Klarna = new GetPaymentMethod("klarna");
+        public static readonly GetPaymentMethod Klarnapaylater = new GetPaymentMethod("klarnapaylater");
+        public static readonly GetPaymentMethod Klarnapaynow = new GetPaymentMethod("klarnapaynow");
+        public static readonly GetPaymentMethod Klarnasliceit = new GetPaymentMethod("klarnasliceit");
+        public static readonly GetPaymentMethod Mbway = new GetPaymentMethod("mbway");
+        public static readonly GetPaymentMethod Multibanco = new GetPaymentMethod("multibanco");
+        public static readonly GetPaymentMethod Mybank = new GetPaymentMethod("mybank");
+        public static readonly GetPaymentMethod Paybybank = new GetPaymentMethod("paybybank");
+        public static readonly GetPaymentMethod Payconiq = new GetPaymentMethod("payconiq");
+        public static readonly GetPaymentMethod Paypal = new GetPaymentMethod("paypal");
+        public static readonly GetPaymentMethod Paysafecard = new GetPaymentMethod("paysafecard");
+        public static readonly GetPaymentMethod Pointofsale = new GetPaymentMethod("pointofsale");
+        public static readonly GetPaymentMethod Przelewy24 = new GetPaymentMethod("przelewy24");
+        public static readonly GetPaymentMethod Riverty = new GetPaymentMethod("riverty");
+        public static readonly GetPaymentMethod Satispay = new GetPaymentMethod("satispay");
+        public static readonly GetPaymentMethod Swish = new GetPaymentMethod("swish");
+        public static readonly GetPaymentMethod Trustly = new GetPaymentMethod("trustly");
+        public static readonly GetPaymentMethod Twint = new GetPaymentMethod("twint");
+        public static readonly GetPaymentMethod Voucher = new GetPaymentMethod("voucher");
 
-    public static class GetPaymentMethodExtension
-    {
-        public static string Value(this GetPaymentMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetPaymentMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPaymentMethod).GetFields())
+        private static readonly Dictionary <string, GetPaymentMethod> _knownValues =
+            new Dictionary <string, GetPaymentMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["applepay"] = Applepay,
+                ["bacs"] = Bacs,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["kbc"] = Kbc,
+                ["klarna"] = Klarna,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPaymentMethod> _values =
+            new ConcurrentDictionary<string, GetPaymentMethod>(_knownValues);
 
-                    if (enumVal is GetPaymentMethod)
-                    {
-                        return (GetPaymentMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPaymentMethod");
+        private GetPaymentMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPaymentMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPaymentMethod(value));
+        }
+
+        public static implicit operator GetPaymentMethod(string value) => Of(value);
+        public static implicit operator string(GetPaymentMethod getpaymentmethod) => getpaymentmethod.Value;
+
+        public static GetPaymentMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPaymentMethod);
+
+        public bool Equals(GetPaymentMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

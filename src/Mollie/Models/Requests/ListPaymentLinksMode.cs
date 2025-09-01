@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    public enum ListPaymentLinksMode
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListPaymentLinksMode : IEquatable<ListPaymentLinksMode>
     {
-        [JsonProperty("live")]
-        Live,
-        [JsonProperty("test")]
-        Test,
-    }
+        public static readonly ListPaymentLinksMode Live = new ListPaymentLinksMode("live");
+        public static readonly ListPaymentLinksMode Test = new ListPaymentLinksMode("test");
 
-    public static class ListPaymentLinksModeExtension
-    {
-        public static string Value(this ListPaymentLinksMode value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListPaymentLinksMode ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListPaymentLinksMode).GetFields())
+        private static readonly Dictionary <string, ListPaymentLinksMode> _knownValues =
+            new Dictionary <string, ListPaymentLinksMode> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["live"] = Live,
+                ["test"] = Test
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListPaymentLinksMode> _values =
+            new ConcurrentDictionary<string, ListPaymentLinksMode>(_knownValues);
 
-                    if (enumVal is ListPaymentLinksMode)
-                    {
-                        return (ListPaymentLinksMode)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListPaymentLinksMode");
+        private ListPaymentLinksMode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListPaymentLinksMode Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListPaymentLinksMode(value));
+        }
+
+        public static implicit operator ListPaymentLinksMode(string value) => Of(value);
+        public static implicit operator string(ListPaymentLinksMode listpaymentlinksmode) => listpaymentlinksmode.Value;
+
+        public static ListPaymentLinksMode[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListPaymentLinksMode);
+
+        public bool Equals(ListPaymentLinksMode? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

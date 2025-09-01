@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
     /// </summary>
-    public enum CreateSubscriptionMethodResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateSubscriptionMethodResponse : IEquatable<CreateSubscriptionMethodResponse>
     {
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("paypal")]
-        Paypal,
-    }
+        public static readonly CreateSubscriptionMethodResponse Creditcard = new CreateSubscriptionMethodResponse("creditcard");
+        public static readonly CreateSubscriptionMethodResponse Directdebit = new CreateSubscriptionMethodResponse("directdebit");
+        public static readonly CreateSubscriptionMethodResponse Paypal = new CreateSubscriptionMethodResponse("paypal");
 
-    public static class CreateSubscriptionMethodResponseExtension
-    {
-        public static string Value(this CreateSubscriptionMethodResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateSubscriptionMethodResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateSubscriptionMethodResponse).GetFields())
+        private static readonly Dictionary <string, CreateSubscriptionMethodResponse> _knownValues =
+            new Dictionary <string, CreateSubscriptionMethodResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["paypal"] = Paypal
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateSubscriptionMethodResponse> _values =
+            new ConcurrentDictionary<string, CreateSubscriptionMethodResponse>(_knownValues);
 
-                    if (enumVal is CreateSubscriptionMethodResponse)
-                    {
-                        return (CreateSubscriptionMethodResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateSubscriptionMethodResponse");
+        private CreateSubscriptionMethodResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateSubscriptionMethodResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateSubscriptionMethodResponse(value));
+        }
+
+        public static implicit operator CreateSubscriptionMethodResponse(string value) => Of(value);
+        public static implicit operator string(CreateSubscriptionMethodResponse createsubscriptionmethodresponse) => createsubscriptionmethodresponse.Value;
+
+        public static CreateSubscriptionMethodResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateSubscriptionMethodResponse);
+
+        public bool Equals(CreateSubscriptionMethodResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

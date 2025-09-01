@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum ChargebacksMovedToAvailableSubTotalMethod1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ChargebacksMovedToAvailableSubTotalMethod1 : IEquatable<ChargebacksMovedToAvailableSubTotalMethod1>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Alma = new ChargebacksMovedToAvailableSubTotalMethod1("alma");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Bacs = new ChargebacksMovedToAvailableSubTotalMethod1("bacs");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Applepay = new ChargebacksMovedToAvailableSubTotalMethod1("applepay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Bancomatpay = new ChargebacksMovedToAvailableSubTotalMethod1("bancomatpay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Bancontact = new ChargebacksMovedToAvailableSubTotalMethod1("bancontact");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Banktransfer = new ChargebacksMovedToAvailableSubTotalMethod1("banktransfer");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Belfius = new ChargebacksMovedToAvailableSubTotalMethod1("belfius");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Billie = new ChargebacksMovedToAvailableSubTotalMethod1("billie");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Bizum = new ChargebacksMovedToAvailableSubTotalMethod1("bizum");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Bitcoin = new ChargebacksMovedToAvailableSubTotalMethod1("bitcoin");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Blik = new ChargebacksMovedToAvailableSubTotalMethod1("blik");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Creditcard = new ChargebacksMovedToAvailableSubTotalMethod1("creditcard");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Directdebit = new ChargebacksMovedToAvailableSubTotalMethod1("directdebit");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Eps = new ChargebacksMovedToAvailableSubTotalMethod1("eps");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Giftcard = new ChargebacksMovedToAvailableSubTotalMethod1("giftcard");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Giropay = new ChargebacksMovedToAvailableSubTotalMethod1("giropay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Googlepay = new ChargebacksMovedToAvailableSubTotalMethod1("googlepay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Ideal = new ChargebacksMovedToAvailableSubTotalMethod1("ideal");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 In3 = new ChargebacksMovedToAvailableSubTotalMethod1("in3");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Inghomepay = new ChargebacksMovedToAvailableSubTotalMethod1("inghomepay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Kbc = new ChargebacksMovedToAvailableSubTotalMethod1("kbc");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Klarnapaylater = new ChargebacksMovedToAvailableSubTotalMethod1("klarnapaylater");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Klarnapaynow = new ChargebacksMovedToAvailableSubTotalMethod1("klarnapaynow");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Klarnasliceit = new ChargebacksMovedToAvailableSubTotalMethod1("klarnasliceit");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Klarna = new ChargebacksMovedToAvailableSubTotalMethod1("klarna");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Mbway = new ChargebacksMovedToAvailableSubTotalMethod1("mbway");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Multibanco = new ChargebacksMovedToAvailableSubTotalMethod1("multibanco");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Mybank = new ChargebacksMovedToAvailableSubTotalMethod1("mybank");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Paybybank = new ChargebacksMovedToAvailableSubTotalMethod1("paybybank");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Payconiq = new ChargebacksMovedToAvailableSubTotalMethod1("payconiq");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Paypal = new ChargebacksMovedToAvailableSubTotalMethod1("paypal");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Paysafecard = new ChargebacksMovedToAvailableSubTotalMethod1("paysafecard");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Przelewy24 = new ChargebacksMovedToAvailableSubTotalMethod1("przelewy24");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Riverty = new ChargebacksMovedToAvailableSubTotalMethod1("riverty");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Satispay = new ChargebacksMovedToAvailableSubTotalMethod1("satispay");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Podiumcadeaukaart = new ChargebacksMovedToAvailableSubTotalMethod1("podiumcadeaukaart");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Pointofsale = new ChargebacksMovedToAvailableSubTotalMethod1("pointofsale");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Sofort = new ChargebacksMovedToAvailableSubTotalMethod1("sofort");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Swish = new ChargebacksMovedToAvailableSubTotalMethod1("swish");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Trustly = new ChargebacksMovedToAvailableSubTotalMethod1("trustly");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Twint = new ChargebacksMovedToAvailableSubTotalMethod1("twint");
+        public static readonly ChargebacksMovedToAvailableSubTotalMethod1 Voucher = new ChargebacksMovedToAvailableSubTotalMethod1("voucher");
 
-    public static class ChargebacksMovedToAvailableSubTotalMethod1Extension
-    {
-        public static string Value(this ChargebacksMovedToAvailableSubTotalMethod1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ChargebacksMovedToAvailableSubTotalMethod1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ChargebacksMovedToAvailableSubTotalMethod1).GetFields())
+        private static readonly Dictionary <string, ChargebacksMovedToAvailableSubTotalMethod1> _knownValues =
+            new Dictionary <string, ChargebacksMovedToAvailableSubTotalMethod1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ChargebacksMovedToAvailableSubTotalMethod1> _values =
+            new ConcurrentDictionary<string, ChargebacksMovedToAvailableSubTotalMethod1>(_knownValues);
 
-                    if (enumVal is ChargebacksMovedToAvailableSubTotalMethod1)
-                    {
-                        return (ChargebacksMovedToAvailableSubTotalMethod1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ChargebacksMovedToAvailableSubTotalMethod1");
+        private ChargebacksMovedToAvailableSubTotalMethod1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ChargebacksMovedToAvailableSubTotalMethod1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ChargebacksMovedToAvailableSubTotalMethod1(value));
+        }
+
+        public static implicit operator ChargebacksMovedToAvailableSubTotalMethod1(string value) => Of(value);
+        public static implicit operator string(ChargebacksMovedToAvailableSubTotalMethod1 chargebacksmovedtoavailablesubtotalmethod1) => chargebacksmovedtoavailablesubtotalmethod1.Value;
+
+        public static ChargebacksMovedToAvailableSubTotalMethod1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ChargebacksMovedToAvailableSubTotalMethod1);
+
+        public bool Equals(ChargebacksMovedToAvailableSubTotalMethod1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

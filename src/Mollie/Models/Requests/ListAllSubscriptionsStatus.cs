@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// 
@@ -20,51 +23,66 @@ namespace Mollie.Models.Requests
     /// enabling the subscription.
     /// </remarks>
     /// </summary>
-    public enum ListAllSubscriptionsStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListAllSubscriptionsStatus : IEquatable<ListAllSubscriptionsStatus>
     {
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("active")]
-        Active,
-        [JsonProperty("canceled")]
-        Canceled,
-        [JsonProperty("suspended")]
-        Suspended,
-        [JsonProperty("completed")]
-        Completed,
-    }
+        public static readonly ListAllSubscriptionsStatus Pending = new ListAllSubscriptionsStatus("pending");
+        public static readonly ListAllSubscriptionsStatus Active = new ListAllSubscriptionsStatus("active");
+        public static readonly ListAllSubscriptionsStatus Canceled = new ListAllSubscriptionsStatus("canceled");
+        public static readonly ListAllSubscriptionsStatus Suspended = new ListAllSubscriptionsStatus("suspended");
+        public static readonly ListAllSubscriptionsStatus Completed = new ListAllSubscriptionsStatus("completed");
 
-    public static class ListAllSubscriptionsStatusExtension
-    {
-        public static string Value(this ListAllSubscriptionsStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListAllSubscriptionsStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListAllSubscriptionsStatus).GetFields())
+        private static readonly Dictionary <string, ListAllSubscriptionsStatus> _knownValues =
+            new Dictionary <string, ListAllSubscriptionsStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["pending"] = Pending,
+                ["active"] = Active,
+                ["canceled"] = Canceled,
+                ["suspended"] = Suspended,
+                ["completed"] = Completed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListAllSubscriptionsStatus> _values =
+            new ConcurrentDictionary<string, ListAllSubscriptionsStatus>(_knownValues);
 
-                    if (enumVal is ListAllSubscriptionsStatus)
-                    {
-                        return (ListAllSubscriptionsStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListAllSubscriptionsStatus");
+        private ListAllSubscriptionsStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListAllSubscriptionsStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListAllSubscriptionsStatus(value));
+        }
+
+        public static implicit operator ListAllSubscriptionsStatus(string value) => Of(value);
+        public static implicit operator string(ListAllSubscriptionsStatus listallsubscriptionsstatus) => listallsubscriptionsstatus.Value;
+
+        public static ListAllSubscriptionsStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListAllSubscriptionsStatus);
+
+        public bool Equals(ListAllSubscriptionsStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

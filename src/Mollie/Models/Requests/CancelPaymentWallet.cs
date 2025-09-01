@@ -12,47 +12,65 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The wallet used when creating the payment.
     /// </summary>
-    public enum CancelPaymentWallet
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CancelPaymentWallet : IEquatable<CancelPaymentWallet>
     {
-        [JsonProperty("applepay")]
-        Applepay,
-    }
+        public static readonly CancelPaymentWallet Applepay = new CancelPaymentWallet("applepay");
 
-    public static class CancelPaymentWalletExtension
-    {
-        public static string Value(this CancelPaymentWallet value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CancelPaymentWallet ToEnum(this string value)
-        {
-            foreach(var field in typeof(CancelPaymentWallet).GetFields())
+        private static readonly Dictionary <string, CancelPaymentWallet> _knownValues =
+            new Dictionary <string, CancelPaymentWallet> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["applepay"] = Applepay
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CancelPaymentWallet> _values =
+            new ConcurrentDictionary<string, CancelPaymentWallet>(_knownValues);
 
-                    if (enumVal is CancelPaymentWallet)
-                    {
-                        return (CancelPaymentWallet)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CancelPaymentWallet");
+        private CancelPaymentWallet(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CancelPaymentWallet Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CancelPaymentWallet(value));
+        }
+
+        public static implicit operator CancelPaymentWallet(string value) => Of(value);
+        public static implicit operator string(CancelPaymentWallet cancelpaymentwallet) => cancelpaymentwallet.Value;
+
+        public static CancelPaymentWallet[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CancelPaymentWallet);
+
+        public bool Equals(CancelPaymentWallet? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

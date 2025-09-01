@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the balance.
     /// </summary>
-    public enum GetPrimaryBalanceStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPrimaryBalanceStatus : IEquatable<GetPrimaryBalanceStatus>
     {
-        [JsonProperty("active")]
-        Active,
-        [JsonProperty("inactive")]
-        Inactive,
-    }
+        public static readonly GetPrimaryBalanceStatus Active = new GetPrimaryBalanceStatus("active");
+        public static readonly GetPrimaryBalanceStatus Inactive = new GetPrimaryBalanceStatus("inactive");
 
-    public static class GetPrimaryBalanceStatusExtension
-    {
-        public static string Value(this GetPrimaryBalanceStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetPrimaryBalanceStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPrimaryBalanceStatus).GetFields())
+        private static readonly Dictionary <string, GetPrimaryBalanceStatus> _knownValues =
+            new Dictionary <string, GetPrimaryBalanceStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["active"] = Active,
+                ["inactive"] = Inactive
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPrimaryBalanceStatus> _values =
+            new ConcurrentDictionary<string, GetPrimaryBalanceStatus>(_knownValues);
 
-                    if (enumVal is GetPrimaryBalanceStatus)
-                    {
-                        return (GetPrimaryBalanceStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPrimaryBalanceStatus");
+        private GetPrimaryBalanceStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPrimaryBalanceStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPrimaryBalanceStatus(value));
+        }
+
+        public static implicit operator GetPrimaryBalanceStatus(string value) => Of(value);
+        public static implicit operator string(GetPrimaryBalanceStatus getprimarybalancestatus) => getprimarybalancestatus.Value;
+
+        public static GetPrimaryBalanceStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPrimaryBalanceStatus);
+
+        public bool Equals(GetPrimaryBalanceStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Indicates to what extent the payment is eligible for PayPal&apos;s Seller Protection. Only available for PayPal<br/>
     /// 
@@ -20,57 +23,72 @@ namespace Mollie.Models.Requests
     /// payments, and if the information is made available by PayPal.
     /// </remarks>
     /// </summary>
-    public enum ListSubscriptionPaymentsSellerProtection
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionPaymentsSellerProtection : IEquatable<ListSubscriptionPaymentsSellerProtection>
     {
-        [JsonProperty("Eligible")]
-        Eligible,
-        [JsonProperty("Ineligible")]
-        Ineligible,
-        [JsonProperty("Partially Eligible - INR Only")]
-        PartiallyEligibleINROnly,
-        [JsonProperty("Partially Eligible - Unauth Only")]
-        PartiallyEligibleUnauthOnly,
-        [JsonProperty("Partially Eligible")]
-        PartiallyEligible,
-        [JsonProperty("None")]
-        None,
-        [JsonProperty("Active")]
-        Active,
-        [JsonProperty("Fraud Control - Unauth Premium Eligible")]
-        FraudControlUnauthPremiumEligible,
-    }
+        public static readonly ListSubscriptionPaymentsSellerProtection Eligible = new ListSubscriptionPaymentsSellerProtection("Eligible");
+        public static readonly ListSubscriptionPaymentsSellerProtection Ineligible = new ListSubscriptionPaymentsSellerProtection("Ineligible");
+        public static readonly ListSubscriptionPaymentsSellerProtection PartiallyEligibleINROnly = new ListSubscriptionPaymentsSellerProtection("Partially Eligible - INR Only");
+        public static readonly ListSubscriptionPaymentsSellerProtection PartiallyEligibleUnauthOnly = new ListSubscriptionPaymentsSellerProtection("Partially Eligible - Unauth Only");
+        public static readonly ListSubscriptionPaymentsSellerProtection PartiallyEligible = new ListSubscriptionPaymentsSellerProtection("Partially Eligible");
+        public static readonly ListSubscriptionPaymentsSellerProtection None = new ListSubscriptionPaymentsSellerProtection("None");
+        public static readonly ListSubscriptionPaymentsSellerProtection Active = new ListSubscriptionPaymentsSellerProtection("Active");
+        public static readonly ListSubscriptionPaymentsSellerProtection FraudControlUnauthPremiumEligible = new ListSubscriptionPaymentsSellerProtection("Fraud Control - Unauth Premium Eligible");
 
-    public static class ListSubscriptionPaymentsSellerProtectionExtension
-    {
-        public static string Value(this ListSubscriptionPaymentsSellerProtection value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionPaymentsSellerProtection ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionPaymentsSellerProtection).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionPaymentsSellerProtection> _knownValues =
+            new Dictionary <string, ListSubscriptionPaymentsSellerProtection> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["Eligible"] = Eligible,
+                ["Ineligible"] = Ineligible,
+                ["Partially Eligible - INR Only"] = PartiallyEligibleINROnly,
+                ["Partially Eligible - Unauth Only"] = PartiallyEligibleUnauthOnly,
+                ["Partially Eligible"] = PartiallyEligible,
+                ["None"] = None,
+                ["Active"] = Active,
+                ["Fraud Control - Unauth Premium Eligible"] = FraudControlUnauthPremiumEligible
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsSellerProtection> _values =
+            new ConcurrentDictionary<string, ListSubscriptionPaymentsSellerProtection>(_knownValues);
 
-                    if (enumVal is ListSubscriptionPaymentsSellerProtection)
-                    {
-                        return (ListSubscriptionPaymentsSellerProtection)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsSellerProtection");
+        private ListSubscriptionPaymentsSellerProtection(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionPaymentsSellerProtection Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsSellerProtection(value));
+        }
+
+        public static implicit operator ListSubscriptionPaymentsSellerProtection(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionPaymentsSellerProtection listsubscriptionpaymentssellerprotection) => listsubscriptionpaymentssellerprotection.Value;
+
+        public static ListSubscriptionPaymentsSellerProtection[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsSellerProtection);
+
+        public bool Equals(ListSubscriptionPaymentsSellerProtection? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

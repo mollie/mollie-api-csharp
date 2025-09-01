@@ -13,7 +13,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using NodaTime;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// An object containing payment details collected during the payment process. For example, details may include the<br/>

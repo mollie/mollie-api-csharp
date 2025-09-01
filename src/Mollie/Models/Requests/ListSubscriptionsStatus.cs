@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// 
@@ -20,51 +23,66 @@ namespace Mollie.Models.Requests
     /// enabling the subscription.
     /// </remarks>
     /// </summary>
-    public enum ListSubscriptionsStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionsStatus : IEquatable<ListSubscriptionsStatus>
     {
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("active")]
-        Active,
-        [JsonProperty("canceled")]
-        Canceled,
-        [JsonProperty("suspended")]
-        Suspended,
-        [JsonProperty("completed")]
-        Completed,
-    }
+        public static readonly ListSubscriptionsStatus Pending = new ListSubscriptionsStatus("pending");
+        public static readonly ListSubscriptionsStatus Active = new ListSubscriptionsStatus("active");
+        public static readonly ListSubscriptionsStatus Canceled = new ListSubscriptionsStatus("canceled");
+        public static readonly ListSubscriptionsStatus Suspended = new ListSubscriptionsStatus("suspended");
+        public static readonly ListSubscriptionsStatus Completed = new ListSubscriptionsStatus("completed");
 
-    public static class ListSubscriptionsStatusExtension
-    {
-        public static string Value(this ListSubscriptionsStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionsStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionsStatus).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionsStatus> _knownValues =
+            new Dictionary <string, ListSubscriptionsStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["pending"] = Pending,
+                ["active"] = Active,
+                ["canceled"] = Canceled,
+                ["suspended"] = Suspended,
+                ["completed"] = Completed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionsStatus> _values =
+            new ConcurrentDictionary<string, ListSubscriptionsStatus>(_knownValues);
 
-                    if (enumVal is ListSubscriptionsStatus)
-                    {
-                        return (ListSubscriptionsStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionsStatus");
+        private ListSubscriptionsStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionsStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionsStatus(value));
+        }
+
+        public static implicit operator ListSubscriptionsStatus(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionsStatus listsubscriptionsstatus) => listsubscriptionsstatus.Value;
+
+        public static ListSubscriptionsStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionsStatus);
+
+        public bool Equals(ListSubscriptionsStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

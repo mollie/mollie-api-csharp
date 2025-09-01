@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The way through which the invoice is to be set to paid.
     /// </summary>
-    public enum ListSalesInvoicesSource
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSalesInvoicesSource : IEquatable<ListSalesInvoicesSource>
     {
-        [JsonProperty("manual")]
-        Manual,
-        [JsonProperty("payment-link")]
-        PaymentLink,
-        [JsonProperty("payment")]
-        Payment,
-    }
+        public static readonly ListSalesInvoicesSource Manual = new ListSalesInvoicesSource("manual");
+        public static readonly ListSalesInvoicesSource PaymentLink = new ListSalesInvoicesSource("payment-link");
+        public static readonly ListSalesInvoicesSource Payment = new ListSalesInvoicesSource("payment");
 
-    public static class ListSalesInvoicesSourceExtension
-    {
-        public static string Value(this ListSalesInvoicesSource value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSalesInvoicesSource ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSalesInvoicesSource).GetFields())
+        private static readonly Dictionary <string, ListSalesInvoicesSource> _knownValues =
+            new Dictionary <string, ListSalesInvoicesSource> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["manual"] = Manual,
+                ["payment-link"] = PaymentLink,
+                ["payment"] = Payment
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSalesInvoicesSource> _values =
+            new ConcurrentDictionary<string, ListSalesInvoicesSource>(_knownValues);
 
-                    if (enumVal is ListSalesInvoicesSource)
-                    {
-                        return (ListSalesInvoicesSource)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSalesInvoicesSource");
+        private ListSalesInvoicesSource(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSalesInvoicesSource Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSalesInvoicesSource(value));
+        }
+
+        public static implicit operator ListSalesInvoicesSource(string value) => Of(value);
+        public static implicit operator string(ListSalesInvoicesSource listsalesinvoicessource) => listsalesinvoicessource.Value;
+
+        public static ListSalesInvoicesSource[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSalesInvoicesSource);
+
+        public bool Equals(ListSalesInvoicesSource? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

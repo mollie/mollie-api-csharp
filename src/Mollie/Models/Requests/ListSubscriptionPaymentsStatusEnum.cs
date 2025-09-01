@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
     /// 
@@ -20,55 +23,70 @@ namespace Mollie.Models.Requests
     /// statuses occur at what point.
     /// </remarks>
     /// </summary>
-    public enum ListSubscriptionPaymentsStatusEnum
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionPaymentsStatusEnum : IEquatable<ListSubscriptionPaymentsStatusEnum>
     {
-        [JsonProperty("open")]
-        Open,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("authorized")]
-        Authorized,
-        [JsonProperty("paid")]
-        Paid,
-        [JsonProperty("canceled")]
-        Canceled,
-        [JsonProperty("expired")]
-        Expired,
-        [JsonProperty("failed")]
-        Failed,
-    }
+        public static readonly ListSubscriptionPaymentsStatusEnum Open = new ListSubscriptionPaymentsStatusEnum("open");
+        public static readonly ListSubscriptionPaymentsStatusEnum Pending = new ListSubscriptionPaymentsStatusEnum("pending");
+        public static readonly ListSubscriptionPaymentsStatusEnum Authorized = new ListSubscriptionPaymentsStatusEnum("authorized");
+        public static readonly ListSubscriptionPaymentsStatusEnum Paid = new ListSubscriptionPaymentsStatusEnum("paid");
+        public static readonly ListSubscriptionPaymentsStatusEnum Canceled = new ListSubscriptionPaymentsStatusEnum("canceled");
+        public static readonly ListSubscriptionPaymentsStatusEnum Expired = new ListSubscriptionPaymentsStatusEnum("expired");
+        public static readonly ListSubscriptionPaymentsStatusEnum Failed = new ListSubscriptionPaymentsStatusEnum("failed");
 
-    public static class ListSubscriptionPaymentsStatusEnumExtension
-    {
-        public static string Value(this ListSubscriptionPaymentsStatusEnum value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionPaymentsStatusEnum ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionPaymentsStatusEnum).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionPaymentsStatusEnum> _knownValues =
+            new Dictionary <string, ListSubscriptionPaymentsStatusEnum> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["open"] = Open,
+                ["pending"] = Pending,
+                ["authorized"] = Authorized,
+                ["paid"] = Paid,
+                ["canceled"] = Canceled,
+                ["expired"] = Expired,
+                ["failed"] = Failed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsStatusEnum> _values =
+            new ConcurrentDictionary<string, ListSubscriptionPaymentsStatusEnum>(_knownValues);
 
-                    if (enumVal is ListSubscriptionPaymentsStatusEnum)
-                    {
-                        return (ListSubscriptionPaymentsStatusEnum)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsStatusEnum");
+        private ListSubscriptionPaymentsStatusEnum(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionPaymentsStatusEnum Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsStatusEnum(value));
+        }
+
+        public static implicit operator ListSubscriptionPaymentsStatusEnum(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionPaymentsStatusEnum listsubscriptionpaymentsstatusenum) => listsubscriptionpaymentsstatusenum.Value;
+
+        public static ListSubscriptionPaymentsStatusEnum[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsStatusEnum);
+
+        public bool Equals(ListSubscriptionPaymentsStatusEnum? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

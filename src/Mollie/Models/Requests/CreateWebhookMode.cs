@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s mode.
     /// </summary>
-    public enum CreateWebhookMode
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateWebhookMode : IEquatable<CreateWebhookMode>
     {
-        [JsonProperty("live")]
-        Live,
-        [JsonProperty("test")]
-        Test,
-    }
+        public static readonly CreateWebhookMode Live = new CreateWebhookMode("live");
+        public static readonly CreateWebhookMode Test = new CreateWebhookMode("test");
 
-    public static class CreateWebhookModeExtension
-    {
-        public static string Value(this CreateWebhookMode value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateWebhookMode ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateWebhookMode).GetFields())
+        private static readonly Dictionary <string, CreateWebhookMode> _knownValues =
+            new Dictionary <string, CreateWebhookMode> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["live"] = Live,
+                ["test"] = Test
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateWebhookMode> _values =
+            new ConcurrentDictionary<string, CreateWebhookMode>(_knownValues);
 
-                    if (enumVal is CreateWebhookMode)
-                    {
-                        return (CreateWebhookMode)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateWebhookMode");
+        private CreateWebhookMode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateWebhookMode Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateWebhookMode(value));
+        }
+
+        public static implicit operator CreateWebhookMode(string value) => Of(value);
+        public static implicit operator string(CreateWebhookMode createwebhookmode) => createwebhookmode.Value;
+
+        public static CreateWebhookMode[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateWebhookMode);
+
+        public bool Equals(CreateWebhookMode? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
     /// 
@@ -20,113 +23,128 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    public enum ListCustomerPaymentsMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListCustomerPaymentsMethod : IEquatable<ListCustomerPaymentsMethod>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly ListCustomerPaymentsMethod Alma = new ListCustomerPaymentsMethod("alma");
+        public static readonly ListCustomerPaymentsMethod Applepay = new ListCustomerPaymentsMethod("applepay");
+        public static readonly ListCustomerPaymentsMethod Bacs = new ListCustomerPaymentsMethod("bacs");
+        public static readonly ListCustomerPaymentsMethod Bancomatpay = new ListCustomerPaymentsMethod("bancomatpay");
+        public static readonly ListCustomerPaymentsMethod Bancontact = new ListCustomerPaymentsMethod("bancontact");
+        public static readonly ListCustomerPaymentsMethod Banktransfer = new ListCustomerPaymentsMethod("banktransfer");
+        public static readonly ListCustomerPaymentsMethod Belfius = new ListCustomerPaymentsMethod("belfius");
+        public static readonly ListCustomerPaymentsMethod Billie = new ListCustomerPaymentsMethod("billie");
+        public static readonly ListCustomerPaymentsMethod Bizum = new ListCustomerPaymentsMethod("bizum");
+        public static readonly ListCustomerPaymentsMethod Blik = new ListCustomerPaymentsMethod("blik");
+        public static readonly ListCustomerPaymentsMethod Creditcard = new ListCustomerPaymentsMethod("creditcard");
+        public static readonly ListCustomerPaymentsMethod Directdebit = new ListCustomerPaymentsMethod("directdebit");
+        public static readonly ListCustomerPaymentsMethod Eps = new ListCustomerPaymentsMethod("eps");
+        public static readonly ListCustomerPaymentsMethod Giftcard = new ListCustomerPaymentsMethod("giftcard");
+        public static readonly ListCustomerPaymentsMethod Ideal = new ListCustomerPaymentsMethod("ideal");
+        public static readonly ListCustomerPaymentsMethod In3 = new ListCustomerPaymentsMethod("in3");
+        public static readonly ListCustomerPaymentsMethod Kbc = new ListCustomerPaymentsMethod("kbc");
+        public static readonly ListCustomerPaymentsMethod Klarna = new ListCustomerPaymentsMethod("klarna");
+        public static readonly ListCustomerPaymentsMethod Klarnapaylater = new ListCustomerPaymentsMethod("klarnapaylater");
+        public static readonly ListCustomerPaymentsMethod Klarnapaynow = new ListCustomerPaymentsMethod("klarnapaynow");
+        public static readonly ListCustomerPaymentsMethod Klarnasliceit = new ListCustomerPaymentsMethod("klarnasliceit");
+        public static readonly ListCustomerPaymentsMethod Mbway = new ListCustomerPaymentsMethod("mbway");
+        public static readonly ListCustomerPaymentsMethod Multibanco = new ListCustomerPaymentsMethod("multibanco");
+        public static readonly ListCustomerPaymentsMethod Mybank = new ListCustomerPaymentsMethod("mybank");
+        public static readonly ListCustomerPaymentsMethod Paybybank = new ListCustomerPaymentsMethod("paybybank");
+        public static readonly ListCustomerPaymentsMethod Payconiq = new ListCustomerPaymentsMethod("payconiq");
+        public static readonly ListCustomerPaymentsMethod Paypal = new ListCustomerPaymentsMethod("paypal");
+        public static readonly ListCustomerPaymentsMethod Paysafecard = new ListCustomerPaymentsMethod("paysafecard");
+        public static readonly ListCustomerPaymentsMethod Pointofsale = new ListCustomerPaymentsMethod("pointofsale");
+        public static readonly ListCustomerPaymentsMethod Przelewy24 = new ListCustomerPaymentsMethod("przelewy24");
+        public static readonly ListCustomerPaymentsMethod Riverty = new ListCustomerPaymentsMethod("riverty");
+        public static readonly ListCustomerPaymentsMethod Satispay = new ListCustomerPaymentsMethod("satispay");
+        public static readonly ListCustomerPaymentsMethod Swish = new ListCustomerPaymentsMethod("swish");
+        public static readonly ListCustomerPaymentsMethod Trustly = new ListCustomerPaymentsMethod("trustly");
+        public static readonly ListCustomerPaymentsMethod Twint = new ListCustomerPaymentsMethod("twint");
+        public static readonly ListCustomerPaymentsMethod Voucher = new ListCustomerPaymentsMethod("voucher");
 
-    public static class ListCustomerPaymentsMethodExtension
-    {
-        public static string Value(this ListCustomerPaymentsMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListCustomerPaymentsMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListCustomerPaymentsMethod).GetFields())
+        private static readonly Dictionary <string, ListCustomerPaymentsMethod> _knownValues =
+            new Dictionary <string, ListCustomerPaymentsMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["applepay"] = Applepay,
+                ["bacs"] = Bacs,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["kbc"] = Kbc,
+                ["klarna"] = Klarna,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListCustomerPaymentsMethod> _values =
+            new ConcurrentDictionary<string, ListCustomerPaymentsMethod>(_knownValues);
 
-                    if (enumVal is ListCustomerPaymentsMethod)
-                    {
-                        return (ListCustomerPaymentsMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListCustomerPaymentsMethod");
+        private ListCustomerPaymentsMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListCustomerPaymentsMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListCustomerPaymentsMethod(value));
+        }
+
+        public static implicit operator ListCustomerPaymentsMethod(string value) => Of(value);
+        public static implicit operator string(ListCustomerPaymentsMethod listcustomerpaymentsmethod) => listcustomerpaymentsmethod.Value;
+
+        public static ListCustomerPaymentsMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListCustomerPaymentsMethod);
+
+        public bool Equals(ListCustomerPaymentsMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

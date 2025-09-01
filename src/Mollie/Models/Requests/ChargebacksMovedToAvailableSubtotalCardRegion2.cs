@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum ChargebacksMovedToAvailableSubtotalCardRegion2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ChargebacksMovedToAvailableSubtotalCardRegion2 : IEquatable<ChargebacksMovedToAvailableSubtotalCardRegion2>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly ChargebacksMovedToAvailableSubtotalCardRegion2 IntraEea = new ChargebacksMovedToAvailableSubtotalCardRegion2("intra-eea");
+        public static readonly ChargebacksMovedToAvailableSubtotalCardRegion2 IntraEu = new ChargebacksMovedToAvailableSubtotalCardRegion2("intra-eu");
+        public static readonly ChargebacksMovedToAvailableSubtotalCardRegion2 Domestic = new ChargebacksMovedToAvailableSubtotalCardRegion2("domestic");
+        public static readonly ChargebacksMovedToAvailableSubtotalCardRegion2 Other = new ChargebacksMovedToAvailableSubtotalCardRegion2("other");
 
-    public static class ChargebacksMovedToAvailableSubtotalCardRegion2Extension
-    {
-        public static string Value(this ChargebacksMovedToAvailableSubtotalCardRegion2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ChargebacksMovedToAvailableSubtotalCardRegion2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ChargebacksMovedToAvailableSubtotalCardRegion2).GetFields())
+        private static readonly Dictionary <string, ChargebacksMovedToAvailableSubtotalCardRegion2> _knownValues =
+            new Dictionary <string, ChargebacksMovedToAvailableSubtotalCardRegion2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ChargebacksMovedToAvailableSubtotalCardRegion2> _values =
+            new ConcurrentDictionary<string, ChargebacksMovedToAvailableSubtotalCardRegion2>(_knownValues);
 
-                    if (enumVal is ChargebacksMovedToAvailableSubtotalCardRegion2)
-                    {
-                        return (ChargebacksMovedToAvailableSubtotalCardRegion2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ChargebacksMovedToAvailableSubtotalCardRegion2");
+        private ChargebacksMovedToAvailableSubtotalCardRegion2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ChargebacksMovedToAvailableSubtotalCardRegion2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ChargebacksMovedToAvailableSubtotalCardRegion2(value));
+        }
+
+        public static implicit operator ChargebacksMovedToAvailableSubtotalCardRegion2(string value) => Of(value);
+        public static implicit operator string(ChargebacksMovedToAvailableSubtotalCardRegion2 chargebacksmovedtoavailablesubtotalcardregion2) => chargebacksmovedtoavailablesubtotalcardregion2.Value;
+
+        public static ChargebacksMovedToAvailableSubtotalCardRegion2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ChargebacksMovedToAvailableSubtotalCardRegion2);
+
+        public bool Equals(ChargebacksMovedToAvailableSubtotalCardRegion2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

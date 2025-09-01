@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The method by which the card was read by the terminal.
     /// </summary>
-    public enum CreateCustomerPaymentCardReadMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentCardReadMethod : IEquatable<CreateCustomerPaymentCardReadMethod>
     {
-        [JsonProperty("chip")]
-        Chip,
-        [JsonProperty("magnetic-stripe")]
-        MagneticStripe,
-        [JsonProperty("near-field-communication")]
-        NearFieldCommunication,
-        [JsonProperty("contactless")]
-        Contactless,
-        [JsonProperty("moto")]
-        Moto,
-    }
+        public static readonly CreateCustomerPaymentCardReadMethod Chip = new CreateCustomerPaymentCardReadMethod("chip");
+        public static readonly CreateCustomerPaymentCardReadMethod MagneticStripe = new CreateCustomerPaymentCardReadMethod("magnetic-stripe");
+        public static readonly CreateCustomerPaymentCardReadMethod NearFieldCommunication = new CreateCustomerPaymentCardReadMethod("near-field-communication");
+        public static readonly CreateCustomerPaymentCardReadMethod Contactless = new CreateCustomerPaymentCardReadMethod("contactless");
+        public static readonly CreateCustomerPaymentCardReadMethod Moto = new CreateCustomerPaymentCardReadMethod("moto");
 
-    public static class CreateCustomerPaymentCardReadMethodExtension
-    {
-        public static string Value(this CreateCustomerPaymentCardReadMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCustomerPaymentCardReadMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentCardReadMethod).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentCardReadMethod> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentCardReadMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["chip"] = Chip,
+                ["magnetic-stripe"] = MagneticStripe,
+                ["near-field-communication"] = NearFieldCommunication,
+                ["contactless"] = Contactless,
+                ["moto"] = Moto
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentCardReadMethod> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentCardReadMethod>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentCardReadMethod)
-                    {
-                        return (CreateCustomerPaymentCardReadMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentCardReadMethod");
+        private CreateCustomerPaymentCardReadMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentCardReadMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentCardReadMethod(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentCardReadMethod(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentCardReadMethod createcustomerpaymentcardreadmethod) => createcustomerpaymentcardreadmethod.Value;
+
+        public static CreateCustomerPaymentCardReadMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentCardReadMethod);
+
+        public bool Equals(CreateCustomerPaymentCardReadMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method&apos;s activation status for this profile.
     /// </summary>
-    public enum ListMethodsStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListMethodsStatus : IEquatable<ListMethodsStatus>
     {
-        [JsonProperty("activated")]
-        Activated,
-        [JsonProperty("pending-boarding")]
-        PendingBoarding,
-        [JsonProperty("pending-review")]
-        PendingReview,
-        [JsonProperty("pending-external")]
-        PendingExternal,
-        [JsonProperty("rejected")]
-        Rejected,
-    }
+        public static readonly ListMethodsStatus Activated = new ListMethodsStatus("activated");
+        public static readonly ListMethodsStatus PendingBoarding = new ListMethodsStatus("pending-boarding");
+        public static readonly ListMethodsStatus PendingReview = new ListMethodsStatus("pending-review");
+        public static readonly ListMethodsStatus PendingExternal = new ListMethodsStatus("pending-external");
+        public static readonly ListMethodsStatus Rejected = new ListMethodsStatus("rejected");
 
-    public static class ListMethodsStatusExtension
-    {
-        public static string Value(this ListMethodsStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListMethodsStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListMethodsStatus).GetFields())
+        private static readonly Dictionary <string, ListMethodsStatus> _knownValues =
+            new Dictionary <string, ListMethodsStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["activated"] = Activated,
+                ["pending-boarding"] = PendingBoarding,
+                ["pending-review"] = PendingReview,
+                ["pending-external"] = PendingExternal,
+                ["rejected"] = Rejected
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListMethodsStatus> _values =
+            new ConcurrentDictionary<string, ListMethodsStatus>(_knownValues);
 
-                    if (enumVal is ListMethodsStatus)
-                    {
-                        return (ListMethodsStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListMethodsStatus");
+        private ListMethodsStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListMethodsStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListMethodsStatus(value));
+        }
+
+        public static implicit operator ListMethodsStatus(string value) => Of(value);
+        public static implicit operator string(ListMethodsStatus listmethodsstatus) => listmethodsstatus.Value;
+
+        public static ListMethodsStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListMethodsStatus);
+
+        public bool Equals(ListMethodsStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

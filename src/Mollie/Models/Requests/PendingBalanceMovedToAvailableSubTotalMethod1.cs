@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum PendingBalanceMovedToAvailableSubTotalMethod1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PendingBalanceMovedToAvailableSubTotalMethod1 : IEquatable<PendingBalanceMovedToAvailableSubTotalMethod1>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Alma = new PendingBalanceMovedToAvailableSubTotalMethod1("alma");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Bacs = new PendingBalanceMovedToAvailableSubTotalMethod1("bacs");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Applepay = new PendingBalanceMovedToAvailableSubTotalMethod1("applepay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Bancomatpay = new PendingBalanceMovedToAvailableSubTotalMethod1("bancomatpay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Bancontact = new PendingBalanceMovedToAvailableSubTotalMethod1("bancontact");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Banktransfer = new PendingBalanceMovedToAvailableSubTotalMethod1("banktransfer");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Belfius = new PendingBalanceMovedToAvailableSubTotalMethod1("belfius");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Billie = new PendingBalanceMovedToAvailableSubTotalMethod1("billie");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Bizum = new PendingBalanceMovedToAvailableSubTotalMethod1("bizum");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Bitcoin = new PendingBalanceMovedToAvailableSubTotalMethod1("bitcoin");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Blik = new PendingBalanceMovedToAvailableSubTotalMethod1("blik");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Creditcard = new PendingBalanceMovedToAvailableSubTotalMethod1("creditcard");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Directdebit = new PendingBalanceMovedToAvailableSubTotalMethod1("directdebit");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Eps = new PendingBalanceMovedToAvailableSubTotalMethod1("eps");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Giftcard = new PendingBalanceMovedToAvailableSubTotalMethod1("giftcard");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Giropay = new PendingBalanceMovedToAvailableSubTotalMethod1("giropay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Googlepay = new PendingBalanceMovedToAvailableSubTotalMethod1("googlepay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Ideal = new PendingBalanceMovedToAvailableSubTotalMethod1("ideal");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 In3 = new PendingBalanceMovedToAvailableSubTotalMethod1("in3");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Inghomepay = new PendingBalanceMovedToAvailableSubTotalMethod1("inghomepay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Kbc = new PendingBalanceMovedToAvailableSubTotalMethod1("kbc");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Klarnapaylater = new PendingBalanceMovedToAvailableSubTotalMethod1("klarnapaylater");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Klarnapaynow = new PendingBalanceMovedToAvailableSubTotalMethod1("klarnapaynow");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Klarnasliceit = new PendingBalanceMovedToAvailableSubTotalMethod1("klarnasliceit");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Klarna = new PendingBalanceMovedToAvailableSubTotalMethod1("klarna");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Mbway = new PendingBalanceMovedToAvailableSubTotalMethod1("mbway");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Multibanco = new PendingBalanceMovedToAvailableSubTotalMethod1("multibanco");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Mybank = new PendingBalanceMovedToAvailableSubTotalMethod1("mybank");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Paybybank = new PendingBalanceMovedToAvailableSubTotalMethod1("paybybank");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Payconiq = new PendingBalanceMovedToAvailableSubTotalMethod1("payconiq");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Paypal = new PendingBalanceMovedToAvailableSubTotalMethod1("paypal");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Paysafecard = new PendingBalanceMovedToAvailableSubTotalMethod1("paysafecard");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Przelewy24 = new PendingBalanceMovedToAvailableSubTotalMethod1("przelewy24");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Riverty = new PendingBalanceMovedToAvailableSubTotalMethod1("riverty");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Satispay = new PendingBalanceMovedToAvailableSubTotalMethod1("satispay");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Podiumcadeaukaart = new PendingBalanceMovedToAvailableSubTotalMethod1("podiumcadeaukaart");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Pointofsale = new PendingBalanceMovedToAvailableSubTotalMethod1("pointofsale");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Sofort = new PendingBalanceMovedToAvailableSubTotalMethod1("sofort");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Swish = new PendingBalanceMovedToAvailableSubTotalMethod1("swish");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Trustly = new PendingBalanceMovedToAvailableSubTotalMethod1("trustly");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Twint = new PendingBalanceMovedToAvailableSubTotalMethod1("twint");
+        public static readonly PendingBalanceMovedToAvailableSubTotalMethod1 Voucher = new PendingBalanceMovedToAvailableSubTotalMethod1("voucher");
 
-    public static class PendingBalanceMovedToAvailableSubTotalMethod1Extension
-    {
-        public static string Value(this PendingBalanceMovedToAvailableSubTotalMethod1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PendingBalanceMovedToAvailableSubTotalMethod1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(PendingBalanceMovedToAvailableSubTotalMethod1).GetFields())
+        private static readonly Dictionary <string, PendingBalanceMovedToAvailableSubTotalMethod1> _knownValues =
+            new Dictionary <string, PendingBalanceMovedToAvailableSubTotalMethod1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PendingBalanceMovedToAvailableSubTotalMethod1> _values =
+            new ConcurrentDictionary<string, PendingBalanceMovedToAvailableSubTotalMethod1>(_knownValues);
 
-                    if (enumVal is PendingBalanceMovedToAvailableSubTotalMethod1)
-                    {
-                        return (PendingBalanceMovedToAvailableSubTotalMethod1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PendingBalanceMovedToAvailableSubTotalMethod1");
+        private PendingBalanceMovedToAvailableSubTotalMethod1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PendingBalanceMovedToAvailableSubTotalMethod1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PendingBalanceMovedToAvailableSubTotalMethod1(value));
+        }
+
+        public static implicit operator PendingBalanceMovedToAvailableSubTotalMethod1(string value) => Of(value);
+        public static implicit operator string(PendingBalanceMovedToAvailableSubTotalMethod1 pendingbalancemovedtoavailablesubtotalmethod1) => pendingbalancemovedtoavailablesubtotalmethod1.Value;
+
+        public static PendingBalanceMovedToAvailableSubTotalMethod1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PendingBalanceMovedToAvailableSubTotalMethod1);
+
+        public bool Equals(PendingBalanceMovedToAvailableSubTotalMethod1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

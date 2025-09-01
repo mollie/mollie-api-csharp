@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum PaymentsMovedToAvailableSubTotalCardAudience1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PaymentsMovedToAvailableSubTotalCardAudience1 : IEquatable<PaymentsMovedToAvailableSubTotalCardAudience1>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly PaymentsMovedToAvailableSubTotalCardAudience1 Corporate = new PaymentsMovedToAvailableSubTotalCardAudience1("corporate");
+        public static readonly PaymentsMovedToAvailableSubTotalCardAudience1 Other = new PaymentsMovedToAvailableSubTotalCardAudience1("other");
 
-    public static class PaymentsMovedToAvailableSubTotalCardAudience1Extension
-    {
-        public static string Value(this PaymentsMovedToAvailableSubTotalCardAudience1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PaymentsMovedToAvailableSubTotalCardAudience1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(PaymentsMovedToAvailableSubTotalCardAudience1).GetFields())
+        private static readonly Dictionary <string, PaymentsMovedToAvailableSubTotalCardAudience1> _knownValues =
+            new Dictionary <string, PaymentsMovedToAvailableSubTotalCardAudience1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PaymentsMovedToAvailableSubTotalCardAudience1> _values =
+            new ConcurrentDictionary<string, PaymentsMovedToAvailableSubTotalCardAudience1>(_knownValues);
 
-                    if (enumVal is PaymentsMovedToAvailableSubTotalCardAudience1)
-                    {
-                        return (PaymentsMovedToAvailableSubTotalCardAudience1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PaymentsMovedToAvailableSubTotalCardAudience1");
+        private PaymentsMovedToAvailableSubTotalCardAudience1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PaymentsMovedToAvailableSubTotalCardAudience1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PaymentsMovedToAvailableSubTotalCardAudience1(value));
+        }
+
+        public static implicit operator PaymentsMovedToAvailableSubTotalCardAudience1(string value) => Of(value);
+        public static implicit operator string(PaymentsMovedToAvailableSubTotalCardAudience1 paymentsmovedtoavailablesubtotalcardaudience1) => paymentsmovedtoavailablesubtotalcardaudience1.Value;
+
+        public static PaymentsMovedToAvailableSubTotalCardAudience1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PaymentsMovedToAvailableSubTotalCardAudience1);
+
+        public bool Equals(PaymentsMovedToAvailableSubTotalCardAudience1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

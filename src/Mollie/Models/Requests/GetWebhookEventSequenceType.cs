@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
     /// 
@@ -24,45 +27,60 @@ namespace Mollie.Models.Requests
     /// <a href="get-payment-link-payments">Payment Link Payments Endpoint</a>.
     /// </remarks>
     /// </summary>
-    public enum GetWebhookEventSequenceType
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetWebhookEventSequenceType : IEquatable<GetWebhookEventSequenceType>
     {
-        [JsonProperty("oneoff")]
-        Oneoff,
-        [JsonProperty("first")]
-        First,
-    }
+        public static readonly GetWebhookEventSequenceType Oneoff = new GetWebhookEventSequenceType("oneoff");
+        public static readonly GetWebhookEventSequenceType First = new GetWebhookEventSequenceType("first");
 
-    public static class GetWebhookEventSequenceTypeExtension
-    {
-        public static string Value(this GetWebhookEventSequenceType value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetWebhookEventSequenceType ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetWebhookEventSequenceType).GetFields())
+        private static readonly Dictionary <string, GetWebhookEventSequenceType> _knownValues =
+            new Dictionary <string, GetWebhookEventSequenceType> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["oneoff"] = Oneoff,
+                ["first"] = First
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetWebhookEventSequenceType> _values =
+            new ConcurrentDictionary<string, GetWebhookEventSequenceType>(_knownValues);
 
-                    if (enumVal is GetWebhookEventSequenceType)
-                    {
-                        return (GetWebhookEventSequenceType)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetWebhookEventSequenceType");
+        private GetWebhookEventSequenceType(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetWebhookEventSequenceType Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetWebhookEventSequenceType(value));
+        }
+
+        public static implicit operator GetWebhookEventSequenceType(string value) => Of(value);
+        public static implicit operator string(GetWebhookEventSequenceType getwebhookeventsequencetype) => getwebhookeventsequencetype.Value;
+
+        public static GetWebhookEventSequenceType[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetWebhookEventSequenceType);
+
+        public bool Equals(GetWebhookEventSequenceType? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

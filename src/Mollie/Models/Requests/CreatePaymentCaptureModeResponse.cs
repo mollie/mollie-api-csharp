@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
     /// 
@@ -22,45 +25,60 @@ namespace Mollie.Models.Requests
     /// This field needs to be set to `manual` for method `riverty`.
     /// </remarks>
     /// </summary>
-    public enum CreatePaymentCaptureModeResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreatePaymentCaptureModeResponse : IEquatable<CreatePaymentCaptureModeResponse>
     {
-        [JsonProperty("automatic")]
-        Automatic,
-        [JsonProperty("manual")]
-        Manual,
-    }
+        public static readonly CreatePaymentCaptureModeResponse Automatic = new CreatePaymentCaptureModeResponse("automatic");
+        public static readonly CreatePaymentCaptureModeResponse Manual = new CreatePaymentCaptureModeResponse("manual");
 
-    public static class CreatePaymentCaptureModeResponseExtension
-    {
-        public static string Value(this CreatePaymentCaptureModeResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreatePaymentCaptureModeResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreatePaymentCaptureModeResponse).GetFields())
+        private static readonly Dictionary <string, CreatePaymentCaptureModeResponse> _knownValues =
+            new Dictionary <string, CreatePaymentCaptureModeResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["automatic"] = Automatic,
+                ["manual"] = Manual
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreatePaymentCaptureModeResponse> _values =
+            new ConcurrentDictionary<string, CreatePaymentCaptureModeResponse>(_knownValues);
 
-                    if (enumVal is CreatePaymentCaptureModeResponse)
-                    {
-                        return (CreatePaymentCaptureModeResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreatePaymentCaptureModeResponse");
+        private CreatePaymentCaptureModeResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreatePaymentCaptureModeResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreatePaymentCaptureModeResponse(value));
+        }
+
+        public static implicit operator CreatePaymentCaptureModeResponse(string value) => Of(value);
+        public static implicit operator string(CreatePaymentCaptureModeResponse createpaymentcapturemoderesponse) => createpaymentcapturemoderesponse.Value;
+
+        public static CreatePaymentCaptureModeResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreatePaymentCaptureModeResponse);
+
+        public bool Equals(CreatePaymentCaptureModeResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

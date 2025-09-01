@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
     /// 
@@ -20,55 +23,70 @@ namespace Mollie.Models.Requests
     /// statuses occur at what point.
     /// </remarks>
     /// </summary>
-    public enum GetPaymentStatusEnum
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPaymentStatusEnum : IEquatable<GetPaymentStatusEnum>
     {
-        [JsonProperty("open")]
-        Open,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("authorized")]
-        Authorized,
-        [JsonProperty("paid")]
-        Paid,
-        [JsonProperty("canceled")]
-        Canceled,
-        [JsonProperty("expired")]
-        Expired,
-        [JsonProperty("failed")]
-        Failed,
-    }
+        public static readonly GetPaymentStatusEnum Open = new GetPaymentStatusEnum("open");
+        public static readonly GetPaymentStatusEnum Pending = new GetPaymentStatusEnum("pending");
+        public static readonly GetPaymentStatusEnum Authorized = new GetPaymentStatusEnum("authorized");
+        public static readonly GetPaymentStatusEnum Paid = new GetPaymentStatusEnum("paid");
+        public static readonly GetPaymentStatusEnum Canceled = new GetPaymentStatusEnum("canceled");
+        public static readonly GetPaymentStatusEnum Expired = new GetPaymentStatusEnum("expired");
+        public static readonly GetPaymentStatusEnum Failed = new GetPaymentStatusEnum("failed");
 
-    public static class GetPaymentStatusEnumExtension
-    {
-        public static string Value(this GetPaymentStatusEnum value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetPaymentStatusEnum ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPaymentStatusEnum).GetFields())
+        private static readonly Dictionary <string, GetPaymentStatusEnum> _knownValues =
+            new Dictionary <string, GetPaymentStatusEnum> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["open"] = Open,
+                ["pending"] = Pending,
+                ["authorized"] = Authorized,
+                ["paid"] = Paid,
+                ["canceled"] = Canceled,
+                ["expired"] = Expired,
+                ["failed"] = Failed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPaymentStatusEnum> _values =
+            new ConcurrentDictionary<string, GetPaymentStatusEnum>(_knownValues);
 
-                    if (enumVal is GetPaymentStatusEnum)
-                    {
-                        return (GetPaymentStatusEnum)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPaymentStatusEnum");
+        private GetPaymentStatusEnum(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPaymentStatusEnum Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPaymentStatusEnum(value));
+        }
+
+        public static implicit operator GetPaymentStatusEnum(string value) => Of(value);
+        public static implicit operator string(GetPaymentStatusEnum getpaymentstatusenum) => getpaymentstatusenum.Value;
+
+        public static GetPaymentStatusEnum[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPaymentStatusEnum);
+
+        public bool Equals(GetPaymentStatusEnum? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

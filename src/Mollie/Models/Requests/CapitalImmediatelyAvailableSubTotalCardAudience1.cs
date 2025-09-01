@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    public enum CapitalImmediatelyAvailableSubTotalCardAudience1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CapitalImmediatelyAvailableSubTotalCardAudience1 : IEquatable<CapitalImmediatelyAvailableSubTotalCardAudience1>
     {
-        [JsonProperty("corporate")]
-        Corporate,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly CapitalImmediatelyAvailableSubTotalCardAudience1 Corporate = new CapitalImmediatelyAvailableSubTotalCardAudience1("corporate");
+        public static readonly CapitalImmediatelyAvailableSubTotalCardAudience1 Other = new CapitalImmediatelyAvailableSubTotalCardAudience1("other");
 
-    public static class CapitalImmediatelyAvailableSubTotalCardAudience1Extension
-    {
-        public static string Value(this CapitalImmediatelyAvailableSubTotalCardAudience1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CapitalImmediatelyAvailableSubTotalCardAudience1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(CapitalImmediatelyAvailableSubTotalCardAudience1).GetFields())
+        private static readonly Dictionary <string, CapitalImmediatelyAvailableSubTotalCardAudience1> _knownValues =
+            new Dictionary <string, CapitalImmediatelyAvailableSubTotalCardAudience1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["corporate"] = Corporate,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CapitalImmediatelyAvailableSubTotalCardAudience1> _values =
+            new ConcurrentDictionary<string, CapitalImmediatelyAvailableSubTotalCardAudience1>(_knownValues);
 
-                    if (enumVal is CapitalImmediatelyAvailableSubTotalCardAudience1)
-                    {
-                        return (CapitalImmediatelyAvailableSubTotalCardAudience1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CapitalImmediatelyAvailableSubTotalCardAudience1");
+        private CapitalImmediatelyAvailableSubTotalCardAudience1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CapitalImmediatelyAvailableSubTotalCardAudience1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CapitalImmediatelyAvailableSubTotalCardAudience1(value));
+        }
+
+        public static implicit operator CapitalImmediatelyAvailableSubTotalCardAudience1(string value) => Of(value);
+        public static implicit operator string(CapitalImmediatelyAvailableSubTotalCardAudience1 capitalimmediatelyavailablesubtotalcardaudience1) => capitalimmediatelyavailablesubtotalcardaudience1.Value;
+
+        public static CapitalImmediatelyAvailableSubTotalCardAudience1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CapitalImmediatelyAvailableSubTotalCardAudience1);
+
+        public bool Equals(CapitalImmediatelyAvailableSubTotalCardAudience1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

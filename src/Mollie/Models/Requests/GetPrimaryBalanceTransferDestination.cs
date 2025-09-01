@@ -12,6 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The destination where the available amount will be automatically transferred to according to the configured<br/>

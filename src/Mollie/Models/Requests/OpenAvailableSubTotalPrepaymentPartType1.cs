@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    public enum OpenAvailableSubTotalPrepaymentPartType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class OpenAvailableSubTotalPrepaymentPartType1 : IEquatable<OpenAvailableSubTotalPrepaymentPartType1>
     {
-        [JsonProperty("fee")]
-        Fee,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-vat")]
-        FeeVat,
-        [JsonProperty("fee-rounding-compensation")]
-        FeeRoundingCompensation,
-    }
+        public static readonly OpenAvailableSubTotalPrepaymentPartType1 Fee = new OpenAvailableSubTotalPrepaymentPartType1("fee");
+        public static readonly OpenAvailableSubTotalPrepaymentPartType1 FeeReimbursement = new OpenAvailableSubTotalPrepaymentPartType1("fee-reimbursement");
+        public static readonly OpenAvailableSubTotalPrepaymentPartType1 FeeDiscount = new OpenAvailableSubTotalPrepaymentPartType1("fee-discount");
+        public static readonly OpenAvailableSubTotalPrepaymentPartType1 FeeVat = new OpenAvailableSubTotalPrepaymentPartType1("fee-vat");
+        public static readonly OpenAvailableSubTotalPrepaymentPartType1 FeeRoundingCompensation = new OpenAvailableSubTotalPrepaymentPartType1("fee-rounding-compensation");
 
-    public static class OpenAvailableSubTotalPrepaymentPartType1Extension
-    {
-        public static string Value(this OpenAvailableSubTotalPrepaymentPartType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static OpenAvailableSubTotalPrepaymentPartType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(OpenAvailableSubTotalPrepaymentPartType1).GetFields())
+        private static readonly Dictionary <string, OpenAvailableSubTotalPrepaymentPartType1> _knownValues =
+            new Dictionary <string, OpenAvailableSubTotalPrepaymentPartType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["fee"] = Fee,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-vat"] = FeeVat,
+                ["fee-rounding-compensation"] = FeeRoundingCompensation
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, OpenAvailableSubTotalPrepaymentPartType1> _values =
+            new ConcurrentDictionary<string, OpenAvailableSubTotalPrepaymentPartType1>(_knownValues);
 
-                    if (enumVal is OpenAvailableSubTotalPrepaymentPartType1)
-                    {
-                        return (OpenAvailableSubTotalPrepaymentPartType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum OpenAvailableSubTotalPrepaymentPartType1");
+        private OpenAvailableSubTotalPrepaymentPartType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static OpenAvailableSubTotalPrepaymentPartType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new OpenAvailableSubTotalPrepaymentPartType1(value));
+        }
+
+        public static implicit operator OpenAvailableSubTotalPrepaymentPartType1(string value) => Of(value);
+        public static implicit operator string(OpenAvailableSubTotalPrepaymentPartType1 openavailablesubtotalprepaymentparttype1) => openavailablesubtotalprepaymentparttype1.Value;
+
+        public static OpenAvailableSubTotalPrepaymentPartType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as OpenAvailableSubTotalPrepaymentPartType1);
+
+        public bool Equals(OpenAvailableSubTotalPrepaymentPartType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

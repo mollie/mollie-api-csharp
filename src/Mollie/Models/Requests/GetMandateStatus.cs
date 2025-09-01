@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
     /// 
@@ -20,47 +23,62 @@ namespace Mollie.Models.Requests
     /// when we did not received the IBAN yet from the first payment.
     /// </remarks>
     /// </summary>
-    public enum GetMandateStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetMandateStatus : IEquatable<GetMandateStatus>
     {
-        [JsonProperty("valid")]
-        Valid,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("invalid")]
-        Invalid,
-    }
+        public static readonly GetMandateStatus Valid = new GetMandateStatus("valid");
+        public static readonly GetMandateStatus Pending = new GetMandateStatus("pending");
+        public static readonly GetMandateStatus Invalid = new GetMandateStatus("invalid");
 
-    public static class GetMandateStatusExtension
-    {
-        public static string Value(this GetMandateStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetMandateStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetMandateStatus).GetFields())
+        private static readonly Dictionary <string, GetMandateStatus> _knownValues =
+            new Dictionary <string, GetMandateStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["valid"] = Valid,
+                ["pending"] = Pending,
+                ["invalid"] = Invalid
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetMandateStatus> _values =
+            new ConcurrentDictionary<string, GetMandateStatus>(_knownValues);
 
-                    if (enumVal is GetMandateStatus)
-                    {
-                        return (GetMandateStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetMandateStatus");
+        private GetMandateStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetMandateStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetMandateStatus(value));
+        }
+
+        public static implicit operator GetMandateStatus(string value) => Of(value);
+        public static implicit operator string(GetMandateStatus getmandatestatus) => getmandatestatus.Value;
+
+        public static GetMandateStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetMandateStatus);
+
+        public bool Equals(GetMandateStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

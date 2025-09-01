@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status.
     /// </summary>
-    public enum CreateWebhookStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateWebhookStatus : IEquatable<CreateWebhookStatus>
     {
-        [JsonProperty("enabled")]
-        Enabled,
-        [JsonProperty("blocked")]
-        Blocked,
-        [JsonProperty("disabled")]
-        Disabled,
-    }
+        public static readonly CreateWebhookStatus Enabled = new CreateWebhookStatus("enabled");
+        public static readonly CreateWebhookStatus Blocked = new CreateWebhookStatus("blocked");
+        public static readonly CreateWebhookStatus Disabled = new CreateWebhookStatus("disabled");
 
-    public static class CreateWebhookStatusExtension
-    {
-        public static string Value(this CreateWebhookStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateWebhookStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateWebhookStatus).GetFields())
+        private static readonly Dictionary <string, CreateWebhookStatus> _knownValues =
+            new Dictionary <string, CreateWebhookStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["enabled"] = Enabled,
+                ["blocked"] = Blocked,
+                ["disabled"] = Disabled
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateWebhookStatus> _values =
+            new ConcurrentDictionary<string, CreateWebhookStatus>(_knownValues);
 
-                    if (enumVal is CreateWebhookStatus)
-                    {
-                        return (CreateWebhookStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateWebhookStatus");
+        private CreateWebhookStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateWebhookStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateWebhookStatus(value));
+        }
+
+        public static implicit operator CreateWebhookStatus(string value) => Of(value);
+        public static implicit operator string(CreateWebhookStatus createwebhookstatus) => createwebhookstatus.Value;
+
+        public static CreateWebhookStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateWebhookStatus);
+
+        public bool Equals(CreateWebhookStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

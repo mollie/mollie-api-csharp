@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the requirement depends on its due date.<br/>
     /// 
@@ -20,47 +23,62 @@ namespace Mollie.Models.Requests
     /// If no due date is given, the status will be `requested`.
     /// </remarks>
     /// </summary>
-    public enum GetClientRequirementStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetClientRequirementStatus : IEquatable<GetClientRequirementStatus>
     {
-        [JsonProperty("currently-due")]
-        CurrentlyDue,
-        [JsonProperty("past-due")]
-        PastDue,
-        [JsonProperty("requested")]
-        Requested,
-    }
+        public static readonly GetClientRequirementStatus CurrentlyDue = new GetClientRequirementStatus("currently-due");
+        public static readonly GetClientRequirementStatus PastDue = new GetClientRequirementStatus("past-due");
+        public static readonly GetClientRequirementStatus Requested = new GetClientRequirementStatus("requested");
 
-    public static class GetClientRequirementStatusExtension
-    {
-        public static string Value(this GetClientRequirementStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetClientRequirementStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetClientRequirementStatus).GetFields())
+        private static readonly Dictionary <string, GetClientRequirementStatus> _knownValues =
+            new Dictionary <string, GetClientRequirementStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["currently-due"] = CurrentlyDue,
+                ["past-due"] = PastDue,
+                ["requested"] = Requested
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetClientRequirementStatus> _values =
+            new ConcurrentDictionary<string, GetClientRequirementStatus>(_knownValues);
 
-                    if (enumVal is GetClientRequirementStatus)
-                    {
-                        return (GetClientRequirementStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetClientRequirementStatus");
+        private GetClientRequirementStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetClientRequirementStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetClientRequirementStatus(value));
+        }
+
+        public static implicit operator GetClientRequirementStatus(string value) => Of(value);
+        public static implicit operator string(GetClientRequirementStatus getclientrequirementstatus) => getclientrequirementstatus.Value;
+
+        public static GetClientRequirementStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetClientRequirementStatus);
+
+        public bool Equals(GetClientRequirementStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

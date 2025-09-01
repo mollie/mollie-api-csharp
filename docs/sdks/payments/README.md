@@ -142,7 +142,7 @@ var res = await sdk.Payments.CreateAsync(
                     Value = "10.00",
                 },
                 Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
+                    Type = CreatePaymentTypeOrganization.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",

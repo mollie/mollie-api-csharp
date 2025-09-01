@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
     /// 
@@ -24,45 +27,60 @@ namespace Mollie.Models.Requests
     /// <a href="get-payment-link-payments">Payment Link Payments Endpoint</a>.
     /// </remarks>
     /// </summary>
-    public enum CreatePaymentLinkSequenceTypeResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreatePaymentLinkSequenceTypeResponse : IEquatable<CreatePaymentLinkSequenceTypeResponse>
     {
-        [JsonProperty("oneoff")]
-        Oneoff,
-        [JsonProperty("first")]
-        First,
-    }
+        public static readonly CreatePaymentLinkSequenceTypeResponse Oneoff = new CreatePaymentLinkSequenceTypeResponse("oneoff");
+        public static readonly CreatePaymentLinkSequenceTypeResponse First = new CreatePaymentLinkSequenceTypeResponse("first");
 
-    public static class CreatePaymentLinkSequenceTypeResponseExtension
-    {
-        public static string Value(this CreatePaymentLinkSequenceTypeResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreatePaymentLinkSequenceTypeResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreatePaymentLinkSequenceTypeResponse).GetFields())
+        private static readonly Dictionary <string, CreatePaymentLinkSequenceTypeResponse> _knownValues =
+            new Dictionary <string, CreatePaymentLinkSequenceTypeResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["oneoff"] = Oneoff,
+                ["first"] = First
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreatePaymentLinkSequenceTypeResponse> _values =
+            new ConcurrentDictionary<string, CreatePaymentLinkSequenceTypeResponse>(_knownValues);
 
-                    if (enumVal is CreatePaymentLinkSequenceTypeResponse)
-                    {
-                        return (CreatePaymentLinkSequenceTypeResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreatePaymentLinkSequenceTypeResponse");
+        private CreatePaymentLinkSequenceTypeResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreatePaymentLinkSequenceTypeResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreatePaymentLinkSequenceTypeResponse(value));
+        }
+
+        public static implicit operator CreatePaymentLinkSequenceTypeResponse(string value) => Of(value);
+        public static implicit operator string(CreatePaymentLinkSequenceTypeResponse createpaymentlinksequencetyperesponse) => createpaymentlinksequencetyperesponse.Value;
+
+        public static CreatePaymentLinkSequenceTypeResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreatePaymentLinkSequenceTypeResponse);
+
+        public bool Equals(CreatePaymentLinkSequenceTypeResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

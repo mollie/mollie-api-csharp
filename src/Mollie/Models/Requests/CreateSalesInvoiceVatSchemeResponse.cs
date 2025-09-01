@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
     /// </summary>
-    public enum CreateSalesInvoiceVatSchemeResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateSalesInvoiceVatSchemeResponse : IEquatable<CreateSalesInvoiceVatSchemeResponse>
     {
-        [JsonProperty("standard")]
-        Standard,
-        [JsonProperty("one-stop-shop")]
-        OneStopShop,
-    }
+        public static readonly CreateSalesInvoiceVatSchemeResponse Standard = new CreateSalesInvoiceVatSchemeResponse("standard");
+        public static readonly CreateSalesInvoiceVatSchemeResponse OneStopShop = new CreateSalesInvoiceVatSchemeResponse("one-stop-shop");
 
-    public static class CreateSalesInvoiceVatSchemeResponseExtension
-    {
-        public static string Value(this CreateSalesInvoiceVatSchemeResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateSalesInvoiceVatSchemeResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateSalesInvoiceVatSchemeResponse).GetFields())
+        private static readonly Dictionary <string, CreateSalesInvoiceVatSchemeResponse> _knownValues =
+            new Dictionary <string, CreateSalesInvoiceVatSchemeResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["standard"] = Standard,
+                ["one-stop-shop"] = OneStopShop
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceVatSchemeResponse> _values =
+            new ConcurrentDictionary<string, CreateSalesInvoiceVatSchemeResponse>(_knownValues);
 
-                    if (enumVal is CreateSalesInvoiceVatSchemeResponse)
-                    {
-                        return (CreateSalesInvoiceVatSchemeResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceVatSchemeResponse");
+        private CreateSalesInvoiceVatSchemeResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateSalesInvoiceVatSchemeResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceVatSchemeResponse(value));
+        }
+
+        public static implicit operator CreateSalesInvoiceVatSchemeResponse(string value) => Of(value);
+        public static implicit operator string(CreateSalesInvoiceVatSchemeResponse createsalesinvoicevatschemeresponse) => createsalesinvoicevatschemeresponse.Value;
+
+        public static CreateSalesInvoiceVatSchemeResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceVatSchemeResponse);
+
+        public bool Equals(CreateSalesInvoiceVatSchemeResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    public enum GetPaymentLinkPaymentsRoutingMode
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPaymentLinkPaymentsRoutingMode : IEquatable<GetPaymentLinkPaymentsRoutingMode>
     {
-        [JsonProperty("live")]
-        Live,
-        [JsonProperty("test")]
-        Test,
-    }
+        public static readonly GetPaymentLinkPaymentsRoutingMode Live = new GetPaymentLinkPaymentsRoutingMode("live");
+        public static readonly GetPaymentLinkPaymentsRoutingMode Test = new GetPaymentLinkPaymentsRoutingMode("test");
 
-    public static class GetPaymentLinkPaymentsRoutingModeExtension
-    {
-        public static string Value(this GetPaymentLinkPaymentsRoutingMode value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetPaymentLinkPaymentsRoutingMode ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPaymentLinkPaymentsRoutingMode).GetFields())
+        private static readonly Dictionary <string, GetPaymentLinkPaymentsRoutingMode> _knownValues =
+            new Dictionary <string, GetPaymentLinkPaymentsRoutingMode> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["live"] = Live,
+                ["test"] = Test
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsRoutingMode> _values =
+            new ConcurrentDictionary<string, GetPaymentLinkPaymentsRoutingMode>(_knownValues);
 
-                    if (enumVal is GetPaymentLinkPaymentsRoutingMode)
-                    {
-                        return (GetPaymentLinkPaymentsRoutingMode)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsRoutingMode");
+        private GetPaymentLinkPaymentsRoutingMode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPaymentLinkPaymentsRoutingMode Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsRoutingMode(value));
+        }
+
+        public static implicit operator GetPaymentLinkPaymentsRoutingMode(string value) => Of(value);
+        public static implicit operator string(GetPaymentLinkPaymentsRoutingMode getpaymentlinkpaymentsroutingmode) => getpaymentlinkpaymentsroutingmode.Value;
+
+        public static GetPaymentLinkPaymentsRoutingMode[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsRoutingMode);
+
+        public bool Equals(GetPaymentLinkPaymentsRoutingMode? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

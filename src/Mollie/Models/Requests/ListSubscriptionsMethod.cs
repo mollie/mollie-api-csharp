@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
     /// </summary>
-    public enum ListSubscriptionsMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionsMethod : IEquatable<ListSubscriptionsMethod>
     {
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("paypal")]
-        Paypal,
-    }
+        public static readonly ListSubscriptionsMethod Creditcard = new ListSubscriptionsMethod("creditcard");
+        public static readonly ListSubscriptionsMethod Directdebit = new ListSubscriptionsMethod("directdebit");
+        public static readonly ListSubscriptionsMethod Paypal = new ListSubscriptionsMethod("paypal");
 
-    public static class ListSubscriptionsMethodExtension
-    {
-        public static string Value(this ListSubscriptionsMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionsMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionsMethod).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionsMethod> _knownValues =
+            new Dictionary <string, ListSubscriptionsMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["paypal"] = Paypal
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionsMethod> _values =
+            new ConcurrentDictionary<string, ListSubscriptionsMethod>(_knownValues);
 
-                    if (enumVal is ListSubscriptionsMethod)
-                    {
-                        return (ListSubscriptionsMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionsMethod");
+        private ListSubscriptionsMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionsMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionsMethod(value));
+        }
+
+        public static implicit operator ListSubscriptionsMethod(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionsMethod listsubscriptionsmethod) => listsubscriptionsmethod.Value;
+
+        public static ListSubscriptionsMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionsMethod);
+
+        public bool Equals(ListSubscriptionsMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

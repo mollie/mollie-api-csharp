@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum FeePrepaymentsPendingSubtotalMethod2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class FeePrepaymentsPendingSubtotalMethod2 : IEquatable<FeePrepaymentsPendingSubtotalMethod2>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Alma = new FeePrepaymentsPendingSubtotalMethod2("alma");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Bacs = new FeePrepaymentsPendingSubtotalMethod2("bacs");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Applepay = new FeePrepaymentsPendingSubtotalMethod2("applepay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Bancomatpay = new FeePrepaymentsPendingSubtotalMethod2("bancomatpay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Bancontact = new FeePrepaymentsPendingSubtotalMethod2("bancontact");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Banktransfer = new FeePrepaymentsPendingSubtotalMethod2("banktransfer");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Belfius = new FeePrepaymentsPendingSubtotalMethod2("belfius");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Billie = new FeePrepaymentsPendingSubtotalMethod2("billie");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Bizum = new FeePrepaymentsPendingSubtotalMethod2("bizum");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Bitcoin = new FeePrepaymentsPendingSubtotalMethod2("bitcoin");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Blik = new FeePrepaymentsPendingSubtotalMethod2("blik");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Creditcard = new FeePrepaymentsPendingSubtotalMethod2("creditcard");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Directdebit = new FeePrepaymentsPendingSubtotalMethod2("directdebit");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Eps = new FeePrepaymentsPendingSubtotalMethod2("eps");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Giftcard = new FeePrepaymentsPendingSubtotalMethod2("giftcard");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Giropay = new FeePrepaymentsPendingSubtotalMethod2("giropay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Googlepay = new FeePrepaymentsPendingSubtotalMethod2("googlepay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Ideal = new FeePrepaymentsPendingSubtotalMethod2("ideal");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 In3 = new FeePrepaymentsPendingSubtotalMethod2("in3");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Inghomepay = new FeePrepaymentsPendingSubtotalMethod2("inghomepay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Kbc = new FeePrepaymentsPendingSubtotalMethod2("kbc");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Klarnapaylater = new FeePrepaymentsPendingSubtotalMethod2("klarnapaylater");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Klarnapaynow = new FeePrepaymentsPendingSubtotalMethod2("klarnapaynow");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Klarnasliceit = new FeePrepaymentsPendingSubtotalMethod2("klarnasliceit");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Klarna = new FeePrepaymentsPendingSubtotalMethod2("klarna");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Mbway = new FeePrepaymentsPendingSubtotalMethod2("mbway");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Multibanco = new FeePrepaymentsPendingSubtotalMethod2("multibanco");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Mybank = new FeePrepaymentsPendingSubtotalMethod2("mybank");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Paybybank = new FeePrepaymentsPendingSubtotalMethod2("paybybank");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Payconiq = new FeePrepaymentsPendingSubtotalMethod2("payconiq");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Paypal = new FeePrepaymentsPendingSubtotalMethod2("paypal");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Paysafecard = new FeePrepaymentsPendingSubtotalMethod2("paysafecard");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Przelewy24 = new FeePrepaymentsPendingSubtotalMethod2("przelewy24");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Riverty = new FeePrepaymentsPendingSubtotalMethod2("riverty");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Satispay = new FeePrepaymentsPendingSubtotalMethod2("satispay");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Podiumcadeaukaart = new FeePrepaymentsPendingSubtotalMethod2("podiumcadeaukaart");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Pointofsale = new FeePrepaymentsPendingSubtotalMethod2("pointofsale");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Sofort = new FeePrepaymentsPendingSubtotalMethod2("sofort");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Swish = new FeePrepaymentsPendingSubtotalMethod2("swish");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Trustly = new FeePrepaymentsPendingSubtotalMethod2("trustly");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Twint = new FeePrepaymentsPendingSubtotalMethod2("twint");
+        public static readonly FeePrepaymentsPendingSubtotalMethod2 Voucher = new FeePrepaymentsPendingSubtotalMethod2("voucher");
 
-    public static class FeePrepaymentsPendingSubtotalMethod2Extension
-    {
-        public static string Value(this FeePrepaymentsPendingSubtotalMethod2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static FeePrepaymentsPendingSubtotalMethod2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(FeePrepaymentsPendingSubtotalMethod2).GetFields())
+        private static readonly Dictionary <string, FeePrepaymentsPendingSubtotalMethod2> _knownValues =
+            new Dictionary <string, FeePrepaymentsPendingSubtotalMethod2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, FeePrepaymentsPendingSubtotalMethod2> _values =
+            new ConcurrentDictionary<string, FeePrepaymentsPendingSubtotalMethod2>(_knownValues);
 
-                    if (enumVal is FeePrepaymentsPendingSubtotalMethod2)
-                    {
-                        return (FeePrepaymentsPendingSubtotalMethod2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum FeePrepaymentsPendingSubtotalMethod2");
+        private FeePrepaymentsPendingSubtotalMethod2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static FeePrepaymentsPendingSubtotalMethod2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new FeePrepaymentsPendingSubtotalMethod2(value));
+        }
+
+        public static implicit operator FeePrepaymentsPendingSubtotalMethod2(string value) => Of(value);
+        public static implicit operator string(FeePrepaymentsPendingSubtotalMethod2 feeprepaymentspendingsubtotalmethod2) => feeprepaymentspendingsubtotalmethod2.Value;
+
+        public static FeePrepaymentsPendingSubtotalMethod2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsPendingSubtotalMethod2);
+
+        public bool Equals(FeePrepaymentsPendingSubtotalMethod2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

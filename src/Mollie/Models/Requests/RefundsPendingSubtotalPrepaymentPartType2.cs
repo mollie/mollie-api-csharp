@@ -12,55 +12,73 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    public enum RefundsPendingSubtotalPrepaymentPartType2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class RefundsPendingSubtotalPrepaymentPartType2 : IEquatable<RefundsPendingSubtotalPrepaymentPartType2>
     {
-        [JsonProperty("fee")]
-        Fee,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-vat")]
-        FeeVat,
-        [JsonProperty("fee-rounding-compensation")]
-        FeeRoundingCompensation,
-    }
+        public static readonly RefundsPendingSubtotalPrepaymentPartType2 Fee = new RefundsPendingSubtotalPrepaymentPartType2("fee");
+        public static readonly RefundsPendingSubtotalPrepaymentPartType2 FeeReimbursement = new RefundsPendingSubtotalPrepaymentPartType2("fee-reimbursement");
+        public static readonly RefundsPendingSubtotalPrepaymentPartType2 FeeDiscount = new RefundsPendingSubtotalPrepaymentPartType2("fee-discount");
+        public static readonly RefundsPendingSubtotalPrepaymentPartType2 FeeVat = new RefundsPendingSubtotalPrepaymentPartType2("fee-vat");
+        public static readonly RefundsPendingSubtotalPrepaymentPartType2 FeeRoundingCompensation = new RefundsPendingSubtotalPrepaymentPartType2("fee-rounding-compensation");
 
-    public static class RefundsPendingSubtotalPrepaymentPartType2Extension
-    {
-        public static string Value(this RefundsPendingSubtotalPrepaymentPartType2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static RefundsPendingSubtotalPrepaymentPartType2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(RefundsPendingSubtotalPrepaymentPartType2).GetFields())
+        private static readonly Dictionary <string, RefundsPendingSubtotalPrepaymentPartType2> _knownValues =
+            new Dictionary <string, RefundsPendingSubtotalPrepaymentPartType2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["fee"] = Fee,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-vat"] = FeeVat,
+                ["fee-rounding-compensation"] = FeeRoundingCompensation
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, RefundsPendingSubtotalPrepaymentPartType2> _values =
+            new ConcurrentDictionary<string, RefundsPendingSubtotalPrepaymentPartType2>(_knownValues);
 
-                    if (enumVal is RefundsPendingSubtotalPrepaymentPartType2)
-                    {
-                        return (RefundsPendingSubtotalPrepaymentPartType2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum RefundsPendingSubtotalPrepaymentPartType2");
+        private RefundsPendingSubtotalPrepaymentPartType2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static RefundsPendingSubtotalPrepaymentPartType2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new RefundsPendingSubtotalPrepaymentPartType2(value));
+        }
+
+        public static implicit operator RefundsPendingSubtotalPrepaymentPartType2(string value) => Of(value);
+        public static implicit operator string(RefundsPendingSubtotalPrepaymentPartType2 refundspendingsubtotalprepaymentparttype2) => refundspendingsubtotalprepaymentparttype2.Value;
+
+        public static RefundsPendingSubtotalPrepaymentPartType2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as RefundsPendingSubtotalPrepaymentPartType2);
+
+        public bool Equals(RefundsPendingSubtotalPrepaymentPartType2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

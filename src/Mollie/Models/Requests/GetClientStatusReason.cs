@@ -12,46 +12,64 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum GetClientStatusReason
-    {
-        [JsonProperty("requirement-past-due")]
-        RequirementPastDue,
-        [JsonProperty("onboarding-information-needed")]
-        OnboardingInformationNeeded,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class GetClientStatusReasonExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetClientStatusReason : IEquatable<GetClientStatusReason>
     {
-        public static string Value(this GetClientStatusReason value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly GetClientStatusReason RequirementPastDue = new GetClientStatusReason("requirement-past-due");
+        public static readonly GetClientStatusReason OnboardingInformationNeeded = new GetClientStatusReason("onboarding-information-needed");
 
-        public static GetClientStatusReason ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetClientStatusReason).GetFields())
+        private static readonly Dictionary <string, GetClientStatusReason> _knownValues =
+            new Dictionary <string, GetClientStatusReason> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["requirement-past-due"] = RequirementPastDue,
+                ["onboarding-information-needed"] = OnboardingInformationNeeded
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetClientStatusReason> _values =
+            new ConcurrentDictionary<string, GetClientStatusReason>(_knownValues);
 
-                    if (enumVal is GetClientStatusReason)
-                    {
-                        return (GetClientStatusReason)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetClientStatusReason");
+        private GetClientStatusReason(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetClientStatusReason Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetClientStatusReason(value));
+        }
+
+        public static implicit operator GetClientStatusReason(string value) => Of(value);
+        public static implicit operator string(GetClientStatusReason getclientstatusreason) => getclientstatusreason.Value;
+
+        public static GetClientStatusReason[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetClientStatusReason);
+
+        public bool Equals(GetClientStatusReason? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

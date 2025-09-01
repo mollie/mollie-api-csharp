@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
     /// 
@@ -20,85 +23,100 @@ namespace Mollie.Models.Requests
     /// absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
     /// </remarks>
     /// </summary>
-    public enum UpdateCustomerLocaleResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class UpdateCustomerLocaleResponse : IEquatable<UpdateCustomerLocaleResponse>
     {
-        [JsonProperty("en_US")]
-        EnUS,
-        [JsonProperty("en_GB")]
-        EnGB,
-        [JsonProperty("nl_NL")]
-        Nlnl,
-        [JsonProperty("nl_BE")]
-        NlBE,
-        [JsonProperty("de_DE")]
-        Dede,
-        [JsonProperty("de_AT")]
-        DeAT,
-        [JsonProperty("de_CH")]
-        DeCH,
-        [JsonProperty("fr_FR")]
-        Frfr,
-        [JsonProperty("fr_BE")]
-        FrBE,
-        [JsonProperty("es_ES")]
-        Eses,
-        [JsonProperty("ca_ES")]
-        CaES,
-        [JsonProperty("pt_PT")]
-        Ptpt,
-        [JsonProperty("it_IT")]
-        Itit,
-        [JsonProperty("nb_NO")]
-        NbNO,
-        [JsonProperty("sv_SE")]
-        SvSE,
-        [JsonProperty("fi_FI")]
-        Fifi,
-        [JsonProperty("da_DK")]
-        DaDK,
-        [JsonProperty("is_IS")]
-        Isis,
-        [JsonProperty("hu_HU")]
-        Huhu,
-        [JsonProperty("pl_PL")]
-        Plpl,
-        [JsonProperty("lv_LV")]
-        Lvlv,
-        [JsonProperty("lt_LT")]
-        Ltlt,
-    }
+        public static readonly UpdateCustomerLocaleResponse EnUS = new UpdateCustomerLocaleResponse("en_US");
+        public static readonly UpdateCustomerLocaleResponse EnGB = new UpdateCustomerLocaleResponse("en_GB");
+        public static readonly UpdateCustomerLocaleResponse Nlnl = new UpdateCustomerLocaleResponse("nl_NL");
+        public static readonly UpdateCustomerLocaleResponse NlBE = new UpdateCustomerLocaleResponse("nl_BE");
+        public static readonly UpdateCustomerLocaleResponse Dede = new UpdateCustomerLocaleResponse("de_DE");
+        public static readonly UpdateCustomerLocaleResponse DeAT = new UpdateCustomerLocaleResponse("de_AT");
+        public static readonly UpdateCustomerLocaleResponse DeCH = new UpdateCustomerLocaleResponse("de_CH");
+        public static readonly UpdateCustomerLocaleResponse Frfr = new UpdateCustomerLocaleResponse("fr_FR");
+        public static readonly UpdateCustomerLocaleResponse FrBE = new UpdateCustomerLocaleResponse("fr_BE");
+        public static readonly UpdateCustomerLocaleResponse Eses = new UpdateCustomerLocaleResponse("es_ES");
+        public static readonly UpdateCustomerLocaleResponse CaES = new UpdateCustomerLocaleResponse("ca_ES");
+        public static readonly UpdateCustomerLocaleResponse Ptpt = new UpdateCustomerLocaleResponse("pt_PT");
+        public static readonly UpdateCustomerLocaleResponse Itit = new UpdateCustomerLocaleResponse("it_IT");
+        public static readonly UpdateCustomerLocaleResponse NbNO = new UpdateCustomerLocaleResponse("nb_NO");
+        public static readonly UpdateCustomerLocaleResponse SvSE = new UpdateCustomerLocaleResponse("sv_SE");
+        public static readonly UpdateCustomerLocaleResponse Fifi = new UpdateCustomerLocaleResponse("fi_FI");
+        public static readonly UpdateCustomerLocaleResponse DaDK = new UpdateCustomerLocaleResponse("da_DK");
+        public static readonly UpdateCustomerLocaleResponse Isis = new UpdateCustomerLocaleResponse("is_IS");
+        public static readonly UpdateCustomerLocaleResponse Huhu = new UpdateCustomerLocaleResponse("hu_HU");
+        public static readonly UpdateCustomerLocaleResponse Plpl = new UpdateCustomerLocaleResponse("pl_PL");
+        public static readonly UpdateCustomerLocaleResponse Lvlv = new UpdateCustomerLocaleResponse("lv_LV");
+        public static readonly UpdateCustomerLocaleResponse Ltlt = new UpdateCustomerLocaleResponse("lt_LT");
 
-    public static class UpdateCustomerLocaleResponseExtension
-    {
-        public static string Value(this UpdateCustomerLocaleResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static UpdateCustomerLocaleResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(UpdateCustomerLocaleResponse).GetFields())
+        private static readonly Dictionary <string, UpdateCustomerLocaleResponse> _knownValues =
+            new Dictionary <string, UpdateCustomerLocaleResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["en_US"] = EnUS,
+                ["en_GB"] = EnGB,
+                ["nl_NL"] = Nlnl,
+                ["nl_BE"] = NlBE,
+                ["de_DE"] = Dede,
+                ["de_AT"] = DeAT,
+                ["de_CH"] = DeCH,
+                ["fr_FR"] = Frfr,
+                ["fr_BE"] = FrBE,
+                ["es_ES"] = Eses,
+                ["ca_ES"] = CaES,
+                ["pt_PT"] = Ptpt,
+                ["it_IT"] = Itit,
+                ["nb_NO"] = NbNO,
+                ["sv_SE"] = SvSE,
+                ["fi_FI"] = Fifi,
+                ["da_DK"] = DaDK,
+                ["is_IS"] = Isis,
+                ["hu_HU"] = Huhu,
+                ["pl_PL"] = Plpl,
+                ["lv_LV"] = Lvlv,
+                ["lt_LT"] = Ltlt
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, UpdateCustomerLocaleResponse> _values =
+            new ConcurrentDictionary<string, UpdateCustomerLocaleResponse>(_knownValues);
 
-                    if (enumVal is UpdateCustomerLocaleResponse)
-                    {
-                        return (UpdateCustomerLocaleResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum UpdateCustomerLocaleResponse");
+        private UpdateCustomerLocaleResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static UpdateCustomerLocaleResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new UpdateCustomerLocaleResponse(value));
+        }
+
+        public static implicit operator UpdateCustomerLocaleResponse(string value) => Of(value);
+        public static implicit operator string(UpdateCustomerLocaleResponse updatecustomerlocaleresponse) => updatecustomerlocaleresponse.Value;
+
+        public static UpdateCustomerLocaleResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as UpdateCustomerLocaleResponse);
+
+        public bool Equals(UpdateCustomerLocaleResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

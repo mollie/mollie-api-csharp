@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The way through which the invoice is to be set to paid.
     /// </summary>
-    public enum CreateSalesInvoiceSourceResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateSalesInvoiceSourceResponse : IEquatable<CreateSalesInvoiceSourceResponse>
     {
-        [JsonProperty("manual")]
-        Manual,
-        [JsonProperty("payment-link")]
-        PaymentLink,
-        [JsonProperty("payment")]
-        Payment,
-    }
+        public static readonly CreateSalesInvoiceSourceResponse Manual = new CreateSalesInvoiceSourceResponse("manual");
+        public static readonly CreateSalesInvoiceSourceResponse PaymentLink = new CreateSalesInvoiceSourceResponse("payment-link");
+        public static readonly CreateSalesInvoiceSourceResponse Payment = new CreateSalesInvoiceSourceResponse("payment");
 
-    public static class CreateSalesInvoiceSourceResponseExtension
-    {
-        public static string Value(this CreateSalesInvoiceSourceResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateSalesInvoiceSourceResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateSalesInvoiceSourceResponse).GetFields())
+        private static readonly Dictionary <string, CreateSalesInvoiceSourceResponse> _knownValues =
+            new Dictionary <string, CreateSalesInvoiceSourceResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["manual"] = Manual,
+                ["payment-link"] = PaymentLink,
+                ["payment"] = Payment
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceSourceResponse> _values =
+            new ConcurrentDictionary<string, CreateSalesInvoiceSourceResponse>(_knownValues);
 
-                    if (enumVal is CreateSalesInvoiceSourceResponse)
-                    {
-                        return (CreateSalesInvoiceSourceResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceSourceResponse");
+        private CreateSalesInvoiceSourceResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateSalesInvoiceSourceResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceSourceResponse(value));
+        }
+
+        public static implicit operator CreateSalesInvoiceSourceResponse(string value) => Of(value);
+        public static implicit operator string(CreateSalesInvoiceSourceResponse createsalesinvoicesourceresponse) => createsalesinvoicesourceresponse.Value;
+
+        public static CreateSalesInvoiceSourceResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceSourceResponse);
+
+        public bool Equals(CreateSalesInvoiceSourceResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

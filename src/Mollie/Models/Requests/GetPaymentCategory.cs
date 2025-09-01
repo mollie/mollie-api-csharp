@@ -12,50 +12,68 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum GetPaymentCategory
-    {
-        [JsonProperty("meal")]
-        Meal,
-        [JsonProperty("eco")]
-        Eco,
-        [JsonProperty("gift")]
-        Gift,
-        [JsonProperty("sport_culture")]
-        SportCulture,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class GetPaymentCategoryExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPaymentCategory : IEquatable<GetPaymentCategory>
     {
-        public static string Value(this GetPaymentCategory value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly GetPaymentCategory Meal = new GetPaymentCategory("meal");
+        public static readonly GetPaymentCategory Eco = new GetPaymentCategory("eco");
+        public static readonly GetPaymentCategory Gift = new GetPaymentCategory("gift");
+        public static readonly GetPaymentCategory SportCulture = new GetPaymentCategory("sport_culture");
 
-        public static GetPaymentCategory ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPaymentCategory).GetFields())
+        private static readonly Dictionary <string, GetPaymentCategory> _knownValues =
+            new Dictionary <string, GetPaymentCategory> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["meal"] = Meal,
+                ["eco"] = Eco,
+                ["gift"] = Gift,
+                ["sport_culture"] = SportCulture
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPaymentCategory> _values =
+            new ConcurrentDictionary<string, GetPaymentCategory>(_knownValues);
 
-                    if (enumVal is GetPaymentCategory)
-                    {
-                        return (GetPaymentCategory)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPaymentCategory");
+        private GetPaymentCategory(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPaymentCategory Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPaymentCategory(value));
+        }
+
+        public static implicit operator GetPaymentCategory(string value) => Of(value);
+        public static implicit operator string(GetPaymentCategory getpaymentcategory) => getpaymentcategory.Value;
+
+        public static GetPaymentCategory[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPaymentCategory);
+
+        public bool Equals(GetPaymentCategory? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

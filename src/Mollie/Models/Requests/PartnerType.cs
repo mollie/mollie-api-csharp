@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>
     /// 
@@ -20,47 +23,62 @@ namespace Mollie.Models.Requests
     /// enrolled as a partner.
     /// </remarks>
     /// </summary>
-    public enum PartnerType
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PartnerType : IEquatable<PartnerType>
     {
-        [JsonProperty("oauth")]
-        Oauth,
-        [JsonProperty("signuplink")]
-        Signuplink,
-        [JsonProperty("useragent")]
-        Useragent,
-    }
+        public static readonly PartnerType Oauth = new PartnerType("oauth");
+        public static readonly PartnerType Signuplink = new PartnerType("signuplink");
+        public static readonly PartnerType Useragent = new PartnerType("useragent");
 
-    public static class PartnerTypeExtension
-    {
-        public static string Value(this PartnerType value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PartnerType ToEnum(this string value)
-        {
-            foreach(var field in typeof(PartnerType).GetFields())
+        private static readonly Dictionary <string, PartnerType> _knownValues =
+            new Dictionary <string, PartnerType> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["oauth"] = Oauth,
+                ["signuplink"] = Signuplink,
+                ["useragent"] = Useragent
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PartnerType> _values =
+            new ConcurrentDictionary<string, PartnerType>(_knownValues);
 
-                    if (enumVal is PartnerType)
-                    {
-                        return (PartnerType)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PartnerType");
+        private PartnerType(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PartnerType Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PartnerType(value));
+        }
+
+        public static implicit operator PartnerType(string value) => Of(value);
+        public static implicit operator string(PartnerType partnertype) => partnertype.Value;
+
+        public static PartnerType[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PartnerType);
+
+        public bool Equals(PartnerType? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

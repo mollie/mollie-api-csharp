@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The subscription&apos;s current status.
     /// </summary>
-    public enum ListWebhooksStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListWebhooksStatus : IEquatable<ListWebhooksStatus>
     {
-        [JsonProperty("enabled")]
-        Enabled,
-        [JsonProperty("blocked")]
-        Blocked,
-        [JsonProperty("disabled")]
-        Disabled,
-        [JsonProperty("deleted")]
-        Deleted,
-    }
+        public static readonly ListWebhooksStatus Enabled = new ListWebhooksStatus("enabled");
+        public static readonly ListWebhooksStatus Blocked = new ListWebhooksStatus("blocked");
+        public static readonly ListWebhooksStatus Disabled = new ListWebhooksStatus("disabled");
+        public static readonly ListWebhooksStatus Deleted = new ListWebhooksStatus("deleted");
 
-    public static class ListWebhooksStatusExtension
-    {
-        public static string Value(this ListWebhooksStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListWebhooksStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListWebhooksStatus).GetFields())
+        private static readonly Dictionary <string, ListWebhooksStatus> _knownValues =
+            new Dictionary <string, ListWebhooksStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["enabled"] = Enabled,
+                ["blocked"] = Blocked,
+                ["disabled"] = Disabled,
+                ["deleted"] = Deleted
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListWebhooksStatus> _values =
+            new ConcurrentDictionary<string, ListWebhooksStatus>(_knownValues);
 
-                    if (enumVal is ListWebhooksStatus)
-                    {
-                        return (ListWebhooksStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListWebhooksStatus");
+        private ListWebhooksStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListWebhooksStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListWebhooksStatus(value));
+        }
+
+        public static implicit operator ListWebhooksStatus(string value) => Of(value);
+        public static implicit operator string(ListWebhooksStatus listwebhooksstatus) => listwebhooksstatus.Value;
+
+        public static ListWebhooksStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListWebhooksStatus);
+
+        public bool Equals(ListWebhooksStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

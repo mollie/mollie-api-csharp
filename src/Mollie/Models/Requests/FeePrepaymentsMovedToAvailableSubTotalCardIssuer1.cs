@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    public enum FeePrepaymentsMovedToAvailableSubTotalCardIssuer1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 : IEquatable<FeePrepaymentsMovedToAvailableSubTotalCardIssuer1>
     {
-        [JsonProperty("amex")]
-        Amex,
-        [JsonProperty("maestro")]
-        Maestro,
-        [JsonProperty("carte-bancaire")]
-        CarteBancaire,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 Amex = new FeePrepaymentsMovedToAvailableSubTotalCardIssuer1("amex");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 Maestro = new FeePrepaymentsMovedToAvailableSubTotalCardIssuer1("maestro");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 CarteBancaire = new FeePrepaymentsMovedToAvailableSubTotalCardIssuer1("carte-bancaire");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 Other = new FeePrepaymentsMovedToAvailableSubTotalCardIssuer1("other");
 
-    public static class FeePrepaymentsMovedToAvailableSubTotalCardIssuer1Extension
-    {
-        public static string Value(this FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(FeePrepaymentsMovedToAvailableSubTotalCardIssuer1).GetFields())
+        private static readonly Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalCardIssuer1> _knownValues =
+            new Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalCardIssuer1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["amex"] = Amex,
+                ["maestro"] = Maestro,
+                ["carte-bancaire"] = CarteBancaire,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalCardIssuer1> _values =
+            new ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalCardIssuer1>(_knownValues);
 
-                    if (enumVal is FeePrepaymentsMovedToAvailableSubTotalCardIssuer1)
-                    {
-                        return (FeePrepaymentsMovedToAvailableSubTotalCardIssuer1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum FeePrepaymentsMovedToAvailableSubTotalCardIssuer1");
+        private FeePrepaymentsMovedToAvailableSubTotalCardIssuer1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new FeePrepaymentsMovedToAvailableSubTotalCardIssuer1(value));
+        }
+
+        public static implicit operator FeePrepaymentsMovedToAvailableSubTotalCardIssuer1(string value) => Of(value);
+        public static implicit operator string(FeePrepaymentsMovedToAvailableSubTotalCardIssuer1 feeprepaymentsmovedtoavailablesubtotalcardissuer1) => feeprepaymentsmovedtoavailablesubtotalcardissuer1.Value;
+
+        public static FeePrepaymentsMovedToAvailableSubTotalCardIssuer1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsMovedToAvailableSubTotalCardIssuer1);
+
+        public bool Equals(FeePrepaymentsMovedToAvailableSubTotalCardIssuer1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The level of security applied during card processing.
     /// </summary>
-    public enum CreateCustomerPaymentCardSecurity
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentCardSecurity : IEquatable<CreateCustomerPaymentCardSecurity>
     {
-        [JsonProperty("normal")]
-        Normal,
-        [JsonProperty("3dsecure")]
-        Threedsecure,
-    }
+        public static readonly CreateCustomerPaymentCardSecurity Normal = new CreateCustomerPaymentCardSecurity("normal");
+        public static readonly CreateCustomerPaymentCardSecurity Threedsecure = new CreateCustomerPaymentCardSecurity("3dsecure");
 
-    public static class CreateCustomerPaymentCardSecurityExtension
-    {
-        public static string Value(this CreateCustomerPaymentCardSecurity value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCustomerPaymentCardSecurity ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentCardSecurity).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentCardSecurity> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentCardSecurity> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["normal"] = Normal,
+                ["3dsecure"] = Threedsecure
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentCardSecurity> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentCardSecurity>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentCardSecurity)
-                    {
-                        return (CreateCustomerPaymentCardSecurity)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentCardSecurity");
+        private CreateCustomerPaymentCardSecurity(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentCardSecurity Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentCardSecurity(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentCardSecurity(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentCardSecurity createcustomerpaymentcardsecurity) => createcustomerpaymentcardsecurity.Value;
+
+        public static CreateCustomerPaymentCardSecurity[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentCardSecurity);
+
+        public bool Equals(CreateCustomerPaymentCardSecurity? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

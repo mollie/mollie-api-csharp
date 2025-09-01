@@ -12,123 +12,141 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Represents the transaction type
     /// </summary>
-    public enum FeePrepaymentsMovedToAvailableSubTotalTransactionType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class FeePrepaymentsMovedToAvailableSubTotalTransactionType1 : IEquatable<FeePrepaymentsMovedToAvailableSubTotalTransactionType1>
     {
-        [JsonProperty("payment")]
-        Payment,
-        [JsonProperty("split-payment")]
-        SplitPayment,
-        [JsonProperty("failed-payment")]
-        FailedPayment,
-        [JsonProperty("failed-platform-split-payment")]
-        FailedPlatformSplitPayment,
-        [JsonProperty("failed-split-payment-compensation")]
-        FailedSplitPaymentCompensation,
-        [JsonProperty("capture")]
-        Capture,
-        [JsonProperty("split-transaction")]
-        SplitTransaction,
-        [JsonProperty("refund")]
-        Refund,
-        [JsonProperty("platform-payment-refund")]
-        PlatformPaymentRefund,
-        [JsonProperty("returned-platform-payment-refund")]
-        ReturnedPlatformPaymentRefund,
-        [JsonProperty("refund-compensation")]
-        RefundCompensation,
-        [JsonProperty("returned-refund-compensation")]
-        ReturnedRefundCompensation,
-        [JsonProperty("returned-refund")]
-        ReturnedRefund,
-        [JsonProperty("chargeback")]
-        Chargeback,
-        [JsonProperty("chargeback-reversal")]
-        ChargebackReversal,
-        [JsonProperty("chargeback-compensation")]
-        ChargebackCompensation,
-        [JsonProperty("reversed-chargeback-compensation")]
-        ReversedChargebackCompensation,
-        [JsonProperty("platform-payment-chargeback")]
-        PlatformPaymentChargeback,
-        [JsonProperty("reversed-platform-payment-chargeback")]
-        ReversedPlatformPaymentChargeback,
-        [JsonProperty("fee-prepayment")]
-        FeePrepayment,
-        [JsonProperty("outgoing-transfer")]
-        OutgoingTransfer,
-        [JsonProperty("incoming-transfer")]
-        IncomingTransfer,
-        [JsonProperty("canceled-transfer")]
-        CanceledTransfer,
-        [JsonProperty("returned-transfer")]
-        ReturnedTransfer,
-        [JsonProperty("balance-reserve")]
-        BalanceReserve,
-        [JsonProperty("balance-reserve-return")]
-        BalanceReserveReturn,
-        [JsonProperty("invoice-rounding-compensation")]
-        InvoiceRoundingCompensation,
-        [JsonProperty("rolling-reserve-hold")]
-        RollingReserveHold,
-        [JsonProperty("rolling-reserve-release")]
-        RollingReserveRelease,
-        [JsonProperty("balance-correction")]
-        BalanceCorrection,
-        [JsonProperty("repayment")]
-        Repayment,
-        [JsonProperty("loan")]
-        Loan,
-        [JsonProperty("balance-topup")]
-        BalanceTopup,
-        [JsonProperty("cash-collateral-issuance';")]
-        CashCollateralIssuance,
-        [JsonProperty("cash-collateral-release")]
-        CashCollateralRelease,
-        [JsonProperty("pending-rolling-reserve")]
-        PendingRollingReserve,
-        [JsonProperty("to-be-released-rolling-reserve")]
-        ToBeReleasedRollingReserve,
-        [JsonProperty("held-rolling-reserve")]
-        HeldRollingReserve,
-        [JsonProperty("released-rolling-reserve")]
-        ReleasedRollingReserve,
-    }
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Payment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("payment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 SplitPayment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("split-payment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 FailedPayment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("failed-payment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 FailedPlatformSplitPayment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("failed-platform-split-payment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 FailedSplitPaymentCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("failed-split-payment-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Capture = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("capture");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 SplitTransaction = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("split-transaction");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Refund = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("refund");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 PlatformPaymentRefund = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("platform-payment-refund");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReturnedPlatformPaymentRefund = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("returned-platform-payment-refund");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 RefundCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("refund-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReturnedRefundCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("returned-refund-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReturnedRefund = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("returned-refund");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Chargeback = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("chargeback");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ChargebackReversal = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("chargeback-reversal");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ChargebackCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("chargeback-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReversedChargebackCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("reversed-chargeback-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 PlatformPaymentChargeback = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("platform-payment-chargeback");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReversedPlatformPaymentChargeback = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("reversed-platform-payment-chargeback");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 FeePrepayment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("fee-prepayment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 OutgoingTransfer = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("outgoing-transfer");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 IncomingTransfer = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("incoming-transfer");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 CanceledTransfer = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("canceled-transfer");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReturnedTransfer = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("returned-transfer");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 BalanceReserve = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("balance-reserve");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 BalanceReserveReturn = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("balance-reserve-return");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 InvoiceRoundingCompensation = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("invoice-rounding-compensation");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 RollingReserveHold = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("rolling-reserve-hold");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 RollingReserveRelease = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("rolling-reserve-release");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 BalanceCorrection = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("balance-correction");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Repayment = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("repayment");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Loan = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("loan");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 BalanceTopup = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("balance-topup");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 CashCollateralIssuance = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("cash-collateral-issuance';");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 CashCollateralRelease = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("cash-collateral-release");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 PendingRollingReserve = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("pending-rolling-reserve");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ToBeReleasedRollingReserve = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("to-be-released-rolling-reserve");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 HeldRollingReserve = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("held-rolling-reserve");
+        public static readonly FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ReleasedRollingReserve = new FeePrepaymentsMovedToAvailableSubTotalTransactionType1("released-rolling-reserve");
 
-    public static class FeePrepaymentsMovedToAvailableSubTotalTransactionType1Extension
-    {
-        public static string Value(this FeePrepaymentsMovedToAvailableSubTotalTransactionType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static FeePrepaymentsMovedToAvailableSubTotalTransactionType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(FeePrepaymentsMovedToAvailableSubTotalTransactionType1).GetFields())
+        private static readonly Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalTransactionType1> _knownValues =
+            new Dictionary <string, FeePrepaymentsMovedToAvailableSubTotalTransactionType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment"] = Payment,
+                ["split-payment"] = SplitPayment,
+                ["failed-payment"] = FailedPayment,
+                ["failed-platform-split-payment"] = FailedPlatformSplitPayment,
+                ["failed-split-payment-compensation"] = FailedSplitPaymentCompensation,
+                ["capture"] = Capture,
+                ["split-transaction"] = SplitTransaction,
+                ["refund"] = Refund,
+                ["platform-payment-refund"] = PlatformPaymentRefund,
+                ["returned-platform-payment-refund"] = ReturnedPlatformPaymentRefund,
+                ["refund-compensation"] = RefundCompensation,
+                ["returned-refund-compensation"] = ReturnedRefundCompensation,
+                ["returned-refund"] = ReturnedRefund,
+                ["chargeback"] = Chargeback,
+                ["chargeback-reversal"] = ChargebackReversal,
+                ["chargeback-compensation"] = ChargebackCompensation,
+                ["reversed-chargeback-compensation"] = ReversedChargebackCompensation,
+                ["platform-payment-chargeback"] = PlatformPaymentChargeback,
+                ["reversed-platform-payment-chargeback"] = ReversedPlatformPaymentChargeback,
+                ["fee-prepayment"] = FeePrepayment,
+                ["outgoing-transfer"] = OutgoingTransfer,
+                ["incoming-transfer"] = IncomingTransfer,
+                ["canceled-transfer"] = CanceledTransfer,
+                ["returned-transfer"] = ReturnedTransfer,
+                ["balance-reserve"] = BalanceReserve,
+                ["balance-reserve-return"] = BalanceReserveReturn,
+                ["invoice-rounding-compensation"] = InvoiceRoundingCompensation,
+                ["rolling-reserve-hold"] = RollingReserveHold,
+                ["rolling-reserve-release"] = RollingReserveRelease,
+                ["balance-correction"] = BalanceCorrection,
+                ["repayment"] = Repayment,
+                ["loan"] = Loan,
+                ["balance-topup"] = BalanceTopup,
+                ["cash-collateral-issuance';"] = CashCollateralIssuance,
+                ["cash-collateral-release"] = CashCollateralRelease,
+                ["pending-rolling-reserve"] = PendingRollingReserve,
+                ["to-be-released-rolling-reserve"] = ToBeReleasedRollingReserve,
+                ["held-rolling-reserve"] = HeldRollingReserve,
+                ["released-rolling-reserve"] = ReleasedRollingReserve
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalTransactionType1> _values =
+            new ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubTotalTransactionType1>(_knownValues);
 
-                    if (enumVal is FeePrepaymentsMovedToAvailableSubTotalTransactionType1)
-                    {
-                        return (FeePrepaymentsMovedToAvailableSubTotalTransactionType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum FeePrepaymentsMovedToAvailableSubTotalTransactionType1");
+        private FeePrepaymentsMovedToAvailableSubTotalTransactionType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static FeePrepaymentsMovedToAvailableSubTotalTransactionType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new FeePrepaymentsMovedToAvailableSubTotalTransactionType1(value));
+        }
+
+        public static implicit operator FeePrepaymentsMovedToAvailableSubTotalTransactionType1(string value) => Of(value);
+        public static implicit operator string(FeePrepaymentsMovedToAvailableSubTotalTransactionType1 feeprepaymentsmovedtoavailablesubtotaltransactiontype1) => feeprepaymentsmovedtoavailablesubtotaltransactiontype1.Value;
+
+        public static FeePrepaymentsMovedToAvailableSubTotalTransactionType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsMovedToAvailableSubTotalTransactionType1);
+
+        public bool Equals(FeePrepaymentsMovedToAvailableSubTotalTransactionType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

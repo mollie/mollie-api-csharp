@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    public enum TopupsImmediatelyAvailableSubTotalCardIssuer1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class TopupsImmediatelyAvailableSubTotalCardIssuer1 : IEquatable<TopupsImmediatelyAvailableSubTotalCardIssuer1>
     {
-        [JsonProperty("amex")]
-        Amex,
-        [JsonProperty("maestro")]
-        Maestro,
-        [JsonProperty("carte-bancaire")]
-        CarteBancaire,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly TopupsImmediatelyAvailableSubTotalCardIssuer1 Amex = new TopupsImmediatelyAvailableSubTotalCardIssuer1("amex");
+        public static readonly TopupsImmediatelyAvailableSubTotalCardIssuer1 Maestro = new TopupsImmediatelyAvailableSubTotalCardIssuer1("maestro");
+        public static readonly TopupsImmediatelyAvailableSubTotalCardIssuer1 CarteBancaire = new TopupsImmediatelyAvailableSubTotalCardIssuer1("carte-bancaire");
+        public static readonly TopupsImmediatelyAvailableSubTotalCardIssuer1 Other = new TopupsImmediatelyAvailableSubTotalCardIssuer1("other");
 
-    public static class TopupsImmediatelyAvailableSubTotalCardIssuer1Extension
-    {
-        public static string Value(this TopupsImmediatelyAvailableSubTotalCardIssuer1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static TopupsImmediatelyAvailableSubTotalCardIssuer1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(TopupsImmediatelyAvailableSubTotalCardIssuer1).GetFields())
+        private static readonly Dictionary <string, TopupsImmediatelyAvailableSubTotalCardIssuer1> _knownValues =
+            new Dictionary <string, TopupsImmediatelyAvailableSubTotalCardIssuer1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["amex"] = Amex,
+                ["maestro"] = Maestro,
+                ["carte-bancaire"] = CarteBancaire,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, TopupsImmediatelyAvailableSubTotalCardIssuer1> _values =
+            new ConcurrentDictionary<string, TopupsImmediatelyAvailableSubTotalCardIssuer1>(_knownValues);
 
-                    if (enumVal is TopupsImmediatelyAvailableSubTotalCardIssuer1)
-                    {
-                        return (TopupsImmediatelyAvailableSubTotalCardIssuer1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum TopupsImmediatelyAvailableSubTotalCardIssuer1");
+        private TopupsImmediatelyAvailableSubTotalCardIssuer1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static TopupsImmediatelyAvailableSubTotalCardIssuer1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new TopupsImmediatelyAvailableSubTotalCardIssuer1(value));
+        }
+
+        public static implicit operator TopupsImmediatelyAvailableSubTotalCardIssuer1(string value) => Of(value);
+        public static implicit operator string(TopupsImmediatelyAvailableSubTotalCardIssuer1 topupsimmediatelyavailablesubtotalcardissuer1) => topupsimmediatelyavailablesubtotalcardissuer1.Value;
+
+        public static TopupsImmediatelyAvailableSubTotalCardIssuer1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as TopupsImmediatelyAvailableSubTotalCardIssuer1);
+
+        public bool Equals(TopupsImmediatelyAvailableSubTotalCardIssuer1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

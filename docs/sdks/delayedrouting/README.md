@@ -34,7 +34,7 @@ var res = await sdk.DelayedRouting.CreateAsync(
         },
         Description = "Payment for Order #12345",
         Destination = new PaymentCreateRouteDestinationRequest() {
-            Type = PaymentCreateRouteTypeRequest.Organization,
+            Type = PaymentCreateRouteTypeOrganization.Organization,
             OrganizationId = "org_1234567",
         },
         Testmode = false,

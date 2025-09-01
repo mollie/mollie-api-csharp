@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum AvailableBalanceImmediatelyAvailableSubTotalCardRegion1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 : IEquatable<AvailableBalanceImmediatelyAvailableSubTotalCardRegion1>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 IntraEea = new AvailableBalanceImmediatelyAvailableSubTotalCardRegion1("intra-eea");
+        public static readonly AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 IntraEu = new AvailableBalanceImmediatelyAvailableSubTotalCardRegion1("intra-eu");
+        public static readonly AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 Domestic = new AvailableBalanceImmediatelyAvailableSubTotalCardRegion1("domestic");
+        public static readonly AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 Other = new AvailableBalanceImmediatelyAvailableSubTotalCardRegion1("other");
 
-    public static class AvailableBalanceImmediatelyAvailableSubTotalCardRegion1Extension
-    {
-        public static string Value(this AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(AvailableBalanceImmediatelyAvailableSubTotalCardRegion1).GetFields())
+        private static readonly Dictionary <string, AvailableBalanceImmediatelyAvailableSubTotalCardRegion1> _knownValues =
+            new Dictionary <string, AvailableBalanceImmediatelyAvailableSubTotalCardRegion1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubTotalCardRegion1> _values =
+            new ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubTotalCardRegion1>(_knownValues);
 
-                    if (enumVal is AvailableBalanceImmediatelyAvailableSubTotalCardRegion1)
-                    {
-                        return (AvailableBalanceImmediatelyAvailableSubTotalCardRegion1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AvailableBalanceImmediatelyAvailableSubTotalCardRegion1");
+        private AvailableBalanceImmediatelyAvailableSubTotalCardRegion1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AvailableBalanceImmediatelyAvailableSubTotalCardRegion1(value));
+        }
+
+        public static implicit operator AvailableBalanceImmediatelyAvailableSubTotalCardRegion1(string value) => Of(value);
+        public static implicit operator string(AvailableBalanceImmediatelyAvailableSubTotalCardRegion1 availablebalanceimmediatelyavailablesubtotalcardregion1) => availablebalanceimmediatelyavailablesubtotalcardregion1.Value;
+
+        public static AvailableBalanceImmediatelyAvailableSubTotalCardRegion1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceImmediatelyAvailableSubTotalCardRegion1);
+
+        public bool Equals(AvailableBalanceImmediatelyAvailableSubTotalCardRegion1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

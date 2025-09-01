@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum AvailableBalanceImmediatelyAvailableSubtotalMethod2
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AvailableBalanceImmediatelyAvailableSubtotalMethod2 : IEquatable<AvailableBalanceImmediatelyAvailableSubtotalMethod2>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Alma = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("alma");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Bacs = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("bacs");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Applepay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("applepay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Bancomatpay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("bancomatpay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Bancontact = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("bancontact");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Banktransfer = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("banktransfer");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Belfius = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("belfius");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Billie = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("billie");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Bizum = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("bizum");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Bitcoin = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("bitcoin");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Blik = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("blik");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Creditcard = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("creditcard");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Directdebit = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("directdebit");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Eps = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("eps");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Giftcard = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("giftcard");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Giropay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("giropay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Googlepay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("googlepay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Ideal = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("ideal");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 In3 = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("in3");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Inghomepay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("inghomepay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Kbc = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("kbc");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Klarnapaylater = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("klarnapaylater");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Klarnapaynow = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("klarnapaynow");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Klarnasliceit = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("klarnasliceit");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Klarna = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("klarna");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Mbway = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("mbway");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Multibanco = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("multibanco");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Mybank = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("mybank");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Paybybank = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("paybybank");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Payconiq = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("payconiq");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Paypal = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("paypal");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Paysafecard = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("paysafecard");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Przelewy24 = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("przelewy24");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Riverty = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("riverty");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Satispay = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("satispay");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Podiumcadeaukaart = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("podiumcadeaukaart");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Pointofsale = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("pointofsale");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Sofort = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("sofort");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Swish = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("swish");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Trustly = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("trustly");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Twint = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("twint");
+        public static readonly AvailableBalanceImmediatelyAvailableSubtotalMethod2 Voucher = new AvailableBalanceImmediatelyAvailableSubtotalMethod2("voucher");
 
-    public static class AvailableBalanceImmediatelyAvailableSubtotalMethod2Extension
-    {
-        public static string Value(this AvailableBalanceImmediatelyAvailableSubtotalMethod2 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static AvailableBalanceImmediatelyAvailableSubtotalMethod2 ToEnum(this string value)
-        {
-            foreach(var field in typeof(AvailableBalanceImmediatelyAvailableSubtotalMethod2).GetFields())
+        private static readonly Dictionary <string, AvailableBalanceImmediatelyAvailableSubtotalMethod2> _knownValues =
+            new Dictionary <string, AvailableBalanceImmediatelyAvailableSubtotalMethod2> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubtotalMethod2> _values =
+            new ConcurrentDictionary<string, AvailableBalanceImmediatelyAvailableSubtotalMethod2>(_knownValues);
 
-                    if (enumVal is AvailableBalanceImmediatelyAvailableSubtotalMethod2)
-                    {
-                        return (AvailableBalanceImmediatelyAvailableSubtotalMethod2)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AvailableBalanceImmediatelyAvailableSubtotalMethod2");
+        private AvailableBalanceImmediatelyAvailableSubtotalMethod2(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AvailableBalanceImmediatelyAvailableSubtotalMethod2 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AvailableBalanceImmediatelyAvailableSubtotalMethod2(value));
+        }
+
+        public static implicit operator AvailableBalanceImmediatelyAvailableSubtotalMethod2(string value) => Of(value);
+        public static implicit operator string(AvailableBalanceImmediatelyAvailableSubtotalMethod2 availablebalanceimmediatelyavailablesubtotalmethod2) => availablebalanceimmediatelyavailablesubtotalmethod2.Value;
+
+        public static AvailableBalanceImmediatelyAvailableSubtotalMethod2[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceImmediatelyAvailableSubtotalMethod2);
+
+        public bool Equals(AvailableBalanceImmediatelyAvailableSubtotalMethod2? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

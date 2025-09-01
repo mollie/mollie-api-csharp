@@ -12,49 +12,67 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    public enum CreateCaptureMode
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCaptureMode : IEquatable<CreateCaptureMode>
     {
-        [JsonProperty("live")]
-        Live,
-        [JsonProperty("test")]
-        Test,
-    }
+        public static readonly CreateCaptureMode Live = new CreateCaptureMode("live");
+        public static readonly CreateCaptureMode Test = new CreateCaptureMode("test");
 
-    public static class CreateCaptureModeExtension
-    {
-        public static string Value(this CreateCaptureMode value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCaptureMode ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCaptureMode).GetFields())
+        private static readonly Dictionary <string, CreateCaptureMode> _knownValues =
+            new Dictionary <string, CreateCaptureMode> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["live"] = Live,
+                ["test"] = Test
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCaptureMode> _values =
+            new ConcurrentDictionary<string, CreateCaptureMode>(_knownValues);
 
-                    if (enumVal is CreateCaptureMode)
-                    {
-                        return (CreateCaptureMode)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCaptureMode");
+        private CreateCaptureMode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCaptureMode Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCaptureMode(value));
+        }
+
+        public static implicit operator CreateCaptureMode(string value) => Of(value);
+        public static implicit operator string(CreateCaptureMode createcapturemode) => createcapturemode.Value;
+
+        public static CreateCaptureMode[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCaptureMode);
+
+        public bool Equals(CreateCaptureMode? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

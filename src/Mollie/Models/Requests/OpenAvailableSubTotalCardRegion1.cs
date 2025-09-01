@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum OpenAvailableSubTotalCardRegion1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class OpenAvailableSubTotalCardRegion1 : IEquatable<OpenAvailableSubTotalCardRegion1>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly OpenAvailableSubTotalCardRegion1 IntraEea = new OpenAvailableSubTotalCardRegion1("intra-eea");
+        public static readonly OpenAvailableSubTotalCardRegion1 IntraEu = new OpenAvailableSubTotalCardRegion1("intra-eu");
+        public static readonly OpenAvailableSubTotalCardRegion1 Domestic = new OpenAvailableSubTotalCardRegion1("domestic");
+        public static readonly OpenAvailableSubTotalCardRegion1 Other = new OpenAvailableSubTotalCardRegion1("other");
 
-    public static class OpenAvailableSubTotalCardRegion1Extension
-    {
-        public static string Value(this OpenAvailableSubTotalCardRegion1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static OpenAvailableSubTotalCardRegion1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(OpenAvailableSubTotalCardRegion1).GetFields())
+        private static readonly Dictionary <string, OpenAvailableSubTotalCardRegion1> _knownValues =
+            new Dictionary <string, OpenAvailableSubTotalCardRegion1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, OpenAvailableSubTotalCardRegion1> _values =
+            new ConcurrentDictionary<string, OpenAvailableSubTotalCardRegion1>(_knownValues);
 
-                    if (enumVal is OpenAvailableSubTotalCardRegion1)
-                    {
-                        return (OpenAvailableSubTotalCardRegion1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum OpenAvailableSubTotalCardRegion1");
+        private OpenAvailableSubTotalCardRegion1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static OpenAvailableSubTotalCardRegion1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new OpenAvailableSubTotalCardRegion1(value));
+        }
+
+        public static implicit operator OpenAvailableSubTotalCardRegion1(string value) => Of(value);
+        public static implicit operator string(OpenAvailableSubTotalCardRegion1 openavailablesubtotalcardregion1) => openavailablesubtotalcardregion1.Value;
+
+        public static OpenAvailableSubTotalCardRegion1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as OpenAvailableSubTotalCardRegion1);
+
+        public bool Equals(OpenAvailableSubTotalCardRegion1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    public enum AvailableBalanceOpenSubTotalCardIssuer1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AvailableBalanceOpenSubTotalCardIssuer1 : IEquatable<AvailableBalanceOpenSubTotalCardIssuer1>
     {
-        [JsonProperty("amex")]
-        Amex,
-        [JsonProperty("maestro")]
-        Maestro,
-        [JsonProperty("carte-bancaire")]
-        CarteBancaire,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly AvailableBalanceOpenSubTotalCardIssuer1 Amex = new AvailableBalanceOpenSubTotalCardIssuer1("amex");
+        public static readonly AvailableBalanceOpenSubTotalCardIssuer1 Maestro = new AvailableBalanceOpenSubTotalCardIssuer1("maestro");
+        public static readonly AvailableBalanceOpenSubTotalCardIssuer1 CarteBancaire = new AvailableBalanceOpenSubTotalCardIssuer1("carte-bancaire");
+        public static readonly AvailableBalanceOpenSubTotalCardIssuer1 Other = new AvailableBalanceOpenSubTotalCardIssuer1("other");
 
-    public static class AvailableBalanceOpenSubTotalCardIssuer1Extension
-    {
-        public static string Value(this AvailableBalanceOpenSubTotalCardIssuer1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static AvailableBalanceOpenSubTotalCardIssuer1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(AvailableBalanceOpenSubTotalCardIssuer1).GetFields())
+        private static readonly Dictionary <string, AvailableBalanceOpenSubTotalCardIssuer1> _knownValues =
+            new Dictionary <string, AvailableBalanceOpenSubTotalCardIssuer1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["amex"] = Amex,
+                ["maestro"] = Maestro,
+                ["carte-bancaire"] = CarteBancaire,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AvailableBalanceOpenSubTotalCardIssuer1> _values =
+            new ConcurrentDictionary<string, AvailableBalanceOpenSubTotalCardIssuer1>(_knownValues);
 
-                    if (enumVal is AvailableBalanceOpenSubTotalCardIssuer1)
-                    {
-                        return (AvailableBalanceOpenSubTotalCardIssuer1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AvailableBalanceOpenSubTotalCardIssuer1");
+        private AvailableBalanceOpenSubTotalCardIssuer1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AvailableBalanceOpenSubTotalCardIssuer1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AvailableBalanceOpenSubTotalCardIssuer1(value));
+        }
+
+        public static implicit operator AvailableBalanceOpenSubTotalCardIssuer1(string value) => Of(value);
+        public static implicit operator string(AvailableBalanceOpenSubTotalCardIssuer1 availablebalanceopensubtotalcardissuer1) => availablebalanceopensubtotalcardissuer1.Value;
+
+        public static AvailableBalanceOpenSubTotalCardIssuer1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceOpenSubTotalCardIssuer1);
+
+        public bool Equals(AvailableBalanceOpenSubTotalCardIssuer1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

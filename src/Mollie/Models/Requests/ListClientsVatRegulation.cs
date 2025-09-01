@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
     /// 
@@ -22,47 +25,62 @@ namespace Mollie.Models.Requests
     /// The field is not present for merchants residing in other countries.
     /// </remarks>
     /// </summary>
-    public enum ListClientsVatRegulation
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListClientsVatRegulation : IEquatable<ListClientsVatRegulation>
     {
-        [JsonProperty("dutch")]
-        Dutch,
-        [JsonProperty("british")]
-        British,
-        [JsonProperty("shifted")]
-        Shifted,
-    }
+        public static readonly ListClientsVatRegulation Dutch = new ListClientsVatRegulation("dutch");
+        public static readonly ListClientsVatRegulation British = new ListClientsVatRegulation("british");
+        public static readonly ListClientsVatRegulation Shifted = new ListClientsVatRegulation("shifted");
 
-    public static class ListClientsVatRegulationExtension
-    {
-        public static string Value(this ListClientsVatRegulation value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListClientsVatRegulation ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListClientsVatRegulation).GetFields())
+        private static readonly Dictionary <string, ListClientsVatRegulation> _knownValues =
+            new Dictionary <string, ListClientsVatRegulation> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["dutch"] = Dutch,
+                ["british"] = British,
+                ["shifted"] = Shifted
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListClientsVatRegulation> _values =
+            new ConcurrentDictionary<string, ListClientsVatRegulation>(_knownValues);
 
-                    if (enumVal is ListClientsVatRegulation)
-                    {
-                        return (ListClientsVatRegulation)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListClientsVatRegulation");
+        private ListClientsVatRegulation(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListClientsVatRegulation Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListClientsVatRegulation(value));
+        }
+
+        public static implicit operator ListClientsVatRegulation(string value) => Of(value);
+        public static implicit operator string(ListClientsVatRegulation listclientsvatregulation) => listclientsvatregulation.Value;
+
+        public static ListClientsVatRegulation[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListClientsVatRegulation);
+
+        public bool Equals(ListClientsVatRegulation? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

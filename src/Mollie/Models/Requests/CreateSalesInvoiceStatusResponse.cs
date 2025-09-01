@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status for the invoice to end up in.<br/>
     /// 
@@ -31,47 +34,62 @@ namespace Mollie.Models.Requests
     ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
     /// </remarks>
     /// </summary>
-    public enum CreateSalesInvoiceStatusResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateSalesInvoiceStatusResponse : IEquatable<CreateSalesInvoiceStatusResponse>
     {
-        [JsonProperty("draft")]
-        Draft,
-        [JsonProperty("issued")]
-        Issued,
-        [JsonProperty("paid")]
-        Paid,
-    }
+        public static readonly CreateSalesInvoiceStatusResponse Draft = new CreateSalesInvoiceStatusResponse("draft");
+        public static readonly CreateSalesInvoiceStatusResponse Issued = new CreateSalesInvoiceStatusResponse("issued");
+        public static readonly CreateSalesInvoiceStatusResponse Paid = new CreateSalesInvoiceStatusResponse("paid");
 
-    public static class CreateSalesInvoiceStatusResponseExtension
-    {
-        public static string Value(this CreateSalesInvoiceStatusResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateSalesInvoiceStatusResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateSalesInvoiceStatusResponse).GetFields())
+        private static readonly Dictionary <string, CreateSalesInvoiceStatusResponse> _knownValues =
+            new Dictionary <string, CreateSalesInvoiceStatusResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["draft"] = Draft,
+                ["issued"] = Issued,
+                ["paid"] = Paid
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceStatusResponse> _values =
+            new ConcurrentDictionary<string, CreateSalesInvoiceStatusResponse>(_knownValues);
 
-                    if (enumVal is CreateSalesInvoiceStatusResponse)
-                    {
-                        return (CreateSalesInvoiceStatusResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceStatusResponse");
+        private CreateSalesInvoiceStatusResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateSalesInvoiceStatusResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceStatusResponse(value));
+        }
+
+        public static implicit operator CreateSalesInvoiceStatusResponse(string value) => Of(value);
+        public static implicit operator string(CreateSalesInvoiceStatusResponse createsalesinvoicestatusresponse) => createsalesinvoicestatusresponse.Value;
+
+        public static CreateSalesInvoiceStatusResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceStatusResponse);
+
+        public bool Equals(CreateSalesInvoiceStatusResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

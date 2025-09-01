@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The profile status determines whether the profile is able to receive live payments.<br/>
     /// 
@@ -23,47 +26,62 @@ namespace Mollie.Models.Requests
     /// * `blocked`: The profile is blocked and can no longer be used or changed.
     /// </remarks>
     /// </summary>
-    public enum GetCurrentProfileStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetCurrentProfileStatus : IEquatable<GetCurrentProfileStatus>
     {
-        [JsonProperty("unverified")]
-        Unverified,
-        [JsonProperty("verified")]
-        Verified,
-        [JsonProperty("blocked")]
-        Blocked,
-    }
+        public static readonly GetCurrentProfileStatus Unverified = new GetCurrentProfileStatus("unverified");
+        public static readonly GetCurrentProfileStatus Verified = new GetCurrentProfileStatus("verified");
+        public static readonly GetCurrentProfileStatus Blocked = new GetCurrentProfileStatus("blocked");
 
-    public static class GetCurrentProfileStatusExtension
-    {
-        public static string Value(this GetCurrentProfileStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetCurrentProfileStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetCurrentProfileStatus).GetFields())
+        private static readonly Dictionary <string, GetCurrentProfileStatus> _knownValues =
+            new Dictionary <string, GetCurrentProfileStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["unverified"] = Unverified,
+                ["verified"] = Verified,
+                ["blocked"] = Blocked
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetCurrentProfileStatus> _values =
+            new ConcurrentDictionary<string, GetCurrentProfileStatus>(_knownValues);
 
-                    if (enumVal is GetCurrentProfileStatus)
-                    {
-                        return (GetCurrentProfileStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetCurrentProfileStatus");
+        private GetCurrentProfileStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetCurrentProfileStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetCurrentProfileStatus(value));
+        }
+
+        public static implicit operator GetCurrentProfileStatus(string value) => Of(value);
+        public static implicit operator string(GetCurrentProfileStatus getcurrentprofilestatus) => getcurrentprofilestatus.Value;
+
+        public static GetCurrentProfileStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetCurrentProfileStatus);
+
+        public bool Equals(GetCurrentProfileStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

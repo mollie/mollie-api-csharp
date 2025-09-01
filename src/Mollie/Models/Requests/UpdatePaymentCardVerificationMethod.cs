@@ -12,63 +12,81 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The method used to verify the cardholder&apos;s identity.
     /// </summary>
-    public enum UpdatePaymentCardVerificationMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class UpdatePaymentCardVerificationMethod : IEquatable<UpdatePaymentCardVerificationMethod>
     {
-        [JsonProperty("no-cvm-required")]
-        NoCvmRequired,
-        [JsonProperty("online-pin")]
-        OnlinePin,
-        [JsonProperty("offline-pin")]
-        OfflinePin,
-        [JsonProperty("consumer-device")]
-        ConsumerDevice,
-        [JsonProperty("signature")]
-        Signature,
-        [JsonProperty("signature-and-online-pin")]
-        SignatureAndOnlinePin,
-        [JsonProperty("online-pin-and-signature")]
-        OnlinePinAndSignature,
-        [JsonProperty("none")]
-        None,
-        [JsonProperty("failed")]
-        Failed,
-    }
+        public static readonly UpdatePaymentCardVerificationMethod NoCvmRequired = new UpdatePaymentCardVerificationMethod("no-cvm-required");
+        public static readonly UpdatePaymentCardVerificationMethod OnlinePin = new UpdatePaymentCardVerificationMethod("online-pin");
+        public static readonly UpdatePaymentCardVerificationMethod OfflinePin = new UpdatePaymentCardVerificationMethod("offline-pin");
+        public static readonly UpdatePaymentCardVerificationMethod ConsumerDevice = new UpdatePaymentCardVerificationMethod("consumer-device");
+        public static readonly UpdatePaymentCardVerificationMethod Signature = new UpdatePaymentCardVerificationMethod("signature");
+        public static readonly UpdatePaymentCardVerificationMethod SignatureAndOnlinePin = new UpdatePaymentCardVerificationMethod("signature-and-online-pin");
+        public static readonly UpdatePaymentCardVerificationMethod OnlinePinAndSignature = new UpdatePaymentCardVerificationMethod("online-pin-and-signature");
+        public static readonly UpdatePaymentCardVerificationMethod None = new UpdatePaymentCardVerificationMethod("none");
+        public static readonly UpdatePaymentCardVerificationMethod Failed = new UpdatePaymentCardVerificationMethod("failed");
 
-    public static class UpdatePaymentCardVerificationMethodExtension
-    {
-        public static string Value(this UpdatePaymentCardVerificationMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static UpdatePaymentCardVerificationMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(UpdatePaymentCardVerificationMethod).GetFields())
+        private static readonly Dictionary <string, UpdatePaymentCardVerificationMethod> _knownValues =
+            new Dictionary <string, UpdatePaymentCardVerificationMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["no-cvm-required"] = NoCvmRequired,
+                ["online-pin"] = OnlinePin,
+                ["offline-pin"] = OfflinePin,
+                ["consumer-device"] = ConsumerDevice,
+                ["signature"] = Signature,
+                ["signature-and-online-pin"] = SignatureAndOnlinePin,
+                ["online-pin-and-signature"] = OnlinePinAndSignature,
+                ["none"] = None,
+                ["failed"] = Failed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, UpdatePaymentCardVerificationMethod> _values =
+            new ConcurrentDictionary<string, UpdatePaymentCardVerificationMethod>(_knownValues);
 
-                    if (enumVal is UpdatePaymentCardVerificationMethod)
-                    {
-                        return (UpdatePaymentCardVerificationMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum UpdatePaymentCardVerificationMethod");
+        private UpdatePaymentCardVerificationMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static UpdatePaymentCardVerificationMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new UpdatePaymentCardVerificationMethod(value));
+        }
+
+        public static implicit operator UpdatePaymentCardVerificationMethod(string value) => Of(value);
+        public static implicit operator string(UpdatePaymentCardVerificationMethod updatepaymentcardverificationmethod) => updatepaymentcardverificationmethod.Value;
+
+        public static UpdatePaymentCardVerificationMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentCardVerificationMethod);
+
+        public bool Equals(UpdatePaymentCardVerificationMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,50 +12,68 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum GetWebhookEventCategory
-    {
-        [JsonProperty("meal")]
-        Meal,
-        [JsonProperty("eco")]
-        Eco,
-        [JsonProperty("gift")]
-        Gift,
-        [JsonProperty("sport_culture")]
-        SportCulture,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class GetWebhookEventCategoryExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetWebhookEventCategory : IEquatable<GetWebhookEventCategory>
     {
-        public static string Value(this GetWebhookEventCategory value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly GetWebhookEventCategory Meal = new GetWebhookEventCategory("meal");
+        public static readonly GetWebhookEventCategory Eco = new GetWebhookEventCategory("eco");
+        public static readonly GetWebhookEventCategory Gift = new GetWebhookEventCategory("gift");
+        public static readonly GetWebhookEventCategory SportCulture = new GetWebhookEventCategory("sport_culture");
 
-        public static GetWebhookEventCategory ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetWebhookEventCategory).GetFields())
+        private static readonly Dictionary <string, GetWebhookEventCategory> _knownValues =
+            new Dictionary <string, GetWebhookEventCategory> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["meal"] = Meal,
+                ["eco"] = Eco,
+                ["gift"] = Gift,
+                ["sport_culture"] = SportCulture
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetWebhookEventCategory> _values =
+            new ConcurrentDictionary<string, GetWebhookEventCategory>(_knownValues);
 
-                    if (enumVal is GetWebhookEventCategory)
-                    {
-                        return (GetWebhookEventCategory)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetWebhookEventCategory");
+        private GetWebhookEventCategory(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetWebhookEventCategory Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetWebhookEventCategory(value));
+        }
+
+        public static implicit operator GetWebhookEventCategory(string value) => Of(value);
+        public static implicit operator string(GetWebhookEventCategory getwebhookeventcategory) => getwebhookeventcategory.Value;
+
+        public static GetWebhookEventCategory[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetWebhookEventCategory);
+
+        public bool Equals(GetWebhookEventCategory? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

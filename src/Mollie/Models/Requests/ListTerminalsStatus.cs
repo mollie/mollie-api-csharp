@@ -12,51 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the terminal.
     /// </summary>
-    public enum ListTerminalsStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListTerminalsStatus : IEquatable<ListTerminalsStatus>
     {
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("active")]
-        Active,
-        [JsonProperty("inactive")]
-        Inactive,
-    }
+        public static readonly ListTerminalsStatus Pending = new ListTerminalsStatus("pending");
+        public static readonly ListTerminalsStatus Active = new ListTerminalsStatus("active");
+        public static readonly ListTerminalsStatus Inactive = new ListTerminalsStatus("inactive");
 
-    public static class ListTerminalsStatusExtension
-    {
-        public static string Value(this ListTerminalsStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListTerminalsStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListTerminalsStatus).GetFields())
+        private static readonly Dictionary <string, ListTerminalsStatus> _knownValues =
+            new Dictionary <string, ListTerminalsStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["pending"] = Pending,
+                ["active"] = Active,
+                ["inactive"] = Inactive
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListTerminalsStatus> _values =
+            new ConcurrentDictionary<string, ListTerminalsStatus>(_knownValues);
 
-                    if (enumVal is ListTerminalsStatus)
-                    {
-                        return (ListTerminalsStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListTerminalsStatus");
+        private ListTerminalsStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListTerminalsStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListTerminalsStatus(value));
+        }
+
+        public static implicit operator ListTerminalsStatus(string value) => Of(value);
+        public static implicit operator string(ListTerminalsStatus listterminalsstatus) => listterminalsstatus.Value;
+
+        public static ListTerminalsStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListTerminalsStatus);
+
+        public bool Equals(ListTerminalsStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

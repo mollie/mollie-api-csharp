@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
     /// 
@@ -21,57 +24,72 @@ namespace Mollie.Models.Requests
     /// The `tip` payment line type is not available when creating a payment.
     /// </remarks>
     /// </summary>
-    public enum ListSubscriptionPaymentsLineType
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListSubscriptionPaymentsLineType : IEquatable<ListSubscriptionPaymentsLineType>
     {
-        [JsonProperty("physical")]
-        Physical,
-        [JsonProperty("digital")]
-        Digital,
-        [JsonProperty("shipping_fee")]
-        ShippingFee,
-        [JsonProperty("discount")]
-        Discount,
-        [JsonProperty("store_credit")]
-        StoreCredit,
-        [JsonProperty("gift_card")]
-        GiftCard,
-        [JsonProperty("surcharge")]
-        Surcharge,
-        [JsonProperty("tip")]
-        Tip,
-    }
+        public static readonly ListSubscriptionPaymentsLineType Physical = new ListSubscriptionPaymentsLineType("physical");
+        public static readonly ListSubscriptionPaymentsLineType Digital = new ListSubscriptionPaymentsLineType("digital");
+        public static readonly ListSubscriptionPaymentsLineType ShippingFee = new ListSubscriptionPaymentsLineType("shipping_fee");
+        public static readonly ListSubscriptionPaymentsLineType Discount = new ListSubscriptionPaymentsLineType("discount");
+        public static readonly ListSubscriptionPaymentsLineType StoreCredit = new ListSubscriptionPaymentsLineType("store_credit");
+        public static readonly ListSubscriptionPaymentsLineType GiftCard = new ListSubscriptionPaymentsLineType("gift_card");
+        public static readonly ListSubscriptionPaymentsLineType Surcharge = new ListSubscriptionPaymentsLineType("surcharge");
+        public static readonly ListSubscriptionPaymentsLineType Tip = new ListSubscriptionPaymentsLineType("tip");
 
-    public static class ListSubscriptionPaymentsLineTypeExtension
-    {
-        public static string Value(this ListSubscriptionPaymentsLineType value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListSubscriptionPaymentsLineType ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListSubscriptionPaymentsLineType).GetFields())
+        private static readonly Dictionary <string, ListSubscriptionPaymentsLineType> _knownValues =
+            new Dictionary <string, ListSubscriptionPaymentsLineType> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["physical"] = Physical,
+                ["digital"] = Digital,
+                ["shipping_fee"] = ShippingFee,
+                ["discount"] = Discount,
+                ["store_credit"] = StoreCredit,
+                ["gift_card"] = GiftCard,
+                ["surcharge"] = Surcharge,
+                ["tip"] = Tip
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsLineType> _values =
+            new ConcurrentDictionary<string, ListSubscriptionPaymentsLineType>(_knownValues);
 
-                    if (enumVal is ListSubscriptionPaymentsLineType)
-                    {
-                        return (ListSubscriptionPaymentsLineType)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsLineType");
+        private ListSubscriptionPaymentsLineType(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListSubscriptionPaymentsLineType Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsLineType(value));
+        }
+
+        public static implicit operator ListSubscriptionPaymentsLineType(string value) => Of(value);
+        public static implicit operator string(ListSubscriptionPaymentsLineType listsubscriptionpaymentslinetype) => listsubscriptionpaymentslinetype.Value;
+
+        public static ListSubscriptionPaymentsLineType[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsLineType);
+
+        public bool Equals(ListSubscriptionPaymentsLineType? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

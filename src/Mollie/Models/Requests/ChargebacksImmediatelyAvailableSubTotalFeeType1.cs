@@ -12,99 +12,117 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    public enum ChargebacksImmediatelyAvailableSubTotalFeeType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ChargebacksImmediatelyAvailableSubTotalFeeType1 : IEquatable<ChargebacksImmediatelyAvailableSubTotalFeeType1>
     {
-        [JsonProperty("payment-fee")]
-        PaymentFee,
-        [JsonProperty("direct-debit-failure-fee")]
-        DirectDebitFailureFee,
-        [JsonProperty("unauthorized-direct-debit-fee")]
-        UnauthorizedDirectDebitFee,
-        [JsonProperty("bank-charged-direct-debit-failure-fee")]
-        BankChargedDirectDebitFailureFee,
-        [JsonProperty("partner-commission")]
-        PartnerCommission,
-        [JsonProperty("application-fee")]
-        ApplicationFee,
-        [JsonProperty("capture-fee")]
-        CaptureFee,
-        [JsonProperty("refund-fee")]
-        RefundFee,
-        [JsonProperty("chargeback-fee")]
-        ChargebackFee,
-        [JsonProperty("payment-notification-fee")]
-        PaymentNotificationFee,
-        [JsonProperty("transfer-notification-fee")]
-        TransferNotificationFee,
-        [JsonProperty("payout-fee")]
-        PayoutFee,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("platform-volume-fee")]
-        PlatformVolumeFee,
-        [JsonProperty("platform-connected-organizations-fee")]
-        PlatformConnectedOrganizationsFee,
-        [JsonProperty("balance-charge-fee")]
-        BalanceChargeFee,
-        [JsonProperty("3ds-authentication-attempt-fee")]
-        ThreedsAuthenticationAttemptFee,
-        [JsonProperty("terminal-monthly-fee")]
-        TerminalMonthlyFee,
-        [JsonProperty("acceptance-risk-fee")]
-        AcceptanceRiskFee,
-        [JsonProperty("top-up-fee")]
-        TopUpFee,
-        [JsonProperty("payment-gateway-fee")]
-        PaymentGatewayFee,
-        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
-        MastercardSpecialtyMerchantProgramProcessingFee,
-        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
-        MastercardSpecialtyMerchantProgramRegistrationFee,
-        [JsonProperty("visa-integrity-risk-program-processing-fee")]
-        VisaIntegrityRiskProgramProcessingFee,
-        [JsonProperty("visa-integrity-risk-program-registration-fee")]
-        VisaIntegrityRiskProgramRegistrationFee,
-        [JsonProperty("minimum-invoice-amount-fee")]
-        MinimumInvoiceAmountFee,
-    }
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PaymentFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("payment-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 DirectDebitFailureFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("direct-debit-failure-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 UnauthorizedDirectDebitFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("unauthorized-direct-debit-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 BankChargedDirectDebitFailureFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("bank-charged-direct-debit-failure-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PartnerCommission = new ChargebacksImmediatelyAvailableSubTotalFeeType1("partner-commission");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 ApplicationFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("application-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 CaptureFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("capture-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 RefundFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("refund-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 ChargebackFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("chargeback-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PaymentNotificationFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("payment-notification-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 TransferNotificationFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("transfer-notification-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PayoutFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("payout-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 FeeDiscount = new ChargebacksImmediatelyAvailableSubTotalFeeType1("fee-discount");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 FeeReimbursement = new ChargebacksImmediatelyAvailableSubTotalFeeType1("fee-reimbursement");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PlatformVolumeFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("platform-volume-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PlatformConnectedOrganizationsFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("platform-connected-organizations-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 BalanceChargeFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("balance-charge-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 ThreedsAuthenticationAttemptFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("3ds-authentication-attempt-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 TerminalMonthlyFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("terminal-monthly-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 AcceptanceRiskFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("acceptance-risk-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 TopUpFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("top-up-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 PaymentGatewayFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("payment-gateway-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 MastercardSpecialtyMerchantProgramProcessingFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("mastercard-specialty-merchant-program-processing-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 MastercardSpecialtyMerchantProgramRegistrationFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("mastercard-specialty-merchant-program-registration-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 VisaIntegrityRiskProgramProcessingFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("visa-integrity-risk-program-processing-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 VisaIntegrityRiskProgramRegistrationFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("visa-integrity-risk-program-registration-fee");
+        public static readonly ChargebacksImmediatelyAvailableSubTotalFeeType1 MinimumInvoiceAmountFee = new ChargebacksImmediatelyAvailableSubTotalFeeType1("minimum-invoice-amount-fee");
 
-    public static class ChargebacksImmediatelyAvailableSubTotalFeeType1Extension
-    {
-        public static string Value(this ChargebacksImmediatelyAvailableSubTotalFeeType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ChargebacksImmediatelyAvailableSubTotalFeeType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ChargebacksImmediatelyAvailableSubTotalFeeType1).GetFields())
+        private static readonly Dictionary <string, ChargebacksImmediatelyAvailableSubTotalFeeType1> _knownValues =
+            new Dictionary <string, ChargebacksImmediatelyAvailableSubTotalFeeType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment-fee"] = PaymentFee,
+                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
+                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
+                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
+                ["partner-commission"] = PartnerCommission,
+                ["application-fee"] = ApplicationFee,
+                ["capture-fee"] = CaptureFee,
+                ["refund-fee"] = RefundFee,
+                ["chargeback-fee"] = ChargebackFee,
+                ["payment-notification-fee"] = PaymentNotificationFee,
+                ["transfer-notification-fee"] = TransferNotificationFee,
+                ["payout-fee"] = PayoutFee,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["platform-volume-fee"] = PlatformVolumeFee,
+                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
+                ["balance-charge-fee"] = BalanceChargeFee,
+                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
+                ["terminal-monthly-fee"] = TerminalMonthlyFee,
+                ["acceptance-risk-fee"] = AcceptanceRiskFee,
+                ["top-up-fee"] = TopUpFee,
+                ["payment-gateway-fee"] = PaymentGatewayFee,
+                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
+                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
+                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
+                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
+                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ChargebacksImmediatelyAvailableSubTotalFeeType1> _values =
+            new ConcurrentDictionary<string, ChargebacksImmediatelyAvailableSubTotalFeeType1>(_knownValues);
 
-                    if (enumVal is ChargebacksImmediatelyAvailableSubTotalFeeType1)
-                    {
-                        return (ChargebacksImmediatelyAvailableSubTotalFeeType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ChargebacksImmediatelyAvailableSubTotalFeeType1");
+        private ChargebacksImmediatelyAvailableSubTotalFeeType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ChargebacksImmediatelyAvailableSubTotalFeeType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ChargebacksImmediatelyAvailableSubTotalFeeType1(value));
+        }
+
+        public static implicit operator ChargebacksImmediatelyAvailableSubTotalFeeType1(string value) => Of(value);
+        public static implicit operator string(ChargebacksImmediatelyAvailableSubTotalFeeType1 chargebacksimmediatelyavailablesubtotalfeetype1) => chargebacksimmediatelyavailablesubtotalfeetype1.Value;
+
+        public static ChargebacksImmediatelyAvailableSubTotalFeeType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ChargebacksImmediatelyAvailableSubTotalFeeType1);
+
+        public bool Equals(ChargebacksImmediatelyAvailableSubTotalFeeType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

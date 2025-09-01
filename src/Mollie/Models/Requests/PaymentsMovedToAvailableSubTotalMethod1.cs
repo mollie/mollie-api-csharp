@@ -12,129 +12,147 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    public enum PaymentsMovedToAvailableSubTotalMethod1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PaymentsMovedToAvailableSubTotalMethod1 : IEquatable<PaymentsMovedToAvailableSubTotalMethod1>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("bitcoin")]
-        Bitcoin,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("giropay")]
-        Giropay,
-        [JsonProperty("googlepay")]
-        Googlepay,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("inghomepay")]
-        Inghomepay,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("podiumcadeaukaart")]
-        Podiumcadeaukaart,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("sofort")]
-        Sofort,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Alma = new PaymentsMovedToAvailableSubTotalMethod1("alma");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Bacs = new PaymentsMovedToAvailableSubTotalMethod1("bacs");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Applepay = new PaymentsMovedToAvailableSubTotalMethod1("applepay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Bancomatpay = new PaymentsMovedToAvailableSubTotalMethod1("bancomatpay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Bancontact = new PaymentsMovedToAvailableSubTotalMethod1("bancontact");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Banktransfer = new PaymentsMovedToAvailableSubTotalMethod1("banktransfer");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Belfius = new PaymentsMovedToAvailableSubTotalMethod1("belfius");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Billie = new PaymentsMovedToAvailableSubTotalMethod1("billie");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Bizum = new PaymentsMovedToAvailableSubTotalMethod1("bizum");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Bitcoin = new PaymentsMovedToAvailableSubTotalMethod1("bitcoin");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Blik = new PaymentsMovedToAvailableSubTotalMethod1("blik");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Creditcard = new PaymentsMovedToAvailableSubTotalMethod1("creditcard");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Directdebit = new PaymentsMovedToAvailableSubTotalMethod1("directdebit");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Eps = new PaymentsMovedToAvailableSubTotalMethod1("eps");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Giftcard = new PaymentsMovedToAvailableSubTotalMethod1("giftcard");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Giropay = new PaymentsMovedToAvailableSubTotalMethod1("giropay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Googlepay = new PaymentsMovedToAvailableSubTotalMethod1("googlepay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Ideal = new PaymentsMovedToAvailableSubTotalMethod1("ideal");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 In3 = new PaymentsMovedToAvailableSubTotalMethod1("in3");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Inghomepay = new PaymentsMovedToAvailableSubTotalMethod1("inghomepay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Kbc = new PaymentsMovedToAvailableSubTotalMethod1("kbc");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Klarnapaylater = new PaymentsMovedToAvailableSubTotalMethod1("klarnapaylater");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Klarnapaynow = new PaymentsMovedToAvailableSubTotalMethod1("klarnapaynow");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Klarnasliceit = new PaymentsMovedToAvailableSubTotalMethod1("klarnasliceit");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Klarna = new PaymentsMovedToAvailableSubTotalMethod1("klarna");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Mbway = new PaymentsMovedToAvailableSubTotalMethod1("mbway");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Multibanco = new PaymentsMovedToAvailableSubTotalMethod1("multibanco");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Mybank = new PaymentsMovedToAvailableSubTotalMethod1("mybank");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Paybybank = new PaymentsMovedToAvailableSubTotalMethod1("paybybank");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Payconiq = new PaymentsMovedToAvailableSubTotalMethod1("payconiq");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Paypal = new PaymentsMovedToAvailableSubTotalMethod1("paypal");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Paysafecard = new PaymentsMovedToAvailableSubTotalMethod1("paysafecard");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Przelewy24 = new PaymentsMovedToAvailableSubTotalMethod1("przelewy24");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Riverty = new PaymentsMovedToAvailableSubTotalMethod1("riverty");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Satispay = new PaymentsMovedToAvailableSubTotalMethod1("satispay");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Podiumcadeaukaart = new PaymentsMovedToAvailableSubTotalMethod1("podiumcadeaukaart");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Pointofsale = new PaymentsMovedToAvailableSubTotalMethod1("pointofsale");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Sofort = new PaymentsMovedToAvailableSubTotalMethod1("sofort");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Swish = new PaymentsMovedToAvailableSubTotalMethod1("swish");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Trustly = new PaymentsMovedToAvailableSubTotalMethod1("trustly");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Twint = new PaymentsMovedToAvailableSubTotalMethod1("twint");
+        public static readonly PaymentsMovedToAvailableSubTotalMethod1 Voucher = new PaymentsMovedToAvailableSubTotalMethod1("voucher");
 
-    public static class PaymentsMovedToAvailableSubTotalMethod1Extension
-    {
-        public static string Value(this PaymentsMovedToAvailableSubTotalMethod1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PaymentsMovedToAvailableSubTotalMethod1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(PaymentsMovedToAvailableSubTotalMethod1).GetFields())
+        private static readonly Dictionary <string, PaymentsMovedToAvailableSubTotalMethod1> _knownValues =
+            new Dictionary <string, PaymentsMovedToAvailableSubTotalMethod1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["bacs"] = Bacs,
+                ["applepay"] = Applepay,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["bitcoin"] = Bitcoin,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["giropay"] = Giropay,
+                ["googlepay"] = Googlepay,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["inghomepay"] = Inghomepay,
+                ["kbc"] = Kbc,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["klarna"] = Klarna,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["podiumcadeaukaart"] = Podiumcadeaukaart,
+                ["pointofsale"] = Pointofsale,
+                ["sofort"] = Sofort,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PaymentsMovedToAvailableSubTotalMethod1> _values =
+            new ConcurrentDictionary<string, PaymentsMovedToAvailableSubTotalMethod1>(_knownValues);
 
-                    if (enumVal is PaymentsMovedToAvailableSubTotalMethod1)
-                    {
-                        return (PaymentsMovedToAvailableSubTotalMethod1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PaymentsMovedToAvailableSubTotalMethod1");
+        private PaymentsMovedToAvailableSubTotalMethod1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PaymentsMovedToAvailableSubTotalMethod1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PaymentsMovedToAvailableSubTotalMethod1(value));
+        }
+
+        public static implicit operator PaymentsMovedToAvailableSubTotalMethod1(string value) => Of(value);
+        public static implicit operator string(PaymentsMovedToAvailableSubTotalMethod1 paymentsmovedtoavailablesubtotalmethod1) => paymentsmovedtoavailablesubtotalmethod1.Value;
+
+        public static PaymentsMovedToAvailableSubTotalMethod1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PaymentsMovedToAvailableSubTotalMethod1);
+
+        public bool Equals(PaymentsMovedToAvailableSubTotalMethod1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

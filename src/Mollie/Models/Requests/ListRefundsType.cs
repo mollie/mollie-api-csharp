@@ -12,47 +12,65 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Specifies the reference type
     /// </summary>
-    public enum ListRefundsType
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListRefundsType : IEquatable<ListRefundsType>
     {
-        [JsonProperty("acquirer-reference")]
-        AcquirerReference,
-    }
+        public static readonly ListRefundsType AcquirerReference = new ListRefundsType("acquirer-reference");
 
-    public static class ListRefundsTypeExtension
-    {
-        public static string Value(this ListRefundsType value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListRefundsType ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListRefundsType).GetFields())
+        private static readonly Dictionary <string, ListRefundsType> _knownValues =
+            new Dictionary <string, ListRefundsType> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["acquirer-reference"] = AcquirerReference
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListRefundsType> _values =
+            new ConcurrentDictionary<string, ListRefundsType>(_knownValues);
 
-                    if (enumVal is ListRefundsType)
-                    {
-                        return (ListRefundsType)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListRefundsType");
+        private ListRefundsType(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListRefundsType Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListRefundsType(value));
+        }
+
+        public static implicit operator ListRefundsType(string value) => Of(value);
+        public static implicit operator string(ListRefundsType listrefundstype) => listrefundstype.Value;
+
+        public static ListRefundsType[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListRefundsType);
+
+        public bool Equals(ListRefundsType? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

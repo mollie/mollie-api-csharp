@@ -26,6 +26,6 @@ namespace Mollie.Models.Requests
         /// Where the funds will be pulled back from.
         /// </summary>
         [JsonProperty("source")]
-        public CreateRefundSourceRequest? Source { get; set; }
+        public SourceOrganization? Source { get; set; }
     }
 }

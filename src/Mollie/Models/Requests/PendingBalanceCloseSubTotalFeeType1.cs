@@ -12,99 +12,117 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    public enum PendingBalanceCloseSubTotalFeeType1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class PendingBalanceCloseSubTotalFeeType1 : IEquatable<PendingBalanceCloseSubTotalFeeType1>
     {
-        [JsonProperty("payment-fee")]
-        PaymentFee,
-        [JsonProperty("direct-debit-failure-fee")]
-        DirectDebitFailureFee,
-        [JsonProperty("unauthorized-direct-debit-fee")]
-        UnauthorizedDirectDebitFee,
-        [JsonProperty("bank-charged-direct-debit-failure-fee")]
-        BankChargedDirectDebitFailureFee,
-        [JsonProperty("partner-commission")]
-        PartnerCommission,
-        [JsonProperty("application-fee")]
-        ApplicationFee,
-        [JsonProperty("capture-fee")]
-        CaptureFee,
-        [JsonProperty("refund-fee")]
-        RefundFee,
-        [JsonProperty("chargeback-fee")]
-        ChargebackFee,
-        [JsonProperty("payment-notification-fee")]
-        PaymentNotificationFee,
-        [JsonProperty("transfer-notification-fee")]
-        TransferNotificationFee,
-        [JsonProperty("payout-fee")]
-        PayoutFee,
-        [JsonProperty("fee-discount")]
-        FeeDiscount,
-        [JsonProperty("fee-reimbursement")]
-        FeeReimbursement,
-        [JsonProperty("platform-volume-fee")]
-        PlatformVolumeFee,
-        [JsonProperty("platform-connected-organizations-fee")]
-        PlatformConnectedOrganizationsFee,
-        [JsonProperty("balance-charge-fee")]
-        BalanceChargeFee,
-        [JsonProperty("3ds-authentication-attempt-fee")]
-        ThreedsAuthenticationAttemptFee,
-        [JsonProperty("terminal-monthly-fee")]
-        TerminalMonthlyFee,
-        [JsonProperty("acceptance-risk-fee")]
-        AcceptanceRiskFee,
-        [JsonProperty("top-up-fee")]
-        TopUpFee,
-        [JsonProperty("payment-gateway-fee")]
-        PaymentGatewayFee,
-        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
-        MastercardSpecialtyMerchantProgramProcessingFee,
-        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
-        MastercardSpecialtyMerchantProgramRegistrationFee,
-        [JsonProperty("visa-integrity-risk-program-processing-fee")]
-        VisaIntegrityRiskProgramProcessingFee,
-        [JsonProperty("visa-integrity-risk-program-registration-fee")]
-        VisaIntegrityRiskProgramRegistrationFee,
-        [JsonProperty("minimum-invoice-amount-fee")]
-        MinimumInvoiceAmountFee,
-    }
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PaymentFee = new PendingBalanceCloseSubTotalFeeType1("payment-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 DirectDebitFailureFee = new PendingBalanceCloseSubTotalFeeType1("direct-debit-failure-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 UnauthorizedDirectDebitFee = new PendingBalanceCloseSubTotalFeeType1("unauthorized-direct-debit-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 BankChargedDirectDebitFailureFee = new PendingBalanceCloseSubTotalFeeType1("bank-charged-direct-debit-failure-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PartnerCommission = new PendingBalanceCloseSubTotalFeeType1("partner-commission");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 ApplicationFee = new PendingBalanceCloseSubTotalFeeType1("application-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 CaptureFee = new PendingBalanceCloseSubTotalFeeType1("capture-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 RefundFee = new PendingBalanceCloseSubTotalFeeType1("refund-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 ChargebackFee = new PendingBalanceCloseSubTotalFeeType1("chargeback-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PaymentNotificationFee = new PendingBalanceCloseSubTotalFeeType1("payment-notification-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 TransferNotificationFee = new PendingBalanceCloseSubTotalFeeType1("transfer-notification-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PayoutFee = new PendingBalanceCloseSubTotalFeeType1("payout-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 FeeDiscount = new PendingBalanceCloseSubTotalFeeType1("fee-discount");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 FeeReimbursement = new PendingBalanceCloseSubTotalFeeType1("fee-reimbursement");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PlatformVolumeFee = new PendingBalanceCloseSubTotalFeeType1("platform-volume-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PlatformConnectedOrganizationsFee = new PendingBalanceCloseSubTotalFeeType1("platform-connected-organizations-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 BalanceChargeFee = new PendingBalanceCloseSubTotalFeeType1("balance-charge-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 ThreedsAuthenticationAttemptFee = new PendingBalanceCloseSubTotalFeeType1("3ds-authentication-attempt-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 TerminalMonthlyFee = new PendingBalanceCloseSubTotalFeeType1("terminal-monthly-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 AcceptanceRiskFee = new PendingBalanceCloseSubTotalFeeType1("acceptance-risk-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 TopUpFee = new PendingBalanceCloseSubTotalFeeType1("top-up-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 PaymentGatewayFee = new PendingBalanceCloseSubTotalFeeType1("payment-gateway-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 MastercardSpecialtyMerchantProgramProcessingFee = new PendingBalanceCloseSubTotalFeeType1("mastercard-specialty-merchant-program-processing-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 MastercardSpecialtyMerchantProgramRegistrationFee = new PendingBalanceCloseSubTotalFeeType1("mastercard-specialty-merchant-program-registration-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 VisaIntegrityRiskProgramProcessingFee = new PendingBalanceCloseSubTotalFeeType1("visa-integrity-risk-program-processing-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 VisaIntegrityRiskProgramRegistrationFee = new PendingBalanceCloseSubTotalFeeType1("visa-integrity-risk-program-registration-fee");
+        public static readonly PendingBalanceCloseSubTotalFeeType1 MinimumInvoiceAmountFee = new PendingBalanceCloseSubTotalFeeType1("minimum-invoice-amount-fee");
 
-    public static class PendingBalanceCloseSubTotalFeeType1Extension
-    {
-        public static string Value(this PendingBalanceCloseSubTotalFeeType1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static PendingBalanceCloseSubTotalFeeType1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(PendingBalanceCloseSubTotalFeeType1).GetFields())
+        private static readonly Dictionary <string, PendingBalanceCloseSubTotalFeeType1> _knownValues =
+            new Dictionary <string, PendingBalanceCloseSubTotalFeeType1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["payment-fee"] = PaymentFee,
+                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
+                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
+                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
+                ["partner-commission"] = PartnerCommission,
+                ["application-fee"] = ApplicationFee,
+                ["capture-fee"] = CaptureFee,
+                ["refund-fee"] = RefundFee,
+                ["chargeback-fee"] = ChargebackFee,
+                ["payment-notification-fee"] = PaymentNotificationFee,
+                ["transfer-notification-fee"] = TransferNotificationFee,
+                ["payout-fee"] = PayoutFee,
+                ["fee-discount"] = FeeDiscount,
+                ["fee-reimbursement"] = FeeReimbursement,
+                ["platform-volume-fee"] = PlatformVolumeFee,
+                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
+                ["balance-charge-fee"] = BalanceChargeFee,
+                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
+                ["terminal-monthly-fee"] = TerminalMonthlyFee,
+                ["acceptance-risk-fee"] = AcceptanceRiskFee,
+                ["top-up-fee"] = TopUpFee,
+                ["payment-gateway-fee"] = PaymentGatewayFee,
+                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
+                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
+                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
+                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
+                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, PendingBalanceCloseSubTotalFeeType1> _values =
+            new ConcurrentDictionary<string, PendingBalanceCloseSubTotalFeeType1>(_knownValues);
 
-                    if (enumVal is PendingBalanceCloseSubTotalFeeType1)
-                    {
-                        return (PendingBalanceCloseSubTotalFeeType1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum PendingBalanceCloseSubTotalFeeType1");
+        private PendingBalanceCloseSubTotalFeeType1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static PendingBalanceCloseSubTotalFeeType1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new PendingBalanceCloseSubTotalFeeType1(value));
+        }
+
+        public static implicit operator PendingBalanceCloseSubTotalFeeType1(string value) => Of(value);
+        public static implicit operator string(PendingBalanceCloseSubTotalFeeType1 pendingbalanceclosesubtotalfeetype1) => pendingbalanceclosesubtotalfeetype1.Value;
+
+        public static PendingBalanceCloseSubTotalFeeType1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as PendingBalanceCloseSubTotalFeeType1);
+
+        public bool Equals(PendingBalanceCloseSubTotalFeeType1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

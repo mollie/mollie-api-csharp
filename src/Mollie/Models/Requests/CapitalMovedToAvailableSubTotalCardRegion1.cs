@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum CapitalMovedToAvailableSubTotalCardRegion1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CapitalMovedToAvailableSubTotalCardRegion1 : IEquatable<CapitalMovedToAvailableSubTotalCardRegion1>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly CapitalMovedToAvailableSubTotalCardRegion1 IntraEea = new CapitalMovedToAvailableSubTotalCardRegion1("intra-eea");
+        public static readonly CapitalMovedToAvailableSubTotalCardRegion1 IntraEu = new CapitalMovedToAvailableSubTotalCardRegion1("intra-eu");
+        public static readonly CapitalMovedToAvailableSubTotalCardRegion1 Domestic = new CapitalMovedToAvailableSubTotalCardRegion1("domestic");
+        public static readonly CapitalMovedToAvailableSubTotalCardRegion1 Other = new CapitalMovedToAvailableSubTotalCardRegion1("other");
 
-    public static class CapitalMovedToAvailableSubTotalCardRegion1Extension
-    {
-        public static string Value(this CapitalMovedToAvailableSubTotalCardRegion1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CapitalMovedToAvailableSubTotalCardRegion1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(CapitalMovedToAvailableSubTotalCardRegion1).GetFields())
+        private static readonly Dictionary <string, CapitalMovedToAvailableSubTotalCardRegion1> _knownValues =
+            new Dictionary <string, CapitalMovedToAvailableSubTotalCardRegion1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CapitalMovedToAvailableSubTotalCardRegion1> _values =
+            new ConcurrentDictionary<string, CapitalMovedToAvailableSubTotalCardRegion1>(_knownValues);
 
-                    if (enumVal is CapitalMovedToAvailableSubTotalCardRegion1)
-                    {
-                        return (CapitalMovedToAvailableSubTotalCardRegion1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CapitalMovedToAvailableSubTotalCardRegion1");
+        private CapitalMovedToAvailableSubTotalCardRegion1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CapitalMovedToAvailableSubTotalCardRegion1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CapitalMovedToAvailableSubTotalCardRegion1(value));
+        }
+
+        public static implicit operator CapitalMovedToAvailableSubTotalCardRegion1(string value) => Of(value);
+        public static implicit operator string(CapitalMovedToAvailableSubTotalCardRegion1 capitalmovedtoavailablesubtotalcardregion1) => capitalmovedtoavailablesubtotalcardregion1.Value;
+
+        public static CapitalMovedToAvailableSubTotalCardRegion1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CapitalMovedToAvailableSubTotalCardRegion1);
+
+        public bool Equals(CapitalMovedToAvailableSubTotalCardRegion1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

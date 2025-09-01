@@ -12,57 +12,75 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Refunds may take some time to get confirmed.
     /// </summary>
-    public enum ListRefundsStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListRefundsStatus : IEquatable<ListRefundsStatus>
     {
-        [JsonProperty("queued")]
-        Queued,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("processing")]
-        Processing,
-        [JsonProperty("refunded")]
-        Refunded,
-        [JsonProperty("failed")]
-        Failed,
-        [JsonProperty("canceled")]
-        Canceled,
-    }
+        public static readonly ListRefundsStatus Queued = new ListRefundsStatus("queued");
+        public static readonly ListRefundsStatus Pending = new ListRefundsStatus("pending");
+        public static readonly ListRefundsStatus Processing = new ListRefundsStatus("processing");
+        public static readonly ListRefundsStatus Refunded = new ListRefundsStatus("refunded");
+        public static readonly ListRefundsStatus Failed = new ListRefundsStatus("failed");
+        public static readonly ListRefundsStatus Canceled = new ListRefundsStatus("canceled");
 
-    public static class ListRefundsStatusExtension
-    {
-        public static string Value(this ListRefundsStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ListRefundsStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListRefundsStatus).GetFields())
+        private static readonly Dictionary <string, ListRefundsStatus> _knownValues =
+            new Dictionary <string, ListRefundsStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["queued"] = Queued,
+                ["pending"] = Pending,
+                ["processing"] = Processing,
+                ["refunded"] = Refunded,
+                ["failed"] = Failed,
+                ["canceled"] = Canceled
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListRefundsStatus> _values =
+            new ConcurrentDictionary<string, ListRefundsStatus>(_knownValues);
 
-                    if (enumVal is ListRefundsStatus)
-                    {
-                        return (ListRefundsStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListRefundsStatus");
+        private ListRefundsStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListRefundsStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListRefundsStatus(value));
+        }
+
+        public static implicit operator ListRefundsStatus(string value) => Of(value);
+        public static implicit operator string(ListRefundsStatus listrefundsstatus) => listrefundsstatus.Value;
+
+        public static ListRefundsStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListRefundsStatus);
+
+        public bool Equals(ListRefundsStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

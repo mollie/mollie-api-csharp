@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The status of the settlement.
     /// </summary>
-    public enum GetNextSettlementStatus
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetNextSettlementStatus : IEquatable<GetNextSettlementStatus>
     {
-        [JsonProperty("open")]
-        Open,
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("paidout")]
-        Paidout,
-        [JsonProperty("failed")]
-        Failed,
-    }
+        public static readonly GetNextSettlementStatus Open = new GetNextSettlementStatus("open");
+        public static readonly GetNextSettlementStatus Pending = new GetNextSettlementStatus("pending");
+        public static readonly GetNextSettlementStatus Paidout = new GetNextSettlementStatus("paidout");
+        public static readonly GetNextSettlementStatus Failed = new GetNextSettlementStatus("failed");
 
-    public static class GetNextSettlementStatusExtension
-    {
-        public static string Value(this GetNextSettlementStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetNextSettlementStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetNextSettlementStatus).GetFields())
+        private static readonly Dictionary <string, GetNextSettlementStatus> _knownValues =
+            new Dictionary <string, GetNextSettlementStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["open"] = Open,
+                ["pending"] = Pending,
+                ["paidout"] = Paidout,
+                ["failed"] = Failed
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetNextSettlementStatus> _values =
+            new ConcurrentDictionary<string, GetNextSettlementStatus>(_knownValues);
 
-                    if (enumVal is GetNextSettlementStatus)
-                    {
-                        return (GetNextSettlementStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetNextSettlementStatus");
+        private GetNextSettlementStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetNextSettlementStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetNextSettlementStatus(value));
+        }
+
+        public static implicit operator GetNextSettlementStatus(string value) => Of(value);
+        public static implicit operator string(GetNextSettlementStatus getnextsettlementstatus) => getnextsettlementstatus.Value;
+
+        public static GetNextSettlementStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetNextSettlementStatus);
+
+        public bool Equals(GetNextSettlementStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

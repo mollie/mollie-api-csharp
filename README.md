@@ -63,150 +63,16 @@ dotnet add reference src/Mollie/Mollie.csproj
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
-        Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        RedirectUrl = "https://example.org/redirect",
-        CancelUrl = "https://example.org/cancel",
-        WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
-                Description = "LEGO 4440 Forest Police Station",
-                Quantity = 1,
-                QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
-                },
-                ImageUrl = "https://...",
-                ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
-                    Description = "Gym subscription",
-                    Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Times = 1,
-                    StartDate = "2024-12-12",
-                },
-            },
-        },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
-        Issuer = "ideal_INGBNL2A",
-        RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-        CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            Description = "10",
-        },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
-                    OrganizationId = "org_1234567",
-                },
-                ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new CreatePaymentPaymentRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
-            },
-        },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-        MandateId = "mdt_5B8cwPMGnU",
-        CustomerId = "cst_5B8cwPMGnU",
-        ProfileId = "pfl_5B8cwPMGnU",
-        DueDate = "2025-01-01",
-        Testmode = false,
-        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
-            RegistrationNumber = "12345678",
-            VatNumber = "NL123456789B01",
-        },
-        CardToken = "tkn_12345",
-        VoucherNumber = "1234567890",
-        VoucherPin = "1234",
-        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-        DigitalGoods = true,
-        CustomerReference = "1234567890",
-        TerminalId = "term_1234567890",
-    }
+var res = await sdk.Balances.ListAsync(
+    currency: "EUR",
+    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+    limit: 50,
+    testmode: false
 );
 
 // handle response
@@ -229,150 +95,16 @@ You can set the security parameters through the `security` optional parameter wh
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
-        Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        RedirectUrl = "https://example.org/redirect",
-        CancelUrl = "https://example.org/cancel",
-        WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
-                Description = "LEGO 4440 Forest Police Station",
-                Quantity = 1,
-                QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
-                },
-                ImageUrl = "https://...",
-                ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
-                    Description = "Gym subscription",
-                    Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Times = 1,
-                    StartDate = "2024-12-12",
-                },
-            },
-        },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
-        Issuer = "ideal_INGBNL2A",
-        RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-        CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            Description = "10",
-        },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
-                    OrganizationId = "org_1234567",
-                },
-                ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new CreatePaymentPaymentRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
-            },
-        },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-        MandateId = "mdt_5B8cwPMGnU",
-        CustomerId = "cst_5B8cwPMGnU",
-        ProfileId = "pfl_5B8cwPMGnU",
-        DueDate = "2025-01-01",
-        Testmode = false,
-        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
-            RegistrationNumber = "12345678",
-            VatNumber = "NL123456789B01",
-        },
-        CardToken = "tkn_12345",
-        VoucherNumber = "1234567890",
-        VoucherPin = "1234",
-        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-        DigitalGoods = true,
-        CustomerReference = "1234567890",
-        TerminalId = "term_1234567890",
-    }
+var res = await sdk.Balances.ListAsync(
+    currency: "EUR",
+    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+    limit: 50,
+    testmode: false
 );
 
 // handle response
@@ -566,15 +298,12 @@ To change the default retry strategy for a single API call, simply pass a `Retry
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
+var res = await sdk.Balances.ListAsync(
     retryConfig: new RetryConfig(
         strategy: RetryConfig.RetryStrategy.BACKOFF,
         backoff: new BackoffStrategy(
@@ -585,141 +314,10 @@ var res = await sdk.Payments.CreateAsync(
         ),
         retryConnectionErrors: false
     ),
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
-        Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        RedirectUrl = "https://example.org/redirect",
-        CancelUrl = "https://example.org/cancel",
-        WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
-                Description = "LEGO 4440 Forest Police Station",
-                Quantity = 1,
-                QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
-                },
-                ImageUrl = "https://...",
-                ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
-                    Description = "Gym subscription",
-                    Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Times = 1,
-                    StartDate = "2024-12-12",
-                },
-            },
-        },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
-        Issuer = "ideal_INGBNL2A",
-        RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-        CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            Description = "10",
-        },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
-                    OrganizationId = "org_1234567",
-                },
-                ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new CreatePaymentPaymentRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
-            },
-        },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-        MandateId = "mdt_5B8cwPMGnU",
-        CustomerId = "cst_5B8cwPMGnU",
-        ProfileId = "pfl_5B8cwPMGnU",
-        DueDate = "2025-01-01",
-        Testmode = false,
-        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
-            RegistrationNumber = "12345678",
-            VatNumber = "NL123456789B01",
-        },
-        CardToken = "tkn_12345",
-        VoucherNumber = "1234567890",
-        VoucherPin = "1234",
-        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-        DigitalGoods = true,
-        CustomerReference = "1234567890",
-        TerminalId = "term_1234567890",
-    }
+    currency: "EUR",
+    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+    limit: 50,
+    testmode: false
 );
 
 // handle response
@@ -729,9 +327,6 @@ If you'd like to override the default retry strategy for all operations that sup
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(
     retryConfig: new RetryConfig(
@@ -749,142 +344,11 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payments.CreateAsync(
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
-        Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        RedirectUrl = "https://example.org/redirect",
-        CancelUrl = "https://example.org/cancel",
-        WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
-                Description = "LEGO 4440 Forest Police Station",
-                Quantity = 1,
-                QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
-                },
-                ImageUrl = "https://...",
-                ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
-                    Description = "Gym subscription",
-                    Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Times = 1,
-                    StartDate = "2024-12-12",
-                },
-            },
-        },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
-        Issuer = "ideal_INGBNL2A",
-        RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-        CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            Description = "10",
-        },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
-                    OrganizationId = "org_1234567",
-                },
-                ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new CreatePaymentPaymentRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
-            },
-        },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-        MandateId = "mdt_5B8cwPMGnU",
-        CustomerId = "cst_5B8cwPMGnU",
-        ProfileId = "pfl_5B8cwPMGnU",
-        DueDate = "2025-01-01",
-        Testmode = false,
-        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
-            RegistrationNumber = "12345678",
-            VatNumber = "NL123456789B01",
-        },
-        CardToken = "tkn_12345",
-        VoucherNumber = "1234567890",
-        VoucherPin = "1234",
-        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-        DigitalGoods = true,
-        CustomerReference = "1234567890",
-        TerminalId = "term_1234567890",
-    }
+var res = await sdk.Balances.ListAsync(
+    currency: "EUR",
+    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+    limit: 50,
+    testmode: false
 );
 
 // handle response
@@ -904,13 +368,13 @@ By default, an API error will raise a `Mollie.Models.Errors.APIException` except
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `CreateAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `ListAsync` method throws the following exceptions:
 
-| Error Type                                                            | Status Code | Content Type         |
-| --------------------------------------------------------------------- | ----------- | -------------------- |
-| Mollie.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422         | application/hal+json |
-| Mollie.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503         | application/hal+json |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX    | \*/\*                |
+| Error Type                                                  | Status Code | Content Type         |
+| ----------------------------------------------------------- | ----------- | -------------------- |
+| Mollie.Models.Errors.ListBalancesBadRequestHalJSONException | 400         | application/hal+json |
+| Mollie.Models.Errors.ListBalancesNotFoundHalJSONException   | 404         | application/hal+json |
+| Mollie.Models.Errors.APIException                           | 4XX, 5XX    | \*/\*                |
 
 ### Example
 
@@ -918,9 +382,6 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Errors;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -928,154 +389,23 @@ var sdk = new Client(security: new Security() {
 
 try
 {
-    var res = await sdk.Payments.CreateAsync(
-        include: CreatePaymentInclude.DetailsQrCode,
-        requestBody: new CreatePaymentRequestBody() {
-            Description = "Chess Board",
-            Amount = new CreatePaymentAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            RedirectUrl = "https://example.org/redirect",
-            CancelUrl = "https://example.org/cancel",
-            WebhookUrl = "https://example.org/webhooks",
-            Lines = new List<CreatePaymentLineRequest>() {
-                new CreatePaymentLineRequest() {
-                    Type = CreatePaymentLineTypeRequest.Physical,
-                    Description = "LEGO 4440 Forest Police Station",
-                    Quantity = 1,
-                    QuantityUnit = "pcs",
-                    UnitPrice = new CreatePaymentUnitPriceRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    TotalAmount = new CreatePaymentTotalAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    VatRate = "21.00",
-                    VatAmount = new CreatePaymentVatAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Sku = "9780241661628",
-                    Categories = new List<CreatePaymentCategoryRequest>() {
-                        CreatePaymentCategoryRequest.Meal,
-                        CreatePaymentCategoryRequest.Eco,
-                    },
-                    ImageUrl = "https://...",
-                    ProductUrl = "https://...",
-                    Recurring = new CreatePaymentRecurringRequest() {
-                        Description = "Gym subscription",
-                        Interval = "... days",
-                        Amount = new CreatePaymentRecurringAmountRequest() {
-                            Currency = "EUR",
-                            Value = "10.00",
-                        },
-                        Times = 1,
-                        StartDate = "2024-12-12",
-                    },
-                },
-            },
-            BillingAddress = new CreatePaymentBillingAddressRequest() {
-                Title = "Mr.",
-                GivenName = "Piet",
-                FamilyName = "Mondriaan",
-                OrganizationName = "Mollie B.V.",
-                StreetAndNumber = "Keizersgracht 126",
-                StreetAdditional = "Apt. 1",
-                PostalCode = "1234AB",
-                Email = "piet@example.org",
-                Phone = "31208202070",
-                City = "Amsterdam",
-                Region = "Noord-Holland",
-                Country = "NL",
-            },
-            ShippingAddress = new CreatePaymentShippingAddressRequest() {
-                Title = "Mr.",
-                GivenName = "Piet",
-                FamilyName = "Mondriaan",
-                OrganizationName = "Mollie B.V.",
-                StreetAndNumber = "Keizersgracht 126",
-                StreetAdditional = "Apt. 1",
-                PostalCode = "1234AB",
-                Email = "piet@example.org",
-                Phone = "31208202070",
-                City = "Amsterdam",
-                Region = "Noord-Holland",
-                Country = "NL",
-            },
-            Locale = CreatePaymentLocaleRequest.EnUS,
-            Method = CreatePaymentMethodRequest.Ideal,
-            Issuer = "ideal_INGBNL2A",
-            RestrictPaymentMethodsToCountry = "NL",
-            CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-            CaptureDelay = "8 hours",
-            ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-                Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Description = "10",
-            },
-            Routing = new List<CreatePaymentRoutingRequest>() {
-                new CreatePaymentRoutingRequest() {
-                    Amount = new CreatePaymentRoutingAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Destination = new CreatePaymentDestinationRequest() {
-                        Type = CreatePaymentRoutingTypeRequest.Organization,
-                        OrganizationId = "org_1234567",
-                    },
-                    ReleaseDate = "2024-12-12",
-                    Links = new CreatePaymentLinksRequest() {
-                        Self = new CreatePaymentSelfRequest() {
-                            Href = "https://...",
-                            Type = "application/hal+json",
-                        },
-                        Payment = new CreatePaymentPaymentRequest() {
-                            Href = "https://...",
-                            Type = "application/hal+json",
-                        },
-                    },
-                },
-            },
-            SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-            MandateId = "mdt_5B8cwPMGnU",
-            CustomerId = "cst_5B8cwPMGnU",
-            ProfileId = "pfl_5B8cwPMGnU",
-            DueDate = "2025-01-01",
-            Testmode = false,
-            ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-            Company = new CreatePaymentCompany() {
-                RegistrationNumber = "12345678",
-                VatNumber = "NL123456789B01",
-            },
-            CardToken = "tkn_12345",
-            VoucherNumber = "1234567890",
-            VoucherPin = "1234",
-            ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-            DigitalGoods = true,
-            CustomerReference = "1234567890",
-            TerminalId = "term_1234567890",
-        }
+    var res = await sdk.Balances.ListAsync(
+        currency: "EUR",
+        fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+        limit: 50,
+        testmode: false
     );
 
     // handle response
 }
 catch (Exception ex)
 {
-    if (ex is CreatePaymentUnprocessableEntityHalJSONException)
+    if (ex is ListBalancesBadRequestHalJSONException)
     {
         // Handle exception data
         throw;
     }
-    else if (ex is CreatePaymentServiceUnavailableHalJSONException)
+    else if (ex is ListBalancesNotFoundHalJSONException)
     {
         // Handle exception data
         throw;
@@ -1098,9 +428,6 @@ The default server can be overridden globally by passing a URL to the `serverUrl
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
-using NodaTime;
-using System.Collections.Generic;
 
 var sdk = new Client(
     serverUrl: "https://api.mollie.com/v2",
@@ -1109,142 +436,11 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payments.CreateAsync(
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
-        Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        RedirectUrl = "https://example.org/redirect",
-        CancelUrl = "https://example.org/cancel",
-        WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
-                Description = "LEGO 4440 Forest Police Station",
-                Quantity = 1,
-                QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
-                },
-                ImageUrl = "https://...",
-                ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
-                    Description = "Gym subscription",
-                    Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
-                        Currency = "EUR",
-                        Value = "10.00",
-                    },
-                    Times = 1,
-                    StartDate = "2024-12-12",
-                },
-            },
-        },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
-            Title = "Mr.",
-            GivenName = "Piet",
-            FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
-            StreetAndNumber = "Keizersgracht 126",
-            StreetAdditional = "Apt. 1",
-            PostalCode = "1234AB",
-            Email = "piet@example.org",
-            Phone = "31208202070",
-            City = "Amsterdam",
-            Region = "Noord-Holland",
-            Country = "NL",
-        },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
-        Issuer = "ideal_INGBNL2A",
-        RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
-        CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
-                Currency = "EUR",
-                Value = "10.00",
-            },
-            Description = "10",
-        },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
-                    Currency = "EUR",
-                    Value = "10.00",
-                },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
-                    OrganizationId = "org_1234567",
-                },
-                ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new CreatePaymentPaymentRequest() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
-            },
-        },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
-        MandateId = "mdt_5B8cwPMGnU",
-        CustomerId = "cst_5B8cwPMGnU",
-        ProfileId = "pfl_5B8cwPMGnU",
-        DueDate = "2025-01-01",
-        Testmode = false,
-        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
-            RegistrationNumber = "12345678",
-            VatNumber = "NL123456789B01",
-        },
-        CardToken = "tkn_12345",
-        VoucherNumber = "1234567890",
-        VoucherPin = "1234",
-        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
-        DigitalGoods = true,
-        CustomerReference = "1234567890",
-        TerminalId = "term_1234567890",
-    }
+var res = await sdk.Balances.ListAsync(
+    currency: "EUR",
+    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
+    limit: 50,
+    testmode: false
 );
 
 // handle response

@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Allows you to preset the language to be used in the hosted payment pages shown to the customer. Setting a locale<br/>
     /// 
@@ -26,85 +29,100 @@ namespace Mollie.Models.Requests
     /// customer use a local bank account greatly increases the conversion and speed of payment.
     /// </remarks>
     /// </summary>
-    public enum UpdatePaymentLocaleResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class UpdatePaymentLocaleResponse : IEquatable<UpdatePaymentLocaleResponse>
     {
-        [JsonProperty("en_US")]
-        EnUS,
-        [JsonProperty("en_GB")]
-        EnGB,
-        [JsonProperty("nl_NL")]
-        Nlnl,
-        [JsonProperty("nl_BE")]
-        NlBE,
-        [JsonProperty("de_DE")]
-        Dede,
-        [JsonProperty("de_AT")]
-        DeAT,
-        [JsonProperty("de_CH")]
-        DeCH,
-        [JsonProperty("fr_FR")]
-        Frfr,
-        [JsonProperty("fr_BE")]
-        FrBE,
-        [JsonProperty("es_ES")]
-        Eses,
-        [JsonProperty("ca_ES")]
-        CaES,
-        [JsonProperty("pt_PT")]
-        Ptpt,
-        [JsonProperty("it_IT")]
-        Itit,
-        [JsonProperty("nb_NO")]
-        NbNO,
-        [JsonProperty("sv_SE")]
-        SvSE,
-        [JsonProperty("fi_FI")]
-        Fifi,
-        [JsonProperty("da_DK")]
-        DaDK,
-        [JsonProperty("is_IS")]
-        Isis,
-        [JsonProperty("hu_HU")]
-        Huhu,
-        [JsonProperty("pl_PL")]
-        Plpl,
-        [JsonProperty("lv_LV")]
-        Lvlv,
-        [JsonProperty("lt_LT")]
-        Ltlt,
-    }
+        public static readonly UpdatePaymentLocaleResponse EnUS = new UpdatePaymentLocaleResponse("en_US");
+        public static readonly UpdatePaymentLocaleResponse EnGB = new UpdatePaymentLocaleResponse("en_GB");
+        public static readonly UpdatePaymentLocaleResponse Nlnl = new UpdatePaymentLocaleResponse("nl_NL");
+        public static readonly UpdatePaymentLocaleResponse NlBE = new UpdatePaymentLocaleResponse("nl_BE");
+        public static readonly UpdatePaymentLocaleResponse Dede = new UpdatePaymentLocaleResponse("de_DE");
+        public static readonly UpdatePaymentLocaleResponse DeAT = new UpdatePaymentLocaleResponse("de_AT");
+        public static readonly UpdatePaymentLocaleResponse DeCH = new UpdatePaymentLocaleResponse("de_CH");
+        public static readonly UpdatePaymentLocaleResponse Frfr = new UpdatePaymentLocaleResponse("fr_FR");
+        public static readonly UpdatePaymentLocaleResponse FrBE = new UpdatePaymentLocaleResponse("fr_BE");
+        public static readonly UpdatePaymentLocaleResponse Eses = new UpdatePaymentLocaleResponse("es_ES");
+        public static readonly UpdatePaymentLocaleResponse CaES = new UpdatePaymentLocaleResponse("ca_ES");
+        public static readonly UpdatePaymentLocaleResponse Ptpt = new UpdatePaymentLocaleResponse("pt_PT");
+        public static readonly UpdatePaymentLocaleResponse Itit = new UpdatePaymentLocaleResponse("it_IT");
+        public static readonly UpdatePaymentLocaleResponse NbNO = new UpdatePaymentLocaleResponse("nb_NO");
+        public static readonly UpdatePaymentLocaleResponse SvSE = new UpdatePaymentLocaleResponse("sv_SE");
+        public static readonly UpdatePaymentLocaleResponse Fifi = new UpdatePaymentLocaleResponse("fi_FI");
+        public static readonly UpdatePaymentLocaleResponse DaDK = new UpdatePaymentLocaleResponse("da_DK");
+        public static readonly UpdatePaymentLocaleResponse Isis = new UpdatePaymentLocaleResponse("is_IS");
+        public static readonly UpdatePaymentLocaleResponse Huhu = new UpdatePaymentLocaleResponse("hu_HU");
+        public static readonly UpdatePaymentLocaleResponse Plpl = new UpdatePaymentLocaleResponse("pl_PL");
+        public static readonly UpdatePaymentLocaleResponse Lvlv = new UpdatePaymentLocaleResponse("lv_LV");
+        public static readonly UpdatePaymentLocaleResponse Ltlt = new UpdatePaymentLocaleResponse("lt_LT");
 
-    public static class UpdatePaymentLocaleResponseExtension
-    {
-        public static string Value(this UpdatePaymentLocaleResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static UpdatePaymentLocaleResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(UpdatePaymentLocaleResponse).GetFields())
+        private static readonly Dictionary <string, UpdatePaymentLocaleResponse> _knownValues =
+            new Dictionary <string, UpdatePaymentLocaleResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["en_US"] = EnUS,
+                ["en_GB"] = EnGB,
+                ["nl_NL"] = Nlnl,
+                ["nl_BE"] = NlBE,
+                ["de_DE"] = Dede,
+                ["de_AT"] = DeAT,
+                ["de_CH"] = DeCH,
+                ["fr_FR"] = Frfr,
+                ["fr_BE"] = FrBE,
+                ["es_ES"] = Eses,
+                ["ca_ES"] = CaES,
+                ["pt_PT"] = Ptpt,
+                ["it_IT"] = Itit,
+                ["nb_NO"] = NbNO,
+                ["sv_SE"] = SvSE,
+                ["fi_FI"] = Fifi,
+                ["da_DK"] = DaDK,
+                ["is_IS"] = Isis,
+                ["hu_HU"] = Huhu,
+                ["pl_PL"] = Plpl,
+                ["lv_LV"] = Lvlv,
+                ["lt_LT"] = Ltlt
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, UpdatePaymentLocaleResponse> _values =
+            new ConcurrentDictionary<string, UpdatePaymentLocaleResponse>(_knownValues);
 
-                    if (enumVal is UpdatePaymentLocaleResponse)
-                    {
-                        return (UpdatePaymentLocaleResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum UpdatePaymentLocaleResponse");
+        private UpdatePaymentLocaleResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static UpdatePaymentLocaleResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new UpdatePaymentLocaleResponse(value));
+        }
+
+        public static implicit operator UpdatePaymentLocaleResponse(string value) => Of(value);
+        public static implicit operator string(UpdatePaymentLocaleResponse updatepaymentlocaleresponse) => updatepaymentlocaleresponse.Value;
+
+        public static UpdatePaymentLocaleResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentLocaleResponse);
+
+        public bool Equals(UpdatePaymentLocaleResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,50 +12,68 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum ListCustomerPaymentsCategory
-    {
-        [JsonProperty("meal")]
-        Meal,
-        [JsonProperty("eco")]
-        Eco,
-        [JsonProperty("gift")]
-        Gift,
-        [JsonProperty("sport_culture")]
-        SportCulture,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class ListCustomerPaymentsCategoryExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ListCustomerPaymentsCategory : IEquatable<ListCustomerPaymentsCategory>
     {
-        public static string Value(this ListCustomerPaymentsCategory value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly ListCustomerPaymentsCategory Meal = new ListCustomerPaymentsCategory("meal");
+        public static readonly ListCustomerPaymentsCategory Eco = new ListCustomerPaymentsCategory("eco");
+        public static readonly ListCustomerPaymentsCategory Gift = new ListCustomerPaymentsCategory("gift");
+        public static readonly ListCustomerPaymentsCategory SportCulture = new ListCustomerPaymentsCategory("sport_culture");
 
-        public static ListCustomerPaymentsCategory ToEnum(this string value)
-        {
-            foreach(var field in typeof(ListCustomerPaymentsCategory).GetFields())
+        private static readonly Dictionary <string, ListCustomerPaymentsCategory> _knownValues =
+            new Dictionary <string, ListCustomerPaymentsCategory> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["meal"] = Meal,
+                ["eco"] = Eco,
+                ["gift"] = Gift,
+                ["sport_culture"] = SportCulture
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ListCustomerPaymentsCategory> _values =
+            new ConcurrentDictionary<string, ListCustomerPaymentsCategory>(_knownValues);
 
-                    if (enumVal is ListCustomerPaymentsCategory)
-                    {
-                        return (ListCustomerPaymentsCategory)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ListCustomerPaymentsCategory");
+        private ListCustomerPaymentsCategory(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ListCustomerPaymentsCategory Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ListCustomerPaymentsCategory(value));
+        }
+
+        public static implicit operator ListCustomerPaymentsCategory(string value) => Of(value);
+        public static implicit operator string(ListCustomerPaymentsCategory listcustomerpaymentscategory) => listcustomerpaymentscategory.Value;
+
+        public static ListCustomerPaymentsCategory[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ListCustomerPaymentsCategory);
+
+        public bool Equals(ListCustomerPaymentsCategory? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

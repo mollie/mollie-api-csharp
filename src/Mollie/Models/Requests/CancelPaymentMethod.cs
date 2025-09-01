@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
     /// 
@@ -20,113 +23,128 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    public enum CancelPaymentMethod
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CancelPaymentMethod : IEquatable<CancelPaymentMethod>
     {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("klarnapaylater")]
-        Klarnapaylater,
-        [JsonProperty("klarnapaynow")]
-        Klarnapaynow,
-        [JsonProperty("klarnasliceit")]
-        Klarnasliceit,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+        public static readonly CancelPaymentMethod Alma = new CancelPaymentMethod("alma");
+        public static readonly CancelPaymentMethod Applepay = new CancelPaymentMethod("applepay");
+        public static readonly CancelPaymentMethod Bacs = new CancelPaymentMethod("bacs");
+        public static readonly CancelPaymentMethod Bancomatpay = new CancelPaymentMethod("bancomatpay");
+        public static readonly CancelPaymentMethod Bancontact = new CancelPaymentMethod("bancontact");
+        public static readonly CancelPaymentMethod Banktransfer = new CancelPaymentMethod("banktransfer");
+        public static readonly CancelPaymentMethod Belfius = new CancelPaymentMethod("belfius");
+        public static readonly CancelPaymentMethod Billie = new CancelPaymentMethod("billie");
+        public static readonly CancelPaymentMethod Bizum = new CancelPaymentMethod("bizum");
+        public static readonly CancelPaymentMethod Blik = new CancelPaymentMethod("blik");
+        public static readonly CancelPaymentMethod Creditcard = new CancelPaymentMethod("creditcard");
+        public static readonly CancelPaymentMethod Directdebit = new CancelPaymentMethod("directdebit");
+        public static readonly CancelPaymentMethod Eps = new CancelPaymentMethod("eps");
+        public static readonly CancelPaymentMethod Giftcard = new CancelPaymentMethod("giftcard");
+        public static readonly CancelPaymentMethod Ideal = new CancelPaymentMethod("ideal");
+        public static readonly CancelPaymentMethod In3 = new CancelPaymentMethod("in3");
+        public static readonly CancelPaymentMethod Kbc = new CancelPaymentMethod("kbc");
+        public static readonly CancelPaymentMethod Klarna = new CancelPaymentMethod("klarna");
+        public static readonly CancelPaymentMethod Klarnapaylater = new CancelPaymentMethod("klarnapaylater");
+        public static readonly CancelPaymentMethod Klarnapaynow = new CancelPaymentMethod("klarnapaynow");
+        public static readonly CancelPaymentMethod Klarnasliceit = new CancelPaymentMethod("klarnasliceit");
+        public static readonly CancelPaymentMethod Mbway = new CancelPaymentMethod("mbway");
+        public static readonly CancelPaymentMethod Multibanco = new CancelPaymentMethod("multibanco");
+        public static readonly CancelPaymentMethod Mybank = new CancelPaymentMethod("mybank");
+        public static readonly CancelPaymentMethod Paybybank = new CancelPaymentMethod("paybybank");
+        public static readonly CancelPaymentMethod Payconiq = new CancelPaymentMethod("payconiq");
+        public static readonly CancelPaymentMethod Paypal = new CancelPaymentMethod("paypal");
+        public static readonly CancelPaymentMethod Paysafecard = new CancelPaymentMethod("paysafecard");
+        public static readonly CancelPaymentMethod Pointofsale = new CancelPaymentMethod("pointofsale");
+        public static readonly CancelPaymentMethod Przelewy24 = new CancelPaymentMethod("przelewy24");
+        public static readonly CancelPaymentMethod Riverty = new CancelPaymentMethod("riverty");
+        public static readonly CancelPaymentMethod Satispay = new CancelPaymentMethod("satispay");
+        public static readonly CancelPaymentMethod Swish = new CancelPaymentMethod("swish");
+        public static readonly CancelPaymentMethod Trustly = new CancelPaymentMethod("trustly");
+        public static readonly CancelPaymentMethod Twint = new CancelPaymentMethod("twint");
+        public static readonly CancelPaymentMethod Voucher = new CancelPaymentMethod("voucher");
 
-    public static class CancelPaymentMethodExtension
-    {
-        public static string Value(this CancelPaymentMethod value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CancelPaymentMethod ToEnum(this string value)
-        {
-            foreach(var field in typeof(CancelPaymentMethod).GetFields())
+        private static readonly Dictionary <string, CancelPaymentMethod> _knownValues =
+            new Dictionary <string, CancelPaymentMethod> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["alma"] = Alma,
+                ["applepay"] = Applepay,
+                ["bacs"] = Bacs,
+                ["bancomatpay"] = Bancomatpay,
+                ["bancontact"] = Bancontact,
+                ["banktransfer"] = Banktransfer,
+                ["belfius"] = Belfius,
+                ["billie"] = Billie,
+                ["bizum"] = Bizum,
+                ["blik"] = Blik,
+                ["creditcard"] = Creditcard,
+                ["directdebit"] = Directdebit,
+                ["eps"] = Eps,
+                ["giftcard"] = Giftcard,
+                ["ideal"] = Ideal,
+                ["in3"] = In3,
+                ["kbc"] = Kbc,
+                ["klarna"] = Klarna,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit,
+                ["mbway"] = Mbway,
+                ["multibanco"] = Multibanco,
+                ["mybank"] = Mybank,
+                ["paybybank"] = Paybybank,
+                ["payconiq"] = Payconiq,
+                ["paypal"] = Paypal,
+                ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
+                ["przelewy24"] = Przelewy24,
+                ["riverty"] = Riverty,
+                ["satispay"] = Satispay,
+                ["swish"] = Swish,
+                ["trustly"] = Trustly,
+                ["twint"] = Twint,
+                ["voucher"] = Voucher
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CancelPaymentMethod> _values =
+            new ConcurrentDictionary<string, CancelPaymentMethod>(_knownValues);
 
-                    if (enumVal is CancelPaymentMethod)
-                    {
-                        return (CancelPaymentMethod)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CancelPaymentMethod");
+        private CancelPaymentMethod(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CancelPaymentMethod Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CancelPaymentMethod(value));
+        }
+
+        public static implicit operator CancelPaymentMethod(string value) => Of(value);
+        public static implicit operator string(CancelPaymentMethod cancelpaymentmethod) => cancelpaymentmethod.Value;
+
+        public static CancelPaymentMethod[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CancelPaymentMethod);
+
+        public bool Equals(CancelPaymentMethod? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

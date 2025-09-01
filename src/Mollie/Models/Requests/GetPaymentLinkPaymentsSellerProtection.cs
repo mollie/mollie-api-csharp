@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Indicates to what extent the payment is eligible for PayPal&apos;s Seller Protection. Only available for PayPal<br/>
     /// 
@@ -20,57 +23,72 @@ namespace Mollie.Models.Requests
     /// payments, and if the information is made available by PayPal.
     /// </remarks>
     /// </summary>
-    public enum GetPaymentLinkPaymentsSellerProtection
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class GetPaymentLinkPaymentsSellerProtection : IEquatable<GetPaymentLinkPaymentsSellerProtection>
     {
-        [JsonProperty("Eligible")]
-        Eligible,
-        [JsonProperty("Ineligible")]
-        Ineligible,
-        [JsonProperty("Partially Eligible - INR Only")]
-        PartiallyEligibleINROnly,
-        [JsonProperty("Partially Eligible - Unauth Only")]
-        PartiallyEligibleUnauthOnly,
-        [JsonProperty("Partially Eligible")]
-        PartiallyEligible,
-        [JsonProperty("None")]
-        None,
-        [JsonProperty("Active")]
-        Active,
-        [JsonProperty("Fraud Control - Unauth Premium Eligible")]
-        FraudControlUnauthPremiumEligible,
-    }
+        public static readonly GetPaymentLinkPaymentsSellerProtection Eligible = new GetPaymentLinkPaymentsSellerProtection("Eligible");
+        public static readonly GetPaymentLinkPaymentsSellerProtection Ineligible = new GetPaymentLinkPaymentsSellerProtection("Ineligible");
+        public static readonly GetPaymentLinkPaymentsSellerProtection PartiallyEligibleINROnly = new GetPaymentLinkPaymentsSellerProtection("Partially Eligible - INR Only");
+        public static readonly GetPaymentLinkPaymentsSellerProtection PartiallyEligibleUnauthOnly = new GetPaymentLinkPaymentsSellerProtection("Partially Eligible - Unauth Only");
+        public static readonly GetPaymentLinkPaymentsSellerProtection PartiallyEligible = new GetPaymentLinkPaymentsSellerProtection("Partially Eligible");
+        public static readonly GetPaymentLinkPaymentsSellerProtection None = new GetPaymentLinkPaymentsSellerProtection("None");
+        public static readonly GetPaymentLinkPaymentsSellerProtection Active = new GetPaymentLinkPaymentsSellerProtection("Active");
+        public static readonly GetPaymentLinkPaymentsSellerProtection FraudControlUnauthPremiumEligible = new GetPaymentLinkPaymentsSellerProtection("Fraud Control - Unauth Premium Eligible");
 
-    public static class GetPaymentLinkPaymentsSellerProtectionExtension
-    {
-        public static string Value(this GetPaymentLinkPaymentsSellerProtection value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static GetPaymentLinkPaymentsSellerProtection ToEnum(this string value)
-        {
-            foreach(var field in typeof(GetPaymentLinkPaymentsSellerProtection).GetFields())
+        private static readonly Dictionary <string, GetPaymentLinkPaymentsSellerProtection> _knownValues =
+            new Dictionary <string, GetPaymentLinkPaymentsSellerProtection> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["Eligible"] = Eligible,
+                ["Ineligible"] = Ineligible,
+                ["Partially Eligible - INR Only"] = PartiallyEligibleINROnly,
+                ["Partially Eligible - Unauth Only"] = PartiallyEligibleUnauthOnly,
+                ["Partially Eligible"] = PartiallyEligible,
+                ["None"] = None,
+                ["Active"] = Active,
+                ["Fraud Control - Unauth Premium Eligible"] = FraudControlUnauthPremiumEligible
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsSellerProtection> _values =
+            new ConcurrentDictionary<string, GetPaymentLinkPaymentsSellerProtection>(_knownValues);
 
-                    if (enumVal is GetPaymentLinkPaymentsSellerProtection)
-                    {
-                        return (GetPaymentLinkPaymentsSellerProtection)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsSellerProtection");
+        private GetPaymentLinkPaymentsSellerProtection(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static GetPaymentLinkPaymentsSellerProtection Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsSellerProtection(value));
+        }
+
+        public static implicit operator GetPaymentLinkPaymentsSellerProtection(string value) => Of(value);
+        public static implicit operator string(GetPaymentLinkPaymentsSellerProtection getpaymentlinkpaymentssellerprotection) => getpaymentlinkpaymentssellerprotection.Value;
+
+        public static GetPaymentLinkPaymentsSellerProtection[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsSellerProtection);
+
+        public bool Equals(GetPaymentLinkPaymentsSellerProtection? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

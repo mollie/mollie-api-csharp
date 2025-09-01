@@ -12,7 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
     /// 
@@ -21,57 +24,72 @@ namespace Mollie.Models.Requests
     /// The `tip` payment line type is not available when creating a payment.
     /// </remarks>
     /// </summary>
-    public enum CreateCustomerPaymentLineTypeResponse
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class CreateCustomerPaymentLineTypeResponse : IEquatable<CreateCustomerPaymentLineTypeResponse>
     {
-        [JsonProperty("physical")]
-        Physical,
-        [JsonProperty("digital")]
-        Digital,
-        [JsonProperty("shipping_fee")]
-        ShippingFee,
-        [JsonProperty("discount")]
-        Discount,
-        [JsonProperty("store_credit")]
-        StoreCredit,
-        [JsonProperty("gift_card")]
-        GiftCard,
-        [JsonProperty("surcharge")]
-        Surcharge,
-        [JsonProperty("tip")]
-        Tip,
-    }
+        public static readonly CreateCustomerPaymentLineTypeResponse Physical = new CreateCustomerPaymentLineTypeResponse("physical");
+        public static readonly CreateCustomerPaymentLineTypeResponse Digital = new CreateCustomerPaymentLineTypeResponse("digital");
+        public static readonly CreateCustomerPaymentLineTypeResponse ShippingFee = new CreateCustomerPaymentLineTypeResponse("shipping_fee");
+        public static readonly CreateCustomerPaymentLineTypeResponse Discount = new CreateCustomerPaymentLineTypeResponse("discount");
+        public static readonly CreateCustomerPaymentLineTypeResponse StoreCredit = new CreateCustomerPaymentLineTypeResponse("store_credit");
+        public static readonly CreateCustomerPaymentLineTypeResponse GiftCard = new CreateCustomerPaymentLineTypeResponse("gift_card");
+        public static readonly CreateCustomerPaymentLineTypeResponse Surcharge = new CreateCustomerPaymentLineTypeResponse("surcharge");
+        public static readonly CreateCustomerPaymentLineTypeResponse Tip = new CreateCustomerPaymentLineTypeResponse("tip");
 
-    public static class CreateCustomerPaymentLineTypeResponseExtension
-    {
-        public static string Value(this CreateCustomerPaymentLineTypeResponse value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static CreateCustomerPaymentLineTypeResponse ToEnum(this string value)
-        {
-            foreach(var field in typeof(CreateCustomerPaymentLineTypeResponse).GetFields())
+        private static readonly Dictionary <string, CreateCustomerPaymentLineTypeResponse> _knownValues =
+            new Dictionary <string, CreateCustomerPaymentLineTypeResponse> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["physical"] = Physical,
+                ["digital"] = Digital,
+                ["shipping_fee"] = ShippingFee,
+                ["discount"] = Discount,
+                ["store_credit"] = StoreCredit,
+                ["gift_card"] = GiftCard,
+                ["surcharge"] = Surcharge,
+                ["tip"] = Tip
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentLineTypeResponse> _values =
+            new ConcurrentDictionary<string, CreateCustomerPaymentLineTypeResponse>(_knownValues);
 
-                    if (enumVal is CreateCustomerPaymentLineTypeResponse)
-                    {
-                        return (CreateCustomerPaymentLineTypeResponse)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentLineTypeResponse");
+        private CreateCustomerPaymentLineTypeResponse(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static CreateCustomerPaymentLineTypeResponse Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentLineTypeResponse(value));
+        }
+
+        public static implicit operator CreateCustomerPaymentLineTypeResponse(string value) => Of(value);
+        public static implicit operator string(CreateCustomerPaymentLineTypeResponse createcustomerpaymentlinetyperesponse) => createcustomerpaymentlinetyperesponse.Value;
+
+        public static CreateCustomerPaymentLineTypeResponse[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentLineTypeResponse);
+
+        public bool Equals(CreateCustomerPaymentLineTypeResponse? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

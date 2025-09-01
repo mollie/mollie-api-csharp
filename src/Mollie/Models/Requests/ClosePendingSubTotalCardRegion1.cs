@@ -12,53 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    public enum ClosePendingSubTotalCardRegion1
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class ClosePendingSubTotalCardRegion1 : IEquatable<ClosePendingSubTotalCardRegion1>
     {
-        [JsonProperty("intra-eea")]
-        IntraEea,
-        [JsonProperty("intra-eu")]
-        IntraEu,
-        [JsonProperty("domestic")]
-        Domestic,
-        [JsonProperty("other")]
-        Other,
-    }
+        public static readonly ClosePendingSubTotalCardRegion1 IntraEea = new ClosePendingSubTotalCardRegion1("intra-eea");
+        public static readonly ClosePendingSubTotalCardRegion1 IntraEu = new ClosePendingSubTotalCardRegion1("intra-eu");
+        public static readonly ClosePendingSubTotalCardRegion1 Domestic = new ClosePendingSubTotalCardRegion1("domestic");
+        public static readonly ClosePendingSubTotalCardRegion1 Other = new ClosePendingSubTotalCardRegion1("other");
 
-    public static class ClosePendingSubTotalCardRegion1Extension
-    {
-        public static string Value(this ClosePendingSubTotalCardRegion1 value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static ClosePendingSubTotalCardRegion1 ToEnum(this string value)
-        {
-            foreach(var field in typeof(ClosePendingSubTotalCardRegion1).GetFields())
+        private static readonly Dictionary <string, ClosePendingSubTotalCardRegion1> _knownValues =
+            new Dictionary <string, ClosePendingSubTotalCardRegion1> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["intra-eea"] = IntraEea,
+                ["intra-eu"] = IntraEu,
+                ["domestic"] = Domestic,
+                ["other"] = Other
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, ClosePendingSubTotalCardRegion1> _values =
+            new ConcurrentDictionary<string, ClosePendingSubTotalCardRegion1>(_knownValues);
 
-                    if (enumVal is ClosePendingSubTotalCardRegion1)
-                    {
-                        return (ClosePendingSubTotalCardRegion1)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum ClosePendingSubTotalCardRegion1");
+        private ClosePendingSubTotalCardRegion1(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static ClosePendingSubTotalCardRegion1 Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new ClosePendingSubTotalCardRegion1(value));
+        }
+
+        public static implicit operator ClosePendingSubTotalCardRegion1(string value) => Of(value);
+        public static implicit operator string(ClosePendingSubTotalCardRegion1 closependingsubtotalcardregion1) => closependingsubtotalcardregion1.Value;
+
+        public static ClosePendingSubTotalCardRegion1[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as ClosePendingSubTotalCardRegion1);
+
+        public bool Equals(ClosePendingSubTotalCardRegion1? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }
