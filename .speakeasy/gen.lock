@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 48456f665cac7aa7053a6d2f11db0ec7
+  docChecksum: 2e188bbc6e98a12bd1b21fc2641a9361
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 0.1.6
-  configChecksum: 1a059d73e8011909125d7a45a4f269e0
+  speakeasyVersion: 1.606.9
+  generationVersion: 2.687.13
+  releaseVersion: 0.2.0
+  configChecksum: d6abcf016534d809c06010f6168df58f
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.11.2
+    core: 3.12.0
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.7
@@ -9439,6 +9439,3 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `Client.Terminals.List()`:  `response` **Changed**

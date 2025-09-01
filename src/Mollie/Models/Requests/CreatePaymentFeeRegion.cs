@@ -36,7 +36,7 @@ namespace Mollie.Models.Requests
         Other,
         [JsonProperty("inter")]
         Inter,
-        [JsonProperty("intra-eea")]
+        [JsonProperty("intra_eea")]
         IntraEea,
     }
 

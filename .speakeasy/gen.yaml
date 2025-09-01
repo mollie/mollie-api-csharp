@@ -22,7 +22,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.1.6
+  version: 0.2.0
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -33,6 +33,7 @@ csharp:
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  httpClientPrefix: Speakeasy
   imports:
     option: openapi
     paths:
