@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The current status of the organization&apos;s onboarding process.<br/>
     /// 

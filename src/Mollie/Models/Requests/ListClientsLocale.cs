@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The preferred locale of the merchant, as set in their Mollie dashboard.
     /// </summary>

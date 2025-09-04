@@ -23,13 +23,13 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetWebhookEventSelf? Self { get; set; }
+        public GetWebhookEventSelf Self { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetWebhookEventDocumentation? Documentation { get; set; }
+        public GetWebhookEventDocumentation Documentation { get; set; } = default!;
 
         /// <summary>
         /// The API resource URL of the entity that this event belongs to.

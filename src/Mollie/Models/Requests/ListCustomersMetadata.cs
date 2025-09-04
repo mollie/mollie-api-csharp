@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ListCustomersMetadataType
     {
         private ListCustomersMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static ListCustomersMetadataType Str { get { return new ListCustomersMetadataType("str"); } }
-        
+
         public static ListCustomersMetadataType MapOfAny { get { return new ListCustomersMetadataType("mapOfAny"); } }
-        
+
         public static ListCustomersMetadataType ArrayOfStr { get { return new ListCustomersMetadataType("arrayOfStr"); } }
-        
+
         public static ListCustomersMetadataType Null { get { return new ListCustomersMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(ListCustomersMetadata.ListCustomersMetadataConverter))]
-    public class ListCustomersMetadata {
-        public ListCustomersMetadata(ListCustomersMetadataType type) {
+    public class ListCustomersMetadata
+    {
+        public ListCustomersMetadata(ListCustomersMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public ListCustomersMetadataType Type { get; set; }
-
-
-        public static ListCustomersMetadata CreateStr(string str) {
+        public static ListCustomersMetadata CreateStr(string str)
+        {
             ListCustomersMetadataType typ = ListCustomersMetadataType.Str;
 
             ListCustomersMetadata res = new ListCustomersMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static ListCustomersMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static ListCustomersMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             ListCustomersMetadataType typ = ListCustomersMetadataType.MapOfAny;
 
             ListCustomersMetadata res = new ListCustomersMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static ListCustomersMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static ListCustomersMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             ListCustomersMetadataType typ = ListCustomersMetadataType.ArrayOfStr;
 
             ListCustomersMetadata res = new ListCustomersMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static ListCustomersMetadata CreateNull() {
+        public static ListCustomersMetadata CreateNull()
+        {
             ListCustomersMetadataType typ = ListCustomersMetadataType.Null;
             return new ListCustomersMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 ListCustomersMetadata res = (ListCustomersMetadata)value;
                 if (ListCustomersMetadataType.FromString(res.Type).Equals(ListCustomersMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

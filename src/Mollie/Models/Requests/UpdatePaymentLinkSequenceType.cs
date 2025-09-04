@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
     /// 

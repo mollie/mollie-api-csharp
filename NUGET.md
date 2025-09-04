@@ -160,23 +160,15 @@ var res = await sdk.Balances.ListAsync(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an exception.
-
-By default, an API error will raise a `Mollie.Models.Errors.APIException` exception, which has the following properties:
+[`BaseException`](./src/Mollie/Models/Errors/BaseException.cs) is the base exception class for all HTTP error responses. It has the following properties:
 
 | Property      | Type                  | Description           |
 |---------------|-----------------------|-----------------------|
-| `Message`     | *string*              | The error message     |
-| `Request`     | *HttpRequestMessage*  | The HTTP request      |
-| `Response`    | *HttpResponseMessage* | The HTTP response     |
+| `Message`     | *string*              | Error message         |
+| `Request`     | *HttpRequestMessage*  | HTTP request object   |
+| `Response`    | *HttpResponseMessage* | HTTP response object  |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `ListAsync` method throws the following exceptions:
-
-| Error Type                                                  | Status Code | Content Type         |
-| ----------------------------------------------------------- | ----------- | -------------------- |
-| Mollie.Models.Errors.ListBalancesBadRequestHalJSONException | 400         | application/hal+json |
-| Mollie.Models.Errors.ListBalancesNotFoundHalJSONException   | 404         | application/hal+json |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX    | \*/\*                |
+Some exceptions in this SDK include an additional `Payload` field, which will contain deserialized custom error data when present. Possible exceptions are listed in the [Error Classes](#error-classes) section.
 
 ### Example
 
@@ -200,25 +192,178 @@ try
 
     // handle response
 }
-catch (Exception ex)
+catch (BaseException ex)  // all SDK exceptions inherit from BaseException
 {
-    if (ex is ListBalancesBadRequestHalJSONException)
+    // ex.ToString() provides a detailed error message
+    System.Console.WriteLine(ex);
+
+    // Base exception fields
+    HttpRequestMessage request = ex.Request;
+    HttpResponseMessage response = ex.Response;
+    var statusCode = (int)response.StatusCode;
+    var responseBody = ex.Body;
+
+    if (ex is ListBalancesBadRequestHalJSONException) // different exceptions may be thrown depending on the method
     {
-        // Handle exception data
-        throw;
+        // Check error data fields
+        ListBalancesBadRequestHalJSONExceptionPayload payload = ex.Payload;
+        long Status = payload.Status;
+        string Title = payload.Title;
+        // ...
     }
-    else if (ex is ListBalancesNotFoundHalJSONException)
+
+    // An underlying cause may be provided
+    if (ex.InnerException != null)
     {
-        // Handle exception data
-        throw;
-    }
-    else if (ex is Mollie.Models.Errors.APIException)
-    {
-        // Handle default exception
-        throw;
+        Exception cause = ex.InnerException;
     }
 }
+catch (System.Net.Http.HttpRequestException ex)
+{
+    // Check ex.InnerException for Network connectivity errors
+}
 ```
+
+### Error Classes
+
+**Primary exception:**
+* [`BaseException`](./src/Mollie/Models/Errors/BaseException.cs): The base class for HTTP error responses.
+
+<details><summary>Less common exceptions (128)</summary>
+
+* [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
+
+* Inheriting from [`BaseException`](./src/Mollie/Models/Errors/BaseException.cs):
+  * [`ListBalancesBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListBalancesBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListBalanceTransactionsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListBalanceTransactionsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListSettlementsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementPaymentsHalJSONException`](./src/Mollie/Models/Errors/ListSettlementPaymentsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementCapturesBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListSettlementCapturesBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementRefundsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListSettlementRefundsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementChargebacksBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListSettlementChargebacksBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListInvoicesBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListInvoicesBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListPermissionsHalJSONException`](./src/Mollie/Models/Errors/ListPermissionsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListProfilesHalJSONException`](./src/Mollie/Models/Errors/ListProfilesHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListClientsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListClientsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListWebhooksHalJSONException`](./src/Mollie/Models/Errors/ListWebhooksHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListPaymentsHalJSONException`](./src/Mollie/Models/Errors/ListPaymentsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListMethodsHalJSONException`](./src/Mollie/Models/Errors/ListMethodsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListAllMethodsHalJSONException`](./src/Mollie/Models/Errors/ListAllMethodsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`GetMethodBadRequestHalJSONException`](./src/Mollie/Models/Errors/GetMethodBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListRefundsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListRefundsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListAllRefundsHalJSONException`](./src/Mollie/Models/Errors/ListAllRefundsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListChargebacksBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListChargebacksBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListAllChargebacksBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListAllChargebacksBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListCapturesBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListCapturesBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListPaymentLinksHalJSONException`](./src/Mollie/Models/Errors/ListPaymentLinksHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`GetPaymentLinkPaymentsHalJSONException`](./src/Mollie/Models/Errors/GetPaymentLinkPaymentsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListTerminalsHalJSONException`](./src/Mollie/Models/Errors/ListTerminalsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListCustomersBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListCustomersBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListCustomerPaymentsHalJSONException`](./src/Mollie/Models/Errors/ListCustomerPaymentsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListMandatesBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListMandatesBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSubscriptionsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListSubscriptionsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListAllSubscriptionsBadRequestHalJSONException`](./src/Mollie/Models/Errors/ListAllSubscriptionsBadRequestHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSubscriptionPaymentsHalJSONException`](./src/Mollie/Models/Errors/ListSubscriptionPaymentsHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListSalesInvoicesHalJSONException`](./src/Mollie/Models/Errors/ListSalesInvoicesHalJSONException.cs): An error response object. Status code `400`. Applicable to 1 of 93 methods.*
+  * [`ListBalancesNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListBalancesNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetBalanceHalJSONException`](./src/Mollie/Models/Errors/GetBalanceHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetBalanceReportNotFoundHalJSONException`](./src/Mollie/Models/Errors/GetBalanceReportNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListBalanceTransactionsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListBalanceTransactionsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListSettlementsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetSettlementHalJSONException`](./src/Mollie/Models/Errors/GetSettlementHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementCapturesNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListSettlementCapturesNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementRefundsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListSettlementRefundsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListSettlementChargebacksNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListSettlementChargebacksNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListInvoicesNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListInvoicesNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetInvoiceHalJSONException`](./src/Mollie/Models/Errors/GetInvoiceHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetPermissionHalJSONException`](./src/Mollie/Models/Errors/GetPermissionHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetOrganizationHalJSONException`](./src/Mollie/Models/Errors/GetOrganizationHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetProfileNotFoundHalJSONException`](./src/Mollie/Models/Errors/GetProfileNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdateProfileNotFoundHalJSONException`](./src/Mollie/Models/Errors/UpdateProfileNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`DeleteProfileNotFoundHalJSONException`](./src/Mollie/Models/Errors/DeleteProfileNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListClientsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListClientsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetClientHalJSONException`](./src/Mollie/Models/Errors/GetClientHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateClientLinkNotFoundHalJSONException`](./src/Mollie/Models/Errors/CreateClientLinkNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdateWebhookNotFoundHalJSONException`](./src/Mollie/Models/Errors/UpdateWebhookNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetWebhookNotFoundHalJSONException`](./src/Mollie/Models/Errors/GetWebhookNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`DeleteWebhookNotFoundHalJSONException`](./src/Mollie/Models/Errors/DeleteWebhookNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`TestWebhookNotFoundHalJSONException`](./src/Mollie/Models/Errors/TestWebhookNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetWebhookEventHalJSONException`](./src/Mollie/Models/Errors/GetWebhookEventHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetPaymentHalJSONException`](./src/Mollie/Models/Errors/GetPaymentHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdatePaymentNotFoundHalJSONException`](./src/Mollie/Models/Errors/UpdatePaymentNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CancelPaymentNotFoundHalJSONException`](./src/Mollie/Models/Errors/CancelPaymentNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ReleaseAuthorizationNotFoundHalJSONException`](./src/Mollie/Models/Errors/ReleaseAuthorizationNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetMethodNotFoundHalJSONException`](./src/Mollie/Models/Errors/GetMethodNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateRefundNotFoundHalJSONException`](./src/Mollie/Models/Errors/CreateRefundNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListRefundsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListRefundsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetRefundHalJSONException`](./src/Mollie/Models/Errors/GetRefundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CancelRefundHalJSONException`](./src/Mollie/Models/Errors/CancelRefundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListChargebacksNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListChargebacksNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetChargebackHalJSONException`](./src/Mollie/Models/Errors/GetChargebackHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListAllChargebacksNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListAllChargebacksNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateCaptureNotFoundHalJSONException`](./src/Mollie/Models/Errors/CreateCaptureNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListCapturesNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListCapturesNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetCaptureHalJSONException`](./src/Mollie/Models/Errors/GetCaptureHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreatePaymentLinkNotFoundHalJSONException`](./src/Mollie/Models/Errors/CreatePaymentLinkNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetPaymentLinkHalJSONException`](./src/Mollie/Models/Errors/GetPaymentLinkHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdatePaymentLinkNotFoundHalJSONException`](./src/Mollie/Models/Errors/UpdatePaymentLinkNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`DeletePaymentLinkNotFoundHalJSONException`](./src/Mollie/Models/Errors/DeletePaymentLinkNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetTerminalHalJSONException`](./src/Mollie/Models/Errors/GetTerminalHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`PaymentCreateRouteHalJSONException`](./src/Mollie/Models/Errors/PaymentCreateRouteHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`PaymentListRoutesHalJSONException`](./src/Mollie/Models/Errors/PaymentListRoutesHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateCustomerHalJSONException`](./src/Mollie/Models/Errors/CreateCustomerHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListCustomersNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListCustomersNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetCustomerHalJSONException`](./src/Mollie/Models/Errors/GetCustomerHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdateCustomerHalJSONException`](./src/Mollie/Models/Errors/UpdateCustomerHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`DeleteCustomerHalJSONException`](./src/Mollie/Models/Errors/DeleteCustomerHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateMandateHalJSONException`](./src/Mollie/Models/Errors/CreateMandateHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListMandatesNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListMandatesNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetMandateHalJSONException`](./src/Mollie/Models/Errors/GetMandateHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`RevokeMandateHalJSONException`](./src/Mollie/Models/Errors/RevokeMandateHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateSubscriptionHalJSONException`](./src/Mollie/Models/Errors/CreateSubscriptionHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListSubscriptionsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListSubscriptionsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetSubscriptionHalJSONException`](./src/Mollie/Models/Errors/GetSubscriptionHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdateSubscriptionHalJSONException`](./src/Mollie/Models/Errors/UpdateSubscriptionHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CancelSubscriptionHalJSONException`](./src/Mollie/Models/Errors/CancelSubscriptionHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ListAllSubscriptionsNotFoundHalJSONException`](./src/Mollie/Models/Errors/ListAllSubscriptionsNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`CreateSalesInvoiceNotFoundHalJSONException`](./src/Mollie/Models/Errors/CreateSalesInvoiceNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`GetSalesInvoiceHalJSONException`](./src/Mollie/Models/Errors/GetSalesInvoiceHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`UpdateSalesInvoiceNotFoundHalJSONException`](./src/Mollie/Models/Errors/UpdateSalesInvoiceNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`DeleteSalesInvoiceNotFoundHalJSONException`](./src/Mollie/Models/Errors/DeleteSalesInvoiceNotFoundHalJSONException.cs): An error response object. Status code `404`. Applicable to 1 of 93 methods.*
+  * [`ConflictHalJSONException`](./src/Mollie/Models/Errors/ConflictHalJSONException.cs): An error response object. Status code `409`. Applicable to 1 of 93 methods.*
+  * [`GetProfileGoneHalJSONException`](./src/Mollie/Models/Errors/GetProfileGoneHalJSONException.cs): An error response object. Status code `410`. Applicable to 1 of 93 methods.*
+  * [`UpdateProfileGoneHalJSONException`](./src/Mollie/Models/Errors/UpdateProfileGoneHalJSONException.cs): An error response object. Status code `410`. Applicable to 1 of 93 methods.*
+  * [`DeleteProfileGoneHalJSONException`](./src/Mollie/Models/Errors/DeleteProfileGoneHalJSONException.cs): An error response object. Status code `410`. Applicable to 1 of 93 methods.*
+  * [`GetBalanceReportUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/GetBalanceReportUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateProfileHalJSONException`](./src/Mollie/Models/Errors/CreateProfileHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`UpdateProfileUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/UpdateProfileUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateClientLinkUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreateClientLinkUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateWebhookHalJSONException`](./src/Mollie/Models/Errors/CreateWebhookHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`UpdateWebhookUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/UpdateWebhookUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`GetWebhookUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/GetWebhookUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`DeleteWebhookUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/DeleteWebhookUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`TestWebhookUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/TestWebhookUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreatePaymentUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreatePaymentUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`UpdatePaymentUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/UpdatePaymentUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CancelPaymentUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CancelPaymentUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`ReleaseAuthorizationUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/ReleaseAuthorizationUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateRefundUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreateRefundUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateCaptureUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreateCaptureUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`RequestApplePayPaymentSessionHalJSONException`](./src/Mollie/Models/Errors/RequestApplePayPaymentSessionHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreatePaymentLinkUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreatePaymentLinkUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`UpdatePaymentLinkUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/UpdatePaymentLinkUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`DeletePaymentLinkUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/DeletePaymentLinkUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateCustomerPaymentUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreateCustomerPaymentUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`CreateSalesInvoiceUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/CreateSalesInvoiceUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`UpdateSalesInvoiceUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/UpdateSalesInvoiceUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`DeleteSalesInvoiceUnprocessableEntityHalJSONException`](./src/Mollie/Models/Errors/DeleteSalesInvoiceUnprocessableEntityHalJSONException.cs): An error response object. Status code `422`. Applicable to 1 of 93 methods.*
+  * [`TooManyRequestsHalJSONException`](./src/Mollie/Models/Errors/TooManyRequestsHalJSONException.cs): An error response object. Status code `429`. Applicable to 1 of 93 methods.*
+  * [`CreatePaymentServiceUnavailableHalJSONException`](./src/Mollie/Models/Errors/CreatePaymentServiceUnavailableHalJSONException.cs): An error response object. Status code `503`. Applicable to 1 of 93 methods.*
+  * [`CreateCustomerPaymentServiceUnavailableHalJSONException`](./src/Mollie/Models/Errors/CreateCustomerPaymentServiceUnavailableHalJSONException.cs): An error response object. Status code `503`. Applicable to 1 of 93 methods.*
+  * [`ResponseValidationError`](./src/Mollie/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
+</details>
+
+\* Refer to the [relevant documentation](#available-resources-and-operations) to determine whether an exception applies to a specific operation.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

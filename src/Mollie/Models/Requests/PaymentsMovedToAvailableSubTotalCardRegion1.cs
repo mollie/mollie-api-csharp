@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>

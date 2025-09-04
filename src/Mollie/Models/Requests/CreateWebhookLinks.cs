@@ -23,6 +23,6 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public CreateWebhookDocumentation? Documentation { get; set; }
+        public CreateWebhookDocumentation Documentation { get; set; } = default!;
     }
 }

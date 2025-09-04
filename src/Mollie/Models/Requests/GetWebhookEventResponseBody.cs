@@ -12,6 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The webhook event object.
@@ -23,31 +27,31 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a webhook event object. Will always contain the string `event` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this event.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The event&apos;s type.
+        /// The event&apos;s type
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public GetWebhookEventWebhookEventTypes WebhookEventTypes { get; set; } = default!;
 
         /// <summary>
         /// The entity token that triggered the event
         /// </summary>
         [JsonProperty("entityId")]
-        public string? EntityId { get; set; }
+        public string EntityId { get; set; } = default!;
 
         /// <summary>
         /// The event&apos;s date time of creation.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// Full payload of the event.
@@ -59,6 +63,6 @@ namespace Mollie.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetWebhookEventLinks? Links { get; set; }
+        public GetWebhookEventLinks Links { get; set; } = default!;
     }
 }

@@ -50,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.0";
-        private const string _sdkGenVersion = "2.687.13";
+        private const string _sdkVersion = "0.3.1";
+        private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
         public Capabilities(SDKConfig config)
@@ -146,7 +146,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListCapabilitiesResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListCapabilitiesResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListCapabilitiesResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListCapabilitiesResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new ListCapabilitiesResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -159,18 +169,18 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
     }
 }

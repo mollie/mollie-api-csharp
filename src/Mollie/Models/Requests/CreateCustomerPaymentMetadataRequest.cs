@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CreateCustomerPaymentMetadataRequestType
     {
         private CreateCustomerPaymentMetadataRequestType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CreateCustomerPaymentMetadataRequestType Str { get { return new CreateCustomerPaymentMetadataRequestType("str"); } }
-        
+
         public static CreateCustomerPaymentMetadataRequestType MapOfAny { get { return new CreateCustomerPaymentMetadataRequestType("mapOfAny"); } }
-        
+
         public static CreateCustomerPaymentMetadataRequestType ArrayOfStr { get { return new CreateCustomerPaymentMetadataRequestType("arrayOfStr"); } }
-        
+
         public static CreateCustomerPaymentMetadataRequestType Null { get { return new CreateCustomerPaymentMetadataRequestType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(CreateCustomerPaymentMetadataRequest.CreateCustomerPaymentMetadataRequestConverter))]
-    public class CreateCustomerPaymentMetadataRequest {
-        public CreateCustomerPaymentMetadataRequest(CreateCustomerPaymentMetadataRequestType type) {
+    public class CreateCustomerPaymentMetadataRequest
+    {
+        public CreateCustomerPaymentMetadataRequest(CreateCustomerPaymentMetadataRequestType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public CreateCustomerPaymentMetadataRequestType Type { get; set; }
-
-
-        public static CreateCustomerPaymentMetadataRequest CreateStr(string str) {
+        public static CreateCustomerPaymentMetadataRequest CreateStr(string str)
+        {
             CreateCustomerPaymentMetadataRequestType typ = CreateCustomerPaymentMetadataRequestType.Str;
 
             CreateCustomerPaymentMetadataRequest res = new CreateCustomerPaymentMetadataRequest(typ);
             res.Str = str;
             return res;
         }
-
-        public static CreateCustomerPaymentMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static CreateCustomerPaymentMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             CreateCustomerPaymentMetadataRequestType typ = CreateCustomerPaymentMetadataRequestType.MapOfAny;
 
             CreateCustomerPaymentMetadataRequest res = new CreateCustomerPaymentMetadataRequest(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static CreateCustomerPaymentMetadataRequest CreateArrayOfStr(List<string> arrayOfStr) {
+        public static CreateCustomerPaymentMetadataRequest CreateArrayOfStr(List<string> arrayOfStr)
+        {
             CreateCustomerPaymentMetadataRequestType typ = CreateCustomerPaymentMetadataRequestType.ArrayOfStr;
 
             CreateCustomerPaymentMetadataRequest res = new CreateCustomerPaymentMetadataRequest(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static CreateCustomerPaymentMetadataRequest CreateNull() {
+        public static CreateCustomerPaymentMetadataRequest CreateNull()
+        {
             CreateCustomerPaymentMetadataRequestType typ = CreateCustomerPaymentMetadataRequestType.Null;
             return new CreateCustomerPaymentMetadataRequest(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 CreateCustomerPaymentMetadataRequest res = (CreateCustomerPaymentMetadataRequest)value;
                 if (CreateCustomerPaymentMetadataRequestType.FromString(res.Type).Equals(CreateCustomerPaymentMetadataRequestType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

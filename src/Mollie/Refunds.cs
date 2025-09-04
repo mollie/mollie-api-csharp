@@ -84,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.0";
-        private const string _sdkGenVersion = "2.687.13";
+        private const string _sdkVersion = "0.3.1";
+        private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)
@@ -190,7 +190,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<CreateRefundResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateRefundResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateRefundResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateRefundResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new CreateRefundResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -203,63 +213,96 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<CreateRefundNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateRefundNotFoundHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateRefundNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateRefundNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new CreateRefundNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 409)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ConflictHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ConflictHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ConflictHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ConflictHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new ConflictHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 422)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<CreateRefundUnprocessableEntityHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CreateRefundUnprocessableEntityHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateRefundUnprocessableEntityHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CreateRefundUnprocessableEntityHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new CreateRefundUnprocessableEntityHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<ListRefundsResponse> ListAsync(ListRefundsRequest request, RetryConfig? retryConfig = null)
@@ -348,7 +391,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListRefundsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListRefundsResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListRefundsResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListRefundsResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new ListRefundsResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -361,48 +414,70 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 400)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListRefundsBadRequestHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListRefundsBadRequestHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListRefundsBadRequestHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListRefundsBadRequestHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new ListRefundsBadRequestHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListRefundsNotFoundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListRefundsNotFoundHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListRefundsNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListRefundsNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new ListRefundsNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<GetRefundResponse> GetAsync(string paymentId, string refundId, GetRefundEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
@@ -498,7 +573,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetRefundResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetRefundResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetRefundResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetRefundResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new GetRefundResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -511,33 +596,44 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetRefundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetRefundHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetRefundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetRefundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new GetRefundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, RetryConfig? retryConfig = null)
@@ -632,7 +728,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<object>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    object obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new CancelRefundResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -645,33 +751,44 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<CancelRefundHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CancelRefundHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<CancelRefundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CancelRefundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new CancelRefundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<ListAllRefundsResponse> AllAsync(ListAllRefundsRequest? request = null, RetryConfig? retryConfig = null)
@@ -760,7 +877,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListAllRefundsResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListAllRefundsResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListAllRefundsResponseBody>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListAllRefundsResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new ListAllRefundsResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -773,33 +900,44 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 400)
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ListAllRefundsHalJSONException>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ListAllRefundsHalJSONExceptionPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListAllRefundsHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ListAllRefundsHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
                         Request = httpRequest
                     };
-                    throw obj!;
+
+                    throw new ListAllRefundsHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
     }
 }

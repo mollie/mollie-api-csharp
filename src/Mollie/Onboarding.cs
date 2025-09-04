@@ -53,8 +53,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.0";
-        private const string _sdkGenVersion = "2.687.13";
+        private const string _sdkVersion = "0.3.1";
+        private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
         public Onboarding(SDKConfig config)
@@ -149,7 +149,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<GetOnboardingStatusResponseBody>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    GetOnboardingStatusResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetOnboardingStatusResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOnboardingStatusResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new GetOnboardingStatusResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -162,18 +172,18 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<SubmitOnboardingDataResponse> SubmitAsync(SubmitOnboardingDataRequest? request = null, RetryConfig? retryConfig = null)
@@ -269,7 +279,17 @@ namespace Mollie
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<object>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    object obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new SubmitOnboardingDataResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -282,18 +302,18 @@ namespace Mollie
                     return response;
                 }
 
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
     }
 }

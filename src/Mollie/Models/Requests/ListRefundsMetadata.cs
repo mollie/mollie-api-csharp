@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ListRefundsMetadataType
     {
         private ListRefundsMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static ListRefundsMetadataType Str { get { return new ListRefundsMetadataType("str"); } }
-        
+
         public static ListRefundsMetadataType MapOfAny { get { return new ListRefundsMetadataType("mapOfAny"); } }
-        
+
         public static ListRefundsMetadataType ArrayOfStr { get { return new ListRefundsMetadataType("arrayOfStr"); } }
-        
+
         public static ListRefundsMetadataType Null { get { return new ListRefundsMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(ListRefundsMetadata.ListRefundsMetadataConverter))]
-    public class ListRefundsMetadata {
-        public ListRefundsMetadata(ListRefundsMetadataType type) {
+    public class ListRefundsMetadata
+    {
+        public ListRefundsMetadata(ListRefundsMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public ListRefundsMetadataType Type { get; set; }
-
-
-        public static ListRefundsMetadata CreateStr(string str) {
+        public static ListRefundsMetadata CreateStr(string str)
+        {
             ListRefundsMetadataType typ = ListRefundsMetadataType.Str;
 
             ListRefundsMetadata res = new ListRefundsMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static ListRefundsMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static ListRefundsMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             ListRefundsMetadataType typ = ListRefundsMetadataType.MapOfAny;
 
             ListRefundsMetadata res = new ListRefundsMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static ListRefundsMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static ListRefundsMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             ListRefundsMetadataType typ = ListRefundsMetadataType.ArrayOfStr;
 
             ListRefundsMetadata res = new ListRefundsMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static ListRefundsMetadata CreateNull() {
+        public static ListRefundsMetadata CreateNull()
+        {
             ListRefundsMetadataType typ = ListRefundsMetadataType.Null;
             return new ListRefundsMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 ListRefundsMetadata res = (ListRefundsMetadata)value;
                 if (ListRefundsMetadataType.FromString(res.Type).Equals(ListRefundsMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

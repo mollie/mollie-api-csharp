@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class GetCaptureMetadataType
     {
         private GetCaptureMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static GetCaptureMetadataType Str { get { return new GetCaptureMetadataType("str"); } }
-        
+
         public static GetCaptureMetadataType MapOfAny { get { return new GetCaptureMetadataType("mapOfAny"); } }
-        
+
         public static GetCaptureMetadataType ArrayOfStr { get { return new GetCaptureMetadataType("arrayOfStr"); } }
-        
+
         public static GetCaptureMetadataType Null { get { return new GetCaptureMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(GetCaptureMetadata.GetCaptureMetadataConverter))]
-    public class GetCaptureMetadata {
-        public GetCaptureMetadata(GetCaptureMetadataType type) {
+    public class GetCaptureMetadata
+    {
+        public GetCaptureMetadata(GetCaptureMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public GetCaptureMetadataType Type { get; set; }
-
-
-        public static GetCaptureMetadata CreateStr(string str) {
+        public static GetCaptureMetadata CreateStr(string str)
+        {
             GetCaptureMetadataType typ = GetCaptureMetadataType.Str;
 
             GetCaptureMetadata res = new GetCaptureMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static GetCaptureMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static GetCaptureMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             GetCaptureMetadataType typ = GetCaptureMetadataType.MapOfAny;
 
             GetCaptureMetadata res = new GetCaptureMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static GetCaptureMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static GetCaptureMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             GetCaptureMetadataType typ = GetCaptureMetadataType.ArrayOfStr;
 
             GetCaptureMetadata res = new GetCaptureMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static GetCaptureMetadata CreateNull() {
+        public static GetCaptureMetadata CreateNull()
+        {
             GetCaptureMetadataType typ = GetCaptureMetadataType.Null;
             return new GetCaptureMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 GetCaptureMetadata res = (GetCaptureMetadata)value;
                 if (GetCaptureMetadataType.FromString(res.Type).Equals(GetCaptureMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

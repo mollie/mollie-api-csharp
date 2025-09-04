@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// A list of webhooks.
         /// </summary>
         [JsonProperty("webhooks")]
-        public List<Webhook>? Webhooks { get; set; }
+        public List<Webhook> Webhooks { get; set; } = default!;
     }
 }

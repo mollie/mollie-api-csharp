@@ -14,9 +14,9 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those that require explicit selection. Separate multiple event types with a comma.
+    /// The event&apos;s type
     /// </summary>
-    public enum CreateWebhookEventTypes
+    public enum EventTypesWebhookEventTypes
     {
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
@@ -30,18 +30,20 @@ namespace Mollie.Models.Requests
         SalesInvoiceCanceled,
         [JsonProperty("sales-invoice.paid")]
         SalesInvoicePaid,
+        [JsonProperty("*")]
+        Wildcard,
     }
 
-    public static class CreateWebhookEventTypesExtension
+    public static class EventTypesWebhookEventTypesExtension
     {
-        public static string Value(this CreateWebhookEventTypes value)
+        public static string Value(this EventTypesWebhookEventTypes value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static CreateWebhookEventTypes ToEnum(this string value)
+        public static EventTypesWebhookEventTypes ToEnum(this string value)
         {
-            foreach(var field in typeof(CreateWebhookEventTypes).GetFields())
+            foreach(var field in typeof(EventTypesWebhookEventTypes).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -54,14 +56,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is CreateWebhookEventTypes)
+                    if (enumVal is EventTypesWebhookEventTypes)
                     {
-                        return (CreateWebhookEventTypes)enumVal;
+                        return (EventTypesWebhookEventTypes)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum CreateWebhookEventTypes");
+            throw new Exception($"Unknown value {value} for enum EventTypesWebhookEventTypes");
         }
     }
 

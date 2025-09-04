@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CancelPaymentMetadataType
     {
         private CancelPaymentMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CancelPaymentMetadataType Str { get { return new CancelPaymentMetadataType("str"); } }
-        
+
         public static CancelPaymentMetadataType MapOfAny { get { return new CancelPaymentMetadataType("mapOfAny"); } }
-        
+
         public static CancelPaymentMetadataType ArrayOfStr { get { return new CancelPaymentMetadataType("arrayOfStr"); } }
-        
+
         public static CancelPaymentMetadataType Null { get { return new CancelPaymentMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(CancelPaymentMetadata.CancelPaymentMetadataConverter))]
-    public class CancelPaymentMetadata {
-        public CancelPaymentMetadata(CancelPaymentMetadataType type) {
+    public class CancelPaymentMetadata
+    {
+        public CancelPaymentMetadata(CancelPaymentMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public CancelPaymentMetadataType Type { get; set; }
-
-
-        public static CancelPaymentMetadata CreateStr(string str) {
+        public static CancelPaymentMetadata CreateStr(string str)
+        {
             CancelPaymentMetadataType typ = CancelPaymentMetadataType.Str;
 
             CancelPaymentMetadata res = new CancelPaymentMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static CancelPaymentMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static CancelPaymentMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             CancelPaymentMetadataType typ = CancelPaymentMetadataType.MapOfAny;
 
             CancelPaymentMetadata res = new CancelPaymentMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static CancelPaymentMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static CancelPaymentMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             CancelPaymentMetadataType typ = CancelPaymentMetadataType.ArrayOfStr;
 
             CancelPaymentMetadata res = new CancelPaymentMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static CancelPaymentMetadata CreateNull() {
+        public static CancelPaymentMetadata CreateNull()
+        {
             CancelPaymentMetadataType typ = CancelPaymentMetadataType.Null;
             return new CancelPaymentMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 CancelPaymentMetadata res = (CancelPaymentMetadata)value;
                 if (CancelPaymentMetadataType.FromString(res.Type).Equals(CancelPaymentMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

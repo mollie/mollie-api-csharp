@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class GetPaymentMetadataType
     {
         private GetPaymentMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static GetPaymentMetadataType Str { get { return new GetPaymentMetadataType("str"); } }
-        
+
         public static GetPaymentMetadataType MapOfAny { get { return new GetPaymentMetadataType("mapOfAny"); } }
-        
+
         public static GetPaymentMetadataType ArrayOfStr { get { return new GetPaymentMetadataType("arrayOfStr"); } }
-        
+
         public static GetPaymentMetadataType Null { get { return new GetPaymentMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(GetPaymentMetadata.GetPaymentMetadataConverter))]
-    public class GetPaymentMetadata {
-        public GetPaymentMetadata(GetPaymentMetadataType type) {
+    public class GetPaymentMetadata
+    {
+        public GetPaymentMetadata(GetPaymentMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public GetPaymentMetadataType Type { get; set; }
-
-
-        public static GetPaymentMetadata CreateStr(string str) {
+        public static GetPaymentMetadata CreateStr(string str)
+        {
             GetPaymentMetadataType typ = GetPaymentMetadataType.Str;
 
             GetPaymentMetadata res = new GetPaymentMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static GetPaymentMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static GetPaymentMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             GetPaymentMetadataType typ = GetPaymentMetadataType.MapOfAny;
 
             GetPaymentMetadata res = new GetPaymentMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static GetPaymentMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static GetPaymentMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             GetPaymentMetadataType typ = GetPaymentMetadataType.ArrayOfStr;
 
             GetPaymentMetadata res = new GetPaymentMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static GetPaymentMetadata CreateNull() {
+        public static GetPaymentMetadata CreateNull()
+        {
             GetPaymentMetadataType typ = GetPaymentMetadataType.Null;
             return new GetPaymentMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 GetPaymentMetadata res = (GetPaymentMetadata)value;
                 if (GetPaymentMetadataType.FromString(res.Type).Equals(GetPaymentMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

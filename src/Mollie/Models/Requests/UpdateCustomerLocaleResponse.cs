@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
     /// 

@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
     /// 

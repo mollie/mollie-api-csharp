@@ -14,13 +14,10 @@ namespace Mollie.Models.Errors
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    /// <summary>
-    /// An error response object.
-    /// </summary>
-    public class UpdatePaymentLinkNotFoundHalJSONException : Exception
-    {
+    using System.Net.Http;
 
+    public class UpdatePaymentLinkNotFoundHalJSONExceptionPayload
+    {
         /// <summary>
         /// The status code of the error message. This is always the same code as the status code of the HTTP message itself.
         /// </summary>
@@ -55,4 +52,53 @@ namespace Mollie.Models.Errors
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
+
+    /// <summary>
+    /// An error response object.
+    /// </summary>
+    public class UpdatePaymentLinkNotFoundHalJSONException : BaseException
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public UpdatePaymentLinkNotFoundHalJSONExceptionPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.Status instead.")]
+        public long Status { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.Title instead.")]
+        public string Title { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.Detail instead.")]
+        public string Detail { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.Field instead.")]
+        public string? Field { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.Links instead.")]
+        public UpdatePaymentLinkNotFoundLinks Links { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use UpdatePaymentLinkNotFoundHalJSONException.Payload.HttpMeta instead.")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        public UpdatePaymentLinkNotFoundHalJSONException(
+            UpdatePaymentLinkNotFoundHalJSONExceptionPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Status = payload.Status;
+           Title = payload.Title;
+           Detail = payload.Detail;
+           Field = payload.Field;
+           Links = payload.Links;
+           HttpMeta = payload.HttpMeta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }

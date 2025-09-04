@@ -14,9 +14,13 @@ namespace Mollie.Models.Requests
     using System;
     
     /// <summary>
-    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those that require explicit selection. Separate multiple event types with a comma.
+    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
+    /// 
+    /// <remarks>
+    /// that require explicit selection. Separate multiple event types with a comma.
+    /// </remarks>
     /// </summary>
-    public enum UpdateWebhookEventTypes
+    public enum UpdateWebhookWebhookEventTypesRequest
     {
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
@@ -30,18 +34,20 @@ namespace Mollie.Models.Requests
         SalesInvoiceCanceled,
         [JsonProperty("sales-invoice.paid")]
         SalesInvoicePaid,
+        [JsonProperty("*")]
+        Wildcard,
     }
 
-    public static class UpdateWebhookEventTypesExtension
+    public static class UpdateWebhookWebhookEventTypesRequestExtension
     {
-        public static string Value(this UpdateWebhookEventTypes value)
+        public static string Value(this UpdateWebhookWebhookEventTypesRequest value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static UpdateWebhookEventTypes ToEnum(this string value)
+        public static UpdateWebhookWebhookEventTypesRequest ToEnum(this string value)
         {
-            foreach(var field in typeof(UpdateWebhookEventTypes).GetFields())
+            foreach(var field in typeof(UpdateWebhookWebhookEventTypesRequest).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -54,14 +60,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is UpdateWebhookEventTypes)
+                    if (enumVal is UpdateWebhookWebhookEventTypesRequest)
                     {
-                        return (UpdateWebhookEventTypes)enumVal;
+                        return (UpdateWebhookWebhookEventTypesRequest)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum UpdateWebhookEventTypes");
+            throw new Exception($"Unknown value {value} for enum UpdateWebhookWebhookEventTypesRequest");
         }
     }
 

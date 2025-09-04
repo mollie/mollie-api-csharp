@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by<br/>
     /// 

@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ListSettlementCapturesMetadataType
     {
         private ListSettlementCapturesMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static ListSettlementCapturesMetadataType Str { get { return new ListSettlementCapturesMetadataType("str"); } }
-        
+
         public static ListSettlementCapturesMetadataType MapOfAny { get { return new ListSettlementCapturesMetadataType("mapOfAny"); } }
-        
+
         public static ListSettlementCapturesMetadataType ArrayOfStr { get { return new ListSettlementCapturesMetadataType("arrayOfStr"); } }
-        
+
         public static ListSettlementCapturesMetadataType Null { get { return new ListSettlementCapturesMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(ListSettlementCapturesMetadata.ListSettlementCapturesMetadataConverter))]
-    public class ListSettlementCapturesMetadata {
-        public ListSettlementCapturesMetadata(ListSettlementCapturesMetadataType type) {
+    public class ListSettlementCapturesMetadata
+    {
+        public ListSettlementCapturesMetadata(ListSettlementCapturesMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public ListSettlementCapturesMetadataType Type { get; set; }
-
-
-        public static ListSettlementCapturesMetadata CreateStr(string str) {
+        public static ListSettlementCapturesMetadata CreateStr(string str)
+        {
             ListSettlementCapturesMetadataType typ = ListSettlementCapturesMetadataType.Str;
 
             ListSettlementCapturesMetadata res = new ListSettlementCapturesMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static ListSettlementCapturesMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static ListSettlementCapturesMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             ListSettlementCapturesMetadataType typ = ListSettlementCapturesMetadataType.MapOfAny;
 
             ListSettlementCapturesMetadata res = new ListSettlementCapturesMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static ListSettlementCapturesMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static ListSettlementCapturesMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             ListSettlementCapturesMetadataType typ = ListSettlementCapturesMetadataType.ArrayOfStr;
 
             ListSettlementCapturesMetadata res = new ListSettlementCapturesMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static ListSettlementCapturesMetadata CreateNull() {
+        public static ListSettlementCapturesMetadata CreateNull()
+        {
             ListSettlementCapturesMetadataType typ = ListSettlementCapturesMetadataType.Null;
             return new ListSettlementCapturesMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 ListSettlementCapturesMetadata res = (ListSettlementCapturesMetadata)value;
                 if (ListSettlementCapturesMetadataType.FromString(res.Type).Equals(ListSettlementCapturesMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

@@ -1,6 +1,6 @@
-# ListWebhooksEventTypes
+# WebhookWebhookEventTypes
 
-Used to filter out only the webhooks that are subscribed to certain types of events.
+The event's type
 
 
 ## Values
@@ -13,3 +13,4 @@ Used to filter out only the webhooks that are subscribed to certain types of eve
 | `SalesInvoiceIssued`        | sales-invoice.issued        |
 | `SalesInvoiceCanceled`      | sales-invoice.canceled      |
 | `SalesInvoicePaid`          | sales-invoice.paid          |
+| `Wildcard`                  | *                           |

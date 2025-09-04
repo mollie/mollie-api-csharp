@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The type of transaction, for example `payment` or `refund`. Values include the below examples, although this list<br/>
     /// 

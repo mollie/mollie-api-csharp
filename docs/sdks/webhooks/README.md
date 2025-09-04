@@ -31,7 +31,7 @@ var sdk = new Client(security: new Security() {
 CreateWebhookRequest req = new CreateWebhookRequest() {
     Name = "Webhook #1",
     Url = "https://mollie.com/",
-    EventTypes = CreateWebhookEventTypes.PaymentLinkPaid,
+    WebhookEventTypes = CreateWebhookWebhookEventTypesRequest.PaymentLinkPaid,
     Testmode = false,
 };
 
@@ -77,7 +77,7 @@ ListWebhooksRequest req = new ListWebhooksRequest() {
     From = "hook_B2EyhTH5N4KWUnoYPcgiH",
     Limit = 50,
     Sort = ListWebhooksSort.Desc,
-    EventTypes = ListWebhooksEventTypes.PaymentLinkPaid,
+    EventTypes = EventTypesWebhookEventTypes.PaymentLinkPaid,
     Testmode = false,
 };
 
@@ -124,7 +124,7 @@ var res = await sdk.Webhooks.UpdateAsync(
     requestBody: new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
-        EventTypes = UpdateWebhookEventTypes.PaymentLinkPaid,
+        WebhookEventTypes = UpdateWebhookWebhookEventTypesRequest.PaymentLinkPaid,
         Testmode = false,
     }
 );

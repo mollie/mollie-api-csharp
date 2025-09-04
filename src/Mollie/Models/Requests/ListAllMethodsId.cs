@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The unique identifier of the payment method. When used during <a href="create-payment">payment creation</a>, the payment<br/>
     /// 

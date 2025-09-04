@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CreateRefundMetadataResponseType
     {
         private CreateRefundMetadataResponseType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CreateRefundMetadataResponseType Str { get { return new CreateRefundMetadataResponseType("str"); } }
-        
+
         public static CreateRefundMetadataResponseType MapOfAny { get { return new CreateRefundMetadataResponseType("mapOfAny"); } }
-        
+
         public static CreateRefundMetadataResponseType ArrayOfStr { get { return new CreateRefundMetadataResponseType("arrayOfStr"); } }
-        
+
         public static CreateRefundMetadataResponseType Null { get { return new CreateRefundMetadataResponseType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(CreateRefundMetadataResponse.CreateRefundMetadataResponseConverter))]
-    public class CreateRefundMetadataResponse {
-        public CreateRefundMetadataResponse(CreateRefundMetadataResponseType type) {
+    public class CreateRefundMetadataResponse
+    {
+        public CreateRefundMetadataResponse(CreateRefundMetadataResponseType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public CreateRefundMetadataResponseType Type { get; set; }
-
-
-        public static CreateRefundMetadataResponse CreateStr(string str) {
+        public static CreateRefundMetadataResponse CreateStr(string str)
+        {
             CreateRefundMetadataResponseType typ = CreateRefundMetadataResponseType.Str;
 
             CreateRefundMetadataResponse res = new CreateRefundMetadataResponse(typ);
             res.Str = str;
             return res;
         }
-
-        public static CreateRefundMetadataResponse CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static CreateRefundMetadataResponse CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             CreateRefundMetadataResponseType typ = CreateRefundMetadataResponseType.MapOfAny;
 
             CreateRefundMetadataResponse res = new CreateRefundMetadataResponse(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static CreateRefundMetadataResponse CreateArrayOfStr(List<string> arrayOfStr) {
+        public static CreateRefundMetadataResponse CreateArrayOfStr(List<string> arrayOfStr)
+        {
             CreateRefundMetadataResponseType typ = CreateRefundMetadataResponseType.ArrayOfStr;
 
             CreateRefundMetadataResponse res = new CreateRefundMetadataResponse(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static CreateRefundMetadataResponse CreateNull() {
+        public static CreateRefundMetadataResponse CreateNull()
+        {
             CreateRefundMetadataResponseType typ = CreateRefundMetadataResponseType.Null;
             return new CreateRefundMetadataResponse(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 CreateRefundMetadataResponse res = (CreateRefundMetadataResponse)value;
                 if (CreateRefundMetadataResponseType.FromString(res.Type).Equals(CreateRefundMetadataResponseType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

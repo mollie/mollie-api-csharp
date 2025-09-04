@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class GetSubscriptionMetadataType
     {
         private GetSubscriptionMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static GetSubscriptionMetadataType Str { get { return new GetSubscriptionMetadataType("str"); } }
-        
+
         public static GetSubscriptionMetadataType MapOfAny { get { return new GetSubscriptionMetadataType("mapOfAny"); } }
-        
+
         public static GetSubscriptionMetadataType ArrayOfStr { get { return new GetSubscriptionMetadataType("arrayOfStr"); } }
-        
+
         public static GetSubscriptionMetadataType Null { get { return new GetSubscriptionMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -69,8 +69,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(GetSubscriptionMetadata.GetSubscriptionMetadataConverter))]
-    public class GetSubscriptionMetadata {
-        public GetSubscriptionMetadata(GetSubscriptionMetadataType type) {
+    public class GetSubscriptionMetadata
+    {
+        public GetSubscriptionMetadata(GetSubscriptionMetadataType type)
+        {
             Type = type;
         }
 
@@ -84,25 +86,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public GetSubscriptionMetadataType Type { get; set; }
-
-
-        public static GetSubscriptionMetadata CreateStr(string str) {
+        public static GetSubscriptionMetadata CreateStr(string str)
+        {
             GetSubscriptionMetadataType typ = GetSubscriptionMetadataType.Str;
 
             GetSubscriptionMetadata res = new GetSubscriptionMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static GetSubscriptionMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static GetSubscriptionMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             GetSubscriptionMetadataType typ = GetSubscriptionMetadataType.MapOfAny;
 
             GetSubscriptionMetadata res = new GetSubscriptionMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static GetSubscriptionMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static GetSubscriptionMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             GetSubscriptionMetadataType typ = GetSubscriptionMetadataType.ArrayOfStr;
 
             GetSubscriptionMetadata res = new GetSubscriptionMetadata(typ);
@@ -110,7 +111,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static GetSubscriptionMetadata CreateNull() {
+        public static GetSubscriptionMetadata CreateNull()
+        {
             GetSubscriptionMetadataType typ = GetSubscriptionMetadataType.Null;
             return new GetSubscriptionMetadata(typ);
         }
@@ -208,28 +210,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 GetSubscriptionMetadata res = (GetSubscriptionMetadata)value;
                 if (GetSubscriptionMetadataType.FromString(res.Type).Equals(GetSubscriptionMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

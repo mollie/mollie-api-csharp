@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ListAllRefundsMetadataType
     {
         private ListAllRefundsMetadataType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static ListAllRefundsMetadataType Str { get { return new ListAllRefundsMetadataType("str"); } }
-        
+
         public static ListAllRefundsMetadataType MapOfAny { get { return new ListAllRefundsMetadataType("mapOfAny"); } }
-        
+
         public static ListAllRefundsMetadataType ArrayOfStr { get { return new ListAllRefundsMetadataType("arrayOfStr"); } }
-        
+
         public static ListAllRefundsMetadataType Null { get { return new ListAllRefundsMetadataType("null"); } }
 
         public override string ToString() { return Value; }
@@ -66,8 +66,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(ListAllRefundsMetadata.ListAllRefundsMetadataConverter))]
-    public class ListAllRefundsMetadata {
-        public ListAllRefundsMetadata(ListAllRefundsMetadataType type) {
+    public class ListAllRefundsMetadata
+    {
+        public ListAllRefundsMetadata(ListAllRefundsMetadataType type)
+        {
             Type = type;
         }
 
@@ -81,25 +83,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public ListAllRefundsMetadataType Type { get; set; }
-
-
-        public static ListAllRefundsMetadata CreateStr(string str) {
+        public static ListAllRefundsMetadata CreateStr(string str)
+        {
             ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.Str;
 
             ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
             res.Str = str;
             return res;
         }
-
-        public static ListAllRefundsMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static ListAllRefundsMetadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.MapOfAny;
 
             ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static ListAllRefundsMetadata CreateArrayOfStr(List<string> arrayOfStr) {
+        public static ListAllRefundsMetadata CreateArrayOfStr(List<string> arrayOfStr)
+        {
             ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.ArrayOfStr;
 
             ListAllRefundsMetadata res = new ListAllRefundsMetadata(typ);
@@ -107,7 +108,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static ListAllRefundsMetadata CreateNull() {
+        public static ListAllRefundsMetadata CreateNull()
+        {
             ListAllRefundsMetadataType typ = ListAllRefundsMetadataType.Null;
             return new ListAllRefundsMetadata(typ);
         }
@@ -205,28 +207,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 ListAllRefundsMetadata res = (ListAllRefundsMetadata)value;
                 if (ListAllRefundsMetadataType.FromString(res.Type).Equals(ListAllRefundsMetadataType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

@@ -31,54 +31,60 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this subscription.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The subscription&apos;s events destination.
         /// </summary>
         [JsonProperty("url")]
-        public string? Url { get; set; }
+        public string Url { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to the profile that created the subscription.
         /// </summary>
-        [JsonProperty("profileId")]
+        [JsonProperty("profileId", NullValueHandling = NullValueHandling.Include)]
         public string? ProfileId { get; set; }
 
         /// <summary>
         /// The subscription&apos;s date time of creation.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The subscription&apos;s name.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The events types that are subscribed.
         /// </summary>
         [JsonProperty("eventTypes")]
-        public List<string>? EventTypes { get; set; }
+        public List<GetWebhookWebhookEventTypes> EventTypes { get; set; } = default!;
 
         /// <summary>
         /// The subscription&apos;s current status.
         /// </summary>
         [JsonProperty("status")]
-        public GetWebhookStatus? Status { get; set; }
+        public GetWebhookStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// The subscription&apos;s mode.
+        /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public GetWebhookMode? Mode { get; set; }
+        public GetWebhookMode Mode { get; set; } = default!;
+
+        /// <summary>
+        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+        /// </summary>
+        [JsonProperty("_links")]
+        public GetWebhookLinks Links { get; set; } = default!;
     }
 }

@@ -5,4 +5,4 @@
 
 | Field                                             | Type                                              | Required                                          | Description                                       |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| `Webhooks`                                        | List<[Webhook](../../Models/Requests/Webhook.md)> | :heavy_minus_sign:                                | A list of webhooks.                               |
+| `Webhooks`                                        | List<[Webhook](../../Models/Requests/Webhook.md)> | :heavy_check_mark:                                | A list of webhooks.                               |

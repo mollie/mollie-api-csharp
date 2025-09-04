@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
     /// </summary>

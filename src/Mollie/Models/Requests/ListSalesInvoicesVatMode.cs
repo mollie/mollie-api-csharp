@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
     /// 

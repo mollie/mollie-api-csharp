@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// 

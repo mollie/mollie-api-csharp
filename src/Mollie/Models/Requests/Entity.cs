@@ -17,17 +17,17 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class EntityType
     {
         private EntityType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static EntityType GetWebhookEventPaymentLinkOutput { get { return new EntityType("get_webhook_event_payment-link_output"); } }
-        
+
         public static EntityType GetWebhookEventProfile { get { return new EntityType("get_webhook_event_profile"); } }
-        
+
         public static EntityType Null { get { return new EntityType("null"); } }
 
         public override string ToString() { return Value; }
@@ -57,8 +57,10 @@ namespace Mollie.Models.Requests
 
 
     [JsonConverter(typeof(Entity.EntityConverter))]
-    public class Entity {
-        public Entity(EntityType type) {
+    public class Entity
+    {
+        public Entity(EntityType type)
+        {
             Type = type;
         }
 
@@ -69,17 +71,16 @@ namespace Mollie.Models.Requests
         public GetWebhookEventProfile? GetWebhookEventProfile { get; set; }
 
         public EntityType Type { get; set; }
-
-
-        public static Entity CreateGetWebhookEventPaymentLinkOutput(GetWebhookEventPaymentLinkOutput getWebhookEventPaymentLinkOutput) {
+        public static Entity CreateGetWebhookEventPaymentLinkOutput(GetWebhookEventPaymentLinkOutput getWebhookEventPaymentLinkOutput)
+        {
             EntityType typ = EntityType.GetWebhookEventPaymentLinkOutput;
 
             Entity res = new Entity(typ);
             res.GetWebhookEventPaymentLinkOutput = getWebhookEventPaymentLinkOutput;
             return res;
         }
-
-        public static Entity CreateGetWebhookEventProfile(GetWebhookEventProfile getWebhookEventProfile) {
+        public static Entity CreateGetWebhookEventProfile(GetWebhookEventProfile getWebhookEventProfile)
+        {
             EntityType typ = EntityType.GetWebhookEventProfile;
 
             Entity res = new Entity(typ);
@@ -87,7 +88,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static Entity CreateNull() {
+        public static Entity CreateNull()
+        {
             EntityType typ = EntityType.Null;
             return new Entity(typ);
         }
@@ -178,23 +180,25 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 Entity res = (Entity)value;
                 if (EntityType.FromString(res.Type).Equals(EntityType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.GetWebhookEventPaymentLinkOutput != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.GetWebhookEventPaymentLinkOutput));
                     return;
                 }
+
                 if (res.GetWebhookEventProfile != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.GetWebhookEventProfile));
                     return;
                 }
-
             }
 
         }

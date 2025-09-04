@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
     /// </summary>

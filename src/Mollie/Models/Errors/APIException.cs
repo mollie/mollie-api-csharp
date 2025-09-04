@@ -6,28 +6,23 @@
 // the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #nullable enable
 namespace Mollie.Models.Errors
 {
     using System;
     using System.Net.Http;
 
-    public class APIException : Exception
+    public class APIException : BaseException
     {
-
-        public override string Message { get; }
-        public HttpRequestMessage Request { get; set; }
-        public HttpResponseMessage Response { get; set; }
-        public APIException(string message, HttpRequestMessage request, HttpResponseMessage response)
-        {
-            Message = message;
-            Request = request;
-            Response = response;
-        }
-
-        public override string ToString(){
-            return Message + ": Status " + Response.StatusCode;
-        }
-
+        /// <summary>
+        /// Default API exception.
+        /// </summary>
+        public APIException(
+            string message,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base(message, request, response, body) {}
     }
 }

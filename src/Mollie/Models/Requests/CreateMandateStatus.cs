@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
     /// 

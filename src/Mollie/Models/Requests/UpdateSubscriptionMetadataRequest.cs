@@ -16,19 +16,19 @@ namespace Mollie.Models.Requests
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class UpdateSubscriptionMetadataRequestType
     {
         private UpdateSubscriptionMetadataRequestType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static UpdateSubscriptionMetadataRequestType Str { get { return new UpdateSubscriptionMetadataRequestType("str"); } }
-        
+
         public static UpdateSubscriptionMetadataRequestType MapOfAny { get { return new UpdateSubscriptionMetadataRequestType("mapOfAny"); } }
-        
+
         public static UpdateSubscriptionMetadataRequestType ArrayOfStr { get { return new UpdateSubscriptionMetadataRequestType("arrayOfStr"); } }
-        
+
         public static UpdateSubscriptionMetadataRequestType Null { get { return new UpdateSubscriptionMetadataRequestType("null"); } }
 
         public override string ToString() { return Value; }
@@ -69,8 +69,10 @@ namespace Mollie.Models.Requests
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(UpdateSubscriptionMetadataRequest.UpdateSubscriptionMetadataRequestConverter))]
-    public class UpdateSubscriptionMetadataRequest {
-        public UpdateSubscriptionMetadataRequest(UpdateSubscriptionMetadataRequestType type) {
+    public class UpdateSubscriptionMetadataRequest
+    {
+        public UpdateSubscriptionMetadataRequest(UpdateSubscriptionMetadataRequestType type)
+        {
             Type = type;
         }
 
@@ -84,25 +86,24 @@ namespace Mollie.Models.Requests
         public List<string>? ArrayOfStr { get; set; }
 
         public UpdateSubscriptionMetadataRequestType Type { get; set; }
-
-
-        public static UpdateSubscriptionMetadataRequest CreateStr(string str) {
+        public static UpdateSubscriptionMetadataRequest CreateStr(string str)
+        {
             UpdateSubscriptionMetadataRequestType typ = UpdateSubscriptionMetadataRequestType.Str;
 
             UpdateSubscriptionMetadataRequest res = new UpdateSubscriptionMetadataRequest(typ);
             res.Str = str;
             return res;
         }
-
-        public static UpdateSubscriptionMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static UpdateSubscriptionMetadataRequest CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             UpdateSubscriptionMetadataRequestType typ = UpdateSubscriptionMetadataRequestType.MapOfAny;
 
             UpdateSubscriptionMetadataRequest res = new UpdateSubscriptionMetadataRequest(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static UpdateSubscriptionMetadataRequest CreateArrayOfStr(List<string> arrayOfStr) {
+        public static UpdateSubscriptionMetadataRequest CreateArrayOfStr(List<string> arrayOfStr)
+        {
             UpdateSubscriptionMetadataRequestType typ = UpdateSubscriptionMetadataRequestType.ArrayOfStr;
 
             UpdateSubscriptionMetadataRequest res = new UpdateSubscriptionMetadataRequest(typ);
@@ -110,7 +111,8 @@ namespace Mollie.Models.Requests
             return res;
         }
 
-        public static UpdateSubscriptionMetadataRequest CreateNull() {
+        public static UpdateSubscriptionMetadataRequest CreateNull()
+        {
             UpdateSubscriptionMetadataRequestType typ = UpdateSubscriptionMetadataRequestType.Null;
             return new UpdateSubscriptionMetadataRequest(typ);
         }
@@ -208,28 +210,31 @@ namespace Mollie.Models.Requests
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 UpdateSubscriptionMetadataRequest res = (UpdateSubscriptionMetadataRequest)value;
                 if (UpdateSubscriptionMetadataRequestType.FromString(res.Type).Equals(UpdateSubscriptionMetadataRequestType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfStr != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfStr));
                     return;
                 }
-
             }
 
         }

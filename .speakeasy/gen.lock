@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 8775b58eb25bdd828491af04b29ee197
+  docChecksum: 9c9a91a48aec7717493710340054b32b
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.10
-  generationVersion: 2.687.13
-  releaseVersion: 0.3.0
-  configChecksum: 29bc1649cad3320d70fdc3b39cb5a1a4
+  speakeasyVersion: 1.609.0
+  generationVersion: 2.692.0
+  releaseVersion: 0.3.1
+  configChecksum: f28b7c57b9a7536fd80ffa91efe430fa
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.12.0
+    core: 3.12.2
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.7
@@ -979,7 +979,7 @@ generatedFiles:
   - docs/Models/Requests/CreateSubscriptionSelf.md
   - docs/Models/Requests/CreateSubscriptionStatus.md
   - docs/Models/Requests/CreateWebhookDocumentation.md
-  - docs/Models/Requests/CreateWebhookEventTypes.md
+  - docs/Models/Requests/CreateWebhookEventTypeWebhookEventTypes.md
   - docs/Models/Requests/CreateWebhookLinks.md
   - docs/Models/Requests/CreateWebhookMode.md
   - docs/Models/Requests/CreateWebhookRequest.md
@@ -988,6 +988,7 @@ generatedFiles:
   - docs/Models/Requests/CreateWebhookStatus.md
   - docs/Models/Requests/CreateWebhookUnprocessableEntityDocumentation.md
   - docs/Models/Requests/CreateWebhookUnprocessableEntityLinks.md
+  - docs/Models/Requests/CreateWebhookWebhookEventTypesRequest.md
   - docs/Models/Requests/Currencies.md
   - docs/Models/Requests/CustomerDocumentation.md
   - docs/Models/Requests/CustomerLinks.md
@@ -1033,6 +1034,7 @@ generatedFiles:
   - docs/Models/Requests/EntitySelf2.md
   - docs/Models/Requests/Event.md
   - docs/Models/Requests/EventLinks.md
+  - docs/Models/Requests/EventTypesWebhookEventTypes.md
   - docs/Models/Requests/ExternalReferenceRequest.md
   - docs/Models/Requests/FailedPayment.md
   - docs/Models/Requests/FailedPaymentFee.md
@@ -1644,6 +1646,7 @@ generatedFiles:
   - docs/Models/Requests/GetTerminalResponseBody.md
   - docs/Models/Requests/GetTerminalSelf.md
   - docs/Models/Requests/GetTerminalStatus.md
+  - docs/Models/Requests/GetWebhookDocumentation.md
   - docs/Models/Requests/GetWebhookEventAmount.md
   - docs/Models/Requests/GetWebhookEventApplicationFee.md
   - docs/Models/Requests/GetWebhookEventApplicationFeeAmount.md
@@ -1681,6 +1684,8 @@ generatedFiles:
   - docs/Models/Requests/GetWebhookEventType.md
   - docs/Models/Requests/GetWebhookEventUnitPrice.md
   - docs/Models/Requests/GetWebhookEventVatAmount.md
+  - docs/Models/Requests/GetWebhookEventWebhookEventTypes.md
+  - docs/Models/Requests/GetWebhookLinks.md
   - docs/Models/Requests/GetWebhookMode.md
   - docs/Models/Requests/GetWebhookNotFoundDocumentation.md
   - docs/Models/Requests/GetWebhookNotFoundLinks.md
@@ -1690,6 +1695,7 @@ generatedFiles:
   - docs/Models/Requests/GetWebhookStatus.md
   - docs/Models/Requests/GetWebhookUnprocessableEntityDocumentation.md
   - docs/Models/Requests/GetWebhookUnprocessableEntityLinks.md
+  - docs/Models/Requests/GetWebhookWebhookEventTypes.md
   - docs/Models/Requests/GrossAmount.md
   - docs/Models/Requests/GroupingResponse.md
   - docs/Models/Requests/IncludeWallets.md
@@ -2615,7 +2621,6 @@ generatedFiles:
   - docs/Models/Requests/ListWebhooksBadRequestLinks.md
   - docs/Models/Requests/ListWebhooksDocumentation.md
   - docs/Models/Requests/ListWebhooksEmbedded.md
-  - docs/Models/Requests/ListWebhooksEventTypes.md
   - docs/Models/Requests/ListWebhooksLinks.md
   - docs/Models/Requests/ListWebhooksMode.md
   - docs/Models/Requests/ListWebhooksNext.md
@@ -3321,7 +3326,9 @@ generatedFiles:
   - docs/Models/Requests/UpdateSubscriptionResponseBody.md
   - docs/Models/Requests/UpdateSubscriptionSelf.md
   - docs/Models/Requests/UpdateSubscriptionStatus.md
-  - docs/Models/Requests/UpdateWebhookEventTypes.md
+  - docs/Models/Requests/UpdateWebhookDocumentation.md
+  - docs/Models/Requests/UpdateWebhookEventTypeWebhookEventTypes.md
+  - docs/Models/Requests/UpdateWebhookLinks.md
   - docs/Models/Requests/UpdateWebhookMode.md
   - docs/Models/Requests/UpdateWebhookNotFoundDocumentation.md
   - docs/Models/Requests/UpdateWebhookNotFoundLinks.md
@@ -3332,11 +3339,15 @@ generatedFiles:
   - docs/Models/Requests/UpdateWebhookStatus.md
   - docs/Models/Requests/UpdateWebhookUnprocessableEntityDocumentation.md
   - docs/Models/Requests/UpdateWebhookUnprocessableEntityLinks.md
+  - docs/Models/Requests/UpdateWebhookWebhookEventTypesRequest.md
   - docs/Models/Requests/Url.md
   - docs/Models/Requests/UserAgentToken.md
   - docs/Models/Requests/VatModeRequest.md
   - docs/Models/Requests/VatSchemeRequest.md
   - docs/Models/Requests/Webhook.md
+  - docs/Models/Requests/WebhookDocumentation.md
+  - docs/Models/Requests/WebhookLinks.md
+  - docs/Models/Requests/WebhookWebhookEventTypes.md
   - docs/sdks/balances/README.md
   - docs/sdks/capabilities/README.md
   - docs/sdks/captures/README.md
@@ -3381,6 +3392,7 @@ generatedFiles:
   - src/Mollie/Models/Components/HTTPMetadata.cs
   - src/Mollie/Models/Components/Security.cs
   - src/Mollie/Models/Errors/APIException.cs
+  - src/Mollie/Models/Errors/BaseException.cs
   - src/Mollie/Models/Errors/CancelPaymentNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/CancelPaymentUnprocessableEntityHalJSONException.cs
   - src/Mollie/Models/Errors/CancelRefundHalJSONException.cs
@@ -3490,6 +3502,7 @@ generatedFiles:
   - src/Mollie/Models/Errors/ReleaseAuthorizationNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/ReleaseAuthorizationUnprocessableEntityHalJSONException.cs
   - src/Mollie/Models/Errors/RequestApplePayPaymentSessionHalJSONException.cs
+  - src/Mollie/Models/Errors/ResponseValidationException.cs
   - src/Mollie/Models/Errors/RevokeMandateHalJSONException.cs
   - src/Mollie/Models/Errors/TestWebhookNotFoundHalJSONException.cs
   - src/Mollie/Models/Errors/TestWebhookUnprocessableEntityHalJSONException.cs
@@ -4324,7 +4337,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateSubscriptionSelf.cs
   - src/Mollie/Models/Requests/CreateSubscriptionStatus.cs
   - src/Mollie/Models/Requests/CreateWebhookDocumentation.cs
-  - src/Mollie/Models/Requests/CreateWebhookEventTypes.cs
+  - src/Mollie/Models/Requests/CreateWebhookEventTypeWebhookEventTypes.cs
   - src/Mollie/Models/Requests/CreateWebhookLinks.cs
   - src/Mollie/Models/Requests/CreateWebhookMode.cs
   - src/Mollie/Models/Requests/CreateWebhookRequest.cs
@@ -4333,6 +4346,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateWebhookStatus.cs
   - src/Mollie/Models/Requests/CreateWebhookUnprocessableEntityDocumentation.cs
   - src/Mollie/Models/Requests/CreateWebhookUnprocessableEntityLinks.cs
+  - src/Mollie/Models/Requests/CreateWebhookWebhookEventTypesRequest.cs
   - src/Mollie/Models/Requests/Currencies.cs
   - src/Mollie/Models/Requests/CustomerDocumentation.cs
   - src/Mollie/Models/Requests/CustomerLinks.cs
@@ -4378,6 +4392,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/EntitySelf2.cs
   - src/Mollie/Models/Requests/Event.cs
   - src/Mollie/Models/Requests/EventLinks.cs
+  - src/Mollie/Models/Requests/EventTypesWebhookEventTypes.cs
   - src/Mollie/Models/Requests/ExternalReferenceRequest.cs
   - src/Mollie/Models/Requests/FailedPayment.cs
   - src/Mollie/Models/Requests/FailedPaymentFee.cs
@@ -4989,6 +5004,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetTerminalResponseBody.cs
   - src/Mollie/Models/Requests/GetTerminalSelf.cs
   - src/Mollie/Models/Requests/GetTerminalStatus.cs
+  - src/Mollie/Models/Requests/GetWebhookDocumentation.cs
   - src/Mollie/Models/Requests/GetWebhookEventAmount.cs
   - src/Mollie/Models/Requests/GetWebhookEventApplicationFee.cs
   - src/Mollie/Models/Requests/GetWebhookEventApplicationFeeAmount.cs
@@ -5026,6 +5042,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetWebhookEventType.cs
   - src/Mollie/Models/Requests/GetWebhookEventUnitPrice.cs
   - src/Mollie/Models/Requests/GetWebhookEventVatAmount.cs
+  - src/Mollie/Models/Requests/GetWebhookEventWebhookEventTypes.cs
+  - src/Mollie/Models/Requests/GetWebhookLinks.cs
   - src/Mollie/Models/Requests/GetWebhookMode.cs
   - src/Mollie/Models/Requests/GetWebhookNotFoundDocumentation.cs
   - src/Mollie/Models/Requests/GetWebhookNotFoundLinks.cs
@@ -5035,6 +5053,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetWebhookStatus.cs
   - src/Mollie/Models/Requests/GetWebhookUnprocessableEntityDocumentation.cs
   - src/Mollie/Models/Requests/GetWebhookUnprocessableEntityLinks.cs
+  - src/Mollie/Models/Requests/GetWebhookWebhookEventTypes.cs
   - src/Mollie/Models/Requests/GrossAmount.cs
   - src/Mollie/Models/Requests/GroupingResponse.cs
   - src/Mollie/Models/Requests/IncludeWallets.cs
@@ -5960,7 +5979,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListWebhooksBadRequestLinks.cs
   - src/Mollie/Models/Requests/ListWebhooksDocumentation.cs
   - src/Mollie/Models/Requests/ListWebhooksEmbedded.cs
-  - src/Mollie/Models/Requests/ListWebhooksEventTypes.cs
   - src/Mollie/Models/Requests/ListWebhooksLinks.cs
   - src/Mollie/Models/Requests/ListWebhooksMode.cs
   - src/Mollie/Models/Requests/ListWebhooksNext.cs
@@ -6666,7 +6684,9 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdateSubscriptionResponseBody.cs
   - src/Mollie/Models/Requests/UpdateSubscriptionSelf.cs
   - src/Mollie/Models/Requests/UpdateSubscriptionStatus.cs
-  - src/Mollie/Models/Requests/UpdateWebhookEventTypes.cs
+  - src/Mollie/Models/Requests/UpdateWebhookDocumentation.cs
+  - src/Mollie/Models/Requests/UpdateWebhookEventTypeWebhookEventTypes.cs
+  - src/Mollie/Models/Requests/UpdateWebhookLinks.cs
   - src/Mollie/Models/Requests/UpdateWebhookMode.cs
   - src/Mollie/Models/Requests/UpdateWebhookNotFoundDocumentation.cs
   - src/Mollie/Models/Requests/UpdateWebhookNotFoundLinks.cs
@@ -6677,11 +6697,15 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdateWebhookStatus.cs
   - src/Mollie/Models/Requests/UpdateWebhookUnprocessableEntityDocumentation.cs
   - src/Mollie/Models/Requests/UpdateWebhookUnprocessableEntityLinks.cs
+  - src/Mollie/Models/Requests/UpdateWebhookWebhookEventTypesRequest.cs
   - src/Mollie/Models/Requests/Url.cs
   - src/Mollie/Models/Requests/UserAgentToken.cs
   - src/Mollie/Models/Requests/VatModeRequest.cs
   - src/Mollie/Models/Requests/VatSchemeRequest.cs
   - src/Mollie/Models/Requests/Webhook.cs
+  - src/Mollie/Models/Requests/WebhookDocumentation.cs
+  - src/Mollie/Models/Requests/WebhookLinks.cs
+  - src/Mollie/Models/Requests/WebhookWebhookEventTypes.cs
   - src/Mollie/Mollie.csproj
   - src/Mollie/Onboarding.cs
   - src/Mollie/Organizations.cs
@@ -8761,7 +8785,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-01-01T12:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.paid, sales-invoice.canceled"], "status": "enabled", "mode": "live", "webhookSecret": "secret", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-01-01T12:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "webhookSecret": "secret", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-webhooks:
@@ -8775,7 +8799,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 2, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_yjtBMWDCGw5YFSPQ3HPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #2", "eventTypes": ["payment-link.paid", "payment.failed"], "status": "enabled", "mode": "live"}, {"resource": "webhook", "id": "hook_qHknfTxaDx6s8JNhuGPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:08:48+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "blocked", "mode": "live"}]}, "_links": {"self": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_yjtBMWDCGw5YFSPQ3HPzH&limit=2", "type": "application/hal+json"}, "previous": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_5foxphpBru4xNPCDJJPzH&limit=2", "type": "application/hal+json"}, "next": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_fTqARmWsfs9oXvKbZEPzH&limit=2", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/list-webhook", "type": "text/html"}}}
+          application/hal+json: {"count": 2, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_yjtBMWDCGw5YFSPQ3HPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #2", "eventTypes": ["payment-link.paid", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}, {"resource": "webhook", "id": "hook_qHknfTxaDx6s8JNhuGPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:08:48+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "blocked", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_yjtBMWDCGw5YFSPQ3HPzH&limit=2", "type": "application/hal+json"}, "previous": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_5foxphpBru4xNPCDJJPzH&limit=2", "type": "application/hal+json"}, "next": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_fTqARmWsfs9oXvKbZEPzH&limit=2", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/list-webhook", "type": "text/html"}}}
     speakeasy-default-list-webhooks:
       parameters:
         query:
@@ -8786,7 +8810,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["profile.create", "profile.blocked"], "status": "enabled", "mode": "live"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["balance-transaction.created", "sales-invoice.issued"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-webhook:
@@ -8798,7 +8822,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live"}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/create-webhook", "type": "text/html"}}}
     speakeasy-default-update-webhook:
       parameters:
         path:
@@ -8807,7 +8831,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["profile.create", "profile.blocked"], "status": "enabled", "mode": "live"}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.canceled", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -8821,7 +8845,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid", "sales-invoice.paid"], "status": "enabled", "mode": "test"}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid", "sales-invoice.paid"], "status": "enabled", "mode": "test", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
     get-webhook-200-1:
       parameters:
         path:
@@ -8830,7 +8854,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "deleted", "mode": "test"}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "deleted", "mode": "test", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
     speakeasy-default-get-webhook:
       parameters:
         path:
@@ -8839,7 +8863,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["profile.create", "profile.blocked"], "status": "enabled", "mode": "live"}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.issued", "balance-transaction.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -9440,3 +9464,4 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Webhooks.Create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Update()`: \n  *  `requestBody` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Get()`:  `response` **Changed** **Breaking** :warning:\n* `Client.Webhook-Events.Get()`:  `response` **Changed** **Breaking** :warning:\n"

@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>
     /// 

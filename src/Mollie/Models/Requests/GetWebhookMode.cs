@@ -15,9 +15,9 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
-    /// The subscription&apos;s mode.
+    /// Whether this entity was created in live mode or in test mode.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class GetWebhookMode : IEquatable<GetWebhookMode>

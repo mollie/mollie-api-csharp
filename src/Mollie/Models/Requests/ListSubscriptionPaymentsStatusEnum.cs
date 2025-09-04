@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
     /// 

@@ -45,7 +45,7 @@ namespace Mollie.Models.Requests
         /// Used to filter out only the webhooks that are subscribed to certain types of events.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=eventTypes")]
-        public ListWebhooksEventTypes? EventTypes { get; set; }
+        public EventTypesWebhookEventTypes? EventTypes { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
