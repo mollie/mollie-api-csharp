@@ -110,7 +110,7 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -237,19 +237,19 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListBalancesBadRequestHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListBalancesBadRequestHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListBalancesBadRequestHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -258,33 +258,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new ListBalancesBadRequestHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListBalancesNotFoundHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListBalancesNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListBalancesNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new ListBalancesNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -393,14 +367,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetBalanceResponseBody obj;
+                    EntityBalance obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetBalanceResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityBalance>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetBalanceResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityBalance.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetBalanceResponse()
@@ -411,7 +385,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.EntityBalance = obj;
                     return response;
                 }
 
@@ -422,14 +396,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetBalanceHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetBalanceHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetBalanceHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -438,7 +412,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new GetBalanceHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -543,14 +517,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetPrimaryBalanceResponseBody obj;
+                    EntityBalance obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetPrimaryBalanceResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityBalance>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetPrimaryBalanceResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityBalance.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetPrimaryBalanceResponse()
@@ -561,7 +535,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.EntityBalance = obj;
                     return response;
                 }
 
@@ -666,14 +640,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetBalanceReportResponseBody obj;
+                    EntityBalanceReport obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetBalanceReportResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityBalanceReport>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetBalanceReportResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityBalanceReport.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetBalanceReportResponse()
@@ -684,25 +658,25 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.EntityBalanceReport = obj;
                     return response;
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetBalanceReportNotFoundHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetBalanceReportNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetBalanceReportNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -711,33 +685,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new GetBalanceReportNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 422)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetBalanceReportUnprocessableEntityHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetBalanceReportUnprocessableEntityHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetBalanceReportUnprocessableEntityHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new GetBalanceReportUnprocessableEntityHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -872,19 +820,19 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListBalanceTransactionsBadRequestHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListBalanceTransactionsBadRequestHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListBalanceTransactionsBadRequestHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -893,59 +841,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new ListBalanceTransactionsBadRequestHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListBalanceTransactionsNotFoundHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListBalanceTransactionsNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListBalanceTransactionsNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new ListBalanceTransactionsNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 429)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    TooManyRequestsHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<TooManyRequestsHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into TooManyRequestsHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new TooManyRequestsHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

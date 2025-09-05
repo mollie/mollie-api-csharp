@@ -33,7 +33,7 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     Month = "01",
     From = "inv_xBEbP9rvAq",
     Limit = 50,
-    Sort = ListInvoicesSort.Desc,
+    Sort = ListSort.Desc,
 };
 
 var res = await sdk.Invoices.ListAsync(req);
@@ -53,11 +53,10 @@ var res = await sdk.Invoices.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| Mollie.Models.Errors.ListInvoicesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.ListInvoicesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -84,9 +83,9 @@ var res = await sdk.Invoices.GetAsync(id: "inv_FrvewDA3Pr");
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. | inv_FrvewDA3Pr                                                    |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. |
 
 ### Response
 
@@ -94,7 +93,7 @@ var res = await sdk.Invoices.GetAsync(id: "inv_FrvewDA3Pr");
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Mollie.Models.Errors.GetInvoiceHalJSONException | 404                                             | application/hal+json                            |
-| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

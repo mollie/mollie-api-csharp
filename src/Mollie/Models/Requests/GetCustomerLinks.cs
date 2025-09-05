@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -23,48 +23,36 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetCustomerSelf Self { get; set; } = default!;
+        public Url Self { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("dashboard")]
-        public GetCustomerDashboard Dashboard { get; set; } = default!;
+        public Url Dashboard { get; set; } = default!;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-payments">payments</a> linked to this customer. Omitted if no such payments<br/>
-        /// 
-        /// <remarks>
-        /// exist (yet).
-        /// </remarks>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("payments")]
-        public GetCustomerPayments? Payments { get; set; } = null;
+        public UrlNullable? Payments { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-mandates">mandates</a> linked to this customer. Omitted if no such mandates<br/>
-        /// 
-        /// <remarks>
-        /// exist (yet).
-        /// </remarks>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("mandates")]
-        public GetCustomerMandates? Mandates { get; set; } = null;
+        public UrlNullable? Mandates { get; set; } = null;
 
         /// <summary>
-        /// The API resource URL of the <a href="list-subscriptions">subscriptions</a> linked to this customer. Omitted if no such<br/>
-        /// 
-        /// <remarks>
-        /// subscriptions exist (yet).
-        /// </remarks>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("subscriptions")]
-        public GetCustomerSubscriptions? Subscriptions { get; set; } = null;
+        public UrlNullable? Subscriptions { get; set; } = null;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetCustomerDocumentation Documentation { get; set; } = default!;
+        public Url Documentation { get; set; } = default!;
     }
 }

@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class PaymentCreateRouteRequest
@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         public string PaymentId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public PaymentCreateRouteRequestBody? RequestBody { get; set; }
+        public RouteCreateRequest? RouteCreateRequest { get; set; }
     }
 }

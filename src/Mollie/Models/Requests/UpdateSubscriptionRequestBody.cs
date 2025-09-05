@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -18,10 +17,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Update the amount for future payments of this subscription.
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public UpdateSubscriptionAmountRequest? Amount { get; set; }
+        public Amount? Amount { get; set; }
 
         /// <summary>
         /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
@@ -67,17 +66,14 @@ namespace Mollie.Models.Requests
         public long? Times { get; set; }
 
         /// <summary>
-        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the<br/>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// 
         /// <remarks>
-        /// entity. Whenever you fetch the entity with our API, we will also include the metadata. You can use up to<br/>
-        /// approximately 1kB.<br/>
-        /// <br/>
-        /// Any metadata added to the subscription will be automatically forwarded to the payments generated for it.
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public UpdateSubscriptionMetadataRequest? Metadata { get; set; } = null;
+        public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>
@@ -91,9 +87,6 @@ namespace Mollie.Models.Requests
         [JsonProperty("webhookUrl")]
         public string? WebhookUrl { get; set; }
 
-        /// <summary>
-        /// The mandate used for this subscription, if any.
-        /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
 

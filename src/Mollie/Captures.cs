@@ -39,7 +39,7 @@ namespace Mollie
         /// having collected the customer&apos;s authorization.
         /// </remarks>
         /// </summary>
-        Task<CreateCaptureResponse> CreateAsync(string paymentId, CreateCaptureRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CreateCaptureResponse> CreateAsync(string paymentId, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List captures
@@ -60,14 +60,14 @@ namespace Mollie
         /// payment.
         /// </remarks>
         /// </summary>
-        Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, GetCaptureEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
     }
 
     public class Captures: ICaptures
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -76,12 +76,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateCaptureResponse> CreateAsync(string paymentId, CreateCaptureRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCaptureResponse> CreateAsync(string paymentId, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateCaptureRequest()
             {
                 PaymentId = paymentId,
-                RequestBody = requestBody,
+                EntityCapture = entityCapture,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures", request);
@@ -89,7 +89,7 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityCapture", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -174,14 +174,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCaptureResponseBody obj;
+                    CaptureResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateCaptureResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CaptureResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCaptureResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CaptureResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateCaptureResponse()
@@ -192,25 +192,25 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.CaptureResponse = obj;
                     return response;
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCaptureNotFoundHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateCaptureNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCaptureNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -219,33 +219,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new CreateCaptureNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 422)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCaptureUnprocessableEntityHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateCaptureUnprocessableEntityHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCaptureUnprocessableEntityHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new CreateCaptureUnprocessableEntityHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -373,19 +347,19 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListCapturesBadRequestHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListCapturesBadRequestHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListCapturesBadRequestHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -394,33 +368,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new ListCapturesBadRequestHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListCapturesNotFoundHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListCapturesNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListCapturesNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new ListCapturesNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -437,7 +385,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, GetCaptureEmbed? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new GetCaptureRequest()
             {
@@ -531,14 +479,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetCaptureResponseBody obj;
+                    CaptureResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetCaptureResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CaptureResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetCaptureResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CaptureResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetCaptureResponse()
@@ -549,7 +497,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.CaptureResponse = obj;
                     return response;
                 }
 
@@ -560,14 +508,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetCaptureHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetCaptureHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetCaptureHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -576,7 +524,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new GetCaptureHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

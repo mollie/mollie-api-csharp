@@ -1,9 +1,0 @@
-# CloseAvailable
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [CloseAvailableAmount](../../Models/Requests/CloseAvailableAmount.md)                             | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[CloseAvailableSubtotal2](../../Models/Requests/CloseAvailableSubtotal2.md)>                 | :heavy_minus_sign:                                                                                | N/A                                                                                               |

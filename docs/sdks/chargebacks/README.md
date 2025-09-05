@@ -31,7 +31,7 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
     Limit = 50,
-    Embed = ListChargebacksEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -52,11 +52,10 @@ var res = await sdk.Chargebacks.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| Mollie.Models.Errors.ListChargebacksBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| Mollie.Models.Errors.ListChargebacksNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| Mollie.Models.Errors.APIException                              | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -68,7 +67,6 @@ Retrieve a single payment chargeback by its ID and the ID of its parent payment.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -77,7 +75,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Chargebacks.GetAsync(
     paymentId: "tr_5B8cwPMGnU",
     chargebackId: "chb_xFzwUN4ci8HAmSGUACS4J",
-    embed: GetChargebackEmbed.Payment,
+    embed: "payment",
     testmode: false
 );
 
@@ -90,7 +88,7 @@ var res = await sdk.Chargebacks.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PaymentId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                 | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
 | `ChargebackId`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related chargeback.                                                                                                                                                                                                                                                                                                                                              | chb_xFzwUN4ci8HAmSGUACS4J                                                                                                                                                                                                                                                                                                                                                              |
-| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetChargebackEmbed](../../Models/Requests/GetChargebackEmbed.md)                                                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to embed additional information via the `embed` query string parameter.                                                                                                                                                                                                                                                                                       | payment                                                                                                                                                                                                                                                                                                                                                                                |
+| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter.                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -99,10 +97,10 @@ var res = await sdk.Chargebacks.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.GetChargebackHalJSONException | 404                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## All
 
@@ -125,8 +123,8 @@ var sdk = new Client(security: new Security() {
 ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
     Limit = 50,
-    Embed = ListAllChargebacksEmbed.Payment,
-    Sort = ListAllChargebacksSort.Desc,
+    Embed = "payment",
+    Sort = ListSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -148,8 +146,7 @@ var res = await sdk.Chargebacks.AllAsync(req);
 
 ### Errors
 
-| Error Type                                                        | Status Code                                                       | Content Type                                                      |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Mollie.Models.Errors.ListAllChargebacksBadRequestHalJSONException | 400                                                               | application/hal+json                                              |
-| Mollie.Models.Errors.ListAllChargebacksNotFoundHalJSONException   | 404                                                               | application/hal+json                                              |
-| Mollie.Models.Errors.APIException                                 | 4XX, 5XX                                                          | \*/\*                                                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

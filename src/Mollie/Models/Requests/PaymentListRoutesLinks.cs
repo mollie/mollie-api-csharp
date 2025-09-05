@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -20,15 +20,15 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// The URL to the current set of items.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public PaymentListRoutesSelf? Self { get; set; }
+        public Url? Self { get; set; }
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public PaymentListRoutesDocumentation? Documentation { get; set; }
+        public Url? Documentation { get; set; }
     }
 }

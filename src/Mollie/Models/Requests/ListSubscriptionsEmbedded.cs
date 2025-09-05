@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of subscription objects.
         /// </summary>
         [JsonProperty("subscriptions")]
-        public List<ListSubscriptionsSubscription>? Subscriptions { get; set; }
+        public List<SubscriptionResponse>? Subscriptions { get; set; }
     }
 }

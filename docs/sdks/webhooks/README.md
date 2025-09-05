@@ -31,7 +31,7 @@ var sdk = new Client(security: new Security() {
 CreateWebhookRequest req = new CreateWebhookRequest() {
     Name = "Webhook #1",
     Url = "https://mollie.com/",
-    WebhookEventTypes = CreateWebhookWebhookEventTypesRequest.PaymentLinkPaid,
+    WebhookEventTypes = WebhookEventTypes.PaymentLinkPaid,
     Testmode = false,
 };
 
@@ -52,10 +52,10 @@ var res = await sdk.Webhooks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.CreateWebhookHalJSONException | 422                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -76,8 +76,8 @@ var sdk = new Client(security: new Security() {
 ListWebhooksRequest req = new ListWebhooksRequest() {
     From = "hook_B2EyhTH5N4KWUnoYPcgiH",
     Limit = 50,
-    Sort = ListWebhooksSort.Desc,
-    EventTypes = EventTypesWebhookEventTypes.PaymentLinkPaid,
+    Sort = ListSort.Desc,
+    EventTypes = WebhookEventTypes.PaymentLinkPaid,
     Testmode = false,
 };
 
@@ -98,10 +98,10 @@ var res = await sdk.Webhooks.ListAsync(req);
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| Mollie.Models.Errors.ListWebhooksHalJSONException | 400                                               | application/hal+json                              |
-| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -124,7 +124,7 @@ var res = await sdk.Webhooks.UpdateAsync(
     requestBody: new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
-        WebhookEventTypes = UpdateWebhookWebhookEventTypesRequest.PaymentLinkPaid,
+        WebhookEventTypes = WebhookEventTypes.PaymentLinkPaid,
         Testmode = false,
     }
 );
@@ -134,10 +134,10 @@ var res = await sdk.Webhooks.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             | hook_B2EyhTH5N4KWUnoYPcgiH                                                    |
-| `RequestBody`                                                                 | [UpdateWebhookRequestBody](../../Models/Requests/UpdateWebhookRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             |
+| `RequestBody`                                                                 | [UpdateWebhookRequestBody](../../Models/Requests/UpdateWebhookRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
 
 ### Response
 
@@ -145,11 +145,10 @@ var res = await sdk.Webhooks.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.UpdateWebhookNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.UpdateWebhookUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -178,7 +177,7 @@ var res = await sdk.Webhooks.GetAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | hook_B2EyhTH5N4KWUnoYPcgiH                                                                                                                                                                                                                                                                                                                                                             |
+| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -187,11 +186,10 @@ var res = await sdk.Webhooks.GetAsync(
 
 ### Errors
 
-| Error Type                                                         | Status Code                                                        | Content Type                                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Mollie.Models.Errors.GetWebhookNotFoundHalJSONException            | 404                                                                | application/hal+json                                               |
-| Mollie.Models.Errors.GetWebhookUnprocessableEntityHalJSONException | 422                                                                | application/hal+json                                               |
-| Mollie.Models.Errors.APIException                                  | 4XX, 5XX                                                           | \*/\*                                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
 
@@ -221,10 +219,10 @@ var res = await sdk.Webhooks.DeleteAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             | hook_B2EyhTH5N4KWUnoYPcgiH                                                    |
-| `RequestBody`                                                                 | [DeleteWebhookRequestBody](../../Models/Requests/DeleteWebhookRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             |
+| `RequestBody`                                                                 | [DeleteWebhookRequestBody](../../Models/Requests/DeleteWebhookRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
 
 ### Response
 
@@ -232,11 +230,10 @@ var res = await sdk.Webhooks.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.DeleteWebhookNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.DeleteWebhookUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Test
 
@@ -266,10 +263,10 @@ var res = await sdk.Webhooks.TestAsync(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `Id`                                                                      | *string*                                                                  | :heavy_check_mark:                                                        | Provide the ID of the item you want to perform this operation on.         | hook_B2EyhTH5N4KWUnoYPcgiH                                                |
-| `RequestBody`                                                             | [TestWebhookRequestBody](../../Models/Requests/TestWebhookRequestBody.md) | :heavy_minus_sign:                                                        | N/A                                                                       |                                                                           |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `Id`                                                                      | *string*                                                                  | :heavy_check_mark:                                                        | Provide the ID of the item you want to perform this operation on.         |
+| `RequestBody`                                                             | [TestWebhookRequestBody](../../Models/Requests/TestWebhookRequestBody.md) | :heavy_minus_sign:                                                        | N/A                                                                       |
 
 ### Response
 
@@ -277,8 +274,7 @@ var res = await sdk.Webhooks.TestAsync(
 
 ### Errors
 
-| Error Type                                                          | Status Code                                                         | Content Type                                                        |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Mollie.Models.Errors.TestWebhookNotFoundHalJSONException            | 404                                                                 | application/hal+json                                                |
-| Mollie.Models.Errors.TestWebhookUnprocessableEntityHalJSONException | 422                                                                 | application/hal+json                                                |
-| Mollie.Models.Errors.APIException                                   | 4XX, 5XX                                                            | \*/\*                                                               |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

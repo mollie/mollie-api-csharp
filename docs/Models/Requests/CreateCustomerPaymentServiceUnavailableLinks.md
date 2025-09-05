@@ -1,8 +1,0 @@
-# CreateCustomerPaymentServiceUnavailableLinks
-
-
-## Fields
-
-| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                                       | [CreateCustomerPaymentServiceUnavailableDocumentation](../../Models/Requests/CreateCustomerPaymentServiceUnavailableDocumentation.md) | :heavy_check_mark:                                                                                                                    | The URL to the generic Mollie API error handling guide.                                                                               |

@@ -1,9 +1,0 @@
-# PaymentsImmediatelyAvailable
-
-
-## Fields
-
-| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                                      | [PaymentsImmediatelyAvailableAmount](../../Models/Requests/PaymentsImmediatelyAvailableAmount.md)             | :heavy_minus_sign:                                                                                            | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.             |
-| `Subtotals`                                                                                                   | List<[PaymentsImmediatelyAvailableSubtotal2](../../Models/Requests/PaymentsImmediatelyAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |

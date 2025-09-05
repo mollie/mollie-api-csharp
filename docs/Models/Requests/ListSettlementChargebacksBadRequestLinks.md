@@ -1,8 +1,0 @@
-# ListSettlementChargebacksBadRequestLinks
-
-
-## Fields
-
-| Field                                                                                                                         | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                               | [ListSettlementChargebacksBadRequestDocumentation](../../Models/Requests/ListSettlementChargebacksBadRequestDocumentation.md) | :heavy_check_mark:                                                                                                            | The URL to the generic Mollie API error handling guide.                                                                       |

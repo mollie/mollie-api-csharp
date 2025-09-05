@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// A list of chargeback objects.
         /// </summary>
         [JsonProperty("chargebacks")]
-        public List<ListChargebacksChargeback>? Chargebacks { get; set; }
+        public List<EntityChargeback>? Chargebacks { get; set; }
     }
 }

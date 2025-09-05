@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -23,24 +23,24 @@ namespace Mollie.Models.Requests
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public GetClientSelf? Self { get; set; }
+        public Url? Self { get; set; }
 
         /// <summary>
-        /// The API resource URL of the client&apos;s organization.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("organization")]
-        public GetClientLinksOrganization? Organization { get; set; }
+        public Url? Organization { get; set; }
 
         /// <summary>
-        /// The API resource URL of the client&apos;s onboarding status.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("onboarding")]
-        public GetClientLinksOnboarding? Onboarding { get; set; }
+        public Url? Onboarding { get; set; }
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public GetClientDocumentation? Documentation { get; set; }
+        public Url? Documentation { get; set; }
     }
 }

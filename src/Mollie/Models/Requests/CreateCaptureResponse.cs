@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -27,6 +26,6 @@ namespace Mollie.Models.Requests
         /// capture object, refer to the <a href="get-capture">Get capture endpoint</a> documentation.
         /// </remarks>
         /// </summary>
-        public CreateCaptureResponseBody? Object { get; set; }
+        public CaptureResponse? CaptureResponse { get; set; }
     }
 }

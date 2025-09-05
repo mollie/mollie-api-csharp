@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class ListAllRefundsRequest
@@ -39,7 +39,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListAllRefundsSort? Sort { get; set; } = null;
+        public ListSort? Sort { get; set; } = null;
 
         /// <summary>
         /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
@@ -49,7 +49,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
-        public ListAllRefundsEmbed? Embed { get; set; }
+        public string? Embed { get; set; } = null;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>

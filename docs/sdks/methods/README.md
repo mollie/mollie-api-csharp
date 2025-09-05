@@ -41,9 +41,9 @@ var sdk = new Client(security: new Security() {
 });
 
 ListMethodsRequest req = new ListMethodsRequest() {
-    SequenceType = ListMethodsSequenceType.Oneoff,
-    Locale = ListMethodsLocale.EnUS,
-    Amount = new ListMethodsAmount() {
+    SequenceType = SequenceType.Oneoff,
+    Locale = LocaleParameter.EnUS,
+    Amount = new Amount() {
         Currency = "EUR",
         Value = "10.00",
     },
@@ -52,7 +52,7 @@ ListMethodsRequest req = new ListMethodsRequest() {
     IncludeWallets = IncludeWallets.Applepay,
     OrderLineCategories = OrderLineCategories.Eco,
     ProfileId = "pfl_5B8cwPMGnU",
-    Include = ListMethodsInclude.Issuers,
+    Include = "issuers",
     Testmode = false,
 };
 
@@ -73,10 +73,10 @@ var res = await sdk.Methods.ListAsync(req);
 
 ### Errors
 
-| Error Type                                       | Status Code                                      | Content Type                                     |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| Mollie.Models.Errors.ListMethodsHalJSONException | 400                                              | application/hal+json                             |
-| Mollie.Models.Errors.APIException                | 4XX, 5XX                                         | \*/\*                                            |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## All
 
@@ -98,13 +98,13 @@ var sdk = new Client(security: new Security() {
 });
 
 ListAllMethodsRequest req = new ListAllMethodsRequest() {
-    Locale = ListAllMethodsLocale.EnUS,
-    Amount = new ListAllMethodsAmount() {
+    Locale = LocaleParameter.EnUS,
+    Amount = new Amount() {
         Currency = "EUR",
         Value = "10.00",
     },
-    Include = ListAllMethodsInclude.Issuers,
-    SequenceType = ListAllMethodsSequenceType.Oneoff,
+    Include = "issuers",
+    SequenceType = SequenceType.Oneoff,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -126,10 +126,10 @@ var res = await sdk.Methods.AllAsync(req);
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| Mollie.Models.Errors.ListAllMethodsHalJSONException | 400                                                 | application/hal+json                                |
-| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -160,11 +160,11 @@ var sdk = new Client(security: new Security() {
 
 GetMethodRequest req = new GetMethodRequest() {
     Id = "ideal",
-    Locale = GetMethodLocale.EnUS,
+    Locale = LocaleParameter.EnUS,
     Currency = "EUR",
     ProfileId = "pfl_5B8cwPMGnU",
-    Include = GetMethodInclude.Issuers,
-    SequenceType = GetMethodSequenceType.Oneoff,
+    Include = "issuers",
+    SequenceType = SequenceType.Oneoff,
     Testmode = false,
 };
 
@@ -185,8 +185,7 @@ var res = await sdk.Methods.GetAsync(req);
 
 ### Errors
 
-| Error Type                                               | Status Code                                              | Content Type                                             |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| Mollie.Models.Errors.GetMethodBadRequestHalJSONException | 400                                                      | application/hal+json                                     |
-| Mollie.Models.Errors.GetMethodNotFoundHalJSONException   | 404                                                      | application/hal+json                                     |
-| Mollie.Models.Errors.APIException                        | 4XX, 5XX                                                 | \*/\*                                                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

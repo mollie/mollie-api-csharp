@@ -1,9 +1,0 @@
-# TopupsMovedToAvailable
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [TopupsMovedToAvailableAmount](../../Models/Requests/TopupsMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[TopupsMovedToAvailableSubtotal2](../../Models/Requests/TopupsMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                | N/A                                                                                               |

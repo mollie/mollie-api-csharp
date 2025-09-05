@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
@@ -30,15 +31,15 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         [JsonProperty("_embedded")]
-        public ListCustomersEmbedded? Embedded { get; set; }
+        public ListCustomersEmbedded Embedded { get; set; } = default!;
 
         /// <summary>
         /// Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public ListCustomersLinks? Links { get; set; }
+        public ListLinks Links { get; set; } = default!;
     }
 }

@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// A list of webhooks.
         /// </summary>
         [JsonProperty("webhooks")]
-        public List<Webhook> Webhooks { get; set; } = default!;
+        public List<EntityWebhook> Webhooks { get; set; } = default!;
     }
 }

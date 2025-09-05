@@ -17,6 +17,6 @@ namespace Mollie.Models.Requests
     {
 
         [JsonProperty("documentation")]
-        public ListCapabilitiesDocumentation? Documentation { get; set; }
+        public Models.Requests.Documentation? Documentation { get; set; }
     }
 }

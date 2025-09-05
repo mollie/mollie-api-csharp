@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using System;
@@ -26,17 +27,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
-        public ListMethodsSequenceType? SequenceType { get; set; }
+        public SequenceType? SequenceType { get; set; }
 
         /// <summary>
-        /// Passing a locale will sort the payment methods in the preferred order<br/>
-        /// 
-        /// <remarks>
-        /// for the country, and translate the payment method names in the corresponding language.
-        /// </remarks>
+        /// Response language
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=locale")]
-        public ListMethodsLocale? Locale { get; set; }
+        public LocaleParameter? Locale { get; set; }
 
         /// <summary>
         /// If supplied, only payment methods that support the amount and currency<br/>
@@ -48,7 +45,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=deepObject,explode=true,name=amount")]
-        public ListMethodsAmount? Amount { get; set; }
+        public Amount? Amount { get; set; }
 
         /// <summary>
         /// **⚠️ We no longer recommend using the Orders API. Please refer to the <a href="payments-api">Payments API</a> instead.**<br/>
@@ -113,14 +110,10 @@ namespace Mollie.Models.Requests
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the<br/>
-        /// 
-        /// <remarks>
-        /// `include` query string parameter.
-        /// </remarks>
+        /// This endpoint allows you to include additional information via the `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public ListMethodsInclude? Include { get; set; } = null;
+        public string? Include { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

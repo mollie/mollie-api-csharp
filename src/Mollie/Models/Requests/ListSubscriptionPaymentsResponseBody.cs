@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
@@ -39,6 +40,6 @@ namespace Mollie.Models.Requests
         /// Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public ListSubscriptionPaymentsLinks Links { get; set; } = default!;
+        public ListLinks Links { get; set; } = default!;
     }
 }

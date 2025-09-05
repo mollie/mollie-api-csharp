@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -27,6 +26,6 @@ namespace Mollie.Models.Requests
         /// refer to the <a href="get-subscription">Get subscription endpoint</a> documentation.
         /// </remarks>
         /// </summary>
-        public CancelSubscriptionResponseBody? Object { get; set; }
+        public SubscriptionResponse? SubscriptionResponse { get; set; }
     }
 }

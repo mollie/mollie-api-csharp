@@ -84,14 +84,14 @@ namespace Mollie
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
         /// </remarks>
         /// </summary>
-        Task<CreateClientLinkResponse> CreateAsync(CreateClientLinkRequest? request = null, RetryConfig? retryConfig = null);
+        Task<CreateClientLinkResponse> CreateAsync(EntityClientLink? request = null, RetryConfig? retryConfig = null);
     }
 
     public class ClientLinks: IClientLinks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -100,7 +100,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateClientLinkResponse> CreateAsync(CreateClientLinkRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateClientLinkResponse> CreateAsync(EntityClientLink? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -194,14 +194,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateClientLinkResponseBody obj;
+                    EntityClientLinkResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateClientLinkResponseBody>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityClientLinkResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateClientLinkResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityClientLinkResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateClientLinkResponse()
@@ -212,25 +212,25 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.EntityClientLinkResponse = obj;
                     return response;
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateClientLinkNotFoundHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClientLinkNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateClientLinkNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -239,33 +239,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new CreateClientLinkNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 422)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateClientLinkUnprocessableEntityHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateClientLinkUnprocessableEntityHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateClientLinkUnprocessableEntityHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new CreateClientLinkUnprocessableEntityHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

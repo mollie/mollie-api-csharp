@@ -1,8 +1,0 @@
-# DeletePaymentLinkUnprocessableEntityLinks
-
-
-## Fields
-
-| Field                                                                                                                           | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                                 | [DeletePaymentLinkUnprocessableEntityDocumentation](../../Models/Requests/DeletePaymentLinkUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                              | The URL to the generic Mollie API error handling guide.                                                                         |

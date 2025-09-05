@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of terminal objects.
         /// </summary>
         [JsonProperty("terminals")]
-        public List<ListTerminalsTerminal>? Terminals { get; set; }
+        public List<EntityTerminal>? Terminals { get; set; }
     }
 }

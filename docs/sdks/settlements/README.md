@@ -58,11 +58,10 @@ var res = await sdk.Settlements.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| Mollie.Models.Errors.ListSettlementsBadRequestHalJSONException | 400                                                            | application/hal+json                                           |
-| Mollie.Models.Errors.ListSettlementsNotFoundHalJSONException   | 404                                                            | application/hal+json                                           |
-| Mollie.Models.Errors.APIException                              | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -97,9 +96,9 @@ var res = await sdk.Settlements.GetAsync(id: "stl_jDk30akdN");
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. | stl_jDk30akdN                                                     |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. |
 
 ### Response
 
@@ -107,10 +106,10 @@ var res = await sdk.Settlements.GetAsync(id: "stl_jDk30akdN");
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.GetSettlementHalJSONException | 404                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## GetOpen
 
@@ -210,7 +209,7 @@ ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListSettlementPaymentsSort.Desc,
+    Sort = ListSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -232,10 +231,10 @@ var res = await sdk.Settlements.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| Mollie.Models.Errors.ListSettlementPaymentsHalJSONException | 400                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ListCaptures
 
@@ -259,7 +258,7 @@ ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
-    Embed = ListSettlementCapturesEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -280,11 +279,10 @@ var res = await sdk.Settlements.ListCapturesAsync(req);
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.ListSettlementCapturesBadRequestHalJSONException | 400                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.ListSettlementCapturesNotFoundHalJSONException   | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ListRefunds
 
@@ -308,7 +306,7 @@ ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "re_5B8cwPMGnU",
     Limit = 50,
-    Embed = ListSettlementRefundsEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -329,11 +327,10 @@ var res = await sdk.Settlements.ListRefundsAsync(req);
 
 ### Errors
 
-| Error Type                                                           | Status Code                                                          | Content Type                                                         |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Mollie.Models.Errors.ListSettlementRefundsBadRequestHalJSONException | 400                                                                  | application/hal+json                                                 |
-| Mollie.Models.Errors.ListSettlementRefundsNotFoundHalJSONException   | 404                                                                  | application/hal+json                                                 |
-| Mollie.Models.Errors.APIException                                    | 4XX, 5XX                                                             | \*/\*                                                                |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ListChargebacks
 
@@ -357,7 +354,7 @@ ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
     Limit = 50,
-    Embed = ListSettlementChargebacksEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -378,8 +375,7 @@ var res = await sdk.Settlements.ListChargebacksAsync(req);
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| Mollie.Models.Errors.ListSettlementChargebacksBadRequestHalJSONException | 400                                                                      | application/hal+json                                                     |
-| Mollie.Models.Errors.ListSettlementChargebacksNotFoundHalJSONException   | 404                                                                      | application/hal+json                                                     |
-| Mollie.Models.Errors.APIException                                        | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

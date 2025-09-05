@@ -1,8 +1,0 @@
-# CreateClientLinkUnprocessableEntityLinks
-
-
-## Fields
-
-| Field                                                                                                                         | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                               | [CreateClientLinkUnprocessableEntityDocumentation](../../Models/Requests/CreateClientLinkUnprocessableEntityDocumentation.md) | :heavy_check_mark:                                                                                                            | The URL to the generic Mollie API error handling guide.                                                                       |

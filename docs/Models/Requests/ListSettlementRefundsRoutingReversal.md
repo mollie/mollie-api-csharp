@@ -1,9 +1,0 @@
-# ListSettlementRefundsRoutingReversal
-
-
-## Fields
-
-| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                                          | [ListSettlementRefundsRoutingReversalAmount](../../Models/Requests/ListSettlementRefundsRoutingReversalAmount.md) | :heavy_minus_sign:                                                                                                | The amount that will be pulled back.                                                                              |
-| `Source`                                                                                                          | [ListSettlementRefundsSource](../../Models/Requests/ListSettlementRefundsSource.md)                               | :heavy_minus_sign:                                                                                                | Where the funds will be pulled back from.                                                                         |

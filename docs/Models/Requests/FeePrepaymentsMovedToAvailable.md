@@ -1,9 +1,0 @@
-# FeePrepaymentsMovedToAvailable
-
-
-## Fields
-
-| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                                          | [FeePrepaymentsMovedToAvailableAmount](../../Models/Requests/FeePrepaymentsMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.                 |
-| `Subtotals`                                                                                                       | List<[FeePrepaymentsMovedToAvailableSubtotal2](../../Models/Requests/FeePrepaymentsMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |

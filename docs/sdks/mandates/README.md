@@ -24,7 +24,6 @@ mandates for cards, your customers need to perform a 'first payment' with their 
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -32,9 +31,9 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Mandates.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
-    requestBody: new CreateMandateRequestBody() {
+    entityMandate: new EntityMandate() {
         Id = "mdt_5B8cwPMGnU",
-        Method = CreateMandateMethodRequest.Directdebit,
+        Method = EntityMandateMethod.Directdebit,
         ConsumerName = "John Doe",
         ConsumerAccount = "NL55INGB0000000000",
         ConsumerBic = "BANKBIC",
@@ -43,6 +42,7 @@ var res = await sdk.Mandates.CreateAsync(
         MandateReference = "ID-1023892",
         PaypalBillingAgreementId = "B-12A34567B8901234CD",
         PayPalVaultId = "8kk8451t",
+        CustomerId = "cst_5B8cwPMGnU",
         Testmode = false,
     }
 );
@@ -52,10 +52,10 @@ var res = await sdk.Mandates.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `CustomerId`                                                                  | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the related customer.                                       | cst_5B8cwPMGnU                                                                |
-| `RequestBody`                                                                 | [CreateMandateRequestBody](../../Models/Requests/CreateMandateRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               | Example                                                   |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `CustomerId`                                              | *string*                                                  | :heavy_check_mark:                                        | Provide the ID of the related customer.                   | cst_5B8cwPMGnU                                            |
+| `EntityMandate`                                           | [EntityMandate](../../Models/Components/EntityMandate.md) | :heavy_minus_sign:                                        | N/A                                                       |                                                           |
 
 ### Response
 
@@ -63,10 +63,10 @@ var res = await sdk.Mandates.CreateAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.CreateMandateHalJSONException | 404                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -90,7 +90,7 @@ ListMandatesRequest req = new ListMandatesRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "mdt_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListMandatesSort.Desc,
+    Sort = ListSort.Desc,
     Testmode = false,
 };
 
@@ -111,11 +111,10 @@ var res = await sdk.Mandates.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| Mollie.Models.Errors.ListMandatesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.ListMandatesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -156,10 +155,10 @@ var res = await sdk.Mandates.GetAsync(
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Mollie.Models.Errors.GetMandateHalJSONException | 404                                             | application/hal+json                            |
-| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Revoke
 
@@ -203,7 +202,7 @@ var res = await sdk.Mandates.RevokeAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.RevokeMandateHalJSONException | 404                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

@@ -1,8 +1,0 @@
-# ListSettlementCapturesNotFoundLinks
-
-
-## Fields
-
-| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                     | [ListSettlementCapturesNotFoundDocumentation](../../Models/Requests/ListSettlementCapturesNotFoundDocumentation.md) | :heavy_check_mark:                                                                                                  | The URL to the generic Mollie API error handling guide.                                                             |

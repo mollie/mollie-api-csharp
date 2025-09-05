@@ -35,7 +35,7 @@ namespace Mollie
         /// Once registered, customers will also appear in your Mollie dashboard.
         /// </remarks>
         /// </summary>
-        Task<CreateCustomerResponse> CreateAsync(CreateCustomerRequest? request = null, RetryConfig? retryConfig = null);
+        Task<CreateCustomerResponse> CreateAsync(EntityCustomer? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List customers
@@ -46,7 +46,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListCustomersSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get customer
@@ -55,7 +55,7 @@ namespace Mollie
         /// Retrieve a single customer by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetCustomerResponse> GetAsync(string customerId, GetCustomerInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update customer
@@ -66,7 +66,7 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<UpdateCustomerResponse> UpdateAsync(string customerId, UpdateCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdateCustomerResponse> UpdateAsync(string customerId, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete customer
@@ -94,7 +94,7 @@ namespace Mollie
         /// parameter predefined.
         /// </remarks>
         /// </summary>
-        Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, CreateCustomerPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List customer payments
@@ -110,7 +110,7 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -119,7 +119,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateCustomerResponse> CreateAsync(CreateCustomerRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCustomerResponse> CreateAsync(EntityCustomer? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -213,14 +213,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCustomerResponseBody obj;
+                    CustomerResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateCustomerResponseBody>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CustomerResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCustomerResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CustomerResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateCustomerResponse()
@@ -231,7 +231,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.CustomerResponse = obj;
                     return response;
                 }
 
@@ -242,14 +242,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCustomerHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateCustomerHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCustomerHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -258,7 +258,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new CreateCustomerHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -275,7 +275,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListCustomersSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new ListCustomersRequest()
             {
@@ -393,19 +393,19 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListCustomersBadRequestHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListCustomersBadRequestHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListCustomersBadRequestHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -414,33 +414,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new ListCustomersBadRequestHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
-                {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListCustomersNotFoundHalJSONExceptionPayload payload;
-                    try
-                    {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListCustomersNotFoundHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Include);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListCustomersNotFoundHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    payload.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-
-                    throw new ListCustomersNotFoundHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -457,7 +431,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCustomerResponse> GetAsync(string customerId, GetCustomerInclude? include = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, RetryConfig? retryConfig = null)
         {
             var request = new GetCustomerRequest()
             {
@@ -579,14 +553,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetCustomerHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<GetCustomerHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetCustomerHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -595,7 +569,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new GetCustomerHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -612,12 +586,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateCustomerResponse> UpdateAsync(string customerId, UpdateCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateCustomerResponse> UpdateAsync(string customerId, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateCustomerRequest()
             {
                 CustomerId = customerId,
-                RequestBody = requestBody,
+                EntityCustomer = entityCustomer,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}", request);
@@ -625,7 +599,7 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityCustomer", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -710,14 +684,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    UpdateCustomerResponseBody obj;
+                    CustomerResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<UpdateCustomerResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CustomerResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into UpdateCustomerResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CustomerResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new UpdateCustomerResponse()
@@ -728,7 +702,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.CustomerResponse = obj;
                     return response;
                 }
 
@@ -739,14 +713,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    UpdateCustomerHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<UpdateCustomerHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into UpdateCustomerHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -755,7 +729,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new UpdateCustomerHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -899,14 +873,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    DeleteCustomerHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<DeleteCustomerHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into DeleteCustomerHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -915,7 +889,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new DeleteCustomerHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -932,12 +906,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, CreateCustomerPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateCustomerPaymentRequest()
             {
                 CustomerId = customerId,
-                RequestBody = requestBody,
+                PaymentRequest = paymentRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/payments", request);
@@ -945,7 +919,7 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "PaymentRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1030,14 +1004,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCustomerPaymentResponseBody obj;
+                    PaymentResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<CreateCustomerPaymentResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<PaymentResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCustomerPaymentResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into PaymentResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateCustomerPaymentResponse()
@@ -1048,7 +1022,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.PaymentResponse = obj;
                     return response;
                 }
 
@@ -1059,14 +1033,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCustomerPaymentUnprocessableEntityHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateCustomerPaymentUnprocessableEntityHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCustomerPaymentUnprocessableEntityHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -1075,7 +1049,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new CreateCustomerPaymentUnprocessableEntityHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -1085,14 +1059,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    CreateCustomerPaymentServiceUnavailableHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<CreateCustomerPaymentServiceUnavailableHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into CreateCustomerPaymentServiceUnavailableHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -1101,7 +1075,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new CreateCustomerPaymentServiceUnavailableHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -1234,14 +1208,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ListCustomerPaymentsHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ListCustomerPaymentsHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ListCustomerPaymentsHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -1250,7 +1224,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new ListCustomerPaymentsHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

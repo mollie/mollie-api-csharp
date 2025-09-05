@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class ListWebhooksRequest
@@ -23,7 +23,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
-        public string? From { get; set; }
+        public string? From { get; set; } = null;
 
         /// <summary>
         /// The maximum number of items to return. Defaults to 50 items.
@@ -39,13 +39,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListWebhooksSort? Sort { get; set; } = null;
+        public ListSort? Sort { get; set; } = null;
 
         /// <summary>
         /// Used to filter out only the webhooks that are subscribed to certain types of events.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=eventTypes")]
-        public EventTypesWebhookEventTypes? EventTypes { get; set; }
+        public WebhookEventTypes? EventTypes { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

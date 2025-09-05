@@ -26,7 +26,6 @@ having collected the customer's authorization.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -34,12 +33,20 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Captures.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
-    requestBody: new CreateCaptureRequestBody() {
+    entityCapture: new EntityCapture() {
+        Id = "cpt_vytxeTZskVKR7C7WgdSP3d",
         Description = "Capture for cart #12345",
-        Amount = new CreateCaptureAmountRequest() {
+        Amount = new AmountNullable() {
             Currency = "EUR",
             Value = "10.00",
         },
+        SettlementAmount = new AmountNullable() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        PaymentId = "tr_5B8cwPMGnU",
+        ShipmentId = "shp_5x4xQJDWGNcY3tKGL7X5J",
+        SettlementId = "stl_5B8cwPMGnU",
     }
 );
 
@@ -48,10 +55,10 @@ var res = await sdk.Captures.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `PaymentId`                                                                   | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the related payment.                                        | tr_5B8cwPMGnU                                                                 |
-| `RequestBody`                                                                 | [CreateCaptureRequestBody](../../Models/Requests/CreateCaptureRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               | Example                                                   |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `PaymentId`                                               | *string*                                                  | :heavy_check_mark:                                        | Provide the ID of the related payment.                    | tr_5B8cwPMGnU                                             |
+| `EntityCapture`                                           | [EntityCapture](../../Models/Components/EntityCapture.md) | :heavy_minus_sign:                                        | N/A                                                       |                                                           |
 
 ### Response
 
@@ -59,11 +66,10 @@ var res = await sdk.Captures.CreateAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.CreateCaptureNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.CreateCaptureUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -87,7 +93,7 @@ ListCapturesRequest req = new ListCapturesRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
-    Embed = ListCapturesEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -108,11 +114,10 @@ var res = await sdk.Captures.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| Mollie.Models.Errors.ListCapturesBadRequestHalJSONException | 400                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.ListCapturesNotFoundHalJSONException   | 404                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -125,7 +130,6 @@ payment.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -134,7 +138,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Captures.GetAsync(
     paymentId: "tr_5B8cwPMGnU",
     captureId: "cpt_gVMhHKqSSRYJyPsuoPNFH",
-    embed: GetCaptureEmbed.Payment,
+    embed: "payment",
     testmode: false
 );
 
@@ -147,7 +151,7 @@ var res = await sdk.Captures.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PaymentId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                 | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
 | `CaptureId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related capture.                                                                                                                                                                                                                                                                                                                                                 | cpt_gVMhHKqSSRYJyPsuoPNFH                                                                                                                                                                                                                                                                                                                                                              |
-| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetCaptureEmbed](../../Models/Requests/GetCaptureEmbed.md)                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to embed additional resources via the<br/>`embed` query string parameter.                                                                                                                                                                                                                                                                                     | payment                                                                                                                                                                                                                                                                                                                                                                                |
+| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter.                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -156,7 +160,7 @@ var res = await sdk.Captures.GetAsync(
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Mollie.Models.Errors.GetCaptureHalJSONException | 404                                             | application/hal+json                            |
-| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

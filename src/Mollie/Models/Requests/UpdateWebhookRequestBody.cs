@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -29,14 +29,10 @@ namespace Mollie.Models.Requests
         public string? Url { get; set; }
 
         /// <summary>
-        /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
-        /// 
-        /// <remarks>
-        /// that require explicit selection. Separate multiple event types with a comma.
-        /// </remarks>
+        /// The event&apos;s type
         /// </summary>
         [JsonProperty("eventTypes")]
-        public UpdateWebhookWebhookEventTypesRequest? WebhookEventTypes { get; set; }
+        public WebhookEventTypes? WebhookEventTypes { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>

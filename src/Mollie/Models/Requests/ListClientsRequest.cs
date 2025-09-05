@@ -15,17 +15,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// This endpoint allows embedding related API items by appending the<br/>
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
         /// 
         /// <remarks>
-        /// following values via the `embed` query string parameter.<br/>
-        /// <br/>
-        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
-        ///   partners with the `organizations.read` scope.<br/>
-        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
-        ///   partners with the `onboarding.read` scope.<br/>
-        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
-        ///   Available for *oauth* partners with the `onboarding.read` scope.
+        /// parameter.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
@@ -39,7 +32,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
-        public string? From { get; set; }
+        public string? From { get; set; } = null;
 
         /// <summary>
         /// The maximum number of items to return. Defaults to 50 items.

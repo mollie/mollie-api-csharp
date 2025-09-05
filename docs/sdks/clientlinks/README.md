@@ -69,21 +69,20 @@ to the URL.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-CreateClientLinkRequest req = new CreateClientLinkRequest() {
+EntityClientLink req = new EntityClientLink() {
     Owner = new Owner() {
         Email = "john@example.org",
         GivenName = "John",
         FamilyName = "Doe",
-        Locale = CreateClientLinkLocale.EnUS,
+        Locale = LocaleResponse.EnUS,
     },
     Name = "Acme Corporation",
-    Address = new CreateClientLinkAddress() {
+    Address = new EntityClientLinkAddress() {
         StreetAndNumber = "Main Street 123",
         PostalCode = "1234AB",
         City = "Amsterdam",
@@ -100,9 +99,9 @@ var res = await sdk.ClientLinks.CreateAsync(req);
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `request`                                                                   | [CreateClientLinkRequest](../../Models/Requests/CreateClientLinkRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `request`                                                       | [EntityClientLink](../../Models/Components/EntityClientLink.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
 
 ### Response
 
@@ -110,8 +109,7 @@ var res = await sdk.ClientLinks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                               | Status Code                                                              | Content Type                                                             |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| Mollie.Models.Errors.CreateClientLinkNotFoundHalJSONException            | 404                                                                      | application/hal+json                                                     |
-| Mollie.Models.Errors.CreateClientLinkUnprocessableEntityHalJSONException | 422                                                                      | application/hal+json                                                     |
-| Mollie.Models.Errors.APIException                                        | 4XX, 5XX                                                                 | \*/\*                                                                    |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

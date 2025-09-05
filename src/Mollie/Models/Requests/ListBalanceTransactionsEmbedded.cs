@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of balance transaction objects.
         /// </summary>
         [JsonProperty("balance_transactions")]
-        public List<BalanceTransaction>? BalanceTransactions { get; set; }
+        public List<EntityBalanceTransaction>? BalanceTransactions { get; set; }
     }
 }

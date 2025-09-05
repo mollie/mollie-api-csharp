@@ -32,50 +32,51 @@ var sdk = new Client(security: new Security() {
 });
 
 CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
+    Id = "pl_d9fQur83kFdhH8hIhaZfq",
     Description = "Chess Board",
-    Amount = new CreatePaymentLinkAmountRequest() {
+    Amount = new AmountNullable() {
         Currency = "EUR",
         Value = "10.00",
     },
-    MinimumAmount = new CreatePaymentLinkMinimumAmountRequest() {
+    MinimumAmount = new AmountNullable() {
         Currency = "EUR",
         Value = "10.00",
     },
     RedirectUrl = "https://webshop.example.org/payment-links/redirect/",
     WebhookUrl = "https://webshop.example.org/payment-links/webhook/",
-    Lines = new List<CreatePaymentLinkLineRequest>() {
-        new CreatePaymentLinkLineRequest() {
-            Type = CreatePaymentLinkTypeRequest.Physical,
+    Lines = new List<PaymentLineItem>() {
+        new PaymentLineItem() {
+            Type = PaymentLineItemType.Physical,
             Description = "LEGO 4440 Forest Police Station",
             Quantity = 1,
             QuantityUnit = "pcs",
-            UnitPrice = new CreatePaymentLinkUnitPriceRequest() {
+            UnitPrice = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
-            DiscountAmount = new CreatePaymentLinkDiscountAmountRequest() {
+            DiscountAmount = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
-            TotalAmount = new CreatePaymentLinkTotalAmountRequest() {
+            TotalAmount = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
             VatRate = "21.00",
-            VatAmount = new CreatePaymentLinkVatAmountRequest() {
+            VatAmount = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
             Sku = "9780241661628",
-            Categories = new List<CreatePaymentLinkCategoryRequest>() {
-                CreatePaymentLinkCategoryRequest.Meal,
-                CreatePaymentLinkCategoryRequest.Eco,
+            Categories = new List<PaymentLineItemCategory>() {
+                PaymentLineItemCategory.Meal,
+                PaymentLineItemCategory.Eco,
             },
             ImageUrl = "https://...",
             ProductUrl = "https://...",
         },
     },
-    BillingAddress = new CreatePaymentLinkBillingAddressRequest() {
+    BillingAddress = new PaymentAddress() {
         Title = "Mr.",
         GivenName = "Piet",
         FamilyName = "Mondriaan",
@@ -89,7 +90,7 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
         Region = "Noord-Holland",
         Country = "NL",
     },
-    ShippingAddress = new CreatePaymentLinkShippingAddressRequest() {
+    ShippingAddress = new PaymentAddress() {
         Title = "Mr.",
         GivenName = "Piet",
         FamilyName = "Mondriaan",
@@ -107,14 +108,14 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
     Reusable = false,
     ExpiresAt = "2025-12-24T11:00:16+00:00",
     AllowedMethods = null,
-    ApplicationFee = new CreatePaymentLinkApplicationFeeRequest() {
-        Amount = new CreatePaymentLinkApplicationFeeAmountRequest() {
+    ApplicationFee = new ApplicationFee() {
+        Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
         Description = "Platform fee",
     },
-    SequenceType = CreatePaymentLinkSequenceTypeRequest.Oneoff,
+    SequenceType = PaymentLinkSequenceType.Oneoff,
     CustomerId = "cst_XimFHuaEzd",
     Testmode = false,
 };
@@ -136,11 +137,10 @@ var res = await sdk.PaymentLinks.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                                | Status Code                                                               | Content Type                                                              |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Mollie.Models.Errors.CreatePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.CreatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -182,10 +182,10 @@ var res = await sdk.PaymentLinks.ListAsync(
 
 ### Errors
 
-| Error Type                                            | Status Code                                           | Content Type                                          |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Mollie.Models.Errors.ListPaymentLinksHalJSONException | 400                                                   | application/hal+json                                  |
-| Mollie.Models.Errors.APIException                     | 4XX, 5XX                                              | \*/\*                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -223,10 +223,10 @@ var res = await sdk.PaymentLinks.GetAsync(
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| Mollie.Models.Errors.GetPaymentLinkHalJSONException | 404                                                 | application/hal+json                                |
-| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -249,7 +249,7 @@ var res = await sdk.PaymentLinks.UpdateAsync(
     paymentLinkId: "pl_d9fQur83kFdhH8hIhaZfq",
     requestBody: new UpdatePaymentLinkRequestBody() {
         Description = "Chess Board",
-        MinimumAmount = new UpdatePaymentLinkMinimumAmountRequest() {
+        MinimumAmount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
@@ -258,7 +258,7 @@ var res = await sdk.PaymentLinks.UpdateAsync(
             "ideal",
         },
         Lines = null,
-        BillingAddress = new UpdatePaymentLinkBillingAddressRequest() {
+        BillingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -272,7 +272,7 @@ var res = await sdk.PaymentLinks.UpdateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new UpdatePaymentLinkShippingAddressRequest() {
+        ShippingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -306,11 +306,10 @@ var res = await sdk.PaymentLinks.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                                | Status Code                                                               | Content Type                                                              |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Mollie.Models.Errors.UpdatePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.UpdatePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
 
@@ -357,11 +356,10 @@ var res = await sdk.PaymentLinks.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                                | Status Code                                                               | Content Type                                                              |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Mollie.Models.Errors.DeletePaymentLinkNotFoundHalJSONException            | 404                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.DeletePaymentLinkUnprocessableEntityHalJSONException | 422                                                                       | application/hal+json                                                      |
-| Mollie.Models.Errors.APIException                                         | 4XX, 5XX                                                                  | \*/\*                                                                     |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ListPayments
 
@@ -385,7 +383,7 @@ GetPaymentLinkPaymentsRequest req = new GetPaymentLinkPaymentsRequest() {
     PaymentLinkId = "pl_d9fQur83kFdhH8hIhaZfq",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
-    Sort = GetPaymentLinkPaymentsSort.Desc,
+    Sort = ListSort.Desc,
     Testmode = false,
 };
 
@@ -406,7 +404,7 @@ var res = await sdk.PaymentLinks.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                  | Status Code                                                 | Content Type                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| Mollie.Models.Errors.GetPaymentLinkPaymentsHalJSONException | 400                                                         | application/hal+json                                        |
-| Mollie.Models.Errors.APIException                           | 4XX, 5XX                                                    | \*/\*                                                       |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

@@ -9,38 +9,38 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
+    /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
     /// </summary>
     public class ListClientsLinks
     {
 
         /// <summary>
-        /// The URL to the current set of items.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("self")]
-        public ListClientsSelf Self { get; set; } = default!;
+        public Url? Self { get; set; }
 
         /// <summary>
-        /// The previous set of items, if available.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
-        [JsonProperty("previous", NullValueHandling = NullValueHandling.Include)]
-        public ListClientsPrevious? Previous { get; set; }
+        [JsonProperty("organization")]
+        public Url? Organization { get; set; }
 
         /// <summary>
-        /// The next set of items, if available.
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
-        [JsonProperty("next", NullValueHandling = NullValueHandling.Include)]
-        public ListClientsNext? Next { get; set; }
+        [JsonProperty("onboarding")]
+        public Url? Onboarding { get; set; }
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("documentation")]
-        public ListClientsDocumentation Documentation { get; set; } = default!;
+        public Url? Documentation { get; set; }
     }
 }

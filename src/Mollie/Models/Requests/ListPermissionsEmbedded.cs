@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of permission objects.
         /// </summary>
         [JsonProperty("permissions")]
-        public List<Permission>? Permissions { get; set; }
+        public List<EntityPermission>? Permissions { get; set; }
     }
 }

@@ -1,9 +1,0 @@
-# AvailableBalanceClose
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [AvailableBalanceCloseAmount](../../Models/Requests/AvailableBalanceCloseAmount.md)               | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[AvailableBalanceCloseSubtotal2](../../Models/Requests/AvailableBalanceCloseSubtotal2.md)>   | :heavy_minus_sign:                                                                                | N/A                                                                                               |

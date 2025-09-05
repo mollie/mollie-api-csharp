@@ -83,6 +83,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("mode")]
-        public ModeRequest? Mode { get; set; } = null;
+        public Models.Requests.Mode? Mode { get; set; } = null;
     }
 }

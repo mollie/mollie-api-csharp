@@ -17,9 +17,9 @@ namespace Mollie.Models.Requests
     {
 
         [JsonProperty("organization")]
-        public SubmitOnboardingDataOrganization? Organization { get; set; }
+        public Organization? Organization { get; set; }
 
         [JsonProperty("profile")]
-        public SubmitOnboardingDataProfile? Profile { get; set; }
+        public Profile? Profile { get; set; }
     }
 }

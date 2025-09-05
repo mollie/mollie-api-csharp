@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class ListAllChargebacksRequest
@@ -32,14 +32,14 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = null;
 
         /// <summary>
-        /// This endpoint allows you to embed additional information via the<br/>
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
         /// 
         /// <remarks>
-        /// `embed` query string parameter.
+        /// parameter.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
-        public ListAllChargebacksEmbed? Embed { get; set; }
+        public string? Embed { get; set; } = null;
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
@@ -49,7 +49,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListAllChargebacksSort? Sort { get; set; } = null;
+        public ListSort? Sort { get; set; } = null;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
@@ -65,7 +65,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
-        public string? ProfileId { get; set; } = null;
+        public string? ProfileId { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

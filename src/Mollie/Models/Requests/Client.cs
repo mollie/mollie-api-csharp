@@ -48,7 +48,7 @@ namespace Mollie.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public Models.Requests.ClientLinks? Links { get; set; }
+        public ListClientsLinks? Links { get; set; }
 
         [JsonProperty("_embedded")]
         public ClientEmbedded? Embedded { get; set; }

@@ -19,7 +19,6 @@ The routed amount is credited to the account of your customer.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -27,14 +26,16 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.DelayedRouting.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
-    requestBody: new PaymentCreateRouteRequestBody() {
-        Amount = new PaymentCreateRouteAmountRequest() {
+    routeCreateRequest: new RouteCreateRequest() {
+        Id = "crt_dyARQ3JzCgtPDhU2Pbq3J",
+        PaymentId = "tr_5B8cwPMGnU",
+        Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
         Description = "Payment for Order #12345",
-        Destination = new PaymentCreateRouteDestinationRequest() {
-            Type = PaymentCreateRouteTypeRequest.Organization,
+        Destination = new RouteCreateRequestDestination() {
+            Type = RouteCreateRequestType.Organization,
             OrganizationId = "org_1234567",
         },
         Testmode = false,
@@ -46,10 +47,10 @@ var res = await sdk.DelayedRouting.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `PaymentId`                                                                             | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related payment.                                                  | tr_5B8cwPMGnU                                                                           |
-| `RequestBody`                                                                           | [PaymentCreateRouteRequestBody](../../Models/Requests/PaymentCreateRouteRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `PaymentId`                                                         | *string*                                                            | :heavy_check_mark:                                                  | Provide the ID of the related payment.                              | tr_5B8cwPMGnU                                                       |
+| `RouteCreateRequest`                                                | [RouteCreateRequest](../../Models/Components/RouteCreateRequest.md) | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
 
 ### Response
 
@@ -57,10 +58,10 @@ var res = await sdk.DelayedRouting.CreateAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Mollie.Models.Errors.PaymentCreateRouteHalJSONException | 404                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -98,7 +99,7 @@ var res = await sdk.DelayedRouting.ListAsync(
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| Mollie.Models.Errors.PaymentListRoutesHalJSONException | 404                                                    | application/hal+json                                   |
-| Mollie.Models.Errors.APIException                      | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

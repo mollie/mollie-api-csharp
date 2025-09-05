@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -27,6 +26,6 @@ namespace Mollie.Models.Requests
         /// the <a href="get-settlement">Get settlement</a> endpoint documentation.
         /// </remarks>
         /// </summary>
-        public GetOpenSettlementResponseBody? Object { get; set; }
+        public EntitySettlement? EntitySettlement { get; set; }
     }
 }

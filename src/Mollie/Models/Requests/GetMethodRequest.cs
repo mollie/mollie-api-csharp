@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class GetMethodRequest
@@ -22,14 +22,10 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Passing a locale will sort the payment methods in the preferred order<br/>
-        /// 
-        /// <remarks>
-        /// for the country, and translate the payment method names in the corresponding language.
-        /// </remarks>
+        /// Response language
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=locale")]
-        public GetMethodLocale? Locale { get; set; }
+        public LocaleParameter? Locale { get; set; }
 
         /// <summary>
         /// If provided, the `minimumAmount` and `maximumAmount` will be converted<br/>
@@ -55,14 +51,10 @@ namespace Mollie.Models.Requests
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the<br/>
-        /// 
-        /// <remarks>
-        /// `include` query string parameter.
-        /// </remarks>
+        /// This endpoint allows you to include additional information via the `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public GetMethodInclude? Include { get; set; } = null;
+        public string? Include { get; set; } = null;
 
         /// <summary>
         /// Set this parameter to `first` to only return the methods that<br/>
@@ -74,7 +66,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
-        public GetMethodSequenceType? SequenceType { get; set; }
+        public SequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

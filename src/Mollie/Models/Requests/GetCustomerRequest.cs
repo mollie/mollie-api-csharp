@@ -9,7 +9,6 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class GetCustomerRequest
@@ -25,7 +24,7 @@ namespace Mollie.Models.Requests
         /// This endpoint allows you to include additional information via the `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public GetCustomerInclude? Include { get; set; } = null;
+        public string? Include { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

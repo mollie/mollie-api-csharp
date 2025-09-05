@@ -1,8 +1,0 @@
-# ListAllSubscriptionsBadRequestLinks
-
-
-## Fields
-
-| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Documentation`                                                                                                     | [ListAllSubscriptionsBadRequestDocumentation](../../Models/Requests/ListAllSubscriptionsBadRequestDocumentation.md) | :heavy_check_mark:                                                                                                  | The URL to the generic Mollie API error handling guide.                                                             |

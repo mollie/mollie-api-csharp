@@ -55,7 +55,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=grouping")]
-        public QueryParamGrouping? Grouping { get; set; } = null;
+        public Models.Requests.Grouping? Grouping { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

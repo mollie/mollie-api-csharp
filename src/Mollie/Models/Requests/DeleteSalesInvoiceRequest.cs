@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class DeleteSalesInvoiceRequest
@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         public string Id { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public DeleteSalesInvoiceRequestBody? RequestBody { get; set; }
+        public DeleteValuesSalesInvoice? DeleteValuesSalesInvoice { get; set; }
     }
 }

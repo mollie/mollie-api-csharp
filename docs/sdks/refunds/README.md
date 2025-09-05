@@ -22,7 +22,6 @@ transfer or by refunding the amount to your customer's credit card.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -31,24 +30,36 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Refunds.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
-    requestBody: new CreateRefundRequestBody() {
+    entityRefund: new EntityRefund() {
+        Id = "re_5B8cwPMGnU",
         Description = "Refunding a Chess Board",
-        Amount = new CreateRefundAmountRequest() {
+        Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
-        ExternalReference = new ExternalReferenceRequest() {
-            Type = TypeAcquirerReferenceRequest.AcquirerReference,
+        SettlementAmount = new AmountNullable() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Metadata = Metadata.CreateMapOfAny(
+            new Dictionary<string, object>() {
+
+            }
+        ),
+        PaymentId = "tr_5B8cwPMGnU",
+        SettlementId = "stl_5B8cwPMGnU",
+        ExternalReference = new EntityRefundExternalReference() {
+            Type = EntityRefundTypeAcquirerReference.AcquirerReference,
             Id = "123456789012345",
         },
         ReverseRouting = false,
-        RoutingReversals = new List<RoutingReversalRequest>() {
-            new RoutingReversalRequest() {
-                Amount = new RoutingReversalAmountRequest() {
+        RoutingReversals = new List<EntityRefundRoutingReversal>() {
+            new EntityRefundRoutingReversal() {
+                Amount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                Source = new CreateRefundSourceRequest() {
+                Source = new EntityRefundSource() {
                     Type = RoutingReversalType.Organization,
                     OrganizationId = "org_1234567",
                 },
@@ -63,10 +74,10 @@ var res = await sdk.Refunds.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `PaymentId`                                                                 | *string*                                                                    | :heavy_check_mark:                                                          | Provide the ID of the related payment.                                      | tr_5B8cwPMGnU                                                               |
-| `RequestBody`                                                               | [CreateRefundRequestBody](../../Models/Requests/CreateRefundRequestBody.md) | :heavy_minus_sign:                                                          | N/A                                                                         |                                                                             |
+| Parameter                                               | Type                                                    | Required                                                | Description                                             | Example                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `PaymentId`                                             | *string*                                                | :heavy_check_mark:                                      | Provide the ID of the related payment.                  | tr_5B8cwPMGnU                                           |
+| `EntityRefund`                                          | [EntityRefund](../../Models/Components/EntityRefund.md) | :heavy_minus_sign:                                      | N/A                                                     |                                                         |
 
 ### Response
 
@@ -74,12 +85,10 @@ var res = await sdk.Refunds.CreateAsync(
 
 ### Errors
 
-| Error Type                                                           | Status Code                                                          | Content Type                                                         |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Mollie.Models.Errors.CreateRefundNotFoundHalJSONException            | 404                                                                  | application/hal+json                                                 |
-| Mollie.Models.Errors.ConflictHalJSONException                        | 409                                                                  | application/hal+json                                                 |
-| Mollie.Models.Errors.CreateRefundUnprocessableEntityHalJSONException | 422                                                                  | application/hal+json                                                 |
-| Mollie.Models.Errors.APIException                                    | 4XX, 5XX                                                             | \*/\*                                                                |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 409, 422                      | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -103,7 +112,7 @@ ListRefundsRequest req = new ListRefundsRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "re_5B8cwPMGnU",
     Limit = 50,
-    Embed = ListRefundsEmbed.Payment,
+    Embed = "payment",
     Testmode = false,
 };
 
@@ -124,11 +133,10 @@ var res = await sdk.Refunds.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| Mollie.Models.Errors.ListRefundsBadRequestHalJSONException | 400                                                        | application/hal+json                                       |
-| Mollie.Models.Errors.ListRefundsNotFoundHalJSONException   | 404                                                        | application/hal+json                                       |
-| Mollie.Models.Errors.APIException                          | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -140,7 +148,6 @@ Retrieve a single payment refund by its ID and the ID of its parent payment.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -149,7 +156,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Refunds.GetAsync(
     paymentId: "tr_5B8cwPMGnU",
     refundId: "re_5B8cwPMGnU",
-    embed: GetRefundEmbed.Payment,
+    embed: "payment",
     testmode: false
 );
 
@@ -162,7 +169,7 @@ var res = await sdk.Refunds.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PaymentId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                 | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
 | `RefundId`                                                                                                                                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related refund.                                                                                                                                                                                                                                                                                                                                                  | re_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
-| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetRefundEmbed](../../Models/Requests/GetRefundEmbed.md)                                                                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter.                                                                                                                                                                                                                                                         | payment                                                                                                                                                                                                                                                                                                                                                                                |
+| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter.                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -171,10 +178,10 @@ var res = await sdk.Refunds.GetAsync(
 
 ### Errors
 
-| Error Type                                     | Status Code                                    | Content Type                                   |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Mollie.Models.Errors.GetRefundHalJSONException | 404                                            | application/hal+json                           |
-| Mollie.Models.Errors.APIException              | 4XX, 5XX                                       | \*/\*                                          |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Cancel
 
@@ -218,10 +225,10 @@ var res = await sdk.Refunds.CancelAsync(
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| Mollie.Models.Errors.CancelRefundHalJSONException | 404                                               | application/hal+json                              |
-| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## All
 
@@ -244,8 +251,8 @@ var sdk = new Client(security: new Security() {
 ListAllRefundsRequest req = new ListAllRefundsRequest() {
     From = "re_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListAllRefundsSort.Desc,
-    Embed = ListAllRefundsEmbed.Payment,
+    Sort = ListSort.Desc,
+    Embed = "payment",
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -267,7 +274,7 @@ var res = await sdk.Refunds.AllAsync(req);
 
 ### Errors
 
-| Error Type                                          | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| Mollie.Models.Errors.ListAllRefundsHalJSONException | 400                                                 | application/hal+json                                |
-| Mollie.Models.Errors.APIException                   | 4XX, 5XX                                            | \*/\*                                               |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

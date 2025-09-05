@@ -1,9 +1,0 @@
-# PendingBalanceClose
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [PendingBalanceCloseAmount](../../Models/Requests/PendingBalanceCloseAmount.md)                   | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[PendingBalanceCloseSubtotal2](../../Models/Requests/PendingBalanceCloseSubtotal2.md)>       | :heavy_minus_sign:                                                                                | N/A                                                                                               |

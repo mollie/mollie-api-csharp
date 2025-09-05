@@ -60,13 +60,13 @@ var sdk = new Client(security: new Security() {
 });
 
 SubmitOnboardingDataRequest req = new SubmitOnboardingDataRequest() {
-    Organization = new SubmitOnboardingDataOrganization() {
+    Organization = new Organization() {
         Name = "Mollie B.V.",
         RegistrationNumber = "30204462",
         VatNumber = "NL815839091B01",
-        VatRegulation = SubmitOnboardingDataVatRegulation.Dutch,
+        VatRegulation = Mollie.Models.Requests.VatRegulation.Dutch,
     },
-    Profile = new SubmitOnboardingDataProfile() {
+    Profile = new Profile() {
         Name = "Mollie",
         Url = "https://www.mollie.com",
         Email = "info@mollie.com",

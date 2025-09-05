@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -17,12 +17,12 @@ namespace Mollie.Models.Requests
     {
 
         [JsonProperty("organization")]
-        public GetClientEmbeddedOrganization? Organization { get; set; }
+        public EntityOrganization? Organization { get; set; }
 
         [JsonProperty("onboarding")]
-        public GetClientEmbeddedOnboarding? Onboarding { get; set; }
+        public EntityOnboardingStatus? Onboarding { get; set; }
 
         [JsonProperty("capabilities")]
-        public GetClientCapabilities? Capabilities { get; set; }
+        public EntityCapability? Capabilities { get; set; }
     }
 }

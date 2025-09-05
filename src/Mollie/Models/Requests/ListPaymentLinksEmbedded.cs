@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of payment link objects.
         /// </summary>
         [JsonProperty("payment_links")]
-        public List<ListPaymentLinksPaymentLinkOutput>? PaymentLinks { get; set; }
+        public List<PaymentLinkResponse>? PaymentLinks { get; set; }
     }
 }

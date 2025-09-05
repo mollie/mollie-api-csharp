@@ -33,7 +33,6 @@ guide on [method-specific parameters](extra-payment-parameters).
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -42,50 +41,71 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Payments.CreateAsync(
-    include: CreatePaymentInclude.DetailsQrCode,
-    requestBody: new CreatePaymentRequestBody() {
+    include: "details.qrCode",
+    paymentRequest: new PaymentRequest() {
+        Id = "tr_5B8cwPMGnU",
         Description = "Chess Board",
-        Amount = new CreatePaymentAmountRequest() {
+        Amount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        AmountRefunded = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        AmountRemaining = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        AmountCaptured = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        AmountChargedBack = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        SettlementAmount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Lines = new List<CreatePaymentLineRequest>() {
-            new CreatePaymentLineRequest() {
-                Type = CreatePaymentLineTypeRequest.Physical,
+        Lines = new List<PaymentRequestLine>() {
+            new PaymentRequestLine() {
+                Type = PaymentRequestType.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
-                UnitPrice = new CreatePaymentUnitPriceRequest() {
+                UnitPrice = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                DiscountAmount = new CreatePaymentDiscountAmountRequest() {
+                DiscountAmount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                TotalAmount = new CreatePaymentTotalAmountRequest() {
+                TotalAmount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
                 VatRate = "21.00",
-                VatAmount = new CreatePaymentVatAmountRequest() {
+                VatAmount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
                 Sku = "9780241661628",
-                Categories = new List<CreatePaymentCategoryRequest>() {
-                    CreatePaymentCategoryRequest.Meal,
-                    CreatePaymentCategoryRequest.Eco,
+                Categories = new List<PaymentRequestCategory>() {
+                    PaymentRequestCategory.Meal,
+                    PaymentRequestCategory.Eco,
                 },
                 ImageUrl = "https://...",
                 ProductUrl = "https://...",
-                Recurring = new CreatePaymentRecurringRequest() {
+                Recurring = new RecurringLineItem() {
                     Description = "Gym subscription",
                     Interval = "... days",
-                    Amount = new CreatePaymentRecurringAmountRequest() {
+                    Amount = new Amount() {
                         Currency = "EUR",
                         Value = "10.00",
                     },
@@ -94,7 +114,7 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        BillingAddress = new CreatePaymentBillingAddressRequest() {
+        BillingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -108,7 +128,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new CreatePaymentShippingAddressRequest() {
+        ShippingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -122,50 +142,54 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = CreatePaymentLocaleRequest.EnUS,
-        Method = CreatePaymentMethodRequest.Ideal,
+        Locale = Locale.EnUS,
+        Method = Method.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
-        CaptureMode = CreatePaymentCaptureModeRequest.Manual,
+        CaptureMode = CaptureMode.Manual,
         CaptureDelay = "8 hours",
-        ApplicationFee = new CreatePaymentApplicationFeeRequest() {
-            Amount = new CreatePaymentApplicationFeeAmountRequest() {
+        ApplicationFee = new PaymentRequestApplicationFee() {
+            Amount = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
             Description = "10",
         },
-        Routing = new List<CreatePaymentRoutingRequest>() {
-            new CreatePaymentRoutingRequest() {
-                Amount = new CreatePaymentRoutingAmountRequest() {
+        Routing = new List<EntityPaymentRoute>() {
+            new EntityPaymentRoute() {
+                Id = "rt_5B8cwPMGnU",
+                Amount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                Destination = new CreatePaymentDestinationRequest() {
-                    Type = CreatePaymentRoutingTypeRequest.Organization,
+                Destination = new EntityPaymentRouteDestination() {
+                    Type = EntityPaymentRouteType.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new CreatePaymentLinksRequest() {
-                    Self = new CreatePaymentSelfRequest() {
+                Links = new EntityPaymentRouteLinks() {
+                    Self = new Url() {
                         Href = "https://...",
                         Type = "application/hal+json",
                     },
-                    Payment = new CreatePaymentPaymentRequest() {
+                    Payment = new Url() {
                         Href = "https://...",
                         Type = "application/hal+json",
                     },
                 },
             },
         },
-        SequenceType = CreatePaymentSequenceTypeRequest.Oneoff,
+        SequenceType = SequenceType.Oneoff,
+        SubscriptionId = "sub_5B8cwPMGnU",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
+        SettlementId = "stl_5B8cwPMGnU",
+        OrderId = "ord_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
-        Company = new CreatePaymentCompany() {
+        Company = new Company() {
             RegistrationNumber = "12345678",
             VatNumber = "NL123456789B01",
         },
@@ -184,10 +208,10 @@ var res = await sdk.Payments.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `Include`                                                                                            | [CreatePaymentInclude](../../Models/Requests/CreatePaymentInclude.md)                                | :heavy_minus_sign:                                                                                   | This endpoint allows you to include additional information via the `include` query string parameter. | details.qrCode                                                                                       |
-| `RequestBody`                                                                                        | [CreatePaymentRequestBody](../../Models/Requests/CreatePaymentRequestBody.md)                        | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |                                                                                                      |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `Include`                                                                                            | *string*                                                                                             | :heavy_minus_sign:                                                                                   | This endpoint allows you to include additional information via the `include` query string parameter. |
+| `PaymentRequest`                                                                                     | [PaymentRequest](../../Models/Components/PaymentRequest.md)                                          | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
 
 ### Response
 
@@ -195,11 +219,11 @@ var res = await sdk.Payments.CreateAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.CreatePaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.CreatePaymentServiceUnavailableHalJSONException  | 503                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 503                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -222,7 +246,7 @@ var sdk = new Client(security: new Security() {
 ListPaymentsRequest req = new ListPaymentsRequest() {
     From = "tr_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListPaymentsSort.Desc,
+    Sort = ListSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -244,10 +268,10 @@ var res = await sdk.Payments.ListAsync(req);
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| Mollie.Models.Errors.ListPaymentsHalJSONException | 400                                               | application/hal+json                              |
-| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -259,7 +283,6 @@ Retrieve a single payment object by its payment ID.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -267,8 +290,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Payments.GetAsync(
     paymentId: "tr_5B8cwPMGnU",
-    include: GetPaymentInclude.DetailsQrCode,
-    embed: GetPaymentEmbed.Captures,
+    include: "details.qrCode",
+    embed: "captures",
     testmode: false
 );
 
@@ -280,8 +303,8 @@ var res = await sdk.Payments.GetAsync(
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PaymentId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                 | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                          |
-| `Include`                                                                                                                                                                                                                                                                                                                                                                              | [GetPaymentInclude](../../Models/Requests/GetPaymentInclude.md)                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to include additional information via the `include` query string parameter.                                                                                                                                                                                                                                                                                   | details.qrCode                                                                                                                                                                                                                                                                                                                                                                         |
-| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | [GetPaymentEmbed](../../Models/Requests/GetPaymentEmbed.md)                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the<br/>following values via the `embed` query string parameter.                                                                                                                                                                                                                                                         | captures                                                                                                                                                                                                                                                                                                                                                                               |
+| `Include`                                                                                                                                                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows you to include additional information via the `include` query string parameter.                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                        |
+| `Embed`                                                                                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter.                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -290,10 +313,10 @@ var res = await sdk.Payments.GetAsync(
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| Mollie.Models.Errors.GetPaymentHalJSONException | 404                                             | application/hal+json                            |
-| Mollie.Models.Errors.APIException               | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -320,13 +343,13 @@ var res = await sdk.Payments.UpdateAsync(
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Method = UpdatePaymentMethodRequest.Ideal,
-        Locale = UpdatePaymentLocaleRequest.EnUS,
+        Method = Method.Ideal,
+        Locale = Locale.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
         Issuer = "ideal_INGBNL2A",
-        BillingAddress = new UpdatePaymentBillingAddressRequest() {
+        BillingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -340,7 +363,7 @@ var res = await sdk.Payments.UpdateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new UpdatePaymentShippingAddressRequest() {
+        ShippingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -374,11 +397,10 @@ var res = await sdk.Payments.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.UpdatePaymentNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.UpdatePaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Cancel
 
@@ -424,11 +446,10 @@ var res = await sdk.Payments.CancelAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.CancelPaymentNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.CancelPaymentUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ReleaseAuthorization
 
@@ -477,8 +498,7 @@ var res = await sdk.Payments.ReleaseAuthorizationAsync(
 
 ### Errors
 
-| Error Type                                                                   | Status Code                                                                  | Content Type                                                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Mollie.Models.Errors.ReleaseAuthorizationNotFoundHalJSONException            | 404                                                                          | application/hal+json                                                         |
-| Mollie.Models.Errors.ReleaseAuthorizationUnprocessableEntityHalJSONException | 422                                                                          | application/hal+json                                                         |
-| Mollie.Models.Errors.APIException                                            | 4XX, 5XX                                                                     | \*/\*                                                                        |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

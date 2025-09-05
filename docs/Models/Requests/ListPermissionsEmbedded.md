@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field                                                   | Type                                                    | Required                                                | Description                                             |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Permissions`                                           | List<[Permission](../../Models/Requests/Permission.md)> | :heavy_minus_sign:                                      | An array of permission objects.                         |
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `Permissions`                                                         | List<[EntityPermission](../../Models/Components/EntityPermission.md)> | :heavy_minus_sign:                                                    | An array of permission objects.                                       |

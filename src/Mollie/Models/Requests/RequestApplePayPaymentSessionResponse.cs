@@ -27,6 +27,6 @@ namespace Mollie.Models.Requests
         /// is opaque, so we are not defining a response schema.
         /// </remarks>
         /// </summary>
-        public Dictionary<string, object>? Object { get; set; }
+        public Dictionary<string, object>? EntitySession { get; set; }
     }
 }

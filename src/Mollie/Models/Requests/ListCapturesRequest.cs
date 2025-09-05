@@ -9,7 +9,6 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     
     public class ListCapturesRequest
@@ -38,14 +37,14 @@ namespace Mollie.Models.Requests
         public long? Limit { get; set; } = null;
 
         /// <summary>
-        /// This endpoint allows you to embed additional resources via the<br/>
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
         /// 
         /// <remarks>
-        /// `embed` query string parameter.
+        /// parameter.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
-        public ListCapturesEmbed? Embed { get; set; }
+        public string? Embed { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

@@ -22,7 +22,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
-        public string? From { get; set; }
+        public string? From { get; set; } = null;
 
         /// <summary>
         /// The maximum number of items to return. Defaults to 50 items.

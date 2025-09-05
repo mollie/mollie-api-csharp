@@ -9,8 +9,13 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class ListSettlementsRequest
     {
@@ -23,7 +28,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
-        public string? From { get; set; }
+        public string? From { get; set; } = null;
 
         /// <summary>
         /// The maximum number of items to return. Defaults to 50 items.
@@ -39,7 +44,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=balanceId")]
-        public string? BalanceId { get; set; } = null;
+        public string? BalanceId { get; set; }
 
         /// <summary>
         /// Provide the year to query the settlements. Must be used combined with `month` parameter
@@ -57,6 +62,6 @@ namespace Mollie.Models.Requests
         /// Provides the currencies to retrieve the settlements. It accepts multiple currencies in a comma-separated format.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=currencies")]
-        public Currencies? Currencies { get; set; } = null;
+        public Currencies? Currencies { get; set; }
     }
 }

@@ -41,7 +41,6 @@ Your customer will be charged €10 on the last day of each month, starting in A
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -49,8 +48,9 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Subscriptions.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
-    requestBody: new CreateSubscriptionRequestBody() {
-        Amount = new CreateSubscriptionAmountRequest() {
+    subscriptionRequest: new SubscriptionRequest() {
+        Id = "sub_5B8cwPMGnU",
+        Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
@@ -58,15 +58,16 @@ var res = await sdk.Subscriptions.CreateAsync(
         Interval = "2 days",
         StartDate = "2025-01-01",
         Description = "Subscription of streaming channel",
-        Method = CreateSubscriptionMethodRequest.Paypal,
-        ApplicationFee = new CreateSubscriptionApplicationFeeRequest() {
-            Amount = new CreateSubscriptionApplicationFeeAmountRequest() {
+        Method = SubscriptionRequestMethod.Paypal,
+        ApplicationFee = new SubscriptionRequestApplicationFee() {
+            Amount = new Amount() {
                 Currency = "EUR",
                 Value = "10.00",
             },
             Description = "Platform fee",
         },
         WebhookUrl = "https://example.com/webhook",
+        CustomerId = "cst_5B8cwPMGnU",
         MandateId = "mdt_5B8cwPMGnU",
         Testmode = false,
     }
@@ -77,10 +78,10 @@ var res = await sdk.Subscriptions.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
-| `RequestBody`                                                                           | [CreateSubscriptionRequestBody](../../Models/Requests/CreateSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           | Example                                                               |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `CustomerId`                                                          | *string*                                                              | :heavy_check_mark:                                                    | Provide the ID of the related customer.                               | cst_5B8cwPMGnU                                                        |
+| `SubscriptionRequest`                                                 | [SubscriptionRequest](../../Models/Components/SubscriptionRequest.md) | :heavy_minus_sign:                                                    | N/A                                                                   |                                                                       |
 
 ### Response
 
@@ -88,10 +89,10 @@ var res = await sdk.Subscriptions.CreateAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Mollie.Models.Errors.CreateSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -115,7 +116,7 @@ ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "sub_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListSubscriptionsSort.Desc,
+    Sort = ListSort.Desc,
     Testmode = false,
 };
 
@@ -136,11 +137,10 @@ var res = await sdk.Subscriptions.ListAsync(req);
 
 ### Errors
 
-| Error Type                                                       | Status Code                                                      | Content Type                                                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Mollie.Models.Errors.ListSubscriptionsBadRequestHalJSONException | 400                                                              | application/hal+json                                             |
-| Mollie.Models.Errors.ListSubscriptionsNotFoundHalJSONException   | 404                                                              | application/hal+json                                             |
-| Mollie.Models.Errors.APIException                                | 4XX, 5XX                                                         | \*/\*                                                            |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -180,10 +180,10 @@ var res = await sdk.Subscriptions.GetAsync(
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| Mollie.Models.Errors.GetSubscriptionHalJSONException | 404                                                  | application/hal+json                                 |
-| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -209,7 +209,7 @@ var res = await sdk.Subscriptions.UpdateAsync(
     customerId: "cst_5B8cwPMGnU",
     subscriptionId: "sub_5B8cwPMGnU",
     requestBody: new UpdateSubscriptionRequestBody() {
-        Amount = new UpdateSubscriptionAmountRequest() {
+        Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
@@ -240,10 +240,10 @@ var res = await sdk.Subscriptions.UpdateAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Mollie.Models.Errors.UpdateSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Cancel
 
@@ -286,10 +286,10 @@ var res = await sdk.Subscriptions.CancelAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Mollie.Models.Errors.CancelSubscriptionHalJSONException | 404                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## All
 
@@ -322,7 +322,7 @@ var res = await sdk.Subscriptions.AllAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     | sub_rVKGtNd6s3                                                                                                                                                                                                                                                                                                                                                                         |
+| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Limit`                                                                                                                                                                                                                                                                                                                                                                                | *long*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                           | 50                                                                                                                                                                                                                                                                                                                                                                                     |
 | `ProfileId`                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The identifier referring to the [profile](get-profile) you wish to retrieve subscriptions for.<br/><br/>Most API credentials are linked to a single profile. In these cases the `profileId` is already implied.<br/><br/>To retrieve all subscriptions across the organization, use an organization-level API credential and omit the<br/>`profileId` parameter.                       | pfl_QkEhN94Ba                                                                                                                                                                                                                                                                                                                                                                          |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -333,11 +333,10 @@ var res = await sdk.Subscriptions.AllAsync(
 
 ### Errors
 
-| Error Type                                                          | Status Code                                                         | Content Type                                                        |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Mollie.Models.Errors.ListAllSubscriptionsBadRequestHalJSONException | 400                                                                 | application/hal+json                                                |
-| Mollie.Models.Errors.ListAllSubscriptionsNotFoundHalJSONException   | 404                                                                 | application/hal+json                                                |
-| Mollie.Models.Errors.APIException                                   | 4XX, 5XX                                                            | \*/\*                                                               |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ListPayments
 
@@ -362,7 +361,7 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     SubscriptionId = "sub_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListSubscriptionPaymentsSort.Desc,
+    Sort = ListSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
 };
@@ -384,7 +383,7 @@ var res = await sdk.Subscriptions.ListPaymentsAsync(req);
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| Mollie.Models.Errors.ListSubscriptionPaymentsHalJSONException | 400                                                           | application/hal+json                                          |
-| Mollie.Models.Errors.APIException                             | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

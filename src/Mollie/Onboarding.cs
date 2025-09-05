@@ -53,7 +53,7 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -150,14 +150,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetOnboardingStatusResponseBody obj;
+                    EntityOnboardingStatus obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetOnboardingStatusResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityOnboardingStatus>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetOnboardingStatusResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityOnboardingStatus.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetOnboardingStatusResponse()
@@ -168,7 +168,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.EntityOnboardingStatus = obj;
                     return response;
                 }
 

@@ -1,9 +1,0 @@
-# RefundsMovedToAvailable
-
-
-## Fields
-
-| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                            | [RefundsMovedToAvailableAmount](../../Models/Requests/RefundsMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                  | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.   |
-| `Subtotals`                                                                                         | List<[RefundsMovedToAvailableSubtotal2](../../Models/Requests/RefundsMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |

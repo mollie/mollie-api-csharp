@@ -1,9 +1,0 @@
-# GetRefundExternalReference
-
-
-## Fields
-
-| Field                                                   | Type                                                    | Required                                                | Description                                             | Example                                                 |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Type`                                                  | [GetRefundType](../../Models/Requests/GetRefundType.md) | :heavy_minus_sign:                                      | Specifies the reference type                            | acquirer-reference                                      |
-| `Id`                                                    | *string*                                                | :heavy_minus_sign:                                      | Unique reference from the payment provider              | 123456789012345                                         |

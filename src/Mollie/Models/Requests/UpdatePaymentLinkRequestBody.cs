@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -30,14 +30,10 @@ namespace Mollie.Models.Requests
         public string? Description { get; set; }
 
         /// <summary>
-        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided.<br/>
-        /// 
-        /// <remarks>
-        /// The customer will be prompted to enter a value greater than or equal to the minimum amount.
-        /// </remarks>
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("minimumAmount")]
-        public UpdatePaymentLinkMinimumAmountRequest? MinimumAmount { get; set; }
+        public Amount? MinimumAmount { get; set; }
 
         /// <summary>
         /// Whether the payment link is archived. Customers will not be able to complete payments on archived<br/>
@@ -75,35 +71,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
-        public List<UpdatePaymentLinkLineRequest>? Lines { get; set; } = null;
+        public List<PaymentLineItem>? Lines { get; set; } = null;
 
-        /// <summary>
-        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
-        /// 
-        /// <remarks>
-        /// conversion.<br/>
-        /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
-        /// `country`.<br/>
-        /// <br/>
-        /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("billingAddress")]
-        public UpdatePaymentLinkBillingAddressRequest? BillingAddress { get; set; }
+        public PaymentAddress? BillingAddress { get; set; }
 
-        /// <summary>
-        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and<br/>
-        /// 
-        /// <remarks>
-        /// conversion.<br/>
-        /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
-        /// `country`.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("shippingAddress")]
-        public UpdatePaymentLinkShippingAddressRequest? ShippingAddress { get; set; }
+        public PaymentAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>

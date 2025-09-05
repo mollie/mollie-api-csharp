@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -26,6 +26,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("methods")]
-        public List<ListAllMethodsMethod> Methods { get; set; } = default!;
+        public List<EntityMethodAll> Methods { get; set; } = default!;
     }
 }

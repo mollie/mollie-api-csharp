@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -23,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The updated payment object.
         /// </summary>
-        public UpdatePaymentResponseBody? Object { get; set; }
+        public PaymentResponse? PaymentResponse { get; set; }
     }
 }

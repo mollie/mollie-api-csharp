@@ -36,10 +36,10 @@ var res = await sdk.Permissions.ListAsync();
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| Mollie.Models.Errors.ListPermissionsHalJSONException | 400                                                  | application/hal+json                                 |
-| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -77,7 +77,7 @@ var res = await sdk.Permissions.GetAsync(
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.GetPermissionHalJSONException | 404                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

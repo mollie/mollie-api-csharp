@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
@@ -16,6 +17,9 @@ namespace Mollie.Models.Requests
     
     public class CreatePaymentLinkRequest
     {
+
+        [JsonProperty("id")]
+        public string? Id { get; set; }
 
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the<br/>
@@ -28,24 +32,16 @@ namespace Mollie.Models.Requests
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The amount of the payment link. If no amount is provided initially, the customer will be prompted to enter an<br/>
-        /// 
-        /// <remarks>
-        /// amount.
-        /// </remarks>
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public CreatePaymentLinkAmountRequest? Amount { get; set; } = null;
+        public AmountNullable? Amount { get; set; } = null;
 
         /// <summary>
-        /// The minimum amount of the payment link. This property is only allowed when there is no amount provided. The<br/>
-        /// 
-        /// <remarks>
-        /// customer will be prompted to enter a value greater than or equal to the minimum amount.
-        /// </remarks>
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("minimumAmount")]
-        public CreatePaymentLinkMinimumAmountRequest? MinimumAmount { get; set; } = null;
+        public AmountNullable? MinimumAmount { get; set; } = null;
 
         /// <summary>
         /// The URL your customer will be redirected to after completing the payment process. If no redirect URL is provided,<br/>
@@ -85,35 +81,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
-        public List<CreatePaymentLinkLineRequest>? Lines { get; set; } = null;
+        public List<PaymentLineItem>? Lines { get; set; } = null;
 
-        /// <summary>
-        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
-        /// 
-        /// <remarks>
-        /// conversion.<br/>
-        /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
-        /// `country`.<br/>
-        /// <br/>
-        /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("billingAddress")]
-        public CreatePaymentLinkBillingAddressRequest? BillingAddress { get; set; }
+        public PaymentAddress? BillingAddress { get; set; }
 
-        /// <summary>
-        /// The customer&apos;s shipping address details. We advise to provide these details to improve fraud protection and<br/>
-        /// 
-        /// <remarks>
-        /// conversion.<br/>
-        /// <br/>
-        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
-        /// `country`.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("shippingAddress")]
-        public CreatePaymentLinkShippingAddressRequest? ShippingAddress { get; set; }
+        public PaymentAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
@@ -176,21 +150,10 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("applicationFee")]
-        public CreatePaymentLinkApplicationFeeRequest? ApplicationFee { get; set; }
+        public ApplicationFee? ApplicationFee { get; set; }
 
-        /// <summary>
-        /// If set to `first`, a payment mandate is established right after a payment is made by the customer.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Defaults to `oneoff`, which is a regular payment link and will not establish a mandate after payment.<br/>
-        /// <br/>
-        /// The mandate ID can be retrieved by making a call to the<br/>
-        /// <a href="get-payment-link-payments">Payment Link Payments Endpoint</a>.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("sequenceType")]
-        public CreatePaymentLinkSequenceTypeRequest? SequenceType { get; set; } = null;
+        public PaymentLinkSequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// **Only relevant when `sequenceType` is set to `first`**<br/>

@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     
     public class CreatePaymentRequest
@@ -19,9 +19,9 @@ namespace Mollie.Models.Requests
         /// This endpoint allows you to include additional information via the `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public CreatePaymentInclude? Include { get; set; } = null;
+        public string? Include { get; set; } = null;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public CreatePaymentRequestBody? RequestBody { get; set; }
+        public PaymentRequest? PaymentRequest { get; set; }
     }
 }

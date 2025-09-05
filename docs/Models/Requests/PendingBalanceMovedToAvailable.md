@@ -1,9 +1,0 @@
-# PendingBalanceMovedToAvailable
-
-
-## Fields
-
-| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                                          | [PendingBalanceMovedToAvailableAmount](../../Models/Requests/PendingBalanceMovedToAvailableAmount.md)             | :heavy_minus_sign:                                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.                 |
-| `Subtotals`                                                                                                       | List<[PendingBalanceMovedToAvailableSubtotal2](../../Models/Requests/PendingBalanceMovedToAvailableSubtotal2.md)> | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |

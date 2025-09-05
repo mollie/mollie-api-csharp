@@ -1,9 +1,0 @@
-# TopupsPending
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [TopupsPendingAmount](../../Models/Requests/TopupsPendingAmount.md)                               | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[TopupsPendingSubtotal2](../../Models/Requests/TopupsPendingSubtotal2.md)>                   | :heavy_minus_sign:                                                                                | N/A                                                                                               |

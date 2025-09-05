@@ -25,34 +25,34 @@ With the Sales Invoice API you can generate sales invoices to send to your custo
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-CreateSalesInvoiceRequest req = new CreateSalesInvoiceRequest() {
+EntitySalesInvoice req = new EntitySalesInvoice() {
+    Id = "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     Testmode = false,
     ProfileId = "pfl_QkEhN94Ba",
-    Status = CreateSalesInvoiceStatusRequest.Draft,
-    VatScheme = VatSchemeRequest.Standard,
-    VatMode = VatModeRequest.Exclusive,
+    Status = EntitySalesInvoiceStatus.Draft,
+    VatScheme = EntitySalesInvoiceVatScheme.Standard,
+    VatMode = EntitySalesInvoiceVatMode.Exclusive,
     Memo = "This is a memo!",
-    PaymentTerm = CreateSalesInvoicePaymentTermRequest.Thirtydays,
-    PaymentDetails = new CreateSalesInvoicePaymentDetailsRequest() {
-        Source = CreateSalesInvoiceSourceRequest.PaymentLink,
+    PaymentTerm = EntitySalesInvoicePaymentTerm.Thirtydays,
+    PaymentDetails = new SalesInvoicePaymentDetails() {
+        Source = SalesInvoicePaymentDetailsSource.PaymentLink,
         SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
     },
-    EmailDetails = new CreateSalesInvoiceEmailDetailsRequest() {
+    EmailDetails = new SalesInvoiceEmailDetails() {
         Subject = "Your invoice is available",
         Body = "Please find your invoice enclosed.",
     },
     CustomerId = "cst_8wmqcHMN4U",
     MandateId = "mdt_pWUnw6pkBN",
     RecipientIdentifier = "customer-xyz-0123",
-    Recipient = new CreateSalesInvoiceRecipientRequest() {
-        Type = CreateSalesInvoiceRecipientTypeRequest.Consumer,
+    Recipient = new SalesInvoiceRecipient() {
+        Type = SalesInvoiceRecipientType.Consumer,
         Title = "Mrs.",
         GivenName = "Jane",
         FamilyName = "Doe",
@@ -67,11 +67,31 @@ CreateSalesInvoiceRequest req = new CreateSalesInvoiceRequest() {
         City = "Amsterdam",
         Region = "Noord-Holland",
         Country = "NL",
-        Locale = CreateSalesInvoiceLocaleRequest.Nlnl,
+        Locale = SalesInvoiceRecipientLocale.Nlnl,
     },
-    Lines = new List<CreateSalesInvoiceLineRequest>() {},
-    Discount = new CreateSalesInvoiceDiscountRequest() {
-        Type = CreateSalesInvoiceDiscountTypeRequest.Amount,
+    Lines = new List<SalesInvoiceLineItem>() {},
+    Discount = new SalesInvoiceDiscount() {
+        Type = SalesInvoiceDiscountType.Amount,
+        Value = "10.00",
+    },
+    AmountDue = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    SubtotalAmount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    TotalAmount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    TotalVatAmount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    DiscountedSubtotalAmount = new Amount() {
+        Currency = "EUR",
         Value = "10.00",
     },
 };
@@ -83,9 +103,9 @@ var res = await sdk.SalesInvoices.CreateAsync(req);
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `request`                                                                       | [CreateSalesInvoiceRequest](../../Models/Requests/CreateSalesInvoiceRequest.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [EntitySalesInvoice](../../Models/Components/EntitySalesInvoice.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 
@@ -93,11 +113,10 @@ var res = await sdk.SalesInvoices.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Mollie.Models.Errors.CreateSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.CreateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -133,7 +152,7 @@ var res = await sdk.SalesInvoices.ListAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                                                                                                                                                                                                                                                                                                                          |
+| `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Limit`                                                                                                                                                                                                                                                                                                                                                                                | *long*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                           | 50                                                                                                                                                                                                                                                                                                                                                                                     |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
@@ -143,10 +162,10 @@ var res = await sdk.SalesInvoices.ListAsync(
 
 ### Errors
 
-| Error Type                                             | Status Code                                            | Content Type                                           |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| Mollie.Models.Errors.ListSalesInvoicesHalJSONException | 400                                                    | application/hal+json                                   |
-| Mollie.Models.Errors.APIException                      | 4XX, 5XX                                               | \*/\*                                                  |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -179,7 +198,7 @@ var res = await sdk.SalesInvoices.GetAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                                                                                                                                                                                                                                                                                                                          |
+| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -188,10 +207,10 @@ var res = await sdk.SalesInvoices.GetAsync(
 
 ### Errors
 
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| Mollie.Models.Errors.GetSalesInvoiceHalJSONException | 404                                                  | application/hal+json                                 |
-| Mollie.Models.Errors.APIException                    | 4XX, 5XX                                             | \*/\*                                                |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -209,7 +228,6 @@ respectively).
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -218,22 +236,22 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.UpdateAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
-    requestBody: new UpdateSalesInvoiceRequestBody() {
+    updateValuesSalesInvoice: new UpdateValuesSalesInvoice() {
         Testmode = false,
-        Status = UpdateSalesInvoiceStatusRequest.Paid,
+        Status = UpdateValuesSalesInvoiceStatus.Paid,
         Memo = "An updated memo!",
-        PaymentTerm = UpdateSalesInvoicePaymentTermRequest.Thirtydays,
-        PaymentDetails = new UpdateSalesInvoicePaymentDetailsRequest() {
-            Source = UpdateSalesInvoiceSourceRequest.PaymentLink,
+        PaymentTerm = UpdateValuesSalesInvoicePaymentTerm.Thirtydays,
+        PaymentDetails = new SalesInvoicePaymentDetails() {
+            Source = SalesInvoicePaymentDetailsSource.PaymentLink,
             SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
         },
-        EmailDetails = new UpdateSalesInvoiceEmailDetailsRequest() {
+        EmailDetails = new SalesInvoiceEmailDetails() {
             Subject = "Your invoice is available",
             Body = "Please find your invoice enclosed.",
         },
         RecipientIdentifier = "customer-xyz-0123",
-        Recipient = new UpdateSalesInvoiceRecipientRequest() {
-            Type = UpdateSalesInvoiceRecipientTypeRequest.Consumer,
+        Recipient = new SalesInvoiceRecipient() {
+            Type = SalesInvoiceRecipientType.Consumer,
             Title = "Mrs.",
             GivenName = "Jane",
             FamilyName = "Doe",
@@ -248,25 +266,25 @@ var res = await sdk.SalesInvoices.UpdateAsync(
             City = "Amsterdam",
             Region = "Noord-Holland",
             Country = "NL",
-            Locale = UpdateSalesInvoiceLocaleRequest.Nlnl,
+            Locale = SalesInvoiceRecipientLocale.Nlnl,
         },
-        Lines = new List<UpdateSalesInvoiceLineRequest>() {
-            new UpdateSalesInvoiceLineRequest() {
+        Lines = new List<SalesInvoiceLineItem>() {
+            new SalesInvoiceLineItem() {
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 VatRate = "21.00",
-                UnitPrice = new UpdateSalesInvoiceUnitPriceRequest() {
+                UnitPrice = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                Discount = new UpdateSalesInvoiceLineDiscountRequest() {
-                    Type = UpdateSalesInvoiceLineTypeRequest.Amount,
+                Discount = new SalesInvoiceDiscount() {
+                    Type = SalesInvoiceDiscountType.Amount,
                     Value = "10.00",
                 },
             },
         },
-        Discount = new UpdateSalesInvoiceDiscountRequest() {
-            Type = UpdateSalesInvoiceDiscountTypeRequest.Amount,
+        Discount = new SalesInvoiceDiscount() {
+            Type = SalesInvoiceDiscountType.Amount,
             Value = "10.00",
         },
     }
@@ -277,10 +295,10 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `Id`                                                                                    | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the item you want to perform this operation on.                       | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                           |
-| `RequestBody`                                                                           | [UpdateSalesInvoiceRequestBody](../../Models/Requests/UpdateSalesInvoiceRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | Provide the ID of the item you want to perform this operation on.               |
+| `UpdateValuesSalesInvoice`                                                      | [UpdateValuesSalesInvoice](../../Models/Components/UpdateValuesSalesInvoice.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
 
 ### Response
 
@@ -288,11 +306,10 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Mollie.Models.Errors.UpdateSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.UpdateSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
 
@@ -309,7 +326,6 @@ Sales invoices which are in status `draft` can be deleted. For all other statuse
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -317,7 +333,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.DeleteAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
-    requestBody: new DeleteSalesInvoiceRequestBody() {
+    deleteValuesSalesInvoice: new DeleteValuesSalesInvoice() {
         Testmode = false,
     }
 );
@@ -327,10 +343,10 @@ var res = await sdk.SalesInvoices.DeleteAsync(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `Id`                                                                                    | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the item you want to perform this operation on.                       | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                           |
-| `RequestBody`                                                                           | [DeleteSalesInvoiceRequestBody](../../Models/Requests/DeleteSalesInvoiceRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | Provide the ID of the item you want to perform this operation on.               |
+| `DeleteValuesSalesInvoice`                                                      | [DeleteValuesSalesInvoice](../../Models/Components/DeleteValuesSalesInvoice.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
 
 ### Response
 
@@ -338,8 +354,7 @@ var res = await sdk.SalesInvoices.DeleteAsync(
 
 ### Errors
 
-| Error Type                                                                 | Status Code                                                                | Content Type                                                               |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Mollie.Models.Errors.DeleteSalesInvoiceNotFoundHalJSONException            | 404                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.DeleteSalesInvoiceUnprocessableEntityHalJSONException | 422                                                                        | application/hal+json                                                       |
-| Mollie.Models.Errors.APIException                                          | 4XX, 5XX                                                                   | \*/\*                                                                      |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

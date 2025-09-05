@@ -13,7 +13,10 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The customer object.
@@ -25,41 +28,34 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a customer object. Will always contain the string `customer` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string Resource { get; set; } = default!;
+        public string? Resource { get; set; }
 
-        /// <summary>
-        /// The identifier uniquely referring to this customer. Example: `cst_vsKJpSsabw`.
-        /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; } = default!;
+        public string? Id { get; set; }
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public GetCustomerMode Mode { get; set; } = default!;
+        public Models.Components.Mode? Mode { get; set; }
 
         /// <summary>
         /// The full name of the customer.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
-        public string? Name { get; set; }
+        [JsonProperty("name")]
+        public string? Name { get; set; } = null;
 
         /// <summary>
         /// The email address of the customer.
         /// </summary>
-        [JsonProperty("email", NullValueHandling = NullValueHandling.Include)]
-        public string? Email { get; set; }
+        [JsonProperty("email")]
+        public string? Email { get; set; } = null;
 
         /// <summary>
-        /// Preconfigure the language to be used in the hosted payment pages shown to the customer. Should only be provided if<br/>
-        /// 
-        /// <remarks>
-        /// absolutely necessary. If not provided, the browser language will be used which is typically highly accurate.
-        /// </remarks>
+        /// Allows you to preset the language to be used.
         /// </summary>
-        [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
-        public GetCustomerLocale? Locale { get; set; }
+        [JsonProperty("locale")]
+        public LocaleResponse? Locale { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
@@ -68,22 +64,22 @@ namespace Mollie.Models.Requests
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </remarks>
         /// </summary>
-        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
-        public GetCustomerMetadata? Metadata { get; set; }
+        [JsonProperty("metadata")]
+        public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string CreatedAt { get; set; } = default!;
+        public string? CreatedAt { get; set; }
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetCustomerLinks Links { get; set; } = default!;
+        public GetCustomerLinks? Links { get; set; }
 
         [JsonProperty("events")]
-        public List<Event>? Events { get; set; }
+        public List<EntityEvent>? Events { get; set; }
     }
 }

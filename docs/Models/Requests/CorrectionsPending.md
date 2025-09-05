@@ -1,9 +1,0 @@
-# CorrectionsPending
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Amount`                                                                                          | [CorrectionsPendingAmount](../../Models/Requests/CorrectionsPendingAmount.md)                     | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Subtotals`                                                                                       | List<[CorrectionsPendingSubtotal2](../../Models/Requests/CorrectionsPendingSubtotal2.md)>         | :heavy_minus_sign:                                                                                | N/A                                                                                               |

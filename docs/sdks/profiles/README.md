@@ -25,14 +25,13 @@ can use this endpoint to automate profile creation.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-CreateProfileRequest req = new CreateProfileRequest() {
+EntityProfile req = new EntityProfile() {
     Name = "My website name",
     Website = "https://example.com",
     Email = "test@mollie.com",
@@ -52,9 +51,9 @@ var res = await sdk.Profiles.CreateAsync(req);
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `request`                                                             | [CreateProfileRequest](../../Models/Requests/CreateProfileRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `request`                                                 | [EntityProfile](../../Models/Components/EntityProfile.md) | :heavy_check_mark:                                        | The request object to use for the request.                |
 
 ### Response
 
@@ -62,10 +61,10 @@ var res = await sdk.Profiles.CreateAsync(req);
 
 ### Errors
 
-| Error Type                                         | Status Code                                        | Content Type                                       |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| Mollie.Models.Errors.CreateProfileHalJSONException | 422                                                | application/hal+json                               |
-| Mollie.Models.Errors.APIException                  | 4XX, 5XX                                           | \*/\*                                              |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
 
@@ -96,7 +95,7 @@ var res = await sdk.Profiles.ListAsync(
 
 | Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    | Example                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `From`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set. | pfl_QkEhN94Ba                                                                                                                  |
+| `From`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set. |                                                                                                                                |
 | `Limit`                                                                                                                        | *long*                                                                                                                         | :heavy_minus_sign:                                                                                                             | The maximum number of items to return. Defaults to 50 items.                                                                   | 50                                                                                                                             |
 
 ### Response
@@ -105,10 +104,10 @@ var res = await sdk.Profiles.ListAsync(
 
 ### Errors
 
-| Error Type                                        | Status Code                                       | Content Type                                      |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| Mollie.Models.Errors.ListProfilesHalJSONException | 400                                               | application/hal+json                              |
-| Mollie.Models.Errors.APIException                 | 4XX, 5XX                                          | \*/\*                                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
 
@@ -137,7 +136,7 @@ var res = await sdk.Profiles.GetAsync(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      | pfl_QkEhN94Ba                                                                                                                                                                                                                                                                                                                                                                          |
+| `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Response
@@ -146,11 +145,10 @@ var res = await sdk.Profiles.GetAsync(
 
 ### Errors
 
-| Error Type                                              | Status Code                                             | Content Type                                            |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Mollie.Models.Errors.GetProfileNotFoundHalJSONException | 404                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.GetProfileGoneHalJSONException     | 410                                                     | application/hal+json                                    |
-| Mollie.Models.Errors.APIException                       | 4XX, 5XX                                                | \*/\*                                                   |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 410                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
 
@@ -185,7 +183,7 @@ var res = await sdk.Profiles.UpdateAsync(
             "GB",
         },
         BusinessCategory = "OTHER_MERCHANDISE",
-        Mode = ModeRequest.Live,
+        Mode = Mollie.Models.Requests.Mode.Live,
     }
 );
 
@@ -194,10 +192,10 @@ var res = await sdk.Profiles.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             | pfl_QkEhN94Ba                                                                 |
-| `RequestBody`                                                                 | [UpdateProfileRequestBody](../../Models/Requests/UpdateProfileRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |                                                                               |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | Provide the ID of the item you want to perform this operation on.             |
+| `RequestBody`                                                                 | [UpdateProfileRequestBody](../../Models/Requests/UpdateProfileRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |
 
 ### Response
 
@@ -205,12 +203,10 @@ var res = await sdk.Profiles.UpdateAsync(
 
 ### Errors
 
-| Error Type                                                            | Status Code                                                           | Content Type                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Mollie.Models.Errors.UpdateProfileNotFoundHalJSONException            | 404                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.UpdateProfileGoneHalJSONException                | 410                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.UpdateProfileUnprocessableEntityHalJSONException | 422                                                                   | application/hal+json                                                  |
-| Mollie.Models.Errors.APIException                                     | 4XX, 5XX                                                              | \*/\*                                                                 |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 410, 422                      | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
 
@@ -234,9 +230,9 @@ var res = await sdk.Profiles.DeleteAsync(id: "pfl_QkEhN94Ba");
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. | pfl_QkEhN94Ba                                                     |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. |
 
 ### Response
 
@@ -244,11 +240,10 @@ var res = await sdk.Profiles.DeleteAsync(id: "pfl_QkEhN94Ba");
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| Mollie.Models.Errors.DeleteProfileNotFoundHalJSONException | 404                                                        | application/hal+json                                       |
-| Mollie.Models.Errors.DeleteProfileGoneHalJSONException     | 410                                                        | application/hal+json                                       |
-| Mollie.Models.Errors.APIException                          | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 410                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## GetCurrent
 

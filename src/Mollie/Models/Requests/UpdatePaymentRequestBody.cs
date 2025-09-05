@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -86,7 +85,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public UpdatePaymentMetadataRequest? Metadata { get; set; } = null;
+        public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>
@@ -101,13 +100,13 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public UpdatePaymentMethodRequest? Method { get; set; } = null;
+        public Method? Method { get; set; } = null;
 
         /// <summary>
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public UpdatePaymentLocaleRequest? Locale { get; set; }
+        public Locale? Locale { get; set; }
 
         /// <summary>
         /// The date by which the payment should be completed in `YYYY-MM-DD` format
@@ -168,10 +167,10 @@ namespace Mollie.Models.Requests
         public string? Issuer { get; set; } = null;
 
         [JsonProperty("billingAddress")]
-        public UpdatePaymentBillingAddressRequest? BillingAddress { get; set; }
+        public PaymentAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public UpdatePaymentShippingAddressRequest? ShippingAddress { get; set; }
+        public PaymentAddress? ShippingAddress { get; set; }
 
         [JsonProperty("billingEmail")]
         public string? BillingEmail { get; set; }

@@ -33,7 +33,7 @@ namespace Mollie
         /// The routed amount is credited to the account of your customer.
         /// </remarks>
         /// </summary>
-        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, PaymentCreateRouteRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List payment routes
@@ -49,7 +49,7 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.0";
+        private const string _sdkVersion = "0.5.0";
         private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "1.0.0";
 
@@ -58,12 +58,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, PaymentCreateRouteRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null)
         {
             var request = new PaymentCreateRouteRequest()
             {
                 PaymentId = paymentId,
-                RequestBody = requestBody,
+                RouteCreateRequest = routeCreateRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/routes", request);
@@ -71,7 +71,7 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RouteCreateRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -156,14 +156,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    PaymentCreateRouteResponseBody obj;
+                    RouteCreateResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<PaymentCreateRouteResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RouteCreateResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into PaymentCreateRouteResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into RouteCreateResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new PaymentCreateRouteResponse()
@@ -174,7 +174,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.RouteCreateResponse = obj;
                     return response;
                 }
 
@@ -185,14 +185,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    PaymentCreateRouteHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<PaymentCreateRouteHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into PaymentCreateRouteHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -201,7 +201,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new PaymentCreateRouteHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -339,14 +339,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    PaymentListRoutesHalJSONExceptionPayload payload;
+                    ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<PaymentListRoutesHalJSONExceptionPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into PaymentListRoutesHalJSONExceptionPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     payload.HttpMeta = new Models.Components.HTTPMetadata()
@@ -355,7 +355,7 @@ namespace Mollie
                         Request = httpRequest
                     };
 
-                    throw new PaymentListRoutesHalJSONException(payload, httpRequest, httpResponse, httpResponseBody);
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -29,14 +29,10 @@ namespace Mollie.Models.Requests
         public string Url { get; set; } = default!;
 
         /// <summary>
-        /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
-        /// 
-        /// <remarks>
-        /// that require explicit selection. Separate multiple event types with a comma.
-        /// </remarks>
+        /// The event&apos;s type
         /// </summary>
         [JsonProperty("eventTypes")]
-        public CreateWebhookWebhookEventTypesRequest WebhookEventTypes { get; set; } = default!;
+        public WebhookEventTypes WebhookEventTypes { get; set; } = default!;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

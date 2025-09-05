@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -27,6 +26,6 @@ namespace Mollie.Models.Requests
         /// <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
         /// </remarks>
         /// </summary>
-        public CreateSalesInvoiceResponseBody? Object { get; set; }
+        public EntitySalesInvoiceResponse? EntitySalesInvoiceResponse { get; set; }
     }
 }

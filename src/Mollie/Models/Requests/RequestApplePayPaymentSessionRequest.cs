@@ -45,12 +45,12 @@ namespace Mollie.Models.Requests
         /// 
         /// <remarks>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in<br/>
-        /// the creation request. For organization-level credentials such as OAuth access tokens however, the<br/>
-        /// `profileId` parameter is required.
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
-        public string? ProfileId { get; set; } = null;
+        public string? ProfileId { get; set; }
     }
 }
