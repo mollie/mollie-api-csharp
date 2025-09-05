@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The level of security applied during card processing.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListPaymentsCardSecurity : IEquatable<ListPaymentsCardSecurity>
+    public enum ListPaymentsCardSecurity
     {
-        public static readonly ListPaymentsCardSecurity Normal = new ListPaymentsCardSecurity("normal");
-        public static readonly ListPaymentsCardSecurity Threedsecure = new ListPaymentsCardSecurity("3dsecure");
+        [JsonProperty("normal")]
+        Normal,
+        [JsonProperty("3dsecure")]
+        Threedsecure,
+    }
 
-        private static readonly Dictionary <string, ListPaymentsCardSecurity> _knownValues =
-            new Dictionary <string, ListPaymentsCardSecurity> ()
+    public static class ListPaymentsCardSecurityExtension
+    {
+        public static string Value(this ListPaymentsCardSecurity value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListPaymentsCardSecurity ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListPaymentsCardSecurity).GetFields())
             {
-                ["normal"] = Normal,
-                ["3dsecure"] = Threedsecure
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListPaymentsCardSecurity> _values =
-            new ConcurrentDictionary<string, ListPaymentsCardSecurity>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListPaymentsCardSecurity(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListPaymentsCardSecurity)
+                    {
+                        return (ListPaymentsCardSecurity)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListPaymentsCardSecurity");
         }
-
-        public string Value { get; }
-
-        public static ListPaymentsCardSecurity Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListPaymentsCardSecurity(value));
-        }
-
-        public static implicit operator ListPaymentsCardSecurity(string value) => Of(value);
-        public static implicit operator string(ListPaymentsCardSecurity listpaymentscardsecurity) => listpaymentscardsecurity.Value;
-
-        public static ListPaymentsCardSecurity[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListPaymentsCardSecurity);
-
-        public bool Equals(ListPaymentsCardSecurity? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

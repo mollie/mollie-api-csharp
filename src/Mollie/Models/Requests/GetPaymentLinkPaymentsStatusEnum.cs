@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
@@ -23,70 +20,55 @@ namespace Mollie.Models.Requests
     /// statuses occur at what point.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsStatusEnum : IEquatable<GetPaymentLinkPaymentsStatusEnum>
+    public enum GetPaymentLinkPaymentsStatusEnum
     {
-        public static readonly GetPaymentLinkPaymentsStatusEnum Open = new GetPaymentLinkPaymentsStatusEnum("open");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Pending = new GetPaymentLinkPaymentsStatusEnum("pending");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Authorized = new GetPaymentLinkPaymentsStatusEnum("authorized");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Paid = new GetPaymentLinkPaymentsStatusEnum("paid");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Canceled = new GetPaymentLinkPaymentsStatusEnum("canceled");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Expired = new GetPaymentLinkPaymentsStatusEnum("expired");
-        public static readonly GetPaymentLinkPaymentsStatusEnum Failed = new GetPaymentLinkPaymentsStatusEnum("failed");
+        [JsonProperty("open")]
+        Open,
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("authorized")]
+        Authorized,
+        [JsonProperty("paid")]
+        Paid,
+        [JsonProperty("canceled")]
+        Canceled,
+        [JsonProperty("expired")]
+        Expired,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsStatusEnum> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsStatusEnum> ()
+    public static class GetPaymentLinkPaymentsStatusEnumExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsStatusEnum value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsStatusEnum ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsStatusEnum).GetFields())
             {
-                ["open"] = Open,
-                ["pending"] = Pending,
-                ["authorized"] = Authorized,
-                ["paid"] = Paid,
-                ["canceled"] = Canceled,
-                ["expired"] = Expired,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsStatusEnum> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsStatusEnum>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsStatusEnum(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsStatusEnum)
+                    {
+                        return (GetPaymentLinkPaymentsStatusEnum)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsStatusEnum");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsStatusEnum Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsStatusEnum(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsStatusEnum(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsStatusEnum getpaymentlinkpaymentsstatusenum) => getpaymentlinkpaymentsstatusenum.Value;
-
-        public static GetPaymentLinkPaymentsStatusEnum[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsStatusEnum);
-
-        public bool Equals(GetPaymentLinkPaymentsStatusEnum? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

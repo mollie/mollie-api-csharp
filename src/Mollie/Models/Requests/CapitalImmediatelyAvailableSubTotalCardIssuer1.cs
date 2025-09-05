@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CapitalImmediatelyAvailableSubTotalCardIssuer1 : IEquatable<CapitalImmediatelyAvailableSubTotalCardIssuer1>
+    public enum CapitalImmediatelyAvailableSubTotalCardIssuer1
     {
-        public static readonly CapitalImmediatelyAvailableSubTotalCardIssuer1 Amex = new CapitalImmediatelyAvailableSubTotalCardIssuer1("amex");
-        public static readonly CapitalImmediatelyAvailableSubTotalCardIssuer1 Maestro = new CapitalImmediatelyAvailableSubTotalCardIssuer1("maestro");
-        public static readonly CapitalImmediatelyAvailableSubTotalCardIssuer1 CarteBancaire = new CapitalImmediatelyAvailableSubTotalCardIssuer1("carte-bancaire");
-        public static readonly CapitalImmediatelyAvailableSubTotalCardIssuer1 Other = new CapitalImmediatelyAvailableSubTotalCardIssuer1("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, CapitalImmediatelyAvailableSubTotalCardIssuer1> _knownValues =
-            new Dictionary <string, CapitalImmediatelyAvailableSubTotalCardIssuer1> ()
+    public static class CapitalImmediatelyAvailableSubTotalCardIssuer1Extension
+    {
+        public static string Value(this CapitalImmediatelyAvailableSubTotalCardIssuer1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CapitalImmediatelyAvailableSubTotalCardIssuer1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(CapitalImmediatelyAvailableSubTotalCardIssuer1).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CapitalImmediatelyAvailableSubTotalCardIssuer1> _values =
-            new ConcurrentDictionary<string, CapitalImmediatelyAvailableSubTotalCardIssuer1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CapitalImmediatelyAvailableSubTotalCardIssuer1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CapitalImmediatelyAvailableSubTotalCardIssuer1)
+                    {
+                        return (CapitalImmediatelyAvailableSubTotalCardIssuer1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CapitalImmediatelyAvailableSubTotalCardIssuer1");
         }
-
-        public string Value { get; }
-
-        public static CapitalImmediatelyAvailableSubTotalCardIssuer1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CapitalImmediatelyAvailableSubTotalCardIssuer1(value));
-        }
-
-        public static implicit operator CapitalImmediatelyAvailableSubTotalCardIssuer1(string value) => Of(value);
-        public static implicit operator string(CapitalImmediatelyAvailableSubTotalCardIssuer1 capitalimmediatelyavailablesubtotalcardissuer1) => capitalimmediatelyavailablesubtotalcardissuer1.Value;
-
-        public static CapitalImmediatelyAvailableSubTotalCardIssuer1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CapitalImmediatelyAvailableSubTotalCardIssuer1);
-
-        public bool Equals(CapitalImmediatelyAvailableSubTotalCardIssuer1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

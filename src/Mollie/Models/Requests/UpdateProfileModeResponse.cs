@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdateProfileModeResponse : IEquatable<UpdateProfileModeResponse>
+    public enum UpdateProfileModeResponse
     {
-        public static readonly UpdateProfileModeResponse Live = new UpdateProfileModeResponse("live");
-        public static readonly UpdateProfileModeResponse Test = new UpdateProfileModeResponse("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, UpdateProfileModeResponse> _knownValues =
-            new Dictionary <string, UpdateProfileModeResponse> ()
+    public static class UpdateProfileModeResponseExtension
+    {
+        public static string Value(this UpdateProfileModeResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdateProfileModeResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdateProfileModeResponse).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdateProfileModeResponse> _values =
-            new ConcurrentDictionary<string, UpdateProfileModeResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdateProfileModeResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdateProfileModeResponse)
+                    {
+                        return (UpdateProfileModeResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdateProfileModeResponse");
         }
-
-        public string Value { get; }
-
-        public static UpdateProfileModeResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdateProfileModeResponse(value));
-        }
-
-        public static implicit operator UpdateProfileModeResponse(string value) => Of(value);
-        public static implicit operator string(UpdateProfileModeResponse updateprofilemoderesponse) => updateprofilemoderesponse.Value;
-
-        public static UpdateProfileModeResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdateProfileModeResponse);
-
-        public bool Equals(UpdateProfileModeResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

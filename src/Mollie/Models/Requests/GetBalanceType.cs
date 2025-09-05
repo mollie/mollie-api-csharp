@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The default destination of automatic scheduled transfers. Currently only `bank-account` is supported.<br/>
@@ -24,58 +21,43 @@ namespace Mollie.Models.Requests
     /// * `bank-account` — Transfer the balance amount to an external bank account
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetBalanceType : IEquatable<GetBalanceType>
+    public enum GetBalanceType
     {
-        public static readonly GetBalanceType BankAccount = new GetBalanceType("bank-account");
+        [JsonProperty("bank-account")]
+        BankAccount,
+    }
 
-        private static readonly Dictionary <string, GetBalanceType> _knownValues =
-            new Dictionary <string, GetBalanceType> ()
+    public static class GetBalanceTypeExtension
+    {
+        public static string Value(this GetBalanceType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetBalanceType ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetBalanceType).GetFields())
             {
-                ["bank-account"] = BankAccount
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetBalanceType> _values =
-            new ConcurrentDictionary<string, GetBalanceType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetBalanceType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetBalanceType)
+                    {
+                        return (GetBalanceType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetBalanceType");
         }
-
-        public string Value { get; }
-
-        public static GetBalanceType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetBalanceType(value));
-        }
-
-        public static implicit operator GetBalanceType(string value) => Of(value);
-        public static implicit operator string(GetBalanceType getbalancetype) => getbalancetype.Value;
-
-        public static GetBalanceType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetBalanceType);
-
-        public bool Equals(GetBalanceType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

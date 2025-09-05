@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PendingBalancePendingSubTotalCardIssuer1 : IEquatable<PendingBalancePendingSubTotalCardIssuer1>
+    public enum PendingBalancePendingSubTotalCardIssuer1
     {
-        public static readonly PendingBalancePendingSubTotalCardIssuer1 Amex = new PendingBalancePendingSubTotalCardIssuer1("amex");
-        public static readonly PendingBalancePendingSubTotalCardIssuer1 Maestro = new PendingBalancePendingSubTotalCardIssuer1("maestro");
-        public static readonly PendingBalancePendingSubTotalCardIssuer1 CarteBancaire = new PendingBalancePendingSubTotalCardIssuer1("carte-bancaire");
-        public static readonly PendingBalancePendingSubTotalCardIssuer1 Other = new PendingBalancePendingSubTotalCardIssuer1("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, PendingBalancePendingSubTotalCardIssuer1> _knownValues =
-            new Dictionary <string, PendingBalancePendingSubTotalCardIssuer1> ()
+    public static class PendingBalancePendingSubTotalCardIssuer1Extension
+    {
+        public static string Value(this PendingBalancePendingSubTotalCardIssuer1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PendingBalancePendingSubTotalCardIssuer1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(PendingBalancePendingSubTotalCardIssuer1).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PendingBalancePendingSubTotalCardIssuer1> _values =
-            new ConcurrentDictionary<string, PendingBalancePendingSubTotalCardIssuer1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PendingBalancePendingSubTotalCardIssuer1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PendingBalancePendingSubTotalCardIssuer1)
+                    {
+                        return (PendingBalancePendingSubTotalCardIssuer1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PendingBalancePendingSubTotalCardIssuer1");
         }
-
-        public string Value { get; }
-
-        public static PendingBalancePendingSubTotalCardIssuer1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PendingBalancePendingSubTotalCardIssuer1(value));
-        }
-
-        public static implicit operator PendingBalancePendingSubTotalCardIssuer1(string value) => Of(value);
-        public static implicit operator string(PendingBalancePendingSubTotalCardIssuer1 pendingbalancependingsubtotalcardissuer1) => pendingbalancependingsubtotalcardissuer1.Value;
-
-        public static PendingBalancePendingSubTotalCardIssuer1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PendingBalancePendingSubTotalCardIssuer1);
-
-        public bool Equals(PendingBalancePendingSubTotalCardIssuer1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

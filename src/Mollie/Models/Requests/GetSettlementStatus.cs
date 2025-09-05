@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the settlement.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetSettlementStatus : IEquatable<GetSettlementStatus>
+    public enum GetSettlementStatus
     {
-        public static readonly GetSettlementStatus Open = new GetSettlementStatus("open");
-        public static readonly GetSettlementStatus Pending = new GetSettlementStatus("pending");
-        public static readonly GetSettlementStatus Paidout = new GetSettlementStatus("paidout");
-        public static readonly GetSettlementStatus Failed = new GetSettlementStatus("failed");
+        [JsonProperty("open")]
+        Open,
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("paidout")]
+        Paidout,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, GetSettlementStatus> _knownValues =
-            new Dictionary <string, GetSettlementStatus> ()
+    public static class GetSettlementStatusExtension
+    {
+        public static string Value(this GetSettlementStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetSettlementStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetSettlementStatus).GetFields())
             {
-                ["open"] = Open,
-                ["pending"] = Pending,
-                ["paidout"] = Paidout,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetSettlementStatus> _values =
-            new ConcurrentDictionary<string, GetSettlementStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetSettlementStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetSettlementStatus)
+                    {
+                        return (GetSettlementStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetSettlementStatus");
         }
-
-        public string Value { get; }
-
-        public static GetSettlementStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetSettlementStatus(value));
-        }
-
-        public static implicit operator GetSettlementStatus(string value) => Of(value);
-        public static implicit operator string(GetSettlementStatus getsettlementstatus) => getsettlementstatus.Value;
-
-        public static GetSettlementStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetSettlementStatus);
-
-        public bool Equals(GetSettlementStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

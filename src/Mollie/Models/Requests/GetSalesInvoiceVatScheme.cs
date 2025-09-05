@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetSalesInvoiceVatScheme : IEquatable<GetSalesInvoiceVatScheme>
+    public enum GetSalesInvoiceVatScheme
     {
-        public static readonly GetSalesInvoiceVatScheme Standard = new GetSalesInvoiceVatScheme("standard");
-        public static readonly GetSalesInvoiceVatScheme OneStopShop = new GetSalesInvoiceVatScheme("one-stop-shop");
+        [JsonProperty("standard")]
+        Standard,
+        [JsonProperty("one-stop-shop")]
+        OneStopShop,
+    }
 
-        private static readonly Dictionary <string, GetSalesInvoiceVatScheme> _knownValues =
-            new Dictionary <string, GetSalesInvoiceVatScheme> ()
+    public static class GetSalesInvoiceVatSchemeExtension
+    {
+        public static string Value(this GetSalesInvoiceVatScheme value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetSalesInvoiceVatScheme ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetSalesInvoiceVatScheme).GetFields())
             {
-                ["standard"] = Standard,
-                ["one-stop-shop"] = OneStopShop
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetSalesInvoiceVatScheme> _values =
-            new ConcurrentDictionary<string, GetSalesInvoiceVatScheme>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetSalesInvoiceVatScheme(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetSalesInvoiceVatScheme)
+                    {
+                        return (GetSalesInvoiceVatScheme)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetSalesInvoiceVatScheme");
         }
-
-        public string Value { get; }
-
-        public static GetSalesInvoiceVatScheme Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetSalesInvoiceVatScheme(value));
-        }
-
-        public static implicit operator GetSalesInvoiceVatScheme(string value) => Of(value);
-        public static implicit operator string(GetSalesInvoiceVatScheme getsalesinvoicevatscheme) => getsalesinvoicevatscheme.Value;
-
-        public static GetSalesInvoiceVatScheme[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetSalesInvoiceVatScheme);
-
-        public bool Equals(GetSalesInvoiceVatScheme? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

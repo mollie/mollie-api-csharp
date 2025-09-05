@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CapitalMovedToAvailableSubtotalCardAudience2 : IEquatable<CapitalMovedToAvailableSubtotalCardAudience2>
+    public enum CapitalMovedToAvailableSubtotalCardAudience2
     {
-        public static readonly CapitalMovedToAvailableSubtotalCardAudience2 Corporate = new CapitalMovedToAvailableSubtotalCardAudience2("corporate");
-        public static readonly CapitalMovedToAvailableSubtotalCardAudience2 Other = new CapitalMovedToAvailableSubtotalCardAudience2("other");
+        [JsonProperty("corporate")]
+        Corporate,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, CapitalMovedToAvailableSubtotalCardAudience2> _knownValues =
-            new Dictionary <string, CapitalMovedToAvailableSubtotalCardAudience2> ()
+    public static class CapitalMovedToAvailableSubtotalCardAudience2Extension
+    {
+        public static string Value(this CapitalMovedToAvailableSubtotalCardAudience2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CapitalMovedToAvailableSubtotalCardAudience2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(CapitalMovedToAvailableSubtotalCardAudience2).GetFields())
             {
-                ["corporate"] = Corporate,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CapitalMovedToAvailableSubtotalCardAudience2> _values =
-            new ConcurrentDictionary<string, CapitalMovedToAvailableSubtotalCardAudience2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CapitalMovedToAvailableSubtotalCardAudience2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CapitalMovedToAvailableSubtotalCardAudience2)
+                    {
+                        return (CapitalMovedToAvailableSubtotalCardAudience2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CapitalMovedToAvailableSubtotalCardAudience2");
         }
-
-        public string Value { get; }
-
-        public static CapitalMovedToAvailableSubtotalCardAudience2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CapitalMovedToAvailableSubtotalCardAudience2(value));
-        }
-
-        public static implicit operator CapitalMovedToAvailableSubtotalCardAudience2(string value) => Of(value);
-        public static implicit operator string(CapitalMovedToAvailableSubtotalCardAudience2 capitalmovedtoavailablesubtotalcardaudience2) => capitalmovedtoavailablesubtotalcardaudience2.Value;
-
-        public static CapitalMovedToAvailableSubtotalCardAudience2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CapitalMovedToAvailableSubtotalCardAudience2);
-
-        public bool Equals(CapitalMovedToAvailableSubtotalCardAudience2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

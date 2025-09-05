@@ -12,77 +12,59 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment term to be set on the invoice.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdateSalesInvoicePaymentTermResponse : IEquatable<UpdateSalesInvoicePaymentTermResponse>
+    public enum UpdateSalesInvoicePaymentTermResponse
     {
-        public static readonly UpdateSalesInvoicePaymentTermResponse Sevendays = new UpdateSalesInvoicePaymentTermResponse("7 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse Fourteendays = new UpdateSalesInvoicePaymentTermResponse("14 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse Thirtydays = new UpdateSalesInvoicePaymentTermResponse("30 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse FortyFivedays = new UpdateSalesInvoicePaymentTermResponse("45 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse Sixtydays = new UpdateSalesInvoicePaymentTermResponse("60 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse Ninetydays = new UpdateSalesInvoicePaymentTermResponse("90 days");
-        public static readonly UpdateSalesInvoicePaymentTermResponse OneHundredAndTwentydays = new UpdateSalesInvoicePaymentTermResponse("120 days");
+        [JsonProperty("7 days")]
+        Sevendays,
+        [JsonProperty("14 days")]
+        Fourteendays,
+        [JsonProperty("30 days")]
+        Thirtydays,
+        [JsonProperty("45 days")]
+        FortyFivedays,
+        [JsonProperty("60 days")]
+        Sixtydays,
+        [JsonProperty("90 days")]
+        Ninetydays,
+        [JsonProperty("120 days")]
+        OneHundredAndTwentydays,
+    }
 
-        private static readonly Dictionary <string, UpdateSalesInvoicePaymentTermResponse> _knownValues =
-            new Dictionary <string, UpdateSalesInvoicePaymentTermResponse> ()
+    public static class UpdateSalesInvoicePaymentTermResponseExtension
+    {
+        public static string Value(this UpdateSalesInvoicePaymentTermResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdateSalesInvoicePaymentTermResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdateSalesInvoicePaymentTermResponse).GetFields())
             {
-                ["7 days"] = Sevendays,
-                ["14 days"] = Fourteendays,
-                ["30 days"] = Thirtydays,
-                ["45 days"] = FortyFivedays,
-                ["60 days"] = Sixtydays,
-                ["90 days"] = Ninetydays,
-                ["120 days"] = OneHundredAndTwentydays
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdateSalesInvoicePaymentTermResponse> _values =
-            new ConcurrentDictionary<string, UpdateSalesInvoicePaymentTermResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdateSalesInvoicePaymentTermResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdateSalesInvoicePaymentTermResponse)
+                    {
+                        return (UpdateSalesInvoicePaymentTermResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdateSalesInvoicePaymentTermResponse");
         }
-
-        public string Value { get; }
-
-        public static UpdateSalesInvoicePaymentTermResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdateSalesInvoicePaymentTermResponse(value));
-        }
-
-        public static implicit operator UpdateSalesInvoicePaymentTermResponse(string value) => Of(value);
-        public static implicit operator string(UpdateSalesInvoicePaymentTermResponse updatesalesinvoicepaymenttermresponse) => updatesalesinvoicepaymenttermresponse.Value;
-
-        public static UpdateSalesInvoicePaymentTermResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdateSalesInvoicePaymentTermResponse);
-
-        public bool Equals(UpdateSalesInvoicePaymentTermResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

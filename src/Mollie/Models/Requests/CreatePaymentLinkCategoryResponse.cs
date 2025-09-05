@@ -12,68 +12,50 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreatePaymentLinkCategoryResponse : IEquatable<CreatePaymentLinkCategoryResponse>
+    public enum CreatePaymentLinkCategoryResponse
     {
-        public static readonly CreatePaymentLinkCategoryResponse Meal = new CreatePaymentLinkCategoryResponse("meal");
-        public static readonly CreatePaymentLinkCategoryResponse Eco = new CreatePaymentLinkCategoryResponse("eco");
-        public static readonly CreatePaymentLinkCategoryResponse Gift = new CreatePaymentLinkCategoryResponse("gift");
-        public static readonly CreatePaymentLinkCategoryResponse SportCulture = new CreatePaymentLinkCategoryResponse("sport_culture");
+        [JsonProperty("meal")]
+        Meal,
+        [JsonProperty("eco")]
+        Eco,
+        [JsonProperty("gift")]
+        Gift,
+        [JsonProperty("sport_culture")]
+        SportCulture,
+    }
 
-        private static readonly Dictionary <string, CreatePaymentLinkCategoryResponse> _knownValues =
-            new Dictionary <string, CreatePaymentLinkCategoryResponse> ()
+    public static class CreatePaymentLinkCategoryResponseExtension
+    {
+        public static string Value(this CreatePaymentLinkCategoryResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreatePaymentLinkCategoryResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreatePaymentLinkCategoryResponse).GetFields())
             {
-                ["meal"] = Meal,
-                ["eco"] = Eco,
-                ["gift"] = Gift,
-                ["sport_culture"] = SportCulture
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreatePaymentLinkCategoryResponse> _values =
-            new ConcurrentDictionary<string, CreatePaymentLinkCategoryResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreatePaymentLinkCategoryResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreatePaymentLinkCategoryResponse)
+                    {
+                        return (CreatePaymentLinkCategoryResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreatePaymentLinkCategoryResponse");
         }
-
-        public string Value { get; }
-
-        public static CreatePaymentLinkCategoryResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreatePaymentLinkCategoryResponse(value));
-        }
-
-        public static implicit operator CreatePaymentLinkCategoryResponse(string value) => Of(value);
-        public static implicit operator string(CreatePaymentLinkCategoryResponse createpaymentlinkcategoryresponse) => createpaymentlinkcategoryresponse.Value;
-
-        public static CreatePaymentLinkCategoryResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreatePaymentLinkCategoryResponse);
-
-        public bool Equals(CreatePaymentLinkCategoryResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

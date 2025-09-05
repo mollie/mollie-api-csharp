@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of recipient, either `consumer` or `business`. This will determine what further fields are<br/>
@@ -23,60 +20,45 @@ namespace Mollie.Models.Requests
     /// required on the `recipient` object.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateSalesInvoiceRecipientTypeResponse : IEquatable<CreateSalesInvoiceRecipientTypeResponse>
+    public enum CreateSalesInvoiceRecipientTypeResponse
     {
-        public static readonly CreateSalesInvoiceRecipientTypeResponse Consumer = new CreateSalesInvoiceRecipientTypeResponse("consumer");
-        public static readonly CreateSalesInvoiceRecipientTypeResponse Business = new CreateSalesInvoiceRecipientTypeResponse("business");
+        [JsonProperty("consumer")]
+        Consumer,
+        [JsonProperty("business")]
+        Business,
+    }
 
-        private static readonly Dictionary <string, CreateSalesInvoiceRecipientTypeResponse> _knownValues =
-            new Dictionary <string, CreateSalesInvoiceRecipientTypeResponse> ()
+    public static class CreateSalesInvoiceRecipientTypeResponseExtension
+    {
+        public static string Value(this CreateSalesInvoiceRecipientTypeResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateSalesInvoiceRecipientTypeResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateSalesInvoiceRecipientTypeResponse).GetFields())
             {
-                ["consumer"] = Consumer,
-                ["business"] = Business
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceRecipientTypeResponse> _values =
-            new ConcurrentDictionary<string, CreateSalesInvoiceRecipientTypeResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateSalesInvoiceRecipientTypeResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateSalesInvoiceRecipientTypeResponse)
+                    {
+                        return (CreateSalesInvoiceRecipientTypeResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceRecipientTypeResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateSalesInvoiceRecipientTypeResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceRecipientTypeResponse(value));
-        }
-
-        public static implicit operator CreateSalesInvoiceRecipientTypeResponse(string value) => Of(value);
-        public static implicit operator string(CreateSalesInvoiceRecipientTypeResponse createsalesinvoicerecipienttyperesponse) => createsalesinvoicerecipienttyperesponse.Value;
-
-        public static CreateSalesInvoiceRecipientTypeResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceRecipientTypeResponse);
-
-        public bool Equals(CreateSalesInvoiceRecipientTypeResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

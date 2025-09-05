@@ -12,65 +12,47 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of destination. Currently only the destination type `organization` is supported.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentListRoutesType : IEquatable<PaymentListRoutesType>
+    public enum PaymentListRoutesType
     {
-        public static readonly PaymentListRoutesType Organization = new PaymentListRoutesType("organization");
+        [JsonProperty("organization")]
+        Organization,
+    }
 
-        private static readonly Dictionary <string, PaymentListRoutesType> _knownValues =
-            new Dictionary <string, PaymentListRoutesType> ()
+    public static class PaymentListRoutesTypeExtension
+    {
+        public static string Value(this PaymentListRoutesType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PaymentListRoutesType ToEnum(this string value)
+        {
+            foreach(var field in typeof(PaymentListRoutesType).GetFields())
             {
-                ["organization"] = Organization
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PaymentListRoutesType> _values =
-            new ConcurrentDictionary<string, PaymentListRoutesType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PaymentListRoutesType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PaymentListRoutesType)
+                    {
+                        return (PaymentListRoutesType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PaymentListRoutesType");
         }
-
-        public string Value { get; }
-
-        public static PaymentListRoutesType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PaymentListRoutesType(value));
-        }
-
-        public static implicit operator PaymentListRoutesType(string value) => Of(value);
-        public static implicit operator string(PaymentListRoutesType paymentlistroutestype) => paymentlistroutestype.Value;
-
-        public static PaymentListRoutesType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PaymentListRoutesType);
-
-        public bool Equals(PaymentListRoutesType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

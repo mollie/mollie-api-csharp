@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsRoutingMode : IEquatable<ListSubscriptionPaymentsRoutingMode>
+    public enum ListSubscriptionPaymentsRoutingMode
     {
-        public static readonly ListSubscriptionPaymentsRoutingMode Live = new ListSubscriptionPaymentsRoutingMode("live");
-        public static readonly ListSubscriptionPaymentsRoutingMode Test = new ListSubscriptionPaymentsRoutingMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsRoutingMode> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsRoutingMode> ()
+    public static class ListSubscriptionPaymentsRoutingModeExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsRoutingMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsRoutingMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsRoutingMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsRoutingMode> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsRoutingMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsRoutingMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsRoutingMode)
+                    {
+                        return (ListSubscriptionPaymentsRoutingMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsRoutingMode");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsRoutingMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsRoutingMode(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsRoutingMode(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsRoutingMode listsubscriptionpaymentsroutingmode) => listsubscriptionpaymentsroutingmode.Value;
-
-        public static ListSubscriptionPaymentsRoutingMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsRoutingMode);
-
-        public bool Equals(ListSubscriptionPaymentsRoutingMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

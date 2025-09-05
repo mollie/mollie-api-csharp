@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The card&apos;s target audience, if known.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdatePaymentCardAudition : IEquatable<UpdatePaymentCardAudition>
+    public enum UpdatePaymentCardAudition
     {
-        public static readonly UpdatePaymentCardAudition Consumer = new UpdatePaymentCardAudition("consumer");
-        public static readonly UpdatePaymentCardAudition Business = new UpdatePaymentCardAudition("business");
+        [JsonProperty("consumer")]
+        Consumer,
+        [JsonProperty("business")]
+        Business,
+    }
 
-        private static readonly Dictionary <string, UpdatePaymentCardAudition> _knownValues =
-            new Dictionary <string, UpdatePaymentCardAudition> ()
+    public static class UpdatePaymentCardAuditionExtension
+    {
+        public static string Value(this UpdatePaymentCardAudition value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdatePaymentCardAudition ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdatePaymentCardAudition).GetFields())
             {
-                ["consumer"] = Consumer,
-                ["business"] = Business
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdatePaymentCardAudition> _values =
-            new ConcurrentDictionary<string, UpdatePaymentCardAudition>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdatePaymentCardAudition(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdatePaymentCardAudition)
+                    {
+                        return (UpdatePaymentCardAudition)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdatePaymentCardAudition");
         }
-
-        public string Value { get; }
-
-        public static UpdatePaymentCardAudition Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdatePaymentCardAudition(value));
-        }
-
-        public static implicit operator UpdatePaymentCardAudition(string value) => Of(value);
-        public static implicit operator string(UpdatePaymentCardAudition updatepaymentcardaudition) => updatepaymentcardaudition.Value;
-
-        public static UpdatePaymentCardAudition[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentCardAudition);
-
-        public bool Equals(UpdatePaymentCardAudition? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

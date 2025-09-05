@@ -12,10 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The destination of this portion of the payment.
@@ -27,7 +23,7 @@ namespace Mollie.Models.Requests
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public ListPaymentsDestinationType Type { get; set; } = default!;
+        public ListPaymentsRoutingType Type { get; set; } = default!;
 
         /// <summary>
         /// Required for destination type `organization`. The ID of the connected organization the funds should be<br/>

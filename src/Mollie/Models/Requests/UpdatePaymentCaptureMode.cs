@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
@@ -25,60 +22,45 @@ namespace Mollie.Models.Requests
     /// This field needs to be set to `manual` for method `riverty`.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdatePaymentCaptureMode : IEquatable<UpdatePaymentCaptureMode>
+    public enum UpdatePaymentCaptureMode
     {
-        public static readonly UpdatePaymentCaptureMode Automatic = new UpdatePaymentCaptureMode("automatic");
-        public static readonly UpdatePaymentCaptureMode Manual = new UpdatePaymentCaptureMode("manual");
+        [JsonProperty("automatic")]
+        Automatic,
+        [JsonProperty("manual")]
+        Manual,
+    }
 
-        private static readonly Dictionary <string, UpdatePaymentCaptureMode> _knownValues =
-            new Dictionary <string, UpdatePaymentCaptureMode> ()
+    public static class UpdatePaymentCaptureModeExtension
+    {
+        public static string Value(this UpdatePaymentCaptureMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdatePaymentCaptureMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdatePaymentCaptureMode).GetFields())
             {
-                ["automatic"] = Automatic,
-                ["manual"] = Manual
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdatePaymentCaptureMode> _values =
-            new ConcurrentDictionary<string, UpdatePaymentCaptureMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdatePaymentCaptureMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdatePaymentCaptureMode)
+                    {
+                        return (UpdatePaymentCaptureMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdatePaymentCaptureMode");
         }
-
-        public string Value { get; }
-
-        public static UpdatePaymentCaptureMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdatePaymentCaptureMode(value));
-        }
-
-        public static implicit operator UpdatePaymentCaptureMode(string value) => Of(value);
-        public static implicit operator string(UpdatePaymentCaptureMode updatepaymentcapturemode) => updatepaymentcapturemode.Value;
-
-        public static UpdatePaymentCaptureMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentCaptureMode);
-
-        public bool Equals(UpdatePaymentCaptureMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

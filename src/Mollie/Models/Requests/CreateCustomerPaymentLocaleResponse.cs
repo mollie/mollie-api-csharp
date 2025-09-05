@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Allows you to preset the language to be used in the hosted payment pages shown to the customer. Setting a locale<br/>
@@ -29,100 +26,85 @@ namespace Mollie.Models.Requests
     /// customer use a local bank account greatly increases the conversion and speed of payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateCustomerPaymentLocaleResponse : IEquatable<CreateCustomerPaymentLocaleResponse>
+    public enum CreateCustomerPaymentLocaleResponse
     {
-        public static readonly CreateCustomerPaymentLocaleResponse EnUS = new CreateCustomerPaymentLocaleResponse("en_US");
-        public static readonly CreateCustomerPaymentLocaleResponse EnGB = new CreateCustomerPaymentLocaleResponse("en_GB");
-        public static readonly CreateCustomerPaymentLocaleResponse Nlnl = new CreateCustomerPaymentLocaleResponse("nl_NL");
-        public static readonly CreateCustomerPaymentLocaleResponse NlBE = new CreateCustomerPaymentLocaleResponse("nl_BE");
-        public static readonly CreateCustomerPaymentLocaleResponse Dede = new CreateCustomerPaymentLocaleResponse("de_DE");
-        public static readonly CreateCustomerPaymentLocaleResponse DeAT = new CreateCustomerPaymentLocaleResponse("de_AT");
-        public static readonly CreateCustomerPaymentLocaleResponse DeCH = new CreateCustomerPaymentLocaleResponse("de_CH");
-        public static readonly CreateCustomerPaymentLocaleResponse Frfr = new CreateCustomerPaymentLocaleResponse("fr_FR");
-        public static readonly CreateCustomerPaymentLocaleResponse FrBE = new CreateCustomerPaymentLocaleResponse("fr_BE");
-        public static readonly CreateCustomerPaymentLocaleResponse Eses = new CreateCustomerPaymentLocaleResponse("es_ES");
-        public static readonly CreateCustomerPaymentLocaleResponse CaES = new CreateCustomerPaymentLocaleResponse("ca_ES");
-        public static readonly CreateCustomerPaymentLocaleResponse Ptpt = new CreateCustomerPaymentLocaleResponse("pt_PT");
-        public static readonly CreateCustomerPaymentLocaleResponse Itit = new CreateCustomerPaymentLocaleResponse("it_IT");
-        public static readonly CreateCustomerPaymentLocaleResponse NbNO = new CreateCustomerPaymentLocaleResponse("nb_NO");
-        public static readonly CreateCustomerPaymentLocaleResponse SvSE = new CreateCustomerPaymentLocaleResponse("sv_SE");
-        public static readonly CreateCustomerPaymentLocaleResponse Fifi = new CreateCustomerPaymentLocaleResponse("fi_FI");
-        public static readonly CreateCustomerPaymentLocaleResponse DaDK = new CreateCustomerPaymentLocaleResponse("da_DK");
-        public static readonly CreateCustomerPaymentLocaleResponse Isis = new CreateCustomerPaymentLocaleResponse("is_IS");
-        public static readonly CreateCustomerPaymentLocaleResponse Huhu = new CreateCustomerPaymentLocaleResponse("hu_HU");
-        public static readonly CreateCustomerPaymentLocaleResponse Plpl = new CreateCustomerPaymentLocaleResponse("pl_PL");
-        public static readonly CreateCustomerPaymentLocaleResponse Lvlv = new CreateCustomerPaymentLocaleResponse("lv_LV");
-        public static readonly CreateCustomerPaymentLocaleResponse Ltlt = new CreateCustomerPaymentLocaleResponse("lt_LT");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+        [JsonProperty("es_ES")]
+        Eses,
+        [JsonProperty("ca_ES")]
+        CaES,
+        [JsonProperty("pt_PT")]
+        Ptpt,
+        [JsonProperty("it_IT")]
+        Itit,
+        [JsonProperty("nb_NO")]
+        NbNO,
+        [JsonProperty("sv_SE")]
+        SvSE,
+        [JsonProperty("fi_FI")]
+        Fifi,
+        [JsonProperty("da_DK")]
+        DaDK,
+        [JsonProperty("is_IS")]
+        Isis,
+        [JsonProperty("hu_HU")]
+        Huhu,
+        [JsonProperty("pl_PL")]
+        Plpl,
+        [JsonProperty("lv_LV")]
+        Lvlv,
+        [JsonProperty("lt_LT")]
+        Ltlt,
+    }
 
-        private static readonly Dictionary <string, CreateCustomerPaymentLocaleResponse> _knownValues =
-            new Dictionary <string, CreateCustomerPaymentLocaleResponse> ()
+    public static class CreateCustomerPaymentLocaleResponseExtension
+    {
+        public static string Value(this CreateCustomerPaymentLocaleResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateCustomerPaymentLocaleResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateCustomerPaymentLocaleResponse).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
-                ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
-                ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
-                ["lt_LT"] = Ltlt
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateCustomerPaymentLocaleResponse> _values =
-            new ConcurrentDictionary<string, CreateCustomerPaymentLocaleResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateCustomerPaymentLocaleResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateCustomerPaymentLocaleResponse)
+                    {
+                        return (CreateCustomerPaymentLocaleResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateCustomerPaymentLocaleResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateCustomerPaymentLocaleResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateCustomerPaymentLocaleResponse(value));
-        }
-
-        public static implicit operator CreateCustomerPaymentLocaleResponse(string value) => Of(value);
-        public static implicit operator string(CreateCustomerPaymentLocaleResponse createcustomerpaymentlocaleresponse) => createcustomerpaymentlocaleresponse.Value;
-
-        public static CreateCustomerPaymentLocaleResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateCustomerPaymentLocaleResponse);
-
-        public bool Equals(CreateCustomerPaymentLocaleResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

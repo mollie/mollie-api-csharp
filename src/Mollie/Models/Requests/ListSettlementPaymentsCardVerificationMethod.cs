@@ -12,81 +12,63 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The method used to verify the cardholder&apos;s identity.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSettlementPaymentsCardVerificationMethod : IEquatable<ListSettlementPaymentsCardVerificationMethod>
+    public enum ListSettlementPaymentsCardVerificationMethod
     {
-        public static readonly ListSettlementPaymentsCardVerificationMethod NoCvmRequired = new ListSettlementPaymentsCardVerificationMethod("no-cvm-required");
-        public static readonly ListSettlementPaymentsCardVerificationMethod OnlinePin = new ListSettlementPaymentsCardVerificationMethod("online-pin");
-        public static readonly ListSettlementPaymentsCardVerificationMethod OfflinePin = new ListSettlementPaymentsCardVerificationMethod("offline-pin");
-        public static readonly ListSettlementPaymentsCardVerificationMethod ConsumerDevice = new ListSettlementPaymentsCardVerificationMethod("consumer-device");
-        public static readonly ListSettlementPaymentsCardVerificationMethod Signature = new ListSettlementPaymentsCardVerificationMethod("signature");
-        public static readonly ListSettlementPaymentsCardVerificationMethod SignatureAndOnlinePin = new ListSettlementPaymentsCardVerificationMethod("signature-and-online-pin");
-        public static readonly ListSettlementPaymentsCardVerificationMethod OnlinePinAndSignature = new ListSettlementPaymentsCardVerificationMethod("online-pin-and-signature");
-        public static readonly ListSettlementPaymentsCardVerificationMethod None = new ListSettlementPaymentsCardVerificationMethod("none");
-        public static readonly ListSettlementPaymentsCardVerificationMethod Failed = new ListSettlementPaymentsCardVerificationMethod("failed");
+        [JsonProperty("no-cvm-required")]
+        NoCvmRequired,
+        [JsonProperty("online-pin")]
+        OnlinePin,
+        [JsonProperty("offline-pin")]
+        OfflinePin,
+        [JsonProperty("consumer-device")]
+        ConsumerDevice,
+        [JsonProperty("signature")]
+        Signature,
+        [JsonProperty("signature-and-online-pin")]
+        SignatureAndOnlinePin,
+        [JsonProperty("online-pin-and-signature")]
+        OnlinePinAndSignature,
+        [JsonProperty("none")]
+        None,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, ListSettlementPaymentsCardVerificationMethod> _knownValues =
-            new Dictionary <string, ListSettlementPaymentsCardVerificationMethod> ()
+    public static class ListSettlementPaymentsCardVerificationMethodExtension
+    {
+        public static string Value(this ListSettlementPaymentsCardVerificationMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSettlementPaymentsCardVerificationMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSettlementPaymentsCardVerificationMethod).GetFields())
             {
-                ["no-cvm-required"] = NoCvmRequired,
-                ["online-pin"] = OnlinePin,
-                ["offline-pin"] = OfflinePin,
-                ["consumer-device"] = ConsumerDevice,
-                ["signature"] = Signature,
-                ["signature-and-online-pin"] = SignatureAndOnlinePin,
-                ["online-pin-and-signature"] = OnlinePinAndSignature,
-                ["none"] = None,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsCardVerificationMethod> _values =
-            new ConcurrentDictionary<string, ListSettlementPaymentsCardVerificationMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSettlementPaymentsCardVerificationMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSettlementPaymentsCardVerificationMethod)
+                    {
+                        return (ListSettlementPaymentsCardVerificationMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsCardVerificationMethod");
         }
-
-        public string Value { get; }
-
-        public static ListSettlementPaymentsCardVerificationMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsCardVerificationMethod(value));
-        }
-
-        public static implicit operator ListSettlementPaymentsCardVerificationMethod(string value) => Of(value);
-        public static implicit operator string(ListSettlementPaymentsCardVerificationMethod listsettlementpaymentscardverificationmethod) => listsettlementpaymentscardverificationmethod.Value;
-
-        public static ListSettlementPaymentsCardVerificationMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsCardVerificationMethod);
-
-        public bool Equals(ListSettlementPaymentsCardVerificationMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

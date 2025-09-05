@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The level of security applied during card processing.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreatePaymentCardSecurity : IEquatable<CreatePaymentCardSecurity>
+    public enum CreatePaymentCardSecurity
     {
-        public static readonly CreatePaymentCardSecurity Normal = new CreatePaymentCardSecurity("normal");
-        public static readonly CreatePaymentCardSecurity Threedsecure = new CreatePaymentCardSecurity("3dsecure");
+        [JsonProperty("normal")]
+        Normal,
+        [JsonProperty("3dsecure")]
+        Threedsecure,
+    }
 
-        private static readonly Dictionary <string, CreatePaymentCardSecurity> _knownValues =
-            new Dictionary <string, CreatePaymentCardSecurity> ()
+    public static class CreatePaymentCardSecurityExtension
+    {
+        public static string Value(this CreatePaymentCardSecurity value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreatePaymentCardSecurity ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreatePaymentCardSecurity).GetFields())
             {
-                ["normal"] = Normal,
-                ["3dsecure"] = Threedsecure
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreatePaymentCardSecurity> _values =
-            new ConcurrentDictionary<string, CreatePaymentCardSecurity>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreatePaymentCardSecurity(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreatePaymentCardSecurity)
+                    {
+                        return (CreatePaymentCardSecurity)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreatePaymentCardSecurity");
         }
-
-        public string Value { get; }
-
-        public static CreatePaymentCardSecurity Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreatePaymentCardSecurity(value));
-        }
-
-        public static implicit operator CreatePaymentCardSecurity(string value) => Of(value);
-        public static implicit operator string(CreatePaymentCardSecurity createpaymentcardsecurity) => createpaymentcardsecurity.Value;
-
-        public static CreatePaymentCardSecurity[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreatePaymentCardSecurity);
-
-        public bool Equals(CreatePaymentCardSecurity? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

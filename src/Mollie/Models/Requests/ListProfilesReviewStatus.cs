@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the requested changes.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListProfilesReviewStatus : IEquatable<ListProfilesReviewStatus>
+    public enum ListProfilesReviewStatus
     {
-        public static readonly ListProfilesReviewStatus Pending = new ListProfilesReviewStatus("pending");
-        public static readonly ListProfilesReviewStatus Rejected = new ListProfilesReviewStatus("rejected");
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("rejected")]
+        Rejected,
+    }
 
-        private static readonly Dictionary <string, ListProfilesReviewStatus> _knownValues =
-            new Dictionary <string, ListProfilesReviewStatus> ()
+    public static class ListProfilesReviewStatusExtension
+    {
+        public static string Value(this ListProfilesReviewStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListProfilesReviewStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListProfilesReviewStatus).GetFields())
             {
-                ["pending"] = Pending,
-                ["rejected"] = Rejected
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListProfilesReviewStatus> _values =
-            new ConcurrentDictionary<string, ListProfilesReviewStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListProfilesReviewStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListProfilesReviewStatus)
+                    {
+                        return (ListProfilesReviewStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListProfilesReviewStatus");
         }
-
-        public string Value { get; }
-
-        public static ListProfilesReviewStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListProfilesReviewStatus(value));
-        }
-
-        public static implicit operator ListProfilesReviewStatus(string value) => Of(value);
-        public static implicit operator string(ListProfilesReviewStatus listprofilesreviewstatus) => listprofilesreviewstatus.Value;
-
-        public static ListProfilesReviewStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListProfilesReviewStatus);
-
-        public bool Equals(ListProfilesReviewStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

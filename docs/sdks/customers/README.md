@@ -376,7 +376,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
                     Value = "10.00",
                 },
                 Destination = new CreateCustomerPaymentDestinationRequest() {
-                    Type = CreateCustomerPaymentTypeOrganization.Organization,
+                    Type = CreateCustomerPaymentRoutingTypeRequest.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",

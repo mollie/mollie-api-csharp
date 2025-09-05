@@ -12,73 +12,55 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 : IEquatable<FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2>
+    public enum FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2
     {
-        public static readonly FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 Fee = new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2("fee");
-        public static readonly FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 FeeReimbursement = new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2("fee-reimbursement");
-        public static readonly FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 FeeDiscount = new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2("fee-discount");
-        public static readonly FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 FeeVat = new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2("fee-vat");
-        public static readonly FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 FeeRoundingCompensation = new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2("fee-rounding-compensation");
+        [JsonProperty("fee")]
+        Fee,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-vat")]
+        FeeVat,
+        [JsonProperty("fee-rounding-compensation")]
+        FeeRoundingCompensation,
+    }
 
-        private static readonly Dictionary <string, FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2> _knownValues =
-            new Dictionary <string, FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2> ()
+    public static class FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2Extension
+    {
+        public static string Value(this FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2).GetFields())
             {
-                ["fee"] = Fee,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-vat"] = FeeVat,
-                ["fee-rounding-compensation"] = FeeRoundingCompensation
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2> _values =
-            new ConcurrentDictionary<string, FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2)
+                    {
+                        return (FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2");
         }
-
-        public string Value { get; }
-
-        public static FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2(value));
-        }
-
-        public static implicit operator FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2(string value) => Of(value);
-        public static implicit operator string(FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2 feeprepaymentsmovedtoavailablesubtotalprepaymentparttype2) => feeprepaymentsmovedtoavailablesubtotalprepaymentparttype2.Value;
-
-        public static FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2);
-
-        public bool Equals(FeePrepaymentsMovedToAvailableSubtotalPrepaymentPartType2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

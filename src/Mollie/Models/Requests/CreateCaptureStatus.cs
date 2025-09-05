@@ -12,69 +12,51 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The capture&apos;s status.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateCaptureStatus : IEquatable<CreateCaptureStatus>
+    public enum CreateCaptureStatus
     {
-        public static readonly CreateCaptureStatus Pending = new CreateCaptureStatus("pending");
-        public static readonly CreateCaptureStatus Succeeded = new CreateCaptureStatus("succeeded");
-        public static readonly CreateCaptureStatus Failed = new CreateCaptureStatus("failed");
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("succeeded")]
+        Succeeded,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, CreateCaptureStatus> _knownValues =
-            new Dictionary <string, CreateCaptureStatus> ()
+    public static class CreateCaptureStatusExtension
+    {
+        public static string Value(this CreateCaptureStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateCaptureStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateCaptureStatus).GetFields())
             {
-                ["pending"] = Pending,
-                ["succeeded"] = Succeeded,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateCaptureStatus> _values =
-            new ConcurrentDictionary<string, CreateCaptureStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateCaptureStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateCaptureStatus)
+                    {
+                        return (CreateCaptureStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateCaptureStatus");
         }
-
-        public string Value { get; }
-
-        public static CreateCaptureStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateCaptureStatus(value));
-        }
-
-        public static implicit operator CreateCaptureStatus(string value) => Of(value);
-        public static implicit operator string(CreateCaptureStatus createcapturestatus) => createcapturestatus.Value;
-
-        public static CreateCaptureStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateCaptureStatus);
-
-        public bool Equals(CreateCaptureStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

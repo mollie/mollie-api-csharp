@@ -12,117 +12,99 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class OpenAvailableSubTotalFeeType1 : IEquatable<OpenAvailableSubTotalFeeType1>
+    public enum OpenAvailableSubTotalFeeType1
     {
-        public static readonly OpenAvailableSubTotalFeeType1 PaymentFee = new OpenAvailableSubTotalFeeType1("payment-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 DirectDebitFailureFee = new OpenAvailableSubTotalFeeType1("direct-debit-failure-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 UnauthorizedDirectDebitFee = new OpenAvailableSubTotalFeeType1("unauthorized-direct-debit-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 BankChargedDirectDebitFailureFee = new OpenAvailableSubTotalFeeType1("bank-charged-direct-debit-failure-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 PartnerCommission = new OpenAvailableSubTotalFeeType1("partner-commission");
-        public static readonly OpenAvailableSubTotalFeeType1 ApplicationFee = new OpenAvailableSubTotalFeeType1("application-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 CaptureFee = new OpenAvailableSubTotalFeeType1("capture-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 RefundFee = new OpenAvailableSubTotalFeeType1("refund-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 ChargebackFee = new OpenAvailableSubTotalFeeType1("chargeback-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 PaymentNotificationFee = new OpenAvailableSubTotalFeeType1("payment-notification-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 TransferNotificationFee = new OpenAvailableSubTotalFeeType1("transfer-notification-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 PayoutFee = new OpenAvailableSubTotalFeeType1("payout-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 FeeDiscount = new OpenAvailableSubTotalFeeType1("fee-discount");
-        public static readonly OpenAvailableSubTotalFeeType1 FeeReimbursement = new OpenAvailableSubTotalFeeType1("fee-reimbursement");
-        public static readonly OpenAvailableSubTotalFeeType1 PlatformVolumeFee = new OpenAvailableSubTotalFeeType1("platform-volume-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 PlatformConnectedOrganizationsFee = new OpenAvailableSubTotalFeeType1("platform-connected-organizations-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 BalanceChargeFee = new OpenAvailableSubTotalFeeType1("balance-charge-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 ThreedsAuthenticationAttemptFee = new OpenAvailableSubTotalFeeType1("3ds-authentication-attempt-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 TerminalMonthlyFee = new OpenAvailableSubTotalFeeType1("terminal-monthly-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 AcceptanceRiskFee = new OpenAvailableSubTotalFeeType1("acceptance-risk-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 TopUpFee = new OpenAvailableSubTotalFeeType1("top-up-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 PaymentGatewayFee = new OpenAvailableSubTotalFeeType1("payment-gateway-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 MastercardSpecialtyMerchantProgramProcessingFee = new OpenAvailableSubTotalFeeType1("mastercard-specialty-merchant-program-processing-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 MastercardSpecialtyMerchantProgramRegistrationFee = new OpenAvailableSubTotalFeeType1("mastercard-specialty-merchant-program-registration-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 VisaIntegrityRiskProgramProcessingFee = new OpenAvailableSubTotalFeeType1("visa-integrity-risk-program-processing-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 VisaIntegrityRiskProgramRegistrationFee = new OpenAvailableSubTotalFeeType1("visa-integrity-risk-program-registration-fee");
-        public static readonly OpenAvailableSubTotalFeeType1 MinimumInvoiceAmountFee = new OpenAvailableSubTotalFeeType1("minimum-invoice-amount-fee");
+        [JsonProperty("payment-fee")]
+        PaymentFee,
+        [JsonProperty("direct-debit-failure-fee")]
+        DirectDebitFailureFee,
+        [JsonProperty("unauthorized-direct-debit-fee")]
+        UnauthorizedDirectDebitFee,
+        [JsonProperty("bank-charged-direct-debit-failure-fee")]
+        BankChargedDirectDebitFailureFee,
+        [JsonProperty("partner-commission")]
+        PartnerCommission,
+        [JsonProperty("application-fee")]
+        ApplicationFee,
+        [JsonProperty("capture-fee")]
+        CaptureFee,
+        [JsonProperty("refund-fee")]
+        RefundFee,
+        [JsonProperty("chargeback-fee")]
+        ChargebackFee,
+        [JsonProperty("payment-notification-fee")]
+        PaymentNotificationFee,
+        [JsonProperty("transfer-notification-fee")]
+        TransferNotificationFee,
+        [JsonProperty("payout-fee")]
+        PayoutFee,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("platform-volume-fee")]
+        PlatformVolumeFee,
+        [JsonProperty("platform-connected-organizations-fee")]
+        PlatformConnectedOrganizationsFee,
+        [JsonProperty("balance-charge-fee")]
+        BalanceChargeFee,
+        [JsonProperty("3ds-authentication-attempt-fee")]
+        ThreedsAuthenticationAttemptFee,
+        [JsonProperty("terminal-monthly-fee")]
+        TerminalMonthlyFee,
+        [JsonProperty("acceptance-risk-fee")]
+        AcceptanceRiskFee,
+        [JsonProperty("top-up-fee")]
+        TopUpFee,
+        [JsonProperty("payment-gateway-fee")]
+        PaymentGatewayFee,
+        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
+        MastercardSpecialtyMerchantProgramProcessingFee,
+        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
+        MastercardSpecialtyMerchantProgramRegistrationFee,
+        [JsonProperty("visa-integrity-risk-program-processing-fee")]
+        VisaIntegrityRiskProgramProcessingFee,
+        [JsonProperty("visa-integrity-risk-program-registration-fee")]
+        VisaIntegrityRiskProgramRegistrationFee,
+        [JsonProperty("minimum-invoice-amount-fee")]
+        MinimumInvoiceAmountFee,
+    }
 
-        private static readonly Dictionary <string, OpenAvailableSubTotalFeeType1> _knownValues =
-            new Dictionary <string, OpenAvailableSubTotalFeeType1> ()
+    public static class OpenAvailableSubTotalFeeType1Extension
+    {
+        public static string Value(this OpenAvailableSubTotalFeeType1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static OpenAvailableSubTotalFeeType1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(OpenAvailableSubTotalFeeType1).GetFields())
             {
-                ["payment-fee"] = PaymentFee,
-                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
-                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
-                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
-                ["partner-commission"] = PartnerCommission,
-                ["application-fee"] = ApplicationFee,
-                ["capture-fee"] = CaptureFee,
-                ["refund-fee"] = RefundFee,
-                ["chargeback-fee"] = ChargebackFee,
-                ["payment-notification-fee"] = PaymentNotificationFee,
-                ["transfer-notification-fee"] = TransferNotificationFee,
-                ["payout-fee"] = PayoutFee,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["platform-volume-fee"] = PlatformVolumeFee,
-                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
-                ["balance-charge-fee"] = BalanceChargeFee,
-                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
-                ["terminal-monthly-fee"] = TerminalMonthlyFee,
-                ["acceptance-risk-fee"] = AcceptanceRiskFee,
-                ["top-up-fee"] = TopUpFee,
-                ["payment-gateway-fee"] = PaymentGatewayFee,
-                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
-                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
-                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
-                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
-                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, OpenAvailableSubTotalFeeType1> _values =
-            new ConcurrentDictionary<string, OpenAvailableSubTotalFeeType1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private OpenAvailableSubTotalFeeType1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is OpenAvailableSubTotalFeeType1)
+                    {
+                        return (OpenAvailableSubTotalFeeType1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum OpenAvailableSubTotalFeeType1");
         }
-
-        public string Value { get; }
-
-        public static OpenAvailableSubTotalFeeType1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new OpenAvailableSubTotalFeeType1(value));
-        }
-
-        public static implicit operator OpenAvailableSubTotalFeeType1(string value) => Of(value);
-        public static implicit operator string(OpenAvailableSubTotalFeeType1 openavailablesubtotalfeetype1) => openavailablesubtotalfeetype1.Value;
-
-        public static OpenAvailableSubTotalFeeType1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as OpenAvailableSubTotalFeeType1);
-
-        public bool Equals(OpenAvailableSubTotalFeeType1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

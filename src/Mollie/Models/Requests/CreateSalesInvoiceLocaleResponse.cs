@@ -12,81 +12,63 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateSalesInvoiceLocaleResponse : IEquatable<CreateSalesInvoiceLocaleResponse>
+    public enum CreateSalesInvoiceLocaleResponse
     {
-        public static readonly CreateSalesInvoiceLocaleResponse EnUS = new CreateSalesInvoiceLocaleResponse("en_US");
-        public static readonly CreateSalesInvoiceLocaleResponse EnGB = new CreateSalesInvoiceLocaleResponse("en_GB");
-        public static readonly CreateSalesInvoiceLocaleResponse Nlnl = new CreateSalesInvoiceLocaleResponse("nl_NL");
-        public static readonly CreateSalesInvoiceLocaleResponse NlBE = new CreateSalesInvoiceLocaleResponse("nl_BE");
-        public static readonly CreateSalesInvoiceLocaleResponse Dede = new CreateSalesInvoiceLocaleResponse("de_DE");
-        public static readonly CreateSalesInvoiceLocaleResponse DeAT = new CreateSalesInvoiceLocaleResponse("de_AT");
-        public static readonly CreateSalesInvoiceLocaleResponse DeCH = new CreateSalesInvoiceLocaleResponse("de_CH");
-        public static readonly CreateSalesInvoiceLocaleResponse Frfr = new CreateSalesInvoiceLocaleResponse("fr_FR");
-        public static readonly CreateSalesInvoiceLocaleResponse FrBE = new CreateSalesInvoiceLocaleResponse("fr_BE");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+    }
 
-        private static readonly Dictionary <string, CreateSalesInvoiceLocaleResponse> _knownValues =
-            new Dictionary <string, CreateSalesInvoiceLocaleResponse> ()
+    public static class CreateSalesInvoiceLocaleResponseExtension
+    {
+        public static string Value(this CreateSalesInvoiceLocaleResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateSalesInvoiceLocaleResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateSalesInvoiceLocaleResponse).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceLocaleResponse> _values =
-            new ConcurrentDictionary<string, CreateSalesInvoiceLocaleResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateSalesInvoiceLocaleResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateSalesInvoiceLocaleResponse)
+                    {
+                        return (CreateSalesInvoiceLocaleResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceLocaleResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateSalesInvoiceLocaleResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceLocaleResponse(value));
-        }
-
-        public static implicit operator CreateSalesInvoiceLocaleResponse(string value) => Of(value);
-        public static implicit operator string(CreateSalesInvoiceLocaleResponse createsalesinvoicelocaleresponse) => createsalesinvoicelocaleresponse.Value;
-
-        public static CreateSalesInvoiceLocaleResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceLocaleResponse);
-
-        public bool Equals(CreateSalesInvoiceLocaleResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

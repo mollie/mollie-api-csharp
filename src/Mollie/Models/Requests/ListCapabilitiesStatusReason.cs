@@ -12,64 +12,46 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListCapabilitiesStatusReason : IEquatable<ListCapabilitiesStatusReason>
+    public enum ListCapabilitiesStatusReason
     {
-        public static readonly ListCapabilitiesStatusReason RequirementPastDue = new ListCapabilitiesStatusReason("requirement-past-due");
-        public static readonly ListCapabilitiesStatusReason OnboardingInformationNeeded = new ListCapabilitiesStatusReason("onboarding-information-needed");
+        [JsonProperty("requirement-past-due")]
+        RequirementPastDue,
+        [JsonProperty("onboarding-information-needed")]
+        OnboardingInformationNeeded,
+    }
 
-        private static readonly Dictionary <string, ListCapabilitiesStatusReason> _knownValues =
-            new Dictionary <string, ListCapabilitiesStatusReason> ()
+    public static class ListCapabilitiesStatusReasonExtension
+    {
+        public static string Value(this ListCapabilitiesStatusReason value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListCapabilitiesStatusReason ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListCapabilitiesStatusReason).GetFields())
             {
-                ["requirement-past-due"] = RequirementPastDue,
-                ["onboarding-information-needed"] = OnboardingInformationNeeded
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListCapabilitiesStatusReason> _values =
-            new ConcurrentDictionary<string, ListCapabilitiesStatusReason>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListCapabilitiesStatusReason(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListCapabilitiesStatusReason)
+                    {
+                        return (ListCapabilitiesStatusReason)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListCapabilitiesStatusReason");
         }
-
-        public string Value { get; }
-
-        public static ListCapabilitiesStatusReason Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListCapabilitiesStatusReason(value));
-        }
-
-        public static implicit operator ListCapabilitiesStatusReason(string value) => Of(value);
-        public static implicit operator string(ListCapabilitiesStatusReason listcapabilitiesstatusreason) => listcapabilitiesstatusreason.Value;
-
-        public static ListCapabilitiesStatusReason[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListCapabilitiesStatusReason);
-
-        public bool Equals(ListCapabilitiesStatusReason? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

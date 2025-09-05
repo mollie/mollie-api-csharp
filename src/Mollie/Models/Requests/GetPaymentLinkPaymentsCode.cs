@@ -12,295 +12,277 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// A machine-readable code that indicates the reason for the payment&apos;s status.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsCode : IEquatable<GetPaymentLinkPaymentsCode>
+    public enum GetPaymentLinkPaymentsCode
     {
-        public static readonly GetPaymentLinkPaymentsCode ApprovedOrCompletedSuccessfully = new GetPaymentLinkPaymentsCode("approved_or_completed_successfully");
-        public static readonly GetPaymentLinkPaymentsCode ReferToCardIssuer = new GetPaymentLinkPaymentsCode("refer_to_card_issuer");
-        public static readonly GetPaymentLinkPaymentsCode InvalidMerchant = new GetPaymentLinkPaymentsCode("invalid_merchant");
-        public static readonly GetPaymentLinkPaymentsCode CaptureCard = new GetPaymentLinkPaymentsCode("capture_card");
-        public static readonly GetPaymentLinkPaymentsCode DoNotHonor = new GetPaymentLinkPaymentsCode("do_not_honor");
-        public static readonly GetPaymentLinkPaymentsCode Error = new GetPaymentLinkPaymentsCode("error");
-        public static readonly GetPaymentLinkPaymentsCode PartialApproval = new GetPaymentLinkPaymentsCode("partial_approval");
-        public static readonly GetPaymentLinkPaymentsCode InvalidTransaction = new GetPaymentLinkPaymentsCode("invalid_transaction");
-        public static readonly GetPaymentLinkPaymentsCode InvalidAmount = new GetPaymentLinkPaymentsCode("invalid_amount");
-        public static readonly GetPaymentLinkPaymentsCode InvalidIssuer = new GetPaymentLinkPaymentsCode("invalid_issuer");
-        public static readonly GetPaymentLinkPaymentsCode LostCard = new GetPaymentLinkPaymentsCode("lost_card");
-        public static readonly GetPaymentLinkPaymentsCode StolenCard = new GetPaymentLinkPaymentsCode("stolen_card");
-        public static readonly GetPaymentLinkPaymentsCode InsufficientFunds = new GetPaymentLinkPaymentsCode("insufficient_funds");
-        public static readonly GetPaymentLinkPaymentsCode ExpiredCard = new GetPaymentLinkPaymentsCode("expired_card");
-        public static readonly GetPaymentLinkPaymentsCode InvalidPin = new GetPaymentLinkPaymentsCode("invalid_pin");
-        public static readonly GetPaymentLinkPaymentsCode TransactionNotPermittedToCardholder = new GetPaymentLinkPaymentsCode("transaction_not_permitted_to_cardholder");
-        public static readonly GetPaymentLinkPaymentsCode TransactionNotAllowedAtTerminal = new GetPaymentLinkPaymentsCode("transaction_not_allowed_at_terminal");
-        public static readonly GetPaymentLinkPaymentsCode ExceedsWithdrawalAmountLimit = new GetPaymentLinkPaymentsCode("exceeds_withdrawal_amount_limit");
-        public static readonly GetPaymentLinkPaymentsCode RestrictedCard = new GetPaymentLinkPaymentsCode("restricted_card");
-        public static readonly GetPaymentLinkPaymentsCode SecurityViolation = new GetPaymentLinkPaymentsCode("security_violation");
-        public static readonly GetPaymentLinkPaymentsCode ExceedsWithdrawalCountLimit = new GetPaymentLinkPaymentsCode("exceeds_withdrawal_count_limit");
-        public static readonly GetPaymentLinkPaymentsCode AllowableNumberOfPinTriesExceeded = new GetPaymentLinkPaymentsCode("allowable_number_of_pin_tries_exceeded");
-        public static readonly GetPaymentLinkPaymentsCode NoReasonToDecline = new GetPaymentLinkPaymentsCode("no_reason_to_decline");
-        public static readonly GetPaymentLinkPaymentsCode CannotVerifyPin = new GetPaymentLinkPaymentsCode("cannot_verify_pin");
-        public static readonly GetPaymentLinkPaymentsCode IssuerUnavailable = new GetPaymentLinkPaymentsCode("issuer_unavailable");
-        public static readonly GetPaymentLinkPaymentsCode UnableToRouteTransaction = new GetPaymentLinkPaymentsCode("unable_to_route_transaction");
-        public static readonly GetPaymentLinkPaymentsCode DuplicateTransaction = new GetPaymentLinkPaymentsCode("duplicate_transaction");
-        public static readonly GetPaymentLinkPaymentsCode SystemMalfunction = new GetPaymentLinkPaymentsCode("system_malfunction");
-        public static readonly GetPaymentLinkPaymentsCode HonorWithId = new GetPaymentLinkPaymentsCode("honor_with_id");
-        public static readonly GetPaymentLinkPaymentsCode InvalidCardNumber = new GetPaymentLinkPaymentsCode("invalid_card_number");
-        public static readonly GetPaymentLinkPaymentsCode FormatError = new GetPaymentLinkPaymentsCode("format_error");
-        public static readonly GetPaymentLinkPaymentsCode ContactCardIssuer = new GetPaymentLinkPaymentsCode("contact_card_issuer");
-        public static readonly GetPaymentLinkPaymentsCode PinNotChanged = new GetPaymentLinkPaymentsCode("pin_not_changed");
-        public static readonly GetPaymentLinkPaymentsCode InvalidNonexistentToAccountSpecified = new GetPaymentLinkPaymentsCode("invalid_nonexistent_to_account_specified");
-        public static readonly GetPaymentLinkPaymentsCode InvalidNonexistentFromAccountSpecified = new GetPaymentLinkPaymentsCode("invalid_nonexistent_from_account_specified");
-        public static readonly GetPaymentLinkPaymentsCode InvalidNonexistentAccountSpecified = new GetPaymentLinkPaymentsCode("invalid_nonexistent_account_specified");
-        public static readonly GetPaymentLinkPaymentsCode LifecycleRelated = new GetPaymentLinkPaymentsCode("lifecycle_related");
-        public static readonly GetPaymentLinkPaymentsCode DomesticDebitTransactionNotAllowed = new GetPaymentLinkPaymentsCode("domestic_debit_transaction_not_allowed");
-        public static readonly GetPaymentLinkPaymentsCode PolicyRelated = new GetPaymentLinkPaymentsCode("policy_related");
-        public static readonly GetPaymentLinkPaymentsCode FraudSecurityRelated = new GetPaymentLinkPaymentsCode("fraud_security_related");
-        public static readonly GetPaymentLinkPaymentsCode InvalidAuthorizationLifeCycle = new GetPaymentLinkPaymentsCode("invalid_authorization_life_cycle");
-        public static readonly GetPaymentLinkPaymentsCode PurchaseAmountOnlyNoCashBackAllowed = new GetPaymentLinkPaymentsCode("purchase_amount_only_no_cash_back_allowed");
-        public static readonly GetPaymentLinkPaymentsCode CryptographicFailure = new GetPaymentLinkPaymentsCode("cryptographic_failure");
-        public static readonly GetPaymentLinkPaymentsCode UnacceptablePin = new GetPaymentLinkPaymentsCode("unacceptable_pin");
-        public static readonly GetPaymentLinkPaymentsCode ReferToCardIssuerSpecialCondition = new GetPaymentLinkPaymentsCode("refer_to_card_issuer_special_condition");
-        public static readonly GetPaymentLinkPaymentsCode PickUpCardSpecialCondition = new GetPaymentLinkPaymentsCode("pick_up_card_special_condition");
-        public static readonly GetPaymentLinkPaymentsCode VipApproval = new GetPaymentLinkPaymentsCode("vip_approval");
-        public static readonly GetPaymentLinkPaymentsCode InvalidAccountNumber = new GetPaymentLinkPaymentsCode("invalid_account_number");
-        public static readonly GetPaymentLinkPaymentsCode ReEnterTransaction = new GetPaymentLinkPaymentsCode("re_enter_transaction");
-        public static readonly GetPaymentLinkPaymentsCode NoActionTaken = new GetPaymentLinkPaymentsCode("no_action_taken");
-        public static readonly GetPaymentLinkPaymentsCode UnableToLocateRecord = new GetPaymentLinkPaymentsCode("unable_to_locate_record");
-        public static readonly GetPaymentLinkPaymentsCode FileTemporarilyUnavailable = new GetPaymentLinkPaymentsCode("file_temporarily_unavailable");
-        public static readonly GetPaymentLinkPaymentsCode NoCreditAccount = new GetPaymentLinkPaymentsCode("no_credit_account");
-        public static readonly GetPaymentLinkPaymentsCode ClosedAccount = new GetPaymentLinkPaymentsCode("closed_account");
-        public static readonly GetPaymentLinkPaymentsCode NoCheckingAccount = new GetPaymentLinkPaymentsCode("no_checking_account");
-        public static readonly GetPaymentLinkPaymentsCode NoSavingsAccount = new GetPaymentLinkPaymentsCode("no_savings_account");
-        public static readonly GetPaymentLinkPaymentsCode SuspectedFraud = new GetPaymentLinkPaymentsCode("suspected_fraud");
-        public static readonly GetPaymentLinkPaymentsCode TransactionDoesNotFulfillAmlRequirement = new GetPaymentLinkPaymentsCode("transaction_does_not_fulfill_aml_requirement");
-        public static readonly GetPaymentLinkPaymentsCode PinDataRequired = new GetPaymentLinkPaymentsCode("pin_data_required");
-        public static readonly GetPaymentLinkPaymentsCode UnableToLocatePreviousMessage = new GetPaymentLinkPaymentsCode("unable_to_locate_previous_message");
-        public static readonly GetPaymentLinkPaymentsCode PreviousMessageLocatedInconsistentData = new GetPaymentLinkPaymentsCode("previous_message_located_inconsistent_data");
-        public static readonly GetPaymentLinkPaymentsCode BlockedFirstUsed = new GetPaymentLinkPaymentsCode("blocked_first_used");
-        public static readonly GetPaymentLinkPaymentsCode TransactionReversed = new GetPaymentLinkPaymentsCode("transaction_reversed");
-        public static readonly GetPaymentLinkPaymentsCode CreditIssuerUnavailable = new GetPaymentLinkPaymentsCode("credit_issuer_unavailable");
-        public static readonly GetPaymentLinkPaymentsCode PinCryptographicErrorFound = new GetPaymentLinkPaymentsCode("pin_cryptographic_error_found");
-        public static readonly GetPaymentLinkPaymentsCode NegativeOnlineCamResult = new GetPaymentLinkPaymentsCode("negative_online_cam_result");
-        public static readonly GetPaymentLinkPaymentsCode ViolationOfLaw = new GetPaymentLinkPaymentsCode("violation_of_law");
-        public static readonly GetPaymentLinkPaymentsCode ForceStip = new GetPaymentLinkPaymentsCode("force_stip");
-        public static readonly GetPaymentLinkPaymentsCode CashServiceNotAvailable = new GetPaymentLinkPaymentsCode("cash_service_not_available");
-        public static readonly GetPaymentLinkPaymentsCode CashbackRequestExceedsIssuerLimit = new GetPaymentLinkPaymentsCode("cashback_request_exceeds_issuer_limit");
-        public static readonly GetPaymentLinkPaymentsCode DeclineForCvv2Failure = new GetPaymentLinkPaymentsCode("decline_for_cvv2_failure");
-        public static readonly GetPaymentLinkPaymentsCode TransactionAmountExceedsPreAuthorizedAmount = new GetPaymentLinkPaymentsCode("transaction_amount_exceeds_pre_authorized_amount");
-        public static readonly GetPaymentLinkPaymentsCode InvalidBillerInformation = new GetPaymentLinkPaymentsCode("invalid_biller_information");
-        public static readonly GetPaymentLinkPaymentsCode PinChangeUnblockRequestDeclined = new GetPaymentLinkPaymentsCode("pin_change_unblock_request_declined");
-        public static readonly GetPaymentLinkPaymentsCode UnsafePin = new GetPaymentLinkPaymentsCode("unsafe_pin");
-        public static readonly GetPaymentLinkPaymentsCode CardAuthenticationFailed = new GetPaymentLinkPaymentsCode("card_authentication_failed");
-        public static readonly GetPaymentLinkPaymentsCode StopPaymentOrder = new GetPaymentLinkPaymentsCode("stop_payment_order");
-        public static readonly GetPaymentLinkPaymentsCode RevocationOfAuthorization = new GetPaymentLinkPaymentsCode("revocation_of_authorization");
-        public static readonly GetPaymentLinkPaymentsCode RevocationOfAllAuthorizations = new GetPaymentLinkPaymentsCode("revocation_of_all_authorizations");
-        public static readonly GetPaymentLinkPaymentsCode ForwardToIssuerXa = new GetPaymentLinkPaymentsCode("forward_to_issuer_xa");
-        public static readonly GetPaymentLinkPaymentsCode ForwardToIssuerXd = new GetPaymentLinkPaymentsCode("forward_to_issuer_xd");
-        public static readonly GetPaymentLinkPaymentsCode UnableToGoOnline = new GetPaymentLinkPaymentsCode("unable_to_go_online");
-        public static readonly GetPaymentLinkPaymentsCode AdditionalCustomerAuthenticationRequired = new GetPaymentLinkPaymentsCode("additional_customer_authentication_required");
-        public static readonly GetPaymentLinkPaymentsCode MerchantIdNotFound = new GetPaymentLinkPaymentsCode("merchant_id_not_found");
-        public static readonly GetPaymentLinkPaymentsCode MerchantAccountClosed = new GetPaymentLinkPaymentsCode("merchant_account_closed");
-        public static readonly GetPaymentLinkPaymentsCode TerminalIdNotFound = new GetPaymentLinkPaymentsCode("terminal_id_not_found");
-        public static readonly GetPaymentLinkPaymentsCode TerminalClosed = new GetPaymentLinkPaymentsCode("terminal_closed");
-        public static readonly GetPaymentLinkPaymentsCode InvalidCategoryCode = new GetPaymentLinkPaymentsCode("invalid_category_code");
-        public static readonly GetPaymentLinkPaymentsCode InvalidCurrency = new GetPaymentLinkPaymentsCode("invalid_currency");
-        public static readonly GetPaymentLinkPaymentsCode MissingCvv2Cvc2 = new GetPaymentLinkPaymentsCode("missing_cvv2_cvc2");
-        public static readonly GetPaymentLinkPaymentsCode Cvv2NotAllowed = new GetPaymentLinkPaymentsCode("cvv2_not_allowed");
-        public static readonly GetPaymentLinkPaymentsCode MerchantNotRegisteredVbv = new GetPaymentLinkPaymentsCode("merchant_not_registered_vbv");
-        public static readonly GetPaymentLinkPaymentsCode MerchantNotRegisteredForAmex = new GetPaymentLinkPaymentsCode("merchant_not_registered_for_amex");
-        public static readonly GetPaymentLinkPaymentsCode TransactionNotPermittedAtTerminal = new GetPaymentLinkPaymentsCode("transaction_not_permitted_at_terminal");
-        public static readonly GetPaymentLinkPaymentsCode AgreementTerminalNotRelated = new GetPaymentLinkPaymentsCode("agreement_terminal_not_related");
-        public static readonly GetPaymentLinkPaymentsCode InvalidProcessorId = new GetPaymentLinkPaymentsCode("invalid_processor_id");
-        public static readonly GetPaymentLinkPaymentsCode InvalidMerchantData = new GetPaymentLinkPaymentsCode("invalid_merchant_data");
-        public static readonly GetPaymentLinkPaymentsCode SubMerchantAccountClosed = new GetPaymentLinkPaymentsCode("sub_merchant_account_closed");
-        public static readonly GetPaymentLinkPaymentsCode TerminalBusy = new GetPaymentLinkPaymentsCode("terminal_busy");
-        public static readonly GetPaymentLinkPaymentsCode TerminalUnreachable = new GetPaymentLinkPaymentsCode("terminal_unreachable");
-        public static readonly GetPaymentLinkPaymentsCode ServiceFailed = new GetPaymentLinkPaymentsCode("service_failed");
-        public static readonly GetPaymentLinkPaymentsCode InvalidOperation = new GetPaymentLinkPaymentsCode("invalid_operation");
-        public static readonly GetPaymentLinkPaymentsCode AuthorizationError = new GetPaymentLinkPaymentsCode("authorization_error");
-        public static readonly GetPaymentLinkPaymentsCode LoginFailedWithoutReason = new GetPaymentLinkPaymentsCode("login_failed_without_reason");
-        public static readonly GetPaymentLinkPaymentsCode InvalidRetailer = new GetPaymentLinkPaymentsCode("invalid_retailer");
-        public static readonly GetPaymentLinkPaymentsCode CardDoesNotExist = new GetPaymentLinkPaymentsCode("card_does_not_exist");
-        public static readonly GetPaymentLinkPaymentsCode CardIsBlocked = new GetPaymentLinkPaymentsCode("card_is_blocked");
-        public static readonly GetPaymentLinkPaymentsCode InvalidCardId = new GetPaymentLinkPaymentsCode("invalid_card_id");
-        public static readonly GetPaymentLinkPaymentsCode CardIsTransferred = new GetPaymentLinkPaymentsCode("card_is_transferred");
-        public static readonly GetPaymentLinkPaymentsCode CardIsNotActive = new GetPaymentLinkPaymentsCode("card_is_not_active");
-        public static readonly GetPaymentLinkPaymentsCode IncorrectPurchaseValue = new GetPaymentLinkPaymentsCode("incorrect_purchase_value");
-        public static readonly GetPaymentLinkPaymentsCode CardNotAvailable = new GetPaymentLinkPaymentsCode("card_not_available");
-        public static readonly GetPaymentLinkPaymentsCode WrongCurrency = new GetPaymentLinkPaymentsCode("wrong_currency");
-        public static readonly GetPaymentLinkPaymentsCode LoginFailedUnknownUser = new GetPaymentLinkPaymentsCode("login_failed_unknown_user");
-        public static readonly GetPaymentLinkPaymentsCode LoginFailedInvalidPassword = new GetPaymentLinkPaymentsCode("login_failed_invalid_password");
-        public static readonly GetPaymentLinkPaymentsCode InvalidEanCode = new GetPaymentLinkPaymentsCode("invalid_ean_code");
+        [JsonProperty("approved_or_completed_successfully")]
+        ApprovedOrCompletedSuccessfully,
+        [JsonProperty("refer_to_card_issuer")]
+        ReferToCardIssuer,
+        [JsonProperty("invalid_merchant")]
+        InvalidMerchant,
+        [JsonProperty("capture_card")]
+        CaptureCard,
+        [JsonProperty("do_not_honor")]
+        DoNotHonor,
+        [JsonProperty("error")]
+        Error,
+        [JsonProperty("partial_approval")]
+        PartialApproval,
+        [JsonProperty("invalid_transaction")]
+        InvalidTransaction,
+        [JsonProperty("invalid_amount")]
+        InvalidAmount,
+        [JsonProperty("invalid_issuer")]
+        InvalidIssuer,
+        [JsonProperty("lost_card")]
+        LostCard,
+        [JsonProperty("stolen_card")]
+        StolenCard,
+        [JsonProperty("insufficient_funds")]
+        InsufficientFunds,
+        [JsonProperty("expired_card")]
+        ExpiredCard,
+        [JsonProperty("invalid_pin")]
+        InvalidPin,
+        [JsonProperty("transaction_not_permitted_to_cardholder")]
+        TransactionNotPermittedToCardholder,
+        [JsonProperty("transaction_not_allowed_at_terminal")]
+        TransactionNotAllowedAtTerminal,
+        [JsonProperty("exceeds_withdrawal_amount_limit")]
+        ExceedsWithdrawalAmountLimit,
+        [JsonProperty("restricted_card")]
+        RestrictedCard,
+        [JsonProperty("security_violation")]
+        SecurityViolation,
+        [JsonProperty("exceeds_withdrawal_count_limit")]
+        ExceedsWithdrawalCountLimit,
+        [JsonProperty("allowable_number_of_pin_tries_exceeded")]
+        AllowableNumberOfPinTriesExceeded,
+        [JsonProperty("no_reason_to_decline")]
+        NoReasonToDecline,
+        [JsonProperty("cannot_verify_pin")]
+        CannotVerifyPin,
+        [JsonProperty("issuer_unavailable")]
+        IssuerUnavailable,
+        [JsonProperty("unable_to_route_transaction")]
+        UnableToRouteTransaction,
+        [JsonProperty("duplicate_transaction")]
+        DuplicateTransaction,
+        [JsonProperty("system_malfunction")]
+        SystemMalfunction,
+        [JsonProperty("honor_with_id")]
+        HonorWithId,
+        [JsonProperty("invalid_card_number")]
+        InvalidCardNumber,
+        [JsonProperty("format_error")]
+        FormatError,
+        [JsonProperty("contact_card_issuer")]
+        ContactCardIssuer,
+        [JsonProperty("pin_not_changed")]
+        PinNotChanged,
+        [JsonProperty("invalid_nonexistent_to_account_specified")]
+        InvalidNonexistentToAccountSpecified,
+        [JsonProperty("invalid_nonexistent_from_account_specified")]
+        InvalidNonexistentFromAccountSpecified,
+        [JsonProperty("invalid_nonexistent_account_specified")]
+        InvalidNonexistentAccountSpecified,
+        [JsonProperty("lifecycle_related")]
+        LifecycleRelated,
+        [JsonProperty("domestic_debit_transaction_not_allowed")]
+        DomesticDebitTransactionNotAllowed,
+        [JsonProperty("policy_related")]
+        PolicyRelated,
+        [JsonProperty("fraud_security_related")]
+        FraudSecurityRelated,
+        [JsonProperty("invalid_authorization_life_cycle")]
+        InvalidAuthorizationLifeCycle,
+        [JsonProperty("purchase_amount_only_no_cash_back_allowed")]
+        PurchaseAmountOnlyNoCashBackAllowed,
+        [JsonProperty("cryptographic_failure")]
+        CryptographicFailure,
+        [JsonProperty("unacceptable_pin")]
+        UnacceptablePin,
+        [JsonProperty("refer_to_card_issuer_special_condition")]
+        ReferToCardIssuerSpecialCondition,
+        [JsonProperty("pick_up_card_special_condition")]
+        PickUpCardSpecialCondition,
+        [JsonProperty("vip_approval")]
+        VipApproval,
+        [JsonProperty("invalid_account_number")]
+        InvalidAccountNumber,
+        [JsonProperty("re_enter_transaction")]
+        ReEnterTransaction,
+        [JsonProperty("no_action_taken")]
+        NoActionTaken,
+        [JsonProperty("unable_to_locate_record")]
+        UnableToLocateRecord,
+        [JsonProperty("file_temporarily_unavailable")]
+        FileTemporarilyUnavailable,
+        [JsonProperty("no_credit_account")]
+        NoCreditAccount,
+        [JsonProperty("closed_account")]
+        ClosedAccount,
+        [JsonProperty("no_checking_account")]
+        NoCheckingAccount,
+        [JsonProperty("no_savings_account")]
+        NoSavingsAccount,
+        [JsonProperty("suspected_fraud")]
+        SuspectedFraud,
+        [JsonProperty("transaction_does_not_fulfill_aml_requirement")]
+        TransactionDoesNotFulfillAmlRequirement,
+        [JsonProperty("pin_data_required")]
+        PinDataRequired,
+        [JsonProperty("unable_to_locate_previous_message")]
+        UnableToLocatePreviousMessage,
+        [JsonProperty("previous_message_located_inconsistent_data")]
+        PreviousMessageLocatedInconsistentData,
+        [JsonProperty("blocked_first_used")]
+        BlockedFirstUsed,
+        [JsonProperty("transaction_reversed")]
+        TransactionReversed,
+        [JsonProperty("credit_issuer_unavailable")]
+        CreditIssuerUnavailable,
+        [JsonProperty("pin_cryptographic_error_found")]
+        PinCryptographicErrorFound,
+        [JsonProperty("negative_online_cam_result")]
+        NegativeOnlineCamResult,
+        [JsonProperty("violation_of_law")]
+        ViolationOfLaw,
+        [JsonProperty("force_stip")]
+        ForceStip,
+        [JsonProperty("cash_service_not_available")]
+        CashServiceNotAvailable,
+        [JsonProperty("cashback_request_exceeds_issuer_limit")]
+        CashbackRequestExceedsIssuerLimit,
+        [JsonProperty("decline_for_cvv2_failure")]
+        DeclineForCvv2Failure,
+        [JsonProperty("transaction_amount_exceeds_pre_authorized_amount")]
+        TransactionAmountExceedsPreAuthorizedAmount,
+        [JsonProperty("invalid_biller_information")]
+        InvalidBillerInformation,
+        [JsonProperty("pin_change_unblock_request_declined")]
+        PinChangeUnblockRequestDeclined,
+        [JsonProperty("unsafe_pin")]
+        UnsafePin,
+        [JsonProperty("card_authentication_failed")]
+        CardAuthenticationFailed,
+        [JsonProperty("stop_payment_order")]
+        StopPaymentOrder,
+        [JsonProperty("revocation_of_authorization")]
+        RevocationOfAuthorization,
+        [JsonProperty("revocation_of_all_authorizations")]
+        RevocationOfAllAuthorizations,
+        [JsonProperty("forward_to_issuer_xa")]
+        ForwardToIssuerXa,
+        [JsonProperty("forward_to_issuer_xd")]
+        ForwardToIssuerXd,
+        [JsonProperty("unable_to_go_online")]
+        UnableToGoOnline,
+        [JsonProperty("additional_customer_authentication_required")]
+        AdditionalCustomerAuthenticationRequired,
+        [JsonProperty("merchant_id_not_found")]
+        MerchantIdNotFound,
+        [JsonProperty("merchant_account_closed")]
+        MerchantAccountClosed,
+        [JsonProperty("terminal_id_not_found")]
+        TerminalIdNotFound,
+        [JsonProperty("terminal_closed")]
+        TerminalClosed,
+        [JsonProperty("invalid_category_code")]
+        InvalidCategoryCode,
+        [JsonProperty("invalid_currency")]
+        InvalidCurrency,
+        [JsonProperty("missing_cvv2_cvc2")]
+        MissingCvv2Cvc2,
+        [JsonProperty("cvv2_not_allowed")]
+        Cvv2NotAllowed,
+        [JsonProperty("merchant_not_registered_vbv")]
+        MerchantNotRegisteredVbv,
+        [JsonProperty("merchant_not_registered_for_amex")]
+        MerchantNotRegisteredForAmex,
+        [JsonProperty("transaction_not_permitted_at_terminal")]
+        TransactionNotPermittedAtTerminal,
+        [JsonProperty("agreement_terminal_not_related")]
+        AgreementTerminalNotRelated,
+        [JsonProperty("invalid_processor_id")]
+        InvalidProcessorId,
+        [JsonProperty("invalid_merchant_data")]
+        InvalidMerchantData,
+        [JsonProperty("sub_merchant_account_closed")]
+        SubMerchantAccountClosed,
+        [JsonProperty("terminal_busy")]
+        TerminalBusy,
+        [JsonProperty("terminal_unreachable")]
+        TerminalUnreachable,
+        [JsonProperty("service_failed")]
+        ServiceFailed,
+        [JsonProperty("invalid_operation")]
+        InvalidOperation,
+        [JsonProperty("authorization_error")]
+        AuthorizationError,
+        [JsonProperty("login_failed_without_reason")]
+        LoginFailedWithoutReason,
+        [JsonProperty("invalid_retailer")]
+        InvalidRetailer,
+        [JsonProperty("card_does_not_exist")]
+        CardDoesNotExist,
+        [JsonProperty("card_is_blocked")]
+        CardIsBlocked,
+        [JsonProperty("invalid_card_id")]
+        InvalidCardId,
+        [JsonProperty("card_is_transferred")]
+        CardIsTransferred,
+        [JsonProperty("card_is_not_active")]
+        CardIsNotActive,
+        [JsonProperty("incorrect_purchase_value")]
+        IncorrectPurchaseValue,
+        [JsonProperty("card_not_available")]
+        CardNotAvailable,
+        [JsonProperty("wrong_currency")]
+        WrongCurrency,
+        [JsonProperty("login_failed_unknown_user")]
+        LoginFailedUnknownUser,
+        [JsonProperty("login_failed_invalid_password")]
+        LoginFailedInvalidPassword,
+        [JsonProperty("invalid_ean_code")]
+        InvalidEanCode,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsCode> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsCode> ()
+    public static class GetPaymentLinkPaymentsCodeExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsCode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsCode ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsCode).GetFields())
             {
-                ["approved_or_completed_successfully"] = ApprovedOrCompletedSuccessfully,
-                ["refer_to_card_issuer"] = ReferToCardIssuer,
-                ["invalid_merchant"] = InvalidMerchant,
-                ["capture_card"] = CaptureCard,
-                ["do_not_honor"] = DoNotHonor,
-                ["error"] = Error,
-                ["partial_approval"] = PartialApproval,
-                ["invalid_transaction"] = InvalidTransaction,
-                ["invalid_amount"] = InvalidAmount,
-                ["invalid_issuer"] = InvalidIssuer,
-                ["lost_card"] = LostCard,
-                ["stolen_card"] = StolenCard,
-                ["insufficient_funds"] = InsufficientFunds,
-                ["expired_card"] = ExpiredCard,
-                ["invalid_pin"] = InvalidPin,
-                ["transaction_not_permitted_to_cardholder"] = TransactionNotPermittedToCardholder,
-                ["transaction_not_allowed_at_terminal"] = TransactionNotAllowedAtTerminal,
-                ["exceeds_withdrawal_amount_limit"] = ExceedsWithdrawalAmountLimit,
-                ["restricted_card"] = RestrictedCard,
-                ["security_violation"] = SecurityViolation,
-                ["exceeds_withdrawal_count_limit"] = ExceedsWithdrawalCountLimit,
-                ["allowable_number_of_pin_tries_exceeded"] = AllowableNumberOfPinTriesExceeded,
-                ["no_reason_to_decline"] = NoReasonToDecline,
-                ["cannot_verify_pin"] = CannotVerifyPin,
-                ["issuer_unavailable"] = IssuerUnavailable,
-                ["unable_to_route_transaction"] = UnableToRouteTransaction,
-                ["duplicate_transaction"] = DuplicateTransaction,
-                ["system_malfunction"] = SystemMalfunction,
-                ["honor_with_id"] = HonorWithId,
-                ["invalid_card_number"] = InvalidCardNumber,
-                ["format_error"] = FormatError,
-                ["contact_card_issuer"] = ContactCardIssuer,
-                ["pin_not_changed"] = PinNotChanged,
-                ["invalid_nonexistent_to_account_specified"] = InvalidNonexistentToAccountSpecified,
-                ["invalid_nonexistent_from_account_specified"] = InvalidNonexistentFromAccountSpecified,
-                ["invalid_nonexistent_account_specified"] = InvalidNonexistentAccountSpecified,
-                ["lifecycle_related"] = LifecycleRelated,
-                ["domestic_debit_transaction_not_allowed"] = DomesticDebitTransactionNotAllowed,
-                ["policy_related"] = PolicyRelated,
-                ["fraud_security_related"] = FraudSecurityRelated,
-                ["invalid_authorization_life_cycle"] = InvalidAuthorizationLifeCycle,
-                ["purchase_amount_only_no_cash_back_allowed"] = PurchaseAmountOnlyNoCashBackAllowed,
-                ["cryptographic_failure"] = CryptographicFailure,
-                ["unacceptable_pin"] = UnacceptablePin,
-                ["refer_to_card_issuer_special_condition"] = ReferToCardIssuerSpecialCondition,
-                ["pick_up_card_special_condition"] = PickUpCardSpecialCondition,
-                ["vip_approval"] = VipApproval,
-                ["invalid_account_number"] = InvalidAccountNumber,
-                ["re_enter_transaction"] = ReEnterTransaction,
-                ["no_action_taken"] = NoActionTaken,
-                ["unable_to_locate_record"] = UnableToLocateRecord,
-                ["file_temporarily_unavailable"] = FileTemporarilyUnavailable,
-                ["no_credit_account"] = NoCreditAccount,
-                ["closed_account"] = ClosedAccount,
-                ["no_checking_account"] = NoCheckingAccount,
-                ["no_savings_account"] = NoSavingsAccount,
-                ["suspected_fraud"] = SuspectedFraud,
-                ["transaction_does_not_fulfill_aml_requirement"] = TransactionDoesNotFulfillAmlRequirement,
-                ["pin_data_required"] = PinDataRequired,
-                ["unable_to_locate_previous_message"] = UnableToLocatePreviousMessage,
-                ["previous_message_located_inconsistent_data"] = PreviousMessageLocatedInconsistentData,
-                ["blocked_first_used"] = BlockedFirstUsed,
-                ["transaction_reversed"] = TransactionReversed,
-                ["credit_issuer_unavailable"] = CreditIssuerUnavailable,
-                ["pin_cryptographic_error_found"] = PinCryptographicErrorFound,
-                ["negative_online_cam_result"] = NegativeOnlineCamResult,
-                ["violation_of_law"] = ViolationOfLaw,
-                ["force_stip"] = ForceStip,
-                ["cash_service_not_available"] = CashServiceNotAvailable,
-                ["cashback_request_exceeds_issuer_limit"] = CashbackRequestExceedsIssuerLimit,
-                ["decline_for_cvv2_failure"] = DeclineForCvv2Failure,
-                ["transaction_amount_exceeds_pre_authorized_amount"] = TransactionAmountExceedsPreAuthorizedAmount,
-                ["invalid_biller_information"] = InvalidBillerInformation,
-                ["pin_change_unblock_request_declined"] = PinChangeUnblockRequestDeclined,
-                ["unsafe_pin"] = UnsafePin,
-                ["card_authentication_failed"] = CardAuthenticationFailed,
-                ["stop_payment_order"] = StopPaymentOrder,
-                ["revocation_of_authorization"] = RevocationOfAuthorization,
-                ["revocation_of_all_authorizations"] = RevocationOfAllAuthorizations,
-                ["forward_to_issuer_xa"] = ForwardToIssuerXa,
-                ["forward_to_issuer_xd"] = ForwardToIssuerXd,
-                ["unable_to_go_online"] = UnableToGoOnline,
-                ["additional_customer_authentication_required"] = AdditionalCustomerAuthenticationRequired,
-                ["merchant_id_not_found"] = MerchantIdNotFound,
-                ["merchant_account_closed"] = MerchantAccountClosed,
-                ["terminal_id_not_found"] = TerminalIdNotFound,
-                ["terminal_closed"] = TerminalClosed,
-                ["invalid_category_code"] = InvalidCategoryCode,
-                ["invalid_currency"] = InvalidCurrency,
-                ["missing_cvv2_cvc2"] = MissingCvv2Cvc2,
-                ["cvv2_not_allowed"] = Cvv2NotAllowed,
-                ["merchant_not_registered_vbv"] = MerchantNotRegisteredVbv,
-                ["merchant_not_registered_for_amex"] = MerchantNotRegisteredForAmex,
-                ["transaction_not_permitted_at_terminal"] = TransactionNotPermittedAtTerminal,
-                ["agreement_terminal_not_related"] = AgreementTerminalNotRelated,
-                ["invalid_processor_id"] = InvalidProcessorId,
-                ["invalid_merchant_data"] = InvalidMerchantData,
-                ["sub_merchant_account_closed"] = SubMerchantAccountClosed,
-                ["terminal_busy"] = TerminalBusy,
-                ["terminal_unreachable"] = TerminalUnreachable,
-                ["service_failed"] = ServiceFailed,
-                ["invalid_operation"] = InvalidOperation,
-                ["authorization_error"] = AuthorizationError,
-                ["login_failed_without_reason"] = LoginFailedWithoutReason,
-                ["invalid_retailer"] = InvalidRetailer,
-                ["card_does_not_exist"] = CardDoesNotExist,
-                ["card_is_blocked"] = CardIsBlocked,
-                ["invalid_card_id"] = InvalidCardId,
-                ["card_is_transferred"] = CardIsTransferred,
-                ["card_is_not_active"] = CardIsNotActive,
-                ["incorrect_purchase_value"] = IncorrectPurchaseValue,
-                ["card_not_available"] = CardNotAvailable,
-                ["wrong_currency"] = WrongCurrency,
-                ["login_failed_unknown_user"] = LoginFailedUnknownUser,
-                ["login_failed_invalid_password"] = LoginFailedInvalidPassword,
-                ["invalid_ean_code"] = InvalidEanCode
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsCode> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsCode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsCode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsCode)
+                    {
+                        return (GetPaymentLinkPaymentsCode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsCode");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsCode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsCode(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsCode(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsCode getpaymentlinkpaymentscode) => getpaymentlinkpaymentscode.Value;
-
-        public static GetPaymentLinkPaymentsCode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsCode);
-
-        public bool Equals(GetPaymentLinkPaymentsCode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

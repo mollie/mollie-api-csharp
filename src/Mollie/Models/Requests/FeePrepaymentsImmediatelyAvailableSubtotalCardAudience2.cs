@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 : IEquatable<FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2>
+    public enum FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2
     {
-        public static readonly FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 Corporate = new FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2("corporate");
-        public static readonly FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 Other = new FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2("other");
+        [JsonProperty("corporate")]
+        Corporate,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2> _knownValues =
-            new Dictionary <string, FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2> ()
+    public static class FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2Extension
+    {
+        public static string Value(this FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2).GetFields())
             {
-                ["corporate"] = Corporate,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2> _values =
-            new ConcurrentDictionary<string, FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2)
+                    {
+                        return (FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2");
         }
-
-        public string Value { get; }
-
-        public static FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2(value));
-        }
-
-        public static implicit operator FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2(string value) => Of(value);
-        public static implicit operator string(FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2 feeprepaymentsimmediatelyavailablesubtotalcardaudience2) => feeprepaymentsimmediatelyavailablesubtotalcardaudience2.Value;
-
-        public static FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2);
-
-        public bool Equals(FeePrepaymentsImmediatelyAvailableSubtotalCardAudience2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

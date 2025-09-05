@@ -12,68 +12,50 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsCategory : IEquatable<ListSubscriptionPaymentsCategory>
+    public enum ListSubscriptionPaymentsCategory
     {
-        public static readonly ListSubscriptionPaymentsCategory Meal = new ListSubscriptionPaymentsCategory("meal");
-        public static readonly ListSubscriptionPaymentsCategory Eco = new ListSubscriptionPaymentsCategory("eco");
-        public static readonly ListSubscriptionPaymentsCategory Gift = new ListSubscriptionPaymentsCategory("gift");
-        public static readonly ListSubscriptionPaymentsCategory SportCulture = new ListSubscriptionPaymentsCategory("sport_culture");
+        [JsonProperty("meal")]
+        Meal,
+        [JsonProperty("eco")]
+        Eco,
+        [JsonProperty("gift")]
+        Gift,
+        [JsonProperty("sport_culture")]
+        SportCulture,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsCategory> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsCategory> ()
+    public static class ListSubscriptionPaymentsCategoryExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsCategory value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsCategory ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsCategory).GetFields())
             {
-                ["meal"] = Meal,
-                ["eco"] = Eco,
-                ["gift"] = Gift,
-                ["sport_culture"] = SportCulture
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsCategory> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsCategory>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsCategory(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsCategory)
+                    {
+                        return (ListSubscriptionPaymentsCategory)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsCategory");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsCategory Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsCategory(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsCategory(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsCategory listsubscriptionpaymentscategory) => listsubscriptionpaymentscategory.Value;
-
-        public static ListSubscriptionPaymentsCategory[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsCategory);
-
-        public bool Equals(ListSubscriptionPaymentsCategory? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

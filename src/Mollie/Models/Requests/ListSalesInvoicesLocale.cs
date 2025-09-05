@@ -12,81 +12,63 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSalesInvoicesLocale : IEquatable<ListSalesInvoicesLocale>
+    public enum ListSalesInvoicesLocale
     {
-        public static readonly ListSalesInvoicesLocale EnUS = new ListSalesInvoicesLocale("en_US");
-        public static readonly ListSalesInvoicesLocale EnGB = new ListSalesInvoicesLocale("en_GB");
-        public static readonly ListSalesInvoicesLocale Nlnl = new ListSalesInvoicesLocale("nl_NL");
-        public static readonly ListSalesInvoicesLocale NlBE = new ListSalesInvoicesLocale("nl_BE");
-        public static readonly ListSalesInvoicesLocale Dede = new ListSalesInvoicesLocale("de_DE");
-        public static readonly ListSalesInvoicesLocale DeAT = new ListSalesInvoicesLocale("de_AT");
-        public static readonly ListSalesInvoicesLocale DeCH = new ListSalesInvoicesLocale("de_CH");
-        public static readonly ListSalesInvoicesLocale Frfr = new ListSalesInvoicesLocale("fr_FR");
-        public static readonly ListSalesInvoicesLocale FrBE = new ListSalesInvoicesLocale("fr_BE");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+    }
 
-        private static readonly Dictionary <string, ListSalesInvoicesLocale> _knownValues =
-            new Dictionary <string, ListSalesInvoicesLocale> ()
+    public static class ListSalesInvoicesLocaleExtension
+    {
+        public static string Value(this ListSalesInvoicesLocale value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSalesInvoicesLocale ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSalesInvoicesLocale).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSalesInvoicesLocale> _values =
-            new ConcurrentDictionary<string, ListSalesInvoicesLocale>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSalesInvoicesLocale(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSalesInvoicesLocale)
+                    {
+                        return (ListSalesInvoicesLocale)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSalesInvoicesLocale");
         }
-
-        public string Value { get; }
-
-        public static ListSalesInvoicesLocale Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSalesInvoicesLocale(value));
-        }
-
-        public static implicit operator ListSalesInvoicesLocale(string value) => Of(value);
-        public static implicit operator string(ListSalesInvoicesLocale listsalesinvoiceslocale) => listsalesinvoiceslocale.Value;
-
-        public static ListSalesInvoicesLocale[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSalesInvoicesLocale);
-
-        public bool Equals(ListSalesInvoicesLocale? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

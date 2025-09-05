@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class RefundsImmediatelyAvailableSubTotalCardRegion1 : IEquatable<RefundsImmediatelyAvailableSubTotalCardRegion1>
+    public enum RefundsImmediatelyAvailableSubTotalCardRegion1
     {
-        public static readonly RefundsImmediatelyAvailableSubTotalCardRegion1 IntraEea = new RefundsImmediatelyAvailableSubTotalCardRegion1("intra-eea");
-        public static readonly RefundsImmediatelyAvailableSubTotalCardRegion1 IntraEu = new RefundsImmediatelyAvailableSubTotalCardRegion1("intra-eu");
-        public static readonly RefundsImmediatelyAvailableSubTotalCardRegion1 Domestic = new RefundsImmediatelyAvailableSubTotalCardRegion1("domestic");
-        public static readonly RefundsImmediatelyAvailableSubTotalCardRegion1 Other = new RefundsImmediatelyAvailableSubTotalCardRegion1("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, RefundsImmediatelyAvailableSubTotalCardRegion1> _knownValues =
-            new Dictionary <string, RefundsImmediatelyAvailableSubTotalCardRegion1> ()
+    public static class RefundsImmediatelyAvailableSubTotalCardRegion1Extension
+    {
+        public static string Value(this RefundsImmediatelyAvailableSubTotalCardRegion1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static RefundsImmediatelyAvailableSubTotalCardRegion1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(RefundsImmediatelyAvailableSubTotalCardRegion1).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, RefundsImmediatelyAvailableSubTotalCardRegion1> _values =
-            new ConcurrentDictionary<string, RefundsImmediatelyAvailableSubTotalCardRegion1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private RefundsImmediatelyAvailableSubTotalCardRegion1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is RefundsImmediatelyAvailableSubTotalCardRegion1)
+                    {
+                        return (RefundsImmediatelyAvailableSubTotalCardRegion1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum RefundsImmediatelyAvailableSubTotalCardRegion1");
         }
-
-        public string Value { get; }
-
-        public static RefundsImmediatelyAvailableSubTotalCardRegion1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new RefundsImmediatelyAvailableSubTotalCardRegion1(value));
-        }
-
-        public static implicit operator RefundsImmediatelyAvailableSubTotalCardRegion1(string value) => Of(value);
-        public static implicit operator string(RefundsImmediatelyAvailableSubTotalCardRegion1 refundsimmediatelyavailablesubtotalcardregion1) => refundsimmediatelyavailablesubtotalcardregion1.Value;
-
-        public static RefundsImmediatelyAvailableSubTotalCardRegion1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as RefundsImmediatelyAvailableSubTotalCardRegion1);
-
-        public bool Equals(RefundsImmediatelyAvailableSubTotalCardRegion1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

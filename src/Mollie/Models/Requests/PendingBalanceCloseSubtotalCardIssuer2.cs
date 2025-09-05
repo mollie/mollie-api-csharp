@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PendingBalanceCloseSubtotalCardIssuer2 : IEquatable<PendingBalanceCloseSubtotalCardIssuer2>
+    public enum PendingBalanceCloseSubtotalCardIssuer2
     {
-        public static readonly PendingBalanceCloseSubtotalCardIssuer2 Amex = new PendingBalanceCloseSubtotalCardIssuer2("amex");
-        public static readonly PendingBalanceCloseSubtotalCardIssuer2 Maestro = new PendingBalanceCloseSubtotalCardIssuer2("maestro");
-        public static readonly PendingBalanceCloseSubtotalCardIssuer2 CarteBancaire = new PendingBalanceCloseSubtotalCardIssuer2("carte-bancaire");
-        public static readonly PendingBalanceCloseSubtotalCardIssuer2 Other = new PendingBalanceCloseSubtotalCardIssuer2("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, PendingBalanceCloseSubtotalCardIssuer2> _knownValues =
-            new Dictionary <string, PendingBalanceCloseSubtotalCardIssuer2> ()
+    public static class PendingBalanceCloseSubtotalCardIssuer2Extension
+    {
+        public static string Value(this PendingBalanceCloseSubtotalCardIssuer2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PendingBalanceCloseSubtotalCardIssuer2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(PendingBalanceCloseSubtotalCardIssuer2).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PendingBalanceCloseSubtotalCardIssuer2> _values =
-            new ConcurrentDictionary<string, PendingBalanceCloseSubtotalCardIssuer2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PendingBalanceCloseSubtotalCardIssuer2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PendingBalanceCloseSubtotalCardIssuer2)
+                    {
+                        return (PendingBalanceCloseSubtotalCardIssuer2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PendingBalanceCloseSubtotalCardIssuer2");
         }
-
-        public string Value { get; }
-
-        public static PendingBalanceCloseSubtotalCardIssuer2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PendingBalanceCloseSubtotalCardIssuer2(value));
-        }
-
-        public static implicit operator PendingBalanceCloseSubtotalCardIssuer2(string value) => Of(value);
-        public static implicit operator string(PendingBalanceCloseSubtotalCardIssuer2 pendingbalanceclosesubtotalcardissuer2) => pendingbalanceclosesubtotalcardissuer2.Value;
-
-        public static PendingBalanceCloseSubtotalCardIssuer2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PendingBalanceCloseSubtotalCardIssuer2);
-
-        public bool Equals(PendingBalanceCloseSubtotalCardIssuer2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

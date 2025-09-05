@@ -12,147 +12,129 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class OpenPendingSubtotalMethod2 : IEquatable<OpenPendingSubtotalMethod2>
+    public enum OpenPendingSubtotalMethod2
     {
-        public static readonly OpenPendingSubtotalMethod2 Alma = new OpenPendingSubtotalMethod2("alma");
-        public static readonly OpenPendingSubtotalMethod2 Bacs = new OpenPendingSubtotalMethod2("bacs");
-        public static readonly OpenPendingSubtotalMethod2 Applepay = new OpenPendingSubtotalMethod2("applepay");
-        public static readonly OpenPendingSubtotalMethod2 Bancomatpay = new OpenPendingSubtotalMethod2("bancomatpay");
-        public static readonly OpenPendingSubtotalMethod2 Bancontact = new OpenPendingSubtotalMethod2("bancontact");
-        public static readonly OpenPendingSubtotalMethod2 Banktransfer = new OpenPendingSubtotalMethod2("banktransfer");
-        public static readonly OpenPendingSubtotalMethod2 Belfius = new OpenPendingSubtotalMethod2("belfius");
-        public static readonly OpenPendingSubtotalMethod2 Billie = new OpenPendingSubtotalMethod2("billie");
-        public static readonly OpenPendingSubtotalMethod2 Bizum = new OpenPendingSubtotalMethod2("bizum");
-        public static readonly OpenPendingSubtotalMethod2 Bitcoin = new OpenPendingSubtotalMethod2("bitcoin");
-        public static readonly OpenPendingSubtotalMethod2 Blik = new OpenPendingSubtotalMethod2("blik");
-        public static readonly OpenPendingSubtotalMethod2 Creditcard = new OpenPendingSubtotalMethod2("creditcard");
-        public static readonly OpenPendingSubtotalMethod2 Directdebit = new OpenPendingSubtotalMethod2("directdebit");
-        public static readonly OpenPendingSubtotalMethod2 Eps = new OpenPendingSubtotalMethod2("eps");
-        public static readonly OpenPendingSubtotalMethod2 Giftcard = new OpenPendingSubtotalMethod2("giftcard");
-        public static readonly OpenPendingSubtotalMethod2 Giropay = new OpenPendingSubtotalMethod2("giropay");
-        public static readonly OpenPendingSubtotalMethod2 Googlepay = new OpenPendingSubtotalMethod2("googlepay");
-        public static readonly OpenPendingSubtotalMethod2 Ideal = new OpenPendingSubtotalMethod2("ideal");
-        public static readonly OpenPendingSubtotalMethod2 In3 = new OpenPendingSubtotalMethod2("in3");
-        public static readonly OpenPendingSubtotalMethod2 Inghomepay = new OpenPendingSubtotalMethod2("inghomepay");
-        public static readonly OpenPendingSubtotalMethod2 Kbc = new OpenPendingSubtotalMethod2("kbc");
-        public static readonly OpenPendingSubtotalMethod2 Klarnapaylater = new OpenPendingSubtotalMethod2("klarnapaylater");
-        public static readonly OpenPendingSubtotalMethod2 Klarnapaynow = new OpenPendingSubtotalMethod2("klarnapaynow");
-        public static readonly OpenPendingSubtotalMethod2 Klarnasliceit = new OpenPendingSubtotalMethod2("klarnasliceit");
-        public static readonly OpenPendingSubtotalMethod2 Klarna = new OpenPendingSubtotalMethod2("klarna");
-        public static readonly OpenPendingSubtotalMethod2 Mbway = new OpenPendingSubtotalMethod2("mbway");
-        public static readonly OpenPendingSubtotalMethod2 Multibanco = new OpenPendingSubtotalMethod2("multibanco");
-        public static readonly OpenPendingSubtotalMethod2 Mybank = new OpenPendingSubtotalMethod2("mybank");
-        public static readonly OpenPendingSubtotalMethod2 Paybybank = new OpenPendingSubtotalMethod2("paybybank");
-        public static readonly OpenPendingSubtotalMethod2 Payconiq = new OpenPendingSubtotalMethod2("payconiq");
-        public static readonly OpenPendingSubtotalMethod2 Paypal = new OpenPendingSubtotalMethod2("paypal");
-        public static readonly OpenPendingSubtotalMethod2 Paysafecard = new OpenPendingSubtotalMethod2("paysafecard");
-        public static readonly OpenPendingSubtotalMethod2 Przelewy24 = new OpenPendingSubtotalMethod2("przelewy24");
-        public static readonly OpenPendingSubtotalMethod2 Riverty = new OpenPendingSubtotalMethod2("riverty");
-        public static readonly OpenPendingSubtotalMethod2 Satispay = new OpenPendingSubtotalMethod2("satispay");
-        public static readonly OpenPendingSubtotalMethod2 Podiumcadeaukaart = new OpenPendingSubtotalMethod2("podiumcadeaukaart");
-        public static readonly OpenPendingSubtotalMethod2 Pointofsale = new OpenPendingSubtotalMethod2("pointofsale");
-        public static readonly OpenPendingSubtotalMethod2 Sofort = new OpenPendingSubtotalMethod2("sofort");
-        public static readonly OpenPendingSubtotalMethod2 Swish = new OpenPendingSubtotalMethod2("swish");
-        public static readonly OpenPendingSubtotalMethod2 Trustly = new OpenPendingSubtotalMethod2("trustly");
-        public static readonly OpenPendingSubtotalMethod2 Twint = new OpenPendingSubtotalMethod2("twint");
-        public static readonly OpenPendingSubtotalMethod2 Voucher = new OpenPendingSubtotalMethod2("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("bitcoin")]
+        Bitcoin,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("giropay")]
+        Giropay,
+        [JsonProperty("googlepay")]
+        Googlepay,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("inghomepay")]
+        Inghomepay,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("podiumcadeaukaart")]
+        Podiumcadeaukaart,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("sofort")]
+        Sofort,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, OpenPendingSubtotalMethod2> _knownValues =
-            new Dictionary <string, OpenPendingSubtotalMethod2> ()
+    public static class OpenPendingSubtotalMethod2Extension
+    {
+        public static string Value(this OpenPendingSubtotalMethod2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static OpenPendingSubtotalMethod2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(OpenPendingSubtotalMethod2).GetFields())
             {
-                ["alma"] = Alma,
-                ["bacs"] = Bacs,
-                ["applepay"] = Applepay,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["bitcoin"] = Bitcoin,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["giropay"] = Giropay,
-                ["googlepay"] = Googlepay,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["inghomepay"] = Inghomepay,
-                ["kbc"] = Kbc,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["klarna"] = Klarna,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["podiumcadeaukaart"] = Podiumcadeaukaart,
-                ["pointofsale"] = Pointofsale,
-                ["sofort"] = Sofort,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, OpenPendingSubtotalMethod2> _values =
-            new ConcurrentDictionary<string, OpenPendingSubtotalMethod2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private OpenPendingSubtotalMethod2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is OpenPendingSubtotalMethod2)
+                    {
+                        return (OpenPendingSubtotalMethod2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum OpenPendingSubtotalMethod2");
         }
-
-        public string Value { get; }
-
-        public static OpenPendingSubtotalMethod2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new OpenPendingSubtotalMethod2(value));
-        }
-
-        public static implicit operator OpenPendingSubtotalMethod2(string value) => Of(value);
-        public static implicit operator string(OpenPendingSubtotalMethod2 openpendingsubtotalmethod2) => openpendingsubtotalmethod2.Value;
-
-        public static OpenPendingSubtotalMethod2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as OpenPendingSubtotalMethod2);
-
-        public bool Equals(OpenPendingSubtotalMethod2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

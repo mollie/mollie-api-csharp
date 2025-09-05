@@ -12,81 +12,63 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The method used to verify the cardholder&apos;s identity.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListPaymentsCardVerificationMethod : IEquatable<ListPaymentsCardVerificationMethod>
+    public enum ListPaymentsCardVerificationMethod
     {
-        public static readonly ListPaymentsCardVerificationMethod NoCvmRequired = new ListPaymentsCardVerificationMethod("no-cvm-required");
-        public static readonly ListPaymentsCardVerificationMethod OnlinePin = new ListPaymentsCardVerificationMethod("online-pin");
-        public static readonly ListPaymentsCardVerificationMethod OfflinePin = new ListPaymentsCardVerificationMethod("offline-pin");
-        public static readonly ListPaymentsCardVerificationMethod ConsumerDevice = new ListPaymentsCardVerificationMethod("consumer-device");
-        public static readonly ListPaymentsCardVerificationMethod Signature = new ListPaymentsCardVerificationMethod("signature");
-        public static readonly ListPaymentsCardVerificationMethod SignatureAndOnlinePin = new ListPaymentsCardVerificationMethod("signature-and-online-pin");
-        public static readonly ListPaymentsCardVerificationMethod OnlinePinAndSignature = new ListPaymentsCardVerificationMethod("online-pin-and-signature");
-        public static readonly ListPaymentsCardVerificationMethod None = new ListPaymentsCardVerificationMethod("none");
-        public static readonly ListPaymentsCardVerificationMethod Failed = new ListPaymentsCardVerificationMethod("failed");
+        [JsonProperty("no-cvm-required")]
+        NoCvmRequired,
+        [JsonProperty("online-pin")]
+        OnlinePin,
+        [JsonProperty("offline-pin")]
+        OfflinePin,
+        [JsonProperty("consumer-device")]
+        ConsumerDevice,
+        [JsonProperty("signature")]
+        Signature,
+        [JsonProperty("signature-and-online-pin")]
+        SignatureAndOnlinePin,
+        [JsonProperty("online-pin-and-signature")]
+        OnlinePinAndSignature,
+        [JsonProperty("none")]
+        None,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, ListPaymentsCardVerificationMethod> _knownValues =
-            new Dictionary <string, ListPaymentsCardVerificationMethod> ()
+    public static class ListPaymentsCardVerificationMethodExtension
+    {
+        public static string Value(this ListPaymentsCardVerificationMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListPaymentsCardVerificationMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListPaymentsCardVerificationMethod).GetFields())
             {
-                ["no-cvm-required"] = NoCvmRequired,
-                ["online-pin"] = OnlinePin,
-                ["offline-pin"] = OfflinePin,
-                ["consumer-device"] = ConsumerDevice,
-                ["signature"] = Signature,
-                ["signature-and-online-pin"] = SignatureAndOnlinePin,
-                ["online-pin-and-signature"] = OnlinePinAndSignature,
-                ["none"] = None,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListPaymentsCardVerificationMethod> _values =
-            new ConcurrentDictionary<string, ListPaymentsCardVerificationMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListPaymentsCardVerificationMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListPaymentsCardVerificationMethod)
+                    {
+                        return (ListPaymentsCardVerificationMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListPaymentsCardVerificationMethod");
         }
-
-        public string Value { get; }
-
-        public static ListPaymentsCardVerificationMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListPaymentsCardVerificationMethod(value));
-        }
-
-        public static implicit operator ListPaymentsCardVerificationMethod(string value) => Of(value);
-        public static implicit operator string(ListPaymentsCardVerificationMethod listpaymentscardverificationmethod) => listpaymentscardverificationmethod.Value;
-
-        public static ListPaymentsCardVerificationMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListPaymentsCardVerificationMethod);
-
-        public bool Equals(ListPaymentsCardVerificationMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

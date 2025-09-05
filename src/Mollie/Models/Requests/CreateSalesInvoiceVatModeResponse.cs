@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -23,60 +20,45 @@ namespace Mollie.Models.Requests
     /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateSalesInvoiceVatModeResponse : IEquatable<CreateSalesInvoiceVatModeResponse>
+    public enum CreateSalesInvoiceVatModeResponse
     {
-        public static readonly CreateSalesInvoiceVatModeResponse Exclusive = new CreateSalesInvoiceVatModeResponse("exclusive");
-        public static readonly CreateSalesInvoiceVatModeResponse Inclusive = new CreateSalesInvoiceVatModeResponse("inclusive");
+        [JsonProperty("exclusive")]
+        Exclusive,
+        [JsonProperty("inclusive")]
+        Inclusive,
+    }
 
-        private static readonly Dictionary <string, CreateSalesInvoiceVatModeResponse> _knownValues =
-            new Dictionary <string, CreateSalesInvoiceVatModeResponse> ()
+    public static class CreateSalesInvoiceVatModeResponseExtension
+    {
+        public static string Value(this CreateSalesInvoiceVatModeResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateSalesInvoiceVatModeResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateSalesInvoiceVatModeResponse).GetFields())
             {
-                ["exclusive"] = Exclusive,
-                ["inclusive"] = Inclusive
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceVatModeResponse> _values =
-            new ConcurrentDictionary<string, CreateSalesInvoiceVatModeResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateSalesInvoiceVatModeResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateSalesInvoiceVatModeResponse)
+                    {
+                        return (CreateSalesInvoiceVatModeResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceVatModeResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateSalesInvoiceVatModeResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceVatModeResponse(value));
-        }
-
-        public static implicit operator CreateSalesInvoiceVatModeResponse(string value) => Of(value);
-        public static implicit operator string(CreateSalesInvoiceVatModeResponse createsalesinvoicevatmoderesponse) => createsalesinvoicevatmoderesponse.Value;
-
-        public static CreateSalesInvoiceVatModeResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceVatModeResponse);
-
-        public bool Equals(CreateSalesInvoiceVatModeResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

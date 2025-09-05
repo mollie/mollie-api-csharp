@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
@@ -24,72 +21,57 @@ namespace Mollie.Models.Requests
     /// The `tip` payment line type is not available when creating a payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CancelPaymentLineType : IEquatable<CancelPaymentLineType>
+    public enum CancelPaymentLineType
     {
-        public static readonly CancelPaymentLineType Physical = new CancelPaymentLineType("physical");
-        public static readonly CancelPaymentLineType Digital = new CancelPaymentLineType("digital");
-        public static readonly CancelPaymentLineType ShippingFee = new CancelPaymentLineType("shipping_fee");
-        public static readonly CancelPaymentLineType Discount = new CancelPaymentLineType("discount");
-        public static readonly CancelPaymentLineType StoreCredit = new CancelPaymentLineType("store_credit");
-        public static readonly CancelPaymentLineType GiftCard = new CancelPaymentLineType("gift_card");
-        public static readonly CancelPaymentLineType Surcharge = new CancelPaymentLineType("surcharge");
-        public static readonly CancelPaymentLineType Tip = new CancelPaymentLineType("tip");
+        [JsonProperty("physical")]
+        Physical,
+        [JsonProperty("digital")]
+        Digital,
+        [JsonProperty("shipping_fee")]
+        ShippingFee,
+        [JsonProperty("discount")]
+        Discount,
+        [JsonProperty("store_credit")]
+        StoreCredit,
+        [JsonProperty("gift_card")]
+        GiftCard,
+        [JsonProperty("surcharge")]
+        Surcharge,
+        [JsonProperty("tip")]
+        Tip,
+    }
 
-        private static readonly Dictionary <string, CancelPaymentLineType> _knownValues =
-            new Dictionary <string, CancelPaymentLineType> ()
+    public static class CancelPaymentLineTypeExtension
+    {
+        public static string Value(this CancelPaymentLineType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CancelPaymentLineType ToEnum(this string value)
+        {
+            foreach(var field in typeof(CancelPaymentLineType).GetFields())
             {
-                ["physical"] = Physical,
-                ["digital"] = Digital,
-                ["shipping_fee"] = ShippingFee,
-                ["discount"] = Discount,
-                ["store_credit"] = StoreCredit,
-                ["gift_card"] = GiftCard,
-                ["surcharge"] = Surcharge,
-                ["tip"] = Tip
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CancelPaymentLineType> _values =
-            new ConcurrentDictionary<string, CancelPaymentLineType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CancelPaymentLineType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CancelPaymentLineType)
+                    {
+                        return (CancelPaymentLineType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CancelPaymentLineType");
         }
-
-        public string Value { get; }
-
-        public static CancelPaymentLineType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CancelPaymentLineType(value));
-        }
-
-        public static implicit operator CancelPaymentLineType(string value) => Of(value);
-        public static implicit operator string(CancelPaymentLineType cancelpaymentlinetype) => cancelpaymentlinetype.Value;
-
-        public static CancelPaymentLineType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CancelPaymentLineType);
-
-        public bool Equals(CancelPaymentLineType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

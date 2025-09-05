@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class TopupsMovedToAvailableSubTotalCardIssuer1 : IEquatable<TopupsMovedToAvailableSubTotalCardIssuer1>
+    public enum TopupsMovedToAvailableSubTotalCardIssuer1
     {
-        public static readonly TopupsMovedToAvailableSubTotalCardIssuer1 Amex = new TopupsMovedToAvailableSubTotalCardIssuer1("amex");
-        public static readonly TopupsMovedToAvailableSubTotalCardIssuer1 Maestro = new TopupsMovedToAvailableSubTotalCardIssuer1("maestro");
-        public static readonly TopupsMovedToAvailableSubTotalCardIssuer1 CarteBancaire = new TopupsMovedToAvailableSubTotalCardIssuer1("carte-bancaire");
-        public static readonly TopupsMovedToAvailableSubTotalCardIssuer1 Other = new TopupsMovedToAvailableSubTotalCardIssuer1("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, TopupsMovedToAvailableSubTotalCardIssuer1> _knownValues =
-            new Dictionary <string, TopupsMovedToAvailableSubTotalCardIssuer1> ()
+    public static class TopupsMovedToAvailableSubTotalCardIssuer1Extension
+    {
+        public static string Value(this TopupsMovedToAvailableSubTotalCardIssuer1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static TopupsMovedToAvailableSubTotalCardIssuer1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(TopupsMovedToAvailableSubTotalCardIssuer1).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, TopupsMovedToAvailableSubTotalCardIssuer1> _values =
-            new ConcurrentDictionary<string, TopupsMovedToAvailableSubTotalCardIssuer1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private TopupsMovedToAvailableSubTotalCardIssuer1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is TopupsMovedToAvailableSubTotalCardIssuer1)
+                    {
+                        return (TopupsMovedToAvailableSubTotalCardIssuer1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum TopupsMovedToAvailableSubTotalCardIssuer1");
         }
-
-        public string Value { get; }
-
-        public static TopupsMovedToAvailableSubTotalCardIssuer1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new TopupsMovedToAvailableSubTotalCardIssuer1(value));
-        }
-
-        public static implicit operator TopupsMovedToAvailableSubTotalCardIssuer1(string value) => Of(value);
-        public static implicit operator string(TopupsMovedToAvailableSubTotalCardIssuer1 topupsmovedtoavailablesubtotalcardissuer1) => topupsmovedtoavailablesubtotalcardissuer1.Value;
-
-        public static TopupsMovedToAvailableSubTotalCardIssuer1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as TopupsMovedToAvailableSubTotalCardIssuer1);
-
-        public bool Equals(TopupsMovedToAvailableSubTotalCardIssuer1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

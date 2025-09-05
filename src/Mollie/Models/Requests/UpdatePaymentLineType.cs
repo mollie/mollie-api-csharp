@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
@@ -24,72 +21,57 @@ namespace Mollie.Models.Requests
     /// The `tip` payment line type is not available when creating a payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdatePaymentLineType : IEquatable<UpdatePaymentLineType>
+    public enum UpdatePaymentLineType
     {
-        public static readonly UpdatePaymentLineType Physical = new UpdatePaymentLineType("physical");
-        public static readonly UpdatePaymentLineType Digital = new UpdatePaymentLineType("digital");
-        public static readonly UpdatePaymentLineType ShippingFee = new UpdatePaymentLineType("shipping_fee");
-        public static readonly UpdatePaymentLineType Discount = new UpdatePaymentLineType("discount");
-        public static readonly UpdatePaymentLineType StoreCredit = new UpdatePaymentLineType("store_credit");
-        public static readonly UpdatePaymentLineType GiftCard = new UpdatePaymentLineType("gift_card");
-        public static readonly UpdatePaymentLineType Surcharge = new UpdatePaymentLineType("surcharge");
-        public static readonly UpdatePaymentLineType Tip = new UpdatePaymentLineType("tip");
+        [JsonProperty("physical")]
+        Physical,
+        [JsonProperty("digital")]
+        Digital,
+        [JsonProperty("shipping_fee")]
+        ShippingFee,
+        [JsonProperty("discount")]
+        Discount,
+        [JsonProperty("store_credit")]
+        StoreCredit,
+        [JsonProperty("gift_card")]
+        GiftCard,
+        [JsonProperty("surcharge")]
+        Surcharge,
+        [JsonProperty("tip")]
+        Tip,
+    }
 
-        private static readonly Dictionary <string, UpdatePaymentLineType> _knownValues =
-            new Dictionary <string, UpdatePaymentLineType> ()
+    public static class UpdatePaymentLineTypeExtension
+    {
+        public static string Value(this UpdatePaymentLineType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdatePaymentLineType ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdatePaymentLineType).GetFields())
             {
-                ["physical"] = Physical,
-                ["digital"] = Digital,
-                ["shipping_fee"] = ShippingFee,
-                ["discount"] = Discount,
-                ["store_credit"] = StoreCredit,
-                ["gift_card"] = GiftCard,
-                ["surcharge"] = Surcharge,
-                ["tip"] = Tip
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdatePaymentLineType> _values =
-            new ConcurrentDictionary<string, UpdatePaymentLineType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdatePaymentLineType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdatePaymentLineType)
+                    {
+                        return (UpdatePaymentLineType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdatePaymentLineType");
         }
-
-        public string Value { get; }
-
-        public static UpdatePaymentLineType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdatePaymentLineType(value));
-        }
-
-        public static implicit operator UpdatePaymentLineType(string value) => Of(value);
-        public static implicit operator string(UpdatePaymentLineType updatepaymentlinetype) => updatepaymentlinetype.Value;
-
-        public static UpdatePaymentLineType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentLineType);
-
-        public bool Equals(UpdatePaymentLineType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

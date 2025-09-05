@@ -12,75 +12,57 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListTerminalsModel : IEquatable<ListTerminalsModel>
+    public enum ListTerminalsModel
     {
-        public static readonly ListTerminalsModel A35 = new ListTerminalsModel("A35");
-        public static readonly ListTerminalsModel A77 = new ListTerminalsModel("A77");
-        public static readonly ListTerminalsModel A920 = new ListTerminalsModel("A920");
-        public static readonly ListTerminalsModel A920Pro = new ListTerminalsModel("A920Pro");
-        public static readonly ListTerminalsModel Im30 = new ListTerminalsModel("IM30");
-        public static readonly ListTerminalsModel Tap = new ListTerminalsModel("Tap");
+        [JsonProperty("A35")]
+        A35,
+        [JsonProperty("A77")]
+        A77,
+        [JsonProperty("A920")]
+        A920,
+        [JsonProperty("A920Pro")]
+        A920Pro,
+        [JsonProperty("IM30")]
+        Im30,
+        [JsonProperty("Tap")]
+        Tap,
+    }
 
-        private static readonly Dictionary <string, ListTerminalsModel> _knownValues =
-            new Dictionary <string, ListTerminalsModel> ()
+    public static class ListTerminalsModelExtension
+    {
+        public static string Value(this ListTerminalsModel value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListTerminalsModel ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListTerminalsModel).GetFields())
             {
-                ["A35"] = A35,
-                ["A77"] = A77,
-                ["A920"] = A920,
-                ["A920Pro"] = A920Pro,
-                ["IM30"] = Im30,
-                ["Tap"] = Tap
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListTerminalsModel> _values =
-            new ConcurrentDictionary<string, ListTerminalsModel>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListTerminalsModel(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListTerminalsModel)
+                    {
+                        return (ListTerminalsModel)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListTerminalsModel");
         }
-
-        public string Value { get; }
-
-        public static ListTerminalsModel Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListTerminalsModel(value));
-        }
-
-        public static implicit operator ListTerminalsModel(string value) => Of(value);
-        public static implicit operator string(ListTerminalsModel listterminalsmodel) => listterminalsmodel.Value;
-
-        public static ListTerminalsModel[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListTerminalsModel);
-
-        public bool Equals(ListTerminalsModel? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

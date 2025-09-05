@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by<br/>
@@ -30,60 +27,45 @@ namespace Mollie.Models.Requests
     /// of the report.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GroupingResponse : IEquatable<GroupingResponse>
+    public enum GroupingResponse
     {
-        public static readonly GroupingResponse StatusBalances = new GroupingResponse("status-balances");
-        public static readonly GroupingResponse TransactionCategories = new GroupingResponse("transaction-categories");
+        [JsonProperty("status-balances")]
+        StatusBalances,
+        [JsonProperty("transaction-categories")]
+        TransactionCategories,
+    }
 
-        private static readonly Dictionary <string, GroupingResponse> _knownValues =
-            new Dictionary <string, GroupingResponse> ()
+    public static class GroupingResponseExtension
+    {
+        public static string Value(this GroupingResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GroupingResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(GroupingResponse).GetFields())
             {
-                ["status-balances"] = StatusBalances,
-                ["transaction-categories"] = TransactionCategories
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GroupingResponse> _values =
-            new ConcurrentDictionary<string, GroupingResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GroupingResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GroupingResponse)
+                    {
+                        return (GroupingResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GroupingResponse");
         }
-
-        public string Value { get; }
-
-        public static GroupingResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GroupingResponse(value));
-        }
-
-        public static implicit operator GroupingResponse(string value) => Of(value);
-        public static implicit operator string(GroupingResponse groupingresponse) => groupingresponse.Value;
-
-        public static GroupingResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GroupingResponse);
-
-        public bool Equals(GroupingResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

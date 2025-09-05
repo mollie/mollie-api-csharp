@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class TopupsPendingSubTotalCardIssuer1 : IEquatable<TopupsPendingSubTotalCardIssuer1>
+    public enum TopupsPendingSubTotalCardIssuer1
     {
-        public static readonly TopupsPendingSubTotalCardIssuer1 Amex = new TopupsPendingSubTotalCardIssuer1("amex");
-        public static readonly TopupsPendingSubTotalCardIssuer1 Maestro = new TopupsPendingSubTotalCardIssuer1("maestro");
-        public static readonly TopupsPendingSubTotalCardIssuer1 CarteBancaire = new TopupsPendingSubTotalCardIssuer1("carte-bancaire");
-        public static readonly TopupsPendingSubTotalCardIssuer1 Other = new TopupsPendingSubTotalCardIssuer1("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, TopupsPendingSubTotalCardIssuer1> _knownValues =
-            new Dictionary <string, TopupsPendingSubTotalCardIssuer1> ()
+    public static class TopupsPendingSubTotalCardIssuer1Extension
+    {
+        public static string Value(this TopupsPendingSubTotalCardIssuer1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static TopupsPendingSubTotalCardIssuer1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(TopupsPendingSubTotalCardIssuer1).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, TopupsPendingSubTotalCardIssuer1> _values =
-            new ConcurrentDictionary<string, TopupsPendingSubTotalCardIssuer1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private TopupsPendingSubTotalCardIssuer1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is TopupsPendingSubTotalCardIssuer1)
+                    {
+                        return (TopupsPendingSubTotalCardIssuer1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum TopupsPendingSubTotalCardIssuer1");
         }
-
-        public string Value { get; }
-
-        public static TopupsPendingSubTotalCardIssuer1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new TopupsPendingSubTotalCardIssuer1(value));
-        }
-
-        public static implicit operator TopupsPendingSubTotalCardIssuer1(string value) => Of(value);
-        public static implicit operator string(TopupsPendingSubTotalCardIssuer1 topupspendingsubtotalcardissuer1) => topupspendingsubtotalcardissuer1.Value;
-
-        public static TopupsPendingSubTotalCardIssuer1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as TopupsPendingSubTotalCardIssuer1);
-
-        public bool Equals(TopupsPendingSubTotalCardIssuer1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

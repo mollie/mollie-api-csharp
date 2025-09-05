@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
@@ -23,70 +20,55 @@ namespace Mollie.Models.Requests
     /// statuses occur at what point.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListPaymentsStatusEnum : IEquatable<ListPaymentsStatusEnum>
+    public enum ListPaymentsStatusEnum
     {
-        public static readonly ListPaymentsStatusEnum Open = new ListPaymentsStatusEnum("open");
-        public static readonly ListPaymentsStatusEnum Pending = new ListPaymentsStatusEnum("pending");
-        public static readonly ListPaymentsStatusEnum Authorized = new ListPaymentsStatusEnum("authorized");
-        public static readonly ListPaymentsStatusEnum Paid = new ListPaymentsStatusEnum("paid");
-        public static readonly ListPaymentsStatusEnum Canceled = new ListPaymentsStatusEnum("canceled");
-        public static readonly ListPaymentsStatusEnum Expired = new ListPaymentsStatusEnum("expired");
-        public static readonly ListPaymentsStatusEnum Failed = new ListPaymentsStatusEnum("failed");
+        [JsonProperty("open")]
+        Open,
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("authorized")]
+        Authorized,
+        [JsonProperty("paid")]
+        Paid,
+        [JsonProperty("canceled")]
+        Canceled,
+        [JsonProperty("expired")]
+        Expired,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, ListPaymentsStatusEnum> _knownValues =
-            new Dictionary <string, ListPaymentsStatusEnum> ()
+    public static class ListPaymentsStatusEnumExtension
+    {
+        public static string Value(this ListPaymentsStatusEnum value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListPaymentsStatusEnum ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListPaymentsStatusEnum).GetFields())
             {
-                ["open"] = Open,
-                ["pending"] = Pending,
-                ["authorized"] = Authorized,
-                ["paid"] = Paid,
-                ["canceled"] = Canceled,
-                ["expired"] = Expired,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListPaymentsStatusEnum> _values =
-            new ConcurrentDictionary<string, ListPaymentsStatusEnum>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListPaymentsStatusEnum(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListPaymentsStatusEnum)
+                    {
+                        return (ListPaymentsStatusEnum)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListPaymentsStatusEnum");
         }
-
-        public string Value { get; }
-
-        public static ListPaymentsStatusEnum Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListPaymentsStatusEnum(value));
-        }
-
-        public static implicit operator ListPaymentsStatusEnum(string value) => Of(value);
-        public static implicit operator string(ListPaymentsStatusEnum listpaymentsstatusenum) => listpaymentsstatusenum.Value;
-
-        public static ListPaymentsStatusEnum[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListPaymentsStatusEnum);
-
-        public bool Equals(ListPaymentsStatusEnum? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
@@ -25,72 +22,57 @@ namespace Mollie.Models.Requests
     /// Settlements created during weekends or on bank holidays will take place on the next business day.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetBalanceTransferFrequency : IEquatable<GetBalanceTransferFrequency>
+    public enum GetBalanceTransferFrequency
     {
-        public static readonly GetBalanceTransferFrequency Daily = new GetBalanceTransferFrequency("daily");
-        public static readonly GetBalanceTransferFrequency EveryMonday = new GetBalanceTransferFrequency("every-monday");
-        public static readonly GetBalanceTransferFrequency EveryTuesday = new GetBalanceTransferFrequency("every-tuesday");
-        public static readonly GetBalanceTransferFrequency EveryWednesday = new GetBalanceTransferFrequency("every-wednesday");
-        public static readonly GetBalanceTransferFrequency EveryThursday = new GetBalanceTransferFrequency("every-thursday");
-        public static readonly GetBalanceTransferFrequency EveryFriday = new GetBalanceTransferFrequency("every-friday");
-        public static readonly GetBalanceTransferFrequency Monthly = new GetBalanceTransferFrequency("monthly");
-        public static readonly GetBalanceTransferFrequency Never = new GetBalanceTransferFrequency("never");
+        [JsonProperty("daily")]
+        Daily,
+        [JsonProperty("every-monday")]
+        EveryMonday,
+        [JsonProperty("every-tuesday")]
+        EveryTuesday,
+        [JsonProperty("every-wednesday")]
+        EveryWednesday,
+        [JsonProperty("every-thursday")]
+        EveryThursday,
+        [JsonProperty("every-friday")]
+        EveryFriday,
+        [JsonProperty("monthly")]
+        Monthly,
+        [JsonProperty("never")]
+        Never,
+    }
 
-        private static readonly Dictionary <string, GetBalanceTransferFrequency> _knownValues =
-            new Dictionary <string, GetBalanceTransferFrequency> ()
+    public static class GetBalanceTransferFrequencyExtension
+    {
+        public static string Value(this GetBalanceTransferFrequency value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetBalanceTransferFrequency ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetBalanceTransferFrequency).GetFields())
             {
-                ["daily"] = Daily,
-                ["every-monday"] = EveryMonday,
-                ["every-tuesday"] = EveryTuesday,
-                ["every-wednesday"] = EveryWednesday,
-                ["every-thursday"] = EveryThursday,
-                ["every-friday"] = EveryFriday,
-                ["monthly"] = Monthly,
-                ["never"] = Never
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetBalanceTransferFrequency> _values =
-            new ConcurrentDictionary<string, GetBalanceTransferFrequency>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetBalanceTransferFrequency(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetBalanceTransferFrequency)
+                    {
+                        return (GetBalanceTransferFrequency)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetBalanceTransferFrequency");
         }
-
-        public string Value { get; }
-
-        public static GetBalanceTransferFrequency Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetBalanceTransferFrequency(value));
-        }
-
-        public static implicit operator GetBalanceTransferFrequency(string value) => Of(value);
-        public static implicit operator string(GetBalanceTransferFrequency getbalancetransferfrequency) => getbalancetransferfrequency.Value;
-
-        public static GetBalanceTransferFrequency[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetBalanceTransferFrequency);
-
-        public bool Equals(GetBalanceTransferFrequency? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

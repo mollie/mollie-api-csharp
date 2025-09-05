@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments trnsactions with card, the card audience will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CorrectionsImmediatelyAvailableSubtotalCardAudience2 : IEquatable<CorrectionsImmediatelyAvailableSubtotalCardAudience2>
+    public enum CorrectionsImmediatelyAvailableSubtotalCardAudience2
     {
-        public static readonly CorrectionsImmediatelyAvailableSubtotalCardAudience2 Corporate = new CorrectionsImmediatelyAvailableSubtotalCardAudience2("corporate");
-        public static readonly CorrectionsImmediatelyAvailableSubtotalCardAudience2 Other = new CorrectionsImmediatelyAvailableSubtotalCardAudience2("other");
+        [JsonProperty("corporate")]
+        Corporate,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, CorrectionsImmediatelyAvailableSubtotalCardAudience2> _knownValues =
-            new Dictionary <string, CorrectionsImmediatelyAvailableSubtotalCardAudience2> ()
+    public static class CorrectionsImmediatelyAvailableSubtotalCardAudience2Extension
+    {
+        public static string Value(this CorrectionsImmediatelyAvailableSubtotalCardAudience2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CorrectionsImmediatelyAvailableSubtotalCardAudience2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(CorrectionsImmediatelyAvailableSubtotalCardAudience2).GetFields())
             {
-                ["corporate"] = Corporate,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CorrectionsImmediatelyAvailableSubtotalCardAudience2> _values =
-            new ConcurrentDictionary<string, CorrectionsImmediatelyAvailableSubtotalCardAudience2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CorrectionsImmediatelyAvailableSubtotalCardAudience2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CorrectionsImmediatelyAvailableSubtotalCardAudience2)
+                    {
+                        return (CorrectionsImmediatelyAvailableSubtotalCardAudience2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CorrectionsImmediatelyAvailableSubtotalCardAudience2");
         }
-
-        public string Value { get; }
-
-        public static CorrectionsImmediatelyAvailableSubtotalCardAudience2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CorrectionsImmediatelyAvailableSubtotalCardAudience2(value));
-        }
-
-        public static implicit operator CorrectionsImmediatelyAvailableSubtotalCardAudience2(string value) => Of(value);
-        public static implicit operator string(CorrectionsImmediatelyAvailableSubtotalCardAudience2 correctionsimmediatelyavailablesubtotalcardaudience2) => correctionsimmediatelyavailablesubtotalcardaudience2.Value;
-
-        public static CorrectionsImmediatelyAvailableSubtotalCardAudience2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CorrectionsImmediatelyAvailableSubtotalCardAudience2);
-
-        public bool Equals(CorrectionsImmediatelyAvailableSubtotalCardAudience2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreatePaymentRoutingMode : IEquatable<CreatePaymentRoutingMode>
+    public enum CreatePaymentRoutingMode
     {
-        public static readonly CreatePaymentRoutingMode Live = new CreatePaymentRoutingMode("live");
-        public static readonly CreatePaymentRoutingMode Test = new CreatePaymentRoutingMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, CreatePaymentRoutingMode> _knownValues =
-            new Dictionary <string, CreatePaymentRoutingMode> ()
+    public static class CreatePaymentRoutingModeExtension
+    {
+        public static string Value(this CreatePaymentRoutingMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreatePaymentRoutingMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreatePaymentRoutingMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreatePaymentRoutingMode> _values =
-            new ConcurrentDictionary<string, CreatePaymentRoutingMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreatePaymentRoutingMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreatePaymentRoutingMode)
+                    {
+                        return (CreatePaymentRoutingMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreatePaymentRoutingMode");
         }
-
-        public string Value { get; }
-
-        public static CreatePaymentRoutingMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreatePaymentRoutingMode(value));
-        }
-
-        public static implicit operator CreatePaymentRoutingMode(string value) => Of(value);
-        public static implicit operator string(CreatePaymentRoutingMode createpaymentroutingmode) => createpaymentroutingmode.Value;
-
-        public static CreatePaymentRoutingMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreatePaymentRoutingMode);
-
-        public bool Equals(CreatePaymentRoutingMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

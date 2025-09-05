@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ChargebacksPendingSubTotalCardRegion1 : IEquatable<ChargebacksPendingSubTotalCardRegion1>
+    public enum ChargebacksPendingSubTotalCardRegion1
     {
-        public static readonly ChargebacksPendingSubTotalCardRegion1 IntraEea = new ChargebacksPendingSubTotalCardRegion1("intra-eea");
-        public static readonly ChargebacksPendingSubTotalCardRegion1 IntraEu = new ChargebacksPendingSubTotalCardRegion1("intra-eu");
-        public static readonly ChargebacksPendingSubTotalCardRegion1 Domestic = new ChargebacksPendingSubTotalCardRegion1("domestic");
-        public static readonly ChargebacksPendingSubTotalCardRegion1 Other = new ChargebacksPendingSubTotalCardRegion1("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, ChargebacksPendingSubTotalCardRegion1> _knownValues =
-            new Dictionary <string, ChargebacksPendingSubTotalCardRegion1> ()
+    public static class ChargebacksPendingSubTotalCardRegion1Extension
+    {
+        public static string Value(this ChargebacksPendingSubTotalCardRegion1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ChargebacksPendingSubTotalCardRegion1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(ChargebacksPendingSubTotalCardRegion1).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ChargebacksPendingSubTotalCardRegion1> _values =
-            new ConcurrentDictionary<string, ChargebacksPendingSubTotalCardRegion1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ChargebacksPendingSubTotalCardRegion1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ChargebacksPendingSubTotalCardRegion1)
+                    {
+                        return (ChargebacksPendingSubTotalCardRegion1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ChargebacksPendingSubTotalCardRegion1");
         }
-
-        public string Value { get; }
-
-        public static ChargebacksPendingSubTotalCardRegion1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ChargebacksPendingSubTotalCardRegion1(value));
-        }
-
-        public static implicit operator ChargebacksPendingSubTotalCardRegion1(string value) => Of(value);
-        public static implicit operator string(ChargebacksPendingSubTotalCardRegion1 chargebackspendingsubtotalcardregion1) => chargebackspendingsubtotalcardregion1.Value;
-
-        public static ChargebacksPendingSubTotalCardRegion1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ChargebacksPendingSubTotalCardRegion1);
-
-        public bool Equals(ChargebacksPendingSubTotalCardRegion1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The card&apos;s target audience, if known.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSettlementPaymentsCardAudition : IEquatable<ListSettlementPaymentsCardAudition>
+    public enum ListSettlementPaymentsCardAudition
     {
-        public static readonly ListSettlementPaymentsCardAudition Consumer = new ListSettlementPaymentsCardAudition("consumer");
-        public static readonly ListSettlementPaymentsCardAudition Business = new ListSettlementPaymentsCardAudition("business");
+        [JsonProperty("consumer")]
+        Consumer,
+        [JsonProperty("business")]
+        Business,
+    }
 
-        private static readonly Dictionary <string, ListSettlementPaymentsCardAudition> _knownValues =
-            new Dictionary <string, ListSettlementPaymentsCardAudition> ()
+    public static class ListSettlementPaymentsCardAuditionExtension
+    {
+        public static string Value(this ListSettlementPaymentsCardAudition value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSettlementPaymentsCardAudition ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSettlementPaymentsCardAudition).GetFields())
             {
-                ["consumer"] = Consumer,
-                ["business"] = Business
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsCardAudition> _values =
-            new ConcurrentDictionary<string, ListSettlementPaymentsCardAudition>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSettlementPaymentsCardAudition(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSettlementPaymentsCardAudition)
+                    {
+                        return (ListSettlementPaymentsCardAudition)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsCardAudition");
         }
-
-        public string Value { get; }
-
-        public static ListSettlementPaymentsCardAudition Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsCardAudition(value));
-        }
-
-        public static implicit operator ListSettlementPaymentsCardAudition(string value) => Of(value);
-        public static implicit operator string(ListSettlementPaymentsCardAudition listsettlementpaymentscardaudition) => listsettlementpaymentscardaudition.Value;
-
-        public static ListSettlementPaymentsCardAudition[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsCardAudition);
-
-        public bool Equals(ListSettlementPaymentsCardAudition? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

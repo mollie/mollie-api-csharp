@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the requested changes.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateProfileReviewStatus : IEquatable<CreateProfileReviewStatus>
+    public enum CreateProfileReviewStatus
     {
-        public static readonly CreateProfileReviewStatus Pending = new CreateProfileReviewStatus("pending");
-        public static readonly CreateProfileReviewStatus Rejected = new CreateProfileReviewStatus("rejected");
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("rejected")]
+        Rejected,
+    }
 
-        private static readonly Dictionary <string, CreateProfileReviewStatus> _knownValues =
-            new Dictionary <string, CreateProfileReviewStatus> ()
+    public static class CreateProfileReviewStatusExtension
+    {
+        public static string Value(this CreateProfileReviewStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateProfileReviewStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateProfileReviewStatus).GetFields())
             {
-                ["pending"] = Pending,
-                ["rejected"] = Rejected
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateProfileReviewStatus> _values =
-            new ConcurrentDictionary<string, CreateProfileReviewStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateProfileReviewStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateProfileReviewStatus)
+                    {
+                        return (CreateProfileReviewStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateProfileReviewStatus");
         }
-
-        public string Value { get; }
-
-        public static CreateProfileReviewStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateProfileReviewStatus(value));
-        }
-
-        public static implicit operator CreateProfileReviewStatus(string value) => Of(value);
-        public static implicit operator string(CreateProfileReviewStatus createprofilereviewstatus) => createprofilereviewstatus.Value;
-
-        public static CreateProfileReviewStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateProfileReviewStatus);
-
-        public bool Equals(CreateProfileReviewStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,89 +12,71 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The card&apos;s label, if known.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentCardLabel : IEquatable<GetPaymentCardLabel>
+    public enum GetPaymentCardLabel
     {
-        public static readonly GetPaymentCardLabel AmericanExpress = new GetPaymentCardLabel("American Express");
-        public static readonly GetPaymentCardLabel CartaSi = new GetPaymentCardLabel("Carta Si");
-        public static readonly GetPaymentCardLabel CarteBleue = new GetPaymentCardLabel("Carte Bleue");
-        public static readonly GetPaymentCardLabel Dankort = new GetPaymentCardLabel("Dankort");
-        public static readonly GetPaymentCardLabel DinersClub = new GetPaymentCardLabel("Diners Club");
-        public static readonly GetPaymentCardLabel Discover = new GetPaymentCardLabel("Discover");
-        public static readonly GetPaymentCardLabel Jcb = new GetPaymentCardLabel("JCB");
-        public static readonly GetPaymentCardLabel Laser = new GetPaymentCardLabel("Laser");
-        public static readonly GetPaymentCardLabel Maestro = new GetPaymentCardLabel("Maestro");
-        public static readonly GetPaymentCardLabel Mastercard = new GetPaymentCardLabel("Mastercard");
-        public static readonly GetPaymentCardLabel Unionpay = new GetPaymentCardLabel("Unionpay");
-        public static readonly GetPaymentCardLabel Visa = new GetPaymentCardLabel("Visa");
-        public static readonly GetPaymentCardLabel Vpay = new GetPaymentCardLabel("Vpay");
+        [JsonProperty("American Express")]
+        AmericanExpress,
+        [JsonProperty("Carta Si")]
+        CartaSi,
+        [JsonProperty("Carte Bleue")]
+        CarteBleue,
+        [JsonProperty("Dankort")]
+        Dankort,
+        [JsonProperty("Diners Club")]
+        DinersClub,
+        [JsonProperty("Discover")]
+        Discover,
+        [JsonProperty("JCB")]
+        Jcb,
+        [JsonProperty("Laser")]
+        Laser,
+        [JsonProperty("Maestro")]
+        Maestro,
+        [JsonProperty("Mastercard")]
+        Mastercard,
+        [JsonProperty("Unionpay")]
+        Unionpay,
+        [JsonProperty("Visa")]
+        Visa,
+        [JsonProperty("Vpay")]
+        Vpay,
+    }
 
-        private static readonly Dictionary <string, GetPaymentCardLabel> _knownValues =
-            new Dictionary <string, GetPaymentCardLabel> ()
+    public static class GetPaymentCardLabelExtension
+    {
+        public static string Value(this GetPaymentCardLabel value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentCardLabel ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentCardLabel).GetFields())
             {
-                ["American Express"] = AmericanExpress,
-                ["Carta Si"] = CartaSi,
-                ["Carte Bleue"] = CarteBleue,
-                ["Dankort"] = Dankort,
-                ["Diners Club"] = DinersClub,
-                ["Discover"] = Discover,
-                ["JCB"] = Jcb,
-                ["Laser"] = Laser,
-                ["Maestro"] = Maestro,
-                ["Mastercard"] = Mastercard,
-                ["Unionpay"] = Unionpay,
-                ["Visa"] = Visa,
-                ["Vpay"] = Vpay
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentCardLabel> _values =
-            new ConcurrentDictionary<string, GetPaymentCardLabel>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentCardLabel(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentCardLabel)
+                    {
+                        return (GetPaymentCardLabel)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentCardLabel");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentCardLabel Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentCardLabel(value));
-        }
-
-        public static implicit operator GetPaymentCardLabel(string value) => Of(value);
-        public static implicit operator string(GetPaymentCardLabel getpaymentcardlabel) => getpaymentcardlabel.Value;
-
-        public static GetPaymentCardLabel[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentCardLabel);
-
-        public bool Equals(GetPaymentCardLabel? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

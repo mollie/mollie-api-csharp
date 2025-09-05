@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListCapturesMode : IEquatable<ListCapturesMode>
+    public enum ListCapturesMode
     {
-        public static readonly ListCapturesMode Live = new ListCapturesMode("live");
-        public static readonly ListCapturesMode Test = new ListCapturesMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, ListCapturesMode> _knownValues =
-            new Dictionary <string, ListCapturesMode> ()
+    public static class ListCapturesModeExtension
+    {
+        public static string Value(this ListCapturesMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListCapturesMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListCapturesMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListCapturesMode> _values =
-            new ConcurrentDictionary<string, ListCapturesMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListCapturesMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListCapturesMode)
+                    {
+                        return (ListCapturesMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListCapturesMode");
         }
-
-        public string Value { get; }
-
-        public static ListCapturesMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListCapturesMode(value));
-        }
-
-        public static implicit operator ListCapturesMode(string value) => Of(value);
-        public static implicit operator string(ListCapturesMode listcapturesmode) => listcapturesmode.Value;
-
-        public static ListCapturesMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListCapturesMode);
-
-        public bool Equals(ListCapturesMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

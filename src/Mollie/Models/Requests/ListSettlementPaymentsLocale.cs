@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Allows you to preset the language to be used in the hosted payment pages shown to the customer. Setting a locale<br/>
@@ -29,100 +26,85 @@ namespace Mollie.Models.Requests
     /// customer use a local bank account greatly increases the conversion and speed of payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSettlementPaymentsLocale : IEquatable<ListSettlementPaymentsLocale>
+    public enum ListSettlementPaymentsLocale
     {
-        public static readonly ListSettlementPaymentsLocale EnUS = new ListSettlementPaymentsLocale("en_US");
-        public static readonly ListSettlementPaymentsLocale EnGB = new ListSettlementPaymentsLocale("en_GB");
-        public static readonly ListSettlementPaymentsLocale Nlnl = new ListSettlementPaymentsLocale("nl_NL");
-        public static readonly ListSettlementPaymentsLocale NlBE = new ListSettlementPaymentsLocale("nl_BE");
-        public static readonly ListSettlementPaymentsLocale Dede = new ListSettlementPaymentsLocale("de_DE");
-        public static readonly ListSettlementPaymentsLocale DeAT = new ListSettlementPaymentsLocale("de_AT");
-        public static readonly ListSettlementPaymentsLocale DeCH = new ListSettlementPaymentsLocale("de_CH");
-        public static readonly ListSettlementPaymentsLocale Frfr = new ListSettlementPaymentsLocale("fr_FR");
-        public static readonly ListSettlementPaymentsLocale FrBE = new ListSettlementPaymentsLocale("fr_BE");
-        public static readonly ListSettlementPaymentsLocale Eses = new ListSettlementPaymentsLocale("es_ES");
-        public static readonly ListSettlementPaymentsLocale CaES = new ListSettlementPaymentsLocale("ca_ES");
-        public static readonly ListSettlementPaymentsLocale Ptpt = new ListSettlementPaymentsLocale("pt_PT");
-        public static readonly ListSettlementPaymentsLocale Itit = new ListSettlementPaymentsLocale("it_IT");
-        public static readonly ListSettlementPaymentsLocale NbNO = new ListSettlementPaymentsLocale("nb_NO");
-        public static readonly ListSettlementPaymentsLocale SvSE = new ListSettlementPaymentsLocale("sv_SE");
-        public static readonly ListSettlementPaymentsLocale Fifi = new ListSettlementPaymentsLocale("fi_FI");
-        public static readonly ListSettlementPaymentsLocale DaDK = new ListSettlementPaymentsLocale("da_DK");
-        public static readonly ListSettlementPaymentsLocale Isis = new ListSettlementPaymentsLocale("is_IS");
-        public static readonly ListSettlementPaymentsLocale Huhu = new ListSettlementPaymentsLocale("hu_HU");
-        public static readonly ListSettlementPaymentsLocale Plpl = new ListSettlementPaymentsLocale("pl_PL");
-        public static readonly ListSettlementPaymentsLocale Lvlv = new ListSettlementPaymentsLocale("lv_LV");
-        public static readonly ListSettlementPaymentsLocale Ltlt = new ListSettlementPaymentsLocale("lt_LT");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+        [JsonProperty("es_ES")]
+        Eses,
+        [JsonProperty("ca_ES")]
+        CaES,
+        [JsonProperty("pt_PT")]
+        Ptpt,
+        [JsonProperty("it_IT")]
+        Itit,
+        [JsonProperty("nb_NO")]
+        NbNO,
+        [JsonProperty("sv_SE")]
+        SvSE,
+        [JsonProperty("fi_FI")]
+        Fifi,
+        [JsonProperty("da_DK")]
+        DaDK,
+        [JsonProperty("is_IS")]
+        Isis,
+        [JsonProperty("hu_HU")]
+        Huhu,
+        [JsonProperty("pl_PL")]
+        Plpl,
+        [JsonProperty("lv_LV")]
+        Lvlv,
+        [JsonProperty("lt_LT")]
+        Ltlt,
+    }
 
-        private static readonly Dictionary <string, ListSettlementPaymentsLocale> _knownValues =
-            new Dictionary <string, ListSettlementPaymentsLocale> ()
+    public static class ListSettlementPaymentsLocaleExtension
+    {
+        public static string Value(this ListSettlementPaymentsLocale value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSettlementPaymentsLocale ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSettlementPaymentsLocale).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
-                ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
-                ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
-                ["lt_LT"] = Ltlt
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSettlementPaymentsLocale> _values =
-            new ConcurrentDictionary<string, ListSettlementPaymentsLocale>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSettlementPaymentsLocale(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSettlementPaymentsLocale)
+                    {
+                        return (ListSettlementPaymentsLocale)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSettlementPaymentsLocale");
         }
-
-        public string Value { get; }
-
-        public static ListSettlementPaymentsLocale Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSettlementPaymentsLocale(value));
-        }
-
-        public static implicit operator ListSettlementPaymentsLocale(string value) => Of(value);
-        public static implicit operator string(ListSettlementPaymentsLocale listsettlementpaymentslocale) => listsettlementpaymentslocale.Value;
-
-        public static ListSettlementPaymentsLocale[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSettlementPaymentsLocale);
-
-        public bool Equals(ListSettlementPaymentsLocale? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

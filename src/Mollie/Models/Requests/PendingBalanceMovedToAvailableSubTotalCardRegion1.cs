@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PendingBalanceMovedToAvailableSubTotalCardRegion1 : IEquatable<PendingBalanceMovedToAvailableSubTotalCardRegion1>
+    public enum PendingBalanceMovedToAvailableSubTotalCardRegion1
     {
-        public static readonly PendingBalanceMovedToAvailableSubTotalCardRegion1 IntraEea = new PendingBalanceMovedToAvailableSubTotalCardRegion1("intra-eea");
-        public static readonly PendingBalanceMovedToAvailableSubTotalCardRegion1 IntraEu = new PendingBalanceMovedToAvailableSubTotalCardRegion1("intra-eu");
-        public static readonly PendingBalanceMovedToAvailableSubTotalCardRegion1 Domestic = new PendingBalanceMovedToAvailableSubTotalCardRegion1("domestic");
-        public static readonly PendingBalanceMovedToAvailableSubTotalCardRegion1 Other = new PendingBalanceMovedToAvailableSubTotalCardRegion1("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, PendingBalanceMovedToAvailableSubTotalCardRegion1> _knownValues =
-            new Dictionary <string, PendingBalanceMovedToAvailableSubTotalCardRegion1> ()
+    public static class PendingBalanceMovedToAvailableSubTotalCardRegion1Extension
+    {
+        public static string Value(this PendingBalanceMovedToAvailableSubTotalCardRegion1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PendingBalanceMovedToAvailableSubTotalCardRegion1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(PendingBalanceMovedToAvailableSubTotalCardRegion1).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PendingBalanceMovedToAvailableSubTotalCardRegion1> _values =
-            new ConcurrentDictionary<string, PendingBalanceMovedToAvailableSubTotalCardRegion1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PendingBalanceMovedToAvailableSubTotalCardRegion1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PendingBalanceMovedToAvailableSubTotalCardRegion1)
+                    {
+                        return (PendingBalanceMovedToAvailableSubTotalCardRegion1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PendingBalanceMovedToAvailableSubTotalCardRegion1");
         }
-
-        public string Value { get; }
-
-        public static PendingBalanceMovedToAvailableSubTotalCardRegion1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PendingBalanceMovedToAvailableSubTotalCardRegion1(value));
-        }
-
-        public static implicit operator PendingBalanceMovedToAvailableSubTotalCardRegion1(string value) => Of(value);
-        public static implicit operator string(PendingBalanceMovedToAvailableSubTotalCardRegion1 pendingbalancemovedtoavailablesubtotalcardregion1) => pendingbalancemovedtoavailablesubtotalcardregion1.Value;
-
-        public static PendingBalanceMovedToAvailableSubTotalCardRegion1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PendingBalanceMovedToAvailableSubTotalCardRegion1);
-
-        public bool Equals(PendingBalanceMovedToAvailableSubTotalCardRegion1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the balance.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetBalanceStatus : IEquatable<GetBalanceStatus>
+    public enum GetBalanceStatus
     {
-        public static readonly GetBalanceStatus Active = new GetBalanceStatus("active");
-        public static readonly GetBalanceStatus Inactive = new GetBalanceStatus("inactive");
+        [JsonProperty("active")]
+        Active,
+        [JsonProperty("inactive")]
+        Inactive,
+    }
 
-        private static readonly Dictionary <string, GetBalanceStatus> _knownValues =
-            new Dictionary <string, GetBalanceStatus> ()
+    public static class GetBalanceStatusExtension
+    {
+        public static string Value(this GetBalanceStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetBalanceStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetBalanceStatus).GetFields())
             {
-                ["active"] = Active,
-                ["inactive"] = Inactive
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetBalanceStatus> _values =
-            new ConcurrentDictionary<string, GetBalanceStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetBalanceStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetBalanceStatus)
+                    {
+                        return (GetBalanceStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetBalanceStatus");
         }
-
-        public string Value { get; }
-
-        public static GetBalanceStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetBalanceStatus(value));
-        }
-
-        public static implicit operator GetBalanceStatus(string value) => Of(value);
-        public static implicit operator string(GetBalanceStatus getbalancestatus) => getbalancestatus.Value;
-
-        public static GetBalanceStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetBalanceStatus);
-
-        public bool Equals(GetBalanceStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

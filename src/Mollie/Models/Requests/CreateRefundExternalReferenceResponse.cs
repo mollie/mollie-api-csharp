@@ -12,10 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     public class CreateRefundExternalReferenceResponse
     {
@@ -24,7 +20,7 @@ namespace Mollie.Models.Requests
         /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public CreateRefundExternalReferenceType? Type { get; set; }
+        public CreateRefundTypeResponse? Type { get; set; }
 
         /// <summary>
         /// Unique reference from the payment provider

@@ -12,147 +12,129 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class AvailableBalanceCloseSubTotalMethod1 : IEquatable<AvailableBalanceCloseSubTotalMethod1>
+    public enum AvailableBalanceCloseSubTotalMethod1
     {
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Alma = new AvailableBalanceCloseSubTotalMethod1("alma");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Bacs = new AvailableBalanceCloseSubTotalMethod1("bacs");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Applepay = new AvailableBalanceCloseSubTotalMethod1("applepay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Bancomatpay = new AvailableBalanceCloseSubTotalMethod1("bancomatpay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Bancontact = new AvailableBalanceCloseSubTotalMethod1("bancontact");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Banktransfer = new AvailableBalanceCloseSubTotalMethod1("banktransfer");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Belfius = new AvailableBalanceCloseSubTotalMethod1("belfius");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Billie = new AvailableBalanceCloseSubTotalMethod1("billie");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Bizum = new AvailableBalanceCloseSubTotalMethod1("bizum");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Bitcoin = new AvailableBalanceCloseSubTotalMethod1("bitcoin");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Blik = new AvailableBalanceCloseSubTotalMethod1("blik");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Creditcard = new AvailableBalanceCloseSubTotalMethod1("creditcard");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Directdebit = new AvailableBalanceCloseSubTotalMethod1("directdebit");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Eps = new AvailableBalanceCloseSubTotalMethod1("eps");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Giftcard = new AvailableBalanceCloseSubTotalMethod1("giftcard");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Giropay = new AvailableBalanceCloseSubTotalMethod1("giropay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Googlepay = new AvailableBalanceCloseSubTotalMethod1("googlepay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Ideal = new AvailableBalanceCloseSubTotalMethod1("ideal");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 In3 = new AvailableBalanceCloseSubTotalMethod1("in3");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Inghomepay = new AvailableBalanceCloseSubTotalMethod1("inghomepay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Kbc = new AvailableBalanceCloseSubTotalMethod1("kbc");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Klarnapaylater = new AvailableBalanceCloseSubTotalMethod1("klarnapaylater");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Klarnapaynow = new AvailableBalanceCloseSubTotalMethod1("klarnapaynow");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Klarnasliceit = new AvailableBalanceCloseSubTotalMethod1("klarnasliceit");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Klarna = new AvailableBalanceCloseSubTotalMethod1("klarna");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Mbway = new AvailableBalanceCloseSubTotalMethod1("mbway");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Multibanco = new AvailableBalanceCloseSubTotalMethod1("multibanco");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Mybank = new AvailableBalanceCloseSubTotalMethod1("mybank");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Paybybank = new AvailableBalanceCloseSubTotalMethod1("paybybank");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Payconiq = new AvailableBalanceCloseSubTotalMethod1("payconiq");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Paypal = new AvailableBalanceCloseSubTotalMethod1("paypal");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Paysafecard = new AvailableBalanceCloseSubTotalMethod1("paysafecard");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Przelewy24 = new AvailableBalanceCloseSubTotalMethod1("przelewy24");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Riverty = new AvailableBalanceCloseSubTotalMethod1("riverty");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Satispay = new AvailableBalanceCloseSubTotalMethod1("satispay");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Podiumcadeaukaart = new AvailableBalanceCloseSubTotalMethod1("podiumcadeaukaart");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Pointofsale = new AvailableBalanceCloseSubTotalMethod1("pointofsale");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Sofort = new AvailableBalanceCloseSubTotalMethod1("sofort");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Swish = new AvailableBalanceCloseSubTotalMethod1("swish");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Trustly = new AvailableBalanceCloseSubTotalMethod1("trustly");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Twint = new AvailableBalanceCloseSubTotalMethod1("twint");
-        public static readonly AvailableBalanceCloseSubTotalMethod1 Voucher = new AvailableBalanceCloseSubTotalMethod1("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("bitcoin")]
+        Bitcoin,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("giropay")]
+        Giropay,
+        [JsonProperty("googlepay")]
+        Googlepay,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("inghomepay")]
+        Inghomepay,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("podiumcadeaukaart")]
+        Podiumcadeaukaart,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("sofort")]
+        Sofort,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, AvailableBalanceCloseSubTotalMethod1> _knownValues =
-            new Dictionary <string, AvailableBalanceCloseSubTotalMethod1> ()
+    public static class AvailableBalanceCloseSubTotalMethod1Extension
+    {
+        public static string Value(this AvailableBalanceCloseSubTotalMethod1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static AvailableBalanceCloseSubTotalMethod1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(AvailableBalanceCloseSubTotalMethod1).GetFields())
             {
-                ["alma"] = Alma,
-                ["bacs"] = Bacs,
-                ["applepay"] = Applepay,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["bitcoin"] = Bitcoin,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["giropay"] = Giropay,
-                ["googlepay"] = Googlepay,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["inghomepay"] = Inghomepay,
-                ["kbc"] = Kbc,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["klarna"] = Klarna,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["podiumcadeaukaart"] = Podiumcadeaukaart,
-                ["pointofsale"] = Pointofsale,
-                ["sofort"] = Sofort,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, AvailableBalanceCloseSubTotalMethod1> _values =
-            new ConcurrentDictionary<string, AvailableBalanceCloseSubTotalMethod1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private AvailableBalanceCloseSubTotalMethod1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is AvailableBalanceCloseSubTotalMethod1)
+                    {
+                        return (AvailableBalanceCloseSubTotalMethod1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum AvailableBalanceCloseSubTotalMethod1");
         }
-
-        public string Value { get; }
-
-        public static AvailableBalanceCloseSubTotalMethod1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new AvailableBalanceCloseSubTotalMethod1(value));
-        }
-
-        public static implicit operator AvailableBalanceCloseSubTotalMethod1(string value) => Of(value);
-        public static implicit operator string(AvailableBalanceCloseSubTotalMethod1 availablebalanceclosesubtotalmethod1) => availablebalanceclosesubtotalmethod1.Value;
-
-        public static AvailableBalanceCloseSubTotalMethod1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceCloseSubTotalMethod1);
-
-        public bool Equals(AvailableBalanceCloseSubTotalMethod1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

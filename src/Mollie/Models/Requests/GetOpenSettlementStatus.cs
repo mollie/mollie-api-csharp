@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the settlement.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetOpenSettlementStatus : IEquatable<GetOpenSettlementStatus>
+    public enum GetOpenSettlementStatus
     {
-        public static readonly GetOpenSettlementStatus Open = new GetOpenSettlementStatus("open");
-        public static readonly GetOpenSettlementStatus Pending = new GetOpenSettlementStatus("pending");
-        public static readonly GetOpenSettlementStatus Paidout = new GetOpenSettlementStatus("paidout");
-        public static readonly GetOpenSettlementStatus Failed = new GetOpenSettlementStatus("failed");
+        [JsonProperty("open")]
+        Open,
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("paidout")]
+        Paidout,
+        [JsonProperty("failed")]
+        Failed,
+    }
 
-        private static readonly Dictionary <string, GetOpenSettlementStatus> _knownValues =
-            new Dictionary <string, GetOpenSettlementStatus> ()
+    public static class GetOpenSettlementStatusExtension
+    {
+        public static string Value(this GetOpenSettlementStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetOpenSettlementStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetOpenSettlementStatus).GetFields())
             {
-                ["open"] = Open,
-                ["pending"] = Pending,
-                ["paidout"] = Paidout,
-                ["failed"] = Failed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetOpenSettlementStatus> _values =
-            new ConcurrentDictionary<string, GetOpenSettlementStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetOpenSettlementStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetOpenSettlementStatus)
+                    {
+                        return (GetOpenSettlementStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetOpenSettlementStatus");
         }
-
-        public string Value { get; }
-
-        public static GetOpenSettlementStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetOpenSettlementStatus(value));
-        }
-
-        public static implicit operator GetOpenSettlementStatus(string value) => Of(value);
-        public static implicit operator string(GetOpenSettlementStatus getopensettlementstatus) => getopensettlementstatus.Value;
-
-        public static GetOpenSettlementStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetOpenSettlementStatus);
-
-        public bool Equals(GetOpenSettlementStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

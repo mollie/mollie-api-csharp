@@ -12,93 +12,75 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// A failure code to help understand why the payment failed.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsFailureReason : IEquatable<ListSubscriptionPaymentsFailureReason>
+    public enum ListSubscriptionPaymentsFailureReason
     {
-        public static readonly ListSubscriptionPaymentsFailureReason AuthenticationAbandoned = new ListSubscriptionPaymentsFailureReason("authentication_abandoned");
-        public static readonly ListSubscriptionPaymentsFailureReason AuthenticationFailed = new ListSubscriptionPaymentsFailureReason("authentication_failed");
-        public static readonly ListSubscriptionPaymentsFailureReason AuthenticationRequired = new ListSubscriptionPaymentsFailureReason("authentication_required");
-        public static readonly ListSubscriptionPaymentsFailureReason AuthenticationUnavailableAcs = new ListSubscriptionPaymentsFailureReason("authentication_unavailable_acs");
-        public static readonly ListSubscriptionPaymentsFailureReason CardDeclined = new ListSubscriptionPaymentsFailureReason("card_declined");
-        public static readonly ListSubscriptionPaymentsFailureReason CardExpired = new ListSubscriptionPaymentsFailureReason("card_expired");
-        public static readonly ListSubscriptionPaymentsFailureReason InactiveCard = new ListSubscriptionPaymentsFailureReason("inactive_card");
-        public static readonly ListSubscriptionPaymentsFailureReason InsufficientFunds = new ListSubscriptionPaymentsFailureReason("insufficient_funds");
-        public static readonly ListSubscriptionPaymentsFailureReason InvalidCvv = new ListSubscriptionPaymentsFailureReason("invalid_cvv");
-        public static readonly ListSubscriptionPaymentsFailureReason InvalidCardHolderName = new ListSubscriptionPaymentsFailureReason("invalid_card_holder_name");
-        public static readonly ListSubscriptionPaymentsFailureReason InvalidCardNumber = new ListSubscriptionPaymentsFailureReason("invalid_card_number");
-        public static readonly ListSubscriptionPaymentsFailureReason InvalidCardType = new ListSubscriptionPaymentsFailureReason("invalid_card_type");
-        public static readonly ListSubscriptionPaymentsFailureReason PossibleFraud = new ListSubscriptionPaymentsFailureReason("possible_fraud");
-        public static readonly ListSubscriptionPaymentsFailureReason RefusedByIssuer = new ListSubscriptionPaymentsFailureReason("refused_by_issuer");
-        public static readonly ListSubscriptionPaymentsFailureReason UnknownReason = new ListSubscriptionPaymentsFailureReason("unknown_reason");
+        [JsonProperty("authentication_abandoned")]
+        AuthenticationAbandoned,
+        [JsonProperty("authentication_failed")]
+        AuthenticationFailed,
+        [JsonProperty("authentication_required")]
+        AuthenticationRequired,
+        [JsonProperty("authentication_unavailable_acs")]
+        AuthenticationUnavailableAcs,
+        [JsonProperty("card_declined")]
+        CardDeclined,
+        [JsonProperty("card_expired")]
+        CardExpired,
+        [JsonProperty("inactive_card")]
+        InactiveCard,
+        [JsonProperty("insufficient_funds")]
+        InsufficientFunds,
+        [JsonProperty("invalid_cvv")]
+        InvalidCvv,
+        [JsonProperty("invalid_card_holder_name")]
+        InvalidCardHolderName,
+        [JsonProperty("invalid_card_number")]
+        InvalidCardNumber,
+        [JsonProperty("invalid_card_type")]
+        InvalidCardType,
+        [JsonProperty("possible_fraud")]
+        PossibleFraud,
+        [JsonProperty("refused_by_issuer")]
+        RefusedByIssuer,
+        [JsonProperty("unknown_reason")]
+        UnknownReason,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsFailureReason> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsFailureReason> ()
+    public static class ListSubscriptionPaymentsFailureReasonExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsFailureReason value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsFailureReason ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsFailureReason).GetFields())
             {
-                ["authentication_abandoned"] = AuthenticationAbandoned,
-                ["authentication_failed"] = AuthenticationFailed,
-                ["authentication_required"] = AuthenticationRequired,
-                ["authentication_unavailable_acs"] = AuthenticationUnavailableAcs,
-                ["card_declined"] = CardDeclined,
-                ["card_expired"] = CardExpired,
-                ["inactive_card"] = InactiveCard,
-                ["insufficient_funds"] = InsufficientFunds,
-                ["invalid_cvv"] = InvalidCvv,
-                ["invalid_card_holder_name"] = InvalidCardHolderName,
-                ["invalid_card_number"] = InvalidCardNumber,
-                ["invalid_card_type"] = InvalidCardType,
-                ["possible_fraud"] = PossibleFraud,
-                ["refused_by_issuer"] = RefusedByIssuer,
-                ["unknown_reason"] = UnknownReason
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsFailureReason> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsFailureReason>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsFailureReason(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsFailureReason)
+                    {
+                        return (ListSubscriptionPaymentsFailureReason)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsFailureReason");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsFailureReason Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsFailureReason(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsFailureReason(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsFailureReason listsubscriptionpaymentsfailurereason) => listsubscriptionpaymentsfailurereason.Value;
-
-        public static ListSubscriptionPaymentsFailureReason[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsFailureReason);
-
-        public bool Equals(ListSubscriptionPaymentsFailureReason? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,83 +12,65 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The applicable card fee region.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsFeeRegion : IEquatable<GetPaymentLinkPaymentsFeeRegion>
+    public enum GetPaymentLinkPaymentsFeeRegion
     {
-        public static readonly GetPaymentLinkPaymentsFeeRegion AmericanExpress = new GetPaymentLinkPaymentsFeeRegion("american-express");
-        public static readonly GetPaymentLinkPaymentsFeeRegion AmexIntraEea = new GetPaymentLinkPaymentsFeeRegion("amex-intra-eea");
-        public static readonly GetPaymentLinkPaymentsFeeRegion CarteBancaire = new GetPaymentLinkPaymentsFeeRegion("carte-bancaire");
-        public static readonly GetPaymentLinkPaymentsFeeRegion IntraEu = new GetPaymentLinkPaymentsFeeRegion("intra-eu");
-        public static readonly GetPaymentLinkPaymentsFeeRegion IntraEuCorporate = new GetPaymentLinkPaymentsFeeRegion("intra-eu-corporate");
-        public static readonly GetPaymentLinkPaymentsFeeRegion Domestic = new GetPaymentLinkPaymentsFeeRegion("domestic");
-        public static readonly GetPaymentLinkPaymentsFeeRegion Maestro = new GetPaymentLinkPaymentsFeeRegion("maestro");
-        public static readonly GetPaymentLinkPaymentsFeeRegion Other = new GetPaymentLinkPaymentsFeeRegion("other");
-        public static readonly GetPaymentLinkPaymentsFeeRegion Inter = new GetPaymentLinkPaymentsFeeRegion("inter");
-        public static readonly GetPaymentLinkPaymentsFeeRegion IntraEea = new GetPaymentLinkPaymentsFeeRegion("intra_eea");
+        [JsonProperty("american-express")]
+        AmericanExpress,
+        [JsonProperty("amex-intra-eea")]
+        AmexIntraEea,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("intra-eu-corporate")]
+        IntraEuCorporate,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("other")]
+        Other,
+        [JsonProperty("inter")]
+        Inter,
+        [JsonProperty("intra_eea")]
+        IntraEea,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsFeeRegion> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsFeeRegion> ()
+    public static class GetPaymentLinkPaymentsFeeRegionExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsFeeRegion value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsFeeRegion ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsFeeRegion).GetFields())
             {
-                ["american-express"] = AmericanExpress,
-                ["amex-intra-eea"] = AmexIntraEea,
-                ["carte-bancaire"] = CarteBancaire,
-                ["intra-eu"] = IntraEu,
-                ["intra-eu-corporate"] = IntraEuCorporate,
-                ["domestic"] = Domestic,
-                ["maestro"] = Maestro,
-                ["other"] = Other,
-                ["inter"] = Inter,
-                ["intra_eea"] = IntraEea
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsFeeRegion> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsFeeRegion>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsFeeRegion(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsFeeRegion)
+                    {
+                        return (GetPaymentLinkPaymentsFeeRegion)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsFeeRegion");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsFeeRegion Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsFeeRegion(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsFeeRegion(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsFeeRegion getpaymentlinkpaymentsfeeregion) => getpaymentlinkpaymentsfeeregion.Value;
-
-        public static GetPaymentLinkPaymentsFeeRegion[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsFeeRegion);
-
-        public bool Equals(GetPaymentLinkPaymentsFeeRegion? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

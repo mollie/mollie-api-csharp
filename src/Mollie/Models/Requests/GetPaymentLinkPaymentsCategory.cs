@@ -12,68 +12,50 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsCategory : IEquatable<GetPaymentLinkPaymentsCategory>
+    public enum GetPaymentLinkPaymentsCategory
     {
-        public static readonly GetPaymentLinkPaymentsCategory Meal = new GetPaymentLinkPaymentsCategory("meal");
-        public static readonly GetPaymentLinkPaymentsCategory Eco = new GetPaymentLinkPaymentsCategory("eco");
-        public static readonly GetPaymentLinkPaymentsCategory Gift = new GetPaymentLinkPaymentsCategory("gift");
-        public static readonly GetPaymentLinkPaymentsCategory SportCulture = new GetPaymentLinkPaymentsCategory("sport_culture");
+        [JsonProperty("meal")]
+        Meal,
+        [JsonProperty("eco")]
+        Eco,
+        [JsonProperty("gift")]
+        Gift,
+        [JsonProperty("sport_culture")]
+        SportCulture,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsCategory> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsCategory> ()
+    public static class GetPaymentLinkPaymentsCategoryExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsCategory value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsCategory ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsCategory).GetFields())
             {
-                ["meal"] = Meal,
-                ["eco"] = Eco,
-                ["gift"] = Gift,
-                ["sport_culture"] = SportCulture
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsCategory> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsCategory>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsCategory(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsCategory)
+                    {
+                        return (GetPaymentLinkPaymentsCategory)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsCategory");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsCategory Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsCategory(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsCategory(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsCategory getpaymentlinkpaymentscategory) => getpaymentlinkpaymentscategory.Value;
-
-        public static GetPaymentLinkPaymentsCategory[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsCategory);
-
-        public bool Equals(GetPaymentLinkPaymentsCategory? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

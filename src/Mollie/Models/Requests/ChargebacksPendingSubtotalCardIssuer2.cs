@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ChargebacksPendingSubtotalCardIssuer2 : IEquatable<ChargebacksPendingSubtotalCardIssuer2>
+    public enum ChargebacksPendingSubtotalCardIssuer2
     {
-        public static readonly ChargebacksPendingSubtotalCardIssuer2 Amex = new ChargebacksPendingSubtotalCardIssuer2("amex");
-        public static readonly ChargebacksPendingSubtotalCardIssuer2 Maestro = new ChargebacksPendingSubtotalCardIssuer2("maestro");
-        public static readonly ChargebacksPendingSubtotalCardIssuer2 CarteBancaire = new ChargebacksPendingSubtotalCardIssuer2("carte-bancaire");
-        public static readonly ChargebacksPendingSubtotalCardIssuer2 Other = new ChargebacksPendingSubtotalCardIssuer2("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, ChargebacksPendingSubtotalCardIssuer2> _knownValues =
-            new Dictionary <string, ChargebacksPendingSubtotalCardIssuer2> ()
+    public static class ChargebacksPendingSubtotalCardIssuer2Extension
+    {
+        public static string Value(this ChargebacksPendingSubtotalCardIssuer2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ChargebacksPendingSubtotalCardIssuer2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(ChargebacksPendingSubtotalCardIssuer2).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ChargebacksPendingSubtotalCardIssuer2> _values =
-            new ConcurrentDictionary<string, ChargebacksPendingSubtotalCardIssuer2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ChargebacksPendingSubtotalCardIssuer2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ChargebacksPendingSubtotalCardIssuer2)
+                    {
+                        return (ChargebacksPendingSubtotalCardIssuer2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ChargebacksPendingSubtotalCardIssuer2");
         }
-
-        public string Value { get; }
-
-        public static ChargebacksPendingSubtotalCardIssuer2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ChargebacksPendingSubtotalCardIssuer2(value));
-        }
-
-        public static implicit operator ChargebacksPendingSubtotalCardIssuer2(string value) => Of(value);
-        public static implicit operator string(ChargebacksPendingSubtotalCardIssuer2 chargebackspendingsubtotalcardissuer2) => chargebackspendingsubtotalcardissuer2.Value;
-
-        public static ChargebacksPendingSubtotalCardIssuer2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ChargebacksPendingSubtotalCardIssuer2);
-
-        public bool Equals(ChargebacksPendingSubtotalCardIssuer2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

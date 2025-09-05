@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// **Only relevant for recurring payments.**<br/>
@@ -36,62 +33,47 @@ namespace Mollie.Models.Requests
     /// are set up correctly for recurring payments.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsSequenceType : IEquatable<GetPaymentLinkPaymentsSequenceType>
+    public enum GetPaymentLinkPaymentsSequenceType
     {
-        public static readonly GetPaymentLinkPaymentsSequenceType Oneoff = new GetPaymentLinkPaymentsSequenceType("oneoff");
-        public static readonly GetPaymentLinkPaymentsSequenceType First = new GetPaymentLinkPaymentsSequenceType("first");
-        public static readonly GetPaymentLinkPaymentsSequenceType Recurring = new GetPaymentLinkPaymentsSequenceType("recurring");
+        [JsonProperty("oneoff")]
+        Oneoff,
+        [JsonProperty("first")]
+        First,
+        [JsonProperty("recurring")]
+        Recurring,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsSequenceType> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsSequenceType> ()
+    public static class GetPaymentLinkPaymentsSequenceTypeExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsSequenceType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsSequenceType ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsSequenceType).GetFields())
             {
-                ["oneoff"] = Oneoff,
-                ["first"] = First,
-                ["recurring"] = Recurring
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsSequenceType> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsSequenceType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsSequenceType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsSequenceType)
+                    {
+                        return (GetPaymentLinkPaymentsSequenceType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsSequenceType");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsSequenceType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsSequenceType(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsSequenceType(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsSequenceType getpaymentlinkpaymentssequencetype) => getpaymentlinkpaymentssequencetype.Value;
-
-        public static GetPaymentLinkPaymentsSequenceType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsSequenceType);
-
-        public bool Equals(GetPaymentLinkPaymentsSequenceType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

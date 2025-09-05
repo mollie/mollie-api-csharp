@@ -12,75 +12,57 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Refunds may take some time to get confirmed.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSettlementRefundsStatus : IEquatable<ListSettlementRefundsStatus>
+    public enum ListSettlementRefundsStatus
     {
-        public static readonly ListSettlementRefundsStatus Queued = new ListSettlementRefundsStatus("queued");
-        public static readonly ListSettlementRefundsStatus Pending = new ListSettlementRefundsStatus("pending");
-        public static readonly ListSettlementRefundsStatus Processing = new ListSettlementRefundsStatus("processing");
-        public static readonly ListSettlementRefundsStatus Refunded = new ListSettlementRefundsStatus("refunded");
-        public static readonly ListSettlementRefundsStatus Failed = new ListSettlementRefundsStatus("failed");
-        public static readonly ListSettlementRefundsStatus Canceled = new ListSettlementRefundsStatus("canceled");
+        [JsonProperty("queued")]
+        Queued,
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("processing")]
+        Processing,
+        [JsonProperty("refunded")]
+        Refunded,
+        [JsonProperty("failed")]
+        Failed,
+        [JsonProperty("canceled")]
+        Canceled,
+    }
 
-        private static readonly Dictionary <string, ListSettlementRefundsStatus> _knownValues =
-            new Dictionary <string, ListSettlementRefundsStatus> ()
+    public static class ListSettlementRefundsStatusExtension
+    {
+        public static string Value(this ListSettlementRefundsStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSettlementRefundsStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSettlementRefundsStatus).GetFields())
             {
-                ["queued"] = Queued,
-                ["pending"] = Pending,
-                ["processing"] = Processing,
-                ["refunded"] = Refunded,
-                ["failed"] = Failed,
-                ["canceled"] = Canceled
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSettlementRefundsStatus> _values =
-            new ConcurrentDictionary<string, ListSettlementRefundsStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSettlementRefundsStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSettlementRefundsStatus)
+                    {
+                        return (ListSettlementRefundsStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSettlementRefundsStatus");
         }
-
-        public string Value { get; }
-
-        public static ListSettlementRefundsStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSettlementRefundsStatus(value));
-        }
-
-        public static implicit operator ListSettlementRefundsStatus(string value) => Of(value);
-        public static implicit operator string(ListSettlementRefundsStatus listsettlementrefundsstatus) => listsettlementrefundsstatus.Value;
-
-        public static ListSettlementRefundsStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSettlementRefundsStatus);
-
-        public bool Equals(ListSettlementRefundsStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

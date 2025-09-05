@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of discount.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetSalesInvoiceLineType : IEquatable<GetSalesInvoiceLineType>
+    public enum GetSalesInvoiceLineType
     {
-        public static readonly GetSalesInvoiceLineType Amount = new GetSalesInvoiceLineType("amount");
-        public static readonly GetSalesInvoiceLineType Percentage = new GetSalesInvoiceLineType("percentage");
+        [JsonProperty("amount")]
+        Amount,
+        [JsonProperty("percentage")]
+        Percentage,
+    }
 
-        private static readonly Dictionary <string, GetSalesInvoiceLineType> _knownValues =
-            new Dictionary <string, GetSalesInvoiceLineType> ()
+    public static class GetSalesInvoiceLineTypeExtension
+    {
+        public static string Value(this GetSalesInvoiceLineType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetSalesInvoiceLineType ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetSalesInvoiceLineType).GetFields())
             {
-                ["amount"] = Amount,
-                ["percentage"] = Percentage
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetSalesInvoiceLineType> _values =
-            new ConcurrentDictionary<string, GetSalesInvoiceLineType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetSalesInvoiceLineType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetSalesInvoiceLineType)
+                    {
+                        return (GetSalesInvoiceLineType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetSalesInvoiceLineType");
         }
-
-        public string Value { get; }
-
-        public static GetSalesInvoiceLineType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetSalesInvoiceLineType(value));
-        }
-
-        public static implicit operator GetSalesInvoiceLineType(string value) => Of(value);
-        public static implicit operator string(GetSalesInvoiceLineType getsalesinvoicelinetype) => getsalesinvoicelinetype.Value;
-
-        public static GetSalesInvoiceLineType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetSalesInvoiceLineType);
-
-        public bool Equals(GetSalesInvoiceLineType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

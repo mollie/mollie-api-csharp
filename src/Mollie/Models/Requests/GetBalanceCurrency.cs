@@ -12,87 +12,69 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The balance&apos;s ISO 4217 currency code.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetBalanceCurrency : IEquatable<GetBalanceCurrency>
+    public enum GetBalanceCurrency
     {
-        public static readonly GetBalanceCurrency Eur = new GetBalanceCurrency("EUR");
-        public static readonly GetBalanceCurrency Gbp = new GetBalanceCurrency("GBP");
-        public static readonly GetBalanceCurrency Chf = new GetBalanceCurrency("CHF");
-        public static readonly GetBalanceCurrency Dkk = new GetBalanceCurrency("DKK");
-        public static readonly GetBalanceCurrency Nok = new GetBalanceCurrency("NOK");
-        public static readonly GetBalanceCurrency Pln = new GetBalanceCurrency("PLN");
-        public static readonly GetBalanceCurrency Sek = new GetBalanceCurrency("SEK");
-        public static readonly GetBalanceCurrency Usd = new GetBalanceCurrency("USD");
-        public static readonly GetBalanceCurrency Czk = new GetBalanceCurrency("CZK");
-        public static readonly GetBalanceCurrency Huf = new GetBalanceCurrency("HUF");
-        public static readonly GetBalanceCurrency Aud = new GetBalanceCurrency("AUD");
-        public static readonly GetBalanceCurrency Cad = new GetBalanceCurrency("CAD");
+        [JsonProperty("EUR")]
+        Eur,
+        [JsonProperty("GBP")]
+        Gbp,
+        [JsonProperty("CHF")]
+        Chf,
+        [JsonProperty("DKK")]
+        Dkk,
+        [JsonProperty("NOK")]
+        Nok,
+        [JsonProperty("PLN")]
+        Pln,
+        [JsonProperty("SEK")]
+        Sek,
+        [JsonProperty("USD")]
+        Usd,
+        [JsonProperty("CZK")]
+        Czk,
+        [JsonProperty("HUF")]
+        Huf,
+        [JsonProperty("AUD")]
+        Aud,
+        [JsonProperty("CAD")]
+        Cad,
+    }
 
-        private static readonly Dictionary <string, GetBalanceCurrency> _knownValues =
-            new Dictionary <string, GetBalanceCurrency> ()
+    public static class GetBalanceCurrencyExtension
+    {
+        public static string Value(this GetBalanceCurrency value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetBalanceCurrency ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetBalanceCurrency).GetFields())
             {
-                ["EUR"] = Eur,
-                ["GBP"] = Gbp,
-                ["CHF"] = Chf,
-                ["DKK"] = Dkk,
-                ["NOK"] = Nok,
-                ["PLN"] = Pln,
-                ["SEK"] = Sek,
-                ["USD"] = Usd,
-                ["CZK"] = Czk,
-                ["HUF"] = Huf,
-                ["AUD"] = Aud,
-                ["CAD"] = Cad
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetBalanceCurrency> _values =
-            new ConcurrentDictionary<string, GetBalanceCurrency>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetBalanceCurrency(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetBalanceCurrency)
+                    {
+                        return (GetBalanceCurrency)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetBalanceCurrency");
         }
-
-        public string Value { get; }
-
-        public static GetBalanceCurrency Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetBalanceCurrency(value));
-        }
-
-        public static implicit operator GetBalanceCurrency(string value) => Of(value);
-        public static implicit operator string(GetBalanceCurrency getbalancecurrency) => getbalancecurrency.Value;
-
-        public static GetBalanceCurrency[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetBalanceCurrency);
-
-        public bool Equals(GetBalanceCurrency? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

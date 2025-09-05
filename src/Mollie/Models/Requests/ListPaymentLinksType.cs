@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
@@ -24,72 +21,57 @@ namespace Mollie.Models.Requests
     /// The `tip` payment line type is not available when creating a payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListPaymentLinksType : IEquatable<ListPaymentLinksType>
+    public enum ListPaymentLinksType
     {
-        public static readonly ListPaymentLinksType Physical = new ListPaymentLinksType("physical");
-        public static readonly ListPaymentLinksType Digital = new ListPaymentLinksType("digital");
-        public static readonly ListPaymentLinksType ShippingFee = new ListPaymentLinksType("shipping_fee");
-        public static readonly ListPaymentLinksType Discount = new ListPaymentLinksType("discount");
-        public static readonly ListPaymentLinksType StoreCredit = new ListPaymentLinksType("store_credit");
-        public static readonly ListPaymentLinksType GiftCard = new ListPaymentLinksType("gift_card");
-        public static readonly ListPaymentLinksType Surcharge = new ListPaymentLinksType("surcharge");
-        public static readonly ListPaymentLinksType Tip = new ListPaymentLinksType("tip");
+        [JsonProperty("physical")]
+        Physical,
+        [JsonProperty("digital")]
+        Digital,
+        [JsonProperty("shipping_fee")]
+        ShippingFee,
+        [JsonProperty("discount")]
+        Discount,
+        [JsonProperty("store_credit")]
+        StoreCredit,
+        [JsonProperty("gift_card")]
+        GiftCard,
+        [JsonProperty("surcharge")]
+        Surcharge,
+        [JsonProperty("tip")]
+        Tip,
+    }
 
-        private static readonly Dictionary <string, ListPaymentLinksType> _knownValues =
-            new Dictionary <string, ListPaymentLinksType> ()
+    public static class ListPaymentLinksTypeExtension
+    {
+        public static string Value(this ListPaymentLinksType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListPaymentLinksType ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListPaymentLinksType).GetFields())
             {
-                ["physical"] = Physical,
-                ["digital"] = Digital,
-                ["shipping_fee"] = ShippingFee,
-                ["discount"] = Discount,
-                ["store_credit"] = StoreCredit,
-                ["gift_card"] = GiftCard,
-                ["surcharge"] = Surcharge,
-                ["tip"] = Tip
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListPaymentLinksType> _values =
-            new ConcurrentDictionary<string, ListPaymentLinksType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListPaymentLinksType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListPaymentLinksType)
+                    {
+                        return (ListPaymentLinksType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListPaymentLinksType");
         }
-
-        public string Value { get; }
-
-        public static ListPaymentLinksType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListPaymentLinksType(value));
-        }
-
-        public static implicit operator ListPaymentLinksType(string value) => Of(value);
-        public static implicit operator string(ListPaymentLinksType listpaymentlinkstype) => listpaymentlinkstype.Value;
-
-        public static ListPaymentLinksType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListPaymentLinksType);
-
-        public bool Equals(ListPaymentLinksType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

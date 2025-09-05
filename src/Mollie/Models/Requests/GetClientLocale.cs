@@ -12,107 +12,89 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The preferred locale of the merchant, as set in their Mollie dashboard.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetClientLocale : IEquatable<GetClientLocale>
+    public enum GetClientLocale
     {
-        public static readonly GetClientLocale EnUS = new GetClientLocale("en_US");
-        public static readonly GetClientLocale EnGB = new GetClientLocale("en_GB");
-        public static readonly GetClientLocale Nlnl = new GetClientLocale("nl_NL");
-        public static readonly GetClientLocale NlBE = new GetClientLocale("nl_BE");
-        public static readonly GetClientLocale Dede = new GetClientLocale("de_DE");
-        public static readonly GetClientLocale DeAT = new GetClientLocale("de_AT");
-        public static readonly GetClientLocale DeCH = new GetClientLocale("de_CH");
-        public static readonly GetClientLocale Frfr = new GetClientLocale("fr_FR");
-        public static readonly GetClientLocale FrBE = new GetClientLocale("fr_BE");
-        public static readonly GetClientLocale Eses = new GetClientLocale("es_ES");
-        public static readonly GetClientLocale CaES = new GetClientLocale("ca_ES");
-        public static readonly GetClientLocale Ptpt = new GetClientLocale("pt_PT");
-        public static readonly GetClientLocale Itit = new GetClientLocale("it_IT");
-        public static readonly GetClientLocale NbNO = new GetClientLocale("nb_NO");
-        public static readonly GetClientLocale SvSE = new GetClientLocale("sv_SE");
-        public static readonly GetClientLocale Fifi = new GetClientLocale("fi_FI");
-        public static readonly GetClientLocale DaDK = new GetClientLocale("da_DK");
-        public static readonly GetClientLocale Isis = new GetClientLocale("is_IS");
-        public static readonly GetClientLocale Huhu = new GetClientLocale("hu_HU");
-        public static readonly GetClientLocale Plpl = new GetClientLocale("pl_PL");
-        public static readonly GetClientLocale Lvlv = new GetClientLocale("lv_LV");
-        public static readonly GetClientLocale Ltlt = new GetClientLocale("lt_LT");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+        [JsonProperty("es_ES")]
+        Eses,
+        [JsonProperty("ca_ES")]
+        CaES,
+        [JsonProperty("pt_PT")]
+        Ptpt,
+        [JsonProperty("it_IT")]
+        Itit,
+        [JsonProperty("nb_NO")]
+        NbNO,
+        [JsonProperty("sv_SE")]
+        SvSE,
+        [JsonProperty("fi_FI")]
+        Fifi,
+        [JsonProperty("da_DK")]
+        DaDK,
+        [JsonProperty("is_IS")]
+        Isis,
+        [JsonProperty("hu_HU")]
+        Huhu,
+        [JsonProperty("pl_PL")]
+        Plpl,
+        [JsonProperty("lv_LV")]
+        Lvlv,
+        [JsonProperty("lt_LT")]
+        Ltlt,
+    }
 
-        private static readonly Dictionary <string, GetClientLocale> _knownValues =
-            new Dictionary <string, GetClientLocale> ()
+    public static class GetClientLocaleExtension
+    {
+        public static string Value(this GetClientLocale value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetClientLocale ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetClientLocale).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
-                ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
-                ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
-                ["lt_LT"] = Ltlt
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetClientLocale> _values =
-            new ConcurrentDictionary<string, GetClientLocale>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetClientLocale(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetClientLocale)
+                    {
+                        return (GetClientLocale)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetClientLocale");
         }
-
-        public string Value { get; }
-
-        public static GetClientLocale Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetClientLocale(value));
-        }
-
-        public static implicit operator GetClientLocale(string value) => Of(value);
-        public static implicit operator string(GetClientLocale getclientlocale) => getclientlocale.Value;
-
-        public static GetClientLocale[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetClientLocale);
-
-        public bool Equals(GetClientLocale? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

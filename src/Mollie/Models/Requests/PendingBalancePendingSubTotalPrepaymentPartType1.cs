@@ -12,73 +12,55 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PendingBalancePendingSubTotalPrepaymentPartType1 : IEquatable<PendingBalancePendingSubTotalPrepaymentPartType1>
+    public enum PendingBalancePendingSubTotalPrepaymentPartType1
     {
-        public static readonly PendingBalancePendingSubTotalPrepaymentPartType1 Fee = new PendingBalancePendingSubTotalPrepaymentPartType1("fee");
-        public static readonly PendingBalancePendingSubTotalPrepaymentPartType1 FeeReimbursement = new PendingBalancePendingSubTotalPrepaymentPartType1("fee-reimbursement");
-        public static readonly PendingBalancePendingSubTotalPrepaymentPartType1 FeeDiscount = new PendingBalancePendingSubTotalPrepaymentPartType1("fee-discount");
-        public static readonly PendingBalancePendingSubTotalPrepaymentPartType1 FeeVat = new PendingBalancePendingSubTotalPrepaymentPartType1("fee-vat");
-        public static readonly PendingBalancePendingSubTotalPrepaymentPartType1 FeeRoundingCompensation = new PendingBalancePendingSubTotalPrepaymentPartType1("fee-rounding-compensation");
+        [JsonProperty("fee")]
+        Fee,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-vat")]
+        FeeVat,
+        [JsonProperty("fee-rounding-compensation")]
+        FeeRoundingCompensation,
+    }
 
-        private static readonly Dictionary <string, PendingBalancePendingSubTotalPrepaymentPartType1> _knownValues =
-            new Dictionary <string, PendingBalancePendingSubTotalPrepaymentPartType1> ()
+    public static class PendingBalancePendingSubTotalPrepaymentPartType1Extension
+    {
+        public static string Value(this PendingBalancePendingSubTotalPrepaymentPartType1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PendingBalancePendingSubTotalPrepaymentPartType1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(PendingBalancePendingSubTotalPrepaymentPartType1).GetFields())
             {
-                ["fee"] = Fee,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-vat"] = FeeVat,
-                ["fee-rounding-compensation"] = FeeRoundingCompensation
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PendingBalancePendingSubTotalPrepaymentPartType1> _values =
-            new ConcurrentDictionary<string, PendingBalancePendingSubTotalPrepaymentPartType1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PendingBalancePendingSubTotalPrepaymentPartType1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PendingBalancePendingSubTotalPrepaymentPartType1)
+                    {
+                        return (PendingBalancePendingSubTotalPrepaymentPartType1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PendingBalancePendingSubTotalPrepaymentPartType1");
         }
-
-        public string Value { get; }
-
-        public static PendingBalancePendingSubTotalPrepaymentPartType1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PendingBalancePendingSubTotalPrepaymentPartType1(value));
-        }
-
-        public static implicit operator PendingBalancePendingSubTotalPrepaymentPartType1(string value) => Of(value);
-        public static implicit operator string(PendingBalancePendingSubTotalPrepaymentPartType1 pendingbalancependingsubtotalprepaymentparttype1) => pendingbalancependingsubtotalprepaymentparttype1.Value;
-
-        public static PendingBalancePendingSubTotalPrepaymentPartType1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PendingBalancePendingSubTotalPrepaymentPartType1);
-
-        public bool Equals(PendingBalancePendingSubTotalPrepaymentPartType1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,77 +12,59 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The event&apos;s type
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetWebhookEventWebhookEventTypes : IEquatable<GetWebhookEventWebhookEventTypes>
+    public enum GetWebhookEventWebhookEventTypes
     {
-        public static readonly GetWebhookEventWebhookEventTypes PaymentLinkPaid = new GetWebhookEventWebhookEventTypes("payment-link.paid");
-        public static readonly GetWebhookEventWebhookEventTypes BalanceTransactionCreated = new GetWebhookEventWebhookEventTypes("balance-transaction.created");
-        public static readonly GetWebhookEventWebhookEventTypes SalesInvoiceCreated = new GetWebhookEventWebhookEventTypes("sales-invoice.created");
-        public static readonly GetWebhookEventWebhookEventTypes SalesInvoiceIssued = new GetWebhookEventWebhookEventTypes("sales-invoice.issued");
-        public static readonly GetWebhookEventWebhookEventTypes SalesInvoiceCanceled = new GetWebhookEventWebhookEventTypes("sales-invoice.canceled");
-        public static readonly GetWebhookEventWebhookEventTypes SalesInvoicePaid = new GetWebhookEventWebhookEventTypes("sales-invoice.paid");
-        public static readonly GetWebhookEventWebhookEventTypes Wildcard = new GetWebhookEventWebhookEventTypes("*");
+        [JsonProperty("payment-link.paid")]
+        PaymentLinkPaid,
+        [JsonProperty("balance-transaction.created")]
+        BalanceTransactionCreated,
+        [JsonProperty("sales-invoice.created")]
+        SalesInvoiceCreated,
+        [JsonProperty("sales-invoice.issued")]
+        SalesInvoiceIssued,
+        [JsonProperty("sales-invoice.canceled")]
+        SalesInvoiceCanceled,
+        [JsonProperty("sales-invoice.paid")]
+        SalesInvoicePaid,
+        [JsonProperty("*")]
+        Wildcard,
+    }
 
-        private static readonly Dictionary <string, GetWebhookEventWebhookEventTypes> _knownValues =
-            new Dictionary <string, GetWebhookEventWebhookEventTypes> ()
+    public static class GetWebhookEventWebhookEventTypesExtension
+    {
+        public static string Value(this GetWebhookEventWebhookEventTypes value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetWebhookEventWebhookEventTypes ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetWebhookEventWebhookEventTypes).GetFields())
             {
-                ["payment-link.paid"] = PaymentLinkPaid,
-                ["balance-transaction.created"] = BalanceTransactionCreated,
-                ["sales-invoice.created"] = SalesInvoiceCreated,
-                ["sales-invoice.issued"] = SalesInvoiceIssued,
-                ["sales-invoice.canceled"] = SalesInvoiceCanceled,
-                ["sales-invoice.paid"] = SalesInvoicePaid,
-                ["*"] = Wildcard
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetWebhookEventWebhookEventTypes> _values =
-            new ConcurrentDictionary<string, GetWebhookEventWebhookEventTypes>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetWebhookEventWebhookEventTypes(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetWebhookEventWebhookEventTypes)
+                    {
+                        return (GetWebhookEventWebhookEventTypes)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetWebhookEventWebhookEventTypes");
         }
-
-        public string Value { get; }
-
-        public static GetWebhookEventWebhookEventTypes Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetWebhookEventWebhookEventTypes(value));
-        }
-
-        public static implicit operator GetWebhookEventWebhookEventTypes(string value) => Of(value);
-        public static implicit operator string(GetWebhookEventWebhookEventTypes getwebhookeventwebhookeventtypes) => getwebhookeventwebhookeventtypes.Value;
-
-        public static GetWebhookEventWebhookEventTypes[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetWebhookEventWebhookEventTypes);
-
-        public bool Equals(GetWebhookEventWebhookEventTypes? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

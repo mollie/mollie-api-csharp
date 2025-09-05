@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The profile status determines whether the profile is able to receive live payments.<br/>
@@ -26,62 +23,47 @@ namespace Mollie.Models.Requests
     /// * `blocked`: The profile is blocked and can no longer be used or changed.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateProfileStatus : IEquatable<CreateProfileStatus>
+    public enum CreateProfileStatus
     {
-        public static readonly CreateProfileStatus Unverified = new CreateProfileStatus("unverified");
-        public static readonly CreateProfileStatus Verified = new CreateProfileStatus("verified");
-        public static readonly CreateProfileStatus Blocked = new CreateProfileStatus("blocked");
+        [JsonProperty("unverified")]
+        Unverified,
+        [JsonProperty("verified")]
+        Verified,
+        [JsonProperty("blocked")]
+        Blocked,
+    }
 
-        private static readonly Dictionary <string, CreateProfileStatus> _knownValues =
-            new Dictionary <string, CreateProfileStatus> ()
+    public static class CreateProfileStatusExtension
+    {
+        public static string Value(this CreateProfileStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateProfileStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateProfileStatus).GetFields())
             {
-                ["unverified"] = Unverified,
-                ["verified"] = Verified,
-                ["blocked"] = Blocked
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateProfileStatus> _values =
-            new ConcurrentDictionary<string, CreateProfileStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateProfileStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateProfileStatus)
+                    {
+                        return (CreateProfileStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateProfileStatus");
         }
-
-        public string Value { get; }
-
-        public static CreateProfileStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateProfileStatus(value));
-        }
-
-        public static implicit operator CreateProfileStatus(string value) => Of(value);
-        public static implicit operator string(CreateProfileStatus createprofilestatus) => createprofilestatus.Value;
-
-        public static CreateProfileStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateProfileStatus);
-
-        public bool Equals(CreateProfileStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

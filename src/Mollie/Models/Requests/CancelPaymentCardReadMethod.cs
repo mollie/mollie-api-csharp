@@ -12,73 +12,55 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The method by which the card was read by the terminal.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CancelPaymentCardReadMethod : IEquatable<CancelPaymentCardReadMethod>
+    public enum CancelPaymentCardReadMethod
     {
-        public static readonly CancelPaymentCardReadMethod Chip = new CancelPaymentCardReadMethod("chip");
-        public static readonly CancelPaymentCardReadMethod MagneticStripe = new CancelPaymentCardReadMethod("magnetic-stripe");
-        public static readonly CancelPaymentCardReadMethod NearFieldCommunication = new CancelPaymentCardReadMethod("near-field-communication");
-        public static readonly CancelPaymentCardReadMethod Contactless = new CancelPaymentCardReadMethod("contactless");
-        public static readonly CancelPaymentCardReadMethod Moto = new CancelPaymentCardReadMethod("moto");
+        [JsonProperty("chip")]
+        Chip,
+        [JsonProperty("magnetic-stripe")]
+        MagneticStripe,
+        [JsonProperty("near-field-communication")]
+        NearFieldCommunication,
+        [JsonProperty("contactless")]
+        Contactless,
+        [JsonProperty("moto")]
+        Moto,
+    }
 
-        private static readonly Dictionary <string, CancelPaymentCardReadMethod> _knownValues =
-            new Dictionary <string, CancelPaymentCardReadMethod> ()
+    public static class CancelPaymentCardReadMethodExtension
+    {
+        public static string Value(this CancelPaymentCardReadMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CancelPaymentCardReadMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(CancelPaymentCardReadMethod).GetFields())
             {
-                ["chip"] = Chip,
-                ["magnetic-stripe"] = MagneticStripe,
-                ["near-field-communication"] = NearFieldCommunication,
-                ["contactless"] = Contactless,
-                ["moto"] = Moto
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CancelPaymentCardReadMethod> _values =
-            new ConcurrentDictionary<string, CancelPaymentCardReadMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CancelPaymentCardReadMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CancelPaymentCardReadMethod)
+                    {
+                        return (CancelPaymentCardReadMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CancelPaymentCardReadMethod");
         }
-
-        public string Value { get; }
-
-        public static CancelPaymentCardReadMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CancelPaymentCardReadMethod(value));
-        }
-
-        public static implicit operator CancelPaymentCardReadMethod(string value) => Of(value);
-        public static implicit operator string(CancelPaymentCardReadMethod cancelpaymentcardreadmethod) => cancelpaymentcardreadmethod.Value;
-
-        public static CancelPaymentCardReadMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CancelPaymentCardReadMethod);
-
-        public bool Equals(CancelPaymentCardReadMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

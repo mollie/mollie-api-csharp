@@ -12,68 +12,50 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CancelPaymentCategory : IEquatable<CancelPaymentCategory>
+    public enum CancelPaymentCategory
     {
-        public static readonly CancelPaymentCategory Meal = new CancelPaymentCategory("meal");
-        public static readonly CancelPaymentCategory Eco = new CancelPaymentCategory("eco");
-        public static readonly CancelPaymentCategory Gift = new CancelPaymentCategory("gift");
-        public static readonly CancelPaymentCategory SportCulture = new CancelPaymentCategory("sport_culture");
+        [JsonProperty("meal")]
+        Meal,
+        [JsonProperty("eco")]
+        Eco,
+        [JsonProperty("gift")]
+        Gift,
+        [JsonProperty("sport_culture")]
+        SportCulture,
+    }
 
-        private static readonly Dictionary <string, CancelPaymentCategory> _knownValues =
-            new Dictionary <string, CancelPaymentCategory> ()
+    public static class CancelPaymentCategoryExtension
+    {
+        public static string Value(this CancelPaymentCategory value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CancelPaymentCategory ToEnum(this string value)
+        {
+            foreach(var field in typeof(CancelPaymentCategory).GetFields())
             {
-                ["meal"] = Meal,
-                ["eco"] = Eco,
-                ["gift"] = Gift,
-                ["sport_culture"] = SportCulture
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CancelPaymentCategory> _values =
-            new ConcurrentDictionary<string, CancelPaymentCategory>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CancelPaymentCategory(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CancelPaymentCategory)
+                    {
+                        return (CancelPaymentCategory)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CancelPaymentCategory");
         }
-
-        public string Value { get; }
-
-        public static CancelPaymentCategory Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CancelPaymentCategory(value));
-        }
-
-        public static implicit operator CancelPaymentCategory(string value) => Of(value);
-        public static implicit operator string(CancelPaymentCategory cancelpaymentcategory) => cancelpaymentcategory.Value;
-
-        public static CancelPaymentCategory[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CancelPaymentCategory);
-
-        public bool Equals(CancelPaymentCategory? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

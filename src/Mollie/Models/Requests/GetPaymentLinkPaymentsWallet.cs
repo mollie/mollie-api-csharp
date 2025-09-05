@@ -12,65 +12,47 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The wallet used when creating the payment.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsWallet : IEquatable<GetPaymentLinkPaymentsWallet>
+    public enum GetPaymentLinkPaymentsWallet
     {
-        public static readonly GetPaymentLinkPaymentsWallet Applepay = new GetPaymentLinkPaymentsWallet("applepay");
+        [JsonProperty("applepay")]
+        Applepay,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsWallet> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsWallet> ()
+    public static class GetPaymentLinkPaymentsWalletExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsWallet value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsWallet ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsWallet).GetFields())
             {
-                ["applepay"] = Applepay
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsWallet> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsWallet>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsWallet(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsWallet)
+                    {
+                        return (GetPaymentLinkPaymentsWallet)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsWallet");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsWallet Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsWallet(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsWallet(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsWallet getpaymentlinkpaymentswallet) => getpaymentlinkpaymentswallet.Value;
-
-        public static GetPaymentLinkPaymentsWallet[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsWallet);
-
-        public bool Equals(GetPaymentLinkPaymentsWallet? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

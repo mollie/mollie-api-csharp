@@ -12,73 +12,55 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CapitalPendingSubtotalPrepaymentPartType2 : IEquatable<CapitalPendingSubtotalPrepaymentPartType2>
+    public enum CapitalPendingSubtotalPrepaymentPartType2
     {
-        public static readonly CapitalPendingSubtotalPrepaymentPartType2 Fee = new CapitalPendingSubtotalPrepaymentPartType2("fee");
-        public static readonly CapitalPendingSubtotalPrepaymentPartType2 FeeReimbursement = new CapitalPendingSubtotalPrepaymentPartType2("fee-reimbursement");
-        public static readonly CapitalPendingSubtotalPrepaymentPartType2 FeeDiscount = new CapitalPendingSubtotalPrepaymentPartType2("fee-discount");
-        public static readonly CapitalPendingSubtotalPrepaymentPartType2 FeeVat = new CapitalPendingSubtotalPrepaymentPartType2("fee-vat");
-        public static readonly CapitalPendingSubtotalPrepaymentPartType2 FeeRoundingCompensation = new CapitalPendingSubtotalPrepaymentPartType2("fee-rounding-compensation");
+        [JsonProperty("fee")]
+        Fee,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-vat")]
+        FeeVat,
+        [JsonProperty("fee-rounding-compensation")]
+        FeeRoundingCompensation,
+    }
 
-        private static readonly Dictionary <string, CapitalPendingSubtotalPrepaymentPartType2> _knownValues =
-            new Dictionary <string, CapitalPendingSubtotalPrepaymentPartType2> ()
+    public static class CapitalPendingSubtotalPrepaymentPartType2Extension
+    {
+        public static string Value(this CapitalPendingSubtotalPrepaymentPartType2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CapitalPendingSubtotalPrepaymentPartType2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(CapitalPendingSubtotalPrepaymentPartType2).GetFields())
             {
-                ["fee"] = Fee,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-vat"] = FeeVat,
-                ["fee-rounding-compensation"] = FeeRoundingCompensation
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CapitalPendingSubtotalPrepaymentPartType2> _values =
-            new ConcurrentDictionary<string, CapitalPendingSubtotalPrepaymentPartType2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CapitalPendingSubtotalPrepaymentPartType2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CapitalPendingSubtotalPrepaymentPartType2)
+                    {
+                        return (CapitalPendingSubtotalPrepaymentPartType2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CapitalPendingSubtotalPrepaymentPartType2");
         }
-
-        public string Value { get; }
-
-        public static CapitalPendingSubtotalPrepaymentPartType2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CapitalPendingSubtotalPrepaymentPartType2(value));
-        }
-
-        public static implicit operator CapitalPendingSubtotalPrepaymentPartType2(string value) => Of(value);
-        public static implicit operator string(CapitalPendingSubtotalPrepaymentPartType2 capitalpendingsubtotalprepaymentparttype2) => capitalpendingsubtotalprepaymentparttype2.Value;
-
-        public static CapitalPendingSubtotalPrepaymentPartType2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CapitalPendingSubtotalPrepaymentPartType2);
-
-        public bool Equals(CapitalPendingSubtotalPrepaymentPartType2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

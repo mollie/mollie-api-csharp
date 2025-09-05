@@ -12,68 +12,50 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListCapabilitiesStatus : IEquatable<ListCapabilitiesStatus>
+    public enum ListCapabilitiesStatus
     {
-        public static readonly ListCapabilitiesStatus Unrequested = new ListCapabilitiesStatus("unrequested");
-        public static readonly ListCapabilitiesStatus Enabled = new ListCapabilitiesStatus("enabled");
-        public static readonly ListCapabilitiesStatus Disabled = new ListCapabilitiesStatus("disabled");
-        public static readonly ListCapabilitiesStatus Pending = new ListCapabilitiesStatus("pending");
+        [JsonProperty("unrequested")]
+        Unrequested,
+        [JsonProperty("enabled")]
+        Enabled,
+        [JsonProperty("disabled")]
+        Disabled,
+        [JsonProperty("pending")]
+        Pending,
+    }
 
-        private static readonly Dictionary <string, ListCapabilitiesStatus> _knownValues =
-            new Dictionary <string, ListCapabilitiesStatus> ()
+    public static class ListCapabilitiesStatusExtension
+    {
+        public static string Value(this ListCapabilitiesStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListCapabilitiesStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListCapabilitiesStatus).GetFields())
             {
-                ["unrequested"] = Unrequested,
-                ["enabled"] = Enabled,
-                ["disabled"] = Disabled,
-                ["pending"] = Pending
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListCapabilitiesStatus> _values =
-            new ConcurrentDictionary<string, ListCapabilitiesStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListCapabilitiesStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListCapabilitiesStatus)
+                    {
+                        return (ListCapabilitiesStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListCapabilitiesStatus");
         }
-
-        public string Value { get; }
-
-        public static ListCapabilitiesStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListCapabilitiesStatus(value));
-        }
-
-        public static implicit operator ListCapabilitiesStatus(string value) => Of(value);
-        public static implicit operator string(ListCapabilitiesStatus listcapabilitiesstatus) => listcapabilitiesstatus.Value;
-
-        public static ListCapabilitiesStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListCapabilitiesStatus);
-
-        public bool Equals(ListCapabilitiesStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

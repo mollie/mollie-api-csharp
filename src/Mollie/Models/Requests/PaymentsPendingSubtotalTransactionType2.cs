@@ -12,141 +12,123 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Represents the transaction type
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentsPendingSubtotalTransactionType2 : IEquatable<PaymentsPendingSubtotalTransactionType2>
+    public enum PaymentsPendingSubtotalTransactionType2
     {
-        public static readonly PaymentsPendingSubtotalTransactionType2 Payment = new PaymentsPendingSubtotalTransactionType2("payment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 SplitPayment = new PaymentsPendingSubtotalTransactionType2("split-payment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 FailedPayment = new PaymentsPendingSubtotalTransactionType2("failed-payment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 FailedPlatformSplitPayment = new PaymentsPendingSubtotalTransactionType2("failed-platform-split-payment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 FailedSplitPaymentCompensation = new PaymentsPendingSubtotalTransactionType2("failed-split-payment-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 Capture = new PaymentsPendingSubtotalTransactionType2("capture");
-        public static readonly PaymentsPendingSubtotalTransactionType2 SplitTransaction = new PaymentsPendingSubtotalTransactionType2("split-transaction");
-        public static readonly PaymentsPendingSubtotalTransactionType2 Refund = new PaymentsPendingSubtotalTransactionType2("refund");
-        public static readonly PaymentsPendingSubtotalTransactionType2 PlatformPaymentRefund = new PaymentsPendingSubtotalTransactionType2("platform-payment-refund");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReturnedPlatformPaymentRefund = new PaymentsPendingSubtotalTransactionType2("returned-platform-payment-refund");
-        public static readonly PaymentsPendingSubtotalTransactionType2 RefundCompensation = new PaymentsPendingSubtotalTransactionType2("refund-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReturnedRefundCompensation = new PaymentsPendingSubtotalTransactionType2("returned-refund-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReturnedRefund = new PaymentsPendingSubtotalTransactionType2("returned-refund");
-        public static readonly PaymentsPendingSubtotalTransactionType2 Chargeback = new PaymentsPendingSubtotalTransactionType2("chargeback");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ChargebackReversal = new PaymentsPendingSubtotalTransactionType2("chargeback-reversal");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ChargebackCompensation = new PaymentsPendingSubtotalTransactionType2("chargeback-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReversedChargebackCompensation = new PaymentsPendingSubtotalTransactionType2("reversed-chargeback-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 PlatformPaymentChargeback = new PaymentsPendingSubtotalTransactionType2("platform-payment-chargeback");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReversedPlatformPaymentChargeback = new PaymentsPendingSubtotalTransactionType2("reversed-platform-payment-chargeback");
-        public static readonly PaymentsPendingSubtotalTransactionType2 FeePrepayment = new PaymentsPendingSubtotalTransactionType2("fee-prepayment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 OutgoingTransfer = new PaymentsPendingSubtotalTransactionType2("outgoing-transfer");
-        public static readonly PaymentsPendingSubtotalTransactionType2 IncomingTransfer = new PaymentsPendingSubtotalTransactionType2("incoming-transfer");
-        public static readonly PaymentsPendingSubtotalTransactionType2 CanceledTransfer = new PaymentsPendingSubtotalTransactionType2("canceled-transfer");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReturnedTransfer = new PaymentsPendingSubtotalTransactionType2("returned-transfer");
-        public static readonly PaymentsPendingSubtotalTransactionType2 BalanceReserve = new PaymentsPendingSubtotalTransactionType2("balance-reserve");
-        public static readonly PaymentsPendingSubtotalTransactionType2 BalanceReserveReturn = new PaymentsPendingSubtotalTransactionType2("balance-reserve-return");
-        public static readonly PaymentsPendingSubtotalTransactionType2 InvoiceRoundingCompensation = new PaymentsPendingSubtotalTransactionType2("invoice-rounding-compensation");
-        public static readonly PaymentsPendingSubtotalTransactionType2 RollingReserveHold = new PaymentsPendingSubtotalTransactionType2("rolling-reserve-hold");
-        public static readonly PaymentsPendingSubtotalTransactionType2 RollingReserveRelease = new PaymentsPendingSubtotalTransactionType2("rolling-reserve-release");
-        public static readonly PaymentsPendingSubtotalTransactionType2 BalanceCorrection = new PaymentsPendingSubtotalTransactionType2("balance-correction");
-        public static readonly PaymentsPendingSubtotalTransactionType2 Repayment = new PaymentsPendingSubtotalTransactionType2("repayment");
-        public static readonly PaymentsPendingSubtotalTransactionType2 Loan = new PaymentsPendingSubtotalTransactionType2("loan");
-        public static readonly PaymentsPendingSubtotalTransactionType2 BalanceTopup = new PaymentsPendingSubtotalTransactionType2("balance-topup");
-        public static readonly PaymentsPendingSubtotalTransactionType2 CashCollateralIssuance = new PaymentsPendingSubtotalTransactionType2("cash-collateral-issuance';");
-        public static readonly PaymentsPendingSubtotalTransactionType2 CashCollateralRelease = new PaymentsPendingSubtotalTransactionType2("cash-collateral-release");
-        public static readonly PaymentsPendingSubtotalTransactionType2 PendingRollingReserve = new PaymentsPendingSubtotalTransactionType2("pending-rolling-reserve");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ToBeReleasedRollingReserve = new PaymentsPendingSubtotalTransactionType2("to-be-released-rolling-reserve");
-        public static readonly PaymentsPendingSubtotalTransactionType2 HeldRollingReserve = new PaymentsPendingSubtotalTransactionType2("held-rolling-reserve");
-        public static readonly PaymentsPendingSubtotalTransactionType2 ReleasedRollingReserve = new PaymentsPendingSubtotalTransactionType2("released-rolling-reserve");
+        [JsonProperty("payment")]
+        Payment,
+        [JsonProperty("split-payment")]
+        SplitPayment,
+        [JsonProperty("failed-payment")]
+        FailedPayment,
+        [JsonProperty("failed-platform-split-payment")]
+        FailedPlatformSplitPayment,
+        [JsonProperty("failed-split-payment-compensation")]
+        FailedSplitPaymentCompensation,
+        [JsonProperty("capture")]
+        Capture,
+        [JsonProperty("split-transaction")]
+        SplitTransaction,
+        [JsonProperty("refund")]
+        Refund,
+        [JsonProperty("platform-payment-refund")]
+        PlatformPaymentRefund,
+        [JsonProperty("returned-platform-payment-refund")]
+        ReturnedPlatformPaymentRefund,
+        [JsonProperty("refund-compensation")]
+        RefundCompensation,
+        [JsonProperty("returned-refund-compensation")]
+        ReturnedRefundCompensation,
+        [JsonProperty("returned-refund")]
+        ReturnedRefund,
+        [JsonProperty("chargeback")]
+        Chargeback,
+        [JsonProperty("chargeback-reversal")]
+        ChargebackReversal,
+        [JsonProperty("chargeback-compensation")]
+        ChargebackCompensation,
+        [JsonProperty("reversed-chargeback-compensation")]
+        ReversedChargebackCompensation,
+        [JsonProperty("platform-payment-chargeback")]
+        PlatformPaymentChargeback,
+        [JsonProperty("reversed-platform-payment-chargeback")]
+        ReversedPlatformPaymentChargeback,
+        [JsonProperty("fee-prepayment")]
+        FeePrepayment,
+        [JsonProperty("outgoing-transfer")]
+        OutgoingTransfer,
+        [JsonProperty("incoming-transfer")]
+        IncomingTransfer,
+        [JsonProperty("canceled-transfer")]
+        CanceledTransfer,
+        [JsonProperty("returned-transfer")]
+        ReturnedTransfer,
+        [JsonProperty("balance-reserve")]
+        BalanceReserve,
+        [JsonProperty("balance-reserve-return")]
+        BalanceReserveReturn,
+        [JsonProperty("invoice-rounding-compensation")]
+        InvoiceRoundingCompensation,
+        [JsonProperty("rolling-reserve-hold")]
+        RollingReserveHold,
+        [JsonProperty("rolling-reserve-release")]
+        RollingReserveRelease,
+        [JsonProperty("balance-correction")]
+        BalanceCorrection,
+        [JsonProperty("repayment")]
+        Repayment,
+        [JsonProperty("loan")]
+        Loan,
+        [JsonProperty("balance-topup")]
+        BalanceTopup,
+        [JsonProperty("cash-collateral-issuance';")]
+        CashCollateralIssuance,
+        [JsonProperty("cash-collateral-release")]
+        CashCollateralRelease,
+        [JsonProperty("pending-rolling-reserve")]
+        PendingRollingReserve,
+        [JsonProperty("to-be-released-rolling-reserve")]
+        ToBeReleasedRollingReserve,
+        [JsonProperty("held-rolling-reserve")]
+        HeldRollingReserve,
+        [JsonProperty("released-rolling-reserve")]
+        ReleasedRollingReserve,
+    }
 
-        private static readonly Dictionary <string, PaymentsPendingSubtotalTransactionType2> _knownValues =
-            new Dictionary <string, PaymentsPendingSubtotalTransactionType2> ()
+    public static class PaymentsPendingSubtotalTransactionType2Extension
+    {
+        public static string Value(this PaymentsPendingSubtotalTransactionType2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static PaymentsPendingSubtotalTransactionType2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(PaymentsPendingSubtotalTransactionType2).GetFields())
             {
-                ["payment"] = Payment,
-                ["split-payment"] = SplitPayment,
-                ["failed-payment"] = FailedPayment,
-                ["failed-platform-split-payment"] = FailedPlatformSplitPayment,
-                ["failed-split-payment-compensation"] = FailedSplitPaymentCompensation,
-                ["capture"] = Capture,
-                ["split-transaction"] = SplitTransaction,
-                ["refund"] = Refund,
-                ["platform-payment-refund"] = PlatformPaymentRefund,
-                ["returned-platform-payment-refund"] = ReturnedPlatformPaymentRefund,
-                ["refund-compensation"] = RefundCompensation,
-                ["returned-refund-compensation"] = ReturnedRefundCompensation,
-                ["returned-refund"] = ReturnedRefund,
-                ["chargeback"] = Chargeback,
-                ["chargeback-reversal"] = ChargebackReversal,
-                ["chargeback-compensation"] = ChargebackCompensation,
-                ["reversed-chargeback-compensation"] = ReversedChargebackCompensation,
-                ["platform-payment-chargeback"] = PlatformPaymentChargeback,
-                ["reversed-platform-payment-chargeback"] = ReversedPlatformPaymentChargeback,
-                ["fee-prepayment"] = FeePrepayment,
-                ["outgoing-transfer"] = OutgoingTransfer,
-                ["incoming-transfer"] = IncomingTransfer,
-                ["canceled-transfer"] = CanceledTransfer,
-                ["returned-transfer"] = ReturnedTransfer,
-                ["balance-reserve"] = BalanceReserve,
-                ["balance-reserve-return"] = BalanceReserveReturn,
-                ["invoice-rounding-compensation"] = InvoiceRoundingCompensation,
-                ["rolling-reserve-hold"] = RollingReserveHold,
-                ["rolling-reserve-release"] = RollingReserveRelease,
-                ["balance-correction"] = BalanceCorrection,
-                ["repayment"] = Repayment,
-                ["loan"] = Loan,
-                ["balance-topup"] = BalanceTopup,
-                ["cash-collateral-issuance';"] = CashCollateralIssuance,
-                ["cash-collateral-release"] = CashCollateralRelease,
-                ["pending-rolling-reserve"] = PendingRollingReserve,
-                ["to-be-released-rolling-reserve"] = ToBeReleasedRollingReserve,
-                ["held-rolling-reserve"] = HeldRollingReserve,
-                ["released-rolling-reserve"] = ReleasedRollingReserve
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, PaymentsPendingSubtotalTransactionType2> _values =
-            new ConcurrentDictionary<string, PaymentsPendingSubtotalTransactionType2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private PaymentsPendingSubtotalTransactionType2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is PaymentsPendingSubtotalTransactionType2)
+                    {
+                        return (PaymentsPendingSubtotalTransactionType2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum PaymentsPendingSubtotalTransactionType2");
         }
-
-        public string Value { get; }
-
-        public static PaymentsPendingSubtotalTransactionType2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new PaymentsPendingSubtotalTransactionType2(value));
-        }
-
-        public static implicit operator PaymentsPendingSubtotalTransactionType2(string value) => Of(value);
-        public static implicit operator string(PaymentsPendingSubtotalTransactionType2 paymentspendingsubtotaltransactiontype2) => paymentspendingsubtotaltransactiontype2.Value;
-
-        public static PaymentsPendingSubtotalTransactionType2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as PaymentsPendingSubtotalTransactionType2);
-
-        public bool Equals(PaymentsPendingSubtotalTransactionType2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

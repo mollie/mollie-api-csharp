@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the requirement depends on its due date.<br/>
@@ -23,62 +20,47 @@ namespace Mollie.Models.Requests
     /// If no due date is given, the status will be `requested`.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListClientsRequirementStatus : IEquatable<ListClientsRequirementStatus>
+    public enum ListClientsRequirementStatus
     {
-        public static readonly ListClientsRequirementStatus CurrentlyDue = new ListClientsRequirementStatus("currently-due");
-        public static readonly ListClientsRequirementStatus PastDue = new ListClientsRequirementStatus("past-due");
-        public static readonly ListClientsRequirementStatus Requested = new ListClientsRequirementStatus("requested");
+        [JsonProperty("currently-due")]
+        CurrentlyDue,
+        [JsonProperty("past-due")]
+        PastDue,
+        [JsonProperty("requested")]
+        Requested,
+    }
 
-        private static readonly Dictionary <string, ListClientsRequirementStatus> _knownValues =
-            new Dictionary <string, ListClientsRequirementStatus> ()
+    public static class ListClientsRequirementStatusExtension
+    {
+        public static string Value(this ListClientsRequirementStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListClientsRequirementStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListClientsRequirementStatus).GetFields())
             {
-                ["currently-due"] = CurrentlyDue,
-                ["past-due"] = PastDue,
-                ["requested"] = Requested
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListClientsRequirementStatus> _values =
-            new ConcurrentDictionary<string, ListClientsRequirementStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListClientsRequirementStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListClientsRequirementStatus)
+                    {
+                        return (ListClientsRequirementStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListClientsRequirementStatus");
         }
-
-        public string Value { get; }
-
-        public static ListClientsRequirementStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListClientsRequirementStatus(value));
-        }
-
-        public static implicit operator ListClientsRequirementStatus(string value) => Of(value);
-        public static implicit operator string(ListClientsRequirementStatus listclientsrequirementstatus) => listclientsrequirementstatus.Value;
-
-        public static ListClientsRequirementStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListClientsRequirementStatus);
-
-        public bool Equals(ListClientsRequirementStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -23,60 +20,45 @@ namespace Mollie.Models.Requests
     /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdateSalesInvoiceVatMode : IEquatable<UpdateSalesInvoiceVatMode>
+    public enum UpdateSalesInvoiceVatMode
     {
-        public static readonly UpdateSalesInvoiceVatMode Exclusive = new UpdateSalesInvoiceVatMode("exclusive");
-        public static readonly UpdateSalesInvoiceVatMode Inclusive = new UpdateSalesInvoiceVatMode("inclusive");
+        [JsonProperty("exclusive")]
+        Exclusive,
+        [JsonProperty("inclusive")]
+        Inclusive,
+    }
 
-        private static readonly Dictionary <string, UpdateSalesInvoiceVatMode> _knownValues =
-            new Dictionary <string, UpdateSalesInvoiceVatMode> ()
+    public static class UpdateSalesInvoiceVatModeExtension
+    {
+        public static string Value(this UpdateSalesInvoiceVatMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdateSalesInvoiceVatMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdateSalesInvoiceVatMode).GetFields())
             {
-                ["exclusive"] = Exclusive,
-                ["inclusive"] = Inclusive
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdateSalesInvoiceVatMode> _values =
-            new ConcurrentDictionary<string, UpdateSalesInvoiceVatMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdateSalesInvoiceVatMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdateSalesInvoiceVatMode)
+                    {
+                        return (UpdateSalesInvoiceVatMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdateSalesInvoiceVatMode");
         }
-
-        public string Value { get; }
-
-        public static UpdateSalesInvoiceVatMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdateSalesInvoiceVatMode(value));
-        }
-
-        public static implicit operator UpdateSalesInvoiceVatMode(string value) => Of(value);
-        public static implicit operator string(UpdateSalesInvoiceVatMode updatesalesinvoicevatmode) => updatesalesinvoicevatmode.Value;
-
-        public static UpdateSalesInvoiceVatMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdateSalesInvoiceVatMode);
-
-        public bool Equals(UpdateSalesInvoiceVatMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

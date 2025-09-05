@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetBalanceMode : IEquatable<GetBalanceMode>
+    public enum GetBalanceMode
     {
-        public static readonly GetBalanceMode Live = new GetBalanceMode("live");
-        public static readonly GetBalanceMode Test = new GetBalanceMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, GetBalanceMode> _knownValues =
-            new Dictionary <string, GetBalanceMode> ()
+    public static class GetBalanceModeExtension
+    {
+        public static string Value(this GetBalanceMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetBalanceMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetBalanceMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetBalanceMode> _values =
-            new ConcurrentDictionary<string, GetBalanceMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetBalanceMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetBalanceMode)
+                    {
+                        return (GetBalanceMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetBalanceMode");
         }
-
-        public string Value { get; }
-
-        public static GetBalanceMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetBalanceMode(value));
-        }
-
-        public static implicit operator GetBalanceMode(string value) => Of(value);
-        public static implicit operator string(GetBalanceMode getbalancemode) => getbalancemode.Value;
-
-        public static GetBalanceMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetBalanceMode);
-
-        public bool Equals(GetBalanceMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

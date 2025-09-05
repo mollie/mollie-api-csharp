@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsMode : IEquatable<GetPaymentLinkPaymentsMode>
+    public enum GetPaymentLinkPaymentsMode
     {
-        public static readonly GetPaymentLinkPaymentsMode Live = new GetPaymentLinkPaymentsMode("live");
-        public static readonly GetPaymentLinkPaymentsMode Test = new GetPaymentLinkPaymentsMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsMode> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsMode> ()
+    public static class GetPaymentLinkPaymentsModeExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsMode> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsMode)
+                    {
+                        return (GetPaymentLinkPaymentsMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsMode");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsMode(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsMode(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsMode getpaymentlinkpaymentsmode) => getpaymentlinkpaymentsmode.Value;
-
-        public static GetPaymentLinkPaymentsMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsMode);
-
-        public bool Equals(GetPaymentLinkPaymentsMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

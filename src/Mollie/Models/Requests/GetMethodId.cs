@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The unique identifier of the payment method. When used during <a href="create-payment">payment creation</a>, the payment<br/>
@@ -23,128 +20,113 @@ namespace Mollie.Models.Requests
     /// method selection screen will be skipped.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetMethodId : IEquatable<GetMethodId>
+    public enum GetMethodId
     {
-        public static readonly GetMethodId Alma = new GetMethodId("alma");
-        public static readonly GetMethodId Applepay = new GetMethodId("applepay");
-        public static readonly GetMethodId Bacs = new GetMethodId("bacs");
-        public static readonly GetMethodId Bancomatpay = new GetMethodId("bancomatpay");
-        public static readonly GetMethodId Bancontact = new GetMethodId("bancontact");
-        public static readonly GetMethodId Banktransfer = new GetMethodId("banktransfer");
-        public static readonly GetMethodId Belfius = new GetMethodId("belfius");
-        public static readonly GetMethodId Billie = new GetMethodId("billie");
-        public static readonly GetMethodId Bizum = new GetMethodId("bizum");
-        public static readonly GetMethodId Blik = new GetMethodId("blik");
-        public static readonly GetMethodId Creditcard = new GetMethodId("creditcard");
-        public static readonly GetMethodId Directdebit = new GetMethodId("directdebit");
-        public static readonly GetMethodId Eps = new GetMethodId("eps");
-        public static readonly GetMethodId Giftcard = new GetMethodId("giftcard");
-        public static readonly GetMethodId Ideal = new GetMethodId("ideal");
-        public static readonly GetMethodId In3 = new GetMethodId("in3");
-        public static readonly GetMethodId Kbc = new GetMethodId("kbc");
-        public static readonly GetMethodId Klarna = new GetMethodId("klarna");
-        public static readonly GetMethodId Klarnapaylater = new GetMethodId("klarnapaylater");
-        public static readonly GetMethodId Klarnapaynow = new GetMethodId("klarnapaynow");
-        public static readonly GetMethodId Klarnasliceit = new GetMethodId("klarnasliceit");
-        public static readonly GetMethodId Mbway = new GetMethodId("mbway");
-        public static readonly GetMethodId Multibanco = new GetMethodId("multibanco");
-        public static readonly GetMethodId Mybank = new GetMethodId("mybank");
-        public static readonly GetMethodId Paybybank = new GetMethodId("paybybank");
-        public static readonly GetMethodId Payconiq = new GetMethodId("payconiq");
-        public static readonly GetMethodId Paypal = new GetMethodId("paypal");
-        public static readonly GetMethodId Paysafecard = new GetMethodId("paysafecard");
-        public static readonly GetMethodId Pointofsale = new GetMethodId("pointofsale");
-        public static readonly GetMethodId Przelewy24 = new GetMethodId("przelewy24");
-        public static readonly GetMethodId Riverty = new GetMethodId("riverty");
-        public static readonly GetMethodId Satispay = new GetMethodId("satispay");
-        public static readonly GetMethodId Swish = new GetMethodId("swish");
-        public static readonly GetMethodId Trustly = new GetMethodId("trustly");
-        public static readonly GetMethodId Twint = new GetMethodId("twint");
-        public static readonly GetMethodId Voucher = new GetMethodId("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, GetMethodId> _knownValues =
-            new Dictionary <string, GetMethodId> ()
+    public static class GetMethodIdExtension
+    {
+        public static string Value(this GetMethodId value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetMethodId ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetMethodId).GetFields())
             {
-                ["alma"] = Alma,
-                ["applepay"] = Applepay,
-                ["bacs"] = Bacs,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["kbc"] = Kbc,
-                ["klarna"] = Klarna,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["pointofsale"] = Pointofsale,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetMethodId> _values =
-            new ConcurrentDictionary<string, GetMethodId>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetMethodId(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetMethodId)
+                    {
+                        return (GetMethodId)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetMethodId");
         }
-
-        public string Value { get; }
-
-        public static GetMethodId Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetMethodId(value));
-        }
-
-        public static implicit operator GetMethodId(string value) => Of(value);
-        public static implicit operator string(GetMethodId getmethodid) => getmethodid.Value;
-
-        public static GetMethodId[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetMethodId);
-
-        public bool Equals(GetMethodId? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

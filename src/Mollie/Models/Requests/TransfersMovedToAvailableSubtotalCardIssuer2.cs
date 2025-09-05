@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class TransfersMovedToAvailableSubtotalCardIssuer2 : IEquatable<TransfersMovedToAvailableSubtotalCardIssuer2>
+    public enum TransfersMovedToAvailableSubtotalCardIssuer2
     {
-        public static readonly TransfersMovedToAvailableSubtotalCardIssuer2 Amex = new TransfersMovedToAvailableSubtotalCardIssuer2("amex");
-        public static readonly TransfersMovedToAvailableSubtotalCardIssuer2 Maestro = new TransfersMovedToAvailableSubtotalCardIssuer2("maestro");
-        public static readonly TransfersMovedToAvailableSubtotalCardIssuer2 CarteBancaire = new TransfersMovedToAvailableSubtotalCardIssuer2("carte-bancaire");
-        public static readonly TransfersMovedToAvailableSubtotalCardIssuer2 Other = new TransfersMovedToAvailableSubtotalCardIssuer2("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, TransfersMovedToAvailableSubtotalCardIssuer2> _knownValues =
-            new Dictionary <string, TransfersMovedToAvailableSubtotalCardIssuer2> ()
+    public static class TransfersMovedToAvailableSubtotalCardIssuer2Extension
+    {
+        public static string Value(this TransfersMovedToAvailableSubtotalCardIssuer2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static TransfersMovedToAvailableSubtotalCardIssuer2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(TransfersMovedToAvailableSubtotalCardIssuer2).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, TransfersMovedToAvailableSubtotalCardIssuer2> _values =
-            new ConcurrentDictionary<string, TransfersMovedToAvailableSubtotalCardIssuer2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private TransfersMovedToAvailableSubtotalCardIssuer2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is TransfersMovedToAvailableSubtotalCardIssuer2)
+                    {
+                        return (TransfersMovedToAvailableSubtotalCardIssuer2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum TransfersMovedToAvailableSubtotalCardIssuer2");
         }
-
-        public string Value { get; }
-
-        public static TransfersMovedToAvailableSubtotalCardIssuer2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new TransfersMovedToAvailableSubtotalCardIssuer2(value));
-        }
-
-        public static implicit operator TransfersMovedToAvailableSubtotalCardIssuer2(string value) => Of(value);
-        public static implicit operator string(TransfersMovedToAvailableSubtotalCardIssuer2 transfersmovedtoavailablesubtotalcardissuer2) => transfersmovedtoavailablesubtotalcardissuer2.Value;
-
-        public static TransfersMovedToAvailableSubtotalCardIssuer2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as TransfersMovedToAvailableSubtotalCardIssuer2);
-
-        public bool Equals(TransfersMovedToAvailableSubtotalCardIssuer2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

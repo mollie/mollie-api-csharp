@@ -12,147 +12,129 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class RefundsPendingSubTotalMethod1 : IEquatable<RefundsPendingSubTotalMethod1>
+    public enum RefundsPendingSubTotalMethod1
     {
-        public static readonly RefundsPendingSubTotalMethod1 Alma = new RefundsPendingSubTotalMethod1("alma");
-        public static readonly RefundsPendingSubTotalMethod1 Bacs = new RefundsPendingSubTotalMethod1("bacs");
-        public static readonly RefundsPendingSubTotalMethod1 Applepay = new RefundsPendingSubTotalMethod1("applepay");
-        public static readonly RefundsPendingSubTotalMethod1 Bancomatpay = new RefundsPendingSubTotalMethod1("bancomatpay");
-        public static readonly RefundsPendingSubTotalMethod1 Bancontact = new RefundsPendingSubTotalMethod1("bancontact");
-        public static readonly RefundsPendingSubTotalMethod1 Banktransfer = new RefundsPendingSubTotalMethod1("banktransfer");
-        public static readonly RefundsPendingSubTotalMethod1 Belfius = new RefundsPendingSubTotalMethod1("belfius");
-        public static readonly RefundsPendingSubTotalMethod1 Billie = new RefundsPendingSubTotalMethod1("billie");
-        public static readonly RefundsPendingSubTotalMethod1 Bizum = new RefundsPendingSubTotalMethod1("bizum");
-        public static readonly RefundsPendingSubTotalMethod1 Bitcoin = new RefundsPendingSubTotalMethod1("bitcoin");
-        public static readonly RefundsPendingSubTotalMethod1 Blik = new RefundsPendingSubTotalMethod1("blik");
-        public static readonly RefundsPendingSubTotalMethod1 Creditcard = new RefundsPendingSubTotalMethod1("creditcard");
-        public static readonly RefundsPendingSubTotalMethod1 Directdebit = new RefundsPendingSubTotalMethod1("directdebit");
-        public static readonly RefundsPendingSubTotalMethod1 Eps = new RefundsPendingSubTotalMethod1("eps");
-        public static readonly RefundsPendingSubTotalMethod1 Giftcard = new RefundsPendingSubTotalMethod1("giftcard");
-        public static readonly RefundsPendingSubTotalMethod1 Giropay = new RefundsPendingSubTotalMethod1("giropay");
-        public static readonly RefundsPendingSubTotalMethod1 Googlepay = new RefundsPendingSubTotalMethod1("googlepay");
-        public static readonly RefundsPendingSubTotalMethod1 Ideal = new RefundsPendingSubTotalMethod1("ideal");
-        public static readonly RefundsPendingSubTotalMethod1 In3 = new RefundsPendingSubTotalMethod1("in3");
-        public static readonly RefundsPendingSubTotalMethod1 Inghomepay = new RefundsPendingSubTotalMethod1("inghomepay");
-        public static readonly RefundsPendingSubTotalMethod1 Kbc = new RefundsPendingSubTotalMethod1("kbc");
-        public static readonly RefundsPendingSubTotalMethod1 Klarnapaylater = new RefundsPendingSubTotalMethod1("klarnapaylater");
-        public static readonly RefundsPendingSubTotalMethod1 Klarnapaynow = new RefundsPendingSubTotalMethod1("klarnapaynow");
-        public static readonly RefundsPendingSubTotalMethod1 Klarnasliceit = new RefundsPendingSubTotalMethod1("klarnasliceit");
-        public static readonly RefundsPendingSubTotalMethod1 Klarna = new RefundsPendingSubTotalMethod1("klarna");
-        public static readonly RefundsPendingSubTotalMethod1 Mbway = new RefundsPendingSubTotalMethod1("mbway");
-        public static readonly RefundsPendingSubTotalMethod1 Multibanco = new RefundsPendingSubTotalMethod1("multibanco");
-        public static readonly RefundsPendingSubTotalMethod1 Mybank = new RefundsPendingSubTotalMethod1("mybank");
-        public static readonly RefundsPendingSubTotalMethod1 Paybybank = new RefundsPendingSubTotalMethod1("paybybank");
-        public static readonly RefundsPendingSubTotalMethod1 Payconiq = new RefundsPendingSubTotalMethod1("payconiq");
-        public static readonly RefundsPendingSubTotalMethod1 Paypal = new RefundsPendingSubTotalMethod1("paypal");
-        public static readonly RefundsPendingSubTotalMethod1 Paysafecard = new RefundsPendingSubTotalMethod1("paysafecard");
-        public static readonly RefundsPendingSubTotalMethod1 Przelewy24 = new RefundsPendingSubTotalMethod1("przelewy24");
-        public static readonly RefundsPendingSubTotalMethod1 Riverty = new RefundsPendingSubTotalMethod1("riverty");
-        public static readonly RefundsPendingSubTotalMethod1 Satispay = new RefundsPendingSubTotalMethod1("satispay");
-        public static readonly RefundsPendingSubTotalMethod1 Podiumcadeaukaart = new RefundsPendingSubTotalMethod1("podiumcadeaukaart");
-        public static readonly RefundsPendingSubTotalMethod1 Pointofsale = new RefundsPendingSubTotalMethod1("pointofsale");
-        public static readonly RefundsPendingSubTotalMethod1 Sofort = new RefundsPendingSubTotalMethod1("sofort");
-        public static readonly RefundsPendingSubTotalMethod1 Swish = new RefundsPendingSubTotalMethod1("swish");
-        public static readonly RefundsPendingSubTotalMethod1 Trustly = new RefundsPendingSubTotalMethod1("trustly");
-        public static readonly RefundsPendingSubTotalMethod1 Twint = new RefundsPendingSubTotalMethod1("twint");
-        public static readonly RefundsPendingSubTotalMethod1 Voucher = new RefundsPendingSubTotalMethod1("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("bitcoin")]
+        Bitcoin,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("giropay")]
+        Giropay,
+        [JsonProperty("googlepay")]
+        Googlepay,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("inghomepay")]
+        Inghomepay,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("podiumcadeaukaart")]
+        Podiumcadeaukaart,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("sofort")]
+        Sofort,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, RefundsPendingSubTotalMethod1> _knownValues =
-            new Dictionary <string, RefundsPendingSubTotalMethod1> ()
+    public static class RefundsPendingSubTotalMethod1Extension
+    {
+        public static string Value(this RefundsPendingSubTotalMethod1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static RefundsPendingSubTotalMethod1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(RefundsPendingSubTotalMethod1).GetFields())
             {
-                ["alma"] = Alma,
-                ["bacs"] = Bacs,
-                ["applepay"] = Applepay,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["bitcoin"] = Bitcoin,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["giropay"] = Giropay,
-                ["googlepay"] = Googlepay,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["inghomepay"] = Inghomepay,
-                ["kbc"] = Kbc,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["klarna"] = Klarna,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["podiumcadeaukaart"] = Podiumcadeaukaart,
-                ["pointofsale"] = Pointofsale,
-                ["sofort"] = Sofort,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, RefundsPendingSubTotalMethod1> _values =
-            new ConcurrentDictionary<string, RefundsPendingSubTotalMethod1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private RefundsPendingSubTotalMethod1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is RefundsPendingSubTotalMethod1)
+                    {
+                        return (RefundsPendingSubTotalMethod1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum RefundsPendingSubTotalMethod1");
         }
-
-        public string Value { get; }
-
-        public static RefundsPendingSubTotalMethod1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new RefundsPendingSubTotalMethod1(value));
-        }
-
-        public static implicit operator RefundsPendingSubTotalMethod1(string value) => Of(value);
-        public static implicit operator string(RefundsPendingSubTotalMethod1 refundspendingsubtotalmethod1) => refundspendingsubtotalmethod1.Value;
-
-        public static RefundsPendingSubTotalMethod1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as RefundsPendingSubTotalMethod1);
-
-        public bool Equals(RefundsPendingSubTotalMethod1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The current status of the organization&apos;s onboarding process.<br/>
@@ -26,62 +23,47 @@ namespace Mollie.Models.Requests
     /// * `completed` — The onboarding is completed
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetClientOnboardingStatus : IEquatable<GetClientOnboardingStatus>
+    public enum GetClientOnboardingStatus
     {
-        public static readonly GetClientOnboardingStatus NeedsData = new GetClientOnboardingStatus("needs-data");
-        public static readonly GetClientOnboardingStatus InReview = new GetClientOnboardingStatus("in-review");
-        public static readonly GetClientOnboardingStatus Completed = new GetClientOnboardingStatus("completed");
+        [JsonProperty("needs-data")]
+        NeedsData,
+        [JsonProperty("in-review")]
+        InReview,
+        [JsonProperty("completed")]
+        Completed,
+    }
 
-        private static readonly Dictionary <string, GetClientOnboardingStatus> _knownValues =
-            new Dictionary <string, GetClientOnboardingStatus> ()
+    public static class GetClientOnboardingStatusExtension
+    {
+        public static string Value(this GetClientOnboardingStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetClientOnboardingStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetClientOnboardingStatus).GetFields())
             {
-                ["needs-data"] = NeedsData,
-                ["in-review"] = InReview,
-                ["completed"] = Completed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetClientOnboardingStatus> _values =
-            new ConcurrentDictionary<string, GetClientOnboardingStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetClientOnboardingStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetClientOnboardingStatus)
+                    {
+                        return (GetClientOnboardingStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetClientOnboardingStatus");
         }
-
-        public string Value { get; }
-
-        public static GetClientOnboardingStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetClientOnboardingStatus(value));
-        }
-
-        public static implicit operator GetClientOnboardingStatus(string value) => Of(value);
-        public static implicit operator string(GetClientOnboardingStatus getclientonboardingstatus) => getclientonboardingstatus.Value;
-
-        public static GetClientOnboardingStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetClientOnboardingStatus);
-
-        public bool Equals(GetClientOnboardingStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

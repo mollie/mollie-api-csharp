@@ -12,73 +12,55 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class MovedFromPendingSubtotalPrepaymentPartType2 : IEquatable<MovedFromPendingSubtotalPrepaymentPartType2>
+    public enum MovedFromPendingSubtotalPrepaymentPartType2
     {
-        public static readonly MovedFromPendingSubtotalPrepaymentPartType2 Fee = new MovedFromPendingSubtotalPrepaymentPartType2("fee");
-        public static readonly MovedFromPendingSubtotalPrepaymentPartType2 FeeReimbursement = new MovedFromPendingSubtotalPrepaymentPartType2("fee-reimbursement");
-        public static readonly MovedFromPendingSubtotalPrepaymentPartType2 FeeDiscount = new MovedFromPendingSubtotalPrepaymentPartType2("fee-discount");
-        public static readonly MovedFromPendingSubtotalPrepaymentPartType2 FeeVat = new MovedFromPendingSubtotalPrepaymentPartType2("fee-vat");
-        public static readonly MovedFromPendingSubtotalPrepaymentPartType2 FeeRoundingCompensation = new MovedFromPendingSubtotalPrepaymentPartType2("fee-rounding-compensation");
+        [JsonProperty("fee")]
+        Fee,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-vat")]
+        FeeVat,
+        [JsonProperty("fee-rounding-compensation")]
+        FeeRoundingCompensation,
+    }
 
-        private static readonly Dictionary <string, MovedFromPendingSubtotalPrepaymentPartType2> _knownValues =
-            new Dictionary <string, MovedFromPendingSubtotalPrepaymentPartType2> ()
+    public static class MovedFromPendingSubtotalPrepaymentPartType2Extension
+    {
+        public static string Value(this MovedFromPendingSubtotalPrepaymentPartType2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static MovedFromPendingSubtotalPrepaymentPartType2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(MovedFromPendingSubtotalPrepaymentPartType2).GetFields())
             {
-                ["fee"] = Fee,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-vat"] = FeeVat,
-                ["fee-rounding-compensation"] = FeeRoundingCompensation
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, MovedFromPendingSubtotalPrepaymentPartType2> _values =
-            new ConcurrentDictionary<string, MovedFromPendingSubtotalPrepaymentPartType2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private MovedFromPendingSubtotalPrepaymentPartType2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is MovedFromPendingSubtotalPrepaymentPartType2)
+                    {
+                        return (MovedFromPendingSubtotalPrepaymentPartType2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum MovedFromPendingSubtotalPrepaymentPartType2");
         }
-
-        public string Value { get; }
-
-        public static MovedFromPendingSubtotalPrepaymentPartType2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new MovedFromPendingSubtotalPrepaymentPartType2(value));
-        }
-
-        public static implicit operator MovedFromPendingSubtotalPrepaymentPartType2(string value) => Of(value);
-        public static implicit operator string(MovedFromPendingSubtotalPrepaymentPartType2 movedfrompendingsubtotalprepaymentparttype2) => movedfrompendingsubtotalprepaymentparttype2.Value;
-
-        public static MovedFromPendingSubtotalPrepaymentPartType2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as MovedFromPendingSubtotalPrepaymentPartType2);
-
-        public bool Equals(MovedFromPendingSubtotalPrepaymentPartType2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

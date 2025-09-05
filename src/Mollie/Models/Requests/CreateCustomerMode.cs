@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateCustomerMode : IEquatable<CreateCustomerMode>
+    public enum CreateCustomerMode
     {
-        public static readonly CreateCustomerMode Live = new CreateCustomerMode("live");
-        public static readonly CreateCustomerMode Test = new CreateCustomerMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, CreateCustomerMode> _knownValues =
-            new Dictionary <string, CreateCustomerMode> ()
+    public static class CreateCustomerModeExtension
+    {
+        public static string Value(this CreateCustomerMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateCustomerMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateCustomerMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateCustomerMode> _values =
-            new ConcurrentDictionary<string, CreateCustomerMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateCustomerMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateCustomerMode)
+                    {
+                        return (CreateCustomerMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateCustomerMode");
         }
-
-        public string Value { get; }
-
-        public static CreateCustomerMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateCustomerMode(value));
-        }
-
-        public static implicit operator CreateCustomerMode(string value) => Of(value);
-        public static implicit operator string(CreateCustomerMode createcustomermode) => createcustomermode.Value;
-
-        public static CreateCustomerMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateCustomerMode);
-
-        public bool Equals(CreateCustomerMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
@@ -23,66 +20,51 @@ namespace Mollie.Models.Requests
     /// enabling the subscription.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetSubscriptionStatus : IEquatable<GetSubscriptionStatus>
+    public enum GetSubscriptionStatus
     {
-        public static readonly GetSubscriptionStatus Pending = new GetSubscriptionStatus("pending");
-        public static readonly GetSubscriptionStatus Active = new GetSubscriptionStatus("active");
-        public static readonly GetSubscriptionStatus Canceled = new GetSubscriptionStatus("canceled");
-        public static readonly GetSubscriptionStatus Suspended = new GetSubscriptionStatus("suspended");
-        public static readonly GetSubscriptionStatus Completed = new GetSubscriptionStatus("completed");
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("active")]
+        Active,
+        [JsonProperty("canceled")]
+        Canceled,
+        [JsonProperty("suspended")]
+        Suspended,
+        [JsonProperty("completed")]
+        Completed,
+    }
 
-        private static readonly Dictionary <string, GetSubscriptionStatus> _knownValues =
-            new Dictionary <string, GetSubscriptionStatus> ()
+    public static class GetSubscriptionStatusExtension
+    {
+        public static string Value(this GetSubscriptionStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetSubscriptionStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetSubscriptionStatus).GetFields())
             {
-                ["pending"] = Pending,
-                ["active"] = Active,
-                ["canceled"] = Canceled,
-                ["suspended"] = Suspended,
-                ["completed"] = Completed
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetSubscriptionStatus> _values =
-            new ConcurrentDictionary<string, GetSubscriptionStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetSubscriptionStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetSubscriptionStatus)
+                    {
+                        return (GetSubscriptionStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetSubscriptionStatus");
         }
-
-        public string Value { get; }
-
-        public static GetSubscriptionStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetSubscriptionStatus(value));
-        }
-
-        public static implicit operator GetSubscriptionStatus(string value) => Of(value);
-        public static implicit operator string(GetSubscriptionStatus getsubscriptionstatus) => getsubscriptionstatus.Value;
-
-        public static GetSubscriptionStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetSubscriptionStatus);
-
-        public bool Equals(GetSubscriptionStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
@@ -23,128 +20,113 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsMethod : IEquatable<ListSubscriptionPaymentsMethod>
+    public enum ListSubscriptionPaymentsMethod
     {
-        public static readonly ListSubscriptionPaymentsMethod Alma = new ListSubscriptionPaymentsMethod("alma");
-        public static readonly ListSubscriptionPaymentsMethod Applepay = new ListSubscriptionPaymentsMethod("applepay");
-        public static readonly ListSubscriptionPaymentsMethod Bacs = new ListSubscriptionPaymentsMethod("bacs");
-        public static readonly ListSubscriptionPaymentsMethod Bancomatpay = new ListSubscriptionPaymentsMethod("bancomatpay");
-        public static readonly ListSubscriptionPaymentsMethod Bancontact = new ListSubscriptionPaymentsMethod("bancontact");
-        public static readonly ListSubscriptionPaymentsMethod Banktransfer = new ListSubscriptionPaymentsMethod("banktransfer");
-        public static readonly ListSubscriptionPaymentsMethod Belfius = new ListSubscriptionPaymentsMethod("belfius");
-        public static readonly ListSubscriptionPaymentsMethod Billie = new ListSubscriptionPaymentsMethod("billie");
-        public static readonly ListSubscriptionPaymentsMethod Bizum = new ListSubscriptionPaymentsMethod("bizum");
-        public static readonly ListSubscriptionPaymentsMethod Blik = new ListSubscriptionPaymentsMethod("blik");
-        public static readonly ListSubscriptionPaymentsMethod Creditcard = new ListSubscriptionPaymentsMethod("creditcard");
-        public static readonly ListSubscriptionPaymentsMethod Directdebit = new ListSubscriptionPaymentsMethod("directdebit");
-        public static readonly ListSubscriptionPaymentsMethod Eps = new ListSubscriptionPaymentsMethod("eps");
-        public static readonly ListSubscriptionPaymentsMethod Giftcard = new ListSubscriptionPaymentsMethod("giftcard");
-        public static readonly ListSubscriptionPaymentsMethod Ideal = new ListSubscriptionPaymentsMethod("ideal");
-        public static readonly ListSubscriptionPaymentsMethod In3 = new ListSubscriptionPaymentsMethod("in3");
-        public static readonly ListSubscriptionPaymentsMethod Kbc = new ListSubscriptionPaymentsMethod("kbc");
-        public static readonly ListSubscriptionPaymentsMethod Klarna = new ListSubscriptionPaymentsMethod("klarna");
-        public static readonly ListSubscriptionPaymentsMethod Klarnapaylater = new ListSubscriptionPaymentsMethod("klarnapaylater");
-        public static readonly ListSubscriptionPaymentsMethod Klarnapaynow = new ListSubscriptionPaymentsMethod("klarnapaynow");
-        public static readonly ListSubscriptionPaymentsMethod Klarnasliceit = new ListSubscriptionPaymentsMethod("klarnasliceit");
-        public static readonly ListSubscriptionPaymentsMethod Mbway = new ListSubscriptionPaymentsMethod("mbway");
-        public static readonly ListSubscriptionPaymentsMethod Multibanco = new ListSubscriptionPaymentsMethod("multibanco");
-        public static readonly ListSubscriptionPaymentsMethod Mybank = new ListSubscriptionPaymentsMethod("mybank");
-        public static readonly ListSubscriptionPaymentsMethod Paybybank = new ListSubscriptionPaymentsMethod("paybybank");
-        public static readonly ListSubscriptionPaymentsMethod Payconiq = new ListSubscriptionPaymentsMethod("payconiq");
-        public static readonly ListSubscriptionPaymentsMethod Paypal = new ListSubscriptionPaymentsMethod("paypal");
-        public static readonly ListSubscriptionPaymentsMethod Paysafecard = new ListSubscriptionPaymentsMethod("paysafecard");
-        public static readonly ListSubscriptionPaymentsMethod Pointofsale = new ListSubscriptionPaymentsMethod("pointofsale");
-        public static readonly ListSubscriptionPaymentsMethod Przelewy24 = new ListSubscriptionPaymentsMethod("przelewy24");
-        public static readonly ListSubscriptionPaymentsMethod Riverty = new ListSubscriptionPaymentsMethod("riverty");
-        public static readonly ListSubscriptionPaymentsMethod Satispay = new ListSubscriptionPaymentsMethod("satispay");
-        public static readonly ListSubscriptionPaymentsMethod Swish = new ListSubscriptionPaymentsMethod("swish");
-        public static readonly ListSubscriptionPaymentsMethod Trustly = new ListSubscriptionPaymentsMethod("trustly");
-        public static readonly ListSubscriptionPaymentsMethod Twint = new ListSubscriptionPaymentsMethod("twint");
-        public static readonly ListSubscriptionPaymentsMethod Voucher = new ListSubscriptionPaymentsMethod("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsMethod> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsMethod> ()
+    public static class ListSubscriptionPaymentsMethodExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsMethod).GetFields())
             {
-                ["alma"] = Alma,
-                ["applepay"] = Applepay,
-                ["bacs"] = Bacs,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["kbc"] = Kbc,
-                ["klarna"] = Klarna,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["pointofsale"] = Pointofsale,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsMethod> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsMethod)
+                    {
+                        return (ListSubscriptionPaymentsMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsMethod");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsMethod(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsMethod(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsMethod listsubscriptionpaymentsmethod) => listsubscriptionpaymentsmethod.Value;
-
-        public static ListSubscriptionPaymentsMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsMethod);
-
-        public bool Equals(ListSubscriptionPaymentsMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

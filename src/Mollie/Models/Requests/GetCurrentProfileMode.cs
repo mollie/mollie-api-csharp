@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetCurrentProfileMode : IEquatable<GetCurrentProfileMode>
+    public enum GetCurrentProfileMode
     {
-        public static readonly GetCurrentProfileMode Live = new GetCurrentProfileMode("live");
-        public static readonly GetCurrentProfileMode Test = new GetCurrentProfileMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, GetCurrentProfileMode> _knownValues =
-            new Dictionary <string, GetCurrentProfileMode> ()
+    public static class GetCurrentProfileModeExtension
+    {
+        public static string Value(this GetCurrentProfileMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetCurrentProfileMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetCurrentProfileMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetCurrentProfileMode> _values =
-            new ConcurrentDictionary<string, GetCurrentProfileMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetCurrentProfileMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetCurrentProfileMode)
+                    {
+                        return (GetCurrentProfileMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetCurrentProfileMode");
         }
-
-        public string Value { get; }
-
-        public static GetCurrentProfileMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetCurrentProfileMode(value));
-        }
-
-        public static implicit operator GetCurrentProfileMode(string value) => Of(value);
-        public static implicit operator string(GetCurrentProfileMode getcurrentprofilemode) => getcurrentprofilemode.Value;
-
-        public static GetCurrentProfileMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetCurrentProfileMode);
-
-        public bool Equals(GetCurrentProfileMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

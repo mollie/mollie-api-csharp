@@ -12,69 +12,51 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CancelSubscriptionMethod : IEquatable<CancelSubscriptionMethod>
+    public enum CancelSubscriptionMethod
     {
-        public static readonly CancelSubscriptionMethod Creditcard = new CancelSubscriptionMethod("creditcard");
-        public static readonly CancelSubscriptionMethod Directdebit = new CancelSubscriptionMethod("directdebit");
-        public static readonly CancelSubscriptionMethod Paypal = new CancelSubscriptionMethod("paypal");
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("paypal")]
+        Paypal,
+    }
 
-        private static readonly Dictionary <string, CancelSubscriptionMethod> _knownValues =
-            new Dictionary <string, CancelSubscriptionMethod> ()
+    public static class CancelSubscriptionMethodExtension
+    {
+        public static string Value(this CancelSubscriptionMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CancelSubscriptionMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(CancelSubscriptionMethod).GetFields())
             {
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["paypal"] = Paypal
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CancelSubscriptionMethod> _values =
-            new ConcurrentDictionary<string, CancelSubscriptionMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CancelSubscriptionMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CancelSubscriptionMethod)
+                    {
+                        return (CancelSubscriptionMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CancelSubscriptionMethod");
         }
-
-        public string Value { get; }
-
-        public static CancelSubscriptionMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CancelSubscriptionMethod(value));
-        }
-
-        public static implicit operator CancelSubscriptionMethod(string value) => Of(value);
-        public static implicit operator string(CancelSubscriptionMethod cancelsubscriptionmethod) => cancelsubscriptionmethod.Value;
-
-        public static CancelSubscriptionMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CancelSubscriptionMethod);
-
-        public bool Equals(CancelSubscriptionMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

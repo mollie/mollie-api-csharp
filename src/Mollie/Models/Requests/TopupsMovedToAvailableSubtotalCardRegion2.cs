@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class TopupsMovedToAvailableSubtotalCardRegion2 : IEquatable<TopupsMovedToAvailableSubtotalCardRegion2>
+    public enum TopupsMovedToAvailableSubtotalCardRegion2
     {
-        public static readonly TopupsMovedToAvailableSubtotalCardRegion2 IntraEea = new TopupsMovedToAvailableSubtotalCardRegion2("intra-eea");
-        public static readonly TopupsMovedToAvailableSubtotalCardRegion2 IntraEu = new TopupsMovedToAvailableSubtotalCardRegion2("intra-eu");
-        public static readonly TopupsMovedToAvailableSubtotalCardRegion2 Domestic = new TopupsMovedToAvailableSubtotalCardRegion2("domestic");
-        public static readonly TopupsMovedToAvailableSubtotalCardRegion2 Other = new TopupsMovedToAvailableSubtotalCardRegion2("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, TopupsMovedToAvailableSubtotalCardRegion2> _knownValues =
-            new Dictionary <string, TopupsMovedToAvailableSubtotalCardRegion2> ()
+    public static class TopupsMovedToAvailableSubtotalCardRegion2Extension
+    {
+        public static string Value(this TopupsMovedToAvailableSubtotalCardRegion2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static TopupsMovedToAvailableSubtotalCardRegion2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(TopupsMovedToAvailableSubtotalCardRegion2).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, TopupsMovedToAvailableSubtotalCardRegion2> _values =
-            new ConcurrentDictionary<string, TopupsMovedToAvailableSubtotalCardRegion2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private TopupsMovedToAvailableSubtotalCardRegion2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is TopupsMovedToAvailableSubtotalCardRegion2)
+                    {
+                        return (TopupsMovedToAvailableSubtotalCardRegion2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum TopupsMovedToAvailableSubtotalCardRegion2");
         }
-
-        public string Value { get; }
-
-        public static TopupsMovedToAvailableSubtotalCardRegion2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new TopupsMovedToAvailableSubtotalCardRegion2(value));
-        }
-
-        public static implicit operator TopupsMovedToAvailableSubtotalCardRegion2(string value) => Of(value);
-        public static implicit operator string(TopupsMovedToAvailableSubtotalCardRegion2 topupsmovedtoavailablesubtotalcardregion2) => topupsmovedtoavailablesubtotalcardregion2.Value;
-
-        public static TopupsMovedToAvailableSubtotalCardRegion2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as TopupsMovedToAvailableSubtotalCardRegion2);
-
-        public bool Equals(TopupsMovedToAvailableSubtotalCardRegion2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

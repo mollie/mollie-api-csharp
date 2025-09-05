@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Allows you to preset the language to be used in the hosted payment pages shown to the customer. Setting a locale<br/>
@@ -29,100 +26,85 @@ namespace Mollie.Models.Requests
     /// customer use a local bank account greatly increases the conversion and speed of payment.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsLocale : IEquatable<ListSubscriptionPaymentsLocale>
+    public enum ListSubscriptionPaymentsLocale
     {
-        public static readonly ListSubscriptionPaymentsLocale EnUS = new ListSubscriptionPaymentsLocale("en_US");
-        public static readonly ListSubscriptionPaymentsLocale EnGB = new ListSubscriptionPaymentsLocale("en_GB");
-        public static readonly ListSubscriptionPaymentsLocale Nlnl = new ListSubscriptionPaymentsLocale("nl_NL");
-        public static readonly ListSubscriptionPaymentsLocale NlBE = new ListSubscriptionPaymentsLocale("nl_BE");
-        public static readonly ListSubscriptionPaymentsLocale Dede = new ListSubscriptionPaymentsLocale("de_DE");
-        public static readonly ListSubscriptionPaymentsLocale DeAT = new ListSubscriptionPaymentsLocale("de_AT");
-        public static readonly ListSubscriptionPaymentsLocale DeCH = new ListSubscriptionPaymentsLocale("de_CH");
-        public static readonly ListSubscriptionPaymentsLocale Frfr = new ListSubscriptionPaymentsLocale("fr_FR");
-        public static readonly ListSubscriptionPaymentsLocale FrBE = new ListSubscriptionPaymentsLocale("fr_BE");
-        public static readonly ListSubscriptionPaymentsLocale Eses = new ListSubscriptionPaymentsLocale("es_ES");
-        public static readonly ListSubscriptionPaymentsLocale CaES = new ListSubscriptionPaymentsLocale("ca_ES");
-        public static readonly ListSubscriptionPaymentsLocale Ptpt = new ListSubscriptionPaymentsLocale("pt_PT");
-        public static readonly ListSubscriptionPaymentsLocale Itit = new ListSubscriptionPaymentsLocale("it_IT");
-        public static readonly ListSubscriptionPaymentsLocale NbNO = new ListSubscriptionPaymentsLocale("nb_NO");
-        public static readonly ListSubscriptionPaymentsLocale SvSE = new ListSubscriptionPaymentsLocale("sv_SE");
-        public static readonly ListSubscriptionPaymentsLocale Fifi = new ListSubscriptionPaymentsLocale("fi_FI");
-        public static readonly ListSubscriptionPaymentsLocale DaDK = new ListSubscriptionPaymentsLocale("da_DK");
-        public static readonly ListSubscriptionPaymentsLocale Isis = new ListSubscriptionPaymentsLocale("is_IS");
-        public static readonly ListSubscriptionPaymentsLocale Huhu = new ListSubscriptionPaymentsLocale("hu_HU");
-        public static readonly ListSubscriptionPaymentsLocale Plpl = new ListSubscriptionPaymentsLocale("pl_PL");
-        public static readonly ListSubscriptionPaymentsLocale Lvlv = new ListSubscriptionPaymentsLocale("lv_LV");
-        public static readonly ListSubscriptionPaymentsLocale Ltlt = new ListSubscriptionPaymentsLocale("lt_LT");
+        [JsonProperty("en_US")]
+        EnUS,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("de_DE")]
+        Dede,
+        [JsonProperty("de_AT")]
+        DeAT,
+        [JsonProperty("de_CH")]
+        DeCH,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_BE")]
+        FrBE,
+        [JsonProperty("es_ES")]
+        Eses,
+        [JsonProperty("ca_ES")]
+        CaES,
+        [JsonProperty("pt_PT")]
+        Ptpt,
+        [JsonProperty("it_IT")]
+        Itit,
+        [JsonProperty("nb_NO")]
+        NbNO,
+        [JsonProperty("sv_SE")]
+        SvSE,
+        [JsonProperty("fi_FI")]
+        Fifi,
+        [JsonProperty("da_DK")]
+        DaDK,
+        [JsonProperty("is_IS")]
+        Isis,
+        [JsonProperty("hu_HU")]
+        Huhu,
+        [JsonProperty("pl_PL")]
+        Plpl,
+        [JsonProperty("lv_LV")]
+        Lvlv,
+        [JsonProperty("lt_LT")]
+        Ltlt,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsLocale> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsLocale> ()
+    public static class ListSubscriptionPaymentsLocaleExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsLocale value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsLocale ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsLocale).GetFields())
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
-                ["de_AT"] = DeAT,
-                ["de_CH"] = DeCH,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
-                ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
-                ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
-                ["lt_LT"] = Ltlt
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsLocale> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsLocale>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsLocale(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsLocale)
+                    {
+                        return (ListSubscriptionPaymentsLocale)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsLocale");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsLocale Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsLocale(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsLocale(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsLocale listsubscriptionpaymentslocale) => listsubscriptionpaymentslocale.Value;
-
-        public static ListSubscriptionPaymentsLocale[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsLocale);
-
-        public bool Equals(ListSubscriptionPaymentsLocale? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

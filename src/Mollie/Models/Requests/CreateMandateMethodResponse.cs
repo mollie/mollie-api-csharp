@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment method of the mandate.<br/>
@@ -24,62 +21,47 @@ namespace Mollie.Models.Requests
     /// SEPA Direct Debit and PayPal mandates can be created directly.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateMandateMethodResponse : IEquatable<CreateMandateMethodResponse>
+    public enum CreateMandateMethodResponse
     {
-        public static readonly CreateMandateMethodResponse Creditcard = new CreateMandateMethodResponse("creditcard");
-        public static readonly CreateMandateMethodResponse Directdebit = new CreateMandateMethodResponse("directdebit");
-        public static readonly CreateMandateMethodResponse Paypal = new CreateMandateMethodResponse("paypal");
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("paypal")]
+        Paypal,
+    }
 
-        private static readonly Dictionary <string, CreateMandateMethodResponse> _knownValues =
-            new Dictionary <string, CreateMandateMethodResponse> ()
+    public static class CreateMandateMethodResponseExtension
+    {
+        public static string Value(this CreateMandateMethodResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateMandateMethodResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateMandateMethodResponse).GetFields())
             {
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["paypal"] = Paypal
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateMandateMethodResponse> _values =
-            new ConcurrentDictionary<string, CreateMandateMethodResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateMandateMethodResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateMandateMethodResponse)
+                    {
+                        return (CreateMandateMethodResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateMandateMethodResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateMandateMethodResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateMandateMethodResponse(value));
-        }
-
-        public static implicit operator CreateMandateMethodResponse(string value) => Of(value);
-        public static implicit operator string(CreateMandateMethodResponse createmandatemethodresponse) => createmandatemethodresponse.Value;
-
-        public static CreateMandateMethodResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateMandateMethodResponse);
-
-        public bool Equals(CreateMandateMethodResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

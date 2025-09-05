@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// **Only relevant for recurring payments.**<br/>
@@ -36,62 +33,47 @@ namespace Mollie.Models.Requests
     /// are set up correctly for recurring payments.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListSubscriptionPaymentsSequenceType : IEquatable<ListSubscriptionPaymentsSequenceType>
+    public enum ListSubscriptionPaymentsSequenceType
     {
-        public static readonly ListSubscriptionPaymentsSequenceType Oneoff = new ListSubscriptionPaymentsSequenceType("oneoff");
-        public static readonly ListSubscriptionPaymentsSequenceType First = new ListSubscriptionPaymentsSequenceType("first");
-        public static readonly ListSubscriptionPaymentsSequenceType Recurring = new ListSubscriptionPaymentsSequenceType("recurring");
+        [JsonProperty("oneoff")]
+        Oneoff,
+        [JsonProperty("first")]
+        First,
+        [JsonProperty("recurring")]
+        Recurring,
+    }
 
-        private static readonly Dictionary <string, ListSubscriptionPaymentsSequenceType> _knownValues =
-            new Dictionary <string, ListSubscriptionPaymentsSequenceType> ()
+    public static class ListSubscriptionPaymentsSequenceTypeExtension
+    {
+        public static string Value(this ListSubscriptionPaymentsSequenceType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListSubscriptionPaymentsSequenceType ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListSubscriptionPaymentsSequenceType).GetFields())
             {
-                ["oneoff"] = Oneoff,
-                ["first"] = First,
-                ["recurring"] = Recurring
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListSubscriptionPaymentsSequenceType> _values =
-            new ConcurrentDictionary<string, ListSubscriptionPaymentsSequenceType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListSubscriptionPaymentsSequenceType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListSubscriptionPaymentsSequenceType)
+                    {
+                        return (ListSubscriptionPaymentsSequenceType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListSubscriptionPaymentsSequenceType");
         }
-
-        public string Value { get; }
-
-        public static ListSubscriptionPaymentsSequenceType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListSubscriptionPaymentsSequenceType(value));
-        }
-
-        public static implicit operator ListSubscriptionPaymentsSequenceType(string value) => Of(value);
-        public static implicit operator string(ListSubscriptionPaymentsSequenceType listsubscriptionpaymentssequencetype) => listsubscriptionpaymentssequencetype.Value;
-
-        public static ListSubscriptionPaymentsSequenceType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListSubscriptionPaymentsSequenceType);
-
-        public bool Equals(ListSubscriptionPaymentsSequenceType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

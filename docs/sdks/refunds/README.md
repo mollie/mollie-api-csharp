@@ -38,7 +38,7 @@ var res = await sdk.Refunds.CreateAsync(
             Value = "10.00",
         },
         ExternalReference = new ExternalReferenceRequest() {
-            Type = TypeAcquirerReference.AcquirerReference,
+            Type = TypeAcquirerReferenceRequest.AcquirerReference,
             Id = "123456789012345",
         },
         ReverseRouting = false,
@@ -48,7 +48,7 @@ var res = await sdk.Refunds.CreateAsync(
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                Source = new SourceOrganization() {
+                Source = new CreateRefundSourceRequest() {
                     Type = RoutingReversalType.Organization,
                     OrganizationId = "org_1234567",
                 },

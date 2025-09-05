@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class FeePrepaymentsPendingSubTotalCardRegion1 : IEquatable<FeePrepaymentsPendingSubTotalCardRegion1>
+    public enum FeePrepaymentsPendingSubTotalCardRegion1
     {
-        public static readonly FeePrepaymentsPendingSubTotalCardRegion1 IntraEea = new FeePrepaymentsPendingSubTotalCardRegion1("intra-eea");
-        public static readonly FeePrepaymentsPendingSubTotalCardRegion1 IntraEu = new FeePrepaymentsPendingSubTotalCardRegion1("intra-eu");
-        public static readonly FeePrepaymentsPendingSubTotalCardRegion1 Domestic = new FeePrepaymentsPendingSubTotalCardRegion1("domestic");
-        public static readonly FeePrepaymentsPendingSubTotalCardRegion1 Other = new FeePrepaymentsPendingSubTotalCardRegion1("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, FeePrepaymentsPendingSubTotalCardRegion1> _knownValues =
-            new Dictionary <string, FeePrepaymentsPendingSubTotalCardRegion1> ()
+    public static class FeePrepaymentsPendingSubTotalCardRegion1Extension
+    {
+        public static string Value(this FeePrepaymentsPendingSubTotalCardRegion1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static FeePrepaymentsPendingSubTotalCardRegion1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(FeePrepaymentsPendingSubTotalCardRegion1).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, FeePrepaymentsPendingSubTotalCardRegion1> _values =
-            new ConcurrentDictionary<string, FeePrepaymentsPendingSubTotalCardRegion1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private FeePrepaymentsPendingSubTotalCardRegion1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is FeePrepaymentsPendingSubTotalCardRegion1)
+                    {
+                        return (FeePrepaymentsPendingSubTotalCardRegion1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum FeePrepaymentsPendingSubTotalCardRegion1");
         }
-
-        public string Value { get; }
-
-        public static FeePrepaymentsPendingSubTotalCardRegion1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new FeePrepaymentsPendingSubTotalCardRegion1(value));
-        }
-
-        public static implicit operator FeePrepaymentsPendingSubTotalCardRegion1(string value) => Of(value);
-        public static implicit operator string(FeePrepaymentsPendingSubTotalCardRegion1 feeprepaymentspendingsubtotalcardregion1) => feeprepaymentspendingsubtotalcardregion1.Value;
-
-        public static FeePrepaymentsPendingSubTotalCardRegion1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as FeePrepaymentsPendingSubTotalCardRegion1);
-
-        public bool Equals(FeePrepaymentsPendingSubTotalCardRegion1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

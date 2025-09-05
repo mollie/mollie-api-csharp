@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of discount.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateSalesInvoiceLineTypeResponse : IEquatable<CreateSalesInvoiceLineTypeResponse>
+    public enum CreateSalesInvoiceLineTypeResponse
     {
-        public static readonly CreateSalesInvoiceLineTypeResponse Amount = new CreateSalesInvoiceLineTypeResponse("amount");
-        public static readonly CreateSalesInvoiceLineTypeResponse Percentage = new CreateSalesInvoiceLineTypeResponse("percentage");
+        [JsonProperty("amount")]
+        Amount,
+        [JsonProperty("percentage")]
+        Percentage,
+    }
 
-        private static readonly Dictionary <string, CreateSalesInvoiceLineTypeResponse> _knownValues =
-            new Dictionary <string, CreateSalesInvoiceLineTypeResponse> ()
+    public static class CreateSalesInvoiceLineTypeResponseExtension
+    {
+        public static string Value(this CreateSalesInvoiceLineTypeResponse value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateSalesInvoiceLineTypeResponse ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateSalesInvoiceLineTypeResponse).GetFields())
             {
-                ["amount"] = Amount,
-                ["percentage"] = Percentage
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateSalesInvoiceLineTypeResponse> _values =
-            new ConcurrentDictionary<string, CreateSalesInvoiceLineTypeResponse>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateSalesInvoiceLineTypeResponse(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateSalesInvoiceLineTypeResponse)
+                    {
+                        return (CreateSalesInvoiceLineTypeResponse)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateSalesInvoiceLineTypeResponse");
         }
-
-        public string Value { get; }
-
-        public static CreateSalesInvoiceLineTypeResponse Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateSalesInvoiceLineTypeResponse(value));
-        }
-
-        public static implicit operator CreateSalesInvoiceLineTypeResponse(string value) => Of(value);
-        public static implicit operator string(CreateSalesInvoiceLineTypeResponse createsalesinvoicelinetyperesponse) => createsalesinvoicelinetyperesponse.Value;
-
-        public static CreateSalesInvoiceLineTypeResponse[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateSalesInvoiceLineTypeResponse);
-
-        public bool Equals(CreateSalesInvoiceLineTypeResponse? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

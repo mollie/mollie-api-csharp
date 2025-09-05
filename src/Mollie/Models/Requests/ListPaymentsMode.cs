@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListPaymentsMode : IEquatable<ListPaymentsMode>
+    public enum ListPaymentsMode
     {
-        public static readonly ListPaymentsMode Live = new ListPaymentsMode("live");
-        public static readonly ListPaymentsMode Test = new ListPaymentsMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, ListPaymentsMode> _knownValues =
-            new Dictionary <string, ListPaymentsMode> ()
+    public static class ListPaymentsModeExtension
+    {
+        public static string Value(this ListPaymentsMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListPaymentsMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListPaymentsMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListPaymentsMode> _values =
-            new ConcurrentDictionary<string, ListPaymentsMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListPaymentsMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListPaymentsMode)
+                    {
+                        return (ListPaymentsMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListPaymentsMode");
         }
-
-        public string Value { get; }
-
-        public static ListPaymentsMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListPaymentsMode(value));
-        }
-
-        public static implicit operator ListPaymentsMode(string value) => Of(value);
-        public static implicit operator string(ListPaymentsMode listpaymentsmode) => listpaymentsmode.Value;
-
-        public static ListPaymentsMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListPaymentsMode);
-
-        public bool Equals(ListPaymentsMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

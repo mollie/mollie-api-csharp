@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 9c9a91a48aec7717493710340054b32b
+  docChecksum: 30e66b28c2936672fec3dc4ec5e841f3
   docVersion: 1.0.0
   speakeasyVersion: 1.609.0
   generationVersion: 2.692.0
-  releaseVersion: 0.3.1
-  configChecksum: f28b7c57b9a7536fd80ffa91efe430fa
+  releaseVersion: 0.4.0
+  configChecksum: 2677408da2885742bc2e0bf90904fc57
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -24,7 +24,6 @@ features:
     methodArguments: 0.2.0
     nameOverrides: 2.81.2
     nullables: 0.1.1
-    openEnums: 0.1.0
     responseFormat: 0.0.4
     retries: 0.0.1
     sdkHooks: 0.2.0
@@ -246,7 +245,6 @@ generatedFiles:
   - docs/Models/Requests/CancelPaymentCustomer.md
   - docs/Models/Requests/CancelPaymentDashboard.md
   - docs/Models/Requests/CancelPaymentDestination.md
-  - docs/Models/Requests/CancelPaymentDestinationType.md
   - docs/Models/Requests/CancelPaymentDetails.md
   - docs/Models/Requests/CancelPaymentDiscountAmount.md
   - docs/Models/Requests/CancelPaymentDocumentation.md
@@ -283,6 +281,7 @@ generatedFiles:
   - docs/Models/Requests/CancelPaymentRoutingLinks.md
   - docs/Models/Requests/CancelPaymentRoutingMode.md
   - docs/Models/Requests/CancelPaymentRoutingSelf.md
+  - docs/Models/Requests/CancelPaymentRoutingType.md
   - docs/Models/Requests/CancelPaymentSelf.md
   - docs/Models/Requests/CancelPaymentSellerProtection.md
   - docs/Models/Requests/CancelPaymentSequenceType.md
@@ -623,7 +622,6 @@ generatedFiles:
   - docs/Models/Requests/CreateCustomerPaymentDashboard.md
   - docs/Models/Requests/CreateCustomerPaymentDestinationRequest.md
   - docs/Models/Requests/CreateCustomerPaymentDestinationResponse.md
-  - docs/Models/Requests/CreateCustomerPaymentDestinationType.md
   - docs/Models/Requests/CreateCustomerPaymentDetails.md
   - docs/Models/Requests/CreateCustomerPaymentDiscountAmountRequest.md
   - docs/Models/Requests/CreateCustomerPaymentDiscountAmountResponse.md
@@ -670,6 +668,8 @@ generatedFiles:
   - docs/Models/Requests/CreateCustomerPaymentRoutingRequest.md
   - docs/Models/Requests/CreateCustomerPaymentRoutingResponse.md
   - docs/Models/Requests/CreateCustomerPaymentRoutingSelfResponse.md
+  - docs/Models/Requests/CreateCustomerPaymentRoutingTypeRequest.md
+  - docs/Models/Requests/CreateCustomerPaymentRoutingTypeResponse.md
   - docs/Models/Requests/CreateCustomerPaymentSelfRequest.md
   - docs/Models/Requests/CreateCustomerPaymentSelfResponse.md
   - docs/Models/Requests/CreateCustomerPaymentSellerProtection.md
@@ -687,7 +687,6 @@ generatedFiles:
   - docs/Models/Requests/CreateCustomerPaymentTerminal.md
   - docs/Models/Requests/CreateCustomerPaymentTotalAmountRequest.md
   - docs/Models/Requests/CreateCustomerPaymentTotalAmountResponse.md
-  - docs/Models/Requests/CreateCustomerPaymentTypeOrganization.md
   - docs/Models/Requests/CreateCustomerPaymentUnitPriceRequest.md
   - docs/Models/Requests/CreateCustomerPaymentUnitPriceResponse.md
   - docs/Models/Requests/CreateCustomerPaymentUnprocessableEntityDocumentation.md
@@ -749,7 +748,6 @@ generatedFiles:
   - docs/Models/Requests/CreatePaymentDashboard.md
   - docs/Models/Requests/CreatePaymentDestinationRequest.md
   - docs/Models/Requests/CreatePaymentDestinationResponse.md
-  - docs/Models/Requests/CreatePaymentDestinationType.md
   - docs/Models/Requests/CreatePaymentDetails.md
   - docs/Models/Requests/CreatePaymentDiscountAmountRequest.md
   - docs/Models/Requests/CreatePaymentDiscountAmountResponse.md
@@ -836,6 +834,8 @@ generatedFiles:
   - docs/Models/Requests/CreatePaymentRoutingRequest.md
   - docs/Models/Requests/CreatePaymentRoutingResponse.md
   - docs/Models/Requests/CreatePaymentRoutingSelfResponse.md
+  - docs/Models/Requests/CreatePaymentRoutingTypeRequest.md
+  - docs/Models/Requests/CreatePaymentRoutingTypeResponse.md
   - docs/Models/Requests/CreatePaymentSelfRequest.md
   - docs/Models/Requests/CreatePaymentSelfResponse.md
   - docs/Models/Requests/CreatePaymentSellerProtection.md
@@ -853,7 +853,6 @@ generatedFiles:
   - docs/Models/Requests/CreatePaymentTerminal.md
   - docs/Models/Requests/CreatePaymentTotalAmountRequest.md
   - docs/Models/Requests/CreatePaymentTotalAmountResponse.md
-  - docs/Models/Requests/CreatePaymentTypeOrganization.md
   - docs/Models/Requests/CreatePaymentUnitPriceRequest.md
   - docs/Models/Requests/CreatePaymentUnitPriceResponse.md
   - docs/Models/Requests/CreatePaymentUnprocessableEntityDocumentation.md
@@ -883,7 +882,6 @@ generatedFiles:
   - docs/Models/Requests/CreateRefundAmountResponse.md
   - docs/Models/Requests/CreateRefundDocumentation.md
   - docs/Models/Requests/CreateRefundExternalReferenceResponse.md
-  - docs/Models/Requests/CreateRefundExternalReferenceType.md
   - docs/Models/Requests/CreateRefundLinks.md
   - docs/Models/Requests/CreateRefundMetadataRequest.md
   - docs/Models/Requests/CreateRefundMetadataResponse.md
@@ -901,7 +899,9 @@ generatedFiles:
   - docs/Models/Requests/CreateRefundSettlement.md
   - docs/Models/Requests/CreateRefundSettlementAmount.md
   - docs/Models/Requests/CreateRefundSourceOutput.md
+  - docs/Models/Requests/CreateRefundSourceRequest.md
   - docs/Models/Requests/CreateRefundStatus.md
+  - docs/Models/Requests/CreateRefundTypeResponse.md
   - docs/Models/Requests/CreateRefundUnprocessableEntityDocumentation.md
   - docs/Models/Requests/CreateRefundUnprocessableEntityLinks.md
   - docs/Models/Requests/CreateSalesInvoiceAmountDue.md
@@ -1348,7 +1348,6 @@ generatedFiles:
   - docs/Models/Requests/GetPaymentCustomer.md
   - docs/Models/Requests/GetPaymentDashboard.md
   - docs/Models/Requests/GetPaymentDestination.md
-  - docs/Models/Requests/GetPaymentDestinationType.md
   - docs/Models/Requests/GetPaymentDetails.md
   - docs/Models/Requests/GetPaymentDiscountAmount.md
   - docs/Models/Requests/GetPaymentDocumentation.md
@@ -1397,7 +1396,6 @@ generatedFiles:
   - docs/Models/Requests/GetPaymentLinkPaymentsCustomer.md
   - docs/Models/Requests/GetPaymentLinkPaymentsDashboard.md
   - docs/Models/Requests/GetPaymentLinkPaymentsDestination.md
-  - docs/Models/Requests/GetPaymentLinkPaymentsDestinationType.md
   - docs/Models/Requests/GetPaymentLinkPaymentsDetails.md
   - docs/Models/Requests/GetPaymentLinkPaymentsDiscountAmount.md
   - docs/Models/Requests/GetPaymentLinkPaymentsDocumentation.md
@@ -1438,6 +1436,7 @@ generatedFiles:
   - docs/Models/Requests/GetPaymentLinkPaymentsRoutingMode.md
   - docs/Models/Requests/GetPaymentLinkPaymentsRoutingPayment.md
   - docs/Models/Requests/GetPaymentLinkPaymentsRoutingSelf.md
+  - docs/Models/Requests/GetPaymentLinkPaymentsRoutingType.md
   - docs/Models/Requests/GetPaymentLinkPaymentsSelf.md
   - docs/Models/Requests/GetPaymentLinkPaymentsSellerProtection.md
   - docs/Models/Requests/GetPaymentLinkPaymentsSequenceType.md
@@ -1491,6 +1490,7 @@ generatedFiles:
   - docs/Models/Requests/GetPaymentRoutingLinks.md
   - docs/Models/Requests/GetPaymentRoutingMode.md
   - docs/Models/Requests/GetPaymentRoutingSelf.md
+  - docs/Models/Requests/GetPaymentRoutingType.md
   - docs/Models/Requests/GetPaymentSelf.md
   - docs/Models/Requests/GetPaymentSellerProtection.md
   - docs/Models/Requests/GetPaymentSequenceType.md
@@ -1964,7 +1964,6 @@ generatedFiles:
   - docs/Models/Requests/ListCustomerPaymentsCustomer.md
   - docs/Models/Requests/ListCustomerPaymentsDashboard.md
   - docs/Models/Requests/ListCustomerPaymentsDestination.md
-  - docs/Models/Requests/ListCustomerPaymentsDestinationType.md
   - docs/Models/Requests/ListCustomerPaymentsDetails.md
   - docs/Models/Requests/ListCustomerPaymentsDiscountAmount.md
   - docs/Models/Requests/ListCustomerPaymentsDocumentation.md
@@ -2005,6 +2004,7 @@ generatedFiles:
   - docs/Models/Requests/ListCustomerPaymentsRoutingMode.md
   - docs/Models/Requests/ListCustomerPaymentsRoutingPayment.md
   - docs/Models/Requests/ListCustomerPaymentsRoutingSelf.md
+  - docs/Models/Requests/ListCustomerPaymentsRoutingType.md
   - docs/Models/Requests/ListCustomerPaymentsSelf.md
   - docs/Models/Requests/ListCustomerPaymentsSellerProtection.md
   - docs/Models/Requests/ListCustomerPaymentsSequenceType.md
@@ -2156,7 +2156,6 @@ generatedFiles:
   - docs/Models/Requests/ListPaymentsCustomer.md
   - docs/Models/Requests/ListPaymentsDashboard.md
   - docs/Models/Requests/ListPaymentsDestination.md
-  - docs/Models/Requests/ListPaymentsDestinationType.md
   - docs/Models/Requests/ListPaymentsDetails.md
   - docs/Models/Requests/ListPaymentsDiscountAmount.md
   - docs/Models/Requests/ListPaymentsDocumentation.md
@@ -2197,6 +2196,7 @@ generatedFiles:
   - docs/Models/Requests/ListPaymentsRoutingMode.md
   - docs/Models/Requests/ListPaymentsRoutingPayment.md
   - docs/Models/Requests/ListPaymentsRoutingSelf.md
+  - docs/Models/Requests/ListPaymentsRoutingType.md
   - docs/Models/Requests/ListPaymentsSelf.md
   - docs/Models/Requests/ListPaymentsSellerProtection.md
   - docs/Models/Requests/ListPaymentsSequenceType.md
@@ -2382,7 +2382,6 @@ generatedFiles:
   - docs/Models/Requests/ListSettlementPaymentsCustomer.md
   - docs/Models/Requests/ListSettlementPaymentsDashboard.md
   - docs/Models/Requests/ListSettlementPaymentsDestination.md
-  - docs/Models/Requests/ListSettlementPaymentsDestinationType.md
   - docs/Models/Requests/ListSettlementPaymentsDetails.md
   - docs/Models/Requests/ListSettlementPaymentsDiscountAmount.md
   - docs/Models/Requests/ListSettlementPaymentsDocumentation.md
@@ -2423,6 +2422,7 @@ generatedFiles:
   - docs/Models/Requests/ListSettlementPaymentsRoutingMode.md
   - docs/Models/Requests/ListSettlementPaymentsRoutingPayment.md
   - docs/Models/Requests/ListSettlementPaymentsRoutingSelf.md
+  - docs/Models/Requests/ListSettlementPaymentsRoutingType.md
   - docs/Models/Requests/ListSettlementPaymentsSelf.md
   - docs/Models/Requests/ListSettlementPaymentsSellerProtection.md
   - docs/Models/Requests/ListSettlementPaymentsSequenceType.md
@@ -2515,7 +2515,6 @@ generatedFiles:
   - docs/Models/Requests/ListSubscriptionPaymentsCustomer.md
   - docs/Models/Requests/ListSubscriptionPaymentsDashboard.md
   - docs/Models/Requests/ListSubscriptionPaymentsDestination.md
-  - docs/Models/Requests/ListSubscriptionPaymentsDestinationType.md
   - docs/Models/Requests/ListSubscriptionPaymentsDetails.md
   - docs/Models/Requests/ListSubscriptionPaymentsDiscountAmount.md
   - docs/Models/Requests/ListSubscriptionPaymentsDocumentation.md
@@ -2556,6 +2555,7 @@ generatedFiles:
   - docs/Models/Requests/ListSubscriptionPaymentsRoutingMode.md
   - docs/Models/Requests/ListSubscriptionPaymentsRoutingPayment.md
   - docs/Models/Requests/ListSubscriptionPaymentsRoutingSelf.md
+  - docs/Models/Requests/ListSubscriptionPaymentsRoutingType.md
   - docs/Models/Requests/ListSubscriptionPaymentsSelf.md
   - docs/Models/Requests/ListSubscriptionPaymentsSellerProtection.md
   - docs/Models/Requests/ListSubscriptionPaymentsSequenceType.md
@@ -2701,7 +2701,6 @@ generatedFiles:
   - docs/Models/Requests/PaymentCreateRouteAmountResponse.md
   - docs/Models/Requests/PaymentCreateRouteDestinationRequest.md
   - docs/Models/Requests/PaymentCreateRouteDestinationResponse.md
-  - docs/Models/Requests/PaymentCreateRouteDestinationType.md
   - docs/Models/Requests/PaymentCreateRouteDocumentation.md
   - docs/Models/Requests/PaymentCreateRouteLinks.md
   - docs/Models/Requests/PaymentCreateRouteNotFoundDocumentation.md
@@ -2711,7 +2710,8 @@ generatedFiles:
   - docs/Models/Requests/PaymentCreateRouteResponse.md
   - docs/Models/Requests/PaymentCreateRouteResponseBody.md
   - docs/Models/Requests/PaymentCreateRouteSelf.md
-  - docs/Models/Requests/PaymentCreateRouteTypeOrganization.md
+  - docs/Models/Requests/PaymentCreateRouteTypeRequest.md
+  - docs/Models/Requests/PaymentCreateRouteTypeResponse.md
   - docs/Models/Requests/PaymentFee.md
   - docs/Models/Requests/PaymentLinkLinks.md
   - docs/Models/Requests/PaymentLinkSelf.md
@@ -2963,7 +2963,6 @@ generatedFiles:
   - docs/Models/Requests/SettlementLinks.md
   - docs/Models/Requests/SettlementSelf.md
   - docs/Models/Requests/Signuplink.md
-  - docs/Models/Requests/SourceOrganization.md
   - docs/Models/Requests/SplitPayment.md
   - docs/Models/Requests/SubmitOnboardingDataAddress.md
   - docs/Models/Requests/SubmitOnboardingDataOrganization.md
@@ -3094,7 +3093,7 @@ generatedFiles:
   - docs/Models/Requests/TransfersPendingSubtotalMethod2.md
   - docs/Models/Requests/TransfersPendingSubtotalPrepaymentPartType2.md
   - docs/Models/Requests/TransfersPendingSubtotalTransactionType2.md
-  - docs/Models/Requests/TypeAcquirerReference.md
+  - docs/Models/Requests/TypeAcquirerReferenceRequest.md
   - docs/Models/Requests/UnauthorizedDirectDebit.md
   - docs/Models/Requests/UpdateCustomerDashboard.md
   - docs/Models/Requests/UpdateCustomerDocumentation.md
@@ -3139,7 +3138,6 @@ generatedFiles:
   - docs/Models/Requests/UpdatePaymentCustomer.md
   - docs/Models/Requests/UpdatePaymentDashboard.md
   - docs/Models/Requests/UpdatePaymentDestination.md
-  - docs/Models/Requests/UpdatePaymentDestinationType.md
   - docs/Models/Requests/UpdatePaymentDetails.md
   - docs/Models/Requests/UpdatePaymentDiscountAmount.md
   - docs/Models/Requests/UpdatePaymentDocumentation.md
@@ -3215,6 +3213,7 @@ generatedFiles:
   - docs/Models/Requests/UpdatePaymentRoutingLinks.md
   - docs/Models/Requests/UpdatePaymentRoutingMode.md
   - docs/Models/Requests/UpdatePaymentRoutingSelf.md
+  - docs/Models/Requests/UpdatePaymentRoutingType.md
   - docs/Models/Requests/UpdatePaymentSelf.md
   - docs/Models/Requests/UpdatePaymentSellerProtection.md
   - docs/Models/Requests/UpdatePaymentSequenceType.md
@@ -3604,7 +3603,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CancelPaymentCustomer.cs
   - src/Mollie/Models/Requests/CancelPaymentDashboard.cs
   - src/Mollie/Models/Requests/CancelPaymentDestination.cs
-  - src/Mollie/Models/Requests/CancelPaymentDestinationType.cs
   - src/Mollie/Models/Requests/CancelPaymentDetails.cs
   - src/Mollie/Models/Requests/CancelPaymentDiscountAmount.cs
   - src/Mollie/Models/Requests/CancelPaymentDocumentation.cs
@@ -3641,6 +3639,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/CancelPaymentRoutingLinks.cs
   - src/Mollie/Models/Requests/CancelPaymentRoutingMode.cs
   - src/Mollie/Models/Requests/CancelPaymentRoutingSelf.cs
+  - src/Mollie/Models/Requests/CancelPaymentRoutingType.cs
   - src/Mollie/Models/Requests/CancelPaymentSelf.cs
   - src/Mollie/Models/Requests/CancelPaymentSellerProtection.cs
   - src/Mollie/Models/Requests/CancelPaymentSequenceType.cs
@@ -3981,7 +3980,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateCustomerPaymentDashboard.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentDestinationRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentDestinationResponse.cs
-  - src/Mollie/Models/Requests/CreateCustomerPaymentDestinationType.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentDetails.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentDiscountAmountRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentDiscountAmountResponse.cs
@@ -4028,6 +4026,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateCustomerPaymentRoutingRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentRoutingResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentRoutingSelfResponse.cs
+  - src/Mollie/Models/Requests/CreateCustomerPaymentRoutingTypeRequest.cs
+  - src/Mollie/Models/Requests/CreateCustomerPaymentRoutingTypeResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentSelfRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentSelfResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentSellerProtection.cs
@@ -4045,7 +4045,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateCustomerPaymentTerminal.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentTotalAmountRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentTotalAmountResponse.cs
-  - src/Mollie/Models/Requests/CreateCustomerPaymentTypeOrganization.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentUnitPriceRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentUnitPriceResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentUnprocessableEntityDocumentation.cs
@@ -4107,7 +4106,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreatePaymentDashboard.cs
   - src/Mollie/Models/Requests/CreatePaymentDestinationRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentDestinationResponse.cs
-  - src/Mollie/Models/Requests/CreatePaymentDestinationType.cs
   - src/Mollie/Models/Requests/CreatePaymentDetails.cs
   - src/Mollie/Models/Requests/CreatePaymentDiscountAmountRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentDiscountAmountResponse.cs
@@ -4194,6 +4192,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreatePaymentRoutingRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentRoutingResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentRoutingSelfResponse.cs
+  - src/Mollie/Models/Requests/CreatePaymentRoutingTypeRequest.cs
+  - src/Mollie/Models/Requests/CreatePaymentRoutingTypeResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentSelfRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentSelfResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentSellerProtection.cs
@@ -4211,7 +4211,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreatePaymentTerminal.cs
   - src/Mollie/Models/Requests/CreatePaymentTotalAmountRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentTotalAmountResponse.cs
-  - src/Mollie/Models/Requests/CreatePaymentTypeOrganization.cs
   - src/Mollie/Models/Requests/CreatePaymentUnitPriceRequest.cs
   - src/Mollie/Models/Requests/CreatePaymentUnitPriceResponse.cs
   - src/Mollie/Models/Requests/CreatePaymentUnprocessableEntityDocumentation.cs
@@ -4241,7 +4240,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateRefundAmountResponse.cs
   - src/Mollie/Models/Requests/CreateRefundDocumentation.cs
   - src/Mollie/Models/Requests/CreateRefundExternalReferenceResponse.cs
-  - src/Mollie/Models/Requests/CreateRefundExternalReferenceType.cs
   - src/Mollie/Models/Requests/CreateRefundLinks.cs
   - src/Mollie/Models/Requests/CreateRefundMetadataRequest.cs
   - src/Mollie/Models/Requests/CreateRefundMetadataResponse.cs
@@ -4259,7 +4257,9 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateRefundSettlement.cs
   - src/Mollie/Models/Requests/CreateRefundSettlementAmount.cs
   - src/Mollie/Models/Requests/CreateRefundSourceOutput.cs
+  - src/Mollie/Models/Requests/CreateRefundSourceRequest.cs
   - src/Mollie/Models/Requests/CreateRefundStatus.cs
+  - src/Mollie/Models/Requests/CreateRefundTypeResponse.cs
   - src/Mollie/Models/Requests/CreateRefundUnprocessableEntityDocumentation.cs
   - src/Mollie/Models/Requests/CreateRefundUnprocessableEntityLinks.cs
   - src/Mollie/Models/Requests/CreateSalesInvoiceAmountDue.cs
@@ -4706,7 +4706,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetPaymentCustomer.cs
   - src/Mollie/Models/Requests/GetPaymentDashboard.cs
   - src/Mollie/Models/Requests/GetPaymentDestination.cs
-  - src/Mollie/Models/Requests/GetPaymentDestinationType.cs
   - src/Mollie/Models/Requests/GetPaymentDetails.cs
   - src/Mollie/Models/Requests/GetPaymentDiscountAmount.cs
   - src/Mollie/Models/Requests/GetPaymentDocumentation.cs
@@ -4755,7 +4754,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsCustomer.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDashboard.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDestination.cs
-  - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDestinationType.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDetails.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDiscountAmount.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsDocumentation.cs
@@ -4796,6 +4794,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsRoutingMode.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsRoutingPayment.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsRoutingSelf.cs
+  - src/Mollie/Models/Requests/GetPaymentLinkPaymentsRoutingType.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsSelf.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsSellerProtection.cs
   - src/Mollie/Models/Requests/GetPaymentLinkPaymentsSequenceType.cs
@@ -4849,6 +4848,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetPaymentRoutingLinks.cs
   - src/Mollie/Models/Requests/GetPaymentRoutingMode.cs
   - src/Mollie/Models/Requests/GetPaymentRoutingSelf.cs
+  - src/Mollie/Models/Requests/GetPaymentRoutingType.cs
   - src/Mollie/Models/Requests/GetPaymentSelf.cs
   - src/Mollie/Models/Requests/GetPaymentSellerProtection.cs
   - src/Mollie/Models/Requests/GetPaymentSequenceType.cs
@@ -5322,7 +5322,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListCustomerPaymentsCustomer.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsDashboard.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsDestination.cs
-  - src/Mollie/Models/Requests/ListCustomerPaymentsDestinationType.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsDetails.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsDiscountAmount.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsDocumentation.cs
@@ -5363,6 +5362,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListCustomerPaymentsRoutingMode.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsRoutingPayment.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsRoutingSelf.cs
+  - src/Mollie/Models/Requests/ListCustomerPaymentsRoutingType.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsSelf.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsSellerProtection.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsSequenceType.cs
@@ -5514,7 +5514,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListPaymentsCustomer.cs
   - src/Mollie/Models/Requests/ListPaymentsDashboard.cs
   - src/Mollie/Models/Requests/ListPaymentsDestination.cs
-  - src/Mollie/Models/Requests/ListPaymentsDestinationType.cs
   - src/Mollie/Models/Requests/ListPaymentsDetails.cs
   - src/Mollie/Models/Requests/ListPaymentsDiscountAmount.cs
   - src/Mollie/Models/Requests/ListPaymentsDocumentation.cs
@@ -5555,6 +5554,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListPaymentsRoutingMode.cs
   - src/Mollie/Models/Requests/ListPaymentsRoutingPayment.cs
   - src/Mollie/Models/Requests/ListPaymentsRoutingSelf.cs
+  - src/Mollie/Models/Requests/ListPaymentsRoutingType.cs
   - src/Mollie/Models/Requests/ListPaymentsSelf.cs
   - src/Mollie/Models/Requests/ListPaymentsSellerProtection.cs
   - src/Mollie/Models/Requests/ListPaymentsSequenceType.cs
@@ -5740,7 +5740,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListSettlementPaymentsCustomer.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsDashboard.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsDestination.cs
-  - src/Mollie/Models/Requests/ListSettlementPaymentsDestinationType.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsDetails.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsDiscountAmount.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsDocumentation.cs
@@ -5781,6 +5780,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListSettlementPaymentsRoutingMode.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsRoutingPayment.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsRoutingSelf.cs
+  - src/Mollie/Models/Requests/ListSettlementPaymentsRoutingType.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsSelf.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsSellerProtection.cs
   - src/Mollie/Models/Requests/ListSettlementPaymentsSequenceType.cs
@@ -5873,7 +5873,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsCustomer.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsDashboard.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsDestination.cs
-  - src/Mollie/Models/Requests/ListSubscriptionPaymentsDestinationType.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsDetails.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsDiscountAmount.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsDocumentation.cs
@@ -5914,6 +5913,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsRoutingMode.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsRoutingPayment.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsRoutingSelf.cs
+  - src/Mollie/Models/Requests/ListSubscriptionPaymentsRoutingType.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsSelf.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsSellerProtection.cs
   - src/Mollie/Models/Requests/ListSubscriptionPaymentsSequenceType.cs
@@ -6059,7 +6059,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/PaymentCreateRouteAmountResponse.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteDestinationRequest.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteDestinationResponse.cs
-  - src/Mollie/Models/Requests/PaymentCreateRouteDestinationType.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteDocumentation.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteLinks.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteNotFoundDocumentation.cs
@@ -6069,7 +6068,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/PaymentCreateRouteResponse.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteResponseBody.cs
   - src/Mollie/Models/Requests/PaymentCreateRouteSelf.cs
-  - src/Mollie/Models/Requests/PaymentCreateRouteTypeOrganization.cs
+  - src/Mollie/Models/Requests/PaymentCreateRouteTypeRequest.cs
+  - src/Mollie/Models/Requests/PaymentCreateRouteTypeResponse.cs
   - src/Mollie/Models/Requests/PaymentFee.cs
   - src/Mollie/Models/Requests/PaymentLinkLinks.cs
   - src/Mollie/Models/Requests/PaymentLinkSelf.cs
@@ -6321,7 +6321,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/SettlementLinks.cs
   - src/Mollie/Models/Requests/SettlementSelf.cs
   - src/Mollie/Models/Requests/Signuplink.cs
-  - src/Mollie/Models/Requests/SourceOrganization.cs
   - src/Mollie/Models/Requests/SplitPayment.cs
   - src/Mollie/Models/Requests/SubmitOnboardingDataAddress.cs
   - src/Mollie/Models/Requests/SubmitOnboardingDataOrganization.cs
@@ -6452,7 +6451,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/TransfersPendingSubtotalMethod2.cs
   - src/Mollie/Models/Requests/TransfersPendingSubtotalPrepaymentPartType2.cs
   - src/Mollie/Models/Requests/TransfersPendingSubtotalTransactionType2.cs
-  - src/Mollie/Models/Requests/TypeAcquirerReference.cs
+  - src/Mollie/Models/Requests/TypeAcquirerReferenceRequest.cs
   - src/Mollie/Models/Requests/UnauthorizedDirectDebit.cs
   - src/Mollie/Models/Requests/UpdateCustomerDashboard.cs
   - src/Mollie/Models/Requests/UpdateCustomerDocumentation.cs
@@ -6497,7 +6496,6 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdatePaymentCustomer.cs
   - src/Mollie/Models/Requests/UpdatePaymentDashboard.cs
   - src/Mollie/Models/Requests/UpdatePaymentDestination.cs
-  - src/Mollie/Models/Requests/UpdatePaymentDestinationType.cs
   - src/Mollie/Models/Requests/UpdatePaymentDetails.cs
   - src/Mollie/Models/Requests/UpdatePaymentDiscountAmount.cs
   - src/Mollie/Models/Requests/UpdatePaymentDocumentation.cs
@@ -6573,6 +6571,7 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdatePaymentRoutingLinks.cs
   - src/Mollie/Models/Requests/UpdatePaymentRoutingMode.cs
   - src/Mollie/Models/Requests/UpdatePaymentRoutingSelf.cs
+  - src/Mollie/Models/Requests/UpdatePaymentRoutingType.cs
   - src/Mollie/Models/Requests/UpdatePaymentSelf.cs
   - src/Mollie/Models/Requests/UpdatePaymentSellerProtection.cs
   - src/Mollie/Models/Requests/UpdatePaymentSequenceType.cs
@@ -9464,4 +9463,3 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Webhooks.Create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Update()`: \n  *  `requestBody` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Get()`:  `response` **Changed** **Breaking** :warning:\n* `Client.Webhook-Events.Get()`:  `response` **Changed** **Breaking** :warning:\n"

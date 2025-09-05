@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The type of transaction, for example `payment` or `refund`. Values include the below examples, although this list<br/>
@@ -29,148 +26,133 @@ namespace Mollie.Models.Requests
     /// * Mollie Connect: `application-fee` `split-payment` `platform-payment-refund` `platform-payment-chargeback`
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListBalanceTransactionsType : IEquatable<ListBalanceTransactionsType>
+    public enum ListBalanceTransactionsType
     {
-        public static readonly ListBalanceTransactionsType ApplicationFee = new ListBalanceTransactionsType("application-fee");
-        public static readonly ListBalanceTransactionsType Capture = new ListBalanceTransactionsType("capture");
-        public static readonly ListBalanceTransactionsType Chargeback = new ListBalanceTransactionsType("chargeback");
-        public static readonly ListBalanceTransactionsType ChargebackReversal = new ListBalanceTransactionsType("chargeback-reversal");
-        public static readonly ListBalanceTransactionsType FailedPaymentFee = new ListBalanceTransactionsType("failed-payment-fee");
-        public static readonly ListBalanceTransactionsType FailedPayment = new ListBalanceTransactionsType("failed-payment");
-        public static readonly ListBalanceTransactionsType InvoiceCompensation = new ListBalanceTransactionsType("invoice-compensation");
-        public static readonly ListBalanceTransactionsType Payment = new ListBalanceTransactionsType("payment");
-        public static readonly ListBalanceTransactionsType PaymentFee = new ListBalanceTransactionsType("payment-fee");
-        public static readonly ListBalanceTransactionsType PaymentCommission = new ListBalanceTransactionsType("payment-commission");
-        public static readonly ListBalanceTransactionsType Refund = new ListBalanceTransactionsType("refund");
-        public static readonly ListBalanceTransactionsType ReturnedRefund = new ListBalanceTransactionsType("returned-refund");
-        public static readonly ListBalanceTransactionsType ReturnedTransfer = new ListBalanceTransactionsType("returned-transfer");
-        public static readonly ListBalanceTransactionsType SplitPayment = new ListBalanceTransactionsType("split-payment");
-        public static readonly ListBalanceTransactionsType OutgoingTransfer = new ListBalanceTransactionsType("outgoing-transfer");
-        public static readonly ListBalanceTransactionsType CaptureCommission = new ListBalanceTransactionsType("capture-commission");
-        public static readonly ListBalanceTransactionsType CanceledOutgoingTransfer = new ListBalanceTransactionsType("canceled-outgoing-transfer");
-        public static readonly ListBalanceTransactionsType IncomingTransfer = new ListBalanceTransactionsType("incoming-transfer");
-        public static readonly ListBalanceTransactionsType ApiPaymentRollingReserveRelease = new ListBalanceTransactionsType("api-payment-rolling-reserve-release");
-        public static readonly ListBalanceTransactionsType CaptureRollingReserveRelease = new ListBalanceTransactionsType("capture-rolling-reserve-release");
-        public static readonly ListBalanceTransactionsType ReimbursementFee = new ListBalanceTransactionsType("reimbursement-fee");
-        public static readonly ListBalanceTransactionsType BalanceCorrection = new ListBalanceTransactionsType("balance-correction");
-        public static readonly ListBalanceTransactionsType UnauthorizedDirectDebit = new ListBalanceTransactionsType("unauthorized-direct-debit");
-        public static readonly ListBalanceTransactionsType BankChargedFailureFee = new ListBalanceTransactionsType("bank-charged-failure-fee");
-        public static readonly ListBalanceTransactionsType PlatformPaymentRefund = new ListBalanceTransactionsType("platform-payment-refund");
-        public static readonly ListBalanceTransactionsType RefundCompensation = new ListBalanceTransactionsType("refund-compensation");
-        public static readonly ListBalanceTransactionsType ReturnedRefundCompensation = new ListBalanceTransactionsType("returned-refund-compensation");
-        public static readonly ListBalanceTransactionsType ReturnedPlatformPaymentRefund = new ListBalanceTransactionsType("returned-platform-payment-refund");
-        public static readonly ListBalanceTransactionsType PlatformPaymentChargeback = new ListBalanceTransactionsType("platform-payment-chargeback");
-        public static readonly ListBalanceTransactionsType ChargebackCompensation = new ListBalanceTransactionsType("chargeback-compensation");
-        public static readonly ListBalanceTransactionsType ReversedPlatformPaymentChargeback = new ListBalanceTransactionsType("reversed-platform-payment-chargeback");
-        public static readonly ListBalanceTransactionsType ReversedChargebackCompensation = new ListBalanceTransactionsType("reversed-chargeback-compensation");
-        public static readonly ListBalanceTransactionsType FailedSplitPaymentPlatform = new ListBalanceTransactionsType("failed-split-payment-platform");
-        public static readonly ListBalanceTransactionsType FailedSplitPaymentCompensation = new ListBalanceTransactionsType("failed-split-payment-compensation");
-        public static readonly ListBalanceTransactionsType CashAdvanceLoan = new ListBalanceTransactionsType("cash-advance-loan");
-        public static readonly ListBalanceTransactionsType PlatformConnectedOrganizationsFee = new ListBalanceTransactionsType("platform-connected-organizations-fee");
-        public static readonly ListBalanceTransactionsType SplitTransaction = new ListBalanceTransactionsType("split-transaction");
-        public static readonly ListBalanceTransactionsType ManagedFee = new ListBalanceTransactionsType("managed-fee");
-        public static readonly ListBalanceTransactionsType ReturnedManagedFee = new ListBalanceTransactionsType("returned-managed-fee");
-        public static readonly ListBalanceTransactionsType Topup = new ListBalanceTransactionsType("topup");
-        public static readonly ListBalanceTransactionsType BalanceReserve = new ListBalanceTransactionsType("balance-reserve");
-        public static readonly ListBalanceTransactionsType BalanceReserveReturn = new ListBalanceTransactionsType("balance-reserve-return");
-        public static readonly ListBalanceTransactionsType Movement = new ListBalanceTransactionsType("movement");
-        public static readonly ListBalanceTransactionsType PostPaymentSplitPayment = new ListBalanceTransactionsType("post-payment-split-payment");
-        public static readonly ListBalanceTransactionsType CashCollateralIssuance = new ListBalanceTransactionsType("cash-collateral-issuance");
-        public static readonly ListBalanceTransactionsType CashCollateralRelease = new ListBalanceTransactionsType("cash-collateral-release");
+        [JsonProperty("application-fee")]
+        ApplicationFee,
+        [JsonProperty("capture")]
+        Capture,
+        [JsonProperty("chargeback")]
+        Chargeback,
+        [JsonProperty("chargeback-reversal")]
+        ChargebackReversal,
+        [JsonProperty("failed-payment-fee")]
+        FailedPaymentFee,
+        [JsonProperty("failed-payment")]
+        FailedPayment,
+        [JsonProperty("invoice-compensation")]
+        InvoiceCompensation,
+        [JsonProperty("payment")]
+        Payment,
+        [JsonProperty("payment-fee")]
+        PaymentFee,
+        [JsonProperty("payment-commission")]
+        PaymentCommission,
+        [JsonProperty("refund")]
+        Refund,
+        [JsonProperty("returned-refund")]
+        ReturnedRefund,
+        [JsonProperty("returned-transfer")]
+        ReturnedTransfer,
+        [JsonProperty("split-payment")]
+        SplitPayment,
+        [JsonProperty("outgoing-transfer")]
+        OutgoingTransfer,
+        [JsonProperty("capture-commission")]
+        CaptureCommission,
+        [JsonProperty("canceled-outgoing-transfer")]
+        CanceledOutgoingTransfer,
+        [JsonProperty("incoming-transfer")]
+        IncomingTransfer,
+        [JsonProperty("api-payment-rolling-reserve-release")]
+        ApiPaymentRollingReserveRelease,
+        [JsonProperty("capture-rolling-reserve-release")]
+        CaptureRollingReserveRelease,
+        [JsonProperty("reimbursement-fee")]
+        ReimbursementFee,
+        [JsonProperty("balance-correction")]
+        BalanceCorrection,
+        [JsonProperty("unauthorized-direct-debit")]
+        UnauthorizedDirectDebit,
+        [JsonProperty("bank-charged-failure-fee")]
+        BankChargedFailureFee,
+        [JsonProperty("platform-payment-refund")]
+        PlatformPaymentRefund,
+        [JsonProperty("refund-compensation")]
+        RefundCompensation,
+        [JsonProperty("returned-refund-compensation")]
+        ReturnedRefundCompensation,
+        [JsonProperty("returned-platform-payment-refund")]
+        ReturnedPlatformPaymentRefund,
+        [JsonProperty("platform-payment-chargeback")]
+        PlatformPaymentChargeback,
+        [JsonProperty("chargeback-compensation")]
+        ChargebackCompensation,
+        [JsonProperty("reversed-platform-payment-chargeback")]
+        ReversedPlatformPaymentChargeback,
+        [JsonProperty("reversed-chargeback-compensation")]
+        ReversedChargebackCompensation,
+        [JsonProperty("failed-split-payment-platform")]
+        FailedSplitPaymentPlatform,
+        [JsonProperty("failed-split-payment-compensation")]
+        FailedSplitPaymentCompensation,
+        [JsonProperty("cash-advance-loan")]
+        CashAdvanceLoan,
+        [JsonProperty("platform-connected-organizations-fee")]
+        PlatformConnectedOrganizationsFee,
+        [JsonProperty("split-transaction")]
+        SplitTransaction,
+        [JsonProperty("managed-fee")]
+        ManagedFee,
+        [JsonProperty("returned-managed-fee")]
+        ReturnedManagedFee,
+        [JsonProperty("topup")]
+        Topup,
+        [JsonProperty("balance-reserve")]
+        BalanceReserve,
+        [JsonProperty("balance-reserve-return")]
+        BalanceReserveReturn,
+        [JsonProperty("movement")]
+        Movement,
+        [JsonProperty("post-payment-split-payment")]
+        PostPaymentSplitPayment,
+        [JsonProperty("cash-collateral-issuance")]
+        CashCollateralIssuance,
+        [JsonProperty("cash-collateral-release")]
+        CashCollateralRelease,
+    }
 
-        private static readonly Dictionary <string, ListBalanceTransactionsType> _knownValues =
-            new Dictionary <string, ListBalanceTransactionsType> ()
+    public static class ListBalanceTransactionsTypeExtension
+    {
+        public static string Value(this ListBalanceTransactionsType value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListBalanceTransactionsType ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListBalanceTransactionsType).GetFields())
             {
-                ["application-fee"] = ApplicationFee,
-                ["capture"] = Capture,
-                ["chargeback"] = Chargeback,
-                ["chargeback-reversal"] = ChargebackReversal,
-                ["failed-payment-fee"] = FailedPaymentFee,
-                ["failed-payment"] = FailedPayment,
-                ["invoice-compensation"] = InvoiceCompensation,
-                ["payment"] = Payment,
-                ["payment-fee"] = PaymentFee,
-                ["payment-commission"] = PaymentCommission,
-                ["refund"] = Refund,
-                ["returned-refund"] = ReturnedRefund,
-                ["returned-transfer"] = ReturnedTransfer,
-                ["split-payment"] = SplitPayment,
-                ["outgoing-transfer"] = OutgoingTransfer,
-                ["capture-commission"] = CaptureCommission,
-                ["canceled-outgoing-transfer"] = CanceledOutgoingTransfer,
-                ["incoming-transfer"] = IncomingTransfer,
-                ["api-payment-rolling-reserve-release"] = ApiPaymentRollingReserveRelease,
-                ["capture-rolling-reserve-release"] = CaptureRollingReserveRelease,
-                ["reimbursement-fee"] = ReimbursementFee,
-                ["balance-correction"] = BalanceCorrection,
-                ["unauthorized-direct-debit"] = UnauthorizedDirectDebit,
-                ["bank-charged-failure-fee"] = BankChargedFailureFee,
-                ["platform-payment-refund"] = PlatformPaymentRefund,
-                ["refund-compensation"] = RefundCompensation,
-                ["returned-refund-compensation"] = ReturnedRefundCompensation,
-                ["returned-platform-payment-refund"] = ReturnedPlatformPaymentRefund,
-                ["platform-payment-chargeback"] = PlatformPaymentChargeback,
-                ["chargeback-compensation"] = ChargebackCompensation,
-                ["reversed-platform-payment-chargeback"] = ReversedPlatformPaymentChargeback,
-                ["reversed-chargeback-compensation"] = ReversedChargebackCompensation,
-                ["failed-split-payment-platform"] = FailedSplitPaymentPlatform,
-                ["failed-split-payment-compensation"] = FailedSplitPaymentCompensation,
-                ["cash-advance-loan"] = CashAdvanceLoan,
-                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
-                ["split-transaction"] = SplitTransaction,
-                ["managed-fee"] = ManagedFee,
-                ["returned-managed-fee"] = ReturnedManagedFee,
-                ["topup"] = Topup,
-                ["balance-reserve"] = BalanceReserve,
-                ["balance-reserve-return"] = BalanceReserveReturn,
-                ["movement"] = Movement,
-                ["post-payment-split-payment"] = PostPaymentSplitPayment,
-                ["cash-collateral-issuance"] = CashCollateralIssuance,
-                ["cash-collateral-release"] = CashCollateralRelease
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListBalanceTransactionsType> _values =
-            new ConcurrentDictionary<string, ListBalanceTransactionsType>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListBalanceTransactionsType(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListBalanceTransactionsType)
+                    {
+                        return (ListBalanceTransactionsType)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListBalanceTransactionsType");
         }
-
-        public string Value { get; }
-
-        public static ListBalanceTransactionsType Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListBalanceTransactionsType(value));
-        }
-
-        public static implicit operator ListBalanceTransactionsType(string value) => Of(value);
-        public static implicit operator string(ListBalanceTransactionsType listbalancetransactionstype) => listbalancetransactionstype.Value;
-
-        public static ListBalanceTransactionsType[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListBalanceTransactionsType);
-
-        public bool Equals(ListBalanceTransactionsType? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

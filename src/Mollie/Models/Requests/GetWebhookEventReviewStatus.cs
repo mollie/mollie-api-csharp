@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The status of the requested changes.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetWebhookEventReviewStatus : IEquatable<GetWebhookEventReviewStatus>
+    public enum GetWebhookEventReviewStatus
     {
-        public static readonly GetWebhookEventReviewStatus Pending = new GetWebhookEventReviewStatus("pending");
-        public static readonly GetWebhookEventReviewStatus Rejected = new GetWebhookEventReviewStatus("rejected");
+        [JsonProperty("pending")]
+        Pending,
+        [JsonProperty("rejected")]
+        Rejected,
+    }
 
-        private static readonly Dictionary <string, GetWebhookEventReviewStatus> _knownValues =
-            new Dictionary <string, GetWebhookEventReviewStatus> ()
+    public static class GetWebhookEventReviewStatusExtension
+    {
+        public static string Value(this GetWebhookEventReviewStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetWebhookEventReviewStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetWebhookEventReviewStatus).GetFields())
             {
-                ["pending"] = Pending,
-                ["rejected"] = Rejected
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetWebhookEventReviewStatus> _values =
-            new ConcurrentDictionary<string, GetWebhookEventReviewStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetWebhookEventReviewStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetWebhookEventReviewStatus)
+                    {
+                        return (GetWebhookEventReviewStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetWebhookEventReviewStatus");
         }
-
-        public string Value { get; }
-
-        public static GetWebhookEventReviewStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetWebhookEventReviewStatus(value));
-        }
-
-        public static implicit operator GetWebhookEventReviewStatus(string value) => Of(value);
-        public static implicit operator string(GetWebhookEventReviewStatus getwebhookeventreviewstatus) => getwebhookeventreviewstatus.Value;
-
-        public static GetWebhookEventReviewStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetWebhookEventReviewStatus);
-
-        public bool Equals(GetWebhookEventReviewStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

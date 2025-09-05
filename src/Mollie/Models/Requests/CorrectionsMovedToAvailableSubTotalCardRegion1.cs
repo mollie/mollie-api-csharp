@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card region will be available.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CorrectionsMovedToAvailableSubTotalCardRegion1 : IEquatable<CorrectionsMovedToAvailableSubTotalCardRegion1>
+    public enum CorrectionsMovedToAvailableSubTotalCardRegion1
     {
-        public static readonly CorrectionsMovedToAvailableSubTotalCardRegion1 IntraEea = new CorrectionsMovedToAvailableSubTotalCardRegion1("intra-eea");
-        public static readonly CorrectionsMovedToAvailableSubTotalCardRegion1 IntraEu = new CorrectionsMovedToAvailableSubTotalCardRegion1("intra-eu");
-        public static readonly CorrectionsMovedToAvailableSubTotalCardRegion1 Domestic = new CorrectionsMovedToAvailableSubTotalCardRegion1("domestic");
-        public static readonly CorrectionsMovedToAvailableSubTotalCardRegion1 Other = new CorrectionsMovedToAvailableSubTotalCardRegion1("other");
+        [JsonProperty("intra-eea")]
+        IntraEea,
+        [JsonProperty("intra-eu")]
+        IntraEu,
+        [JsonProperty("domestic")]
+        Domestic,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, CorrectionsMovedToAvailableSubTotalCardRegion1> _knownValues =
-            new Dictionary <string, CorrectionsMovedToAvailableSubTotalCardRegion1> ()
+    public static class CorrectionsMovedToAvailableSubTotalCardRegion1Extension
+    {
+        public static string Value(this CorrectionsMovedToAvailableSubTotalCardRegion1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CorrectionsMovedToAvailableSubTotalCardRegion1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(CorrectionsMovedToAvailableSubTotalCardRegion1).GetFields())
             {
-                ["intra-eea"] = IntraEea,
-                ["intra-eu"] = IntraEu,
-                ["domestic"] = Domestic,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CorrectionsMovedToAvailableSubTotalCardRegion1> _values =
-            new ConcurrentDictionary<string, CorrectionsMovedToAvailableSubTotalCardRegion1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CorrectionsMovedToAvailableSubTotalCardRegion1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CorrectionsMovedToAvailableSubTotalCardRegion1)
+                    {
+                        return (CorrectionsMovedToAvailableSubTotalCardRegion1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CorrectionsMovedToAvailableSubTotalCardRegion1");
         }
-
-        public string Value { get; }
-
-        public static CorrectionsMovedToAvailableSubTotalCardRegion1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CorrectionsMovedToAvailableSubTotalCardRegion1(value));
-        }
-
-        public static implicit operator CorrectionsMovedToAvailableSubTotalCardRegion1(string value) => Of(value);
-        public static implicit operator string(CorrectionsMovedToAvailableSubTotalCardRegion1 correctionsmovedtoavailablesubtotalcardregion1) => correctionsmovedtoavailablesubtotalcardregion1.Value;
-
-        public static CorrectionsMovedToAvailableSubTotalCardRegion1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CorrectionsMovedToAvailableSubTotalCardRegion1);
-
-        public bool Equals(CorrectionsMovedToAvailableSubTotalCardRegion1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

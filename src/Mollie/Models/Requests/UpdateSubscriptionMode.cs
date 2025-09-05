@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdateSubscriptionMode : IEquatable<UpdateSubscriptionMode>
+    public enum UpdateSubscriptionMode
     {
-        public static readonly UpdateSubscriptionMode Live = new UpdateSubscriptionMode("live");
-        public static readonly UpdateSubscriptionMode Test = new UpdateSubscriptionMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, UpdateSubscriptionMode> _knownValues =
-            new Dictionary <string, UpdateSubscriptionMode> ()
+    public static class UpdateSubscriptionModeExtension
+    {
+        public static string Value(this UpdateSubscriptionMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdateSubscriptionMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdateSubscriptionMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdateSubscriptionMode> _values =
-            new ConcurrentDictionary<string, UpdateSubscriptionMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdateSubscriptionMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdateSubscriptionMode)
+                    {
+                        return (UpdateSubscriptionMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdateSubscriptionMode");
         }
-
-        public string Value { get; }
-
-        public static UpdateSubscriptionMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdateSubscriptionMode(value));
-        }
-
-        public static implicit operator UpdateSubscriptionMode(string value) => Of(value);
-        public static implicit operator string(UpdateSubscriptionMode updatesubscriptionmode) => updatesubscriptionmode.Value;
-
-        public static UpdateSubscriptionMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdateSubscriptionMode);
-
-        public bool Equals(UpdateSubscriptionMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

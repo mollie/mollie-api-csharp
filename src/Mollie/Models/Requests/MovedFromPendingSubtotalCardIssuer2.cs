@@ -12,71 +12,53 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// In case of payments transactions with card, the card issuer will be available
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class MovedFromPendingSubtotalCardIssuer2 : IEquatable<MovedFromPendingSubtotalCardIssuer2>
+    public enum MovedFromPendingSubtotalCardIssuer2
     {
-        public static readonly MovedFromPendingSubtotalCardIssuer2 Amex = new MovedFromPendingSubtotalCardIssuer2("amex");
-        public static readonly MovedFromPendingSubtotalCardIssuer2 Maestro = new MovedFromPendingSubtotalCardIssuer2("maestro");
-        public static readonly MovedFromPendingSubtotalCardIssuer2 CarteBancaire = new MovedFromPendingSubtotalCardIssuer2("carte-bancaire");
-        public static readonly MovedFromPendingSubtotalCardIssuer2 Other = new MovedFromPendingSubtotalCardIssuer2("other");
+        [JsonProperty("amex")]
+        Amex,
+        [JsonProperty("maestro")]
+        Maestro,
+        [JsonProperty("carte-bancaire")]
+        CarteBancaire,
+        [JsonProperty("other")]
+        Other,
+    }
 
-        private static readonly Dictionary <string, MovedFromPendingSubtotalCardIssuer2> _knownValues =
-            new Dictionary <string, MovedFromPendingSubtotalCardIssuer2> ()
+    public static class MovedFromPendingSubtotalCardIssuer2Extension
+    {
+        public static string Value(this MovedFromPendingSubtotalCardIssuer2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static MovedFromPendingSubtotalCardIssuer2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(MovedFromPendingSubtotalCardIssuer2).GetFields())
             {
-                ["amex"] = Amex,
-                ["maestro"] = Maestro,
-                ["carte-bancaire"] = CarteBancaire,
-                ["other"] = Other
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, MovedFromPendingSubtotalCardIssuer2> _values =
-            new ConcurrentDictionary<string, MovedFromPendingSubtotalCardIssuer2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private MovedFromPendingSubtotalCardIssuer2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is MovedFromPendingSubtotalCardIssuer2)
+                    {
+                        return (MovedFromPendingSubtotalCardIssuer2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum MovedFromPendingSubtotalCardIssuer2");
         }
-
-        public string Value { get; }
-
-        public static MovedFromPendingSubtotalCardIssuer2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new MovedFromPendingSubtotalCardIssuer2(value));
-        }
-
-        public static implicit operator MovedFromPendingSubtotalCardIssuer2(string value) => Of(value);
-        public static implicit operator string(MovedFromPendingSubtotalCardIssuer2 movedfrompendingsubtotalcardissuer2) => movedfrompendingsubtotalcardissuer2.Value;
-
-        public static MovedFromPendingSubtotalCardIssuer2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as MovedFromPendingSubtotalCardIssuer2);
-
-        public bool Equals(MovedFromPendingSubtotalCardIssuer2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

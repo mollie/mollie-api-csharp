@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreateMandateMode : IEquatable<CreateMandateMode>
+    public enum CreateMandateMode
     {
-        public static readonly CreateMandateMode Live = new CreateMandateMode("live");
-        public static readonly CreateMandateMode Test = new CreateMandateMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, CreateMandateMode> _knownValues =
-            new Dictionary <string, CreateMandateMode> ()
+    public static class CreateMandateModeExtension
+    {
+        public static string Value(this CreateMandateMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static CreateMandateMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(CreateMandateMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, CreateMandateMode> _values =
-            new ConcurrentDictionary<string, CreateMandateMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private CreateMandateMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is CreateMandateMode)
+                    {
+                        return (CreateMandateMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum CreateMandateMode");
         }
-
-        public string Value { get; }
-
-        public static CreateMandateMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new CreateMandateMode(value));
-        }
-
-        public static implicit operator CreateMandateMode(string value) => Of(value);
-        public static implicit operator string(CreateMandateMode createmandatemode) => createmandatemode.Value;
-
-        public static CreateMandateMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as CreateMandateMode);
-
-        public bool Equals(CreateMandateMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

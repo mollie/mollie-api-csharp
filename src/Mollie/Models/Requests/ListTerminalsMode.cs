@@ -12,67 +12,49 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListTerminalsMode : IEquatable<ListTerminalsMode>
+    public enum ListTerminalsMode
     {
-        public static readonly ListTerminalsMode Live = new ListTerminalsMode("live");
-        public static readonly ListTerminalsMode Test = new ListTerminalsMode("test");
+        [JsonProperty("live")]
+        Live,
+        [JsonProperty("test")]
+        Test,
+    }
 
-        private static readonly Dictionary <string, ListTerminalsMode> _knownValues =
-            new Dictionary <string, ListTerminalsMode> ()
+    public static class ListTerminalsModeExtension
+    {
+        public static string Value(this ListTerminalsMode value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListTerminalsMode ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListTerminalsMode).GetFields())
             {
-                ["live"] = Live,
-                ["test"] = Test
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListTerminalsMode> _values =
-            new ConcurrentDictionary<string, ListTerminalsMode>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListTerminalsMode(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListTerminalsMode)
+                    {
+                        return (ListTerminalsMode)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListTerminalsMode");
         }
-
-        public string Value { get; }
-
-        public static ListTerminalsMode Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListTerminalsMode(value));
-        }
-
-        public static implicit operator ListTerminalsMode(string value) => Of(value);
-        public static implicit operator string(ListTerminalsMode listterminalsmode) => listterminalsmode.Value;
-
-        public static ListTerminalsMode[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListTerminalsMode);
-
-        public bool Equals(ListTerminalsMode? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

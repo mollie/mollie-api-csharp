@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Status of the invoice.<br/>
@@ -26,62 +23,47 @@ namespace Mollie.Models.Requests
     /// * `overdue` — Payment of the invoice is overdue.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetInvoiceStatus : IEquatable<GetInvoiceStatus>
+    public enum GetInvoiceStatus
     {
-        public static readonly GetInvoiceStatus Open = new GetInvoiceStatus("open");
-        public static readonly GetInvoiceStatus Paid = new GetInvoiceStatus("paid");
-        public static readonly GetInvoiceStatus Overdue = new GetInvoiceStatus("overdue");
+        [JsonProperty("open")]
+        Open,
+        [JsonProperty("paid")]
+        Paid,
+        [JsonProperty("overdue")]
+        Overdue,
+    }
 
-        private static readonly Dictionary <string, GetInvoiceStatus> _knownValues =
-            new Dictionary <string, GetInvoiceStatus> ()
+    public static class GetInvoiceStatusExtension
+    {
+        public static string Value(this GetInvoiceStatus value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetInvoiceStatus ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetInvoiceStatus).GetFields())
             {
-                ["open"] = Open,
-                ["paid"] = Paid,
-                ["overdue"] = Overdue
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetInvoiceStatus> _values =
-            new ConcurrentDictionary<string, GetInvoiceStatus>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetInvoiceStatus(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetInvoiceStatus)
+                    {
+                        return (GetInvoiceStatus)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetInvoiceStatus");
         }
-
-        public string Value { get; }
-
-        public static GetInvoiceStatus Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetInvoiceStatus(value));
-        }
-
-        public static implicit operator GetInvoiceStatus(string value) => Of(value);
-        public static implicit operator string(GetInvoiceStatus getinvoicestatus) => getinvoicestatus.Value;
-
-        public static GetInvoiceStatus[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetInvoiceStatus);
-
-        public bool Equals(GetInvoiceStatus? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

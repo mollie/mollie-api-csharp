@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Indicates to what extent the payment is eligible for PayPal&apos;s Seller Protection. Only available for PayPal<br/>
@@ -23,72 +20,57 @@ namespace Mollie.Models.Requests
     /// payments, and if the information is made available by PayPal.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class UpdatePaymentSellerProtection : IEquatable<UpdatePaymentSellerProtection>
+    public enum UpdatePaymentSellerProtection
     {
-        public static readonly UpdatePaymentSellerProtection Eligible = new UpdatePaymentSellerProtection("Eligible");
-        public static readonly UpdatePaymentSellerProtection Ineligible = new UpdatePaymentSellerProtection("Ineligible");
-        public static readonly UpdatePaymentSellerProtection PartiallyEligibleINROnly = new UpdatePaymentSellerProtection("Partially Eligible - INR Only");
-        public static readonly UpdatePaymentSellerProtection PartiallyEligibleUnauthOnly = new UpdatePaymentSellerProtection("Partially Eligible - Unauth Only");
-        public static readonly UpdatePaymentSellerProtection PartiallyEligible = new UpdatePaymentSellerProtection("Partially Eligible");
-        public static readonly UpdatePaymentSellerProtection None = new UpdatePaymentSellerProtection("None");
-        public static readonly UpdatePaymentSellerProtection Active = new UpdatePaymentSellerProtection("Active");
-        public static readonly UpdatePaymentSellerProtection FraudControlUnauthPremiumEligible = new UpdatePaymentSellerProtection("Fraud Control - Unauth Premium Eligible");
+        [JsonProperty("Eligible")]
+        Eligible,
+        [JsonProperty("Ineligible")]
+        Ineligible,
+        [JsonProperty("Partially Eligible - INR Only")]
+        PartiallyEligibleINROnly,
+        [JsonProperty("Partially Eligible - Unauth Only")]
+        PartiallyEligibleUnauthOnly,
+        [JsonProperty("Partially Eligible")]
+        PartiallyEligible,
+        [JsonProperty("None")]
+        None,
+        [JsonProperty("Active")]
+        Active,
+        [JsonProperty("Fraud Control - Unauth Premium Eligible")]
+        FraudControlUnauthPremiumEligible,
+    }
 
-        private static readonly Dictionary <string, UpdatePaymentSellerProtection> _knownValues =
-            new Dictionary <string, UpdatePaymentSellerProtection> ()
+    public static class UpdatePaymentSellerProtectionExtension
+    {
+        public static string Value(this UpdatePaymentSellerProtection value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static UpdatePaymentSellerProtection ToEnum(this string value)
+        {
+            foreach(var field in typeof(UpdatePaymentSellerProtection).GetFields())
             {
-                ["Eligible"] = Eligible,
-                ["Ineligible"] = Ineligible,
-                ["Partially Eligible - INR Only"] = PartiallyEligibleINROnly,
-                ["Partially Eligible - Unauth Only"] = PartiallyEligibleUnauthOnly,
-                ["Partially Eligible"] = PartiallyEligible,
-                ["None"] = None,
-                ["Active"] = Active,
-                ["Fraud Control - Unauth Premium Eligible"] = FraudControlUnauthPremiumEligible
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, UpdatePaymentSellerProtection> _values =
-            new ConcurrentDictionary<string, UpdatePaymentSellerProtection>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private UpdatePaymentSellerProtection(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is UpdatePaymentSellerProtection)
+                    {
+                        return (UpdatePaymentSellerProtection)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum UpdatePaymentSellerProtection");
         }
-
-        public string Value { get; }
-
-        public static UpdatePaymentSellerProtection Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new UpdatePaymentSellerProtection(value));
-        }
-
-        public static implicit operator UpdatePaymentSellerProtection(string value) => Of(value);
-        public static implicit operator string(UpdatePaymentSellerProtection updatepaymentsellerprotection) => updatepaymentsellerprotection.Value;
-
-        public static UpdatePaymentSellerProtection[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as UpdatePaymentSellerProtection);
-
-        public bool Equals(UpdatePaymentSellerProtection? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

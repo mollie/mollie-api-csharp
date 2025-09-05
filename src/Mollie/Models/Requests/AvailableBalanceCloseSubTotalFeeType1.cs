@@ -12,117 +12,99 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Present when the transaction represents a fee.
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class AvailableBalanceCloseSubTotalFeeType1 : IEquatable<AvailableBalanceCloseSubTotalFeeType1>
+    public enum AvailableBalanceCloseSubTotalFeeType1
     {
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PaymentFee = new AvailableBalanceCloseSubTotalFeeType1("payment-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 DirectDebitFailureFee = new AvailableBalanceCloseSubTotalFeeType1("direct-debit-failure-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 UnauthorizedDirectDebitFee = new AvailableBalanceCloseSubTotalFeeType1("unauthorized-direct-debit-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 BankChargedDirectDebitFailureFee = new AvailableBalanceCloseSubTotalFeeType1("bank-charged-direct-debit-failure-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PartnerCommission = new AvailableBalanceCloseSubTotalFeeType1("partner-commission");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 ApplicationFee = new AvailableBalanceCloseSubTotalFeeType1("application-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 CaptureFee = new AvailableBalanceCloseSubTotalFeeType1("capture-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 RefundFee = new AvailableBalanceCloseSubTotalFeeType1("refund-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 ChargebackFee = new AvailableBalanceCloseSubTotalFeeType1("chargeback-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PaymentNotificationFee = new AvailableBalanceCloseSubTotalFeeType1("payment-notification-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 TransferNotificationFee = new AvailableBalanceCloseSubTotalFeeType1("transfer-notification-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PayoutFee = new AvailableBalanceCloseSubTotalFeeType1("payout-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 FeeDiscount = new AvailableBalanceCloseSubTotalFeeType1("fee-discount");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 FeeReimbursement = new AvailableBalanceCloseSubTotalFeeType1("fee-reimbursement");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PlatformVolumeFee = new AvailableBalanceCloseSubTotalFeeType1("platform-volume-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PlatformConnectedOrganizationsFee = new AvailableBalanceCloseSubTotalFeeType1("platform-connected-organizations-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 BalanceChargeFee = new AvailableBalanceCloseSubTotalFeeType1("balance-charge-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 ThreedsAuthenticationAttemptFee = new AvailableBalanceCloseSubTotalFeeType1("3ds-authentication-attempt-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 TerminalMonthlyFee = new AvailableBalanceCloseSubTotalFeeType1("terminal-monthly-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 AcceptanceRiskFee = new AvailableBalanceCloseSubTotalFeeType1("acceptance-risk-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 TopUpFee = new AvailableBalanceCloseSubTotalFeeType1("top-up-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 PaymentGatewayFee = new AvailableBalanceCloseSubTotalFeeType1("payment-gateway-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 MastercardSpecialtyMerchantProgramProcessingFee = new AvailableBalanceCloseSubTotalFeeType1("mastercard-specialty-merchant-program-processing-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 MastercardSpecialtyMerchantProgramRegistrationFee = new AvailableBalanceCloseSubTotalFeeType1("mastercard-specialty-merchant-program-registration-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 VisaIntegrityRiskProgramProcessingFee = new AvailableBalanceCloseSubTotalFeeType1("visa-integrity-risk-program-processing-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 VisaIntegrityRiskProgramRegistrationFee = new AvailableBalanceCloseSubTotalFeeType1("visa-integrity-risk-program-registration-fee");
-        public static readonly AvailableBalanceCloseSubTotalFeeType1 MinimumInvoiceAmountFee = new AvailableBalanceCloseSubTotalFeeType1("minimum-invoice-amount-fee");
+        [JsonProperty("payment-fee")]
+        PaymentFee,
+        [JsonProperty("direct-debit-failure-fee")]
+        DirectDebitFailureFee,
+        [JsonProperty("unauthorized-direct-debit-fee")]
+        UnauthorizedDirectDebitFee,
+        [JsonProperty("bank-charged-direct-debit-failure-fee")]
+        BankChargedDirectDebitFailureFee,
+        [JsonProperty("partner-commission")]
+        PartnerCommission,
+        [JsonProperty("application-fee")]
+        ApplicationFee,
+        [JsonProperty("capture-fee")]
+        CaptureFee,
+        [JsonProperty("refund-fee")]
+        RefundFee,
+        [JsonProperty("chargeback-fee")]
+        ChargebackFee,
+        [JsonProperty("payment-notification-fee")]
+        PaymentNotificationFee,
+        [JsonProperty("transfer-notification-fee")]
+        TransferNotificationFee,
+        [JsonProperty("payout-fee")]
+        PayoutFee,
+        [JsonProperty("fee-discount")]
+        FeeDiscount,
+        [JsonProperty("fee-reimbursement")]
+        FeeReimbursement,
+        [JsonProperty("platform-volume-fee")]
+        PlatformVolumeFee,
+        [JsonProperty("platform-connected-organizations-fee")]
+        PlatformConnectedOrganizationsFee,
+        [JsonProperty("balance-charge-fee")]
+        BalanceChargeFee,
+        [JsonProperty("3ds-authentication-attempt-fee")]
+        ThreedsAuthenticationAttemptFee,
+        [JsonProperty("terminal-monthly-fee")]
+        TerminalMonthlyFee,
+        [JsonProperty("acceptance-risk-fee")]
+        AcceptanceRiskFee,
+        [JsonProperty("top-up-fee")]
+        TopUpFee,
+        [JsonProperty("payment-gateway-fee")]
+        PaymentGatewayFee,
+        [JsonProperty("mastercard-specialty-merchant-program-processing-fee")]
+        MastercardSpecialtyMerchantProgramProcessingFee,
+        [JsonProperty("mastercard-specialty-merchant-program-registration-fee")]
+        MastercardSpecialtyMerchantProgramRegistrationFee,
+        [JsonProperty("visa-integrity-risk-program-processing-fee")]
+        VisaIntegrityRiskProgramProcessingFee,
+        [JsonProperty("visa-integrity-risk-program-registration-fee")]
+        VisaIntegrityRiskProgramRegistrationFee,
+        [JsonProperty("minimum-invoice-amount-fee")]
+        MinimumInvoiceAmountFee,
+    }
 
-        private static readonly Dictionary <string, AvailableBalanceCloseSubTotalFeeType1> _knownValues =
-            new Dictionary <string, AvailableBalanceCloseSubTotalFeeType1> ()
+    public static class AvailableBalanceCloseSubTotalFeeType1Extension
+    {
+        public static string Value(this AvailableBalanceCloseSubTotalFeeType1 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static AvailableBalanceCloseSubTotalFeeType1 ToEnum(this string value)
+        {
+            foreach(var field in typeof(AvailableBalanceCloseSubTotalFeeType1).GetFields())
             {
-                ["payment-fee"] = PaymentFee,
-                ["direct-debit-failure-fee"] = DirectDebitFailureFee,
-                ["unauthorized-direct-debit-fee"] = UnauthorizedDirectDebitFee,
-                ["bank-charged-direct-debit-failure-fee"] = BankChargedDirectDebitFailureFee,
-                ["partner-commission"] = PartnerCommission,
-                ["application-fee"] = ApplicationFee,
-                ["capture-fee"] = CaptureFee,
-                ["refund-fee"] = RefundFee,
-                ["chargeback-fee"] = ChargebackFee,
-                ["payment-notification-fee"] = PaymentNotificationFee,
-                ["transfer-notification-fee"] = TransferNotificationFee,
-                ["payout-fee"] = PayoutFee,
-                ["fee-discount"] = FeeDiscount,
-                ["fee-reimbursement"] = FeeReimbursement,
-                ["platform-volume-fee"] = PlatformVolumeFee,
-                ["platform-connected-organizations-fee"] = PlatformConnectedOrganizationsFee,
-                ["balance-charge-fee"] = BalanceChargeFee,
-                ["3ds-authentication-attempt-fee"] = ThreedsAuthenticationAttemptFee,
-                ["terminal-monthly-fee"] = TerminalMonthlyFee,
-                ["acceptance-risk-fee"] = AcceptanceRiskFee,
-                ["top-up-fee"] = TopUpFee,
-                ["payment-gateway-fee"] = PaymentGatewayFee,
-                ["mastercard-specialty-merchant-program-processing-fee"] = MastercardSpecialtyMerchantProgramProcessingFee,
-                ["mastercard-specialty-merchant-program-registration-fee"] = MastercardSpecialtyMerchantProgramRegistrationFee,
-                ["visa-integrity-risk-program-processing-fee"] = VisaIntegrityRiskProgramProcessingFee,
-                ["visa-integrity-risk-program-registration-fee"] = VisaIntegrityRiskProgramRegistrationFee,
-                ["minimum-invoice-amount-fee"] = MinimumInvoiceAmountFee
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, AvailableBalanceCloseSubTotalFeeType1> _values =
-            new ConcurrentDictionary<string, AvailableBalanceCloseSubTotalFeeType1>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private AvailableBalanceCloseSubTotalFeeType1(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is AvailableBalanceCloseSubTotalFeeType1)
+                    {
+                        return (AvailableBalanceCloseSubTotalFeeType1)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum AvailableBalanceCloseSubTotalFeeType1");
         }
-
-        public string Value { get; }
-
-        public static AvailableBalanceCloseSubTotalFeeType1 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new AvailableBalanceCloseSubTotalFeeType1(value));
-        }
-
-        public static implicit operator AvailableBalanceCloseSubTotalFeeType1(string value) => Of(value);
-        public static implicit operator string(AvailableBalanceCloseSubTotalFeeType1 availablebalanceclosesubtotalfeetype1) => availablebalanceclosesubtotalfeetype1.Value;
-
-        public static AvailableBalanceCloseSubTotalFeeType1[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as AvailableBalanceCloseSubTotalFeeType1);
-
-        public bool Equals(AvailableBalanceCloseSubTotalFeeType1? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

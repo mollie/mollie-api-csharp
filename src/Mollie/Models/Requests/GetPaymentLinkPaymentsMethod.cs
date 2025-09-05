@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// The payment method used for this transaction. If a specific method was selected during payment initialization,<br/>
@@ -23,128 +20,113 @@ namespace Mollie.Models.Requests
     /// this field reflects that choice.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetPaymentLinkPaymentsMethod : IEquatable<GetPaymentLinkPaymentsMethod>
+    public enum GetPaymentLinkPaymentsMethod
     {
-        public static readonly GetPaymentLinkPaymentsMethod Alma = new GetPaymentLinkPaymentsMethod("alma");
-        public static readonly GetPaymentLinkPaymentsMethod Applepay = new GetPaymentLinkPaymentsMethod("applepay");
-        public static readonly GetPaymentLinkPaymentsMethod Bacs = new GetPaymentLinkPaymentsMethod("bacs");
-        public static readonly GetPaymentLinkPaymentsMethod Bancomatpay = new GetPaymentLinkPaymentsMethod("bancomatpay");
-        public static readonly GetPaymentLinkPaymentsMethod Bancontact = new GetPaymentLinkPaymentsMethod("bancontact");
-        public static readonly GetPaymentLinkPaymentsMethod Banktransfer = new GetPaymentLinkPaymentsMethod("banktransfer");
-        public static readonly GetPaymentLinkPaymentsMethod Belfius = new GetPaymentLinkPaymentsMethod("belfius");
-        public static readonly GetPaymentLinkPaymentsMethod Billie = new GetPaymentLinkPaymentsMethod("billie");
-        public static readonly GetPaymentLinkPaymentsMethod Bizum = new GetPaymentLinkPaymentsMethod("bizum");
-        public static readonly GetPaymentLinkPaymentsMethod Blik = new GetPaymentLinkPaymentsMethod("blik");
-        public static readonly GetPaymentLinkPaymentsMethod Creditcard = new GetPaymentLinkPaymentsMethod("creditcard");
-        public static readonly GetPaymentLinkPaymentsMethod Directdebit = new GetPaymentLinkPaymentsMethod("directdebit");
-        public static readonly GetPaymentLinkPaymentsMethod Eps = new GetPaymentLinkPaymentsMethod("eps");
-        public static readonly GetPaymentLinkPaymentsMethod Giftcard = new GetPaymentLinkPaymentsMethod("giftcard");
-        public static readonly GetPaymentLinkPaymentsMethod Ideal = new GetPaymentLinkPaymentsMethod("ideal");
-        public static readonly GetPaymentLinkPaymentsMethod In3 = new GetPaymentLinkPaymentsMethod("in3");
-        public static readonly GetPaymentLinkPaymentsMethod Kbc = new GetPaymentLinkPaymentsMethod("kbc");
-        public static readonly GetPaymentLinkPaymentsMethod Klarna = new GetPaymentLinkPaymentsMethod("klarna");
-        public static readonly GetPaymentLinkPaymentsMethod Klarnapaylater = new GetPaymentLinkPaymentsMethod("klarnapaylater");
-        public static readonly GetPaymentLinkPaymentsMethod Klarnapaynow = new GetPaymentLinkPaymentsMethod("klarnapaynow");
-        public static readonly GetPaymentLinkPaymentsMethod Klarnasliceit = new GetPaymentLinkPaymentsMethod("klarnasliceit");
-        public static readonly GetPaymentLinkPaymentsMethod Mbway = new GetPaymentLinkPaymentsMethod("mbway");
-        public static readonly GetPaymentLinkPaymentsMethod Multibanco = new GetPaymentLinkPaymentsMethod("multibanco");
-        public static readonly GetPaymentLinkPaymentsMethod Mybank = new GetPaymentLinkPaymentsMethod("mybank");
-        public static readonly GetPaymentLinkPaymentsMethod Paybybank = new GetPaymentLinkPaymentsMethod("paybybank");
-        public static readonly GetPaymentLinkPaymentsMethod Payconiq = new GetPaymentLinkPaymentsMethod("payconiq");
-        public static readonly GetPaymentLinkPaymentsMethod Paypal = new GetPaymentLinkPaymentsMethod("paypal");
-        public static readonly GetPaymentLinkPaymentsMethod Paysafecard = new GetPaymentLinkPaymentsMethod("paysafecard");
-        public static readonly GetPaymentLinkPaymentsMethod Pointofsale = new GetPaymentLinkPaymentsMethod("pointofsale");
-        public static readonly GetPaymentLinkPaymentsMethod Przelewy24 = new GetPaymentLinkPaymentsMethod("przelewy24");
-        public static readonly GetPaymentLinkPaymentsMethod Riverty = new GetPaymentLinkPaymentsMethod("riverty");
-        public static readonly GetPaymentLinkPaymentsMethod Satispay = new GetPaymentLinkPaymentsMethod("satispay");
-        public static readonly GetPaymentLinkPaymentsMethod Swish = new GetPaymentLinkPaymentsMethod("swish");
-        public static readonly GetPaymentLinkPaymentsMethod Trustly = new GetPaymentLinkPaymentsMethod("trustly");
-        public static readonly GetPaymentLinkPaymentsMethod Twint = new GetPaymentLinkPaymentsMethod("twint");
-        public static readonly GetPaymentLinkPaymentsMethod Voucher = new GetPaymentLinkPaymentsMethod("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, GetPaymentLinkPaymentsMethod> _knownValues =
-            new Dictionary <string, GetPaymentLinkPaymentsMethod> ()
+    public static class GetPaymentLinkPaymentsMethodExtension
+    {
+        public static string Value(this GetPaymentLinkPaymentsMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static GetPaymentLinkPaymentsMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(GetPaymentLinkPaymentsMethod).GetFields())
             {
-                ["alma"] = Alma,
-                ["applepay"] = Applepay,
-                ["bacs"] = Bacs,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["kbc"] = Kbc,
-                ["klarna"] = Klarna,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["pointofsale"] = Pointofsale,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, GetPaymentLinkPaymentsMethod> _values =
-            new ConcurrentDictionary<string, GetPaymentLinkPaymentsMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private GetPaymentLinkPaymentsMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is GetPaymentLinkPaymentsMethod)
+                    {
+                        return (GetPaymentLinkPaymentsMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum GetPaymentLinkPaymentsMethod");
         }
-
-        public string Value { get; }
-
-        public static GetPaymentLinkPaymentsMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new GetPaymentLinkPaymentsMethod(value));
-        }
-
-        public static implicit operator GetPaymentLinkPaymentsMethod(string value) => Of(value);
-        public static implicit operator string(GetPaymentLinkPaymentsMethod getpaymentlinkpaymentsmethod) => getpaymentlinkpaymentsmethod.Value;
-
-        public static GetPaymentLinkPaymentsMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as GetPaymentLinkPaymentsMethod);
-
-        public bool Equals(GetPaymentLinkPaymentsMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

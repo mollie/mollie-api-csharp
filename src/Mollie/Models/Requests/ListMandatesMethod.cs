@@ -12,9 +12,6 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment method of the mandate.<br/>
@@ -24,62 +21,47 @@ namespace Mollie.Models.Requests
     /// SEPA Direct Debit and PayPal mandates can be created directly.
     /// </remarks>
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListMandatesMethod : IEquatable<ListMandatesMethod>
+    public enum ListMandatesMethod
     {
-        public static readonly ListMandatesMethod Creditcard = new ListMandatesMethod("creditcard");
-        public static readonly ListMandatesMethod Directdebit = new ListMandatesMethod("directdebit");
-        public static readonly ListMandatesMethod Paypal = new ListMandatesMethod("paypal");
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("paypal")]
+        Paypal,
+    }
 
-        private static readonly Dictionary <string, ListMandatesMethod> _knownValues =
-            new Dictionary <string, ListMandatesMethod> ()
+    public static class ListMandatesMethodExtension
+    {
+        public static string Value(this ListMandatesMethod value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static ListMandatesMethod ToEnum(this string value)
+        {
+            foreach(var field in typeof(ListMandatesMethod).GetFields())
             {
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["paypal"] = Paypal
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, ListMandatesMethod> _values =
-            new ConcurrentDictionary<string, ListMandatesMethod>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private ListMandatesMethod(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is ListMandatesMethod)
+                    {
+                        return (ListMandatesMethod)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum ListMandatesMethod");
         }
-
-        public string Value { get; }
-
-        public static ListMandatesMethod Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new ListMandatesMethod(value));
-        }
-
-        public static implicit operator ListMandatesMethod(string value) => Of(value);
-        public static implicit operator string(ListMandatesMethod listmandatesmethod) => listmandatesmethod.Value;
-
-        public static ListMandatesMethod[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as ListMandatesMethod);
-
-        public bool Equals(ListMandatesMethod? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

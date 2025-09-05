@@ -12,147 +12,129 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Payment type of the transactions
     /// </summary>
-    [JsonConverter(typeof(OpenEnumConverter))]
-    public class TransfersPendingSubtotalMethod2 : IEquatable<TransfersPendingSubtotalMethod2>
+    public enum TransfersPendingSubtotalMethod2
     {
-        public static readonly TransfersPendingSubtotalMethod2 Alma = new TransfersPendingSubtotalMethod2("alma");
-        public static readonly TransfersPendingSubtotalMethod2 Bacs = new TransfersPendingSubtotalMethod2("bacs");
-        public static readonly TransfersPendingSubtotalMethod2 Applepay = new TransfersPendingSubtotalMethod2("applepay");
-        public static readonly TransfersPendingSubtotalMethod2 Bancomatpay = new TransfersPendingSubtotalMethod2("bancomatpay");
-        public static readonly TransfersPendingSubtotalMethod2 Bancontact = new TransfersPendingSubtotalMethod2("bancontact");
-        public static readonly TransfersPendingSubtotalMethod2 Banktransfer = new TransfersPendingSubtotalMethod2("banktransfer");
-        public static readonly TransfersPendingSubtotalMethod2 Belfius = new TransfersPendingSubtotalMethod2("belfius");
-        public static readonly TransfersPendingSubtotalMethod2 Billie = new TransfersPendingSubtotalMethod2("billie");
-        public static readonly TransfersPendingSubtotalMethod2 Bizum = new TransfersPendingSubtotalMethod2("bizum");
-        public static readonly TransfersPendingSubtotalMethod2 Bitcoin = new TransfersPendingSubtotalMethod2("bitcoin");
-        public static readonly TransfersPendingSubtotalMethod2 Blik = new TransfersPendingSubtotalMethod2("blik");
-        public static readonly TransfersPendingSubtotalMethod2 Creditcard = new TransfersPendingSubtotalMethod2("creditcard");
-        public static readonly TransfersPendingSubtotalMethod2 Directdebit = new TransfersPendingSubtotalMethod2("directdebit");
-        public static readonly TransfersPendingSubtotalMethod2 Eps = new TransfersPendingSubtotalMethod2("eps");
-        public static readonly TransfersPendingSubtotalMethod2 Giftcard = new TransfersPendingSubtotalMethod2("giftcard");
-        public static readonly TransfersPendingSubtotalMethod2 Giropay = new TransfersPendingSubtotalMethod2("giropay");
-        public static readonly TransfersPendingSubtotalMethod2 Googlepay = new TransfersPendingSubtotalMethod2("googlepay");
-        public static readonly TransfersPendingSubtotalMethod2 Ideal = new TransfersPendingSubtotalMethod2("ideal");
-        public static readonly TransfersPendingSubtotalMethod2 In3 = new TransfersPendingSubtotalMethod2("in3");
-        public static readonly TransfersPendingSubtotalMethod2 Inghomepay = new TransfersPendingSubtotalMethod2("inghomepay");
-        public static readonly TransfersPendingSubtotalMethod2 Kbc = new TransfersPendingSubtotalMethod2("kbc");
-        public static readonly TransfersPendingSubtotalMethod2 Klarnapaylater = new TransfersPendingSubtotalMethod2("klarnapaylater");
-        public static readonly TransfersPendingSubtotalMethod2 Klarnapaynow = new TransfersPendingSubtotalMethod2("klarnapaynow");
-        public static readonly TransfersPendingSubtotalMethod2 Klarnasliceit = new TransfersPendingSubtotalMethod2("klarnasliceit");
-        public static readonly TransfersPendingSubtotalMethod2 Klarna = new TransfersPendingSubtotalMethod2("klarna");
-        public static readonly TransfersPendingSubtotalMethod2 Mbway = new TransfersPendingSubtotalMethod2("mbway");
-        public static readonly TransfersPendingSubtotalMethod2 Multibanco = new TransfersPendingSubtotalMethod2("multibanco");
-        public static readonly TransfersPendingSubtotalMethod2 Mybank = new TransfersPendingSubtotalMethod2("mybank");
-        public static readonly TransfersPendingSubtotalMethod2 Paybybank = new TransfersPendingSubtotalMethod2("paybybank");
-        public static readonly TransfersPendingSubtotalMethod2 Payconiq = new TransfersPendingSubtotalMethod2("payconiq");
-        public static readonly TransfersPendingSubtotalMethod2 Paypal = new TransfersPendingSubtotalMethod2("paypal");
-        public static readonly TransfersPendingSubtotalMethod2 Paysafecard = new TransfersPendingSubtotalMethod2("paysafecard");
-        public static readonly TransfersPendingSubtotalMethod2 Przelewy24 = new TransfersPendingSubtotalMethod2("przelewy24");
-        public static readonly TransfersPendingSubtotalMethod2 Riverty = new TransfersPendingSubtotalMethod2("riverty");
-        public static readonly TransfersPendingSubtotalMethod2 Satispay = new TransfersPendingSubtotalMethod2("satispay");
-        public static readonly TransfersPendingSubtotalMethod2 Podiumcadeaukaart = new TransfersPendingSubtotalMethod2("podiumcadeaukaart");
-        public static readonly TransfersPendingSubtotalMethod2 Pointofsale = new TransfersPendingSubtotalMethod2("pointofsale");
-        public static readonly TransfersPendingSubtotalMethod2 Sofort = new TransfersPendingSubtotalMethod2("sofort");
-        public static readonly TransfersPendingSubtotalMethod2 Swish = new TransfersPendingSubtotalMethod2("swish");
-        public static readonly TransfersPendingSubtotalMethod2 Trustly = new TransfersPendingSubtotalMethod2("trustly");
-        public static readonly TransfersPendingSubtotalMethod2 Twint = new TransfersPendingSubtotalMethod2("twint");
-        public static readonly TransfersPendingSubtotalMethod2 Voucher = new TransfersPendingSubtotalMethod2("voucher");
+        [JsonProperty("alma")]
+        Alma,
+        [JsonProperty("bacs")]
+        Bacs,
+        [JsonProperty("applepay")]
+        Applepay,
+        [JsonProperty("bancomatpay")]
+        Bancomatpay,
+        [JsonProperty("bancontact")]
+        Bancontact,
+        [JsonProperty("banktransfer")]
+        Banktransfer,
+        [JsonProperty("belfius")]
+        Belfius,
+        [JsonProperty("billie")]
+        Billie,
+        [JsonProperty("bizum")]
+        Bizum,
+        [JsonProperty("bitcoin")]
+        Bitcoin,
+        [JsonProperty("blik")]
+        Blik,
+        [JsonProperty("creditcard")]
+        Creditcard,
+        [JsonProperty("directdebit")]
+        Directdebit,
+        [JsonProperty("eps")]
+        Eps,
+        [JsonProperty("giftcard")]
+        Giftcard,
+        [JsonProperty("giropay")]
+        Giropay,
+        [JsonProperty("googlepay")]
+        Googlepay,
+        [JsonProperty("ideal")]
+        Ideal,
+        [JsonProperty("in3")]
+        In3,
+        [JsonProperty("inghomepay")]
+        Inghomepay,
+        [JsonProperty("kbc")]
+        Kbc,
+        [JsonProperty("klarnapaylater")]
+        Klarnapaylater,
+        [JsonProperty("klarnapaynow")]
+        Klarnapaynow,
+        [JsonProperty("klarnasliceit")]
+        Klarnasliceit,
+        [JsonProperty("klarna")]
+        Klarna,
+        [JsonProperty("mbway")]
+        Mbway,
+        [JsonProperty("multibanco")]
+        Multibanco,
+        [JsonProperty("mybank")]
+        Mybank,
+        [JsonProperty("paybybank")]
+        Paybybank,
+        [JsonProperty("payconiq")]
+        Payconiq,
+        [JsonProperty("paypal")]
+        Paypal,
+        [JsonProperty("paysafecard")]
+        Paysafecard,
+        [JsonProperty("przelewy24")]
+        Przelewy24,
+        [JsonProperty("riverty")]
+        Riverty,
+        [JsonProperty("satispay")]
+        Satispay,
+        [JsonProperty("podiumcadeaukaart")]
+        Podiumcadeaukaart,
+        [JsonProperty("pointofsale")]
+        Pointofsale,
+        [JsonProperty("sofort")]
+        Sofort,
+        [JsonProperty("swish")]
+        Swish,
+        [JsonProperty("trustly")]
+        Trustly,
+        [JsonProperty("twint")]
+        Twint,
+        [JsonProperty("voucher")]
+        Voucher,
+    }
 
-        private static readonly Dictionary <string, TransfersPendingSubtotalMethod2> _knownValues =
-            new Dictionary <string, TransfersPendingSubtotalMethod2> ()
+    public static class TransfersPendingSubtotalMethod2Extension
+    {
+        public static string Value(this TransfersPendingSubtotalMethod2 value)
+        {
+            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+        }
+
+        public static TransfersPendingSubtotalMethod2 ToEnum(this string value)
+        {
+            foreach(var field in typeof(TransfersPendingSubtotalMethod2).GetFields())
             {
-                ["alma"] = Alma,
-                ["bacs"] = Bacs,
-                ["applepay"] = Applepay,
-                ["bancomatpay"] = Bancomatpay,
-                ["bancontact"] = Bancontact,
-                ["banktransfer"] = Banktransfer,
-                ["belfius"] = Belfius,
-                ["billie"] = Billie,
-                ["bizum"] = Bizum,
-                ["bitcoin"] = Bitcoin,
-                ["blik"] = Blik,
-                ["creditcard"] = Creditcard,
-                ["directdebit"] = Directdebit,
-                ["eps"] = Eps,
-                ["giftcard"] = Giftcard,
-                ["giropay"] = Giropay,
-                ["googlepay"] = Googlepay,
-                ["ideal"] = Ideal,
-                ["in3"] = In3,
-                ["inghomepay"] = Inghomepay,
-                ["kbc"] = Kbc,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["klarna"] = Klarna,
-                ["mbway"] = Mbway,
-                ["multibanco"] = Multibanco,
-                ["mybank"] = Mybank,
-                ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
-                ["paypal"] = Paypal,
-                ["paysafecard"] = Paysafecard,
-                ["przelewy24"] = Przelewy24,
-                ["riverty"] = Riverty,
-                ["satispay"] = Satispay,
-                ["podiumcadeaukaart"] = Podiumcadeaukaart,
-                ["pointofsale"] = Pointofsale,
-                ["sofort"] = Sofort,
-                ["swish"] = Swish,
-                ["trustly"] = Trustly,
-                ["twint"] = Twint,
-                ["voucher"] = Voucher
-            };
+                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
 
-        private static readonly ConcurrentDictionary<string, TransfersPendingSubtotalMethod2> _values =
-            new ConcurrentDictionary<string, TransfersPendingSubtotalMethod2>(_knownValues);
+                var attribute = attributes[0] as JsonPropertyAttribute;
+                if (attribute != null && attribute.PropertyName == value)
+                {
+                    var enumVal = field.GetValue(null);
 
-        private TransfersPendingSubtotalMethod2(string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            Value = value;
+                    if (enumVal is TransfersPendingSubtotalMethod2)
+                    {
+                        return (TransfersPendingSubtotalMethod2)enumVal;
+                    }
+                }
+            }
+
+            throw new Exception($"Unknown value {value} for enum TransfersPendingSubtotalMethod2");
         }
-
-        public string Value { get; }
-
-        public static TransfersPendingSubtotalMethod2 Of(string value)
-        {
-            return _values.GetOrAdd(value, _ => new TransfersPendingSubtotalMethod2(value));
-        }
-
-        public static implicit operator TransfersPendingSubtotalMethod2(string value) => Of(value);
-        public static implicit operator string(TransfersPendingSubtotalMethod2 transferspendingsubtotalmethod2) => transferspendingsubtotalmethod2.Value;
-
-        public static TransfersPendingSubtotalMethod2[] Values()
-        {
-            return _values.Values.ToArray();
-        }
-
-        public override string ToString() => Value.ToString();
-
-        public bool IsKnown()
-        {
-            return _knownValues.ContainsKey(Value);
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as TransfersPendingSubtotalMethod2);
-
-        public bool Equals(TransfersPendingSubtotalMethod2? other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (other is null) return false;
-            return string.Equals(Value, other.Value);
-        }
-
-        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }
