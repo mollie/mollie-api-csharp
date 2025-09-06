@@ -55,7 +55,7 @@ namespace Mollie.Models.Requests
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public LocaleResponse? Locale { get; set; }
+        public LocaleResponse? Locale { get; set; } = null;
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>

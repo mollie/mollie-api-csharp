@@ -142,7 +142,7 @@ namespace Mollie.Models.Components
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public Locale? Locale { get; set; }
+        public Locale? Locale { get; set; } = null;
 
         /// <summary>
         /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>

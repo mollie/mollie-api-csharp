@@ -106,7 +106,7 @@ namespace Mollie.Models.Requests
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public Locale? Locale { get; set; }
+        public Locale? Locale { get; set; } = null;
 
         /// <summary>
         /// The date by which the payment should be completed in `YYYY-MM-DD` format

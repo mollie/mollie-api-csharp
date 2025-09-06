@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 5361df49d53bcce56f67914ee4958cb4
+  docChecksum: 5b3c94b71c47f8438aa46ead6de7e7fd
   docVersion: 1.0.0
-  speakeasyVersion: 1.609.0
-  generationVersion: 2.692.0
-  releaseVersion: 0.5.0
-  configChecksum: 238dc2f085ef523c3ecdb066691288b6
+  speakeasyVersion: 1.611.0
+  generationVersion: 2.694.1
+  releaseVersion: 0.5.1
+  configChecksum: 7d92034999972dca3c2aa9fb42849833
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -3982,3 +3982,4 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Payments.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.List()`:  `response.Embedded.Customers.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Organizations.Get-Current()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Clients.Get()`:  `response.Embedded.Organization.Locale` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Create()`: \n  *  `request.payment-request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Organizations.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Cancel()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Clients.List()`:  `response.Embedded.Clients.[].Embedded.Organization.Locale` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Create()`: \n  *  `request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Update()`: \n  *  `request.entity-customer.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Create-Payment()`: \n  *  `request.payment-request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Client-Links.Create()`: \n  *  `request.Owner.Locale` **Changed**\n"

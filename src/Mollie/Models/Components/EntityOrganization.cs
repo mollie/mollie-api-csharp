@@ -52,7 +52,7 @@ namespace Mollie.Models.Components
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public LocaleResponse? Locale { get; set; }
+        public LocaleResponse? Locale { get; set; } = null;
 
         [JsonProperty("address")]
         public Address? Address { get; set; }

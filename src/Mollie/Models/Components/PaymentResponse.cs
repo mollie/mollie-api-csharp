@@ -156,7 +156,7 @@ namespace Mollie.Models.Components
         /// Allows you to preset the language to be used.
         /// </summary>
         [JsonProperty("locale")]
-        public LocaleResponse? Locale { get; set; }
+        public LocaleResponse? Locale { get; set; } = null;
 
         /// <summary>
         /// This optional field contains your customer&apos;s ISO 3166-1 alpha-2 country code, detected by us during checkout. This<br/>
