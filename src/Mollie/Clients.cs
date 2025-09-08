@@ -34,7 +34,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, RetryConfig? retryConfig = null);
+        Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get client
@@ -43,15 +43,15 @@ namespace Mollie
         /// Retrieve a single client by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetClientResponse> GetAsync(string id, string? embed = null, RetryConfig? retryConfig = null);
+        Task<GetClientResponse> GetAsync(string id, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Clients: IClients
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Clients(SDKConfig config)
@@ -59,19 +59,21 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, RetryConfig? retryConfig = null)
+        public async Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new ListClientsRequest()
             {
                 Embed = embed,
                 From = fromP,
                 Limit = limit,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/clients", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -214,18 +216,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetClientResponse> GetAsync(string id, string? embed = null, RetryConfig? retryConfig = null)
+        public async Task<GetClientResponse> GetAsync(string id, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetClientRequest()
             {
                 Id = id,
                 Embed = embed,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/clients/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

@@ -21,6 +21,12 @@ namespace Mollie.Models.Requests
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
         public string? Include { get; set; } = null;
 
+        /// <summary>
+        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
+        public string? IdempotencyKey { get; set; }
+
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public PaymentRequest? PaymentRequest { get; set; }
     }

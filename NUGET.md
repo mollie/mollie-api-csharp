@@ -43,17 +43,21 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Balances.ListAsync(
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
-);
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
 
 // handle response
 ```
@@ -75,17 +79,21 @@ You can set the security parameters through the `security` optional parameter wh
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Balances.ListAsync(
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
-);
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
 
 // handle response
 ```
@@ -100,10 +108,19 @@ To change the default retry strategy for a single API call, simply pass a `Retry
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
+
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
 
 var res = await sdk.Balances.ListAsync(
     retryConfig: new RetryConfig(
@@ -116,10 +133,7 @@ var res = await sdk.Balances.ListAsync(
         ),
         retryConnectionErrors: false
     ),
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
+    request: req
 );
 
 // handle response
@@ -129,6 +143,7 @@ If you'd like to override the default retry strategy for all operations that sup
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     retryConfig: new RetryConfig(
@@ -146,12 +161,15 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Balances.ListAsync(
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
-);
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
 
 // handle response
 ```
@@ -176,6 +194,7 @@ Some exceptions in this SDK include an additional `Payload` field, which will co
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Errors;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -183,12 +202,15 @@ var sdk = new Client(security: new Security() {
 
 try
 {
-    var res = await sdk.Balances.ListAsync(
-        currency: "EUR",
-        fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-        limit: 50,
-        testmode: false
-    );
+    ListBalancesRequest req = new ListBalancesRequest() {
+        Currency = "EUR",
+        From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+        Limit = 50,
+        Testmode = false,
+        IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    };
+
+    var res = await sdk.Balances.ListAsync(req);
 
     // handle response
 }
@@ -250,6 +272,7 @@ The default server can be overridden globally by passing a URL to the `serverUrl
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     serverUrl: "https://api.mollie.com/v2",
@@ -258,12 +281,15 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Balances.ListAsync(
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
-);
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
 
 // handle response
 ```

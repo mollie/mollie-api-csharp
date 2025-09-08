@@ -39,6 +39,7 @@ ListSettlementsRequest req = new ListSettlementsRequest() {
     Year = "2025",
     Month = "1",
     Currencies = Currencies.Eur,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Settlements.ListAsync(req);
@@ -89,16 +90,20 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Settlements.GetAsync(id: "stl_jDk30akdN");
+var res = await sdk.Settlements.GetAsync(
+    id: "stl_jDk30akdN",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
 
@@ -133,10 +138,16 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Settlements.GetOpenAsync();
+var res = await sdk.Settlements.GetOpenAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
 // handle response
 ```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
 
@@ -169,10 +180,16 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Settlements.GetNextAsync();
+var res = await sdk.Settlements.GetNextAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
 // handle response
 ```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
 
@@ -212,6 +229,7 @@ ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     Sort = ListSort.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Settlements.ListPaymentsAsync(req);
@@ -260,6 +278,7 @@ ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     Limit = 50,
     Embed = "payment",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Settlements.ListCapturesAsync(req);
@@ -308,6 +327,7 @@ ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     Limit = 50,
     Embed = "payment",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Settlements.ListRefundsAsync(req);
@@ -356,6 +376,7 @@ ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     Limit = 50,
     Embed = "payment",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Settlements.ListChargebacksAsync(req);

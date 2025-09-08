@@ -34,6 +34,7 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     From = "inv_xBEbP9rvAq",
     Limit = 50,
     Sort = ListSort.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Invoices.ListAsync(req);
@@ -76,16 +77,20 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Invoices.GetAsync(id: "inv_FrvewDA3Pr");
+var res = await sdk.Invoices.GetAsync(
+    id: "inv_FrvewDA3Pr",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Provide the ID of the item you want to perform this operation on. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
 

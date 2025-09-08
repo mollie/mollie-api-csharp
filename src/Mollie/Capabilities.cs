@@ -19,6 +19,7 @@ namespace Mollie
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
     public interface ICapabilities
@@ -43,15 +44,15 @@ namespace Mollie
         /// the payments capability is enabled, communicating that the organization can indeed receive payments.
         /// </remarks>
         /// </summary>
-        Task<ListCapabilitiesResponse> ListAsync(RetryConfig? retryConfig = null);
+        Task<ListCapabilitiesResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Capabilities: ICapabilities
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Capabilities(SDKConfig config)
@@ -59,14 +60,19 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListCapabilitiesResponse> ListAsync(RetryConfig? retryConfig = null)
+        public async Task<ListCapabilitiesResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new ListCapabilitiesRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/capabilities";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -150,7 +156,7 @@ namespace Mollie
                     ListCapabilitiesResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListCapabilitiesResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListCapabilitiesResponseBody>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {

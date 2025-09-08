@@ -33,7 +33,7 @@ namespace Mollie
         /// The routed amount is credited to the account of your customer.
         /// </remarks>
         /// </summary>
-        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null);
+        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List payment routes
@@ -42,15 +42,15 @@ namespace Mollie
         /// Retrieve a list of all routes created for a specific payment.
         /// </remarks>
         /// </summary>
-        Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class DelayedRouting: IDelayedRouting
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public DelayedRouting(SDKConfig config)
@@ -58,11 +58,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null)
+        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null)
         {
             var request = new PaymentCreateRouteRequest()
             {
                 PaymentId = paymentId,
+                IdempotencyKey = idempotencyKey,
                 RouteCreateRequest = routeCreateRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -70,6 +71,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RouteCreateRequest", "json", false, true);
             if (serializedBody != null)
@@ -218,18 +220,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<PaymentListRoutesResponse> ListAsync(string paymentId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new PaymentListRoutesRequest()
             {
                 PaymentId = paymentId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/routes", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

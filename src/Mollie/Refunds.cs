@@ -33,7 +33,7 @@ namespace Mollie
         /// transfer or by refunding the amount to your customer&apos;s credit card.
         /// </remarks>
         /// </summary>
-        Task<CreateRefundResponse> CreateAsync(string paymentId, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null);
+        Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List payment refunds
@@ -53,7 +53,7 @@ namespace Mollie
         /// Retrieve a single payment refund by its ID and the ID of its parent payment.
         /// </remarks>
         /// </summary>
-        Task<GetRefundResponse> GetAsync(string paymentId, string refundId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetRefundResponse> GetAsync(GetRefundRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Cancel payment refund
@@ -66,7 +66,7 @@ namespace Mollie
         /// <a href="get-refund">Get refund endpoint</a> for more information.
         /// </remarks>
         /// </summary>
-        Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List all refunds
@@ -84,8 +84,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)
@@ -93,11 +93,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateRefundResponse> CreateAsync(string paymentId, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null)
+        public async Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateRefundRequest()
             {
                 PaymentId = paymentId,
+                IdempotencyKey = idempotencyKey,
                 EntityRefund = entityRefund,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -105,6 +106,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "EntityRefund", "json", false, true);
             if (serializedBody != null)
@@ -260,6 +262,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -402,20 +405,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetRefundResponse> GetAsync(string paymentId, string refundId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetRefundResponse> GetAsync(GetRefundRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new GetRefundRequest()
-            {
-                PaymentId = paymentId,
-                RefundId = refundId,
-                Embed = embed,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/refunds/{refundId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -558,19 +555,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<CancelRefundResponse> CancelAsync(string paymentId, string refundId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new CancelRefundRequest()
             {
                 PaymentId = paymentId,
                 RefundId = refundId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/refunds/{refundId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -720,6 +719,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

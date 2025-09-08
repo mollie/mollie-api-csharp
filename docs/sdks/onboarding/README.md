@@ -23,10 +23,16 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Onboarding.GetAsync();
+var res = await sdk.Onboarding.GetAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
 // handle response
 ```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
 
@@ -59,33 +65,35 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-SubmitOnboardingDataRequest req = new SubmitOnboardingDataRequest() {
-    Organization = new Organization() {
-        Name = "Mollie B.V.",
-        RegistrationNumber = "30204462",
-        VatNumber = "NL815839091B01",
-        VatRegulation = VatRegulation.Dutch,
-    },
-    Profile = new Profile() {
-        Name = "Mollie",
-        Url = "https://www.mollie.com",
-        Email = "info@mollie.com",
-        Phone = "+31208202070",
-        Description = "Payment service provider",
-        BusinessCategory = "MONEY_SERVICES",
-    },
-};
-
-var res = await sdk.Onboarding.SubmitAsync(req);
+var res = await sdk.Onboarding.SubmitAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new SubmitOnboardingDataRequestBody() {
+        Organization = new Organization() {
+            Name = "Mollie B.V.",
+            RegistrationNumber = "30204462",
+            VatNumber = "NL815839091B01",
+            VatRegulation = VatRegulation.Dutch,
+        },
+        Profile = new Profile() {
+            Name = "Mollie",
+            Url = "https://www.mollie.com",
+            Email = "info@mollie.com",
+            Phone = "+31208202070",
+            Description = "Payment service provider",
+            BusinessCategory = "MONEY_SERVICES",
+        },
+    }
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `request`                                                                           | [SubmitOnboardingDataRequest](../../Models/Requests/SubmitOnboardingDataRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                            | *string*                                                                                    | :heavy_minus_sign:                                                                          | A unique key to ensure idempotent requests. This key should be a UUID v4 string.            | 123e4567-e89b-12d3-a456-426                                                                 |
+| `RequestBody`                                                                               | [SubmitOnboardingDataRequestBody](../../Models/Requests/SubmitOnboardingDataRequestBody.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |                                                                                             |
 
 ### Response
 

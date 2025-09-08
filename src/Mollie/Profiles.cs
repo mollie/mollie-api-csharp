@@ -35,7 +35,7 @@ namespace Mollie
         /// can use this endpoint to automate profile creation.
         /// </remarks>
         /// </summary>
-        Task<CreateProfileResponse> CreateAsync(EntityProfile request, RetryConfig? retryConfig = null);
+        Task<CreateProfileResponse> CreateAsync(EntityProfile entityProfile, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List profiles
@@ -46,7 +46,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, RetryConfig? retryConfig = null);
+        Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get profile
@@ -55,7 +55,7 @@ namespace Mollie
         /// Retrieve a single profile by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update profile
@@ -67,7 +67,7 @@ namespace Mollie
         /// Alternatively, you can use this endpoint to automate profile management.
         /// </remarks>
         /// </summary>
-        Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, RetryConfig? retryConfig = null);
+        Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete profile
@@ -76,7 +76,7 @@ namespace Mollie
         /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
         /// </remarks>
         /// </summary>
-        Task<DeleteProfileResponse> DeleteAsync(string id, RetryConfig? retryConfig = null);
+        Task<DeleteProfileResponse> DeleteAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get current profile
@@ -89,15 +89,15 @@ namespace Mollie
         /// documentation.
         /// </remarks>
         /// </summary>
-        Task<GetCurrentProfileResponse> GetCurrentAsync(RetryConfig? retryConfig = null);
+        Task<GetCurrentProfileResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Profiles: IProfiles
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)
@@ -105,16 +105,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateProfileResponse> CreateAsync(EntityProfile request, RetryConfig? retryConfig = null)
+        public async Task<CreateProfileResponse> CreateAsync(EntityProfile entityProfile, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreateProfileRequest()
+            {
+                EntityProfile = entityProfile,
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/profiles";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityProfile", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -261,18 +267,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, RetryConfig? retryConfig = null)
+        public async Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new ListProfilesRequest()
             {
                 From = fromP,
                 Limit = limit,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -415,18 +423,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetProfileRequest()
             {
                 Id = id,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -569,18 +579,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, RetryConfig? retryConfig = null)
+        public async Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateProfileRequest()
             {
                 Id = id,
                 RequestBody = requestBody,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
@@ -729,17 +741,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteProfileResponse> DeleteAsync(string id, RetryConfig? retryConfig = null)
+        public async Task<DeleteProfileResponse> DeleteAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new DeleteProfileRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -882,14 +896,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCurrentProfileResponse> GetCurrentAsync(RetryConfig? retryConfig = null)
+        public async Task<GetCurrentProfileResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new GetCurrentProfileRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/profiles/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -973,7 +992,7 @@ namespace Mollie
                     EntityProfileResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {

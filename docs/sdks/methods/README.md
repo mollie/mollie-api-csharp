@@ -54,6 +54,7 @@ ListMethodsRequest req = new ListMethodsRequest() {
     ProfileId = "pfl_5B8cwPMGnU",
     Include = "issuers",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Methods.ListAsync(req);
@@ -107,6 +108,7 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     SequenceType = SequenceType.Oneoff,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Methods.AllAsync(req);
@@ -166,6 +168,7 @@ GetMethodRequest req = new GetMethodRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
 var res = await sdk.Methods.GetAsync(req);

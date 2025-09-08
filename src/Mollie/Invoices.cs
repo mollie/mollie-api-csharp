@@ -47,15 +47,15 @@ namespace Mollie
         /// call the <a href="list-invoices">List invoices</a> endpoint with the `reference` parameter.
         /// </remarks>
         /// </summary>
-        Task<GetInvoiceResponse> GetAsync(string id, RetryConfig? retryConfig = null);
+        Task<GetInvoiceResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Invoices: IInvoices
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Invoices(SDKConfig config)
@@ -70,6 +70,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -212,17 +213,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetInvoiceResponse> GetAsync(string id, RetryConfig? retryConfig = null)
+        public async Task<GetInvoiceResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetInvoiceRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/invoices/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

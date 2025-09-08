@@ -9,48 +9,19 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Requests;
     using Mollie.Utils;
-    using Newtonsoft.Json;
     
     public class RequestApplePayPaymentSessionRequest
     {
 
         /// <summary>
-        /// The validationUrl you got from the<br/>
-        /// 
-        /// <remarks>
-        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepayvalidatemerchantevent">ApplePayValidateMerchant event</a>.<br/>
-        /// <br/>
-        /// A list of all<br/>
-        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/setting_up_your_server">valid host names</a><br/>
-        /// for merchant validation is available. You should white list these in your application and reject any<br/>
-        /// `validationUrl`s that have a host name not in the list.
-        /// </remarks>
+        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
         /// </summary>
-        [JsonProperty("validationUrl")]
-        public string ValidationUrl { get; set; } = default!;
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
+        public string? IdempotencyKey { get; set; }
 
-        /// <summary>
-        /// The domain of your web shop, that is visible in the browser&apos;s location bar. For example<br/>
-        /// 
-        /// <remarks>
-        /// `pay.myshop.com`.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("domain")]
-        public string Domain { get; set; } = default!;
-
-        /// <summary>
-        /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
-        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
-        /// required.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("profileId")]
-        public string? ProfileId { get; set; }
+        [SpeakeasyMetadata("request:mediaType=application/json")]
+        public RequestApplePayPaymentSessionRequestBody? RequestBody { get; set; }
     }
 }

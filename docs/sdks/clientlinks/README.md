@@ -74,34 +74,36 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-EntityClientLink req = new EntityClientLink() {
-    Owner = new Owner() {
-        Email = "john@example.org",
-        GivenName = "John",
-        FamilyName = "Doe",
-        Locale = LocaleResponse.EnUS,
-    },
-    Name = "Acme Corporation",
-    Address = new EntityClientLinkAddress() {
-        StreetAndNumber = "Main Street 123",
-        PostalCode = "1234AB",
-        City = "Amsterdam",
-        Country = "NL",
-    },
-    RegistrationNumber = "12345678",
-    VatNumber = "123456789B01",
-};
-
-var res = await sdk.ClientLinks.CreateAsync(req);
+var res = await sdk.ClientLinks.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    entityClientLink: new EntityClientLink() {
+        Owner = new Owner() {
+            Email = "john@example.org",
+            GivenName = "John",
+            FamilyName = "Doe",
+            Locale = LocaleResponse.EnUS,
+        },
+        Name = "Acme Corporation",
+        Address = new EntityClientLinkAddress() {
+            StreetAndNumber = "Main Street 123",
+            PostalCode = "1234AB",
+            City = "Amsterdam",
+            Country = "NL",
+        },
+        RegistrationNumber = "12345678",
+        VatNumber = "123456789B01",
+    }
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `request`                                                       | [EntityClientLink](../../Models/Components/EntityClientLink.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| `EntityClientLink`                                                               | [EntityClientLink](../../Models/Components/EntityClientLink.md)                  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

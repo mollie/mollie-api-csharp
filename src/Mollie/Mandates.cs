@@ -36,7 +36,7 @@ namespace Mollie
         /// mandates for cards, your customers need to perform a &apos;first payment&apos; with their card.
         /// </remarks>
         /// </summary>
-        Task<CreateMandateResponse> CreateAsync(string customerId, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null);
+        Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List mandates
@@ -57,7 +57,7 @@ namespace Mollie
         /// account details, card details, or PayPal account details.
         /// </remarks>
         /// </summary>
-        Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Revoke mandate
@@ -67,15 +67,15 @@ namespace Mollie
         /// mandate, and all connected subscriptions will be canceled.
         /// </remarks>
         /// </summary>
-        Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, string? idempotencyKey = null, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
     }
 
     public class Mandates: IMandates
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Mandates(SDKConfig config)
@@ -83,11 +83,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateMandateResponse> CreateAsync(string customerId, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null)
+        public async Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateMandateRequest()
             {
                 CustomerId = customerId,
+                IdempotencyKey = idempotencyKey,
                 EntityMandate = entityMandate,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -95,6 +96,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "EntityMandate", "json", false, true);
             if (serializedBody != null)
@@ -250,6 +252,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -392,19 +395,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetMandateRequest()
             {
                 CustomerId = customerId,
                 MandateId = mandateId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates/{mandateId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -547,12 +552,13 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, string? idempotencyKey = null, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new RevokeMandateRequest()
             {
                 CustomerId = customerId,
                 MandateId = mandateId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -560,6 +566,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)

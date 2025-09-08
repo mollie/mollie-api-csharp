@@ -35,7 +35,7 @@ namespace Mollie
         /// Once registered, customers will also appear in your Mollie dashboard.
         /// </remarks>
         /// </summary>
-        Task<CreateCustomerResponse> CreateAsync(EntityCustomer? request = null, RetryConfig? retryConfig = null);
+        Task<CreateCustomerResponse> CreateAsync(string? idempotencyKey = null, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List customers
@@ -46,7 +46,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListCustomersResponse> ListAsync(ListCustomersRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get customer
@@ -55,7 +55,7 @@ namespace Mollie
         /// Retrieve a single customer by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update customer
@@ -66,7 +66,7 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<UpdateCustomerResponse> UpdateAsync(string customerId, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null);
+        Task<UpdateCustomerResponse> UpdateAsync(string customerId, string? idempotencyKey = null, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete customer
@@ -75,7 +75,7 @@ namespace Mollie
         /// Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.
         /// </remarks>
         /// </summary>
-        Task<DeleteCustomerResponse> DeleteAsync(string customerId, DeleteCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<DeleteCustomerResponse> DeleteAsync(string customerId, string? idempotencyKey = null, DeleteCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create customer payment
@@ -94,7 +94,7 @@ namespace Mollie
         /// parameter predefined.
         /// </remarks>
         /// </summary>
-        Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null);
+        Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List customer payments
@@ -110,8 +110,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Customers(SDKConfig config)
@@ -119,16 +119,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateCustomerResponse> CreateAsync(EntityCustomer? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCustomerResponse> CreateAsync(string? idempotencyKey = null, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreateCustomerRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                EntityCustomer = entityCustomer,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/customers";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityCustomer", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -275,20 +281,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListCustomersResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListCustomersResponse> ListAsync(ListCustomersRequest? request = null, RetryConfig? retryConfig = null)
         {
-            var request = new ListCustomersRequest()
-            {
-                From = fromP,
-                Limit = limit,
-                Sort = sort,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -431,19 +431,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetCustomerResponse> GetAsync(string customerId, string? include = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetCustomerRequest()
             {
                 CustomerId = customerId,
                 Include = include,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -586,11 +588,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateCustomerResponse> UpdateAsync(string customerId, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateCustomerResponse> UpdateAsync(string customerId, string? idempotencyKey = null, EntityCustomer? entityCustomer = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateCustomerRequest()
             {
                 CustomerId = customerId,
+                IdempotencyKey = idempotencyKey,
                 EntityCustomer = entityCustomer,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -598,6 +601,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "EntityCustomer", "json", false, true);
             if (serializedBody != null)
@@ -746,11 +750,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteCustomerResponse> DeleteAsync(string customerId, DeleteCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<DeleteCustomerResponse> DeleteAsync(string customerId, string? idempotencyKey = null, DeleteCustomerRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new DeleteCustomerRequest()
             {
                 CustomerId = customerId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -758,6 +763,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -906,11 +912,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCustomerPaymentResponse> CreatePaymentAsync(string customerId, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateCustomerPaymentRequest()
             {
                 CustomerId = customerId,
+                IdempotencyKey = idempotencyKey,
                 PaymentRequest = paymentRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -918,6 +925,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "PaymentRequest", "json", false, true);
             if (serializedBody != null)
@@ -1099,6 +1107,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

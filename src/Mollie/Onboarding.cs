@@ -32,7 +32,7 @@ namespace Mollie
         /// Retrieve the onboarding status of the currently authenticated organization.
         /// </remarks>
         /// </summary>
-        Task<GetOnboardingStatusResponse> GetAsync(RetryConfig? retryConfig = null);
+        Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Submit onboarding data
@@ -46,15 +46,15 @@ namespace Mollie
         /// Information that the merchant has entered in their dashboard will not be overwritten.
         /// </remarks>
         /// </summary>
-        Task<SubmitOnboardingDataResponse> SubmitAsync(SubmitOnboardingDataRequest? request = null, RetryConfig? retryConfig = null);
+        Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null);
     }
 
     public class Onboarding: IOnboarding
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Onboarding(SDKConfig config)
@@ -62,14 +62,19 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetOnboardingStatusResponse> GetAsync(RetryConfig? retryConfig = null)
+        public async Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new GetOnboardingStatusRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/onboarding/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -153,7 +158,7 @@ namespace Mollie
                     EntityOnboardingStatus obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityOnboardingStatus>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityOnboardingStatus>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
@@ -186,16 +191,22 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<SubmitOnboardingDataResponse> SubmitAsync(SubmitOnboardingDataRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
+            var request = new SubmitOnboardingDataRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                RequestBody = requestBody,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/onboarding/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

@@ -27,6 +27,12 @@ namespace Mollie.Models.Requests
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=subscriptionId")]
         public string SubscriptionId { get; set; } = default!;
 
+        /// <summary>
+        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
+        public string? IdempotencyKey { get; set; }
+
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public CancelSubscriptionRequestBody? RequestBody { get; set; }
     }

@@ -34,7 +34,7 @@ namespace Mollie
         /// The results are **not** paginated.
         /// </remarks>
         /// </summary>
-        Task<ListPermissionsResponse> ListAsync(RetryConfig? retryConfig = null);
+        Task<ListPermissionsResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get permission
@@ -43,15 +43,15 @@ namespace Mollie
         /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.
         /// </remarks>
         /// </summary>
-        Task<GetPermissionResponse> GetAsync(string permissionId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetPermissionResponse> GetAsync(string permissionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Permissions: IPermissions
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Permissions(SDKConfig config)
@@ -59,14 +59,19 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListPermissionsResponse> ListAsync(RetryConfig? retryConfig = null)
+        public async Task<ListPermissionsResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new ListPermissionsRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/permissions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -150,7 +155,7 @@ namespace Mollie
                     ListPermissionsResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListPermissionsResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ListPermissionsResponseBody>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
@@ -179,7 +184,7 @@ namespace Mollie
                     ErrorResponsePayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
@@ -209,18 +214,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPermissionResponse> GetAsync(string permissionId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetPermissionResponse> GetAsync(string permissionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetPermissionRequest()
             {
                 PermissionId = permissionId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/permissions/{permissionId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

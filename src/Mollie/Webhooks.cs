@@ -32,7 +32,7 @@ namespace Mollie
         /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.
         /// </remarks>
         /// </summary>
-        Task<CreateWebhookResponse> CreateAsync(CreateWebhookRequest? request = null, RetryConfig? retryConfig = null);
+        Task<CreateWebhookResponse> CreateAsync(string? idempotencyKey = null, CreateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List all webhooks
@@ -50,7 +50,7 @@ namespace Mollie
         /// Updates the webhook. You may edit the name, url and the list of subscribed event types.
         /// </remarks>
         /// </summary>
-        Task<UpdateWebhookResponse> UpdateAsync(string id, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdateWebhookResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get a webhook
@@ -59,7 +59,7 @@ namespace Mollie
         /// Retrieve a single webhook object by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete a webhook
@@ -68,7 +68,7 @@ namespace Mollie
         /// Delete a single webhook object by its webhook ID.
         /// </remarks>
         /// </summary>
-        Task<DeleteWebhookResponse> DeleteAsync(string id, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<DeleteWebhookResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Test a webhook
@@ -77,15 +77,15 @@ namespace Mollie
         /// Sends a test event to the webhook to verify the endpoint is working as expected.
         /// </remarks>
         /// </summary>
-        Task<TestWebhookResponse> TestAsync(string id, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<TestWebhookResponse> TestAsync(string id, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null);
     }
 
     public class Webhooks: IWebhooks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Webhooks(SDKConfig config)
@@ -93,16 +93,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateWebhookResponse> CreateAsync(CreateWebhookRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateWebhookResponse> CreateAsync(string? idempotencyKey = null, CreateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreateWebhookRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                RequestBody = requestBody,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/webhooks";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -256,6 +262,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -398,11 +405,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateWebhookResponse> UpdateAsync(string id, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateWebhookResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateWebhookRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -410,6 +418,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -558,18 +567,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetWebhookRequest()
             {
                 Id = id,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -712,11 +723,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteWebhookResponse> DeleteAsync(string id, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<DeleteWebhookResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new DeleteWebhookRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -724,6 +736,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -872,11 +885,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<TestWebhookResponse> TestAsync(string id, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<TestWebhookResponse> TestAsync(string id, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new TestWebhookRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -884,6 +898,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)

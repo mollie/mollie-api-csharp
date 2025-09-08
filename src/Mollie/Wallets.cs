@@ -50,15 +50,15 @@ namespace Mollie
         /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
         /// </remarks>
         /// </summary>
-        Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(RequestApplePayPaymentSessionRequest? request = null, RetryConfig? retryConfig = null);
+        Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(string? idempotencyKey = null, RequestApplePayPaymentSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
     }
 
     public class Wallets: IWallets
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Wallets(SDKConfig config)
@@ -66,16 +66,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(RequestApplePayPaymentSessionRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(string? idempotencyKey = null, RequestApplePayPaymentSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
+            var request = new RequestApplePayPaymentSessionRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                RequestBody = requestBody,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/wallets/applepay/sessions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

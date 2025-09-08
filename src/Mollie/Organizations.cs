@@ -37,7 +37,7 @@ namespace Mollie
         /// If you have a *partner account*&apos;, you can retrieve organization details of connected organizations.
         /// </remarks>
         /// </summary>
-        Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get current organization
@@ -50,7 +50,7 @@ namespace Mollie
         /// documentation.
         /// </remarks>
         /// </summary>
-        Task<GetCurrentOrganizationResponse> GetCurrentAsync(RetryConfig? retryConfig = null);
+        Task<GetCurrentOrganizationResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get partner status
@@ -60,15 +60,15 @@ namespace Mollie
         /// accounts*.
         /// </remarks>
         /// </summary>
-        Task<GetPartnerStatusResponse> GetPartnerAsync(RetryConfig? retryConfig = null);
+        Task<GetPartnerStatusResponse> GetPartnerAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Organizations: IOrganizations
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Organizations(SDKConfig config)
@@ -76,18 +76,20 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetOrganizationRequest()
             {
                 Id = id,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -230,14 +232,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCurrentOrganizationResponse> GetCurrentAsync(RetryConfig? retryConfig = null)
+        public async Task<GetCurrentOrganizationResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new GetCurrentOrganizationRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/organizations/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -321,7 +328,7 @@ namespace Mollie
                     EntityOrganization obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityOrganization>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityOrganization>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
@@ -354,14 +361,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPartnerStatusResponse> GetPartnerAsync(RetryConfig? retryConfig = null)
+        public async Task<GetPartnerStatusResponse> GetPartnerAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new GetPartnerStatusRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/organizations/me/partner";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -445,7 +457,7 @@ namespace Mollie
                     GetPartnerStatusResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetPartnerStatusResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetPartnerStatusResponseBody>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {

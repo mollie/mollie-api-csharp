@@ -19,5 +19,11 @@ namespace Mollie.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
         public string Id { get; set; } = default!;
+
+        /// <summary>
+        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
+        public string? IdempotencyKey { get; set; }
     }
 }

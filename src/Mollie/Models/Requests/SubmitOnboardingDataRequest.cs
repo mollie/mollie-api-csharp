@@ -11,15 +11,17 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Requests;
     using Mollie.Utils;
-    using Newtonsoft.Json;
     
     public class SubmitOnboardingDataRequest
     {
 
-        [JsonProperty("organization")]
-        public Organization? Organization { get; set; }
+        /// <summary>
+        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
+        public string? IdempotencyKey { get; set; }
 
-        [JsonProperty("profile")]
-        public Profile? Profile { get; set; }
+        [SpeakeasyMetadata("request:mediaType=application/json")]
+        public SubmitOnboardingDataRequestBody? RequestBody { get; set; }
     }
 }

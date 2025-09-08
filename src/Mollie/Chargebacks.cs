@@ -43,7 +43,7 @@ namespace Mollie
         /// Retrieve a single payment chargeback by its ID and the ID of its parent payment.
         /// </remarks>
         /// </summary>
-        Task<GetChargebackResponse> GetAsync(string paymentId, string chargebackId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetChargebackResponse> GetAsync(GetChargebackRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List all chargebacks
@@ -61,8 +61,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Chargebacks(SDKConfig config)
@@ -77,6 +77,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -219,20 +220,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetChargebackResponse> GetAsync(string paymentId, string chargebackId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetChargebackResponse> GetAsync(GetChargebackRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new GetChargebackRequest()
-            {
-                PaymentId = paymentId,
-                ChargebackId = chargebackId,
-                Embed = embed,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/chargebacks/{chargebackId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -382,6 +377,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

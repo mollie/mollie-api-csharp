@@ -34,7 +34,7 @@ namespace Mollie
         /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
         /// </remarks>
         /// </summary>
-        Task<CreatePaymentLinkResponse> CreateAsync(CreatePaymentLinkRequest? request = null, RetryConfig? retryConfig = null);
+        Task<CreatePaymentLinkResponse> CreateAsync(string? idempotencyKey = null, CreatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List payment links
@@ -45,7 +45,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get payment link
@@ -54,7 +54,7 @@ namespace Mollie
         /// Retrieve a single payment link by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update payment link
@@ -63,7 +63,7 @@ namespace Mollie
         /// Certain details of an existing payment link can be updated.
         /// </remarks>
         /// </summary>
-        Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, string? idempotencyKey = null, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete payment link
@@ -78,7 +78,7 @@ namespace Mollie
         /// <a href="update-payment-link">Update payment link</a> endpoint instead.
         /// </remarks>
         /// </summary>
-        Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, string? idempotencyKey = null, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get payment link payments
@@ -96,8 +96,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public PaymentLinks(SDKConfig config)
@@ -105,16 +105,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreatePaymentLinkResponse> CreateAsync(CreatePaymentLinkRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreatePaymentLinkResponse> CreateAsync(string? idempotencyKey = null, CreatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreatePaymentLinkRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                RequestBody = requestBody,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/payment-links";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -261,19 +267,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new ListPaymentLinksRequest()
             {
                 From = fromP,
                 Limit = limit,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -416,18 +424,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetPaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -570,11 +580,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, string? idempotencyKey = null, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdatePaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -582,6 +593,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -730,11 +742,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, string? idempotencyKey = null, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new DeletePaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -742,6 +755,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -897,6 +911,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

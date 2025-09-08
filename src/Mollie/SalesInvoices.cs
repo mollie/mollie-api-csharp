@@ -36,7 +36,7 @@ namespace Mollie
         /// With the Sales Invoice API you can generate sales invoices to send to your customers.
         /// </remarks>
         /// </summary>
-        Task<CreateSalesInvoiceResponse> CreateAsync(EntitySalesInvoice? request = null, RetryConfig? retryConfig = null);
+        Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List sales invoices
@@ -51,7 +51,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get sales invoice
@@ -64,7 +64,7 @@ namespace Mollie
         /// Retrieve a single sales invoice by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update sales invoice
@@ -79,7 +79,7 @@ namespace Mollie
         /// respectively).
         /// </remarks>
         /// </summary>
-        Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null);
+        Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete sales invoice
@@ -93,15 +93,15 @@ namespace Mollie
         /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.
         /// </remarks>
         /// </summary>
-        Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null);
+        Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null);
     }
 
     public class SalesInvoices: ISalesInvoices
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)
@@ -109,16 +109,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateSalesInvoiceResponse> CreateAsync(EntitySalesInvoice? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreateSalesInvoiceRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                EntitySalesInvoice = entitySalesInvoice,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/sales-invoices";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntitySalesInvoice", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -265,19 +271,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new ListSalesInvoicesRequest()
             {
                 From = fromP,
                 Limit = limit,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sales-invoices", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -420,18 +428,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetSalesInvoiceRequest()
             {
                 Id = id,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sales-invoices/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -574,11 +584,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateSalesInvoiceRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
                 UpdateValuesSalesInvoice = updateValuesSalesInvoice,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -586,6 +597,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "UpdateValuesSalesInvoice", "json", false, true);
             if (serializedBody != null)
@@ -734,11 +746,12 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null)
+        public async Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null)
         {
             var request = new DeleteSalesInvoiceRequest()
             {
                 Id = id,
+                IdempotencyKey = idempotencyKey,
                 DeleteValuesSalesInvoice = deleteValuesSalesInvoice,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -746,6 +759,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "DeleteValuesSalesInvoice", "json", false, true);
             if (serializedBody != null)

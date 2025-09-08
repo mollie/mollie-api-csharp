@@ -34,7 +34,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get terminal
@@ -43,15 +43,15 @@ namespace Mollie
         /// Retrieve a single terminal by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
     }
 
     public class Terminals: ITerminals
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Terminals(SDKConfig config)
@@ -59,20 +59,14 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListTerminalsResponse> ListAsync(string? fromP = null, long? limit = null, ListSort? sort = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null)
         {
-            var request = new ListTerminalsRequest()
-            {
-                From = fromP,
-                Limit = limit,
-                Sort = sort,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/terminals", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -215,18 +209,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetTerminalRequest()
             {
                 TerminalId = terminalId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/terminals/{terminalId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

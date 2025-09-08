@@ -34,7 +34,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListBalancesResponse> ListAsync(string? currency = null, string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListBalancesResponse> ListAsync(ListBalancesRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get balance
@@ -57,7 +57,7 @@ namespace Mollie
         /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
         /// </remarks>
         /// </summary>
-        Task<GetBalanceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetBalanceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get primary balance
@@ -70,7 +70,7 @@ namespace Mollie
         /// endpoint.
         /// </remarks>
         /// </summary>
-        Task<GetPrimaryBalanceResponse> GetPrimaryAsync(RetryConfig? retryConfig = null);
+        Task<GetPrimaryBalanceResponse> GetPrimaryAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Get balance report
@@ -103,15 +103,15 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListBalanceTransactionsResponse> ListTransactionsAsync(string balanceId, string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListBalanceTransactionsResponse> ListTransactionsAsync(ListBalanceTransactionsRequest request, RetryConfig? retryConfig = null);
     }
 
     public class Balances: IBalances
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Balances(SDKConfig config)
@@ -119,20 +119,14 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListBalancesResponse> ListAsync(string? currency = null, string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListBalancesResponse> ListAsync(ListBalancesRequest? request = null, RetryConfig? retryConfig = null)
         {
-            var request = new ListBalancesRequest()
-            {
-                Currency = currency,
-                From = fromP,
-                Limit = limit,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -275,18 +269,20 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetBalanceResponse> GetAsync(string id, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetBalanceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetBalanceRequest()
             {
                 Id = id,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -429,14 +425,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPrimaryBalanceResponse> GetPrimaryAsync(RetryConfig? retryConfig = null)
+        public async Task<GetPrimaryBalanceResponse> GetPrimaryAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
+            var request = new GetPrimaryBalanceRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/balances/primary";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -520,7 +521,7 @@ namespace Mollie
                     EntityBalance obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityBalance>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityBalance>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
@@ -560,6 +561,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -702,20 +704,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListBalanceTransactionsResponse> ListTransactionsAsync(string balanceId, string? fromP = null, long? limit = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListBalanceTransactionsResponse> ListTransactionsAsync(ListBalanceTransactionsRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new ListBalanceTransactionsRequest()
-            {
-                BalanceId = balanceId,
-                From = fromP,
-                Limit = limit,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/transactions", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

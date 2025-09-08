@@ -2,17 +2,21 @@
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Balances.ListAsync(
-    currency: "EUR",
-    fromP: "bal_gVMhHKqSSRYJyPsuoPNFH",
-    limit: 50,
-    testmode: false
-);
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    Testmode = false,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
 
 // handle response
 ```

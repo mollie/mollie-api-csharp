@@ -50,7 +50,7 @@ namespace Mollie
         /// Your customer will be charged €10 on the last day of each month, starting in April 2018.
         /// </remarks>
         /// </summary>
-        Task<CreateSubscriptionResponse> CreateAsync(string customerId, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null);
+        Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List customer subscriptions
@@ -70,7 +70,7 @@ namespace Mollie
         /// Retrieve a single subscription by its ID and the ID of its parent customer.
         /// </remarks>
         /// </summary>
-        Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update subscription
@@ -83,7 +83,7 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-subscription">Create subscription</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Cancel subscription
@@ -92,7 +92,7 @@ namespace Mollie
         /// Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.
         /// </remarks>
         /// </summary>
-        Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List all subscriptions
@@ -103,7 +103,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListAllSubscriptionsResponse> AllAsync(string? fromP = null, long? limit = null, string? profileId = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List subscription payments
@@ -121,8 +121,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Subscriptions(SDKConfig config)
@@ -130,11 +130,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateSubscriptionResponse> CreateAsync(string customerId, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null)
+        public async Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateSubscriptionRequest()
             {
                 CustomerId = customerId,
+                IdempotencyKey = idempotencyKey,
                 SubscriptionRequest = subscriptionRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -142,6 +143,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "SubscriptionRequest", "json", false, true);
             if (serializedBody != null)
@@ -297,6 +299,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -439,19 +442,21 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
         {
             var request = new GetSubscriptionRequest()
             {
                 CustomerId = customerId,
                 SubscriptionId = subscriptionId,
                 Testmode = testmode,
+                IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions/{subscriptionId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -594,12 +599,13 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateSubscriptionRequest()
             {
                 CustomerId = customerId,
                 SubscriptionId = subscriptionId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -607,6 +613,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -755,12 +762,13 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new CancelSubscriptionRequest()
             {
                 CustomerId = customerId,
                 SubscriptionId = subscriptionId,
+                IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -768,6 +776,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -916,20 +925,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListAllSubscriptionsResponse> AllAsync(string? fromP = null, long? limit = null, string? profileId = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null)
         {
-            var request = new ListAllSubscriptionsRequest()
-            {
-                From = fromP,
-                Limit = limit,
-                ProfileId = profileId,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/subscriptions", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -1079,6 +1082,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {

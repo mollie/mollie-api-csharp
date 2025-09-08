@@ -31,81 +31,83 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-EntitySalesInvoice req = new EntitySalesInvoice() {
-    Id = "invoice_4Y0eZitmBnQ6IDoMqZQKh",
-    Testmode = false,
-    ProfileId = "pfl_QkEhN94Ba",
-    Status = SalesInvoiceStatus.Draft,
-    VatScheme = SalesInvoiceVatScheme.Standard,
-    VatMode = SalesInvoiceVatMode.Exclusive,
-    Memo = "This is a memo!",
-    PaymentTerm = SalesInvoicePaymentTerm.Thirtydays,
-    PaymentDetails = new SalesInvoicePaymentDetails() {
-        Source = SalesInvoicePaymentDetailsSource.PaymentLink,
-        SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
-    },
-    EmailDetails = new SalesInvoiceEmailDetails() {
-        Subject = "Your invoice is available",
-        Body = "Please find your invoice enclosed.",
-    },
-    CustomerId = "cst_8wmqcHMN4U",
-    MandateId = "mdt_pWUnw6pkBN",
-    RecipientIdentifier = "customer-xyz-0123",
-    Recipient = new SalesInvoiceRecipient() {
-        Type = SalesInvoiceRecipientType.Consumer,
-        Title = "Mrs.",
-        GivenName = "Jane",
-        FamilyName = "Doe",
-        OrganizationName = "Organization Corp.",
-        OrganizationNumber = "12345678",
-        VatNumber = "NL123456789B01",
-        Email = "example@email.com",
-        Phone = "+0123456789",
-        StreetAndNumber = "Keizersgracht 126",
-        StreetAdditional = "4th floor",
-        PostalCode = "5678AB",
-        City = "Amsterdam",
-        Region = "Noord-Holland",
-        Country = "NL",
-        Locale = SalesInvoiceRecipientLocale.Nlnl,
-    },
-    Lines = new List<SalesInvoiceLineItem>() {},
-    Discount = new SalesInvoiceDiscount() {
-        Type = SalesInvoiceDiscountType.Amount,
-        Value = "10.00",
-    },
-    AmountDue = new Amount() {
-        Currency = "EUR",
-        Value = "10.00",
-    },
-    SubtotalAmount = new Amount() {
-        Currency = "EUR",
-        Value = "10.00",
-    },
-    TotalAmount = new Amount() {
-        Currency = "EUR",
-        Value = "10.00",
-    },
-    TotalVatAmount = new Amount() {
-        Currency = "EUR",
-        Value = "10.00",
-    },
-    DiscountedSubtotalAmount = new Amount() {
-        Currency = "EUR",
-        Value = "10.00",
-    },
-};
-
-var res = await sdk.SalesInvoices.CreateAsync(req);
+var res = await sdk.SalesInvoices.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    entitySalesInvoice: new EntitySalesInvoice() {
+        Id = "invoice_4Y0eZitmBnQ6IDoMqZQKh",
+        Testmode = false,
+        ProfileId = "pfl_QkEhN94Ba",
+        Status = SalesInvoiceStatus.Draft,
+        VatScheme = SalesInvoiceVatScheme.Standard,
+        VatMode = SalesInvoiceVatMode.Exclusive,
+        Memo = "This is a memo!",
+        PaymentTerm = SalesInvoicePaymentTerm.Thirtydays,
+        PaymentDetails = new SalesInvoicePaymentDetails() {
+            Source = SalesInvoicePaymentDetailsSource.PaymentLink,
+            SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
+        },
+        EmailDetails = new SalesInvoiceEmailDetails() {
+            Subject = "Your invoice is available",
+            Body = "Please find your invoice enclosed.",
+        },
+        CustomerId = "cst_8wmqcHMN4U",
+        MandateId = "mdt_pWUnw6pkBN",
+        RecipientIdentifier = "customer-xyz-0123",
+        Recipient = new SalesInvoiceRecipient() {
+            Type = SalesInvoiceRecipientType.Consumer,
+            Title = "Mrs.",
+            GivenName = "Jane",
+            FamilyName = "Doe",
+            OrganizationName = "Organization Corp.",
+            OrganizationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+            Email = "example@email.com",
+            Phone = "+0123456789",
+            StreetAndNumber = "Keizersgracht 126",
+            StreetAdditional = "4th floor",
+            PostalCode = "5678AB",
+            City = "Amsterdam",
+            Region = "Noord-Holland",
+            Country = "NL",
+            Locale = SalesInvoiceRecipientLocale.Nlnl,
+        },
+        Lines = new List<SalesInvoiceLineItem>() {},
+        Discount = new SalesInvoiceDiscount() {
+            Type = SalesInvoiceDiscountType.Amount,
+            Value = "10.00",
+        },
+        AmountDue = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        SubtotalAmount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        TotalAmount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        TotalVatAmount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        DiscountedSubtotalAmount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+    }
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [EntitySalesInvoice](../../Models/Components/EntitySalesInvoice.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| `EntitySalesInvoice`                                                             | [EntitySalesInvoice](../../Models/Components/EntitySalesInvoice.md)              | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 
@@ -142,7 +144,8 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.SalesInvoices.ListAsync(
     fromP: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     limit: 50,
-    testmode: false
+    testmode: false,
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
 // handle response
@@ -155,6 +158,7 @@ var res = await sdk.SalesInvoices.ListAsync(
 | `From`                                                                                                                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Limit`                                                                                                                                                                                                                                                                                                                                                                                | *long*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                           | 50                                                                                                                                                                                                                                                                                                                                                                                     |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                       | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Response
 
@@ -188,7 +192,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.GetAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
-    testmode: false
+    testmode: false,
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
 // handle response
@@ -200,6 +205,7 @@ var res = await sdk.SalesInvoices.GetAsync(
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                     | Provide the ID of the item you want to perform this operation on.                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                        |
 | `Testmode`                                                                                                                                                                                                                                                                                                                                                                             | *bool*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. | false                                                                                                                                                                                                                                                                                                                                                                                  |
+| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                     | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                       | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Response
 
@@ -236,6 +242,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.UpdateAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
     updateValuesSalesInvoice: new UpdateValuesSalesInvoice() {
         Testmode = false,
         Status = SalesInvoiceStatus.Draft,
@@ -295,10 +302,11 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | Provide the ID of the item you want to perform this operation on.               |
-| `UpdateValuesSalesInvoice`                                                      | [UpdateValuesSalesInvoice](../../Models/Components/UpdateValuesSalesInvoice.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| `UpdateValuesSalesInvoice`                                                       | [UpdateValuesSalesInvoice](../../Models/Components/UpdateValuesSalesInvoice.md)  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 
@@ -333,6 +341,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.DeleteAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
     deleteValuesSalesInvoice: new DeleteValuesSalesInvoice() {
         Testmode = false,
     }
@@ -343,10 +352,11 @@ var res = await sdk.SalesInvoices.DeleteAsync(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | Provide the ID of the item you want to perform this operation on.               |
-| `DeleteValuesSalesInvoice`                                                      | [DeleteValuesSalesInvoice](../../Models/Components/DeleteValuesSalesInvoice.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| `DeleteValuesSalesInvoice`                                                       | [DeleteValuesSalesInvoice](../../Models/Components/DeleteValuesSalesInvoice.md)  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

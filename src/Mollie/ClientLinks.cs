@@ -84,15 +84,15 @@ namespace Mollie
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
         /// </remarks>
         /// </summary>
-        Task<CreateClientLinkResponse> CreateAsync(EntityClientLink? request = null, RetryConfig? retryConfig = null);
+        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null);
     }
 
     public class ClientLinks: IClientLinks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public ClientLinks(SDKConfig config)
@@ -100,16 +100,22 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateClientLinkResponse> CreateAsync(EntityClientLink? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null)
         {
+            var request = new CreateClientLinkRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                EntityClientLink = entityClientLink,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
             var urlString = baseUrl + "/client-links";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityClientLink", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

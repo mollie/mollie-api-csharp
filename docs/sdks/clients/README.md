@@ -28,7 +28,8 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Clients.ListAsync(
     embed: "organization",
     fromP: "org_12345678",
-    limit: 50
+    limit: 50,
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
 // handle response
@@ -41,6 +42,7 @@ var res = await sdk.Clients.ListAsync(
 | `Embed`                                                                                                                        | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter. |                                                                                                                                |
 | `From`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set. |                                                                                                                                |
 | `Limit`                                                                                                                        | *long*                                                                                                                         | :heavy_minus_sign:                                                                                                             | The maximum number of items to return. Defaults to 50 items.                                                                   | 50                                                                                                                             |
+| `IdempotencyKey`                                                                                                               | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                               | 123e4567-e89b-12d3-a456-426                                                                                                    |
 
 ### Response
 
@@ -70,7 +72,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Clients.GetAsync(
     id: "org_12345678",
-    embed: "organization"
+    embed: "organization",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
 // handle response
@@ -78,10 +81,11 @@ var res = await sdk.Clients.GetAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
-| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                       | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Provide the ID of the item you want to perform this operation on.                                                          |
-| `Embed`                                                                                                                    | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter. |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `Id`                                                                                                                       | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Provide the ID of the item you want to perform this operation on.                                                          |                                                                                                                            |
+| `Embed`                                                                                                                    | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter. |                                                                                                                            |
+| `IdempotencyKey`                                                                                                           | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                           | 123e4567-e89b-12d3-a456-426                                                                                                |
 
 ### Response
 

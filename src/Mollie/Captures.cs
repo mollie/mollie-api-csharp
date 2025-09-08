@@ -39,7 +39,7 @@ namespace Mollie
         /// having collected the customer&apos;s authorization.
         /// </remarks>
         /// </summary>
-        Task<CreateCaptureResponse> CreateAsync(string paymentId, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null);
+        Task<CreateCaptureResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List captures
@@ -60,15 +60,15 @@ namespace Mollie
         /// payment.
         /// </remarks>
         /// </summary>
-        Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null);
+        Task<GetCaptureResponse> GetAsync(GetCaptureRequest request, RetryConfig? retryConfig = null);
     }
 
     public class Captures: ICaptures
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
-        private const string _sdkGenVersion = "2.694.1";
+        private const string _sdkVersion = "0.5.3";
+        private const string _sdkGenVersion = "2.695.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Captures(SDKConfig config)
@@ -76,11 +76,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateCaptureResponse> CreateAsync(string paymentId, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null)
+        public async Task<CreateCaptureResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityCapture? entityCapture = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateCaptureRequest()
             {
                 PaymentId = paymentId,
+                IdempotencyKey = idempotencyKey,
                 EntityCapture = entityCapture,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -88,6 +89,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             var serializedBody = RequestBodySerializer.Serialize(request, "EntityCapture", "json", false, true);
             if (serializedBody != null)
@@ -243,6 +245,7 @@ namespace Mollie
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -385,20 +388,14 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCaptureResponse> GetAsync(string paymentId, string captureId, string? embed = null, bool? testmode = null, RetryConfig? retryConfig = null)
+        public async Task<GetCaptureResponse> GetAsync(GetCaptureRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new GetCaptureRequest()
-            {
-                PaymentId = paymentId,
-                CaptureId = captureId,
-                Embed = embed,
-                Testmode = testmode,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures/{captureId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
             if (SDKConfiguration.SecuritySource != null)
             {
