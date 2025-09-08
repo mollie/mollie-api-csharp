@@ -69,11 +69,8 @@ namespace Mollie.Models.Components
         [JsonProperty("settlementId")]
         public string? SettlementId { get; set; }
 
-        /// <summary>
-        /// Refunds may take some time to get confirmed.
-        /// </summary>
         [JsonProperty("status")]
-        public EntityRefundResponseStatus Status { get; set; } = default!;
+        public RefundStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

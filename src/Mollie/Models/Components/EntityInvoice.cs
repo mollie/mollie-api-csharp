@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityInvoice
     {
@@ -46,17 +49,10 @@ namespace Mollie.Models.Components
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
-        /// Status of the invoice.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// * `open` — The invoice is not paid yet.<br/>
-        /// * `paid` — The invoice is paid.<br/>
-        /// * `overdue` — Payment of the invoice is overdue.
-        /// </remarks>
+        /// Status of the invoice.
         /// </summary>
         [JsonProperty("status")]
-        public EntityInvoiceStatus? Status { get; set; }
+        public InvoiceStatus? Status { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.

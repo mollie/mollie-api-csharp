@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityOnboardingStatus
     {
@@ -33,17 +37,10 @@ namespace Mollie.Models.Components
         public string? Name { get; set; }
 
         /// <summary>
-        /// The current status of the organization&apos;s onboarding process.<br/>
-        /// 
-        /// <remarks>
-        /// <br/>
-        /// * `needs-data` — The merchant needs to provide additional information<br/>
-        /// * `in-review` — The merchant provided all information, awaiting review from Mollie<br/>
-        /// * `completed` — The onboarding is completed
-        /// </remarks>
+        /// The current status of the organization&apos;s onboarding process.
         /// </summary>
         [JsonProperty("status")]
-        public EntityOnboardingStatusStatus? Status { get; set; }
+        public OnboardingStatus? Status { get; set; }
 
         /// <summary>
         /// Whether the organization can receive payments.

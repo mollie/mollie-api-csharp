@@ -13,7 +13,10 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using NodaTime;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// An object containing payment details collected during the payment process. For example, details may include the<br/>
@@ -125,13 +128,13 @@ namespace Mollie.Models.Components
         /// The card&apos;s target audience, if known.
         /// </summary>
         [JsonProperty("cardAudition")]
-        public CardAudition? CardAudition { get; set; } = null;
+        public PaymentDetailsCardAuditionResponse? CardAudition { get; set; } = null;
 
         /// <summary>
         /// The card&apos;s label, if known.
         /// </summary>
         [JsonProperty("cardLabel")]
-        public PaymentResponseCardLabel? CardLabel { get; set; } = null;
+        public PaymentDetailsCardLabelResponse? CardLabel { get; set; } = null;
 
         /// <summary>
         /// The ISO 3166-1 alpha-2 country code of the country the card was issued in.
@@ -149,19 +152,19 @@ namespace Mollie.Models.Components
         /// The card type.
         /// </summary>
         [JsonProperty("cardFunding")]
-        public CardFunding? CardFunding { get; set; } = null;
+        public PaymentDetailsCardFundingResponse? CardFunding { get; set; } = null;
 
         /// <summary>
         /// The level of security applied during card processing.
         /// </summary>
         [JsonProperty("cardSecurity")]
-        public CardSecurity? CardSecurity { get; set; } = null;
+        public PaymentDetailsCardSecurityResponse? CardSecurity { get; set; } = null;
 
         /// <summary>
         /// The applicable card fee region.
         /// </summary>
         [JsonProperty("feeRegion")]
-        public FeeRegion? FeeRegion { get; set; } = null;
+        public PaymentDetailsFeeRegionResponse? FeeRegion { get; set; } = null;
 
         /// <summary>
         /// The first 6 and last 4 digits of the card number.
@@ -191,7 +194,7 @@ namespace Mollie.Models.Components
         /// A failure code to help understand why the payment failed.
         /// </summary>
         [JsonProperty("failureReason")]
-        public FailureReason? FailureReason { get; set; } = null;
+        public PaymentDetailsFailureReasonResponse? FailureReason { get; set; } = null;
 
         /// <summary>
         /// A human-friendly failure message that can be shown to the customer. The message is translated in accordance<br/>
@@ -207,7 +210,7 @@ namespace Mollie.Models.Components
         /// The wallet used when creating the payment.
         /// </summary>
         [JsonProperty("wallet")]
-        public Wallet? Wallet { get; set; } = null;
+        public PaymentDetailsWalletResponse? Wallet { get; set; } = null;
 
         /// <summary>
         /// PayPal&apos;s reference for the payment.
@@ -229,7 +232,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("sellerProtection")]
-        public SellerProtection? SellerProtection { get; set; } = null;
+        public PaymentDetailsSellerProtectionResponse? SellerProtection { get; set; } = null;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.

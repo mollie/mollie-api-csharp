@@ -44,6 +44,7 @@ var res = await sdk.Captures.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
+        Status = CaptureStatus.Succeeded,
         PaymentId = "tr_5B8cwPMGnU",
         ShipmentId = "shp_5x4xQJDWGNcY3tKGL7X5J",
         SettlementId = "stl_5B8cwPMGnU",

@@ -23,7 +23,7 @@ namespace Mollie.Models.Components
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public EntityPaymentRouteType Type { get; set; } = default!;
+        public RouteDestinationType Type { get; set; } = default!;
 
         [JsonProperty("organizationId")]
         public string OrganizationId { get; set; } = default!;

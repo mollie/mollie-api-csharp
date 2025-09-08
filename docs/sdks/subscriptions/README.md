@@ -50,6 +50,7 @@ var res = await sdk.Subscriptions.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
     subscriptionRequest: new SubscriptionRequest() {
         Id = "sub_5B8cwPMGnU",
+        Status = SubscriptionStatus.Active,
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -58,7 +59,7 @@ var res = await sdk.Subscriptions.CreateAsync(
         Interval = "2 days",
         StartDate = "2025-01-01",
         Description = "Subscription of streaming channel",
-        Method = SubscriptionRequestMethod.Paypal,
+        Method = SubscriptionMethod.Paypal,
         ApplicationFee = new SubscriptionRequestApplicationFee() {
             Amount = new Amount() {
                 Currency = "EUR",

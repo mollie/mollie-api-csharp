@@ -9,9 +9,13 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityProfile
     {
@@ -73,5 +77,18 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; }
+
+        /// <summary>
+        /// The profile status determines whether the profile is able to receive live payments.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// * `unverified`: The profile has not been verified yet and can only be used to create test payments.<br/>
+        /// * `verified`: The profile has been verified and can be used to create live payments and test payments.<br/>
+        /// * `blocked`: The profile is blocked and can no longer be used or changed.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("status")]
+        public ProfileStatus? Status { get; set; }
     }
 }

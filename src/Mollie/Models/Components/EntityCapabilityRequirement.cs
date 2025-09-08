@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityCapabilityRequirement
     {
@@ -35,7 +39,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public EntityCapabilityRequirementStatus? Status { get; set; }
+        public CapabilityRequirementStatus? Status { get; set; }
 
         /// <summary>
         /// Due date until the requirement must be fulfilled, if any. The date is shown in ISO-8601 format.

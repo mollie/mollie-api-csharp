@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
         /// The capture&apos;s status.
         /// </summary>
         [JsonProperty("status")]
-        public CaptureResponseStatus? Status { get; set; }
+        public CaptureStatus? Status { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>

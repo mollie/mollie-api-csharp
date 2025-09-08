@@ -9,6 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -17,6 +18,12 @@ namespace Mollie.Models.Components
     /// </summary>
     public class EntityRefundResponseSource
     {
+
+        /// <summary>
+        /// The type of source. Currently only the source type `organization` is supported.
+        /// </summary>
+        [JsonProperty("type")]
+        public RefundRoutingReversalsSourceType? Type { get; set; }
 
         [JsonProperty("organizationId")]
         public string? OrganizationId { get; set; }

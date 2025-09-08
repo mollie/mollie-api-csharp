@@ -47,7 +47,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public SubscriptionResponseStatus? Status { get; set; }
+        public SubscriptionStatus? Status { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -118,7 +118,7 @@ namespace Mollie.Models.Components
         /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
         /// </summary>
         [JsonProperty("method")]
-        public SubscriptionResponseMethod? Method { get; set; } = null;
+        public SubscriptionMethodResponse? Method { get; set; } = null;
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>

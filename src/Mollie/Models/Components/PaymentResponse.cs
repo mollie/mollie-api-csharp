@@ -333,7 +333,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public PaymentResponseStatus? Status { get; set; }
+        public PaymentStatus? Status { get; set; }
 
         /// <summary>
         /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>

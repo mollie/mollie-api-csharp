@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The destination where the available amount will be automatically transferred to according to the configured<br/>
@@ -32,7 +36,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public EntityBalanceType? Type { get; set; }
+        public BalanceTransferDestinationType? Type { get; set; }
 
         /// <summary>
         /// The configured bank account number of the beneficiary the balance amount is to be transferred to.

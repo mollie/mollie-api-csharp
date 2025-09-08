@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class SalesInvoiceRecipientResponse
     {
@@ -24,7 +28,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public SalesInvoiceRecipientResponseType Type { get; set; } = default!;
+        public SalesInvoiceRecipientTypeResponse Type { get; set; } = default!;
 
         /// <summary>
         /// The title of the `consumer` type recipient, for example Mr. or Mrs..
@@ -130,6 +134,6 @@ namespace Mollie.Models.Components
         /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
         /// </summary>
         [JsonProperty("locale")]
-        public SalesInvoiceRecipientResponseLocale Locale { get; set; } = default!;
+        public SalesInvoiceRecipientLocaleResponse Locale { get; set; } = default!;
     }
 }

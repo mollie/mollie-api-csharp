@@ -85,7 +85,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
-        public Models.Components.VatRegulation? VatRegulation { get; set; } = null;
+        public OrganizationVatRegulation? VatRegulation { get; set; } = null;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

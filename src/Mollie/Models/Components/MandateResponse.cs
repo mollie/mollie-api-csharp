@@ -44,7 +44,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public MandateResponseMethod? Method { get; set; }
+        public MandateMethodResponse? Method { get; set; }
 
         [JsonProperty("details")]
         public MandateResponseDetails? Details { get; set; }
@@ -73,7 +73,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public MandateResponseStatus? Status { get; set; }
+        public MandateStatus? Status { get; set; }
 
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }

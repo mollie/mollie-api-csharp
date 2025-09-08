@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The destination of the route.
@@ -23,7 +27,7 @@ namespace Mollie.Models.Components
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public RouteGetResponseType Type { get; set; } = default!;
+        public RouteDestinationTypeResponse Type { get; set; } = default!;
 
         [JsonProperty("organizationId")]
         public string OrganizationId { get; set; } = default!;

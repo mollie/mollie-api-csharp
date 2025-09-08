@@ -65,13 +65,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public EntitySalesInvoiceStatus? Status { get; set; }
+        public SalesInvoiceStatus? Status { get; set; }
 
         /// <summary>
         /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]
-        public EntitySalesInvoiceVatScheme? VatScheme { get; set; }
+        public SalesInvoiceVatScheme? VatScheme { get; set; }
 
         /// <summary>
         /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -81,7 +81,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
-        public EntitySalesInvoiceVatMode? VatMode { get; set; }
+        public SalesInvoiceVatMode? VatMode { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -103,7 +103,7 @@ namespace Mollie.Models.Components
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public EntitySalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
+        public SalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
 
         [JsonProperty("paymentDetails")]
         public SalesInvoicePaymentDetails? PaymentDetails { get; set; } = null;

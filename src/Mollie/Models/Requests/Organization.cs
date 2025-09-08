@@ -54,6 +54,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
-        public Models.Requests.VatRegulation? VatRegulation { get; set; } = null;
+        public VatRegulation? VatRegulation { get; set; } = null;
     }
 }

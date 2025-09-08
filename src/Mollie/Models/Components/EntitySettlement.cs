@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntitySettlement
     {
@@ -58,7 +61,7 @@ namespace Mollie.Models.Components
         /// The status of the settlement.
         /// </summary>
         [JsonProperty("status")]
-        public EntitySettlementStatus? Status { get; set; }
+        public SettlementStatus? Status { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.

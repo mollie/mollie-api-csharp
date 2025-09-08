@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class SalesInvoiceDiscountResponse
     {
@@ -20,7 +24,7 @@ namespace Mollie.Models.Components
         /// The type of discount.
         /// </summary>
         [JsonProperty("type")]
-        public SalesInvoiceDiscountResponseType Type { get; set; } = default!;
+        public SalesInvoiceDiscountTypeResponse Type { get; set; } = default!;
 
         /// <summary>
         /// A string containing an exact monetary amount in the given currency, or the percentage.

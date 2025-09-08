@@ -23,7 +23,7 @@ namespace Mollie.Models.Components
         /// The type of source. Currently only the source type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public RoutingReversalType? Type { get; set; }
+        public RefundRoutingReversalsSourceType? Type { get; set; }
 
         [JsonProperty("organizationId")]
         public string? OrganizationId { get; set; }

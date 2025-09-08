@@ -107,7 +107,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public EntityProfileResponseStatus? Status { get; set; }
+        public ProfileStatus? Status { get; set; }
 
         /// <summary>
         /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>

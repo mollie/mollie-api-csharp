@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityRefundResponseExternalReference
     {
@@ -20,7 +24,7 @@ namespace Mollie.Models.Components
         /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public EntityRefundResponseType? Type { get; set; }
+        public RefundExternalReferenceTypeResponse? Type { get; set; }
 
         /// <summary>
         /// Unique reference from the payment provider

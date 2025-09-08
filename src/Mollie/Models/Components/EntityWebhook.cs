@@ -70,7 +70,7 @@ namespace Mollie.Models.Components
         /// The subscription&apos;s current status.
         /// </summary>
         [JsonProperty("status")]
-        public EntityWebhookStatus Status { get; set; } = default!;
+        public WebhookStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.

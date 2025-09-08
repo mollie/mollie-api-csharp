@@ -26,7 +26,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public PaymentRequestType? Type { get; set; }
+        public PaymentLineType? Type { get; set; }
 
         /// <summary>
         /// A description of the line item. For example *LEGO 4440 Forest Police Station*.

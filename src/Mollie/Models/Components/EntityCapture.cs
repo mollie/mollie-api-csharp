@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityCapture
     {
@@ -36,6 +40,12 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("settlementAmount")]
         public AmountNullable? SettlementAmount { get; set; } = null;
+
+        /// <summary>
+        /// The capture&apos;s status.
+        /// </summary>
+        [JsonProperty("status")]
+        public CaptureStatus? Status { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>

@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntitySalesInvoiceResponse
     {
@@ -55,13 +58,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public EntitySalesInvoiceResponseStatus? Status { get; set; }
+        public SalesInvoiceStatusResponse? Status { get; set; }
 
         /// <summary>
         /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]
-        public EntitySalesInvoiceResponseVatScheme? VatScheme { get; set; }
+        public SalesInvoiceVatSchemeResponse? VatScheme { get; set; }
 
         /// <summary>
         /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -71,7 +74,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
-        public EntitySalesInvoiceResponseVatMode? VatMode { get; set; }
+        public SalesInvoiceVatModeResponse? VatMode { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -93,7 +96,7 @@ namespace Mollie.Models.Components
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public EntitySalesInvoiceResponsePaymentTerm? PaymentTerm { get; set; } = null;
+        public SalesInvoicePaymentTermResponse? PaymentTerm { get; set; } = null;
 
         [JsonProperty("paymentDetails")]
         public SalesInvoicePaymentDetailsResponse? PaymentDetails { get; set; } = null;

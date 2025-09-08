@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class PaymentResponseLine
     {
@@ -26,7 +29,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("type")]
-        public PaymentResponseType? Type { get; set; }
+        public PaymentLineTypeResponse? Type { get; set; }
 
         /// <summary>
         /// A description of the line item. For example *LEGO 4440 Forest Police Station*.

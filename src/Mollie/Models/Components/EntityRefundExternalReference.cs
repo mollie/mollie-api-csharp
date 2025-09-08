@@ -20,7 +20,7 @@ namespace Mollie.Models.Components
         /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public EntityRefundTypeAcquirerReference? Type { get; set; }
+        public RefundExternalReferenceType? Type { get; set; }
 
         /// <summary>
         /// Unique reference from the payment provider

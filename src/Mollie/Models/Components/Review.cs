@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
@@ -28,6 +32,6 @@ namespace Mollie.Models.Components
         /// The status of the requested changes.
         /// </summary>
         [JsonProperty("status")]
-        public ReviewStatus? Status { get; set; }
+        public ProfileReviewStatusResponse? Status { get; set; }
     }
 }

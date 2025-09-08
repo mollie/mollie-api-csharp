@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 5b3c94b71c47f8438aa46ead6de7e7fd
+  docChecksum: 150d1c9453c094e3fb1016906ad8d062
   docVersion: 1.0.0
-  speakeasyVersion: 1.611.0
+  speakeasyVersion: 1.611.1
   generationVersion: 2.694.1
-  releaseVersion: 0.5.1
-  configChecksum: 7d92034999972dca3c2aa9fb42849833
+  releaseVersion: 0.5.2
+  configChecksum: 6487a91b4236b8077f2bc06c919cab72
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -38,8 +38,15 @@ generatedFiles:
   - docs/Models/Components/Amount.md
   - docs/Models/Components/AmountNullable.md
   - docs/Models/Components/AvailableBalance.md
-  - docs/Models/Components/Brand.md
+  - docs/Models/Components/BalanceReportGrouping.md
+  - docs/Models/Components/BalanceStatus.md
+  - docs/Models/Components/BalanceTransactionType.md
+  - docs/Models/Components/BalanceTransferDestinationType.md
+  - docs/Models/Components/BalanceTransferFrequency.md
   - docs/Models/Components/CanceledOutgoingTransfer.md
+  - docs/Models/Components/CapabilityRequirementStatus.md
+  - docs/Models/Components/CapabilityStatus.md
+  - docs/Models/Components/CapabilityStatusReason.md
   - docs/Models/Components/Capital.md
   - docs/Models/Components/Capture.md
   - docs/Models/Components/CaptureCommision.md
@@ -47,13 +54,8 @@ generatedFiles:
   - docs/Models/Components/CaptureModeResponse.md
   - docs/Models/Components/CaptureResponse.md
   - docs/Models/Components/CaptureResponseLinks.md
-  - docs/Models/Components/CaptureResponseStatus.md
   - docs/Models/Components/CaptureRollingReserveRelease.md
-  - docs/Models/Components/CardAudition.md
-  - docs/Models/Components/CardFunding.md
-  - docs/Models/Components/CardReadMethod.md
-  - docs/Models/Components/CardSecurity.md
-  - docs/Models/Components/CardVerificationMethod.md
+  - docs/Models/Components/CaptureStatus.md
   - docs/Models/Components/Chargeback.md
   - docs/Models/Components/ChargebackCompensation.md
   - docs/Models/Components/ChargebackReversal.md
@@ -72,7 +74,6 @@ generatedFiles:
   - docs/Models/Components/Corrections.md
   - docs/Models/Components/CreateWebhook.md
   - docs/Models/Components/CreateWebhookLinks.md
-  - docs/Models/Components/CreateWebhookStatus.md
   - docs/Models/Components/Currencies.md
   - docs/Models/Components/CustomerResponse.md
   - docs/Models/Components/CustomerResponseLinks.md
@@ -85,16 +86,11 @@ generatedFiles:
   - docs/Models/Components/EntityBalanceLinks.md
   - docs/Models/Components/EntityBalanceReport.md
   - docs/Models/Components/EntityBalanceReportLinks.md
-  - docs/Models/Components/EntityBalanceStatus.md
   - docs/Models/Components/EntityBalanceTransaction.md
   - docs/Models/Components/EntityBalanceTransactionApplicationFee.md
-  - docs/Models/Components/EntityBalanceTransactionType.md
-  - docs/Models/Components/EntityBalanceType.md
   - docs/Models/Components/EntityCapability.md
   - docs/Models/Components/EntityCapabilityRequirement.md
   - docs/Models/Components/EntityCapabilityRequirementLinks.md
-  - docs/Models/Components/EntityCapabilityRequirementStatus.md
-  - docs/Models/Components/EntityCapabilityStatus.md
   - docs/Models/Components/EntityCapture.md
   - docs/Models/Components/EntityChargeback.md
   - docs/Models/Components/EntityChargebackLinks.md
@@ -108,24 +104,19 @@ generatedFiles:
   - docs/Models/Components/EntityInvoice.md
   - docs/Models/Components/EntityInvoiceLine.md
   - docs/Models/Components/EntityInvoiceLinks.md
-  - docs/Models/Components/EntityInvoiceStatus.md
   - docs/Models/Components/EntityMandate.md
-  - docs/Models/Components/EntityMandateMethod.md
   - docs/Models/Components/EntityMethod.md
   - docs/Models/Components/EntityMethodAll.md
   - docs/Models/Components/EntityMethodAllImage.md
   - docs/Models/Components/EntityMethodAllIssuer.md
   - docs/Models/Components/EntityMethodAllIssuerImage.md
   - docs/Models/Components/EntityMethodAllLinks.md
-  - docs/Models/Components/EntityMethodAllStatus.md
   - docs/Models/Components/EntityMethodImage.md
   - docs/Models/Components/EntityMethodIssuer.md
   - docs/Models/Components/EntityMethodIssuerImage.md
   - docs/Models/Components/EntityMethodLinks.md
-  - docs/Models/Components/EntityMethodStatus.md
   - docs/Models/Components/EntityOnboardingStatus.md
   - docs/Models/Components/EntityOnboardingStatusLinks.md
-  - docs/Models/Components/EntityOnboardingStatusStatus.md
   - docs/Models/Components/EntityOrganization.md
   - docs/Models/Components/EntityOrganizationLinks.md
   - docs/Models/Components/EntityPaymentRoute.md
@@ -134,14 +125,11 @@ generatedFiles:
   - docs/Models/Components/EntityPaymentRouteResponse.md
   - docs/Models/Components/EntityPaymentRouteResponseDestination.md
   - docs/Models/Components/EntityPaymentRouteResponseLinks.md
-  - docs/Models/Components/EntityPaymentRouteResponseType.md
-  - docs/Models/Components/EntityPaymentRouteType.md
   - docs/Models/Components/EntityPermission.md
   - docs/Models/Components/EntityPermissionLinks.md
   - docs/Models/Components/EntityProfile.md
   - docs/Models/Components/EntityProfileResponse.md
   - docs/Models/Components/EntityProfileResponseLinks.md
-  - docs/Models/Components/EntityProfileResponseStatus.md
   - docs/Models/Components/EntityRefund.md
   - docs/Models/Components/EntityRefundExternalReference.md
   - docs/Models/Components/EntityRefundResponse.md
@@ -149,74 +137,72 @@ generatedFiles:
   - docs/Models/Components/EntityRefundResponseLinks.md
   - docs/Models/Components/EntityRefundResponseRoutingReversal.md
   - docs/Models/Components/EntityRefundResponseSource.md
-  - docs/Models/Components/EntityRefundResponseStatus.md
-  - docs/Models/Components/EntityRefundResponseType.md
   - docs/Models/Components/EntityRefundRoutingReversal.md
   - docs/Models/Components/EntityRefundSource.md
-  - docs/Models/Components/EntityRefundTypeAcquirerReference.md
   - docs/Models/Components/EntitySalesInvoice.md
   - docs/Models/Components/EntitySalesInvoiceMetadata.md
-  - docs/Models/Components/EntitySalesInvoicePaymentTerm.md
   - docs/Models/Components/EntitySalesInvoiceResponse.md
   - docs/Models/Components/EntitySalesInvoiceResponseLinks.md
   - docs/Models/Components/EntitySalesInvoiceResponseMetadata.md
-  - docs/Models/Components/EntitySalesInvoiceResponsePaymentTerm.md
-  - docs/Models/Components/EntitySalesInvoiceResponseStatus.md
-  - docs/Models/Components/EntitySalesInvoiceResponseVatMode.md
-  - docs/Models/Components/EntitySalesInvoiceResponseVatScheme.md
-  - docs/Models/Components/EntitySalesInvoiceStatus.md
-  - docs/Models/Components/EntitySalesInvoiceVatMode.md
-  - docs/Models/Components/EntitySalesInvoiceVatScheme.md
   - docs/Models/Components/EntitySettlement.md
   - docs/Models/Components/EntitySettlementLinks.md
-  - docs/Models/Components/EntitySettlementStatus.md
   - docs/Models/Components/EntityTerminal.md
   - docs/Models/Components/EntityTerminalLinks.md
-  - docs/Models/Components/EntityTerminalStatus.md
   - docs/Models/Components/EntityWebhook.md
   - docs/Models/Components/EntityWebhookEvent.md
   - docs/Models/Components/EntityWebhookEventLinks.md
   - docs/Models/Components/EntityWebhookLinks.md
-  - docs/Models/Components/EntityWebhookStatus.md
   - docs/Models/Components/ErrorResponseLinks.md
   - docs/Models/Components/FailedPayment.md
   - docs/Models/Components/FailedPaymentFee.md
-  - docs/Models/Components/FailureReason.md
   - docs/Models/Components/FeePrepayments.md
-  - docs/Models/Components/FeeRegion.md
-  - docs/Models/Components/Grouping.md
   - docs/Models/Components/HTTPMetadata.md
   - docs/Models/Components/InvoiceCompensation.md
+  - docs/Models/Components/InvoiceStatus.md
   - docs/Models/Components/ListLinks.md
   - docs/Models/Components/ListSort.md
   - docs/Models/Components/Locale.md
   - docs/Models/Components/LocaleParameter.md
   - docs/Models/Components/LocaleResponse.md
   - docs/Models/Components/ManagedFee.md
+  - docs/Models/Components/MandateDetailsCardLabelResponse.md
+  - docs/Models/Components/MandateMethod.md
+  - docs/Models/Components/MandateMethodResponse.md
   - docs/Models/Components/MandateResponse.md
-  - docs/Models/Components/MandateResponseCardLabel.md
   - docs/Models/Components/MandateResponseDetails.md
   - docs/Models/Components/MandateResponseLinks.md
-  - docs/Models/Components/MandateResponseMethod.md
-  - docs/Models/Components/MandateResponseStatus.md
+  - docs/Models/Components/MandateStatus.md
   - docs/Models/Components/Metadata.md
   - docs/Models/Components/Method.md
   - docs/Models/Components/MethodResponse.md
+  - docs/Models/Components/MethodStatus.md
   - docs/Models/Components/Mode.md
+  - docs/Models/Components/OnboardingStatus.md
   - docs/Models/Components/Open.md
   - docs/Models/Components/OrderLineCategories.md
+  - docs/Models/Components/OrganizationVatRegulation.md
   - docs/Models/Components/OutgoingTransfer.md
   - docs/Models/Components/Owner.md
   - docs/Models/Components/Payment.md
   - docs/Models/Components/PaymentAddress.md
   - docs/Models/Components/PaymentCommission.md
+  - docs/Models/Components/PaymentDetailsCardAuditionResponse.md
+  - docs/Models/Components/PaymentDetailsCardFundingResponse.md
+  - docs/Models/Components/PaymentDetailsCardLabelResponse.md
+  - docs/Models/Components/PaymentDetailsCardSecurityResponse.md
+  - docs/Models/Components/PaymentDetailsFailureReasonResponse.md
+  - docs/Models/Components/PaymentDetailsFeeRegionResponse.md
+  - docs/Models/Components/PaymentDetailsReceiptCardReadMethodResponse.md
+  - docs/Models/Components/PaymentDetailsReceiptCardVerificationMethodResponse.md
+  - docs/Models/Components/PaymentDetailsSellerProtectionResponse.md
+  - docs/Models/Components/PaymentDetailsWalletResponse.md
   - docs/Models/Components/PaymentFee.md
   - docs/Models/Components/PaymentLineItem.md
   - docs/Models/Components/PaymentLineItemCategory.md
   - docs/Models/Components/PaymentLineItemResponse.md
   - docs/Models/Components/PaymentLineItemResponseCategory.md
-  - docs/Models/Components/PaymentLineItemResponseType.md
-  - docs/Models/Components/PaymentLineItemType.md
+  - docs/Models/Components/PaymentLineType.md
+  - docs/Models/Components/PaymentLineTypeResponse.md
   - docs/Models/Components/PaymentLinkResponse.md
   - docs/Models/Components/PaymentLinkResponseApplicationFee.md
   - docs/Models/Components/PaymentLinkResponseLinks.md
@@ -227,28 +213,31 @@ generatedFiles:
   - docs/Models/Components/PaymentRequestApplicationFee.md
   - docs/Models/Components/PaymentRequestCategory.md
   - docs/Models/Components/PaymentRequestLine.md
-  - docs/Models/Components/PaymentRequestType.md
   - docs/Models/Components/PaymentResponse.md
   - docs/Models/Components/PaymentResponseApplicationFee.md
-  - docs/Models/Components/PaymentResponseCardLabel.md
   - docs/Models/Components/PaymentResponseCategory.md
   - docs/Models/Components/PaymentResponseDetails.md
   - docs/Models/Components/PaymentResponseLine.md
   - docs/Models/Components/PaymentResponseLinks.md
-  - docs/Models/Components/PaymentResponseStatus.md
-  - docs/Models/Components/PaymentResponseType.md
+  - docs/Models/Components/PaymentStatus.md
   - docs/Models/Components/Payments.md
   - docs/Models/Components/PendingBalance.md
   - docs/Models/Components/PlatformPaymentChargeback.md
   - docs/Models/Components/PlatformPaymentRefund.md
   - docs/Models/Components/PostPaymentSplitPayment.md
   - docs/Models/Components/Pricing.md
+  - docs/Models/Components/ProfileReviewStatusResponse.md
+  - docs/Models/Components/ProfileStatus.md
   - docs/Models/Components/QrCode.md
   - docs/Models/Components/Reason.md
   - docs/Models/Components/Receipt.md
   - docs/Models/Components/RecurringLineItem.md
   - docs/Models/Components/Refund.md
   - docs/Models/Components/RefundCompensation.md
+  - docs/Models/Components/RefundExternalReferenceType.md
+  - docs/Models/Components/RefundExternalReferenceTypeResponse.md
+  - docs/Models/Components/RefundRoutingReversalsSourceType.md
+  - docs/Models/Components/RefundStatus.md
   - docs/Models/Components/Refunds.md
   - docs/Models/Components/ReimbursementFee.md
   - docs/Models/Components/ReturnedManagedFee.md
@@ -259,43 +248,47 @@ generatedFiles:
   - docs/Models/Components/ReversedChargebackCompensation.md
   - docs/Models/Components/ReversedPlatformPaymentChargeback.md
   - docs/Models/Components/Review.md
-  - docs/Models/Components/ReviewStatus.md
   - docs/Models/Components/RouteCreateRequest.md
   - docs/Models/Components/RouteCreateRequestDestination.md
-  - docs/Models/Components/RouteCreateRequestType.md
   - docs/Models/Components/RouteCreateResponse.md
   - docs/Models/Components/RouteCreateResponseDestination.md
   - docs/Models/Components/RouteCreateResponseLinks.md
-  - docs/Models/Components/RouteCreateResponseType.md
+  - docs/Models/Components/RouteDestinationType.md
+  - docs/Models/Components/RouteDestinationTypeResponse.md
   - docs/Models/Components/RouteGetResponse.md
   - docs/Models/Components/RouteGetResponseDestination.md
   - docs/Models/Components/RouteGetResponseLinks.md
-  - docs/Models/Components/RouteGetResponseType.md
-  - docs/Models/Components/RoutingReversalType.md
   - docs/Models/Components/SalesInvoiceDiscount.md
   - docs/Models/Components/SalesInvoiceDiscountResponse.md
-  - docs/Models/Components/SalesInvoiceDiscountResponseType.md
   - docs/Models/Components/SalesInvoiceDiscountType.md
+  - docs/Models/Components/SalesInvoiceDiscountTypeResponse.md
   - docs/Models/Components/SalesInvoiceEmailDetails.md
   - docs/Models/Components/SalesInvoiceLineItem.md
   - docs/Models/Components/SalesInvoiceLineItemResponse.md
   - docs/Models/Components/SalesInvoicePaymentDetails.md
   - docs/Models/Components/SalesInvoicePaymentDetailsResponse.md
-  - docs/Models/Components/SalesInvoicePaymentDetailsResponseSource.md
   - docs/Models/Components/SalesInvoicePaymentDetailsSource.md
+  - docs/Models/Components/SalesInvoicePaymentDetailsSourceResponse.md
+  - docs/Models/Components/SalesInvoicePaymentTerm.md
+  - docs/Models/Components/SalesInvoicePaymentTermResponse.md
   - docs/Models/Components/SalesInvoiceRecipient.md
   - docs/Models/Components/SalesInvoiceRecipientLocale.md
+  - docs/Models/Components/SalesInvoiceRecipientLocaleResponse.md
   - docs/Models/Components/SalesInvoiceRecipientResponse.md
-  - docs/Models/Components/SalesInvoiceRecipientResponseLocale.md
-  - docs/Models/Components/SalesInvoiceRecipientResponseType.md
   - docs/Models/Components/SalesInvoiceRecipientType.md
+  - docs/Models/Components/SalesInvoiceRecipientTypeResponse.md
+  - docs/Models/Components/SalesInvoiceStatus.md
+  - docs/Models/Components/SalesInvoiceStatusResponse.md
+  - docs/Models/Components/SalesInvoiceVatMode.md
+  - docs/Models/Components/SalesInvoiceVatModeResponse.md
+  - docs/Models/Components/SalesInvoiceVatScheme.md
+  - docs/Models/Components/SalesInvoiceVatSchemeResponse.md
   - docs/Models/Components/Security.md
-  - docs/Models/Components/SellerProtection.md
   - docs/Models/Components/SequenceType.md
   - docs/Models/Components/SequenceTypeResponse.md
+  - docs/Models/Components/SettlementStatus.md
   - docs/Models/Components/SplitPayment.md
   - docs/Models/Components/StatusReason.md
-  - docs/Models/Components/StatusReasonEnum.md
   - docs/Models/Components/SubGroup.md
   - docs/Models/Components/SubTotals.md
   - docs/Models/Components/SubTotalsCardAudience.md
@@ -304,29 +297,27 @@ generatedFiles:
   - docs/Models/Components/SubTotalsFeeType.md
   - docs/Models/Components/SubTotalsPrepaymentPartType.md
   - docs/Models/Components/SubTotalsTransactionType.md
+  - docs/Models/Components/SubscriptionMethod.md
+  - docs/Models/Components/SubscriptionMethodResponse.md
   - docs/Models/Components/SubscriptionRequest.md
   - docs/Models/Components/SubscriptionRequestApplicationFee.md
-  - docs/Models/Components/SubscriptionRequestMethod.md
   - docs/Models/Components/SubscriptionResponse.md
   - docs/Models/Components/SubscriptionResponseApplicationFee.md
   - docs/Models/Components/SubscriptionResponseLinks.md
-  - docs/Models/Components/SubscriptionResponseMethod.md
-  - docs/Models/Components/SubscriptionResponseStatus.md
+  - docs/Models/Components/SubscriptionStatus.md
+  - docs/Models/Components/TerminalBrand.md
   - docs/Models/Components/TerminalModel.md
+  - docs/Models/Components/TerminalStatus.md
   - docs/Models/Components/Topups.md
   - docs/Models/Components/Totals.md
   - docs/Models/Components/TransferDestination.md
-  - docs/Models/Components/TransferFrequency.md
   - docs/Models/Components/Transfers.md
   - docs/Models/Components/UnauthorizedDirectDebit.md
   - docs/Models/Components/UpdateValuesSalesInvoice.md
-  - docs/Models/Components/UpdateValuesSalesInvoicePaymentTerm.md
-  - docs/Models/Components/UpdateValuesSalesInvoiceStatus.md
   - docs/Models/Components/Url.md
   - docs/Models/Components/UrlNullable.md
-  - docs/Models/Components/VatRegulation.md
-  - docs/Models/Components/Wallet.md
   - docs/Models/Components/WebhookEventTypes.md
+  - docs/Models/Components/WebhookStatus.md
   - docs/Models/Errors/ErrorResponse.md
   - docs/Models/Requests/ApplicationFee.md
   - docs/Models/Requests/CancelPaymentRequest.md
@@ -652,8 +643,15 @@ generatedFiles:
   - src/Mollie/Models/Components/Amount.cs
   - src/Mollie/Models/Components/AmountNullable.cs
   - src/Mollie/Models/Components/AvailableBalance.cs
-  - src/Mollie/Models/Components/Brand.cs
+  - src/Mollie/Models/Components/BalanceReportGrouping.cs
+  - src/Mollie/Models/Components/BalanceStatus.cs
+  - src/Mollie/Models/Components/BalanceTransactionType.cs
+  - src/Mollie/Models/Components/BalanceTransferDestinationType.cs
+  - src/Mollie/Models/Components/BalanceTransferFrequency.cs
   - src/Mollie/Models/Components/CanceledOutgoingTransfer.cs
+  - src/Mollie/Models/Components/CapabilityRequirementStatus.cs
+  - src/Mollie/Models/Components/CapabilityStatus.cs
+  - src/Mollie/Models/Components/CapabilityStatusReason.cs
   - src/Mollie/Models/Components/Capital.cs
   - src/Mollie/Models/Components/Capture.cs
   - src/Mollie/Models/Components/CaptureCommision.cs
@@ -661,13 +659,8 @@ generatedFiles:
   - src/Mollie/Models/Components/CaptureModeResponse.cs
   - src/Mollie/Models/Components/CaptureResponse.cs
   - src/Mollie/Models/Components/CaptureResponseLinks.cs
-  - src/Mollie/Models/Components/CaptureResponseStatus.cs
   - src/Mollie/Models/Components/CaptureRollingReserveRelease.cs
-  - src/Mollie/Models/Components/CardAudition.cs
-  - src/Mollie/Models/Components/CardFunding.cs
-  - src/Mollie/Models/Components/CardReadMethod.cs
-  - src/Mollie/Models/Components/CardSecurity.cs
-  - src/Mollie/Models/Components/CardVerificationMethod.cs
+  - src/Mollie/Models/Components/CaptureStatus.cs
   - src/Mollie/Models/Components/Chargeback.cs
   - src/Mollie/Models/Components/ChargebackCompensation.cs
   - src/Mollie/Models/Components/ChargebackReversal.cs
@@ -686,7 +679,6 @@ generatedFiles:
   - src/Mollie/Models/Components/Corrections.cs
   - src/Mollie/Models/Components/CreateWebhook.cs
   - src/Mollie/Models/Components/CreateWebhookLinks.cs
-  - src/Mollie/Models/Components/CreateWebhookStatus.cs
   - src/Mollie/Models/Components/Currencies.cs
   - src/Mollie/Models/Components/CustomerResponse.cs
   - src/Mollie/Models/Components/CustomerResponseLinks.cs
@@ -699,16 +691,11 @@ generatedFiles:
   - src/Mollie/Models/Components/EntityBalanceLinks.cs
   - src/Mollie/Models/Components/EntityBalanceReport.cs
   - src/Mollie/Models/Components/EntityBalanceReportLinks.cs
-  - src/Mollie/Models/Components/EntityBalanceStatus.cs
   - src/Mollie/Models/Components/EntityBalanceTransaction.cs
   - src/Mollie/Models/Components/EntityBalanceTransactionApplicationFee.cs
-  - src/Mollie/Models/Components/EntityBalanceTransactionType.cs
-  - src/Mollie/Models/Components/EntityBalanceType.cs
   - src/Mollie/Models/Components/EntityCapability.cs
   - src/Mollie/Models/Components/EntityCapabilityRequirement.cs
   - src/Mollie/Models/Components/EntityCapabilityRequirementLinks.cs
-  - src/Mollie/Models/Components/EntityCapabilityRequirementStatus.cs
-  - src/Mollie/Models/Components/EntityCapabilityStatus.cs
   - src/Mollie/Models/Components/EntityCapture.cs
   - src/Mollie/Models/Components/EntityChargeback.cs
   - src/Mollie/Models/Components/EntityChargebackLinks.cs
@@ -722,24 +709,19 @@ generatedFiles:
   - src/Mollie/Models/Components/EntityInvoice.cs
   - src/Mollie/Models/Components/EntityInvoiceLine.cs
   - src/Mollie/Models/Components/EntityInvoiceLinks.cs
-  - src/Mollie/Models/Components/EntityInvoiceStatus.cs
   - src/Mollie/Models/Components/EntityMandate.cs
-  - src/Mollie/Models/Components/EntityMandateMethod.cs
   - src/Mollie/Models/Components/EntityMethod.cs
   - src/Mollie/Models/Components/EntityMethodAll.cs
   - src/Mollie/Models/Components/EntityMethodAllImage.cs
   - src/Mollie/Models/Components/EntityMethodAllIssuer.cs
   - src/Mollie/Models/Components/EntityMethodAllIssuerImage.cs
   - src/Mollie/Models/Components/EntityMethodAllLinks.cs
-  - src/Mollie/Models/Components/EntityMethodAllStatus.cs
   - src/Mollie/Models/Components/EntityMethodImage.cs
   - src/Mollie/Models/Components/EntityMethodIssuer.cs
   - src/Mollie/Models/Components/EntityMethodIssuerImage.cs
   - src/Mollie/Models/Components/EntityMethodLinks.cs
-  - src/Mollie/Models/Components/EntityMethodStatus.cs
   - src/Mollie/Models/Components/EntityOnboardingStatus.cs
   - src/Mollie/Models/Components/EntityOnboardingStatusLinks.cs
-  - src/Mollie/Models/Components/EntityOnboardingStatusStatus.cs
   - src/Mollie/Models/Components/EntityOrganization.cs
   - src/Mollie/Models/Components/EntityOrganizationLinks.cs
   - src/Mollie/Models/Components/EntityPaymentRoute.cs
@@ -748,14 +730,11 @@ generatedFiles:
   - src/Mollie/Models/Components/EntityPaymentRouteResponse.cs
   - src/Mollie/Models/Components/EntityPaymentRouteResponseDestination.cs
   - src/Mollie/Models/Components/EntityPaymentRouteResponseLinks.cs
-  - src/Mollie/Models/Components/EntityPaymentRouteResponseType.cs
-  - src/Mollie/Models/Components/EntityPaymentRouteType.cs
   - src/Mollie/Models/Components/EntityPermission.cs
   - src/Mollie/Models/Components/EntityPermissionLinks.cs
   - src/Mollie/Models/Components/EntityProfile.cs
   - src/Mollie/Models/Components/EntityProfileResponse.cs
   - src/Mollie/Models/Components/EntityProfileResponseLinks.cs
-  - src/Mollie/Models/Components/EntityProfileResponseStatus.cs
   - src/Mollie/Models/Components/EntityRefund.cs
   - src/Mollie/Models/Components/EntityRefundExternalReference.cs
   - src/Mollie/Models/Components/EntityRefundResponse.cs
@@ -763,74 +742,72 @@ generatedFiles:
   - src/Mollie/Models/Components/EntityRefundResponseLinks.cs
   - src/Mollie/Models/Components/EntityRefundResponseRoutingReversal.cs
   - src/Mollie/Models/Components/EntityRefundResponseSource.cs
-  - src/Mollie/Models/Components/EntityRefundResponseStatus.cs
-  - src/Mollie/Models/Components/EntityRefundResponseType.cs
   - src/Mollie/Models/Components/EntityRefundRoutingReversal.cs
   - src/Mollie/Models/Components/EntityRefundSource.cs
-  - src/Mollie/Models/Components/EntityRefundTypeAcquirerReference.cs
   - src/Mollie/Models/Components/EntitySalesInvoice.cs
   - src/Mollie/Models/Components/EntitySalesInvoiceMetadata.cs
-  - src/Mollie/Models/Components/EntitySalesInvoicePaymentTerm.cs
   - src/Mollie/Models/Components/EntitySalesInvoiceResponse.cs
   - src/Mollie/Models/Components/EntitySalesInvoiceResponseLinks.cs
   - src/Mollie/Models/Components/EntitySalesInvoiceResponseMetadata.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceResponsePaymentTerm.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceResponseStatus.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceResponseVatMode.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceResponseVatScheme.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceStatus.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceVatMode.cs
-  - src/Mollie/Models/Components/EntitySalesInvoiceVatScheme.cs
   - src/Mollie/Models/Components/EntitySettlement.cs
   - src/Mollie/Models/Components/EntitySettlementLinks.cs
-  - src/Mollie/Models/Components/EntitySettlementStatus.cs
   - src/Mollie/Models/Components/EntityTerminal.cs
   - src/Mollie/Models/Components/EntityTerminalLinks.cs
-  - src/Mollie/Models/Components/EntityTerminalStatus.cs
   - src/Mollie/Models/Components/EntityWebhook.cs
   - src/Mollie/Models/Components/EntityWebhookEvent.cs
   - src/Mollie/Models/Components/EntityWebhookEventLinks.cs
   - src/Mollie/Models/Components/EntityWebhookLinks.cs
-  - src/Mollie/Models/Components/EntityWebhookStatus.cs
   - src/Mollie/Models/Components/ErrorResponseLinks.cs
   - src/Mollie/Models/Components/FailedPayment.cs
   - src/Mollie/Models/Components/FailedPaymentFee.cs
-  - src/Mollie/Models/Components/FailureReason.cs
   - src/Mollie/Models/Components/FeePrepayments.cs
-  - src/Mollie/Models/Components/FeeRegion.cs
-  - src/Mollie/Models/Components/Grouping.cs
   - src/Mollie/Models/Components/HTTPMetadata.cs
   - src/Mollie/Models/Components/InvoiceCompensation.cs
+  - src/Mollie/Models/Components/InvoiceStatus.cs
   - src/Mollie/Models/Components/ListLinks.cs
   - src/Mollie/Models/Components/ListSort.cs
   - src/Mollie/Models/Components/Locale.cs
   - src/Mollie/Models/Components/LocaleParameter.cs
   - src/Mollie/Models/Components/LocaleResponse.cs
   - src/Mollie/Models/Components/ManagedFee.cs
+  - src/Mollie/Models/Components/MandateDetailsCardLabelResponse.cs
+  - src/Mollie/Models/Components/MandateMethod.cs
+  - src/Mollie/Models/Components/MandateMethodResponse.cs
   - src/Mollie/Models/Components/MandateResponse.cs
-  - src/Mollie/Models/Components/MandateResponseCardLabel.cs
   - src/Mollie/Models/Components/MandateResponseDetails.cs
   - src/Mollie/Models/Components/MandateResponseLinks.cs
-  - src/Mollie/Models/Components/MandateResponseMethod.cs
-  - src/Mollie/Models/Components/MandateResponseStatus.cs
+  - src/Mollie/Models/Components/MandateStatus.cs
   - src/Mollie/Models/Components/Metadata.cs
   - src/Mollie/Models/Components/Method.cs
   - src/Mollie/Models/Components/MethodResponse.cs
+  - src/Mollie/Models/Components/MethodStatus.cs
   - src/Mollie/Models/Components/Mode.cs
+  - src/Mollie/Models/Components/OnboardingStatus.cs
   - src/Mollie/Models/Components/Open.cs
   - src/Mollie/Models/Components/OrderLineCategories.cs
+  - src/Mollie/Models/Components/OrganizationVatRegulation.cs
   - src/Mollie/Models/Components/OutgoingTransfer.cs
   - src/Mollie/Models/Components/Owner.cs
   - src/Mollie/Models/Components/Payment.cs
   - src/Mollie/Models/Components/PaymentAddress.cs
   - src/Mollie/Models/Components/PaymentCommission.cs
+  - src/Mollie/Models/Components/PaymentDetailsCardAuditionResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsCardFundingResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsCardLabelResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsCardSecurityResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsFailureReasonResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsFeeRegionResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsReceiptCardReadMethodResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsReceiptCardVerificationMethodResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsSellerProtectionResponse.cs
+  - src/Mollie/Models/Components/PaymentDetailsWalletResponse.cs
   - src/Mollie/Models/Components/PaymentFee.cs
   - src/Mollie/Models/Components/PaymentLineItem.cs
   - src/Mollie/Models/Components/PaymentLineItemCategory.cs
   - src/Mollie/Models/Components/PaymentLineItemResponse.cs
   - src/Mollie/Models/Components/PaymentLineItemResponseCategory.cs
-  - src/Mollie/Models/Components/PaymentLineItemResponseType.cs
-  - src/Mollie/Models/Components/PaymentLineItemType.cs
+  - src/Mollie/Models/Components/PaymentLineType.cs
+  - src/Mollie/Models/Components/PaymentLineTypeResponse.cs
   - src/Mollie/Models/Components/PaymentLinkResponse.cs
   - src/Mollie/Models/Components/PaymentLinkResponseApplicationFee.cs
   - src/Mollie/Models/Components/PaymentLinkResponseLinks.cs
@@ -841,28 +818,31 @@ generatedFiles:
   - src/Mollie/Models/Components/PaymentRequestApplicationFee.cs
   - src/Mollie/Models/Components/PaymentRequestCategory.cs
   - src/Mollie/Models/Components/PaymentRequestLine.cs
-  - src/Mollie/Models/Components/PaymentRequestType.cs
   - src/Mollie/Models/Components/PaymentResponse.cs
   - src/Mollie/Models/Components/PaymentResponseApplicationFee.cs
-  - src/Mollie/Models/Components/PaymentResponseCardLabel.cs
   - src/Mollie/Models/Components/PaymentResponseCategory.cs
   - src/Mollie/Models/Components/PaymentResponseDetails.cs
   - src/Mollie/Models/Components/PaymentResponseLine.cs
   - src/Mollie/Models/Components/PaymentResponseLinks.cs
-  - src/Mollie/Models/Components/PaymentResponseStatus.cs
-  - src/Mollie/Models/Components/PaymentResponseType.cs
+  - src/Mollie/Models/Components/PaymentStatus.cs
   - src/Mollie/Models/Components/Payments.cs
   - src/Mollie/Models/Components/PendingBalance.cs
   - src/Mollie/Models/Components/PlatformPaymentChargeback.cs
   - src/Mollie/Models/Components/PlatformPaymentRefund.cs
   - src/Mollie/Models/Components/PostPaymentSplitPayment.cs
   - src/Mollie/Models/Components/Pricing.cs
+  - src/Mollie/Models/Components/ProfileReviewStatusResponse.cs
+  - src/Mollie/Models/Components/ProfileStatus.cs
   - src/Mollie/Models/Components/QrCode.cs
   - src/Mollie/Models/Components/Reason.cs
   - src/Mollie/Models/Components/Receipt.cs
   - src/Mollie/Models/Components/RecurringLineItem.cs
   - src/Mollie/Models/Components/Refund.cs
   - src/Mollie/Models/Components/RefundCompensation.cs
+  - src/Mollie/Models/Components/RefundExternalReferenceType.cs
+  - src/Mollie/Models/Components/RefundExternalReferenceTypeResponse.cs
+  - src/Mollie/Models/Components/RefundRoutingReversalsSourceType.cs
+  - src/Mollie/Models/Components/RefundStatus.cs
   - src/Mollie/Models/Components/Refunds.cs
   - src/Mollie/Models/Components/ReimbursementFee.cs
   - src/Mollie/Models/Components/ReturnedManagedFee.cs
@@ -873,43 +853,47 @@ generatedFiles:
   - src/Mollie/Models/Components/ReversedChargebackCompensation.cs
   - src/Mollie/Models/Components/ReversedPlatformPaymentChargeback.cs
   - src/Mollie/Models/Components/Review.cs
-  - src/Mollie/Models/Components/ReviewStatus.cs
   - src/Mollie/Models/Components/RouteCreateRequest.cs
   - src/Mollie/Models/Components/RouteCreateRequestDestination.cs
-  - src/Mollie/Models/Components/RouteCreateRequestType.cs
   - src/Mollie/Models/Components/RouteCreateResponse.cs
   - src/Mollie/Models/Components/RouteCreateResponseDestination.cs
   - src/Mollie/Models/Components/RouteCreateResponseLinks.cs
-  - src/Mollie/Models/Components/RouteCreateResponseType.cs
+  - src/Mollie/Models/Components/RouteDestinationType.cs
+  - src/Mollie/Models/Components/RouteDestinationTypeResponse.cs
   - src/Mollie/Models/Components/RouteGetResponse.cs
   - src/Mollie/Models/Components/RouteGetResponseDestination.cs
   - src/Mollie/Models/Components/RouteGetResponseLinks.cs
-  - src/Mollie/Models/Components/RouteGetResponseType.cs
-  - src/Mollie/Models/Components/RoutingReversalType.cs
   - src/Mollie/Models/Components/SalesInvoiceDiscount.cs
   - src/Mollie/Models/Components/SalesInvoiceDiscountResponse.cs
-  - src/Mollie/Models/Components/SalesInvoiceDiscountResponseType.cs
   - src/Mollie/Models/Components/SalesInvoiceDiscountType.cs
+  - src/Mollie/Models/Components/SalesInvoiceDiscountTypeResponse.cs
   - src/Mollie/Models/Components/SalesInvoiceEmailDetails.cs
   - src/Mollie/Models/Components/SalesInvoiceLineItem.cs
   - src/Mollie/Models/Components/SalesInvoiceLineItemResponse.cs
   - src/Mollie/Models/Components/SalesInvoicePaymentDetails.cs
   - src/Mollie/Models/Components/SalesInvoicePaymentDetailsResponse.cs
-  - src/Mollie/Models/Components/SalesInvoicePaymentDetailsResponseSource.cs
   - src/Mollie/Models/Components/SalesInvoicePaymentDetailsSource.cs
+  - src/Mollie/Models/Components/SalesInvoicePaymentDetailsSourceResponse.cs
+  - src/Mollie/Models/Components/SalesInvoicePaymentTerm.cs
+  - src/Mollie/Models/Components/SalesInvoicePaymentTermResponse.cs
   - src/Mollie/Models/Components/SalesInvoiceRecipient.cs
   - src/Mollie/Models/Components/SalesInvoiceRecipientLocale.cs
+  - src/Mollie/Models/Components/SalesInvoiceRecipientLocaleResponse.cs
   - src/Mollie/Models/Components/SalesInvoiceRecipientResponse.cs
-  - src/Mollie/Models/Components/SalesInvoiceRecipientResponseLocale.cs
-  - src/Mollie/Models/Components/SalesInvoiceRecipientResponseType.cs
   - src/Mollie/Models/Components/SalesInvoiceRecipientType.cs
+  - src/Mollie/Models/Components/SalesInvoiceRecipientTypeResponse.cs
+  - src/Mollie/Models/Components/SalesInvoiceStatus.cs
+  - src/Mollie/Models/Components/SalesInvoiceStatusResponse.cs
+  - src/Mollie/Models/Components/SalesInvoiceVatMode.cs
+  - src/Mollie/Models/Components/SalesInvoiceVatModeResponse.cs
+  - src/Mollie/Models/Components/SalesInvoiceVatScheme.cs
+  - src/Mollie/Models/Components/SalesInvoiceVatSchemeResponse.cs
   - src/Mollie/Models/Components/Security.cs
-  - src/Mollie/Models/Components/SellerProtection.cs
   - src/Mollie/Models/Components/SequenceType.cs
   - src/Mollie/Models/Components/SequenceTypeResponse.cs
+  - src/Mollie/Models/Components/SettlementStatus.cs
   - src/Mollie/Models/Components/SplitPayment.cs
   - src/Mollie/Models/Components/StatusReason.cs
-  - src/Mollie/Models/Components/StatusReasonEnum.cs
   - src/Mollie/Models/Components/SubGroup.cs
   - src/Mollie/Models/Components/SubTotals.cs
   - src/Mollie/Models/Components/SubTotalsCardAudience.cs
@@ -918,29 +902,27 @@ generatedFiles:
   - src/Mollie/Models/Components/SubTotalsFeeType.cs
   - src/Mollie/Models/Components/SubTotalsPrepaymentPartType.cs
   - src/Mollie/Models/Components/SubTotalsTransactionType.cs
+  - src/Mollie/Models/Components/SubscriptionMethod.cs
+  - src/Mollie/Models/Components/SubscriptionMethodResponse.cs
   - src/Mollie/Models/Components/SubscriptionRequest.cs
   - src/Mollie/Models/Components/SubscriptionRequestApplicationFee.cs
-  - src/Mollie/Models/Components/SubscriptionRequestMethod.cs
   - src/Mollie/Models/Components/SubscriptionResponse.cs
   - src/Mollie/Models/Components/SubscriptionResponseApplicationFee.cs
   - src/Mollie/Models/Components/SubscriptionResponseLinks.cs
-  - src/Mollie/Models/Components/SubscriptionResponseMethod.cs
-  - src/Mollie/Models/Components/SubscriptionResponseStatus.cs
+  - src/Mollie/Models/Components/SubscriptionStatus.cs
+  - src/Mollie/Models/Components/TerminalBrand.cs
   - src/Mollie/Models/Components/TerminalModel.cs
+  - src/Mollie/Models/Components/TerminalStatus.cs
   - src/Mollie/Models/Components/Topups.cs
   - src/Mollie/Models/Components/Totals.cs
   - src/Mollie/Models/Components/TransferDestination.cs
-  - src/Mollie/Models/Components/TransferFrequency.cs
   - src/Mollie/Models/Components/Transfers.cs
   - src/Mollie/Models/Components/UnauthorizedDirectDebit.cs
   - src/Mollie/Models/Components/UpdateValuesSalesInvoice.cs
-  - src/Mollie/Models/Components/UpdateValuesSalesInvoicePaymentTerm.cs
-  - src/Mollie/Models/Components/UpdateValuesSalesInvoiceStatus.cs
   - src/Mollie/Models/Components/Url.cs
   - src/Mollie/Models/Components/UrlNullable.cs
-  - src/Mollie/Models/Components/VatRegulation.cs
-  - src/Mollie/Models/Components/Wallet.cs
   - src/Mollie/Models/Components/WebhookEventTypes.cs
+  - src/Mollie/Models/Components/WebhookStatus.cs
   - src/Mollie/Models/Errors/APIException.cs
   - src/Mollie/Models/Errors/BaseException.cs
   - src/Mollie/Models/Errors/ErrorResponse.cs
@@ -1722,7 +1704,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
+        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "status": "queued", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": "{\"bookkeeping_id\":12345}", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "status": "pending", "createdAt": "2023-03-14T17:09:02.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -1731,7 +1713,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
+        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "status": "queued", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "refund", "id": "re_GKQYmNNAfL", "mode": "live", "description": "Refund description of example payment", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "-10.00"}, "metadata": null, "paymentId": "tr_aZm7dgj5zs", "status": "pending", "createdAt": "2023-02-06T15:55:57+00:00", "routingReversals": [{"amount": {"currency": "EUR", "value": "7.50"}, "source": {"organizationId": "org_7049691"}}], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_aZm7dgj5zs?testmode=true", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -1740,7 +1722,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
+        application/json: {"id": "re_5B8cwPMGnU", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "status": "queued", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "reverseRouting": false, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "organizationId": "org_1234567"}}], "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "refund", "id": "re_5B8cwPMGnU", "mode": "live", "description": "Refunding a Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "metadata": {}, "paymentId": "tr_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "status": "queued", "createdAt": "2024-03-20T09:13:37.0Z", "externalReference": {"type": "acquirer-reference", "id": "123456789012345"}, "routingReversals": [{"amount": {"currency": "EUR", "value": "10.00"}, "source": {"organizationId": "org_1234567"}}], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}, "settlement": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -1996,7 +1978,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
+        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "status": "succeeded", "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "live", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "35.95"}, "status": "pending", "metadata": "{\"bookkeeping_id\":12345}", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "createdAt": "2023-08-02T09:29:56.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -2005,7 +1987,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
+        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "status": "succeeded", "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "test", "amount": {"currency": "EUR", "value": "467.92"}, "settlementAmount": {"currency": "EUR", "value": "467.92"}, "status": "pending", "paymentId": "tr_V9kqkGtyUH", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "createdAt": "2021-06-03T11:50:58+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_V9kqkGtyUH", "type": "application/hal+json"}, "shipment": {"href": "https://api.mollie.com/v2/orders/ord_uvpptr/shipments/shp_5x4xQJDWGNcY3tKGL7X5J", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -2014,7 +1996,7 @@ examples:
         path:
           paymentId: "tr_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
+        application/json: {"id": "cpt_vytxeTZskVKR7C7WgdSP3d", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "status": "succeeded", "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU"}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "live", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "status": "succeeded", "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}, "settlement": {"href": "https://...", "type": "application/hal+json"}, "shipment": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -2648,7 +2630,7 @@ examples:
         path:
           customerId: "cst_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "customerId": "cst_5B8cwPMGnU", "testmode": false}
+        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "status": "valid", "customerId": "cst_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "mandate", "id": "mdt_h3gAaD5zP", "mode": "live", "method": "directdebit", "details": {"consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "INGBNL2A"}, "signatureDate": "2023-05-07", "mandateReference": "EXAMPLE-CORP-MD13804", "status": "valid", "customerId": "cst_4qqhO89gsT", "createdAt": "2023-05-07T10:49:08.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_4qqhO89gsT", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -2657,7 +2639,7 @@ examples:
         path:
           customerId: "cst_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "customerId": "cst_5B8cwPMGnU", "testmode": false}
+        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "status": "valid", "customerId": "cst_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "mandate", "id": "mdt_gDSN2rx3My", "mode": "test", "method": "directdebit", "details": {"consumerName": "Jane Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "INGBNL2A"}, "signatureDate": "2021-12-31", "mandateReference": "YOUR-COMPANY-MD13804", "status": "valid", "customerId": "cst_tKt44u85MM", "createdAt": "2022-01-03T15:42:11+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_tKt44u85MM", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -2666,7 +2648,7 @@ examples:
         path:
           customerId: "cst_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "customerId": "cst_5B8cwPMGnU", "testmode": false}
+        application/json: {"id": "mdt_5B8cwPMGnU", "method": "directdebit", "consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "consumerEmail": "example@email.com", "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "paypalBillingAgreementId": "B-12A34567B8901234CD", "payPalVaultId": "8kk8451t", "status": "valid", "customerId": "cst_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "mandate", "id": "mdt_5B8cwPMGnU", "mode": "live", "method": "directdebit", "details": {"consumerName": "John Doe", "consumerAccount": "NL55INGB0000000000", "consumerBic": "BANKBIC", "cardHolder": "John Doe", "cardNumber": "3240", "cardExpiryDate": "2025-01-01", "cardLabel": "Visa", "cardFingerprint": "d3290e932k02f"}, "signatureDate": "2025-01-01", "mandateReference": "ID-1023892", "status": "valid", "customerId": "cst_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -2743,7 +2725,7 @@ examples:
         path:
           customerId: "cst_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "sub_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "2 days", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
+        application/json: {"id": "sub_5B8cwPMGnU", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "2 days", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "subscription", "id": "sub_rVKGtNd6s3", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "25.00"}, "times": 4, "timesRemaining": 4, "interval": "3 months", "startDate": "2023-06-01", "nextPaymentDate": "2023-09-01", "description": "Quarterly payment", "method": null, "metadata": null, "webhookUrl": "https://webshop.example.org/payments/webhook", "customerId": "cst_stTC2WHAuS", "mandateId": "mdt_38HS4fsS", "createdAt": "2023-04-06T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://api.mollie.com/v2/customers/cst_stTC2WHAuS", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -2752,7 +2734,7 @@ examples:
         path:
           customerId: "cst_5B8cwPMGnU"
       requestBody:
-        application/json: {"id": "sub_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "2 days", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
+        application/json: {"id": "sub_5B8cwPMGnU", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "interval": "2 days", "startDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "subscription", "id": "sub_5B8cwPMGnU", "mode": "live", "status": "active", "amount": {"currency": "EUR", "value": "10.00"}, "times": 6, "timesRemaining": 5, "interval": "2 days", "startDate": "2025-01-01", "nextPaymentDate": "2025-01-01", "description": "Subscription of streaming channel", "method": "paypal", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Platform fee"}, "webhookUrl": "https://example.com/webhook", "customerId": "cst_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37.0Z", "canceledAt": "2025-01-01T13:10:19.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -3047,7 +3029,7 @@ examples:
           testmode: false
       responses:
         "200":
-          application/hal+json: {"resource": "organization", "locale": "en_US", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "organization", "locale": "en_US", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   get-current-organization:
@@ -3063,19 +3045,19 @@ examples:
   create-profile:
     create-profile-201-1:
       requestBody:
-        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE"}
+        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE", "status": "unverified"}
       responses:
         "201":
           application/hal+json: {"resource": "profile", "id": "pfl_QkEhN94Ba", "mode": "live", "name": "My website name", "website": "https://shop.example.org", "email": "info@example.org", "phone": "+31208202070", "businessCategory": "OTHER_MERCHANDISE", "status": "verified", "review": {"status": "pending"}, "createdAt": "2023-03-20T09:28:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_123456789/settings/profiles/pfl_QkEhN94Ba", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     create-profile-201-2:
       requestBody:
-        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE"}
+        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE", "status": "unverified"}
       responses:
         "201":
           application/hal+json: {"resource": "profile", "id": "pfl_2q3RyuMGry", "mode": "live", "name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "businessCategory": "OTHER_MERCHANDISE", "status": "unverified", "review": {"status": "pending"}, "createdAt": "2022-01-19T12:30:22+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_7049691/settings/profiles/pfl_2q3RyuMGry", "type": "text/html"}, "chargebacks": {"href": "https://api.mollie.com/v2/chargebacks?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "methods": {"href": "https://api.mollie.com/v2/methods?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "payments": {"href": "https://api.mollie.com/v2/payments?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "refunds": {"href": "https://api.mollie.com/v2/refunds?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "checkoutPreviewUrl": {"href": "https://www.mollie.com/checkout/preview/pfl_2q3RyuMGry", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-create-profile:
       requestBody:
-        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE"}
+        application/json: {"name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE", "status": "unverified"}
       responses:
         "201":
           application/hal+json: {"resource": "profile", "id": "pfl_QkEhN94Ba", "mode": "live", "name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE", "status": "unverified", "review": {"status": "pending"}, "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_7049691/settings/profiles/pfl_2q3RyuMGry", "type": "text/html"}, "chargebacks": {"href": "https://api.mollie.com/v2/chargebacks?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "methods": {"href": "https://api.mollie.com/v2/methods?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "payments": {"href": "https://api.mollie.com/v2/payments?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "refunds": {"href": "https://api.mollie.com/v2/refunds?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "checkoutPreviewUrl": {"href": "https://www.mollie.com/checkout/preview/pfl_2q3RyuMGry", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -3259,7 +3241,7 @@ examples:
           embed: "organization"
       responses:
         "200":
-          application/hal+json: {"resource": "client", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "onboarding": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "_embedded": {"organization": {"resource": "organization", "locale": "en_US", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "onboarding": {"resource": "onboarding", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "capabilities": {"resource": "capability", "name": "payments", "status": "pending", "statusReason": "requirement-past-due", "requirements": [{"id": "legal-representatives", "status": "past-due", "dueDate": "2024-01-01T12:00:00+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}}}
+          application/hal+json: {"resource": "client", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "onboarding": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "_embedded": {"organization": {"resource": "organization", "locale": "en_US", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "onboarding": {"resource": "onboarding", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "capabilities": {"resource": "capability", "name": "payments", "status": "pending", "statusReason": "requirement-past-due", "requirements": [{"id": "legal-representatives", "status": "past-due", "dueDate": "2024-01-01T12:00:00+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   create-client-link:
@@ -3959,7 +3941,7 @@ examples:
         path:
           id: "invoice_4Y0eZitmBnQ6IDoMqZQKh"
       requestBody:
-        application/json: {"testmode": false, "status": "paid", "memo": "An updated memo!", "paymentTerm": "30 days", "paymentDetails": {"source": "payment-link", "sourceReference": "pl_d9fQur83kFdhH8hIhaZfq"}, "emailDetails": {"subject": "Your invoice is available", "body": "Please find your invoice enclosed."}, "recipientIdentifier": "customer-xyz-0123", "recipient": {"type": "consumer", "title": "Mrs.", "givenName": "Jane", "familyName": "Doe", "organizationName": "Organization Corp.", "organizationNumber": "12345678", "vatNumber": "NL123456789B01", "email": "example@email.com", "phone": "+0123456789", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "4th floor", "postalCode": "5678AB", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL", "locale": "nl_NL"}, "lines": [{"description": "LEGO 4440 Forest Police Station", "quantity": 1, "vatRate": "21.00", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discount": {"type": "amount", "value": "10.00"}}], "discount": {"type": "amount", "value": "10.00"}}
+        application/json: {"testmode": false, "status": "draft", "memo": "An updated memo!", "paymentTerm": "30 days", "paymentDetails": {"source": "payment-link", "sourceReference": "pl_d9fQur83kFdhH8hIhaZfq"}, "emailDetails": {"subject": "Your invoice is available", "body": "Please find your invoice enclosed."}, "recipientIdentifier": "customer-xyz-0123", "recipient": {"type": "consumer", "title": "Mrs.", "givenName": "Jane", "familyName": "Doe", "organizationName": "Organization Corp.", "organizationNumber": "12345678", "vatNumber": "NL123456789B01", "email": "example@email.com", "phone": "+0123456789", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "4th floor", "postalCode": "5678AB", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL", "locale": "nl_NL"}, "lines": [{"description": "LEGO 4440 Forest Police Station", "quantity": 1, "vatRate": "21.00", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discount": {"type": "amount", "value": "10.00"}}], "discount": {"type": "amount", "value": "10.00"}}
       responses:
         "200":
           application/hal+json: {"resource": "sales-invoice", "id": "invoice_4Y0eZitmBnQ6IDoMqZQKh", "invoiceNumber": "INV-0000001", "status": "draft", "vatScheme": "standard", "vatMode": "exclusive", "memo": "This is a memo!", "paymentTerm": "30 days", "paymentDetails": {"source": "payment-link", "sourceReference": "pl_d9fQur83kFdhH8hIhaZfq"}, "emailDetails": {"subject": "Your invoice is available", "body": "Please find your invoice enclosed."}, "customerId": "cst_8wmqcHMN4U", "mandateId": "mdt_pWUnw6pkBN", "recipientIdentifier": "customer-xyz-0123", "recipient": {"type": "consumer", "title": "Mrs.", "givenName": "Jane", "familyName": "Doe", "organizationName": "Organization Corp.", "organizationNumber": "12345678", "vatNumber": "NL123456789B01", "email": "example@email.com", "phone": "+0123456789", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "4th floor", "postalCode": "5678AB", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL", "locale": "nl_NL"}, "lines": [{"description": "LEGO 4440 Forest Police Station", "quantity": 1, "vatRate": "21.00", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discount": {"type": "amount", "value": "10.00"}}], "discount": null, "amountDue": {"currency": "EUR", "value": "10.00"}, "subtotalAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "totalVatAmount": {"currency": "EUR", "value": "10.00"}, "discountedSubtotalAmount": {"currency": "EUR", "value": "10.00"}, "createdAt": "2024-03-20T09:13:37.0Z", "issuedAt": "2024-10-03T10:47:38+00:00", "paidAt": "2024-10-04T10:47:38+00:00", "dueAt": "2024-11-01T10:47:38+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "invoicePayment": {"href": "https://...", "type": "application/hal+json"}, "pdfLink": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -3982,4 +3964,4 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Payments.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.List()`:  `response.Embedded.Customers.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Organizations.Get-Current()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Clients.Get()`:  `response.Embedded.Organization.Locale` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Create()`: \n  *  `request.payment-request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Organizations.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Payments.Cancel()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Clients.List()`:  `response.Embedded.Clients.[].Embedded.Organization.Locale` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Create()`: \n  *  `request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Get()`:  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Update()`: \n  *  `request.entity-customer.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.Create-Payment()`: \n  *  `request.payment-request.Locale` **Changed**\n  *  `response.locale` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`:  `response.Embedded.Payments.[].Locale` **Changed** **Breaking** :warning:\n* `Client.Client-Links.Create()`: \n  *  `request.Owner.Locale` **Changed**\n"
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Capabilities.List()`:  `response.Embedded.Capabilities.[].StatusReason` **Changed** **Breaking** :warning:\n* `Client.Clients.List()`:  `response.Embedded.Clients.[].Embedded.Capabilities.StatusReason` **Changed** **Breaking** :warning:\n* `Client.Clients.Get()`:  `response.Embedded.Capabilities.StatusReason` **Changed** **Breaking** :warning:\n* `Client.Refunds.Create()`: \n  *  `request.entity-refund.Status` **Added** **Breaking** :warning:\n  *  `response.routingReversals.[].Source.Type` **Added**\n* `Client.Settlements.List-Refunds()`:  `response.Embedded.Refunds.[].RoutingReversals.[].Source.Type` **Added**\n* `Client.Profiles.Create()`: \n  *  `request.Status` **Added**\n* `Client.Refunds.List()`:  `response.Embedded.Refunds.[].RoutingReversals.[].Source.Type` **Added**\n* `Client.Refunds.Get()`:  `response.routingReversals.[].Source.Type` **Added**\n* `Client.Refunds.All()`:  `response.Embedded.Refunds.[].RoutingReversals.[].Source.Type` **Added**\n* `Client.Captures.Create()`: \n  *  `request.entity-capture.Status` **Added**\n* `Client.Mandates.Create()`: \n  *  `request.entity-mandate.Status` **Added**\n* `Client.Subscriptions.Create()`: \n  *  `request.subscription-request.Status` **Added**\n"

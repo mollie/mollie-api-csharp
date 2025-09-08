@@ -34,11 +34,21 @@ namespace Mollie.Models.Components
         /// 
         /// <remarks>
         /// <br/>
-        /// Dependent parameters: `paymentDetails` for `paid`, `emailDetails` for `issued` and `paid`.
+        /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
+        /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
+        /// mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
+        /// <br/>
+        /// A status value that cannot be set but can be returned is `canceled`, for invoices which were<br/>
+        /// issued, but then canceled. Currently this can only be done for invoices created in the dashboard.<br/>
+        /// <br/>
+        /// Dependent parameters:<br/>
+        ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
+        ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
+        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public UpdateValuesSalesInvoiceStatus? Status { get; set; }
+        public SalesInvoiceStatus? Status { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -50,7 +60,7 @@ namespace Mollie.Models.Components
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public UpdateValuesSalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
+        public SalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
 
         [JsonProperty("paymentDetails")]
         public SalesInvoicePaymentDetails? PaymentDetails { get; set; } = null;

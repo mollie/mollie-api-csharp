@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityBalanceTransaction
     {
@@ -29,21 +33,8 @@ namespace Mollie.Models.Components
         [JsonProperty("id")]
         public string? Id { get; set; }
 
-        /// <summary>
-        /// The type of transaction, for example `payment` or `refund`. Values include the below examples, although this list<br/>
-        /// 
-        /// <remarks>
-        /// is not definitive.<br/>
-        /// <br/>
-        /// * Regular payment processing: `payment` `capture` `unauthorized-direct-debit` `failed-payment`<br/>
-        /// * Refunds and chargebacks: `refund` `returned-refund` `chargeback` `chargeback-reversal`<br/>
-        /// * Settlements: `outgoing-transfer` `canceled-outgoing-transfer` `returned-transfer`<br/>
-        /// * Invoicing: `invoice-compensation` `balance-correction`<br/>
-        /// * Mollie Connect: `application-fee` `split-payment` `platform-payment-refund` `platform-payment-chargeback`
-        /// </remarks>
-        /// </summary>
         [JsonProperty("type")]
-        public EntityBalanceTransactionType? Type { get; set; }
+        public BalanceTransactionType? Type { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.

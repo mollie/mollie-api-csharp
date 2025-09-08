@@ -35,11 +35,11 @@ EntitySalesInvoice req = new EntitySalesInvoice() {
     Id = "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     Testmode = false,
     ProfileId = "pfl_QkEhN94Ba",
-    Status = EntitySalesInvoiceStatus.Draft,
-    VatScheme = EntitySalesInvoiceVatScheme.Standard,
-    VatMode = EntitySalesInvoiceVatMode.Exclusive,
+    Status = SalesInvoiceStatus.Draft,
+    VatScheme = SalesInvoiceVatScheme.Standard,
+    VatMode = SalesInvoiceVatMode.Exclusive,
     Memo = "This is a memo!",
-    PaymentTerm = EntitySalesInvoicePaymentTerm.Thirtydays,
+    PaymentTerm = SalesInvoicePaymentTerm.Thirtydays,
     PaymentDetails = new SalesInvoicePaymentDetails() {
         Source = SalesInvoicePaymentDetailsSource.PaymentLink,
         SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",
@@ -238,9 +238,9 @@ var res = await sdk.SalesInvoices.UpdateAsync(
     id: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     updateValuesSalesInvoice: new UpdateValuesSalesInvoice() {
         Testmode = false,
-        Status = UpdateValuesSalesInvoiceStatus.Paid,
+        Status = SalesInvoiceStatus.Draft,
         Memo = "An updated memo!",
-        PaymentTerm = UpdateValuesSalesInvoicePaymentTerm.Thirtydays,
+        PaymentTerm = SalesInvoicePaymentTerm.Thirtydays,
         PaymentDetails = new SalesInvoicePaymentDetails() {
             Source = SalesInvoicePaymentDetailsSource.PaymentLink,
             SourceReference = "pl_d9fQur83kFdhH8hIhaZfq",

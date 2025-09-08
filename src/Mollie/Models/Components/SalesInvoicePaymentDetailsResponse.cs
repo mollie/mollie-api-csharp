@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class SalesInvoicePaymentDetailsResponse
     {
@@ -20,7 +24,7 @@ namespace Mollie.Models.Components
         /// The way through which the invoice is to be set to paid.
         /// </summary>
         [JsonProperty("source")]
-        public SalesInvoicePaymentDetailsResponseSource Source { get; set; } = default!;
+        public SalesInvoicePaymentDetailsSourceResponse Source { get; set; } = default!;
 
         /// <summary>
         /// A reference to the payment the sales invoice is paid by. Required for `source` values `payment-link` and<br/>

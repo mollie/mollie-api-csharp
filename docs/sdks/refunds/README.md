@@ -48,8 +48,9 @@ var res = await sdk.Refunds.CreateAsync(
         ),
         PaymentId = "tr_5B8cwPMGnU",
         SettlementId = "stl_5B8cwPMGnU",
+        Status = RefundStatus.Queued,
         ExternalReference = new EntityRefundExternalReference() {
-            Type = EntityRefundTypeAcquirerReference.AcquirerReference,
+            Type = RefundExternalReferenceType.AcquirerReference,
             Id = "123456789012345",
         },
         ReverseRouting = false,
@@ -60,7 +61,7 @@ var res = await sdk.Refunds.CreateAsync(
                     Value = "10.00",
                 },
                 Source = new EntityRefundSource() {
-                    Type = RoutingReversalType.Organization,
+                    Type = RefundRoutingReversalsSourceType.Organization,
                     OrganizationId = "org_1234567",
                 },
             },

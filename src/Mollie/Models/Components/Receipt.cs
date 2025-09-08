@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// The Point of sale receipt object.
@@ -35,12 +39,12 @@ namespace Mollie.Models.Components
         /// The method by which the card was read by the terminal.
         /// </summary>
         [JsonProperty("cardReadMethod")]
-        public CardReadMethod? CardReadMethod { get; set; } = null;
+        public PaymentDetailsReceiptCardReadMethodResponse? CardReadMethod { get; set; } = null;
 
         /// <summary>
         /// The method used to verify the cardholder&apos;s identity.
         /// </summary>
         [JsonProperty("cardVerificationMethod")]
-        public CardVerificationMethod? CardVerificationMethod { get; set; } = null;
+        public PaymentDetailsReceiptCardVerificationMethodResponse? CardVerificationMethod { get; set; } = null;
     }
 }

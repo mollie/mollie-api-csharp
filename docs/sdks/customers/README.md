@@ -305,7 +305,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
         WebhookUrl = "https://example.org/webhooks",
         Lines = new List<PaymentRequestLine>() {
             new PaymentRequestLine() {
-                Type = PaymentRequestType.Physical,
+                Type = PaymentLineType.Physical,
                 Description = "LEGO 4440 Forest Police Station",
                 Quantity = 1,
                 QuantityUnit = "pcs",
@@ -394,7 +394,7 @@ var res = await sdk.Customers.CreatePaymentAsync(
                     Value = "10.00",
                 },
                 Destination = new EntityPaymentRouteDestination() {
-                    Type = EntityPaymentRouteType.Organization,
+                    Type = RouteDestinationType.Organization,
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",

@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
         /// The status of the balance.
         /// </summary>
         [JsonProperty("status")]
-        public EntityBalanceStatus? Status { get; set; }
+        public BalanceStatus? Status { get; set; }
 
         /// <summary>
         /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
@@ -66,7 +66,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("transferFrequency")]
-        public TransferFrequency? TransferFrequency { get; set; }
+        public BalanceTransferFrequency? TransferFrequency { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.

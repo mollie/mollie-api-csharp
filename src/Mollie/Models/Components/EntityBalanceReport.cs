@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityBalanceReport
     {
@@ -56,22 +60,8 @@ namespace Mollie.Models.Components
         [JsonProperty("until")]
         public string? Until { get; set; }
 
-        /// <summary>
-        /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped by<br/>
-        /// 
-        /// <remarks>
-        /// status (e.g. `pending`, `available`), then by direction of movement (e.g. moved from pending to available), then<br/>
-        /// by transaction type, and then by other sub-groupings where available (e.g. payment method).<br/>
-        /// <br/>
-        /// With the `transaction-categories` format, transactions are grouped by transaction type, then by direction of<br/>
-        /// movement, and then again by other sub-groupings where available.<br/>
-        /// <br/>
-        /// Both reporting formats will always contain opening and closing amounts that correspond to the start and end dates<br/>
-        /// of the report.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("grouping")]
-        public Models.Components.Grouping? Grouping { get; set; }
+        public BalanceReportGrouping? Grouping { get; set; }
 
         /// <summary>
         /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>

@@ -50,13 +50,13 @@ namespace Mollie.Models.Components
         /// The status of the terminal.
         /// </summary>
         [JsonProperty("status")]
-        public EntityTerminalStatus Status { get; set; } = default!;
+        public TerminalStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The brand of the terminal.
         /// </summary>
         [JsonProperty("brand", NullValueHandling = NullValueHandling.Include)]
-        public Brand? Brand { get; set; }
+        public TerminalBrand? Brand { get; set; }
 
         /// <summary>
         /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.

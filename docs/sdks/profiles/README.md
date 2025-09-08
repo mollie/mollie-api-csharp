@@ -42,6 +42,7 @@ EntityProfile req = new EntityProfile() {
         "GB",
     },
     BusinessCategory = "OTHER_MERCHANDISE",
+    Status = ProfileStatus.Unverified,
 };
 
 var res = await sdk.Profiles.CreateAsync(req);

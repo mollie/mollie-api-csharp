@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityRefund
     {
@@ -53,6 +56,9 @@ namespace Mollie.Models.Components
 
         [JsonProperty("settlementId")]
         public string? SettlementId { get; set; }
+
+        [JsonProperty("status")]
+        public RefundStatus Status { get; set; } = default!;
 
         [JsonProperty("externalReference")]
         public EntityRefundExternalReference? ExternalReference { get; set; }

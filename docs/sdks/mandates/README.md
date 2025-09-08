@@ -33,7 +33,7 @@ var res = await sdk.Mandates.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
     entityMandate: new EntityMandate() {
         Id = "mdt_5B8cwPMGnU",
-        Method = EntityMandateMethod.Directdebit,
+        Method = MandateMethod.Directdebit,
         ConsumerName = "John Doe",
         ConsumerAccount = "NL55INGB0000000000",
         ConsumerBic = "BANKBIC",
@@ -42,6 +42,7 @@ var res = await sdk.Mandates.CreateAsync(
         MandateReference = "ID-1023892",
         PaypalBillingAgreementId = "B-12A34567B8901234CD",
         PayPalVaultId = "8kk8451t",
+        Status = MandateStatus.Valid,
         CustomerId = "cst_5B8cwPMGnU",
         Testmode = false,
     }

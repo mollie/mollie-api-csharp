@@ -12,7 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityCapability
     {
@@ -30,10 +33,10 @@ namespace Mollie.Models.Components
         public string? Name { get; set; }
 
         [JsonProperty("status")]
-        public EntityCapabilityStatus? Status { get; set; }
+        public CapabilityStatus? Status { get; set; }
 
         [JsonProperty("statusReason")]
-        public StatusReasonEnum? StatusReason { get; set; } = null;
+        public CapabilityStatusReason? StatusReason { get; set; }
 
         [JsonProperty("requirements")]
         public List<EntityCapabilityRequirement>? Requirements { get; set; }

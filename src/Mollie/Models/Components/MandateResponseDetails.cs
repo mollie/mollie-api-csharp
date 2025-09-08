@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class MandateResponseDetails
     {
@@ -56,7 +60,7 @@ namespace Mollie.Models.Components
         /// The card&apos;s label. Available for card mandates, if the card label could be detected.
         /// </summary>
         [JsonProperty("cardLabel")]
-        public MandateResponseCardLabel? CardLabel { get; set; } = null;
+        public MandateDetailsCardLabelResponse? CardLabel { get; set; } = null;
 
         /// <summary>
         /// Unique alphanumeric representation of this specific card. Available for card mandates. Can be used to identify<br/>

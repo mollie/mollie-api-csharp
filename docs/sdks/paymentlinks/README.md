@@ -46,7 +46,7 @@ CreatePaymentLinkRequest req = new CreatePaymentLinkRequest() {
     WebhookUrl = "https://webshop.example.org/payment-links/webhook/",
     Lines = new List<PaymentLineItem>() {
         new PaymentLineItem() {
-            Type = PaymentLineItemType.Physical,
+            Type = PaymentLineType.Physical,
             Description = "LEGO 4440 Forest Police Station",
             Quantity = 1,
             QuantityUnit = "pcs",
