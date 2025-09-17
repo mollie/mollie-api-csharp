@@ -1,3 +1,5 @@
+.env
+.env.local
 obj/
 bin/
 debug/

@@ -16,13 +16,14 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.5.3
+  version: 0.5.4
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException

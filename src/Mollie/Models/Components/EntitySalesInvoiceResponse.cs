@@ -154,6 +154,18 @@ namespace Mollie.Models.Components
         public SalesInvoiceDiscountResponse? Discount { get; set; } = null;
 
         /// <summary>
+        /// This indicates whether the invoice is an e-invoice. The default value is `false` and can&apos;t be changed<br/>
+        /// 
+        /// <remarks>
+        /// after the invoice has been issued.<br/>
+        /// <br/>
+        /// When `emailDetails` is provided, an additional email is sent to the recipient.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("isEInvoice")]
+        public bool? IsEInvoice { get; set; }
+
+        /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountDue")]

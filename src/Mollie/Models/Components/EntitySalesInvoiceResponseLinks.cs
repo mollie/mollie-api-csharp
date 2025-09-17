@@ -42,5 +42,17 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("documentation")]
         public Url? Documentation { get; set; }
+
+        /// <summary>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
+        /// </summary>
+        [JsonProperty("next")]
+        public Url? Next { get; set; }
+
+        /// <summary>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
+        /// </summary>
+        [JsonProperty("previous")]
+        public Url? Previous { get; set; }
     }
 }
