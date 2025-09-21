@@ -27,6 +27,7 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
+  * [Idempotency Key](#idempotency-key)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -118,6 +119,52 @@ var res = await sdk.Balances.ListAsync(req);
 // handle response
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Idempotency Key -->
+## Idempotency Key
+
+This SDK supports the usage of Idempotency Keys. See our [documentation](https://docs.mollie.com/reference/api-idempotency) on how to use it.
+
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+using System.Collections.Generic;
+
+var sdk = new Mollie.Client(security: new Security() {
+    ApiKey = Environment.GetEnvironmentVariable("MOLLIE_API_KEY") ?? "test_...",
+});
+
+var paymentRequest = new PaymentRequest() {
+    Description = "Description",
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "5.00",
+    },
+    RedirectUrl = "https://example.org/redirect"
+};
+
+var idempotencyKey = "<some-idempotency-key>";
+
+var payment1 = await sdk.Payments.CreateAsync(
+    idempotencyKey: idempotencyKey,
+    paymentRequest: paymentRequest
+);
+
+var payment2 = await sdk.Payments.CreateAsync(
+    idempotencyKey: idempotencyKey,
+    paymentRequest: paymentRequest
+);
+
+Console.WriteLine("Payment created with ID: " + payment1.PaymentResponse?.Id);
+Console.WriteLine("Payment created with ID: " + payment2.PaymentResponse?.Id);
+if (payment1.PaymentResponse?.Id == payment2.PaymentResponse?.Id) {
+    Console.WriteLine("Payments are the same");
+} else {
+    Console.WriteLine("Payments are different");
+}
+```
+<!-- End Idempotency Key -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
