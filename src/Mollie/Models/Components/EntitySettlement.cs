@@ -28,10 +28,10 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -61,16 +61,16 @@ namespace Mollie.Models.Components
         /// The status of the settlement.
         /// </summary>
         [JsonProperty("status")]
-        public SettlementStatus? Status { get; set; }
+        public SettlementStatus Status { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         [JsonProperty("balanceId")]
-        public string? BalanceId { get; set; }
+        public string BalanceId { get; set; } = default!;
 
         [JsonProperty("invoiceId")]
         public string? InvoiceId { get; set; }
@@ -97,6 +97,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntitySettlementLinks? Links { get; set; }
+        public EntitySettlementLinks Links { get; set; } = default!;
     }
 }

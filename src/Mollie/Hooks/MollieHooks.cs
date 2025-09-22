@@ -8,7 +8,7 @@ using Mollie.Utils;
 
 namespace Mollie.Hooks
 {
-    public class MollieHooks: IBeforeRequestHook
+    public class MollieHooks : IBeforeRequestHook
     {
         public Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {

@@ -24,36 +24,36 @@ namespace Mollie.Models.Components
         /// A description of the revenue subtotal
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The payment method, if applicable
         /// </summary>
-        [JsonProperty("method")]
-        public PaymentMethod? Method { get; set; } = null;
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
+        public PaymentMethod? Method { get; set; }
 
         /// <summary>
         /// The number of payments
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountNet")]
-        public Amount? AmountNet { get; set; }
+        public Amount AmountNet { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
-        [JsonProperty("amountVat")]
-        public Amount? AmountVat { get; set; }
+        [JsonProperty("amountVat", NullValueHandling = NullValueHandling.Include)]
+        public AmountNullable? AmountVat { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountGross")]
-        public Amount? AmountGross { get; set; }
+        public Amount AmountGross { get; set; } = default!;
     }
 }

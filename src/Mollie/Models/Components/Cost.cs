@@ -24,42 +24,42 @@ namespace Mollie.Models.Components
         /// A description of the cost subtotal
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The payment method, if applicable
         /// </summary>
-        [JsonProperty("method")]
-        public PaymentMethod? Method { get; set; } = null;
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
+        public PaymentMethod? Method { get; set; }
 
         /// <summary>
         /// The number of fees
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         /// <summary>
         /// The service rates, further divided into `fixed` and `percentage` costs.
         /// </summary>
         [JsonProperty("rate")]
-        public Rate? Rate { get; set; }
+        public Rate Rate { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountNet")]
-        public Amount? AmountNet { get; set; }
+        public Amount AmountNet { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountVat")]
-        public Amount? AmountVat { get; set; }
+        public Amount AmountVat { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amountGross")]
-        public Amount? AmountGross { get; set; }
+        public Amount AmountGross { get; set; } = default!;
     }
 }

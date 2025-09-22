@@ -25,10 +25,7 @@ namespace Mollie.Models.Components
         [JsonProperty("fixed")]
         public Amount? Fixed { get; set; }
 
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
         [JsonProperty("percentage")]
-        public Amount? Percentage { get; set; }
+        public string? Percentage { get; set; }
     }
 }
