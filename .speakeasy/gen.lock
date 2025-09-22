@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 5f770e879f4e0cd204315098145b861b
+  docChecksum: 843a5fcda17e62c6c7e2027ada861883
   docVersion: 1.0.0
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.5.6
-  configChecksum: d3a2671ad3c2b9977a301561b4c04c44
+  releaseVersion: 0.5.7
+  configChecksum: 57d8e8910e75256a79cb8759a5631e5a
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -4521,7 +4521,7 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Csharp SDK Changes Detected:
-  * `Client.Settlements.List()`:  `response` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get()`:  `response` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get-Open()`:  `response` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get-Next()`:  `response` **Changed** **Breaking** :warning:
+  * `Client.Settlements.List()`:  `response.Embedded.Settlements.[].Periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
+  * `Client.Settlements.Get()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
+  * `Client.Settlements.Get-Open()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
+  * `Client.Settlements.Get-Next()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:

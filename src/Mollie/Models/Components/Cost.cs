@@ -53,8 +53,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
-        [JsonProperty("amountVat")]
-        public Amount AmountVat { get; set; } = default!;
+        [JsonProperty("amountVat", NullValueHandling = NullValueHandling.Include)]
+        public AmountNullable? AmountVat { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
