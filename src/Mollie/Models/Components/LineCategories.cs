@@ -13,28 +13,32 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
     using System;
     
-    public enum PaymentLineItemResponseCategory
+    public enum LineCategories
     {
-        [JsonProperty("meal")]
-        Meal,
         [JsonProperty("eco")]
         Eco,
         [JsonProperty("gift")]
         Gift,
+        [JsonProperty("meal")]
+        Meal,
         [JsonProperty("sport_culture")]
         SportCulture,
+        [JsonProperty("additional")]
+        Additional,
+        [JsonProperty("consume")]
+        Consume,
     }
 
-    public static class PaymentLineItemResponseCategoryExtension
+    public static class LineCategoriesExtension
     {
-        public static string Value(this PaymentLineItemResponseCategory value)
+        public static string Value(this LineCategories value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static PaymentLineItemResponseCategory ToEnum(this string value)
+        public static LineCategories ToEnum(this string value)
         {
-            foreach(var field in typeof(PaymentLineItemResponseCategory).GetFields())
+            foreach(var field in typeof(LineCategories).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -47,14 +51,14 @@ namespace Mollie.Models.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is PaymentLineItemResponseCategory)
+                    if (enumVal is LineCategories)
                     {
-                        return (PaymentLineItemResponseCategory)enumVal;
+                        return (LineCategories)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum PaymentLineItemResponseCategory");
+            throw new Exception($"Unknown value {value} for enum LineCategories");
         }
     }
 

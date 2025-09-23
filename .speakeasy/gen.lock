@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 843a5fcda17e62c6c7e2027ada861883
+  docChecksum: 16b0726675943aa6a17c5fe9184c33cb
   docVersion: 1.0.0
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.5.7
-  configChecksum: 57d8e8910e75256a79cb8759a5631e5a
+  releaseVersion: 0.5.8
+  configChecksum: 797455600caed4cc641ef6f144e655c2
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -160,6 +160,8 @@ generatedFiles:
   - docs/Models/Components/HTTPMetadata.md
   - docs/Models/Components/InvoiceCompensation.md
   - docs/Models/Components/InvoiceStatus.md
+  - docs/Models/Components/LineCategories.md
+  - docs/Models/Components/LineCategoriesResponse.md
   - docs/Models/Components/ListLinks.md
   - docs/Models/Components/ListSort.md
   - docs/Models/Components/Locale.md
@@ -180,7 +182,6 @@ generatedFiles:
   - docs/Models/Components/Mode.md
   - docs/Models/Components/OnboardingStatus.md
   - docs/Models/Components/Open.md
-  - docs/Models/Components/OrderLineCategories.md
   - docs/Models/Components/OrganizationVatRegulation.md
   - docs/Models/Components/OutgoingTransfer.md
   - docs/Models/Components/Owner.md
@@ -199,9 +200,7 @@ generatedFiles:
   - docs/Models/Components/PaymentDetailsWalletResponse.md
   - docs/Models/Components/PaymentFee.md
   - docs/Models/Components/PaymentLineItem.md
-  - docs/Models/Components/PaymentLineItemCategory.md
   - docs/Models/Components/PaymentLineItemResponse.md
-  - docs/Models/Components/PaymentLineItemResponseCategory.md
   - docs/Models/Components/PaymentLineType.md
   - docs/Models/Components/PaymentLineTypeResponse.md
   - docs/Models/Components/PaymentLinkResponse.md
@@ -212,11 +211,9 @@ generatedFiles:
   - docs/Models/Components/PaymentMethod.md
   - docs/Models/Components/PaymentRequest.md
   - docs/Models/Components/PaymentRequestApplicationFee.md
-  - docs/Models/Components/PaymentRequestCategory.md
   - docs/Models/Components/PaymentRequestLine.md
   - docs/Models/Components/PaymentResponse.md
   - docs/Models/Components/PaymentResponseApplicationFee.md
-  - docs/Models/Components/PaymentResponseCategory.md
   - docs/Models/Components/PaymentResponseDetails.md
   - docs/Models/Components/PaymentResponseLine.md
   - docs/Models/Components/PaymentResponseLinks.md
@@ -786,6 +783,8 @@ generatedFiles:
   - src/Mollie/Models/Components/HTTPMetadata.cs
   - src/Mollie/Models/Components/InvoiceCompensation.cs
   - src/Mollie/Models/Components/InvoiceStatus.cs
+  - src/Mollie/Models/Components/LineCategories.cs
+  - src/Mollie/Models/Components/LineCategoriesResponse.cs
   - src/Mollie/Models/Components/ListLinks.cs
   - src/Mollie/Models/Components/ListSort.cs
   - src/Mollie/Models/Components/Locale.cs
@@ -806,7 +805,6 @@ generatedFiles:
   - src/Mollie/Models/Components/Mode.cs
   - src/Mollie/Models/Components/OnboardingStatus.cs
   - src/Mollie/Models/Components/Open.cs
-  - src/Mollie/Models/Components/OrderLineCategories.cs
   - src/Mollie/Models/Components/OrganizationVatRegulation.cs
   - src/Mollie/Models/Components/OutgoingTransfer.cs
   - src/Mollie/Models/Components/Owner.cs
@@ -825,9 +823,7 @@ generatedFiles:
   - src/Mollie/Models/Components/PaymentDetailsWalletResponse.cs
   - src/Mollie/Models/Components/PaymentFee.cs
   - src/Mollie/Models/Components/PaymentLineItem.cs
-  - src/Mollie/Models/Components/PaymentLineItemCategory.cs
   - src/Mollie/Models/Components/PaymentLineItemResponse.cs
-  - src/Mollie/Models/Components/PaymentLineItemResponseCategory.cs
   - src/Mollie/Models/Components/PaymentLineType.cs
   - src/Mollie/Models/Components/PaymentLineTypeResponse.cs
   - src/Mollie/Models/Components/PaymentLinkResponse.cs
@@ -838,11 +834,9 @@ generatedFiles:
   - src/Mollie/Models/Components/PaymentMethod.cs
   - src/Mollie/Models/Components/PaymentRequest.cs
   - src/Mollie/Models/Components/PaymentRequestApplicationFee.cs
-  - src/Mollie/Models/Components/PaymentRequestCategory.cs
   - src/Mollie/Models/Components/PaymentRequestLine.cs
   - src/Mollie/Models/Components/PaymentResponse.cs
   - src/Mollie/Models/Components/PaymentResponseApplicationFee.cs
-  - src/Mollie/Models/Components/PaymentResponseCategory.cs
   - src/Mollie/Models/Components/PaymentResponseDetails.cs
   - src/Mollie/Models/Components/PaymentResponseLine.cs
   - src/Mollie/Models/Components/PaymentResponseLinks.cs
@@ -4519,9 +4513,3 @@ examples:
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes Detected:
-  * `Client.Settlements.List()`:  `response.Embedded.Settlements.[].Periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get-Open()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:
-  * `Client.Settlements.Get-Next()`:  `response.periods.{}.{}.Costs.[].AmountVat` **Changed** **Breaking** :warning:

@@ -94,7 +94,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=orderLineCategories")]
-        public OrderLineCategories? OrderLineCategories { get; set; }
+        public LineCategories? OrderLineCategories { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>

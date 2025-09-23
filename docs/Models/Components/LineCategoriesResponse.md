@@ -1,4 +1,4 @@
-# OrderLineCategories
+# LineCategoriesResponse
 
 
 ## Values

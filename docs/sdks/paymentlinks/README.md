@@ -70,9 +70,9 @@ var res = await sdk.PaymentLinks.CreateAsync(
                     Value = "10.00",
                 },
                 Sku = "9780241661628",
-                Categories = new List<PaymentLineItemCategory>() {
-                    PaymentLineItemCategory.Meal,
-                    PaymentLineItemCategory.Eco,
+                Categories = new List<LineCategories>() {
+                    LineCategories.Meal,
+                    LineCategories.Eco,
                 },
                 ImageUrl = "https://...",
                 ProductUrl = "https://...",

@@ -97,7 +97,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("categories")]
-        public List<PaymentLineItemResponseCategory>? Categories { get; set; }
+        public List<LineCategoriesResponse>? Categories { get; set; }
 
         /// <summary>
         /// A link pointing to an image of the product sold.
