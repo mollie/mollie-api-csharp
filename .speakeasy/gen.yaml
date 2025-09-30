@@ -34,6 +34,7 @@ csharp:
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  enableCancellationToken: true
   httpClientPrefix: Speakeasy
   imports:
     option: openapi
