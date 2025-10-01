@@ -28,15 +28,12 @@ namespace Mollie.Models.Components
 
         public static EntityType EntityProfileResponse { get { return new EntityType("entity-profile-response"); } }
 
-        public static EntityType Null { get { return new EntityType("null"); } }
-
         public override string ToString() { return Value; }
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
             switch(v) {
                 case "payment-link-response": return PaymentLinkResponse;
                 case "entity-profile-response": return EntityProfileResponse;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for EntityType");
             }
         }
@@ -88,27 +85,20 @@ namespace Mollie.Models.Components
             return res;
         }
 
-        public static Entity CreateNull()
-        {
-            EntityType typ = EntityType.Null;
-            return new Entity(typ);
-        }
-
         public class EntityConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(Entity);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -176,17 +166,13 @@ namespace Mollie.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                     return;
                 }
 
                 Entity res = (Entity)value;
-                if (EntityType.FromString(res.Type).Equals(EntityType.Null))
-                {
-                    writer.WriteRawValue("null");
-                    return;
-                }
 
                 if (res.PaymentLinkResponse != null)
                 {

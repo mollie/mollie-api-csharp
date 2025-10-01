@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 16b0726675943aa6a17c5fe9184c33cb
+  docChecksum: 0861d41c8e1ca302fd725a04cdeef785
   docVersion: 1.0.0
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 0.5.8
-  configChecksum: 797455600caed4cc641ef6f144e655c2
+  speakeasyVersion: 1.631.5
+  generationVersion: 2.716.16
+  releaseVersion: 0.6.0
+  configChecksum: 1365dfd6b5bd19dd4a533dab1e2407c7
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.12.2
+    core: 3.12.4
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.8
@@ -28,7 +28,7 @@ features:
     responseFormat: 0.0.4
     retries: 0.0.1
     sdkHooks: 0.2.0
-    unions: 0.2.2
+    unions: 1.0.0
 generatedFiles:
   - .gitattributes
   - Mollie.sln

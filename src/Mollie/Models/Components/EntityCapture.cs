@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </remarks>
         /// </summary>
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
 
         [JsonProperty("paymentId")]

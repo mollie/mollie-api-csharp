@@ -23,7 +23,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.5.8
+  version: 0.6.0
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -31,10 +31,10 @@ csharp:
   defaultErrorName: APIException
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
+  enableCancellationToken: true
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
-  enableCancellationToken: true
   httpClientPrefix: Speakeasy
   imports:
     option: openapi
@@ -53,3 +53,4 @@ csharp:
   packageTags: sdk api client
   responseFormat: envelope-http
   sourceDirectory: src
+  useNodatime: true

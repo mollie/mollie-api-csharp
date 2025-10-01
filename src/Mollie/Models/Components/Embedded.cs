@@ -19,7 +19,7 @@ namespace Mollie.Models.Components
     public class Embedded
     {
 
-        [JsonProperty("entity")]
+        [JsonProperty("entity", NullValueHandling = NullValueHandling.Include)]
         public Entity? Entity { get; set; }
     }
 }
