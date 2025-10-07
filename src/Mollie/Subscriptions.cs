@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface ISubscriptions
@@ -50,7 +51,7 @@ namespace Mollie
         /// Your customer will be charged €10 on the last day of each month, starting in April 2018.
         /// </remarks>
         /// </summary>
-        Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null);
+        Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List customer subscriptions
@@ -61,7 +62,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get subscription
@@ -70,7 +71,7 @@ namespace Mollie
         /// Retrieve a single subscription by its ID and the ID of its parent customer.
         /// </remarks>
         /// </summary>
-        Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Update subscription
@@ -83,7 +84,7 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-subscription">Create subscription</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Cancel subscription
@@ -92,7 +93,7 @@ namespace Mollie
         /// Cancel an existing subscription. Canceling a subscription has no effect on the mandates of the customer.
         /// </remarks>
         /// </summary>
-        Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List all subscriptions
@@ -103,7 +104,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null);
+        Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List subscription payments
@@ -114,15 +115,15 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Subscriptions: ISubscriptions
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Subscriptions(SDKConfig config)
@@ -130,7 +131,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null)
+        public async Task<CreateSubscriptionResponse> CreateAsync(string customerId, string? idempotencyKey = null, SubscriptionRequest? subscriptionRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateSubscriptionRequest()
             {
@@ -156,7 +157,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-subscription", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-subscription", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -189,7 +190,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -292,7 +293,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions", request);
@@ -306,7 +307,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-subscriptions", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-subscriptions", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -339,7 +340,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -442,7 +443,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetSubscriptionResponse> GetAsync(string customerId, string subscriptionId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetSubscriptionRequest()
             {
@@ -463,7 +464,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-subscription", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-subscription", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -496,7 +497,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -599,7 +600,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateSubscriptionResponse> UpdateAsync(string customerId, string subscriptionId, string? idempotencyKey = null, UpdateSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new UpdateSubscriptionRequest()
             {
@@ -626,7 +627,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-subscription", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-subscription", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -659,7 +660,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -762,7 +763,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CancelSubscriptionResponse> CancelAsync(string customerId, string subscriptionId, string? idempotencyKey = null, CancelSubscriptionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CancelSubscriptionRequest()
             {
@@ -789,7 +790,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancel-subscription", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancel-subscription", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -822,7 +823,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -925,7 +926,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/subscriptions", request);
@@ -939,7 +940,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-all-subscriptions", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-all-subscriptions", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -972,7 +973,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -1075,7 +1076,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions/{subscriptionId}/payments", request);
@@ -1089,7 +1090,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-subscription-payments", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-subscription-payments", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1122,7 +1123,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

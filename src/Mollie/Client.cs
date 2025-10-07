@@ -18,6 +18,7 @@ namespace Mollie
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IClient
@@ -34,6 +35,7 @@ namespace Mollie
         public IClientLinks ClientLinks { get; }
         public IWebhooks Webhooks { get; }
         public IWebhookEvents WebhookEvents { get; }
+        public IBalanceTransfers BalanceTransfers { get; }
         public IPayments Payments { get; }
         public IMethods Methods { get; }
         public IRefunds Refunds { get; }
@@ -55,8 +57,8 @@ namespace Mollie
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
         public IBalances Balances { get; private set; }
         public ISettlements Settlements { get; private set; }
@@ -70,6 +72,7 @@ namespace Mollie
         public IClientLinks ClientLinks { get; private set; }
         public IWebhooks Webhooks { get; private set; }
         public IWebhookEvents WebhookEvents { get; private set; }
+        public IBalanceTransfers BalanceTransfers { get; private set; }
         public IPayments Payments { get; private set; }
         public IMethods Methods { get; private set; }
         public IRefunds Refunds { get; private set; }
@@ -112,6 +115,8 @@ namespace Mollie
             Webhooks = new Webhooks(SDKConfiguration);
 
             WebhookEvents = new WebhookEvents(SDKConfiguration);
+
+            BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
 
@@ -205,6 +210,8 @@ namespace Mollie
             Webhooks = new Webhooks(SDKConfiguration);
 
             WebhookEvents = new WebhookEvents(SDKConfiguration);
+
+            BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
 

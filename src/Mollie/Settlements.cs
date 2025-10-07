@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface ISettlements
@@ -34,7 +35,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSettlementsResponse> ListAsync(ListSettlementsRequest? request = null, RetryConfig? retryConfig = null);
+        Task<ListSettlementsResponse> ListAsync(ListSettlementsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get settlement
@@ -54,7 +55,7 @@ namespace Mollie
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get open settlement
@@ -70,7 +71,7 @@ namespace Mollie
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<GetOpenSettlementResponse> GetOpenAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetOpenSettlementResponse> GetOpenAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get next settlement
@@ -85,7 +86,7 @@ namespace Mollie
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<GetNextSettlementResponse> GetNextAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetNextSettlementResponse> GetNextAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List settlement payments
@@ -99,7 +100,7 @@ namespace Mollie
         /// <a href="list-captures">List captures endpoint</a> endpoint instead.
         /// </remarks>
         /// </summary>
-        Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List settlement captures
@@ -110,7 +111,7 @@ namespace Mollie
         /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.
         /// </remarks>
         /// </summary>
-        Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List settlement refunds
@@ -121,7 +122,7 @@ namespace Mollie
         /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.
         /// </remarks>
         /// </summary>
-        Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List settlement chargebacks
@@ -132,15 +133,15 @@ namespace Mollie
         /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.
         /// </remarks>
         /// </summary>
-        Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null);
+        Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Settlements: ISettlements
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Settlements(SDKConfig config)
@@ -148,7 +149,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListSettlementsResponse> ListAsync(ListSettlementsRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementsResponse> ListAsync(ListSettlementsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements", request);
@@ -162,7 +163,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlements", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlements", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -195,7 +196,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -298,7 +299,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetSettlementRequest()
             {
@@ -317,7 +318,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -350,7 +351,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -453,7 +454,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOpenSettlementResponse> GetOpenAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetOpenSettlementResponse> GetOpenAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetOpenSettlementRequest()
             {
@@ -472,7 +473,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-open-settlement", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-open-settlement", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -505,7 +506,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -582,7 +583,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetNextSettlementResponse> GetNextAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetNextSettlementResponse> GetNextAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetNextSettlementRequest()
             {
@@ -601,7 +602,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-next-settlement", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-next-settlement", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -634,7 +635,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -711,7 +712,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request);
@@ -725,7 +726,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-payments", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-payments", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -758,7 +759,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -861,7 +862,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request);
@@ -875,7 +876,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-captures", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-captures", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -908,7 +909,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -1011,7 +1012,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request);
@@ -1025,7 +1026,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-refunds", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-refunds", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1058,7 +1059,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -1161,7 +1162,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null)
+        public async Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/chargebacks", request);
@@ -1175,7 +1176,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-chargebacks", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-chargebacks", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1208,7 +1209,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

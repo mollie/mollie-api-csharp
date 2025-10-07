@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IPayments
@@ -43,7 +44,7 @@ namespace Mollie
         /// guide on <a href="extra-payment-parameters">method-specific parameters</a>.
         /// </remarks>
         /// </summary>
-        Task<CreatePaymentResponse> CreateAsync(string? include = null, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null);
+        Task<CreatePaymentResponse> CreateAsync(string? include = null, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List payments
@@ -54,7 +55,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListPaymentsResponse> ListAsync(ListPaymentsRequest? request = null, RetryConfig? retryConfig = null);
+        Task<ListPaymentsResponse> ListAsync(ListPaymentsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get payment
@@ -63,7 +64,7 @@ namespace Mollie
         /// Retrieve a single payment object by its payment ID.
         /// </remarks>
         /// </summary>
-        Task<GetPaymentResponse> GetAsync(GetPaymentRequest request, RetryConfig? retryConfig = null);
+        Task<GetPaymentResponse> GetAsync(GetPaymentRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Update payment
@@ -74,7 +75,7 @@ namespace Mollie
         /// Updating the payment details will not result in a webhook call.
         /// </remarks>
         /// </summary>
-        Task<UpdatePaymentResponse> UpdateAsync(string paymentId, string? idempotencyKey = null, UpdatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<UpdatePaymentResponse> UpdateAsync(string paymentId, string? idempotencyKey = null, UpdatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Cancel payment
@@ -88,7 +89,7 @@ namespace Mollie
         /// The `isCancelable` property on the <a href="get-payment">Payment object</a> will indicate if the payment can be canceled.
         /// </remarks>
         /// </summary>
-        Task<CancelPaymentResponse> CancelAsync(string paymentId, string? idempotencyKey = null, CancelPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CancelPaymentResponse> CancelAsync(string paymentId, string? idempotencyKey = null, CancelPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Release payment authorization
@@ -104,15 +105,15 @@ namespace Mollie
         /// If there is a successful capture, the payment will transition to `paid`.
         /// </remarks>
         /// </summary>
-        Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(string paymentId, string? idempotencyKey = null, ReleaseAuthorizationRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(string paymentId, string? idempotencyKey = null, ReleaseAuthorizationRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Payments: IPayments
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Payments(SDKConfig config)
@@ -120,7 +121,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreatePaymentResponse> CreateAsync(string? include = null, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null)
+        public async Task<CreatePaymentResponse> CreateAsync(string? include = null, string? idempotencyKey = null, PaymentRequest? paymentRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreatePaymentRequest()
             {
@@ -146,7 +147,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-payment", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-payment", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -179,7 +180,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -308,7 +309,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListPaymentsResponse> ListAsync(ListPaymentsRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<ListPaymentsResponse> ListAsync(ListPaymentsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments", request);
@@ -322,7 +323,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-payments", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-payments", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -355,7 +356,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -458,7 +459,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPaymentResponse> GetAsync(GetPaymentRequest request, RetryConfig? retryConfig = null)
+        public async Task<GetPaymentResponse> GetAsync(GetPaymentRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}", request);
@@ -472,7 +473,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-payment", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-payment", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -505,7 +506,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -608,7 +609,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdatePaymentResponse> UpdateAsync(string paymentId, string? idempotencyKey = null, UpdatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<UpdatePaymentResponse> UpdateAsync(string paymentId, string? idempotencyKey = null, UpdatePaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new UpdatePaymentRequest()
             {
@@ -634,7 +635,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-payment", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-payment", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -667,7 +668,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -770,7 +771,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CancelPaymentResponse> CancelAsync(string paymentId, string? idempotencyKey = null, CancelPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CancelPaymentResponse> CancelAsync(string paymentId, string? idempotencyKey = null, CancelPaymentRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CancelPaymentRequest()
             {
@@ -796,7 +797,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancel-payment", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancel-payment", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -829,7 +830,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -932,7 +933,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(string paymentId, string? idempotencyKey = null, ReleaseAuthorizationRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(string paymentId, string? idempotencyKey = null, ReleaseAuthorizationRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new ReleaseAuthorizationRequest()
             {
@@ -958,7 +959,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "release-authorization", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "release-authorization", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -991,7 +992,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

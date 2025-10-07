@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface ITerminals
@@ -34,7 +35,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null);
+        Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get terminal
@@ -43,15 +44,15 @@ namespace Mollie
         /// Retrieve a single terminal by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Terminals: ITerminals
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Terminals(SDKConfig config)
@@ -59,7 +60,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null)
+        public async Task<ListTerminalsResponse> ListAsync(ListTerminalsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/terminals", request);
@@ -73,7 +74,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-terminals", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-terminals", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -106,7 +107,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -209,7 +210,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetTerminalResponse> GetAsync(string terminalId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetTerminalRequest()
             {
@@ -229,7 +230,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-terminal", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-terminal", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -262,7 +263,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

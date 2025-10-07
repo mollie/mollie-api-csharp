@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IClientLinks
@@ -84,15 +85,15 @@ namespace Mollie
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
         /// </remarks>
         /// </summary>
-        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null);
+        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class ClientLinks: IClientLinks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public ClientLinks(SDKConfig config)
@@ -100,7 +101,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null)
+        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateClientLinkRequest()
             {
@@ -126,7 +127,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-client-link", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-client-link", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -159,7 +160,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

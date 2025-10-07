@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IOnboarding
@@ -32,7 +33,7 @@ namespace Mollie
         /// Retrieve the onboarding status of the currently authenticated organization.
         /// </remarks>
         /// </summary>
-        Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Submit onboarding data
@@ -46,15 +47,15 @@ namespace Mollie
         /// Information that the merchant has entered in their dashboard will not be overwritten.
         /// </remarks>
         /// </summary>
-        Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Onboarding: IOnboarding
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Onboarding(SDKConfig config)
@@ -62,7 +63,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetOnboardingStatusRequest()
             {
@@ -81,7 +82,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-onboarding-status", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-onboarding-status", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -114,7 +115,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -191,7 +192,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new SubmitOnboardingDataRequest()
             {
@@ -217,7 +218,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "submit-onboarding-data", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "submit-onboarding-data", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -250,7 +251,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

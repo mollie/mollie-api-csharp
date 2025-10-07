@@ -13,6 +13,7 @@ namespace Mollie.Hooks
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Threading;
     using Mollie.Utils;
 
     public class HookContext
@@ -22,14 +23,16 @@ namespace Mollie.Hooks
         public string OperationID { get; set; }
         public List<string>? Oauth2Scopes { get; set; }
         public Func<object>? SecuritySource { get; set; }
+        public CancellationToken? CancellationToken { get; set; }
 
-        public HookContext(SDKConfig config, string baseURL, string operationID, List<string>? oauth2Scopes, Func<object>? securitySource)
+        public HookContext(SDKConfig config, string baseURL, string operationID, List<string>? oauth2Scopes, Func<object>? securitySource, CancellationToken? cancellationToken = null)
         {
             SDKConfiguration = config;
             BaseURL = baseURL;
             OperationID = operationID;
             Oauth2Scopes = oauth2Scopes;
             SecuritySource = securitySource;
+            CancellationToken = cancellationToken;
         }
 
         public HookContext(HookContext hookCtx)
@@ -39,6 +42,7 @@ namespace Mollie.Hooks
             OperationID = hookCtx.OperationID;
             Oauth2Scopes = hookCtx.Oauth2Scopes;
             SecuritySource = hookCtx.SecuritySource;
+            CancellationToken = hookCtx.CancellationToken;
         }
     }
 

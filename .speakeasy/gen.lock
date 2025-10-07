@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 0861d41c8e1ca302fd725a04cdeef785
+  docChecksum: 76f737bf3d711e5294198ae05444d97c
   docVersion: 1.0.0
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 0.6.0
-  configChecksum: 1365dfd6b5bd19dd4a533dab1e2407c7
+  speakeasyVersion: 1.635.1
+  generationVersion: 2.722.2
+  releaseVersion: 0.7.0
+  configChecksum: 71d83a61d2ec2ebee8b6c0daed8bc6fe
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.12.4
+    core: 3.13.0
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.8
@@ -28,7 +28,7 @@ features:
     responseFormat: 0.0.4
     retries: 0.0.1
     sdkHooks: 0.2.0
-    unions: 1.0.0
+    unions: 1.1.0
 generatedFiles:
   - .gitattributes
   - Mollie.sln
@@ -41,8 +41,14 @@ generatedFiles:
   - docs/Models/Components/BalanceReportGrouping.md
   - docs/Models/Components/BalanceStatus.md
   - docs/Models/Components/BalanceTransactionType.md
+  - docs/Models/Components/BalanceTransferCategory.md
+  - docs/Models/Components/BalanceTransferCategoryResponse.md
   - docs/Models/Components/BalanceTransferDestinationType.md
   - docs/Models/Components/BalanceTransferFrequency.md
+  - docs/Models/Components/BalanceTransferPartyType.md
+  - docs/Models/Components/BalanceTransferPartyTypeResponse.md
+  - docs/Models/Components/BalanceTransferStatus.md
+  - docs/Models/Components/BalanceTransferStatusReasonResponse.md
   - docs/Models/Components/CanceledOutgoingTransfer.md
   - docs/Models/Components/CapabilityRequirementStatus.md
   - docs/Models/Components/CapabilityStatus.md
@@ -89,6 +95,11 @@ generatedFiles:
   - docs/Models/Components/EntityBalanceReportLinks.md
   - docs/Models/Components/EntityBalanceTransaction.md
   - docs/Models/Components/EntityBalanceTransactionApplicationFee.md
+  - docs/Models/Components/EntityBalanceTransfer.md
+  - docs/Models/Components/EntityBalanceTransferParty.md
+  - docs/Models/Components/EntityBalanceTransferPartyResponse.md
+  - docs/Models/Components/EntityBalanceTransferResponse.md
+  - docs/Models/Components/EntityBalanceTransferResponseStatusReason.md
   - docs/Models/Components/EntityCapability.md
   - docs/Models/Components/EntityCapabilityRequirement.md
   - docs/Models/Components/EntityCapabilityRequirementLinks.md
@@ -335,6 +346,8 @@ generatedFiles:
   - docs/Models/Requests/CreateCaptureResponse.md
   - docs/Models/Requests/CreateClientLinkRequest.md
   - docs/Models/Requests/CreateClientLinkResponse.md
+  - docs/Models/Requests/CreateConnectBalanceTransferRequest.md
+  - docs/Models/Requests/CreateConnectBalanceTransferResponse.md
   - docs/Models/Requests/CreateCustomerPaymentRequest.md
   - docs/Models/Requests/CreateCustomerPaymentResponse.md
   - docs/Models/Requests/CreateCustomerRequest.md
@@ -385,6 +398,8 @@ generatedFiles:
   - docs/Models/Requests/GetClientRequest.md
   - docs/Models/Requests/GetClientResponse.md
   - docs/Models/Requests/GetClientResponseBody.md
+  - docs/Models/Requests/GetConnectBalanceTransferRequest.md
+  - docs/Models/Requests/GetConnectBalanceTransferResponse.md
   - docs/Models/Requests/GetCurrentOrganizationRequest.md
   - docs/Models/Requests/GetCurrentOrganizationResponse.md
   - docs/Models/Requests/GetCurrentProfileRequest.md
@@ -486,6 +501,10 @@ generatedFiles:
   - docs/Models/Requests/ListClientsRequest.md
   - docs/Models/Requests/ListClientsResponse.md
   - docs/Models/Requests/ListClientsResponseBody.md
+  - docs/Models/Requests/ListConnectBalanceTransfersEmbedded.md
+  - docs/Models/Requests/ListConnectBalanceTransfersRequest.md
+  - docs/Models/Requests/ListConnectBalanceTransfersResponse.md
+  - docs/Models/Requests/ListConnectBalanceTransfersResponseBody.md
   - docs/Models/Requests/ListCustomerPaymentsEmbedded.md
   - docs/Models/Requests/ListCustomerPaymentsRequest.md
   - docs/Models/Requests/ListCustomerPaymentsResponse.md
@@ -617,6 +636,7 @@ generatedFiles:
   - docs/Models/Requests/UserAgentToken.md
   - docs/Models/Requests/VatRegulation.md
   - docs/sdks/balances/README.md
+  - docs/sdks/balancetransfers/README.md
   - docs/sdks/capabilities/README.md
   - docs/sdks/captures/README.md
   - docs/sdks/chargebacks/README.md
@@ -643,6 +663,7 @@ generatedFiles:
   - docs/sdks/webhookevents/README.md
   - docs/sdks/webhooks/README.md
   - global.json
+  - src/Mollie/BalanceTransfers.cs
   - src/Mollie/Balances.cs
   - src/Mollie/Capabilities.cs
   - src/Mollie/Captures.cs
@@ -664,8 +685,14 @@ generatedFiles:
   - src/Mollie/Models/Components/BalanceReportGrouping.cs
   - src/Mollie/Models/Components/BalanceStatus.cs
   - src/Mollie/Models/Components/BalanceTransactionType.cs
+  - src/Mollie/Models/Components/BalanceTransferCategory.cs
+  - src/Mollie/Models/Components/BalanceTransferCategoryResponse.cs
   - src/Mollie/Models/Components/BalanceTransferDestinationType.cs
   - src/Mollie/Models/Components/BalanceTransferFrequency.cs
+  - src/Mollie/Models/Components/BalanceTransferPartyType.cs
+  - src/Mollie/Models/Components/BalanceTransferPartyTypeResponse.cs
+  - src/Mollie/Models/Components/BalanceTransferStatus.cs
+  - src/Mollie/Models/Components/BalanceTransferStatusReasonResponse.cs
   - src/Mollie/Models/Components/CanceledOutgoingTransfer.cs
   - src/Mollie/Models/Components/CapabilityRequirementStatus.cs
   - src/Mollie/Models/Components/CapabilityStatus.cs
@@ -712,6 +739,11 @@ generatedFiles:
   - src/Mollie/Models/Components/EntityBalanceReportLinks.cs
   - src/Mollie/Models/Components/EntityBalanceTransaction.cs
   - src/Mollie/Models/Components/EntityBalanceTransactionApplicationFee.cs
+  - src/Mollie/Models/Components/EntityBalanceTransfer.cs
+  - src/Mollie/Models/Components/EntityBalanceTransferParty.cs
+  - src/Mollie/Models/Components/EntityBalanceTransferPartyResponse.cs
+  - src/Mollie/Models/Components/EntityBalanceTransferResponse.cs
+  - src/Mollie/Models/Components/EntityBalanceTransferResponseStatusReason.cs
   - src/Mollie/Models/Components/EntityCapability.cs
   - src/Mollie/Models/Components/EntityCapabilityRequirement.cs
   - src/Mollie/Models/Components/EntityCapabilityRequirementLinks.cs
@@ -961,6 +993,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateCaptureResponse.cs
   - src/Mollie/Models/Requests/CreateClientLinkRequest.cs
   - src/Mollie/Models/Requests/CreateClientLinkResponse.cs
+  - src/Mollie/Models/Requests/CreateConnectBalanceTransferRequest.cs
+  - src/Mollie/Models/Requests/CreateConnectBalanceTransferResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentRequest.cs
   - src/Mollie/Models/Requests/CreateCustomerPaymentResponse.cs
   - src/Mollie/Models/Requests/CreateCustomerRequest.cs
@@ -1011,6 +1045,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/GetClientRequest.cs
   - src/Mollie/Models/Requests/GetClientResponse.cs
   - src/Mollie/Models/Requests/GetClientResponseBody.cs
+  - src/Mollie/Models/Requests/GetConnectBalanceTransferRequest.cs
+  - src/Mollie/Models/Requests/GetConnectBalanceTransferResponse.cs
   - src/Mollie/Models/Requests/GetCurrentOrganizationRequest.cs
   - src/Mollie/Models/Requests/GetCurrentOrganizationResponse.cs
   - src/Mollie/Models/Requests/GetCurrentProfileRequest.cs
@@ -1112,6 +1148,10 @@ generatedFiles:
   - src/Mollie/Models/Requests/ListClientsRequest.cs
   - src/Mollie/Models/Requests/ListClientsResponse.cs
   - src/Mollie/Models/Requests/ListClientsResponseBody.cs
+  - src/Mollie/Models/Requests/ListConnectBalanceTransfersEmbedded.cs
+  - src/Mollie/Models/Requests/ListConnectBalanceTransfersRequest.cs
+  - src/Mollie/Models/Requests/ListConnectBalanceTransfersResponse.cs
+  - src/Mollie/Models/Requests/ListConnectBalanceTransfersResponseBody.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsEmbedded.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsRequest.cs
   - src/Mollie/Models/Requests/ListCustomerPaymentsResponse.cs
@@ -3709,7 +3749,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "webhookSecret": "VpQ3WukU6uSCGQ8TPTD3WPDpac3GyNEj", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/create-webhook", "type": "text/html"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "webhookSecret": "VpQ3WukU6uSCGQ8TPTD3WPDpac3GyNEj", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/create-webhook", "type": "text/html"}}}
     speakeasy-default-create-webhook:
       parameters:
         header:
@@ -3718,7 +3758,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "201":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-01-01T12:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "webhookSecret": "secret", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-01-01T12:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "webhookSecret": "secret", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-webhooks:
@@ -3734,7 +3774,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 2, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_yjtBMWDCGw5YFSPQ3HPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #2", "eventTypes": ["payment-link.paid", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}, {"resource": "webhook", "id": "hook_qHknfTxaDx6s8JNhuGPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:08:48+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "blocked", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_yjtBMWDCGw5YFSPQ3HPzH&limit=2", "type": "application/hal+json"}, "previous": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_5foxphpBru4xNPCDJJPzH&limit=2", "type": "application/hal+json"}, "next": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_fTqARmWsfs9oXvKbZEPzH&limit=2", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/list-webhook", "type": "text/html"}}}
+          application/hal+json: {"count": 2, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_yjtBMWDCGw5YFSPQ3HPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #2", "eventTypes": ["payment-link.paid", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}, {"resource": "webhook", "id": "hook_qHknfTxaDx6s8JNhuGPzH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:08:48+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "blocked", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_yjtBMWDCGw5YFSPQ3HPzH&limit=2", "type": "application/hal+json"}, "previous": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_5foxphpBru4xNPCDJJPzH&limit=2", "type": "application/hal+json"}, "next": {"href": "https://api.mollie.localhost/v2/webhooks?from=hook_fTqARmWsfs9oXvKbZEPzH&limit=2", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/list-webhook", "type": "text/html"}}}
     speakeasy-default-list-webhooks:
       parameters:
         query:
@@ -3747,7 +3787,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["balance-transaction.created", "sales-invoice.issued"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"webhooks": [{"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["balance-transaction.created", "sales-invoice.issued"], "status": "enabled", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-webhook:
@@ -3761,7 +3801,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/create-webhook", "type": "text/html"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "enabled", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/create-webhook", "type": "text/html"}}}
     speakeasy-default-update-webhook:
       parameters:
         path:
@@ -3772,7 +3812,7 @@ examples:
         application/json: {"name": "Webhook #1", "url": "https://mollie.com/", "eventTypes": "payment-link.paid", "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.canceled", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.canceled", "sales-invoice.created"], "status": "enabled", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -3788,7 +3828,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid", "sales-invoice.paid"], "status": "enabled", "mode": "test", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid", "sales-invoice.paid"], "status": "enabled", "mode": "test", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
     get-webhook-200-1:
       parameters:
         path:
@@ -3799,7 +3839,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "deleted", "mode": "test", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_B2EyhTH5N4KWUnoYPcgiH", "url": "https://mollie.com", "profileId": "pfl_8XcSdLtrNK", "createdAt": "2024-12-06T10:09:56+00:00", "name": "Webhook #1", "eventTypes": ["payment-link.paid"], "status": "deleted", "mode": "test", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-webhook", "type": "text/html"}}}
     speakeasy-default-get-webhook:
       parameters:
         path:
@@ -3810,7 +3850,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.issued", "balance-transaction.created"], "status": "enabled", "mode": "live", "_links": {"documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "webhook", "id": "hook_tNP6fpF9fLJpFWziRcgiH", "url": "https://example.com/webhook-endpoint", "profileId": "pfl_YyoaNFjtHc", "createdAt": "2023-03-15T10:00:00Z", "name": "Profile Updates Webhook", "eventTypes": ["sales-invoice.issued", "balance-transaction.created"], "status": "enabled", "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
@@ -4512,4 +4552,82 @@ examples:
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  create-connect-balance-transfer:
+    create-balance-transfer-200-1:
+      parameters:
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      requestBody:
+        application/json: {"id": "cbtr_j8NvRAM2WNZtsykpLEX8J", "amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "destination": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "description": "Invoice fee", "category": "invoice_collection", "testmode": false}
+      responses:
+        "201":
+          application/hal+json: {"resource": "connect-balance-transfer", "id": "cbtr_nBprRarXeqXi98AXSqCBJ", "amount": {"currency": "EUR", "value": "12.34"}, "source": {"type": "organization", "id": "org_1", "description": "description for source"}, "destination": {"type": "organization", "id": "org_2", "description": "description for destination"}, "description": "description for initiating party", "status": "created", "statusReason": {"code": "request_created", "message": "Balance transfer request created."}, "category": "invoice_collection", "createdAt": "2025-05-01T10:00:00Z", "mode": "live"}
+    create-balance-transfer-422-1:
+      parameters:
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      requestBody:
+        application/json: {"id": "cbtr_j8NvRAM2WNZtsykpLEX8J", "amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "destination": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "description": "Invoice fee", "category": "invoice_collection", "testmode": false}
+      responses:
+        "422":
+          application/hal+json: {"status": 422, "title": "Unprocessable Entity", "detail": "The amount contains an invalid value", "field": "amount.value", "_links": {"documentation": {"href": "https://docs.mollie.com/reference/create-balance-transfer", "type": "text/html"}}}
+  list-connect-balance-transfers:
+    list-balance-transfer-200-1:
+      parameters:
+        query:
+          limit: 50
+          sort: "desc"
+          testmode: false
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 2, "_embedded": {"connect_balance_transfers": [{"resource": "connect-balance-transfer", "id": "cbtr_bSAG5zQUrqbJGSv3ZSU9J", "amount": {"currency": "EUR", "value": "200.00"}, "source": {"type": "organization", "id": "org_1", "description": "description for source"}, "destination": {"type": "organization", "id": "org_42", "description": "description for destination"}, "description": "description for initiating party", "status": "created", "statusReason": {"code": "request_created", "message": "Balance transfer request created."}, "createdAt": "2025-05-01T07:00:00Z", "mode": "live"}, {"resource": "connect-balance-transfer", "id": "cbtr_aGa49xYozWV8nhUzTSU9J", "amount": {"currency": "EUR", "value": "100.00"}, "source": {"type": "organization", "id": "org_42", "description": "description for source"}, "destination": {"type": "organization", "id": "org_2", "description": "description for destination"}, "description": "description for initiating party", "status": "created", "statusReason": {"code": "request_created", "message": "Balance transfer request created."}, "createdAt": "2025-05-01T06:00:00Z", "mode": "live"}]}, "_links": {"self": {"href": "https://api.mollie.com/v2/connect/balance-transfers?limit=50", "type": "application/hal+json"}, "previous": null, "next": null, "documentation": {"href": "https://docs.mollie.com/reference/list-balance-transfers", "type": "text/html"}}}
+    speakeasy-default-list-connect-balance-transfers:
+      parameters:
+        query:
+          limit: 50
+          sort: "desc"
+          testmode: false
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 5, "_embedded": {"connect_balance_transfers": [{"resource": "connect-balance-transfer", "id": "cbtr_j8NvRAM2WNZtsykpLEX8J", "amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "destination": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "description": "Invoice fee", "status": "created", "statusReason": {"code": "insufficient_funds", "message": "Insufficient funds in the source balance."}, "category": "invoice_collection", "createdAt": "2024-03-20T09:13:37.0Z", "executedAt": "2024-03-20T09:28:37.0Z", "mode": "live"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "400":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  get-connect-balance-transfer:
+    get-balance-transfer-200-1:
+      parameters:
+        path:
+          id: "<id>"
+        query:
+          testmode: false
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "connect-balance-transfer", "id": "cbtr_nBprRarXeqXi98AXSqCBJ", "amount": {"currency": "EUR", "value": "100.00"}, "source": {"type": "organization", "id": "org_1", "description": "description for source"}, "destination": {"type": "organization", "id": "org_2", "description": "description for destination"}, "description": "description for initiating party", "status": "succeeded", "statusReason": {"code": "success", "message": "Balance transfer completed successfully."}, "createdAt": "2025-05-01T10:00:00Z", "executedAt": "2025-05-01T10:05:00Z", "mode": "live"}
+    speakeasy-default-get-connect-balance-transfer:
+      parameters:
+        path:
+          id: "<id>"
+        query:
+          testmode: false
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "connect-balance-transfer", "id": "cbtr_j8NvRAM2WNZtsykpLEX8J", "amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "destination": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "description": "Invoice fee", "status": "created", "statusReason": {"code": "insufficient_funds", "message": "Insufficient funds in the source balance."}, "category": "invoice_collection", "createdAt": "2024-03-20T09:13:37.0Z", "executedAt": "2024-03-20T09:28:37.0Z", "mode": "live"}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Csharp SDK Changes Detected:
+  * `Client.Balance-Transfers.Create()`: **Added**
+  * `Client.Balance-Transfers.List()`: **Added**
+  * `Client.Balance-Transfers.Get()`: **Added**
+  * `Client.Webhooks.Create()`:  `response.Links.Self` **Added**
+  * `Client.Webhooks.List()`:  `response.Embedded.Webhooks.[].Links.Self` **Added**
+  * `Client.Webhooks.Update()`:  `response.Links.Self` **Added**
+  * `Client.Webhooks.Get()`:  `response.Links.Self` **Added**

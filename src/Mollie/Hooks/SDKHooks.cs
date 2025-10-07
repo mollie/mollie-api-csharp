@@ -14,6 +14,7 @@ namespace Mollie.Hooks
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Threading;
 
     public sealed class FailEarlyException : Exception {}
 
@@ -70,12 +71,18 @@ namespace Mollie.Hooks
         
         public async Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
+            hookCtx.CancellationToken?.ThrowIfCancellationRequested();
             foreach (var hook in this.beforeRequestHooks)
             {
                 try
                 {
                     request = await hook.BeforeRequestAsync(hookCtx, request);
-                } catch (Exception ex)
+                }
+                catch (OperationCanceledException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
                 {
                     throw new Exception("An error occurred while calling BeforeRequestAsync hook", ex);
                 }
@@ -85,11 +92,16 @@ namespace Mollie.Hooks
 
         public async Task<HttpResponseMessage> AfterSuccessAsync(AfterSuccessContext hookCtx, HttpResponseMessage response)
         {
+            hookCtx.CancellationToken?.ThrowIfCancellationRequested();
             foreach (var hook in this.afterSuccessHooks)
             {
                 try
                 {
                     response = await hook.AfterSuccessAsync(hookCtx, response);
+                }
+                catch (OperationCanceledException)
+                {
+                    throw;
                 }
                 catch (Exception ex)
                 {
@@ -101,17 +113,18 @@ namespace Mollie.Hooks
 
         public async Task<HttpResponseMessage?> AfterErrorAsync(AfterErrorContext hookCtx, HttpResponseMessage? response, Exception? error)
         {
-
             (HttpResponseMessage?, Exception?) responseAndError = (response, error);
             foreach (var hook in this.afterErrorHooks)
             {
                 try
                 {
                     responseAndError = await hook.AfterErrorAsync(hookCtx, responseAndError.Item1, responseAndError.Item2);
-                } catch (FailEarlyException)
+                }
+                catch (Exception ex) when (ex is OperationCanceledException || ex is FailEarlyException)
                 {
                     throw;
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     throw new Exception("An error occurred while calling AfterErrorAsync hook", ex);
                 }

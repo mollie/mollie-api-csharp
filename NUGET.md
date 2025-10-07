@@ -240,6 +240,10 @@ catch (BaseException ex)  // all SDK exceptions inherit from BaseException
         Exception cause = ex.InnerException;
     }
 }
+catch (OperationCanceledException ex)
+{
+    // CancellationToken was cancelled
+}
 catch (System.Net.Http.HttpRequestException ex)
 {
     // Check ex.InnerException for Network connectivity errors

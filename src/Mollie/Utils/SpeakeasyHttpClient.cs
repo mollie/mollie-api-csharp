@@ -13,6 +13,7 @@ namespace Mollie.Utils
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Threading;
 
     public interface ISpeakeasyHttpClient
     {
@@ -23,8 +24,9 @@ namespace Mollie.Utils
         /// When overriding this method, use HttpCompletionOption.ResponseHeadersRead to support streaming response bodies.
         /// </remarks>
         /// <param name="request">The HTTP request message to send.</param>
+        /// <param name="cancellationToken">Optional cancellation token to cancel the request.</param>
         /// <returns>The value of the TResult parameter contains the HTTP response message.</returns>
-        Task<HttpResponseMessage> SendAsync(HttpRequestMessage request);
+        Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Clones an HTTP request asynchronously.
@@ -47,9 +49,10 @@ namespace Mollie.Utils
             httpClient = new System.Net.Http.HttpClient();
         }
 
-        public virtual async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+        public virtual async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken? cancellationToken = null)
         {
-            return await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            var token = cancellationToken ?? CancellationToken.None;
+            return await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
         }
 
         public virtual async Task<HttpRequestMessage> CloneAsync(HttpRequestMessage request)

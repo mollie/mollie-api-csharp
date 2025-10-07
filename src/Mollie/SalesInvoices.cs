@@ -20,6 +20,7 @@ namespace Mollie
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface ISalesInvoices
@@ -36,7 +37,7 @@ namespace Mollie
         /// With the Sales Invoice API you can generate sales invoices to send to your customers.
         /// </remarks>
         /// </summary>
-        Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null);
+        Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List sales invoices
@@ -51,7 +52,7 @@ namespace Mollie
         /// The results are paginated.
         /// </remarks>
         /// </summary>
-        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get sales invoice
@@ -64,7 +65,7 @@ namespace Mollie
         /// Retrieve a single sales invoice by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null);
+        Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Update sales invoice
@@ -79,7 +80,7 @@ namespace Mollie
         /// respectively).
         /// </remarks>
         /// </summary>
-        Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null);
+        Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Delete sales invoice
@@ -93,15 +94,15 @@ namespace Mollie
         /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.
         /// </remarks>
         /// </summary>
-        Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null);
+        Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class SalesInvoices: ISalesInvoices
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.0";
-        private const string _sdkGenVersion = "2.716.16";
+        private const string _sdkVersion = "0.7.0";
+        private const string _sdkGenVersion = "2.722.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)
@@ -109,7 +110,7 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null)
+        public async Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateSalesInvoiceRequest()
             {
@@ -135,7 +136,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -168,7 +169,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -271,7 +272,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<ListSalesInvoicesResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new ListSalesInvoicesRequest()
             {
@@ -292,7 +293,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-sales-invoices", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-sales-invoices", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -325,7 +326,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -428,7 +429,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null)
+        public async Task<GetSalesInvoiceResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetSalesInvoiceRequest()
             {
@@ -448,7 +449,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -481,7 +482,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -584,7 +585,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null)
+        public async Task<UpdateSalesInvoiceResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateValuesSalesInvoice? updateValuesSalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new UpdateSalesInvoiceRequest()
             {
@@ -610,7 +611,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -643,7 +644,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
@@ -746,7 +747,7 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null)
+        public async Task<DeleteSalesInvoiceResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteValuesSalesInvoice? deleteValuesSalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new DeleteSalesInvoiceRequest()
             {
@@ -772,7 +773,7 @@ namespace Mollie
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "delete-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "delete-sales-invoice", new List<string> {  }, SDKConfiguration.SecuritySource, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -805,7 +806,7 @@ namespace Mollie
             Func<Task<HttpResponseMessage>> retrySend = async () =>
             {
                 var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
             };
             var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 

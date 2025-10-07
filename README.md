@@ -180,6 +180,12 @@ if (payment1.PaymentResponse?.Id == payment2.PaymentResponse?.Id) {
 * [GetReport](docs/sdks/balances/README.md#getreport) - Get balance report
 * [ListTransactions](docs/sdks/balances/README.md#listtransactions) - List balance transactions
 
+### [BalanceTransfers](docs/sdks/balancetransfers/README.md)
+
+* [Create](docs/sdks/balancetransfers/README.md#create) - Create a Connect balance transfer
+* [List](docs/sdks/balancetransfers/README.md#list) - List all Connect balance transfers
+* [Get](docs/sdks/balancetransfers/README.md#get) - Get a Connect balance transfer
+
 ### [Capabilities](docs/sdks/capabilities/README.md)
 
 * [List](docs/sdks/capabilities/README.md#list) - List capabilities
@@ -484,6 +490,10 @@ catch (BaseException ex)  // all SDK exceptions inherit from BaseException
     {
         Exception cause = ex.InnerException;
     }
+}
+catch (OperationCanceledException ex)
+{
+    // CancellationToken was cancelled
 }
 catch (System.Net.Http.HttpRequestException ex)
 {
