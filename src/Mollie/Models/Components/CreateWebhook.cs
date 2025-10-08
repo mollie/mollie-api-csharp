@@ -41,8 +41,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The identifier uniquely referring to the profile that created the subscription.
         /// </summary>
-        [JsonProperty("profileId")]
-        public string ProfileId { get; set; } = default!;
+        [JsonProperty("profileId", NullValueHandling = NullValueHandling.Include)]
+        public string? ProfileId { get; set; }
 
         /// <summary>
         /// The subscription&apos;s date time of creation.

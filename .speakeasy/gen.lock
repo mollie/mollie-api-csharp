@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: d4c86af0b942215e7a70f30230ce4fd7
+  docChecksum: 248ec6075df6729e0719102b6630ab61
   docVersion: 1.0.0
   speakeasyVersion: 1.636.0
   generationVersion: 2.723.2
-  releaseVersion: 0.7.1
-  configChecksum: 3d39efa097b5a494e53a6d09a8bc4861
+  releaseVersion: 0.7.2
+  configChecksum: f8fd93611ac03cccbd8c419baa7ac1bf
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -4621,3 +4621,6 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Csharp SDK Changes Detected:
+  * `Client.Webhooks.Create()`:  `response.profileId` **Changed** **Breaking** :warning:
