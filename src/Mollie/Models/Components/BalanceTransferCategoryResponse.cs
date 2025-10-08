@@ -29,7 +29,7 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransferCategoryResponse ServicePenalty = new BalanceTransferCategoryResponse("service_penalty");
         public static readonly BalanceTransferCategoryResponse DiscountCompensation = new BalanceTransferCategoryResponse("discount_compensation");
         public static readonly BalanceTransferCategoryResponse ManualCorrection = new BalanceTransferCategoryResponse("manual_correction");
-        public static readonly BalanceTransferCategoryResponse Fee = new BalanceTransferCategoryResponse("fee");
+        public static readonly BalanceTransferCategoryResponse OtherFee = new BalanceTransferCategoryResponse("other_fee");
 
         private static readonly Dictionary <string, BalanceTransferCategoryResponse> _knownValues =
             new Dictionary <string, BalanceTransferCategoryResponse> ()
@@ -41,7 +41,7 @@ namespace Mollie.Models.Components
                 ["service_penalty"] = ServicePenalty,
                 ["discount_compensation"] = DiscountCompensation,
                 ["manual_correction"] = ManualCorrection,
-                ["fee"] = Fee
+                ["other_fee"] = OtherFee
             };
 
         private static readonly ConcurrentDictionary<string, BalanceTransferCategoryResponse> _values =

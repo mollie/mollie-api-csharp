@@ -32,8 +32,8 @@ namespace Mollie.Models.Components
         DiscountCompensation,
         [JsonProperty("manual_correction")]
         ManualCorrection,
-        [JsonProperty("fee")]
-        Fee,
+        [JsonProperty("other_fee")]
+        OtherFee,
     }
 
     public static class BalanceTransferCategoryExtension
