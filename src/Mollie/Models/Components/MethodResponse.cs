@@ -53,6 +53,7 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Klarnapaynow = new MethodResponse("klarnapaynow");
         public static readonly MethodResponse Klarnasliceit = new MethodResponse("klarnasliceit");
         public static readonly MethodResponse Mbway = new MethodResponse("mbway");
+        public static readonly MethodResponse Mobilepay = new MethodResponse("mobilepay");
         public static readonly MethodResponse Multibanco = new MethodResponse("multibanco");
         public static readonly MethodResponse Mybank = new MethodResponse("mybank");
         public static readonly MethodResponse Paybybank = new MethodResponse("paybybank");
@@ -66,6 +67,7 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Swish = new MethodResponse("swish");
         public static readonly MethodResponse Trustly = new MethodResponse("trustly");
         public static readonly MethodResponse Twint = new MethodResponse("twint");
+        public static readonly MethodResponse Vipps = new MethodResponse("vipps");
         public static readonly MethodResponse Voucher = new MethodResponse("voucher");
 
         private static readonly Dictionary <string, MethodResponse> _knownValues =
@@ -93,6 +95,7 @@ namespace Mollie.Models.Components
                 ["klarnapaynow"] = Klarnapaynow,
                 ["klarnasliceit"] = Klarnasliceit,
                 ["mbway"] = Mbway,
+                ["mobilepay"] = Mobilepay,
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
@@ -106,6 +109,7 @@ namespace Mollie.Models.Components
                 ["swish"] = Swish,
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
+                ["vipps"] = Vipps,
                 ["voucher"] = Voucher
             };
 

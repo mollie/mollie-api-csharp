@@ -115,11 +115,10 @@ var res = await sdk.Payments.CreateAsync(
                 },
             },
         },
-        BillingAddress = new PaymentAddress() {
+        BillingAddress = new PaymentRequestBillingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
             StreetAndNumber = "Keizersgracht 126",
             StreetAdditional = "Apt. 1",
             PostalCode = "1234AB",
@@ -354,11 +353,10 @@ var res = await sdk.Payments.UpdateAsync(
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
         Issuer = "ideal_INGBNL2A",
-        BillingAddress = new PaymentAddress() {
+        BillingAddress = new BillingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
             StreetAndNumber = "Keizersgracht 126",
             StreetAdditional = "Apt. 1",
             PostalCode = "1234AB",

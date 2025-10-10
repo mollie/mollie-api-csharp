@@ -355,11 +355,10 @@ var res = await sdk.Customers.CreatePaymentAsync(
                 },
             },
         },
-        BillingAddress = new PaymentAddress() {
+        BillingAddress = new PaymentRequestBillingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
-            OrganizationName = "Mollie B.V.",
             StreetAndNumber = "Keizersgracht 126",
             StreetAdditional = "Apt. 1",
             PostalCode = "1234AB",

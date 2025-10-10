@@ -146,8 +146,20 @@ namespace Mollie.Models.Components
         [JsonProperty("lines")]
         public List<PaymentResponseLine>? Lines { get; set; } = null;
 
+        /// <summary>
+        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
+        /// 
+        /// <remarks>
+        /// conversion.<br/>
+        /// <br/>
+        /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
+        /// `country`.<br/>
+        /// <br/>
+        /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("billingAddress")]
-        public PaymentAddress? BillingAddress { get; set; }
+        public PaymentResponseBillingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
         public PaymentAddress? ShippingAddress { get; set; }

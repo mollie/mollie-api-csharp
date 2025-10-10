@@ -48,6 +48,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentMethod Klarnasliceit = new PaymentMethod("klarnasliceit");
         public static readonly PaymentMethod Klarna = new PaymentMethod("klarna");
         public static readonly PaymentMethod Mbway = new PaymentMethod("mbway");
+        public static readonly PaymentMethod Mobilepay = new PaymentMethod("mobilepay");
         public static readonly PaymentMethod Multibanco = new PaymentMethod("multibanco");
         public static readonly PaymentMethod Mybank = new PaymentMethod("mybank");
         public static readonly PaymentMethod Paybybank = new PaymentMethod("paybybank");
@@ -63,6 +64,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentMethod Swish = new PaymentMethod("swish");
         public static readonly PaymentMethod Trustly = new PaymentMethod("trustly");
         public static readonly PaymentMethod Twint = new PaymentMethod("twint");
+        public static readonly PaymentMethod Vipps = new PaymentMethod("vipps");
         public static readonly PaymentMethod Voucher = new PaymentMethod("voucher");
 
         private static readonly Dictionary <string, PaymentMethod> _knownValues =
@@ -94,6 +96,7 @@ namespace Mollie.Models.Components
                 ["klarnasliceit"] = Klarnasliceit,
                 ["klarna"] = Klarna,
                 ["mbway"] = Mbway,
+                ["mobilepay"] = Mobilepay,
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
@@ -109,6 +112,7 @@ namespace Mollie.Models.Components
                 ["swish"] = Swish,
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
+                ["vipps"] = Vipps,
                 ["voucher"] = Voucher
             };
 

@@ -71,6 +71,8 @@ namespace Mollie.Models.Components
         Klarnasliceit,
         [JsonProperty("mbway")]
         Mbway,
+        [JsonProperty("mobilepay")]
+        Mobilepay,
         [JsonProperty("multibanco")]
         Multibanco,
         [JsonProperty("mybank")]
@@ -97,6 +99,8 @@ namespace Mollie.Models.Components
         Trustly,
         [JsonProperty("twint")]
         Twint,
+        [JsonProperty("vipps")]
+        Vipps,
         [JsonProperty("voucher")]
         Voucher,
     }
