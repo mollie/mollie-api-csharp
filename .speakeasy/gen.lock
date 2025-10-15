@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 36559be2b0c6b4a4ee8083815a92eea7
+  docChecksum: 2715b1c7fd73a3fa5235df5b79d6393c
   docVersion: 1.0.0
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.7.3
-  configChecksum: 6b59e2e7518b2ef0c85bdd445d54676b
+  releaseVersion: 0.7.4
+  configChecksum: b467c6beaff2d9993383980ac2c3bf63
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -3618,7 +3618,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 1, "_embedded": {"capabilities": [{"resource": "capability", "status": "pending", "statusReason": "onboarding-information-needed", "requirements": [{"id": "legal-representatives", "status": "requested", "dueDate": null, "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}, {"id": "bank-account", "status": "past-due", "dueDate": "2024-05-14T01:29:09.283Z", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}]}, "_links": {"documentation": {"href": "https://docs.mollie.com/reference/list-capabilities", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"capabilities": [{"resource": "capability", "name": "payments", "status": "pending", "statusReason": "onboarding-information-needed", "requirements": [{"id": "legal-representatives", "status": "requested", "dueDate": null, "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}, {"id": "bank-account", "status": "past-due", "dueDate": "2024-05-14T01:29:09.283Z", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}]}, "_links": {"documentation": {"href": "https://docs.mollie.com/reference/list-capabilities", "type": "text/html"}}}
   list-clients:
     list-clients-200-1:
       parameters:
@@ -4627,4 +4627,3 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Settlements.List-Payments()`:  `response.Embedded.Payments.[].BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payments.Create()`: \n  *  `request.payment-request.BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n  *  `response.billingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`:  `response.Embedded.Payments.[].BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payments.Get()`:  `response.billingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payments.Update()`: \n  *  `requestBody.BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n  *  `response.billingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payments.Cancel()`:  `response.billingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`:  `response.Embedded.Payments.[].BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Customers.Create-Payment()`: \n  *  `request.payment-request.BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n  *  `response.billingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`:  `response.Embedded.Payments.[].BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`:  `response.Embedded.Payments.[].BillingAddress.OrganizationName` **Changed** **Breaking** :warning:\n"
