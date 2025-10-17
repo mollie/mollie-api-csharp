@@ -18,12 +18,14 @@ generation:
     oAuth2PasswordEnabled: true
     hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.7.4
+  version: 0.8.0
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException

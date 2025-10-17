@@ -76,7 +76,6 @@ var res = await sdk.SalesInvoices.CreateAsync(
             Type = SalesInvoiceDiscountType.Amount,
             Value = "10.00",
         },
-        IsEInvoice = false,
         AmountDue = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -295,7 +294,6 @@ var res = await sdk.SalesInvoices.UpdateAsync(
             Type = SalesInvoiceDiscountType.Amount,
             Value = "10.00",
         },
-        IsEInvoice = false,
     }
 );
 
