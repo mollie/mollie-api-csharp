@@ -1,4 +1,4 @@
-# RouteCreateRequestDestination
+# EntityRouteDestination
 
 The destination of the route.
 
@@ -7,5 +7,5 @@ The destination of the route.
 
 | Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `Type`                                                                                    | [RouteDestinationType](../../Models/Components/RouteDestinationType.md)                   | :heavy_check_mark:                                                                        | The type of destination. Currently only the destination type `organization` is supported. | organization                                                                              |
+| `Type`                                                                                    | [RouteDestinationTypeResponse](../../Models/Components/RouteDestinationTypeResponse.md)   | :heavy_check_mark:                                                                        | The type of destination. Currently only the destination type `organization` is supported. | organization                                                                              |
 | `OrganizationId`                                                                          | *string*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       | org_1234567                                                                               |

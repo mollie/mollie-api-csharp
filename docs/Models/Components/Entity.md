@@ -9,8 +9,8 @@
 Entity.CreatePaymentLinkResponse(/* values here */);
 ```
 
-### EntityProfileResponse
+### ProfileResponse
 
 ```csharp
-Entity.CreateEntityProfileResponse(/* values here */);
+Entity.CreateProfileResponse(/* values here */);
 ```

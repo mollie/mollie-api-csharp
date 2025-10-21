@@ -28,42 +28,42 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The name of the organization.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The current status of the organization&apos;s onboarding process.
         /// </summary>
         [JsonProperty("status")]
-        public OnboardingStatus? Status { get; set; }
+        public OnboardingStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Whether the organization can receive payments.
         /// </summary>
         [JsonProperty("canReceivePayments")]
-        public bool? CanReceivePayments { get; set; }
+        public bool CanReceivePayments { get; set; } = default!;
 
         /// <summary>
         /// Whether the organization can receive settlements to their external bank account.
         /// </summary>
         [JsonProperty("canReceiveSettlements")]
-        public bool? CanReceiveSettlements { get; set; }
+        public bool CanReceiveSettlements { get; set; } = default!;
 
         /// <summary>
         /// The sign up date time of the organization in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("signedUpAt")]
-        public string? SignedUpAt { get; set; }
+        public string SignedUpAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityOnboardingStatusLinks? Links { get; set; }
+        public EntityOnboardingStatusLinks Links { get; set; } = default!;
     }
 }

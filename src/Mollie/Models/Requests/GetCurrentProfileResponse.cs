@@ -26,6 +26,6 @@ namespace Mollie.Models.Requests
         /// <a href="get-profile">Get profile</a> endpoint documentation.
         /// </remarks>
         /// </summary>
-        public EntityProfileResponse? EntityProfileResponse { get; set; }
+        public ProfileResponse? ProfileResponse { get; set; }
     }
 }

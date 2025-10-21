@@ -17,13 +17,9 @@ namespace Mollie.Models.Components
     {
 
         /// <summary>
-        /// If known, a deep link to the Mollie dashboard of the client, where the requirement can be fulfilled.<br/>
-        /// 
-        /// <remarks>
-        /// For example, where necessary documents are to be uploaded.
-        /// </remarks>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("dashboard")]
-        public Dashboard? Dashboard { get; set; }
+        public Url? Dashboard { get; set; }
     }
 }

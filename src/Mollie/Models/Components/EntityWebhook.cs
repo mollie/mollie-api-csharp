@@ -76,7 +76,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode Mode { get; set; } = default!;
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

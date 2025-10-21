@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    public class EntityClientLinkResponse
+    public class ClientLinkResponse
     {
 
         /// <summary>
@@ -36,6 +36,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityClientLinkResponseLinks? Links { get; set; }
+        public ClientLinkResponseLinks? Links { get; set; }
     }
 }

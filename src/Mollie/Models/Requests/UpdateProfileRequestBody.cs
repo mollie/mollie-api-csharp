@@ -9,7 +9,6 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -74,15 +73,5 @@ namespace Mollie.Models.Requests
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; } = null;
-
-        /// <summary>
-        /// Updating a profile from `test` mode to `live` mode will trigger a verification process, where we review<br/>
-        /// 
-        /// <remarks>
-        /// the profile before it can start accepting payments.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("mode")]
-        public Models.Requests.Mode? Mode { get; set; } = null;
     }
 }

@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    public class RouteCreateRequest
+    public class EntityRoute
     {
 
         [JsonProperty("id")]
@@ -38,7 +38,7 @@ namespace Mollie.Models.Components
         /// The destination of the route.
         /// </summary>
         [JsonProperty("destination")]
-        public RouteCreateRequestDestination? Destination { get; set; }
+        public EntityRouteDestination? Destination { get; set; }
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

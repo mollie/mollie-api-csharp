@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -54,6 +53,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
-        public VatRegulation? VatRegulation { get; set; } = null;
+        public OnboardingVatRegulation? VatRegulation { get; set; } = null;
     }
 }

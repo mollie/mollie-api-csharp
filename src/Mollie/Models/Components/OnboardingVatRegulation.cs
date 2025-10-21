@@ -7,41 +7,41 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Mollie.Models.Requests
+namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
     
     /// <summary>
-    /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped<br/>
+    /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in<br/>
     /// 
     /// <remarks>
-    /// by status (e.g. `pending`, `available`), then by transaction type, and then by other sub-groupings where<br/>
-    /// available (e.g. payment method).<br/>
+    /// The United Kingdom, and shifted VAT for merchants in the European Union.<br/>
     /// <br/>
-    /// With the `transaction-categories` format, transactions are grouped by<br/>
-    /// transaction type, then by status, and then again by other sub-groupings where available.
+    /// The field can be omitted for merchants residing in other countries.
     /// </remarks>
     /// </summary>
-    public enum Grouping
+    public enum OnboardingVatRegulation
     {
-        [JsonProperty("status-balances")]
-        StatusBalances,
-        [JsonProperty("transaction-categories")]
-        TransactionCategories,
+        [JsonProperty("dutch")]
+        Dutch,
+        [JsonProperty("british")]
+        British,
+        [JsonProperty("shifted")]
+        Shifted,
     }
 
-    public static class GroupingExtension
+    public static class OnboardingVatRegulationExtension
     {
-        public static string Value(this Grouping value)
+        public static string Value(this OnboardingVatRegulation value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static Grouping ToEnum(this string value)
+        public static OnboardingVatRegulation ToEnum(this string value)
         {
-            foreach(var field in typeof(Grouping).GetFields())
+            foreach(var field in typeof(OnboardingVatRegulation).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -54,14 +54,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is Grouping)
+                    if (enumVal is OnboardingVatRegulation)
                     {
-                        return (Grouping)enumVal;
+                        return (OnboardingVatRegulation)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Grouping");
+            throw new Exception($"Unknown value {value} for enum OnboardingVatRegulation");
         }
     }
 

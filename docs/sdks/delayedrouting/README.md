@@ -27,7 +27,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.DelayedRouting.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    routeCreateRequest: new RouteCreateRequest() {
+    entityRoute: new EntityRoute() {
         Id = "crt_dyARQ3JzCgtPDhU2Pbq3J",
         PaymentId = "tr_5B8cwPMGnU",
         Amount = new Amount() {
@@ -35,8 +35,8 @@ var res = await sdk.DelayedRouting.CreateAsync(
             Value = "10.00",
         },
         Description = "Payment for Order #12345",
-        Destination = new RouteCreateRequestDestination() {
-            Type = RouteDestinationType.Organization,
+        Destination = new EntityRouteDestination() {
+            Type = RouteDestinationTypeResponse.Organization,
             OrganizationId = "org_1234567",
         },
         Testmode = false,
@@ -52,7 +52,7 @@ var res = await sdk.DelayedRouting.CreateAsync(
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RouteCreateRequest`                                                             | [RouteCreateRequest](../../Models/Components/RouteCreateRequest.md)              | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `EntityRoute`                                                                    | [EntityRoute](../../Models/Components/EntityRoute.md)                            | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

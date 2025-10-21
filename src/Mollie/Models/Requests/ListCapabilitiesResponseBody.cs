@@ -23,12 +23,12 @@ namespace Mollie.Models.Requests
         /// The number of items in this result set.
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         [JsonProperty("_embedded")]
-        public ListCapabilitiesEmbedded? Embedded { get; set; }
+        public ListCapabilitiesEmbedded Embedded { get; set; } = default!;
 
         [JsonProperty("_links")]
-        public ListCapabilitiesLinks? Links { get; set; }
+        public ListCapabilitiesLinks Links { get; set; } = default!;
     }
 }

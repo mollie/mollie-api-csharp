@@ -72,7 +72,7 @@ var res = await sdk.Onboarding.SubmitAsync(
             Name = "Mollie B.V.",
             RegistrationNumber = "30204462",
             VatNumber = "NL815839091B01",
-            VatRegulation = VatRegulation.Dutch,
+            VatRegulation = OnboardingVatRegulation.Dutch,
         },
         Profile = new Profile() {
             Name = "Mollie",

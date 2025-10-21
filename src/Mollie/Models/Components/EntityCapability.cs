@@ -24,21 +24,21 @@ namespace Mollie.Models.Components
         /// Always the word `capability` for this resource type.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// A unique name for this capability like `payments` / `settlements`.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         [JsonProperty("status")]
-        public CapabilityStatus? Status { get; set; }
+        public CapabilityStatus Status { get; set; } = default!;
 
-        [JsonProperty("statusReason")]
+        [JsonProperty("statusReason", NullValueHandling = NullValueHandling.Include)]
         public CapabilityStatusReason? StatusReason { get; set; }
 
         [JsonProperty("requirements")]
-        public List<EntityCapabilityRequirement>? Requirements { get; set; }
+        public List<EntityCapabilityRequirement> Requirements { get; set; } = default!;
     }
 }

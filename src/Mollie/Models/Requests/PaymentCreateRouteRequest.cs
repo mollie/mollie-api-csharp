@@ -28,6 +28,6 @@ namespace Mollie.Models.Requests
         public string? IdempotencyKey { get; set; }
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public RouteCreateRequest? RouteCreateRequest { get; set; }
+        public EntityRoute? EntityRoute { get; set; }
     }
 }

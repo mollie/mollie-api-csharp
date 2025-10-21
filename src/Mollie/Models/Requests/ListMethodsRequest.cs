@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using System;
     
@@ -61,7 +60,7 @@ namespace Mollie.Models.Requests
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=resource")]
-        public Resource? Resource { get; set; }
+        public MethodResourceParameter? Resource { get; set; }
 
         /// <summary>
         /// The country taken from your customer&apos;s billing address in ISO 3166-1 alpha-2 format. This parameter can be used<br/>
@@ -83,7 +82,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeWallets")]
-        public IncludeWallets? IncludeWallets { get; set; }
+        public MethodIncludeWalletsParameter? IncludeWallets { get; set; }
 
         /// <summary>
         /// A comma-separated list of the line categories you support in your checkout.<br/>

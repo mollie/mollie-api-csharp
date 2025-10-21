@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The profile object.
         /// </summary>
-        public EntityProfileResponse? EntityProfileResponse { get; set; }
+        public ProfileResponse? ProfileResponse { get; set; }
     }
 }

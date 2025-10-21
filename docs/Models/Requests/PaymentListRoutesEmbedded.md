@@ -5,4 +5,4 @@
 
 | Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `Routes`                                                              | List<[RouteGetResponse](../../Models/Components/RouteGetResponse.md)> | :heavy_minus_sign:                                                    | An array of route objects.                                            |
+| `Routes`                                                              | List<[RouteGetResponse](../../Models/Components/RouteGetResponse.md)> | :heavy_check_mark:                                                    | An array of route objects.                                            |

@@ -37,7 +37,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode? Mode { get; set; }
 
         /// <summary>
         /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>

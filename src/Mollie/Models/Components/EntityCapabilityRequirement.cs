@@ -29,7 +29,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The status of the requirement depends on its due date.<br/>
@@ -39,15 +39,15 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public CapabilityRequirementStatus? Status { get; set; }
+        public CapabilityRequirementStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Due date until the requirement must be fulfilled, if any. The date is shown in ISO-8601 format.
         /// </summary>
-        [JsonProperty("dueDate")]
-        public string? DueDate { get; set; } = null;
+        [JsonProperty("dueDate", NullValueHandling = NullValueHandling.Include)]
+        public string? DueDate { get; set; }
 
         [JsonProperty("_links")]
-        public EntityCapabilityRequirementLinks? Links { get; set; }
+        public EntityCapabilityRequirementLinks Links { get; set; } = default!;
     }
 }

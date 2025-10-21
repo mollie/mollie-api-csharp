@@ -190,7 +190,6 @@ var res = await sdk.Profiles.UpdateAsync(
             "GB",
         },
         BusinessCategory = "OTHER_MERCHANDISE",
-        Mode = Mollie.Models.Requests.Mode.Live,
     },
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );

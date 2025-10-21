@@ -26,14 +26,14 @@ namespace Mollie.Models.Components
 
         public static EntityType PaymentLinkResponse { get { return new EntityType("payment-link-response"); } }
 
-        public static EntityType EntityProfileResponse { get { return new EntityType("entity-profile-response"); } }
+        public static EntityType ProfileResponse { get { return new EntityType("profile-response"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
             switch(v) {
                 case "payment-link-response": return PaymentLinkResponse;
-                case "entity-profile-response": return EntityProfileResponse;
+                case "profile-response": return ProfileResponse;
                 default: throw new ArgumentException("Invalid value for EntityType");
             }
         }
@@ -65,7 +65,7 @@ namespace Mollie.Models.Components
         public PaymentLinkResponse? PaymentLinkResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public EntityProfileResponse? EntityProfileResponse { get; set; }
+        public ProfileResponse? ProfileResponse { get; set; }
 
         public EntityType Type { get; set; }
         public static Entity CreatePaymentLinkResponse(PaymentLinkResponse paymentLinkResponse)
@@ -76,12 +76,12 @@ namespace Mollie.Models.Components
             res.PaymentLinkResponse = paymentLinkResponse;
             return res;
         }
-        public static Entity CreateEntityProfileResponse(EntityProfileResponse entityProfileResponse)
+        public static Entity CreateProfileResponse(ProfileResponse profileResponse)
         {
-            EntityType typ = EntityType.EntityProfileResponse;
+            EntityType typ = EntityType.ProfileResponse;
 
             Entity res = new Entity(typ);
-            res.EntityProfileResponse = entityProfileResponse;
+            res.ProfileResponse = profileResponse;
             return res;
         }
 
@@ -103,14 +103,14 @@ namespace Mollie.Models.Components
 
                 try
                 {
-                    return new Entity(EntityType.EntityProfileResponse)
+                    return new Entity(EntityType.ProfileResponse)
                     {
-                        EntityProfileResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EntityProfileResponse>(json)
+                        ProfileResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ProfileResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(EntityProfileResponse), new Entity(EntityType.EntityProfileResponse), "EntityProfileResponse"));
+                    fallbackCandidates.Add((typeof(ProfileResponse), new Entity(EntityType.ProfileResponse), "ProfileResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -179,9 +179,9 @@ namespace Mollie.Models.Components
                     return;
                 }
 
-                if (res.EntityProfileResponse != null)
+                if (res.ProfileResponse != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.EntityProfileResponse));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ProfileResponse));
                     return;
                 }
             }

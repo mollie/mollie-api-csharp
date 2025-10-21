@@ -20,6 +20,6 @@ namespace Mollie.Models.Components
         /// The URL to the generic Mollie API error handling guide.
         /// </summary>
         [JsonProperty("documentation")]
-        public Models.Components.Documentation Documentation { get; set; } = default!;
+        public Documentation Documentation { get; set; } = default!;
     }
 }

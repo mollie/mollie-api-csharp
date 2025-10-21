@@ -7,41 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Mollie.Models.Requests
+namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
     
-    /// <summary>
-    /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in<br/>
-    /// 
-    /// <remarks>
-    /// The United Kingdom, and shifted VAT for merchants in the European Union.<br/>
-    /// <br/>
-    /// The field can be omitted for merchants residing in other countries.
-    /// </remarks>
-    /// </summary>
-    public enum VatRegulation
+    public enum MethodIncludeWalletsParameter
     {
-        [JsonProperty("dutch")]
-        Dutch,
-        [JsonProperty("british")]
-        British,
-        [JsonProperty("shifted")]
-        Shifted,
+        [JsonProperty("applepay")]
+        Applepay,
     }
 
-    public static class VatRegulationExtension
+    public static class MethodIncludeWalletsParameterExtension
     {
-        public static string Value(this VatRegulation value)
+        public static string Value(this MethodIncludeWalletsParameter value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static VatRegulation ToEnum(this string value)
+        public static MethodIncludeWalletsParameter ToEnum(this string value)
         {
-            foreach(var field in typeof(VatRegulation).GetFields())
+            foreach(var field in typeof(MethodIncludeWalletsParameter).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -54,14 +41,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is VatRegulation)
+                    if (enumVal is MethodIncludeWalletsParameter)
                     {
-                        return (VatRegulation)enumVal;
+                        return (MethodIncludeWalletsParameter)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum VatRegulation");
+            throw new Exception($"Unknown value {value} for enum MethodIncludeWalletsParameter");
         }
     }
 

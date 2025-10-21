@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Collections.Generic;
     using System.Linq;
     
-    public class EntityProfileResponse
+    public class ProfileResponse
     {
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode? Mode { get; set; }
 
         /// <summary>
         /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or<br/>
@@ -130,6 +130,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityProfileResponseLinks? Links { get; set; }
+        public ProfileResponseLinks? Links { get; set; }
     }
 }

@@ -24,27 +24,27 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// A short description of what kind of access the permission enables.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// Whether this permission is granted to the app by the organization.
         /// </summary>
         [JsonProperty("granted")]
-        public bool? Granted { get; set; }
+        public bool Granted { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityPermissionLinks? Links { get; set; }
+        public EntityPermissionLinks Links { get; set; } = default!;
     }
 }

@@ -33,7 +33,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode Mode { get; set; } = default!;
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// A short description of the terminal. The description can be used as an identifier for the terminal. Currently, the<br/>

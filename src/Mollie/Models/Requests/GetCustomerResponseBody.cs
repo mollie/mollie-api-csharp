@@ -37,7 +37,7 @@ namespace Mollie.Models.Requests
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode? Mode { get; set; }
 
         /// <summary>
         /// The full name of the customer.

@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of balance transaction objects.
         /// </summary>
         [JsonProperty("balance_transactions")]
-        public List<EntityBalanceTransaction>? BalanceTransactions { get; set; }
+        public List<EntityBalanceTransaction> BalanceTransactions { get; set; } = default!;
     }
 }

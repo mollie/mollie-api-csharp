@@ -97,8 +97,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.727.4";
+        private const string _sdkVersion = "0.8.1";
+        private const string _sdkGenVersion = "2.727.9";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)
@@ -206,14 +206,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityProfileResponse obj;
+                    ProfileResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateProfileResponse()
@@ -224,7 +224,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityProfileResponse = obj;
+                    response.ProfileResponse = obj;
                     return response;
                 }
 
@@ -518,14 +518,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityProfileResponse obj;
+                    ProfileResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetProfileResponse()
@@ -536,7 +536,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityProfileResponse = obj;
+                    response.ProfileResponse = obj;
                     return response;
                 }
 
@@ -680,14 +680,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityProfileResponse obj;
+                    ProfileResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ProfileResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new UpdateProfileResponse()
@@ -698,7 +698,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityProfileResponse = obj;
+                    response.ProfileResponse = obj;
                     return response;
                 }
 
@@ -990,14 +990,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityProfileResponse obj;
+                    ProfileResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityProfileResponse>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ProfileResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ProfileResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetCurrentProfileResponse()
@@ -1008,7 +1008,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityProfileResponse = obj;
+                    response.ProfileResponse = obj;
                     return response;
                 }
 

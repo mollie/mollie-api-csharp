@@ -28,61 +28,58 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
-        /// <summary>
-        /// The identifier uniquely referring to this invoice. Example: `inv_FrvewDA3Pr`.
-        /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The reference number of the invoice. An example value would be: `2024.10000`.
         /// </summary>
         [JsonProperty("reference")]
-        public string? Reference { get; set; }
+        public string Reference { get; set; } = default!;
 
         /// <summary>
         /// The VAT number to which the invoice was issued to, if applicable.
         /// </summary>
-        [JsonProperty("vatNumber")]
-        public string? VatNumber { get; set; } = null;
+        [JsonProperty("vatNumber", NullValueHandling = NullValueHandling.Include)]
+        public string? VatNumber { get; set; }
 
         /// <summary>
         /// Status of the invoice.
         /// </summary>
         [JsonProperty("status")]
-        public InvoiceStatus? Status { get; set; }
+        public InvoiceStatus Status { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("netAmount")]
-        public Amount? NetAmount { get; set; }
+        public Amount NetAmount { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("vatAmount")]
-        public Amount? VatAmount { get; set; }
+        public Amount VatAmount { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("grossAmount")]
-        public Amount? GrossAmount { get; set; }
+        public Amount GrossAmount { get; set; } = default!;
 
         /// <summary>
         /// The collection of products which make up the invoice.
         /// </summary>
         [JsonProperty("lines")]
-        public List<EntityInvoiceLine>? Lines { get; set; }
+        public List<EntityInvoiceLine> Lines { get; set; } = default!;
 
         /// <summary>
         /// The invoice date in `YYYY-MM-DD` format.
         /// </summary>
         [JsonProperty("issuedAt")]
-        public string? IssuedAt { get; set; }
+        public string IssuedAt { get; set; } = default!;
 
         /// <summary>
         /// The date on which the invoice was paid, if applicable, in `YYYY-MM-DD` format.
@@ -100,6 +97,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityInvoiceLinks? Links { get; set; }
+        public EntityInvoiceLinks Links { get; set; } = default!;
     }
 }

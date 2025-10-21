@@ -16,7 +16,7 @@ namespace Mollie.Models.Components
     /// <summary>
     /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
     /// </summary>
-    public class EntityProfileResponseLinks
+    public class ProfileResponseLinks
     {
 
         /// <summary>

@@ -92,8 +92,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.727.4";
+        private const string _sdkVersion = "0.8.1";
+        private const string _sdkGenVersion = "2.727.9";
         private const string _openapiDocVersion = "1.0.0";
 
         public ClientLinks(SDKConfig config)
@@ -201,14 +201,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityClientLinkResponse obj;
+                    ClientLinkResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityClientLinkResponse>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ClientLinkResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityClientLinkResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ClientLinkResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateClientLinkResponse()
@@ -219,7 +219,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityClientLinkResponse = obj;
+                    response.ClientLinkResponse = obj;
                     return response;
                 }
 

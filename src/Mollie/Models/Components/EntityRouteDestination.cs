@@ -9,29 +9,27 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
-    /// If known, a deep link to the Mollie dashboard of the client, where the requirement can be fulfilled.<br/>
-    /// 
-    /// <remarks>
-    /// For example, where necessary documents are to be uploaded.
-    /// </remarks>
+    /// The destination of the route.
     /// </summary>
-    public class Dashboard
+    public class EntityRouteDestination
     {
 
         /// <summary>
-        /// The actual URL string.
-        /// </summary>
-        [JsonProperty("href")]
-        public string? Href { get; set; }
-
-        /// <summary>
-        /// The content type of the page or endpoint the URL points to.
+        /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public RouteDestinationTypeResponse Type { get; set; } = default!;
+
+        [JsonProperty("organizationId")]
+        public string OrganizationId { get; set; } = default!;
     }
 }

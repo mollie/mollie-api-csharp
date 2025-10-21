@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The newly created client link object.
         /// </summary>
-        public EntityClientLinkResponse? EntityClientLinkResponse { get; set; }
+        public ClientLinkResponse? ClientLinkResponse { get; set; }
     }
 }

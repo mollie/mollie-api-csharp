@@ -7,25 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Mollie.Models.Requests
+namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
     
-    /// <summary>
-    /// **⚠️ We no longer recommend using the Orders API. Please refer to the <a href="payments-api">Payments API</a> instead.**<br/>
-    /// 
-    /// <remarks>
-    /// <br/>
-    /// Indicate if you will use the result for the <a href="create-order">Create order</a><br/>
-    /// or the <a href="create-payment">Create payment</a> endpoint.<br/>
-    /// <br/>
-    /// When passing the value `orders`, the result will include payment methods<br/>
-    /// that are only available for payments created via the Orders API.
-    /// </remarks>
-    /// </summary>
-    public enum Resource
+    public enum MethodResourceParameter
     {
         [JsonProperty("payments")]
         Payments,
@@ -33,16 +21,16 @@ namespace Mollie.Models.Requests
         Orders,
     }
 
-    public static class ResourceExtension
+    public static class MethodResourceParameterExtension
     {
-        public static string Value(this Resource value)
+        public static string Value(this MethodResourceParameter value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static Resource ToEnum(this string value)
+        public static MethodResourceParameter ToEnum(this string value)
         {
-            foreach(var field in typeof(Resource).GetFields())
+            foreach(var field in typeof(MethodResourceParameter).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -55,14 +43,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is Resource)
+                    if (enumVal is MethodResourceParameter)
                     {
-                        return (Resource)enumVal;
+                        return (MethodResourceParameter)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Resource");
+            throw new Exception($"Unknown value {value} for enum MethodResourceParameter");
         }
     }
 

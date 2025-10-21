@@ -24,37 +24,37 @@ namespace Mollie.Models.Components
         /// Indicates the response contains a balance object. Will always contain the string `balance` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         [JsonProperty("currency")]
-        public Currencies? Currency { get; set; }
+        public Currencies Currency { get; set; } = default!;
 
         /// <summary>
         /// The description or name of the balance. Can be used to denote the purpose of the balance.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The status of the balance.
         /// </summary>
         [JsonProperty("status")]
-        public BalanceStatus? Status { get; set; }
+        public BalanceStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
@@ -94,18 +94,18 @@ namespace Mollie.Models.Components
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("availableAmount")]
-        public Amount? AvailableAmount { get; set; }
+        public Amount AvailableAmount { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("pendingAmount")]
-        public Amount? PendingAmount { get; set; }
+        public Amount PendingAmount { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityBalanceLinks? Links { get; set; }
+        public EntityBalanceLinks Links { get; set; } = default!;
     }
 }

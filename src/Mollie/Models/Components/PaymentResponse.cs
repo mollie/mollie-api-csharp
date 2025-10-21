@@ -33,7 +33,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode? Mode { get; set; }
 
         /// <summary>
         /// The description of the payment. This will be shown to your customer on their card or bank statement when possible.<br/>

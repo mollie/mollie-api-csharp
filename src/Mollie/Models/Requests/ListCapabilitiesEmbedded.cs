@@ -18,6 +18,6 @@ namespace Mollie.Models.Requests
     {
 
         [JsonProperty("capabilities")]
-        public List<EntityCapability>? Capabilities { get; set; }
+        public List<EntityCapability> Capabilities { get; set; } = default!;
     }
 }

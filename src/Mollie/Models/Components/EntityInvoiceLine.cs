@@ -20,30 +20,30 @@ namespace Mollie.Models.Components
         /// The administrative period in `YYYY-MM` on which the line should be booked.
         /// </summary>
         [JsonProperty("period")]
-        public string? Period { get; set; }
+        public string Period { get; set; } = default!;
 
         /// <summary>
         /// Description of the product.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// Number of products invoiced. For example, the number of payments.
         /// </summary>
         [JsonProperty("count")]
-        public long? Count { get; set; }
+        public long Count { get; set; } = default!;
 
         /// <summary>
         /// VAT percentage rate that applies to this product.
         /// </summary>
         [JsonProperty("vatPercentage")]
-        public long? VatPercentage { get; set; }
+        public long VatPercentage { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
     }
 }

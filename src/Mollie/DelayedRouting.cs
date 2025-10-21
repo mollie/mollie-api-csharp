@@ -34,7 +34,7 @@ namespace Mollie
         /// The routed amount is credited to the account of your customer.
         /// </remarks>
         /// </summary>
-        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRoute? entityRoute = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List payment routes
@@ -50,8 +50,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.727.4";
+        private const string _sdkVersion = "0.8.1";
+        private const string _sdkGenVersion = "2.727.9";
         private const string _openapiDocVersion = "1.0.0";
 
         public DelayedRouting(SDKConfig config)
@@ -59,13 +59,13 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RouteCreateRequest? routeCreateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<PaymentCreateRouteResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRoute? entityRoute = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new PaymentCreateRouteRequest()
             {
                 PaymentId = paymentId,
                 IdempotencyKey = idempotencyKey,
-                RouteCreateRequest = routeCreateRequest,
+                EntityRoute = entityRoute,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/routes", request);
@@ -74,7 +74,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RouteCreateRequest", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "EntityRoute", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

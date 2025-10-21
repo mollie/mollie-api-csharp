@@ -19,21 +19,21 @@ namespace Mollie.Models.Components
         /// A street and street number.
         /// </summary>
         [JsonProperty("streetAndNumber")]
-        public string? StreetAndNumber { get; set; }
+        public string StreetAndNumber { get; set; } = default!;
 
         /// <summary>
         /// A postal code. This field may be required if the provided country has a postal code system.
         /// </summary>
         [JsonProperty("postalCode")]
-        public string? PostalCode { get; set; }
+        public string PostalCode { get; set; } = default!;
 
         [JsonProperty("city")]
-        public string? City { get; set; }
+        public string City { get; set; } = default!;
 
         /// <summary>
         /// A country code in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
         /// </summary>
         [JsonProperty("country")]
-        public string? Country { get; set; }
+        public string Country { get; set; } = default!;
     }
 }

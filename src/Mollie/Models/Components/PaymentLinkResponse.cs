@@ -37,7 +37,7 @@ namespace Mollie.Models.Components
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Models.Components.Mode? Mode { get; set; }
+        public Mode? Mode { get; set; }
 
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the<br/>

@@ -28,16 +28,16 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("balanceId")]
-        public string? BalanceId { get; set; }
+        public string BalanceId { get; set; } = default!;
 
         /// <summary>
         /// The time zone used for the from and until parameters. Currently only time zone `Europe/Amsterdam` is supported.
         /// </summary>
         [JsonProperty("timeZone")]
-        public string? TimeZone { get; set; }
+        public string TimeZone { get; set; } = default!;
 
         /// <summary>
         /// The start date of the report, in `YYYY-MM-DD` format. The from date is &apos;inclusive&apos;, and in Central European Time.<br/>
@@ -48,7 +48,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("from")]
-        public string? From { get; set; }
+        public string From { get; set; } = default!;
 
         /// <summary>
         /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time.<br/>
@@ -58,10 +58,10 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("until")]
-        public string? Until { get; set; }
+        public string Until { get; set; } = default!;
 
         [JsonProperty("grouping")]
-        public BalanceReportGrouping? Grouping { get; set; }
+        public BalanceReportGrouping Grouping { get; set; } = default!;
 
         /// <summary>
         /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>
@@ -89,12 +89,12 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("totals")]
-        public Totals? Totals { get; set; }
+        public Totals Totals { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityBalanceReportLinks? Links { get; set; }
+        public EntityBalanceReportLinks Links { get; set; } = default!;
     }
 }

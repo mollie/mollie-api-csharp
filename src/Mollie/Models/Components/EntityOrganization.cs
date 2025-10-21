@@ -28,40 +28,37 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
-        /// <summary>
-        /// The identifier uniquely referring to this organization. Example: `org_12345678`.
-        /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The name of the organization.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The email address associated with the organization.
         /// </summary>
         [JsonProperty("email")]
-        public string? Email { get; set; }
+        public string Email { get; set; } = default!;
 
         /// <summary>
         /// Allows you to preset the language to be used.
         /// </summary>
-        [JsonProperty("locale")]
-        public LocaleResponse? Locale { get; set; } = null;
+        [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
+        public LocaleResponse? Locale { get; set; }
 
         [JsonProperty("address")]
-        public Address? Address { get; set; }
+        public Address Address { get; set; } = default!;
 
         /// <summary>
         /// The registration number of the organization at their local chamber of commerce.
         /// </summary>
         [JsonProperty("registrationNumber")]
-        public string? RegistrationNumber { get; set; }
+        public string RegistrationNumber { get; set; } = default!;
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are<br/>
@@ -91,6 +88,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityOrganizationLinks? Links { get; set; }
+        public EntityOrganizationLinks Links { get; set; } = default!;
     }
 }
