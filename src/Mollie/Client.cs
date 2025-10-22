@@ -57,8 +57,8 @@ namespace Mollie
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.1";
-        private const string _sdkGenVersion = "2.727.9";
+        private const string _sdkVersion = "0.8.2";
+        private const string _sdkGenVersion = "2.728.0";
         private const string _openapiDocVersion = "1.0.0";
         public IBalances Balances { get; private set; }
         public ISettlements Settlements { get; private set; }
@@ -145,6 +145,17 @@ namespace Mollie
             SalesInvoices = new SalesInvoices(SDKConfiguration);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK with optional configuration parameters.
+        /// </summary>
+        /// <param name="security">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
+        /// <param name="securitySource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
+        /// <param name="serverIndex">The index of the server to use from the predefined server list. Must be between 0 and the length of the server list. Defaults to 0 if not specified.</param>
+        /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
+        /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
+        /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
+        /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
+        /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
         public Client(Mollie.Models.Components.Security? security = null, Func<Mollie.Models.Components.Security>? securitySource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
             if (serverIndex != null)

@@ -39,7 +39,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListSort? Sort { get; set; } = null;
+        public Sorting? Sort { get; set; }
 
         /// <summary>
         /// Used to filter out only the webhooks that are subscribed to certain types of events.

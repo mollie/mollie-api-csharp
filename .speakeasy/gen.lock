@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: a5dccf14f1e5388d77df2bf0465de0c1
+  docChecksum: 3326eaca21c1637f3b75a6c4f0058439
   docVersion: 1.0.0
-  speakeasyVersion: 1.637.3
-  generationVersion: 2.727.9
-  releaseVersion: 0.8.1
-  configChecksum: 4521a9e69ace230f073286a278d7de88
+  speakeasyVersion: 1.638.0
+  generationVersion: 2.728.0
+  releaseVersion: 0.8.2
+  configChecksum: b76be42ebd64af8b08cdc06e6dfc9203
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.15.0
+    core: 3.15.1
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.8
@@ -174,9 +174,7 @@ generatedFiles:
   - docs/Models/Components/LineCategories.md
   - docs/Models/Components/LineCategoriesResponse.md
   - docs/Models/Components/ListLinks.md
-  - docs/Models/Components/ListSort.md
   - docs/Models/Components/Locale.md
-  - docs/Models/Components/LocaleParameter.md
   - docs/Models/Components/LocaleResponse.md
   - docs/Models/Components/ManagedFee.md
   - docs/Models/Components/MandateDetailsCardLabelResponse.md
@@ -304,6 +302,7 @@ generatedFiles:
   - docs/Models/Components/SequenceType.md
   - docs/Models/Components/SequenceTypeResponse.md
   - docs/Models/Components/SettlementStatus.md
+  - docs/Models/Components/Sorting.md
   - docs/Models/Components/SplitPayment.md
   - docs/Models/Components/StatusReason.md
   - docs/Models/Components/SubGroup.md
@@ -816,9 +815,7 @@ generatedFiles:
   - src/Mollie/Models/Components/LineCategories.cs
   - src/Mollie/Models/Components/LineCategoriesResponse.cs
   - src/Mollie/Models/Components/ListLinks.cs
-  - src/Mollie/Models/Components/ListSort.cs
   - src/Mollie/Models/Components/Locale.cs
-  - src/Mollie/Models/Components/LocaleParameter.cs
   - src/Mollie/Models/Components/LocaleResponse.cs
   - src/Mollie/Models/Components/ManagedFee.cs
   - src/Mollie/Models/Components/MandateDetailsCardLabelResponse.cs
@@ -946,6 +943,7 @@ generatedFiles:
   - src/Mollie/Models/Components/SequenceType.cs
   - src/Mollie/Models/Components/SequenceTypeResponse.cs
   - src/Mollie/Models/Components/SettlementStatus.cs
+  - src/Mollie/Models/Components/Sorting.cs
   - src/Mollie/Models/Components/SplitPayment.cs
   - src/Mollie/Models/Components/StatusReason.cs
   - src/Mollie/Models/Components/SubGroup.cs
@@ -3424,7 +3422,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "organization", "id": "org_1234567", "name": "My Online Store", "email": "example@mail.com", "locale": "en_US", "address": {"streetAndNumber": "<value>", "postalCode": "18293", "city": "South Kaelyn", "country": "Tajikistan"}, "registrationNumber": "12345678", "vatNumber": "NL123456789B01", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "organization", "id": "org_1234567", "name": "My Online Store", "email": "example@mail.com", "locale": "en_US", "address": {"streetAndNumber": "Keizersgracht 126", "postalCode": "1015 CW", "city": "Amsterdam", "country": "NL"}, "registrationNumber": "12345678", "vatNumber": "NL123456789B01", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   get-current-organization:
@@ -3599,7 +3597,7 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"organization": {"name": "Mollie B.V.", "registrationNumber": "30204462", "vatNumber": "NL815839091B01", "vatRegulation": "dutch"}, "profile": {"name": "Mollie", "url": "https://www.mollie.com", "email": "info@mollie.com", "phone": "+31208202070", "description": "Payment service provider", "businessCategory": "MONEY_SERVICES"}}
+        application/json: {"organization": {"name": "Mollie B.V.", "address": {"streetAndNumber": "Keizersgracht 126", "postalCode": "1015 CW", "city": "Amsterdam", "country": "NL"}, "registrationNumber": "30204462", "vatNumber": "NL815839091B01", "vatRegulation": "dutch"}, "profile": {"name": "Mollie", "url": "https://www.mollie.com", "email": "info@mollie.com", "phone": "+31208202070", "description": "Payment service provider", "businessCategory": "MONEY_SERVICES"}}
       responses:
         "204":
           application/hal+json: "<value>"
@@ -3693,7 +3691,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "client", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "onboarding": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "_embedded": {"organization": {"resource": "organization", "id": "org_1234567", "name": "My Online Store", "email": "example@mail.com", "locale": "en_US", "address": {"streetAndNumber": "<value>", "postalCode": "72737", "city": "Fort Reece", "country": "Svalbard & Jan Mayen Islands"}, "registrationNumber": "12345678", "vatNumber": "NL123456789B01", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "onboarding": {"resource": "onboarding", "name": "My webshop", "status": "completed", "canReceivePayments": true, "canReceiveSettlements": true, "signedUpAt": "2023-01-15T13:45:30Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "capabilities": {"resource": "capability", "name": "payments", "status": "pending", "statusReason": "requirement-past-due", "requirements": [{"id": "legal-representatives", "status": "past-due", "dueDate": "2024-01-01T12:00:00+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}}}
+          application/hal+json: {"resource": "client", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "onboarding": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "_embedded": {"organization": {"resource": "organization", "id": "org_1234567", "name": "My Online Store", "email": "example@mail.com", "locale": "en_US", "address": {"streetAndNumber": "Keizersgracht 126", "postalCode": "1015 CW", "city": "Amsterdam", "country": "NL"}, "registrationNumber": "12345678", "vatNumber": "NL123456789B01", "vatRegulation": "dutch", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "onboarding": {"resource": "onboarding", "name": "My webshop", "status": "completed", "canReceivePayments": true, "canReceiveSettlements": true, "signedUpAt": "2023-01-15T13:45:30Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "organization": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}, "capabilities": {"resource": "capability", "name": "payments", "status": "pending", "statusReason": "requirement-past-due", "requirements": [{"id": "legal-representatives", "status": "past-due", "dueDate": "2024-01-01T12:00:00+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   create-client-link:
@@ -4619,4 +4617,4 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Profiles.Update()`: \n  *  `requestBody.Mode` **Removed** **Breaking** :warning:\n* `Client.Delayed-Routing.Create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed**\n* `Client.Clients.Get()`:  `response.Embedded` **Changed** **Breaking** :warning:\n* `Client.Balances.Get-Report()`: \n  *  `request.Grouping` **Changed** **Breaking** :warning:\n  *  `response` **Changed**\n* `Client.Clients.List()`:  `response.Embedded.Clients.[].Embedded` **Changed** **Breaking** :warning:\n* `Client.Capabilities.List()`:  `response` **Changed** **Breaking** :warning:\n* `Client.Onboarding.Submit()`: \n  *  `requestBody.Organization.Address` **Changed** **Breaking** :warning:\n* `Client.Invoices.List()`:  `response` **Changed**\n* `Client.Settlements.List-Chargebacks()`:  `response` **Changed**\n* `Client.Permissions.Get()`:  `response` **Changed**\n* `Client.Organizations.Get()`:  `response` **Changed**\n* `Client.Organizations.Get-Current()`:  `response` **Changed**\n* `Client.Profiles.List()`:  `response` **Changed**\n* `Client.Invoices.Get()`:  `response` **Changed**\n* `Client.Onboarding.Get()`:  `response` **Changed**\n* `Client.Balances.List()`:  `response` **Changed**\n* `Client.Permissions.List()`:  `response` **Changed**\n* `Client.Balances.List-Transactions()`:  `response` **Changed**\n* `Client.Balances.Get-Primary()`:  `response` **Changed**\n* `Client.Webhook-Events.Get()`:  `response.Embedded.Entity` **Changed**\n* `Client.Methods.List()`:  `request` **Changed**\n* `Client.Chargebacks.List()`:  `response` **Changed**\n* `Client.Chargebacks.All()`:  `response` **Changed**\n* `Client.Balances.Get()`:  `response` **Changed**\n* `Client.Delayed-Routing.List()`:  `response` **Changed**\n"
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Refunds.All()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Webhooks.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Balance-Transfers.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Mandates.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Invoices.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Chargebacks.All()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Terminals.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Customers.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Methods.Get()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.All()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.List()`: \n  *  `request.Locale` **Changed**\n"

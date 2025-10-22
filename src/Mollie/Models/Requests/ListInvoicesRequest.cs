@@ -61,7 +61,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListSort? Sort { get; set; } = null;
+        public Sorting? Sort { get; set; }
 
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.

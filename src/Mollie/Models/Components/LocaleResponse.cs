@@ -44,6 +44,7 @@ namespace Mollie.Models.Components
         public static readonly LocaleResponse Plpl = new LocaleResponse("pl_PL");
         public static readonly LocaleResponse Lvlv = new LocaleResponse("lv_LV");
         public static readonly LocaleResponse Ltlt = new LocaleResponse("lt_LT");
+        public static readonly LocaleResponse Null = new LocaleResponse("null");
 
         private static readonly Dictionary <string, LocaleResponse> _knownValues =
             new Dictionary <string, LocaleResponse> ()
@@ -69,7 +70,8 @@ namespace Mollie.Models.Components
                 ["hu_HU"] = Huhu,
                 ["pl_PL"] = Plpl,
                 ["lv_LV"] = Lvlv,
-                ["lt_LT"] = Ltlt
+                ["lt_LT"] = Ltlt,
+                ["null"] = Null
             };
 
         private static readonly ConcurrentDictionary<string, LocaleResponse> _values =

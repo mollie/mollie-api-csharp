@@ -62,6 +62,8 @@ namespace Mollie.Models.Components
         Lvlv,
         [JsonProperty("lt_LT")]
         Ltlt,
+        [JsonProperty("null")]
+        Null,
     }
 
     public static class LocaleExtension

@@ -1,4 +1,4 @@
-# ListSort
+# Sorting
 
 
 ## Values

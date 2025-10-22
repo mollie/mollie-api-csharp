@@ -42,7 +42,7 @@ var sdk = new Client(security: new Security() {
 
 ListMethodsRequest req = new ListMethodsRequest() {
     SequenceType = SequenceType.Oneoff,
-    Locale = LocaleParameter.EnUS,
+    Locale = Locale.EnUS,
     Amount = new Amount() {
         Currency = "EUR",
         Value = "10.00",
@@ -99,7 +99,7 @@ var sdk = new Client(security: new Security() {
 });
 
 ListAllMethodsRequest req = new ListAllMethodsRequest() {
-    Locale = LocaleParameter.EnUS,
+    Locale = Locale.EnUS,
     Amount = new Amount() {
         Currency = "EUR",
         Value = "10.00",
@@ -162,7 +162,7 @@ var sdk = new Client(security: new Security() {
 
 GetMethodRequest req = new GetMethodRequest() {
     Id = "ideal",
-    Locale = LocaleParameter.EnUS,
+    Locale = Locale.EnUS,
     Currency = "EUR",
     ProfileId = "pfl_5B8cwPMGnU",
     Include = "issuers",

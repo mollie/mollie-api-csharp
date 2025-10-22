@@ -29,7 +29,7 @@ var sdk = new Client(security: new Security() {
 ListTerminalsRequest req = new ListTerminalsRequest() {
     From = "term_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
-    Sort = ListSort.Desc,
+    Sort = Sorting.Desc,
     Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };

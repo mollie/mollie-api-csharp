@@ -39,7 +39,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListSort? Sort { get; set; } = null;
+        public Sorting? Sort { get; set; }
 
         /// <summary>
         /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>

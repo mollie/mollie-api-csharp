@@ -84,7 +84,7 @@ var sdk = new Client(security: new Security() {
 ListCustomersRequest req = new ListCustomersRequest() {
     From = "cst_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListSort.Desc,
+    Sort = Sorting.Desc,
     Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
@@ -486,7 +486,7 @@ ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     CustomerId = "cst_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
-    Sort = ListSort.Desc,
+    Sort = Sorting.Desc,
     ProfileId = "pfl_5B8cwPMGnU",
     Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",

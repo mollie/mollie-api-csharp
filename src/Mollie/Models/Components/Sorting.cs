@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
     using System;
     
-    public enum ListSort
+    public enum Sorting
     {
         [JsonProperty("asc")]
         Asc,
@@ -21,16 +21,16 @@ namespace Mollie.Models.Components
         Desc,
     }
 
-    public static class ListSortExtension
+    public static class SortingExtension
     {
-        public static string Value(this ListSort value)
+        public static string Value(this Sorting value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static ListSort ToEnum(this string value)
+        public static Sorting ToEnum(this string value)
         {
-            foreach(var field in typeof(ListSort).GetFields())
+            foreach(var field in typeof(Sorting).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -43,14 +43,14 @@ namespace Mollie.Models.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is ListSort)
+                    if (enumVal is Sorting)
                     {
-                        return (ListSort)enumVal;
+                        return (Sorting)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum ListSort");
+            throw new Exception($"Unknown value {value} for enum Sorting");
         }
     }
 

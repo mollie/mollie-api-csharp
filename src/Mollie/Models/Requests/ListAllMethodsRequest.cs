@@ -19,7 +19,7 @@ namespace Mollie.Models.Requests
         /// Response language
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=locale")]
-        public LocaleParameter? Locale { get; set; }
+        public Locale? Locale { get; set; } = null;
 
         /// <summary>
         /// If supplied, only payment methods that support the amount and currency<br/>

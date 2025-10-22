@@ -70,6 +70,12 @@ var res = await sdk.Onboarding.SubmitAsync(
     requestBody: new SubmitOnboardingDataRequestBody() {
         Organization = new Organization() {
             Name = "Mollie B.V.",
+            Address = new Address() {
+                StreetAndNumber = "Keizersgracht 126",
+                PostalCode = "1015 CW",
+                City = "Amsterdam",
+                Country = "NL",
+            },
             RegistrationNumber = "30204462",
             VatNumber = "NL815839091B01",
             VatRegulation = OnboardingVatRegulation.Dutch,

@@ -45,7 +45,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListSort? Sort { get; set; } = null;
+        public Sorting? Sort { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

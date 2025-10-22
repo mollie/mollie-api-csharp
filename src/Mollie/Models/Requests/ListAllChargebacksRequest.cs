@@ -49,7 +49,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
-        public ListSort? Sort { get; set; } = null;
+        public Sorting? Sort { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
