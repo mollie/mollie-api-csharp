@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 3326eaca21c1637f3b75a6c4f0058439
+  docChecksum: 2dec71b80177f9595e3514414246ba59
   docVersion: 1.0.0
-  speakeasyVersion: 1.638.0
-  generationVersion: 2.728.0
-  releaseVersion: 0.8.2
-  configChecksum: b76be42ebd64af8b08cdc06e6dfc9203
+  speakeasyVersion: 1.638.1
+  generationVersion: 2.729.2
+  releaseVersion: 0.8.3
+  configChecksum: 4955354c4002d4ac88cfdf3811302c11
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -4617,4 +4617,3 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Refunds.All()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Webhooks.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Balance-Transfers.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Mandates.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Invoices.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Chargebacks.All()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Terminals.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Customers.List()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`: \n  *  `request.Sort` **Changed** **Breaking** :warning:\n* `Client.Methods.Get()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.All()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.List()`: \n  *  `request.Locale` **Changed**\n"

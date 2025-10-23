@@ -130,9 +130,9 @@ namespace Mollie.Models.Requests
         /// <remarks>
         /// not provided or is an empty array, all enabled payment methods will be available.<br/>
         /// <br/>
-        /// Enum: &apos;applepay&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;, &apos;giftcard&apos;,<br/>
-        /// &apos;ideal&apos;, &apos;kbc&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;, &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;satispay&apos;, &apos;trustly&apos;, &apos;twint&apos;,<br/>
-        /// &apos;in3&apos;, &apos;riverty&apos;, &apos;klarna&apos;, &apos;billie&apos;.
+        /// Enum: &apos;applepay&apos;, &apos;bacs&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;billie&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;,<br/>
+        /// &apos;giftcard&apos;, &apos;ideal&apos;, &apos;in3&apos;, &apos;kbc&apos;, &apos;klarna&apos;, &apos;mbway&apos;, &apos;multibanco&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;,<br/>
+        /// &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;riverty&apos;, &apos;satispay&apos;, &apos;swish&apos;, &apos;trustly&apos;, &apos;twint&apos;, &apos;voucher&apos;.
         /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods")]

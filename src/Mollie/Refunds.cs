@@ -85,8 +85,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.2";
-        private const string _sdkGenVersion = "2.728.0";
+        private const string _sdkVersion = "0.8.3";
+        private const string _sdkGenVersion = "2.729.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)
