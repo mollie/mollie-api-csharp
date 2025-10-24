@@ -164,15 +164,11 @@ namespace Mollie.Models.Components
         /// An array of payment methods that are allowed to be used for this payment link. When this parameter is<br/>
         /// 
         /// <remarks>
-        /// not provided or is an empty array, all enabled payment methods will be available.<br/>
-        /// <br/>
-        /// Enum: &apos;applepay&apos;, &apos;bacs&apos;, &apos;bancomatpay&apos;, &apos;bancontact&apos;, &apos;banktransfer&apos;, &apos;belfius&apos;, &apos;billie&apos;, &apos;blik&apos;, &apos;creditcard&apos;, &apos;eps&apos;,<br/>
-        /// &apos;giftcard&apos;, &apos;ideal&apos;, &apos;in3&apos;, &apos;kbc&apos;, &apos;klarna&apos;, &apos;mbway&apos;, &apos;multibanco&apos;, &apos;mybank&apos;, &apos;paybybank&apos;, &apos;paypal&apos;, &apos;paysafecard&apos;,<br/>
-        /// &apos;pointofsale&apos;, &apos;przelewy24&apos;, &apos;riverty&apos;, &apos;satispay&apos;, &apos;swish&apos;, &apos;trustly&apos;, &apos;twint&apos;, &apos;voucher&apos;.
+        /// not provided or is an empty array, all enabled payment methods will be available.
         /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods")]
-        public List<string>? AllowedMethods { get; set; } = null;
+        public List<PaymentLinkMethodResponse>? AllowedMethods { get; set; } = null;
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie<br/>

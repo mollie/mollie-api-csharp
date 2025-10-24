@@ -261,8 +261,8 @@ var res = await sdk.PaymentLinks.UpdateAsync(
             Value = "10.00",
         },
         Archived = false,
-        AllowedMethods = new List<string>() {
-            "ideal",
+        AllowedMethods = new List<PaymentLinkMethod>() {
+            PaymentLinkMethod.Ideal,
         },
         Lines = null,
         BillingAddress = new PaymentAddress() {

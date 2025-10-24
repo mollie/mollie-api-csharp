@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 2dec71b80177f9595e3514414246ba59
+  docChecksum: 0598dfa4879965fe4af6bb050f7b9d65
   docVersion: 1.0.0
-  speakeasyVersion: 1.638.1
-  generationVersion: 2.729.2
-  releaseVersion: 0.8.3
-  configChecksum: 4955354c4002d4ac88cfdf3811302c11
+  speakeasyVersion: 1.639.1
+  generationVersion: 2.730.0
+  releaseVersion: 0.8.4
+  configChecksum: f6f5ce7183dc4e0db57f9e830726be39
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -215,6 +215,8 @@ generatedFiles:
   - docs/Models/Components/PaymentLineItemResponse.md
   - docs/Models/Components/PaymentLineType.md
   - docs/Models/Components/PaymentLineTypeResponse.md
+  - docs/Models/Components/PaymentLinkMethod.md
+  - docs/Models/Components/PaymentLinkMethodResponse.md
   - docs/Models/Components/PaymentLinkResponse.md
   - docs/Models/Components/PaymentLinkResponseApplicationFee.md
   - docs/Models/Components/PaymentLinkResponseLinks.md
@@ -856,6 +858,8 @@ generatedFiles:
   - src/Mollie/Models/Components/PaymentLineItemResponse.cs
   - src/Mollie/Models/Components/PaymentLineType.cs
   - src/Mollie/Models/Components/PaymentLineTypeResponse.cs
+  - src/Mollie/Models/Components/PaymentLinkMethod.cs
+  - src/Mollie/Models/Components/PaymentLinkMethodResponse.cs
   - src/Mollie/Models/Components/PaymentLinkResponse.cs
   - src/Mollie/Models/Components/PaymentLinkResponseApplicationFee.cs
   - src/Mollie/Models/Components/PaymentLinkResponseLinks.cs
@@ -4617,3 +4621,4 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Webhook-Events.Get()`:  `response.Embedded.Entity.[payment-Link-Response].AllowedMethods.[]` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.Create()`: \n  *  `requestBody.AllowedMethods.[]` **Changed** **Breaking** :warning:\n  *  `response.allowedMethods.[]` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List()`:  `response.Embedded.PaymentLinks.[].AllowedMethods.[]` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.Get()`:  `response.allowedMethods.[]` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.Update()`: \n  *  `requestBody.AllowedMethods.[]` **Changed** **Breaking** :warning:\n  *  `response.allowedMethods.[]` **Changed** **Breaking** :warning:\n"
