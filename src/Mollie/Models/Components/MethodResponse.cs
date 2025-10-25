@@ -49,9 +49,6 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse In3 = new MethodResponse("in3");
         public static readonly MethodResponse Kbc = new MethodResponse("kbc");
         public static readonly MethodResponse Klarna = new MethodResponse("klarna");
-        public static readonly MethodResponse Klarnapaylater = new MethodResponse("klarnapaylater");
-        public static readonly MethodResponse Klarnapaynow = new MethodResponse("klarnapaynow");
-        public static readonly MethodResponse Klarnasliceit = new MethodResponse("klarnasliceit");
         public static readonly MethodResponse Mbway = new MethodResponse("mbway");
         public static readonly MethodResponse Mobilepay = new MethodResponse("mobilepay");
         public static readonly MethodResponse Multibanco = new MethodResponse("multibanco");
@@ -91,9 +88,6 @@ namespace Mollie.Models.Components
                 ["in3"] = In3,
                 ["kbc"] = Kbc,
                 ["klarna"] = Klarna,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
                 ["mbway"] = Mbway,
                 ["mobilepay"] = Mobilepay,
                 ["multibanco"] = Multibanco,

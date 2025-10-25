@@ -97,8 +97,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.4";
-        private const string _sdkGenVersion = "2.730.0";
+        private const string _sdkVersion = "0.8.5";
+        private const string _sdkGenVersion = "2.730.5";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)
