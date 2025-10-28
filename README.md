@@ -175,7 +175,7 @@ var sdk = new Mollie.Client(
     security: new Security() {
         ApiKey = Environment.GetEnvironmentVariable("MOLLIE_API_KEY") ?? "test_...",
     },
-    customUserAgent: "MyApp/1.0.0"
+    customUserAgent: "insert something here"
 );
 ```
 
