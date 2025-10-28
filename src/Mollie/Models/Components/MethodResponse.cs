@@ -66,6 +66,9 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Twint = new MethodResponse("twint");
         public static readonly MethodResponse Vipps = new MethodResponse("vipps");
         public static readonly MethodResponse Voucher = new MethodResponse("voucher");
+        public static readonly MethodResponse Klarnapaylater = new MethodResponse("klarnapaylater");
+        public static readonly MethodResponse Klarnapaynow = new MethodResponse("klarnapaynow");
+        public static readonly MethodResponse Klarnasliceit = new MethodResponse("klarnasliceit");
 
         private static readonly Dictionary <string, MethodResponse> _knownValues =
             new Dictionary <string, MethodResponse> ()
@@ -104,7 +107,10 @@ namespace Mollie.Models.Components
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
-                ["voucher"] = Voucher
+                ["voucher"] = Voucher,
+                ["klarnapaylater"] = Klarnapaylater,
+                ["klarnapaynow"] = Klarnapaynow,
+                ["klarnasliceit"] = Klarnasliceit
             };
 
         private static readonly ConcurrentDictionary<string, MethodResponse> _values =
