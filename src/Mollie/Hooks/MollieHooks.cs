@@ -12,13 +12,40 @@ namespace Mollie.Hooks
     {
         public Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
-            var authHeader = request.Headers.Authorization;
-            if (!request.Headers.Contains("idempotency-key"))
-            {
-                request.Headers.Add("idempotency-key", GenerateIdempotencyKey());
-            }
+            HandleIdempotencyKey(request.Headers);
+            CustomizeUserAgent(request.Headers, hookCtx);
 
             return Task.FromResult(request);
+        }
+
+        private void HandleIdempotencyKey(HttpRequestHeaders headers)
+        {
+            if (!headers.Contains("idempotency-key"))
+            {
+                headers.Add("idempotency-key", GenerateIdempotencyKey());
+            }
+        }
+
+        private void CustomizeUserAgent(HttpRequestHeaders headers, BeforeRequestContext hookCtx)
+        {
+            const string userAgentKey = "User-Agent";
+
+            string? customUserAgent = hookCtx.SDKConfiguration.CustomUserAgent;
+
+            // Parse from existing UserAgent string: "speakeasy-sdk/csharp 0.9.0 2.731.4 1.0.0 Mollie"
+            string[] userAgentParts = hookCtx.SDKConfiguration.UserAgent.Split(' ');
+            string sdkVersion = userAgentParts[1];
+            string genVersion = userAgentParts[2];
+            string packageName = userAgentParts[4];
+
+            string mollieUserAgent = $"Speakeasy/{genVersion} CSharp/{Environment.Version} {packageName}/{sdkVersion}";
+            if (!string.IsNullOrEmpty(customUserAgent))
+            {
+                mollieUserAgent = $"{mollieUserAgent} {customUserAgent}";
+            }
+
+            headers.Remove(userAgentKey);
+            headers.Add(userAgentKey, mollieUserAgent);
         }
 
         private static string GenerateIdempotencyKey()
