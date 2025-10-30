@@ -24,6 +24,7 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
   * [Authentication](#authentication)
   * [Idempotency Key](#idempotency-key)
   * [Add Custom User-Agent Header](#add-custom-user-agent-header)
+  * [Add Profile ID and Testmode to Client](#add-profile-id-and-testmode-to-client)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -180,6 +181,25 @@ var sdk = new Mollie.Client(
 ```
 
 <!-- End Add Custom User-Agent Header -->
+
+<!-- Start Add Profile ID and Testmode to Client -->
+
+## Add Profile ID and Testmode to Client
+The SDK allows you to define the `profileId` and `testmode` in the client. This way, you don't need to add this
+information to the payload every time when using OAuth. This will not override the details provided in the individual
+requests.
+
+```csharp
+var sdk = new Mollie.Client(
+    security: new Security() {
+        OAuth = Environment.GetEnvironmentVariable("MOLLIE_OAUTH_KEY") ?? "",
+    },
+    testmode: true,
+    profileId: "pfl_..."
+);
+```
+
+<!-- End Add Profile ID and Testmode to Client -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
