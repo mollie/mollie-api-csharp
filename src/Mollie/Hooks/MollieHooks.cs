@@ -24,7 +24,6 @@ namespace Mollie.Hooks
             // Then populate profile ID and testmode if OAuth
             if (IsOAuthRequest(request.Headers, hookCtx))
             {
-                Console.WriteLine("Populating profileId and testmode for OAuth request");
                 PopulateProfileIdAndTestmode(request, hookCtx);
             }
 
@@ -114,24 +113,8 @@ namespace Mollie.Hooks
 
             if (method == HttpMethod.Get)
             {
-                // Update the query parameters. If testmode or profileId are not present, add them.
-                var uriBuilder = new UriBuilder(request.RequestUri);
-                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-
-                // Add profileId if not already present
-                if (!string.IsNullOrEmpty(clientProfileId) && string.IsNullOrEmpty(query["profileId"]))
-                {
-                    query["profileId"] = clientProfileId;
-                }
-
-                // Add testmode if not already present
-                if (clientTestmode.HasValue && string.IsNullOrEmpty(query["testmode"]))
-                {
-                    query["testmode"] = clientTestmode.Value.ToString().ToLower();
-                }
-
-                uriBuilder.Query = query.ToString();
-                request.RequestUri = uriBuilder.Uri;
+                // SDK already handles Query Parameters automatically
+                return;
             }
             else
             {
