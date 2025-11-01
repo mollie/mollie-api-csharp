@@ -74,7 +74,7 @@ namespace Mollie.Hooks
         private void HandleIdempotencyKey(HttpRequestHeaders headers)
         {
             const string idempotencyKey = "idempotency-key";
-            if (!headers.Contains(idempotencyKey) || 
+            if (!headers.Contains(idempotencyKey) ||
                 string.IsNullOrEmpty(headers.GetValues(idempotencyKey).FirstOrDefault()))
             {
                 headers.Remove(idempotencyKey);
@@ -144,8 +144,8 @@ namespace Mollie.Hooks
 
                     try
                     {
-                        body = string.IsNullOrEmpty(contentString) 
-                            ? JsonDocument.Parse("{}") 
+                        body = string.IsNullOrEmpty(contentString)
+                            ? JsonDocument.Parse("{}")
                             : JsonDocument.Parse(contentString);
                     }
                     catch (JsonException)

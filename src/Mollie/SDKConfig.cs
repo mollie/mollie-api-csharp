@@ -29,6 +29,9 @@ namespace Mollie
         public ISpeakeasyHttpClient Client;
         public string ServerUrl;
         public int ServerIndex;
+        public string? ProfileId;
+        public bool? Testmode;
+        public string? CustomUserAgent;
         public string UserAgent;
         public Func<Mollie.Models.Components.Security>? SecuritySource;
         public SDKHooks Hooks;
@@ -42,7 +45,10 @@ namespace Mollie
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerIndex = 0;
-            UserAgent = "speakeasy-sdk/csharp 0.8.6 2.730.5 1.0.0 Mollie";
+            ProfileId = null;
+            Testmode = null;
+            CustomUserAgent = null;
+            UserAgent = "speakeasy-sdk/csharp 0.9.0 2.735.1 1.0.0 Mollie";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

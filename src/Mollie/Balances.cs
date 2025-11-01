@@ -111,8 +111,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Balances(SDKConfig config)
@@ -122,6 +122,8 @@ namespace Mollie
 
         public async Task<ListBalancesResponse> ListAsync(ListBalancesRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances", request);
 
@@ -278,6 +280,8 @@ namespace Mollie
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{id}", request);
 
@@ -557,6 +561,12 @@ namespace Mollie
 
         public async Task<GetBalanceReportResponse> GetReportAsync(GetBalanceReportRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new GetBalanceReportRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/report", request);
 
@@ -707,6 +717,12 @@ namespace Mollie
 
         public async Task<ListBalanceTransactionsResponse> ListTransactionsAsync(ListBalanceTransactionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListBalanceTransactionsRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/transactions", request);
 

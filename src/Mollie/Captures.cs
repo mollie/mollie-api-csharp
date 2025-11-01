@@ -68,8 +68,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Captures(SDKConfig config)
@@ -241,6 +241,12 @@ namespace Mollie
 
         public async Task<ListCapturesResponse> ListAsync(ListCapturesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListCapturesRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures", request);
 
@@ -391,6 +397,12 @@ namespace Mollie
 
         public async Task<GetCaptureResponse> GetAsync(GetCaptureRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new GetCaptureRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures/{captureId}", request);
 

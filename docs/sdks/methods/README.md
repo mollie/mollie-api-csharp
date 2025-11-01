@@ -36,9 +36,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListMethodsRequest req = new ListMethodsRequest() {
     SequenceType = SequenceType.Oneoff,
@@ -51,9 +55,7 @@ ListMethodsRequest req = new ListMethodsRequest() {
     BillingCountry = "DE",
     IncludeWallets = MethodIncludeWalletsParameter.Applepay,
     OrderLineCategories = LineCategories.Eco,
-    ProfileId = "pfl_5B8cwPMGnU",
     Include = "issuers",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -94,9 +96,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListAllMethodsRequest req = new ListAllMethodsRequest() {
     Locale = Locale.EnUS,
@@ -106,8 +112,6 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     },
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
-    ProfileId = "pfl_5B8cwPMGnU",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -156,18 +160,20 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 GetMethodRequest req = new GetMethodRequest() {
     Id = "ideal",
     Locale = Locale.EnUS,
     Currency = "EUR",
-    ProfileId = "pfl_5B8cwPMGnU",
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

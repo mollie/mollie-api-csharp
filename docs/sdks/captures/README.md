@@ -88,16 +88,18 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListCapturesRequest req = new ListCapturesRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
     Embed = "payment",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -136,15 +138,17 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 GetCaptureRequest req = new GetCaptureRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     CaptureId = "cpt_gVMhHKqSSRYJyPsuoPNFH",
     Embed = "payment",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

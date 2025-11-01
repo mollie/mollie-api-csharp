@@ -37,7 +37,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
-        public bool? Testmode { get; set; } = null;
+        public bool? Testmode { get; set; }
 
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.

@@ -45,15 +45,17 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListBalancesRequest req = new ListBalancesRequest() {
     Currency = "EUR",
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -81,15 +83,17 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    },
+    testmode: false
+);
 
 ListBalancesRequest req = new ListBalancesRequest() {
     Currency = "EUR",
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -98,6 +102,53 @@ var res = await sdk.Balances.ListAsync(req);
 // handle response
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Global Parameters [global-parameters] -->
+## Global Parameters
+
+Certain parameters are configured globally. These parameters may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, These global values will be used as defaults on the operations that use them. When such operations are called, there is a place in each to override the global value, if needed.
+
+For example, you can set `profileId` to `` at SDK initialization and then you do not have to pass the same value on calls to operations like `List`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
+
+### Available Globals
+
+The following global parameters are available.
+
+| Name            | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| profileId       | string | The identifier referring to the [profile](get-profile) you wish to<br/>retrieve the resources for.<br/><br/>Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.                                                                     |
+| testmode        | bool   | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |
+| customUserAgent | string | Custom user agent string to be appended to the default Mollie SDK user agent.                                                                                                                                                                                                                                                                                                                          |
+
+### Example
+
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    profileId: "<id>",
+    customUserAgent: "<value>",
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Balances.ListAsync(req);
+
+// handle response
+```
+<!-- End Global Parameters [global-parameters] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -110,15 +161,17 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListBalancesRequest req = new ListBalancesRequest() {
     Currency = "EUR",
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -156,6 +209,7 @@ var sdk = new Client(
         ),
         retryConnectionErrors: false
     ),
+    testmode: false,
     security: new Security() {
         ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
     }
@@ -165,7 +219,6 @@ ListBalancesRequest req = new ListBalancesRequest() {
     Currency = "EUR",
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -196,9 +249,12 @@ using Mollie.Models.Components;
 using Mollie.Models.Errors;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 try
 {
@@ -206,7 +262,6 @@ try
         Currency = "EUR",
         From = "bal_gVMhHKqSSRYJyPsuoPNFH",
         Limit = 50,
-        Testmode = false,
         IdempotencyKey = "123e4567-e89b-12d3-a456-426",
     };
 
@@ -280,6 +335,7 @@ using Mollie.Models.Requests;
 
 var sdk = new Client(
     serverUrl: "https://api.mollie.com/v2",
+    testmode: false,
     security: new Security() {
         ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
     }
@@ -289,7 +345,6 @@ ListBalancesRequest req = new ListBalancesRequest() {
     Currency = "EUR",
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

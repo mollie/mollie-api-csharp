@@ -61,8 +61,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public BalanceTransfers(SDKConfig config)
@@ -234,6 +234,8 @@ namespace Mollie
 
         public async Task<ListConnectBalanceTransfersResponse> ListAsync(ListConnectBalanceTransfersRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers", request);
 
@@ -390,6 +392,8 @@ namespace Mollie
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers/{id}", request);
 

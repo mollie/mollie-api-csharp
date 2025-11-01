@@ -240,16 +240,18 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListPaymentsRequest req = new ListPaymentsRequest() {
     From = "tr_5B8cwPMGnU",
     Limit = 50,
     Sort = Sorting.Desc,
-    ProfileId = "pfl_5B8cwPMGnU",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -287,15 +289,17 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 GetPaymentRequest req = new GetPaymentRequest() {
     PaymentId = "tr_5B8cwPMGnU",
     Include = "details.qrCode",
     Embed = "captures",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

@@ -57,8 +57,8 @@ namespace Mollie
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
         public IBalances Balances { get; private set; }
         public ISettlements Settlements { get; private set; }
@@ -150,13 +150,16 @@ namespace Mollie
         /// </summary>
         /// <param name="security">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
         /// <param name="securitySource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
+        /// <param name="profileId">The identifier referring to the <a href="get-profile">profile</a> you wish to<br/></param>
+        /// <param name="testmode">Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/></param>
+        /// <param name="customUserAgent">Custom user agent string to be appended to the default Mollie SDK user agent.</param>
         /// <param name="serverIndex">The index of the server to use from the predefined server list. Must be between 0 and the length of the server list. Defaults to 0 if not specified.</param>
         /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
         /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
         /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
         /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
         /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
-        public Client(Mollie.Models.Components.Security? security = null, Func<Mollie.Models.Components.Security>? securitySource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
+        public Client(Mollie.Models.Components.Security? security = null, Func<Mollie.Models.Components.Security>? securitySource = null, string? profileId = null, bool? testmode = null, string? customUserAgent = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
             if (serverIndex != null)
             {
@@ -190,6 +193,9 @@ namespace Mollie
 
             SDKConfiguration = new SDKConfig(client)
             {
+                ProfileId = profileId,
+                Testmode = testmode,
+                CustomUserAgent = customUserAgent,
                 ServerIndex = serverIndex == null ? 0 : serverIndex.Value,
                 ServerUrl = serverUrl == null ? "" : serverUrl,
                 SecuritySource = _securitySource,
@@ -279,6 +285,24 @@ namespace Mollie
                     serverUrl = Utilities.TemplateUrl(serverUrl, serverVariables);
                 }
                 _sdkConfig.ServerUrl = serverUrl;
+                return this;
+            }
+
+            public SDKBuilder WithProfileId(string profileId)
+            {
+                _sdkConfig.ProfileId = profileId;
+                return this;
+            }
+
+            public SDKBuilder WithTestmode(bool testmode)
+            {
+                _sdkConfig.Testmode = testmode;
+                return this;
+            }
+
+            public SDKBuilder WithCustomUserAgent(string customUserAgent)
+            {
+                _sdkConfig.CustomUserAgent = customUserAgent;
                 return this;
             }
 

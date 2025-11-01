@@ -218,17 +218,19 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
     Sort = Sorting.Desc,
-    ProfileId = "pfl_5B8cwPMGnU",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -268,16 +270,18 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
     Embed = "payment",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -317,16 +321,18 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "re_5B8cwPMGnU",
     Limit = 50,
     Embed = "payment",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
@@ -366,16 +372,18 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
 
 ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     SettlementId = "stl_jDk30akdN",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
     Limit = 50,
     Embed = "payment",
-    Testmode = false,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

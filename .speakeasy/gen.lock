@@ -1,23 +1,24 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: f7935b5b5d341c91ffbc2f74abfa5f97
+  docChecksum: 04af8e2301bc33abd357c925d77cd2d6
   docVersion: 1.0.0
-  speakeasyVersion: 1.640.0
-  generationVersion: 2.730.5
-  releaseVersion: 0.8.6
-  configChecksum: 5a3004c68e0f0e600b6c7bdd41143f5f
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 0.9.0
+  configChecksum: bc257fa1ab97a507e93dad7acd0f0627
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.15.1
+    core: 3.15.2
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.8
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.83.0
+    globals: 2.82.1
     groups: 2.81.3
     inputOutputModels: 2.83.0
     intellisenseMarkdownSupport: 0.1.0
@@ -4621,3 +4622,4 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes Detected:\n* `Client.Balances.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Balances.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Balances.Get-Report()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Balances.List-Transactions()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Captures()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Refunds()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Settlements.List-Chargebacks()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Permissions.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Organizations.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Profiles.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Webhooks.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Webhook-Events.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Balance-Transfers.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Balance-Transfers.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Payments.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Payments.Get()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Methods.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Methods.All()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Methods.Get()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Refunds.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Refunds.Get()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Refunds.Cancel()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Refunds.All()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Chargebacks.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Chargebacks.Get()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Chargebacks.All()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Captures.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Captures.Get()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Payment-Links.List-Payments()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Terminals.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Terminals.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Delayed-Routing.List()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Customers.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Customers.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Customers.List-Payments()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Mandates.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Mandates.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.All()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Subscriptions.List-Payments()`: \n  *  `request.Testmode` **Changed** **Breaking** :warning:\n* `Client.Sales-Invoices.List()`:  `request.testmode` **Changed** **Breaking** :warning:\n* `Client.Sales-Invoices.Get()`:  `request.testmode` **Changed** **Breaking** :warning:\n"

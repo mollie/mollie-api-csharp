@@ -87,8 +87,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Methods(SDKConfig config)
@@ -98,6 +98,9 @@ namespace Mollie
 
         public async Task<ListMethodsResponse> ListAsync(ListMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods", request);
 
@@ -248,6 +251,9 @@ namespace Mollie
 
         public async Task<ListAllMethodsResponse> AllAsync(ListAllMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods/all", request);
 
@@ -398,6 +404,13 @@ namespace Mollie
 
         public async Task<GetMethodResponse> GetAsync(GetMethodRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new GetMethodRequest();
+            }
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods/{id}", request);
 

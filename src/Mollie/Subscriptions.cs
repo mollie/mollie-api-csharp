@@ -122,8 +122,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Subscriptions(SDKConfig config)
@@ -295,6 +295,12 @@ namespace Mollie
 
         public async Task<ListSubscriptionsResponse> ListAsync(ListSubscriptionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSubscriptionsRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions", request);
 
@@ -452,6 +458,8 @@ namespace Mollie
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions/{subscriptionId}", request);
 
@@ -928,6 +936,9 @@ namespace Mollie
 
         public async Task<ListAllSubscriptionsResponse> AllAsync(ListAllSubscriptionsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/subscriptions", request);
 
@@ -1078,6 +1089,13 @@ namespace Mollie
 
         public async Task<ListSubscriptionPaymentsResponse> ListPaymentsAsync(ListSubscriptionPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSubscriptionPaymentsRequest();
+            }
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/subscriptions/{subscriptionId}/payments", request);
 

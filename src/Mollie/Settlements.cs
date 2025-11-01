@@ -140,8 +140,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Settlements(SDKConfig config)
@@ -714,6 +714,13 @@ namespace Mollie
 
         public async Task<ListSettlementPaymentsResponse> ListPaymentsAsync(ListSettlementPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSettlementPaymentsRequest();
+            }
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request);
 
@@ -864,6 +871,12 @@ namespace Mollie
 
         public async Task<ListSettlementCapturesResponse> ListCapturesAsync(ListSettlementCapturesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSettlementCapturesRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request);
 
@@ -1014,6 +1027,12 @@ namespace Mollie
 
         public async Task<ListSettlementRefundsResponse> ListRefundsAsync(ListSettlementRefundsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSettlementRefundsRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request);
 
@@ -1164,6 +1183,12 @@ namespace Mollie
 
         public async Task<ListSettlementChargebacksResponse> ListChargebacksAsync(ListSettlementChargebacksRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListSettlementChargebacksRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/chargebacks", request);
 

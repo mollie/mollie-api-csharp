@@ -62,8 +62,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.6";
-        private const string _sdkGenVersion = "2.730.5";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.735.1";
         private const string _openapiDocVersion = "1.0.0";
 
         public Chargebacks(SDKConfig config)
@@ -73,6 +73,12 @@ namespace Mollie
 
         public async Task<ListChargebacksResponse> ListAsync(ListChargebacksRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new ListChargebacksRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/chargebacks", request);
 
@@ -223,6 +229,12 @@ namespace Mollie
 
         public async Task<GetChargebackResponse> GetAsync(GetChargebackRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            if (request == null)
+            {
+                request = new GetChargebackRequest();
+            }
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/chargebacks/{chargebackId}", request);
 
@@ -373,6 +385,9 @@ namespace Mollie
 
         public async Task<ListAllChargebacksResponse> AllAsync(ListAllChargebacksRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            request.Testmode ??= SDKConfiguration.Testmode;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/chargebacks", request);
 
