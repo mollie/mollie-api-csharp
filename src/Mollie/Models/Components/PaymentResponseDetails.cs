@@ -384,5 +384,17 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("remainderDetails")]
         public Dictionary<string, object>? RemainderDetails { get; set; }
+
+        /// <summary>
+        /// Multibanco payment reference of the transaction
+        /// </summary>
+        [JsonProperty("multibancoReference")]
+        public string? MultibancoReference { get; set; } = null;
+
+        /// <summary>
+        /// Multibanco entity reference of the transaction
+        /// </summary>
+        [JsonProperty("multibancoEntity")]
+        public string? MultibancoEntity { get; set; } = null;
     }
 }
