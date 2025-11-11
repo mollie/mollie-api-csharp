@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 3aa14a6670ca743ca161fe3bee4d0251
+  docChecksum: 3101d53cbe06acbc04397305ff448453
   docVersion: 1.0.0
-  speakeasyVersion: 1.648.0
-  generationVersion: 2.737.0
-  releaseVersion: 0.9.1
-  configChecksum: 23fb9e583d9e99509601b6d1363d97fc
+  speakeasyVersion: 1.653.0
+  generationVersion: 2.748.0
+  releaseVersion: 0.9.2
+  configChecksum: 4563efc7f905250b3e983315650b87fd
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.15.2
+    core: 3.15.3
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.8
@@ -4622,15 +4622,3 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes Detected:
-  * `Client.Settlements.List-Payments()`:  `response.Embedded.Payments.[].Details` **Changed**
-  * `Client.Payments.Create()`:  `response.details` **Changed**
-  * `Client.Payments.List()`:  `response.Embedded.Payments.[].Details` **Changed**
-  * `Client.Payments.Get()`:  `response.details` **Changed**
-  * `Client.Payments.Update()`:  `response.details` **Changed**
-  * `Client.Payments.Cancel()`:  `response.details` **Changed**
-  * `Client.Payment-Links.List-Payments()`:  `response.Embedded.Payments.[].Details` **Changed**
-  * `Client.Customers.Create-Payment()`:  `response.details` **Changed**
-  * `Client.Customers.List-Payments()`:  `response.Embedded.Payments.[].Details` **Changed**
-  * `Client.Subscriptions.List-Payments()`:  `response.Embedded.Payments.[].Details` **Changed**
