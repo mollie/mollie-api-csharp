@@ -1,4 +1,4 @@
-# EntityClientLinkAddress
+# ClientLinkRequestAddress
 
 Address of the organization.
 

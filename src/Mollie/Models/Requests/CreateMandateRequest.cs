@@ -28,6 +28,6 @@ namespace Mollie.Models.Requests
         public string? IdempotencyKey { get; set; }
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public EntityMandate? EntityMandate { get; set; }
+        public MandateRequest? MandateRequest { get; set; }
     }
 }

@@ -28,34 +28,34 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a customer object. Will always contain the string `customer` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The full name of the customer.
         /// </summary>
-        [JsonProperty("name")]
-        public string? Name { get; set; } = null;
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
+        public string? Name { get; set; }
 
         /// <summary>
         /// The email address of the customer.
         /// </summary>
-        [JsonProperty("email")]
-        public string? Email { get; set; } = null;
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Include)]
+        public string? Email { get; set; }
 
         /// <summary>
         /// Allows you to preset the language to be used.
         /// </summary>
-        [JsonProperty("locale")]
-        public LocaleResponse? Locale { get; set; } = null;
+        [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
+        public LocaleResponse? Locale { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
@@ -65,19 +65,19 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
-        public Metadata? Metadata { get; set; } = null;
+        public Metadata? Metadata { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetCustomerLinks? Links { get; set; }
+        public GetCustomerLinks Links { get; set; } = default!;
 
         [JsonProperty("events")]
         public List<EntityEvent>? Events { get; set; }

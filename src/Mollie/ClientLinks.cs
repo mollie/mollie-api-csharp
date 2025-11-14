@@ -85,15 +85,15 @@ namespace Mollie
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
         /// </remarks>
         /// </summary>
-        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, ClientLinkRequest? clientLinkRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class ClientLinks: IClientLinks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.2";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.9.3";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "1.0.0";
 
         public ClientLinks(SDKConfig config)
@@ -101,12 +101,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, EntityClientLink? entityClientLink = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, ClientLinkRequest? clientLinkRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateClientLinkRequest()
             {
                 IdempotencyKey = idempotencyKey,
-                EntityClientLink = entityClientLink,
+                ClientLinkRequest = clientLinkRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -116,7 +116,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityClientLink", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "ClientLinkRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

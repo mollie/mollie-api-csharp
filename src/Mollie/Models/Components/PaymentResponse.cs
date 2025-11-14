@@ -24,16 +24,16 @@ namespace Mollie.Models.Components
         /// Indicates the response contains a payment object. Will always contain the string `payment` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The description of the payment. This will be shown to your customer on their card or bank statement when possible.<br/>
@@ -50,13 +50,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -307,7 +307,7 @@ namespace Mollie.Models.Components
         public List<EntityPaymentRouteResponse>? Routing { get; set; } = null;
 
         [JsonProperty("sequenceType")]
-        public SequenceTypeResponse? SequenceType { get; set; }
+        public SequenceTypeResponse SequenceType { get; set; } = default!;
 
         [JsonProperty("subscriptionId")]
         public string? SubscriptionId { get; set; }
@@ -329,7 +329,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
-        public string? ProfileId { get; set; }
+        public string ProfileId { get; set; } = default!;
 
         [JsonProperty("settlementId")]
         public string? SettlementId { get; set; }
@@ -345,7 +345,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public PaymentStatus? Status { get; set; }
+        public PaymentStatus Status { get; set; } = default!;
 
         /// <summary>
         /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>
@@ -381,7 +381,7 @@ namespace Mollie.Models.Components
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The date and time the payment became authorized, in ISO 8601 format. This parameter is omitted if the payment is<br/>
@@ -447,6 +447,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public PaymentResponseLinks? Links { get; set; }
+        public PaymentResponseLinks Links { get; set; } = default!;
     }
 }

@@ -13,19 +13,19 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    /// <summary>
-    /// Where the funds will be pulled back from.
-    /// </summary>
-    public class EntityRefundSource
+    public class RefundRequestExternalReference
     {
 
         /// <summary>
-        /// The type of source. Currently only the source type `organization` is supported.
+        /// Specifies the reference type
         /// </summary>
         [JsonProperty("type")]
-        public RefundRoutingReversalsSourceType? Type { get; set; }
+        public RefundExternalReferenceType? Type { get; set; }
 
-        [JsonProperty("organizationId")]
-        public string? OrganizationId { get; set; }
+        /// <summary>
+        /// Unique reference from the payment provider
+        /// </summary>
+        [JsonProperty("id")]
+        public string? Id { get; set; }
     }
 }

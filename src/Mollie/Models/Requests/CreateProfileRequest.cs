@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         public string? IdempotencyKey { get; set; }
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public EntityProfile EntityProfile { get; set; } = default!;
+        public ProfileRequest ProfileRequest { get; set; } = default!;
     }
 }

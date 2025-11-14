@@ -31,7 +31,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Refunds.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityRefund: new EntityRefund() {
+    refundRequest: new RefundRequest() {
         Id = "re_5B8cwPMGnU",
         Description = "Refunding a Chess Board",
         Amount = new Amount() {
@@ -50,18 +50,18 @@ var res = await sdk.Refunds.CreateAsync(
         PaymentId = "tr_5B8cwPMGnU",
         SettlementId = "stl_5B8cwPMGnU",
         Status = RefundStatus.Queued,
-        ExternalReference = new EntityRefundExternalReference() {
+        ExternalReference = new RefundRequestExternalReference() {
             Type = RefundExternalReferenceType.AcquirerReference,
             Id = "123456789012345",
         },
         ReverseRouting = false,
-        RoutingReversals = new List<EntityRefundRoutingReversal>() {
-            new EntityRefundRoutingReversal() {
+        RoutingReversals = new List<RefundRequestRoutingReversal>() {
+            new RefundRequestRoutingReversal() {
                 Amount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
                 },
-                Source = new EntityRefundSource() {
+                Source = new RefundRequestSource() {
                     Type = RefundRoutingReversalsSourceType.Organization,
                     OrganizationId = "org_1234567",
                 },
@@ -80,7 +80,7 @@ var res = await sdk.Refunds.CreateAsync(
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityRefund`                                                                   | [EntityRefund](../../Models/Components/EntityRefund.md)                          | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `RefundRequest`                                                                  | [RefundRequest](../../Models/Components/RefundRequest.md)                        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

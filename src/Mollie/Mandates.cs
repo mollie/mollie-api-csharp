@@ -37,7 +37,7 @@ namespace Mollie
         /// mandates for cards, your customers need to perform a &apos;first payment&apos; with their card.
         /// </remarks>
         /// </summary>
-        Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, MandateRequest? mandateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List mandates
@@ -75,8 +75,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.2";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.9.3";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "1.0.0";
 
         public Mandates(SDKConfig config)
@@ -84,13 +84,13 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, EntityMandate? entityMandate = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, MandateRequest? mandateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateMandateRequest()
             {
                 CustomerId = customerId,
                 IdempotencyKey = idempotencyKey,
-                EntityMandate = entityMandate,
+                MandateRequest = mandateRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates", request);
@@ -99,7 +99,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityMandate", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "MandateRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -659,32 +659,14 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 204)
             {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                return new RevokeMandateResponse()
                 {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    object obj;
-                    try
+                    HttpMeta = new Models.Components.HTTPMetadata()
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Ignore);
+                        Response = httpResponse,
+                        Request = httpRequest
                     }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    var response = new RevokeMandateResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.Any = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+                };
             }
             else if(responseStatusCode == 404)
             {

@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Collections.Generic;
     using System.Linq;
     
-    public class EntityProfile
+    public class ProfileRequest
     {
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are<br/>
@@ -38,19 +38,19 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("website")]
-        public string? Website { get; set; }
+        public string Website { get; set; } = default!;
 
         /// <summary>
         /// The email address associated with the profile&apos;s trade name or brand.
         /// </summary>
         [JsonProperty("email")]
-        public string? Email { get; set; }
+        public string Email { get; set; } = default!;
 
         /// <summary>
         /// The phone number associated with the profile&apos;s trade name or brand.
         /// </summary>
         [JsonProperty("phone")]
-        public string? Phone { get; set; }
+        public string Phone { get; set; } = default!;
 
         /// <summary>
         /// The products or services offered by the profile&apos;s website or application.

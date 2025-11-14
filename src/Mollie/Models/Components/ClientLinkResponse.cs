@@ -24,18 +24,18 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this client link. Example: `cl_vZCnNQsV2UtfXxYifWKWH`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public ClientLinkResponseLinks? Links { get; set; }
+        public ClientLinkResponseLinks Links { get; set; } = default!;
     }
 }

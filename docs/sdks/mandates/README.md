@@ -32,7 +32,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Mandates.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityMandate: new EntityMandate() {
+    mandateRequest: new MandateRequest() {
         Id = "mdt_5B8cwPMGnU",
         Method = MandateMethod.Directdebit,
         ConsumerName = "John Doe",
@@ -58,7 +58,7 @@ var res = await sdk.Mandates.CreateAsync(
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `CustomerId`                                                                     | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related customer.                                          | cst_5B8cwPMGnU                                                                   |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityMandate`                                                                  | [EntityMandate](../../Models/Components/EntityMandate.md)                        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `MandateRequest`                                                                 | [MandateRequest](../../Models/Components/MandateRequest.md)                      | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

@@ -20,37 +20,37 @@ namespace Mollie.Models.Components
         /// Indicates the response contains a route object. Will always contain the string `route` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
+        public string PaymentId { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         /// <summary>
         /// The description of the route. This description is shown in the reports.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The destination of the route.
         /// </summary>
         [JsonProperty("destination")]
-        public RouteGetResponseDestination? Destination { get; set; }
+        public RouteGetResponseDestination Destination { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public RouteGetResponseLinks? Links { get; set; }
+        public RouteGetResponseLinks Links { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

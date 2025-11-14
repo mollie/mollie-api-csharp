@@ -24,16 +24,16 @@ namespace Mollie.Models.Components
         /// Indicates the response contains a capture object. Will always contain the string `capture` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The description of the capture.
@@ -44,8 +44,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
-        [JsonProperty("amount")]
-        public AmountNullable? Amount { get; set; } = null;
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
+        public AmountNullable? Amount { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
         /// The capture&apos;s status.
         /// </summary>
         [JsonProperty("status")]
-        public CaptureStatus? Status { get; set; }
+        public CaptureStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
@@ -70,7 +70,7 @@ namespace Mollie.Models.Components
         public Metadata? Metadata { get; set; } = null;
 
         [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
+        public string PaymentId { get; set; } = default!;
 
         [JsonProperty("shipmentId")]
         public string? ShipmentId { get; set; }
@@ -82,12 +82,12 @@ namespace Mollie.Models.Components
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public CaptureResponseLinks? Links { get; set; }
+        public CaptureResponseLinks Links { get; set; } = default!;
     }
 }

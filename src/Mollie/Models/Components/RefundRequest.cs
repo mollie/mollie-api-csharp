@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Collections.Generic;
     using System.Linq;
     
-    public class EntityRefund
+    public class RefundRequest
     {
 
         [JsonProperty("id")]
@@ -61,7 +61,7 @@ namespace Mollie.Models.Components
         public RefundStatus Status { get; set; } = default!;
 
         [JsonProperty("externalReference")]
-        public EntityRefundExternalReference? ExternalReference { get; set; }
+        public RefundRequestExternalReference? ExternalReference { get; set; }
 
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>
@@ -96,7 +96,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("routingReversals")]
-        public List<EntityRefundRoutingReversal>? RoutingReversals { get; set; } = null;
+        public List<RefundRequestRoutingReversal>? RoutingReversals { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

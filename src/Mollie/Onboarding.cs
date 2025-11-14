@@ -54,8 +54,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.2";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.9.3";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "1.0.0";
 
         public Onboarding(SDKConfig config)
@@ -289,32 +289,14 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 204)
             {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                return new SubmitOnboardingDataResponse()
                 {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    object obj;
-                    try
+                    HttpMeta = new Models.Components.HTTPMetadata()
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Include);
+                        Response = httpResponse,
+                        Request = httpRequest
                     }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    var response = new SubmitOnboardingDataResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.Any = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+                };
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {

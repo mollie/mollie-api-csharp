@@ -76,7 +76,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.ClientLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityClientLink: new EntityClientLink() {
+    clientLinkRequest: new ClientLinkRequest() {
         Owner = new Owner() {
             Email = "john@example.org",
             GivenName = "John",
@@ -84,7 +84,7 @@ var res = await sdk.ClientLinks.CreateAsync(
             Locale = LocaleResponse.EnUS,
         },
         Name = "Acme Corporation",
-        Address = new EntityClientLinkAddress() {
+        Address = new ClientLinkRequestAddress() {
             StreetAndNumber = "Main Street 123",
             PostalCode = "1234AB",
             City = "Amsterdam",
@@ -103,7 +103,7 @@ var res = await sdk.ClientLinks.CreateAsync(
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityClientLink`                                                               | [EntityClientLink](../../Models/Components/EntityClientLink.md)                  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `ClientLinkRequest`                                                              | [ClientLinkRequest](../../Models/Components/ClientLinkRequest.md)                | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

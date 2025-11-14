@@ -32,7 +32,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Profiles.CreateAsync(
-    entityProfile: new EntityProfile() {
+    profileRequest: new ProfileRequest() {
         Name = "My website name",
         Website = "https://example.com",
         Email = "test@mollie.com",
@@ -55,7 +55,7 @@ var res = await sdk.Profiles.CreateAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `EntityProfile`                                                                  | [EntityProfile](../../Models/Components/EntityProfile.md)                        | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
+| `ProfileRequest`                                                                 | [ProfileRequest](../../Models/Components/ProfileRequest.md)                      | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response

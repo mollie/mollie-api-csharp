@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Collections.Generic;
     using System.Linq;
     
-    public class EntityMandate
+    public class MandateRequest
     {
 
         [JsonProperty("id")]
@@ -32,13 +32,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public MandateMethod? Method { get; set; }
+        public MandateMethod Method { get; set; } = default!;
 
         /// <summary>
         /// The customer&apos;s name.
         /// </summary>
         [JsonProperty("consumerName")]
-        public string? ConsumerName { get; set; }
+        public string ConsumerName { get; set; } = default!;
 
         /// <summary>
         /// The customer&apos;s IBAN. Required for SEPA Direct Debit mandates.

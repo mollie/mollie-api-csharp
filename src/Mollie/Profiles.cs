@@ -36,7 +36,7 @@ namespace Mollie
         /// can use this endpoint to automate profile creation.
         /// </remarks>
         /// </summary>
-        Task<CreateProfileResponse> CreateAsync(EntityProfile entityProfile, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<CreateProfileResponse> CreateAsync(ProfileRequest profileRequest, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List profiles
@@ -97,8 +97,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.2";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.9.3";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "1.0.0";
 
         public Profiles(SDKConfig config)
@@ -106,11 +106,11 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateProfileResponse> CreateAsync(EntityProfile entityProfile, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<CreateProfileResponse> CreateAsync(ProfileRequest profileRequest, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateProfileRequest()
             {
-                EntityProfile = entityProfile,
+                ProfileRequest = profileRequest,
                 IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -121,7 +121,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityProfile", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "ProfileRequest", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -834,32 +834,14 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 204)
             {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                return new DeleteProfileResponse()
                 {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    object obj;
-                    try
+                    HttpMeta = new Models.Components.HTTPMetadata()
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Ignore);
+                        Response = httpResponse,
+                        Request = httpRequest
                     }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    var response = new DeleteProfileResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.Any = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+                };
             }
             else if(new List<int>{404, 410}.Contains(responseStatusCode))
             {

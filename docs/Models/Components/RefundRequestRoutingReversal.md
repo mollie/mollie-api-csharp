@@ -1,4 +1,4 @@
-# EntityRefundRoutingReversal
+# RefundRequestRoutingReversal
 
 
 ## Fields
@@ -6,4 +6,4 @@
 | Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `Amount`                                                                                          | [Amount](../../Models/Components/Amount.md)                                                       | :heavy_minus_sign:                                                                                | In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field. |
-| `Source`                                                                                          | [EntityRefundSource](../../Models/Components/EntityRefundSource.md)                               | :heavy_minus_sign:                                                                                | Where the funds will be pulled back from.                                                         |
+| `Source`                                                                                          | [RefundRequestSource](../../Models/Components/RefundRequestSource.md)                             | :heavy_minus_sign:                                                                                | Where the funds will be pulled back from.                                                         |

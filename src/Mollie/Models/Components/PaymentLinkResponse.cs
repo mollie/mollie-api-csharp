@@ -28,16 +28,16 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the<br/>
@@ -47,13 +47,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
-        [JsonProperty("amount")]
-        public AmountNullable? Amount { get; set; } = null;
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
+        public AmountNullable? Amount { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -65,7 +65,7 @@ namespace Mollie.Models.Components
         /// Whether the payment link is archived. Customers will not be able to complete payments on archived payment links.
         /// </summary>
         [JsonProperty("archived")]
-        public bool? Archived { get; set; }
+        public bool Archived { get; set; } = default!;
 
         /// <summary>
         /// The URL your customer will be redirected to after completing the payment process. If no redirect URL is provided,<br/>
@@ -74,8 +74,8 @@ namespace Mollie.Models.Components
         /// the customer will be shown a generic message after completing the payment.
         /// </remarks>
         /// </summary>
-        [JsonProperty("redirectUrl")]
-        public string? RedirectUrl { get; set; } = null;
+        [JsonProperty("redirectUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The webhook URL where we will send payment status updates to.<br/>
@@ -90,8 +90,8 @@ namespace Mollie.Models.Components
         /// local machine.
         /// </remarks>
         /// </summary>
-        [JsonProperty("webhookUrl")]
-        public string? WebhookUrl { get; set; } = null;
+        [JsonProperty("webhookUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? WebhookUrl { get; set; }
 
         /// <summary>
         /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item<br/>
@@ -123,8 +123,8 @@ namespace Mollie.Models.Components
         /// required.
         /// </remarks>
         /// </summary>
-        [JsonProperty("profileId")]
-        public string? ProfileId { get; set; } = null;
+        [JsonProperty("profileId", NullValueHandling = NullValueHandling.Include)]
+        public string? ProfileId { get; set; }
 
         /// <summary>
         /// Indicates whether the payment link is reusable. If this field is set to `true`, customers can make multiple<br/>
@@ -135,20 +135,20 @@ namespace Mollie.Models.Components
         /// If no value is specified, the field defaults to `false`, allowing only a single payment per link.
         /// </remarks>
         /// </summary>
-        [JsonProperty("reusable")]
-        public bool? Reusable { get; set; } = null;
+        [JsonProperty("reusable", NullValueHandling = NullValueHandling.Include)]
+        public bool? Reusable { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The date and time the payment link became paid, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("paidAt")]
-        public string? PaidAt { get; set; } = null;
+        [JsonProperty("paidAt", NullValueHandling = NullValueHandling.Include)]
+        public string? PaidAt { get; set; }
 
         /// <summary>
         /// The date and time the payment link is set to expire, in ISO 8601 format. If no expiry date was provided up front,<br/>
@@ -157,8 +157,8 @@ namespace Mollie.Models.Components
         /// the payment link will not expire automatically.
         /// </remarks>
         /// </summary>
-        [JsonProperty("expiresAt")]
-        public string? ExpiresAt { get; set; } = null;
+        [JsonProperty("expiresAt", NullValueHandling = NullValueHandling.Include)]
+        public string? ExpiresAt { get; set; }
 
         /// <summary>
         /// An array of payment methods that are allowed to be used for this payment link. When this parameter is<br/>
@@ -167,8 +167,8 @@ namespace Mollie.Models.Components
         /// not provided or is an empty array, all enabled payment methods will be available.
         /// </remarks>
         /// </summary>
-        [JsonProperty("allowedMethods")]
-        public List<PaymentLinkMethodResponse>? AllowedMethods { get; set; } = null;
+        [JsonProperty("allowedMethods", NullValueHandling = NullValueHandling.Include)]
+        public List<PaymentLinkMethodResponse>? AllowedMethods { get; set; }
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie<br/>
@@ -204,6 +204,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public PaymentLinkResponseLinks? Links { get; set; }
+        public PaymentLinkResponseLinks Links { get; set; } = default!;
     }
 }

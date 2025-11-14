@@ -34,7 +34,7 @@ namespace Mollie
         /// transfer or by refunding the amount to your customer&apos;s credit card.
         /// </remarks>
         /// </summary>
-        Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RefundRequest? refundRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List payment refunds
@@ -85,8 +85,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.2";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.9.3";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "1.0.0";
 
         public Refunds(SDKConfig config)
@@ -94,13 +94,13 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, EntityRefund? entityRefund = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<CreateRefundResponse> CreateAsync(string paymentId, string? idempotencyKey = null, RefundRequest? refundRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateRefundRequest()
             {
                 PaymentId = paymentId,
                 IdempotencyKey = idempotencyKey,
-                EntityRefund = entityRefund,
+                RefundRequest = refundRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/refunds", request);
@@ -109,7 +109,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityRefund", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RefundRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -662,32 +662,14 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 204)
             {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                return new CancelRefundResponse()
                 {
-                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    object obj;
-                    try
+                    HttpMeta = new Models.Components.HTTPMetadata()
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<object>(httpResponseBody, NullValueHandling.Ignore);
+                        Response = httpResponse,
+                        Request = httpRequest
                     }
-                    catch (Exception ex)
-                    {
-                        throw new ResponseValidationException("Failed to deserialize response body into object.", httpRequest, httpResponse, httpResponseBody, ex);
-                    }
-
-                    var response = new CancelRefundResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.Any = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+                };
             }
             else if(responseStatusCode == 404)
             {

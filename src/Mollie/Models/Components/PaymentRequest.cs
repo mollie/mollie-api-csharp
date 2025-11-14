@@ -36,13 +36,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -86,8 +86,8 @@ namespace Mollie.Models.Components
         /// Apple Pay payments with an `applePayPaymentToken`.
         /// </remarks>
         /// </summary>
-        [JsonProperty("redirectUrl")]
-        public string? RedirectUrl { get; set; } = null;
+        [JsonProperty("redirectUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The URL your customer will be redirected to when the customer explicitly cancels the payment. If this URL is not<br/>

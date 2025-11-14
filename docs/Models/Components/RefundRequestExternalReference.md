@@ -1,4 +1,4 @@
-# EntityRefundExternalReference
+# RefundRequestExternalReference
 
 
 ## Fields

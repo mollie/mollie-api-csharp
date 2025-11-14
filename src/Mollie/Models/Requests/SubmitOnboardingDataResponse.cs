@@ -18,10 +18,5 @@ namespace Mollie.Models.Requests
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
-
-        /// <summary>
-        /// An empty response.
-        /// </summary>
-        public object? Any { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Mollie.Models.Components
     /// <summary>
     /// Address of the organization.
     /// </summary>
-    public class EntityClientLinkAddress
+    public class ClientLinkRequestAddress
     {
 
         /// <summary>

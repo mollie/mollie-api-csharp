@@ -13,26 +13,26 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    public class EntityClientLink
+    public class ClientLinkRequest
     {
 
         /// <summary>
         /// Personal data of your customer.
         /// </summary>
         [JsonProperty("owner")]
-        public Owner? Owner { get; set; }
+        public Owner Owner { get; set; } = default!;
 
         /// <summary>
         /// Name of the organization.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// Address of the organization.
         /// </summary>
         [JsonProperty("address")]
-        public EntityClientLinkAddress? Address { get; set; }
+        public ClientLinkRequestAddress Address { get; set; } = default!;
 
         /// <summary>
         /// The registration number of the organization at their local chamber of commerce.

@@ -1,4 +1,4 @@
-# EntityRefundSource
+# RefundRequestSource
 
 Where the funds will be pulled back from.
 

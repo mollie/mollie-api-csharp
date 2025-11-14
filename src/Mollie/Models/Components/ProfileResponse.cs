@@ -24,19 +24,19 @@ namespace Mollie.Models.Components
         /// Indicates the response contains a profile object. Will always contain the string `profile` for this endpoint.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The identifier uniquely referring to this profile. Example: `pfl_v9hTwCvYqw`.
         /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Whether this entity was created in live mode or in test mode.
         /// </summary>
         [JsonProperty("mode")]
-        public Mode? Mode { get; set; }
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or<br/>
@@ -46,7 +46,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are<br/>
@@ -56,19 +56,19 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("website")]
-        public string? Website { get; set; }
+        public string Website { get; set; } = default!;
 
         /// <summary>
         /// The email address associated with the profile&apos;s trade name or brand.
         /// </summary>
         [JsonProperty("email")]
-        public string? Email { get; set; }
+        public string Email { get; set; } = default!;
 
         /// <summary>
         /// The phone number associated with the profile&apos;s trade name or brand.
         /// </summary>
         [JsonProperty("phone")]
-        public string? Phone { get; set; }
+        public string Phone { get; set; } = default!;
 
         /// <summary>
         /// The products or services offered by the profile&apos;s website or application.
@@ -94,7 +94,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
-        public string? BusinessCategory { get; set; }
+        public string BusinessCategory { get; set; } = default!;
 
         /// <summary>
         /// The profile status determines whether the profile is able to receive live payments.<br/>
@@ -107,7 +107,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public ProfileStatus? Status { get; set; }
+        public ProfileStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
@@ -124,12 +124,12 @@ namespace Mollie.Models.Components
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public ProfileResponseLinks? Links { get; set; }
+        public ProfileResponseLinks Links { get; set; } = default!;
     }
 }

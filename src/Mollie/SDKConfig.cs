@@ -48,7 +48,7 @@ namespace Mollie
             ProfileId = null;
             Testmode = null;
             CustomUserAgent = null;
-            UserAgent = "speakeasy-sdk/csharp 0.9.2 2.748.0 1.0.0 Mollie";
+            UserAgent = "speakeasy-sdk/csharp 0.9.3 2.753.6 1.0.0 Mollie";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    public class EntityRefundRoutingReversal
+    public class RefundRequestRoutingReversal
     {
 
         /// <summary>
@@ -26,6 +26,6 @@ namespace Mollie.Models.Components
         /// Where the funds will be pulled back from.
         /// </summary>
         [JsonProperty("source")]
-        public EntityRefundSource? Source { get; set; }
+        public RefundRequestSource? Source { get; set; }
     }
 }
