@@ -23,13 +23,10 @@ namespace Mollie.Models.Requests
         /// Indicates the response contains a client object. Will always contain the string `client` for this resource type.
         /// </summary>
         [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        public string Resource { get; set; } = default!;
 
-        /// <summary>
-        /// The identifier uniquely referring to this client. Example: `org_12345678`.
-        /// </summary>
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The commission object.
@@ -51,7 +48,7 @@ namespace Mollie.Models.Requests
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public GetClientLinks? Links { get; set; }
+        public GetClientLinks Links { get; set; } = default!;
 
         [JsonProperty("_embedded")]
         public GetClientEmbedded? Embedded { get; set; }
