@@ -26,6 +26,13 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this payment. Mollie assigns this identifier at payment creation time. Mollie<br/>
+        /// 
+        /// <remarks>
+        /// will always refer to the payment by this ID. Example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -59,34 +66,53 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount that is already refunded. Only available when refunds are available for this payment. For some<br/>
+        /// 
+        /// <remarks>
+        /// payment methods, this amount may be higher than the payment amount, for example to allow reimbursement of the<br/>
+        /// costs for a return shipment to the customer.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amountRefunded")]
-        public Amount? AmountRefunded { get; set; }
+        public AmountRefunded? AmountRefunded { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The remaining amount that can be refunded. Only available when refunds are available for this payment.
         /// </summary>
         [JsonProperty("amountRemaining")]
-        public Amount? AmountRemaining { get; set; }
+        public AmountRemaining? AmountRemaining { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount that is already captured for this payment. Only available when this payment supports captures.
         /// </summary>
         [JsonProperty("amountCaptured")]
-        public Amount? AmountCaptured { get; set; }
+        public AmountCaptured? AmountCaptured { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount that was charged back for this payment. Only available when the total charged back amount is not<br/>
+        /// 
+        /// <remarks>
+        /// zero.
+        /// </remarks>
         /// </summary>
         [JsonProperty("amountChargedBack")]
-        public Amount? AmountChargedBack { get; set; }
+        public AmountChargedBack? AmountChargedBack { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
+        /// 
+        /// <remarks>
+        /// currency your account is settled in.<br/>
+        /// <br/>
+        /// Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is<br/>
+        /// settled by Mollie the `settlementAmount` is omitted from the response.<br/>
+        /// <br/>
+        /// Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest<br/>
+        /// using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
-        public Amount? SettlementAmount { get; set; }
+        public PaymentResponseSettlementAmount? SettlementAmount { get; set; }
 
         /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
@@ -309,11 +335,27 @@ namespace Mollie.Models.Components
         [JsonProperty("sequenceType")]
         public SequenceTypeResponse SequenceType { get; set; } = default!;
 
+        /// <summary>
+        /// If the payment was automatically created via a subscription, the ID of the <a href="get-subscription">subscription</a> will<br/>
+        /// 
+        /// <remarks>
+        /// be added to the response.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("subscriptionId")]
-        public string? SubscriptionId { get; set; }
+        public string? SubscriptionId { get; set; } = null;
 
+        /// <summary>
+        /// **Only relevant for recurring payments.**<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// When creating recurring payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
+        /// the customer&apos;s accounts should be credited.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("mandateId")]
-        public string? MandateId { get; set; }
+        public string? MandateId { get; set; } = null;
 
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }
@@ -331,21 +373,20 @@ namespace Mollie.Models.Components
         [JsonProperty("profileId")]
         public string ProfileId { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier referring to the <a href="get-settlement">settlement</a> this payment was settled with.
+        /// </summary>
         [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
-
-        [JsonProperty("orderId")]
-        public string? OrderId { get; set; }
+        public string? SettlementId { get; set; } = null;
 
         /// <summary>
-        /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
-        /// 
-        /// <remarks>
-        /// statuses occur at what point.
-        /// </remarks>
+        /// If the payment was created for an <a href="get-order">order</a>, the ID of that order will be part of the response.
         /// </summary>
+        [JsonProperty("orderId")]
+        public string? OrderId { get; set; } = null;
+
         [JsonProperty("status")]
-        public PaymentStatus Status { get; set; } = default!;
+        public PaymentResponseStatus Status { get; set; } = default!;
 
         /// <summary>
         /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>

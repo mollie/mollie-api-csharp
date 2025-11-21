@@ -30,6 +30,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this balance transaction.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

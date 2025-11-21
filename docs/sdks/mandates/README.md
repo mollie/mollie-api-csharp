@@ -43,8 +43,6 @@ var res = await sdk.Mandates.CreateAsync(
         MandateReference = "ID-1023892",
         PaypalBillingAgreementId = "B-12A34567B8901234CD",
         PayPalVaultId = "8kk8451t",
-        Status = MandateStatus.Valid,
-        CustomerId = "cst_5B8cwPMGnU",
         Testmode = false,
     }
 );

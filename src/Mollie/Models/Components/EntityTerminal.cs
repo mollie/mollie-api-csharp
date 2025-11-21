@@ -26,6 +26,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this terminal. Example: `term_7MgL4wea46qkRcoTZjWEH`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -46,11 +49,8 @@ namespace Mollie.Models.Components
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
-        /// <summary>
-        /// The status of the terminal.
-        /// </summary>
         [JsonProperty("status")]
-        public TerminalStatus Status { get; set; } = default!;
+        public EntityTerminalStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The brand of the terminal.

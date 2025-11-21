@@ -28,8 +28,6 @@ var res = await sdk.DelayedRouting.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entityRoute: new EntityRoute() {
-        Id = "crt_dyARQ3JzCgtPDhU2Pbq3J",
-        PaymentId = "tr_5B8cwPMGnU",
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",

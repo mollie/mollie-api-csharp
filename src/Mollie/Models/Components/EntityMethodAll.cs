@@ -31,19 +31,14 @@ namespace Mollie.Models.Components
         public string Resource { get; set; } = default!;
 
         /// <summary>
-        /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>
+        /// The unique identifier of the payment method. When used during <a href="create-payment">payment creation</a>, the payment<br/>
         /// 
         /// <remarks>
-        /// method and your customer will skip the selection screen and is sent directly to the chosen payment method. The<br/>
-        /// parameter enables you to fully integrate the payment method selection into your website.<br/>
-        /// <br/>
-        /// You can also specify the methods in an array. By doing so we will still show the payment method selection screen<br/>
-        /// but will only show the methods specified in the array. For example, you can use this functionality to only show<br/>
-        /// payment methods from a specific country to your customer `[&apos;bancontact&apos;, &apos;belfius&apos;]`.
+        /// method selection screen will be skipped.
         /// </remarks>
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Include)]
-        public MethodResponse? Id { get; set; }
+        public EntityMethodAllId? Id { get; set; }
 
         /// <summary>
         /// The full name of the payment method.<br/>
@@ -57,16 +52,20 @@ namespace Mollie.Models.Components
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The minimum payment amount required to use this payment method.
         /// </summary>
         [JsonProperty("minimumAmount")]
-        public Amount MinimumAmount { get; set; } = default!;
+        public EntityMethodAllMinimumAmount MinimumAmount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The maximum payment amount allowed when using this payment method. If there is no method-specific maximum, `null`<br/>
+        /// 
+        /// <remarks>
+        /// is returned instead.
+        /// </remarks>
         /// </summary>
         [JsonProperty("maximumAmount", NullValueHandling = NullValueHandling.Include)]
-        public AmountNullable? MaximumAmount { get; set; }
+        public EntityMethodAllMaximumAmount? MaximumAmount { get; set; }
 
         /// <summary>
         /// URLs of images representing the payment method.

@@ -30,6 +30,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this subscription. Example: `sub_rVKGtNd6s3`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -39,15 +42,8 @@ namespace Mollie.Models.Components
         [JsonProperty("mode")]
         public Mode Mode { get; set; } = default!;
 
-        /// <summary>
-        /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
-        /// 
-        /// <remarks>
-        /// enabling the subscription.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("status")]
-        public SubscriptionStatus Status { get; set; } = default!;
+        public SubscriptionResponseStatus Status { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -157,6 +153,9 @@ namespace Mollie.Models.Components
         [JsonProperty("webhookUrl")]
         public string WebhookUrl { get; set; } = default!;
 
+        /// <summary>
+        /// The customer this subscription belongs to.
+        /// </summary>
         [JsonProperty("customerId")]
         public string CustomerId { get; set; } = default!;
 

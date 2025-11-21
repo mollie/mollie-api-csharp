@@ -16,12 +16,6 @@ namespace Mollie.Models.Components
     public class EntityRoute
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
-        [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>

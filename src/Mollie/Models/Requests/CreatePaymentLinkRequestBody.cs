@@ -18,9 +18,6 @@ namespace Mollie.Models.Requests
     public class CreatePaymentLinkRequestBody
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown on the<br/>
         /// 

@@ -34,7 +34,6 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.SalesInvoices.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entitySalesInvoice: new EntitySalesInvoice() {
-        Id = "invoice_4Y0eZitmBnQ6IDoMqZQKh",
         Testmode = false,
         ProfileId = "pfl_QkEhN94Ba",
         Status = SalesInvoiceStatus.Draft,
@@ -74,26 +73,6 @@ var res = await sdk.SalesInvoices.CreateAsync(
         Lines = new List<SalesInvoiceLineItem>() {},
         Discount = new SalesInvoiceDiscount() {
             Type = SalesInvoiceDiscountType.Amount,
-            Value = "10.00",
-        },
-        AmountDue = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        SubtotalAmount = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        TotalAmount = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        TotalVatAmount = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        DiscountedSubtotalAmount = new Amount() {
-            Currency = "EUR",
             Value = "10.00",
         },
     }

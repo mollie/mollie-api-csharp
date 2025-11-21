@@ -26,6 +26,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this balance.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -41,8 +44,11 @@ namespace Mollie.Models.Components
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
+        /// <summary>
+        /// The balance&apos;s ISO 4217 currency code.
+        /// </summary>
         [JsonProperty("currency")]
-        public Currencies Currency { get; set; } = default!;
+        public Currency Currency { get; set; } = default!;
 
         /// <summary>
         /// The description or name of the balance. Can be used to denote the purpose of the balance.
@@ -50,29 +56,22 @@ namespace Mollie.Models.Components
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
-        /// <summary>
-        /// The status of the balance.
-        /// </summary>
         [JsonProperty("status")]
-        public BalanceStatus Status { get; set; } = default!;
+        public EntityBalanceStatus Status { get; set; } = default!;
+
+        [JsonProperty("transferFrequency")]
+        public TransferFrequency? TransferFrequency { get; set; }
 
         /// <summary>
-        /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
+        /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
         /// 
         /// <remarks>
-        /// destination.<br/>
-        /// <br/>
-        /// Settlements created during weekends or on bank holidays will take place on the next business day.
+        /// this threshold, the complete balance will be paid out to the transfer destination according to the configured<br/>
+        /// frequency.
         /// </remarks>
         /// </summary>
-        [JsonProperty("transferFrequency")]
-        public BalanceTransferFrequency? TransferFrequency { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
         [JsonProperty("transferThreshold")]
-        public Amount? TransferThreshold { get; set; }
+        public TransferThreshold? TransferThreshold { get; set; }
 
         /// <summary>
         /// The transfer reference set to be included in all the transfers for this balance.
@@ -91,16 +90,20 @@ namespace Mollie.Models.Components
         public TransferDestination? TransferDestination { get; set; } = null;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The amount directly available on the balance, e.g. `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;100.00&quot;}`.
         /// </summary>
         [JsonProperty("availableAmount")]
-        public Amount AvailableAmount { get; set; } = default!;
+        public AvailableAmount AvailableAmount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
+        /// 
+        /// <remarks>
+        /// few days to clear.
+        /// </remarks>
         /// </summary>
         [JsonProperty("pendingAmount")]
-        public Amount PendingAmount { get; set; } = default!;
+        public PendingAmount PendingAmount { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

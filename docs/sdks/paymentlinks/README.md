@@ -34,7 +34,6 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.PaymentLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new CreatePaymentLinkRequestBody() {
-        Id = "pl_d9fQur83kFdhH8hIhaZfq",
         Description = "Chess Board",
         Amount = new AmountNullable() {
             Currency = "EUR",

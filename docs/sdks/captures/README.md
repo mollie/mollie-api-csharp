@@ -35,20 +35,11 @@ var res = await sdk.Captures.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entityCapture: new EntityCapture() {
-        Id = "cpt_vytxeTZskVKR7C7WgdSP3d",
         Description = "Capture for cart #12345",
         Amount = new AmountNullable() {
             Currency = "EUR",
             Value = "10.00",
         },
-        SettlementAmount = new AmountNullable() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        Status = CaptureStatus.Succeeded,
-        PaymentId = "tr_5B8cwPMGnU",
-        ShipmentId = "shp_5x4xQJDWGNcY3tKGL7X5J",
-        SettlementId = "stl_5B8cwPMGnU",
     }
 );
 

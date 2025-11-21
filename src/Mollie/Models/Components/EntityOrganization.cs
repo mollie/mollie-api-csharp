@@ -46,10 +46,10 @@ namespace Mollie.Models.Components
         public string Email { get; set; } = default!;
 
         /// <summary>
-        /// Allows you to preset the language to be used.
+        /// The preferred locale of the merchant, as set in their Mollie dashboard.
         /// </summary>
         [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
-        public LocaleResponse? Locale { get; set; }
+        public EntityOrganizationLocale? Locale { get; set; }
 
         [JsonProperty("address")]
         public Address Address { get; set; } = default!;

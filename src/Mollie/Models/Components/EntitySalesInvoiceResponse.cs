@@ -30,6 +30,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string? Resource { get; set; }
 
+        /// <summary>
+        /// The identifier uniquely referring to this invoice. Example: `invoice_4Y0eZitmBnQ6IDoMqZQKh`.
+        /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -154,34 +157,34 @@ namespace Mollie.Models.Components
         public SalesInvoiceDiscountResponse? Discount { get; set; } = null;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The amount that is left to be paid.
         /// </summary>
         [JsonProperty("amountDue")]
-        public Amount? AmountDue { get; set; }
+        public AmountDue? AmountDue { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount without VAT before discounts.
         /// </summary>
         [JsonProperty("subtotalAmount")]
-        public Amount? SubtotalAmount { get; set; }
+        public SubtotalAmount? SubtotalAmount { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount with VAT.
         /// </summary>
         [JsonProperty("totalAmount")]
-        public Amount? TotalAmount { get; set; }
+        public TotalAmount? TotalAmount { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total VAT amount.
         /// </summary>
         [JsonProperty("totalVatAmount")]
-        public Amount? TotalVatAmount { get; set; }
+        public TotalVatAmount? TotalVatAmount { get; set; }
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount without VAT after discounts.
         /// </summary>
         [JsonProperty("discountedSubtotalAmount")]
-        public Amount? DiscountedSubtotalAmount { get; set; }
+        public DiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

@@ -35,40 +35,22 @@ namespace Mollie.Models.Components
         [JsonProperty("method")]
         public PaymentMethod? Method { get; set; } = null;
 
-        /// <summary>
-        /// In case of payments transactions with card, the card issuer will be available
-        /// </summary>
         [JsonProperty("cardIssuer")]
-        public ComponentsSubTotalsCardIssuer? CardIssuer { get; set; } = null;
+        public BalanceCardIssuer? CardIssuer { get; set; }
 
-        /// <summary>
-        /// In case of payments trnsactions with card, the card audience will be available.
-        /// </summary>
         [JsonProperty("cardAudience")]
-        public ComponentsSubTotalsCardAudience? CardAudience { get; set; } = null;
+        public BalanceCardAudience? CardAudience { get; set; }
 
-        /// <summary>
-        /// In case of payments transactions with card, the card region will be available.
-        /// </summary>
         [JsonProperty("cardRegion")]
-        public ComponentsSubTotalsCardRegion? CardRegion { get; set; } = null;
+        public BalanceCardRegion? CardRegion { get; set; }
 
-        /// <summary>
-        /// Present when the transaction represents a fee.
-        /// </summary>
         [JsonProperty("feeType")]
-        public ComponentsSubTotalsFeeType? FeeType { get; set; } = null;
+        public BalanceFeeType? FeeType { get; set; }
 
-        /// <summary>
-        /// Prepayment part: fee itself, reimbursement, discount, VAT or rounding compensation.
-        /// </summary>
         [JsonProperty("prepaymentPartType")]
-        public ComponentsSubTotalsPrepaymentPartType? PrepaymentPartType { get; set; } = null;
+        public BalancePrepaymentPartType? PrepaymentPartType { get; set; }
 
-        /// <summary>
-        /// Represents the transaction type
-        /// </summary>
         [JsonProperty("transactionType")]
-        public ComponentsSubTotalsTransactionType? TransactionType { get; set; } = null;
+        public BalanceTransactionType? TransactionType { get; set; }
     }
 }

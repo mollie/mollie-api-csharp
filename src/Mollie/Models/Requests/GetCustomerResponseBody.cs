@@ -30,6 +30,9 @@ namespace Mollie.Models.Requests
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this customer. Example: `cst_vsKJpSsabw`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

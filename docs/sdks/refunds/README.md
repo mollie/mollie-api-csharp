@@ -32,13 +32,8 @@ var res = await sdk.Refunds.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     refundRequest: new RefundRequest() {
-        Id = "re_5B8cwPMGnU",
         Description = "Refunding a Chess Board",
         Amount = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        SettlementAmount = new AmountNullable() {
             Currency = "EUR",
             Value = "10.00",
         },
@@ -47,9 +42,6 @@ var res = await sdk.Refunds.CreateAsync(
 
             }
         ),
-        PaymentId = "tr_5B8cwPMGnU",
-        SettlementId = "stl_5B8cwPMGnU",
-        Status = RefundStatus.Queued,
         ExternalReference = new RefundRequestExternalReference() {
             Type = RefundExternalReferenceType.AcquirerReference,
             Id = "123456789012345",
@@ -62,7 +54,7 @@ var res = await sdk.Refunds.CreateAsync(
                     Value = "10.00",
                 },
                 Source = new RefundRequestSource() {
-                    Type = RefundRoutingReversalsSourceType.Organization,
+                    Type = Mollie.Models.Components.Type.Organization,
                     OrganizationId = "org_1234567",
                 },
             },

@@ -18,9 +18,6 @@ namespace Mollie.Models.Components
     public class PaymentRequest
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
         /// <summary>
         /// The description of the payment. This will be shown to your customer on their card or bank statement when possible.<br/>
         /// 
@@ -43,36 +40,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("amount")]
         public Amount Amount { get; set; } = default!;
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("amountRefunded")]
-        public Amount? AmountRefunded { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("amountRemaining")]
-        public Amount? AmountRemaining { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("amountCaptured")]
-        public Amount? AmountCaptured { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("amountChargedBack")]
-        public Amount? AmountChargedBack { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public Amount? SettlementAmount { get; set; }
 
         /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
@@ -298,11 +265,17 @@ namespace Mollie.Models.Components
         [JsonProperty("sequenceType")]
         public SequenceType? SequenceType { get; set; }
 
-        [JsonProperty("subscriptionId")]
-        public string? SubscriptionId { get; set; }
-
+        /// <summary>
+        /// **Only relevant for recurring payments.**<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// When creating recurring payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
+        /// the customer&apos;s accounts should be credited.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("mandateId")]
-        public string? MandateId { get; set; }
+        public string? MandateId { get; set; } = null;
 
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }
@@ -319,12 +292,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("profileId")]
         public string? ProfileId { get; set; }
-
-        [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
-
-        [JsonProperty("orderId")]
-        public string? OrderId { get; set; }
 
         /// <summary>
         /// The date by which the payment should be completed in `YYYY-MM-DD` format

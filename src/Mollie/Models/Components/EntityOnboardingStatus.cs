@@ -36,11 +36,8 @@ namespace Mollie.Models.Components
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
-        /// <summary>
-        /// The current status of the organization&apos;s onboarding process.
-        /// </summary>
         [JsonProperty("status")]
-        public OnboardingStatus Status { get; set; } = default!;
+        public EntityOnboardingStatusStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Whether the organization can receive payments.

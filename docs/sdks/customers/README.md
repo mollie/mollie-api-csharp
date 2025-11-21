@@ -34,7 +34,6 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Customers.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entityCustomer: new EntityCustomer() {
-        Id = "cst_5B8cwPMGnU",
         Name = "John Doe",
         Email = "example@email.com",
         Locale = LocaleResponse.EnUS,
@@ -181,7 +180,6 @@ var res = await sdk.Customers.UpdateAsync(
     customerId: "cst_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entityCustomer: new EntityCustomer() {
-        Id = "cst_5B8cwPMGnU",
         Name = "John Doe",
         Email = "example@email.com",
         Locale = LocaleResponse.EnUS,
@@ -288,29 +286,8 @@ var res = await sdk.Customers.CreatePaymentAsync(
     customerId: "cst_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     paymentRequest: new PaymentRequest() {
-        Id = "tr_5B8cwPMGnU",
         Description = "Chess Board",
         Amount = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        AmountRefunded = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        AmountRemaining = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        AmountCaptured = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        AmountChargedBack = new Amount() {
-            Currency = "EUR",
-            Value = "10.00",
-        },
-        SettlementAmount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
@@ -401,7 +378,6 @@ var res = await sdk.Customers.CreatePaymentAsync(
         },
         Routing = new List<EntityPaymentRoute>() {
             new EntityPaymentRoute() {
-                Id = "rt_5B8cwPMGnU",
                 Amount = new Amount() {
                     Currency = "EUR",
                     Value = "10.00",
@@ -424,12 +400,9 @@ var res = await sdk.Customers.CreatePaymentAsync(
             },
         },
         SequenceType = SequenceType.Oneoff,
-        SubscriptionId = "sub_5B8cwPMGnU",
         MandateId = "mdt_5B8cwPMGnU",
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
-        SettlementId = "stl_5B8cwPMGnU",
-        OrderId = "ord_5B8cwPMGnU",
         DueDate = "2025-01-01",
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",

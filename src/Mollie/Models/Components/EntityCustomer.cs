@@ -20,9 +20,6 @@ namespace Mollie.Models.Components
     public class EntityCustomer
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
         /// <summary>
         /// The full name of the customer.
         /// </summary>

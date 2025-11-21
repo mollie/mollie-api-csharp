@@ -26,6 +26,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this mandate. Example: `mdt_pWUnw6pkBN`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -65,16 +68,12 @@ namespace Mollie.Models.Components
         [JsonProperty("mandateReference", NullValueHandling = NullValueHandling.Include)]
         public string? MandateReference { get; set; }
 
-        /// <summary>
-        /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
-        /// 
-        /// <remarks>
-        /// when we did not received the IBAN yet from the first payment.
-        /// </remarks>
-        /// </summary>
         [JsonProperty("status")]
-        public MandateStatus Status { get; set; } = default!;
+        public MandateResponseStatus Status { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier referring to the <a href="get-customer">customer</a> this mandate was linked to.
+        /// </summary>
         [JsonProperty("customerId")]
         public string CustomerId { get; set; } = default!;
 

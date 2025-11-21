@@ -16,9 +16,6 @@ namespace Mollie.Models.Components
     public class EntityBalanceTransfer
     {
 
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>

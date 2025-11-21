@@ -19,11 +19,8 @@ namespace Mollie.Models.Components
     public class RefundRequestSource
     {
 
-        /// <summary>
-        /// The type of source. Currently only the source type `organization` is supported.
-        /// </summary>
         [JsonProperty("type")]
-        public RefundRoutingReversalsSourceType? Type { get; set; }
+        public Models.Components.Type? Type { get; set; }
 
         [JsonProperty("organizationId")]
         public string? OrganizationId { get; set; }

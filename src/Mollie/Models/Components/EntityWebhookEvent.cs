@@ -12,6 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class EntityWebhookEvent
     {
@@ -28,11 +32,8 @@ namespace Mollie.Models.Components
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
-        /// <summary>
-        /// The event&apos;s type
-        /// </summary>
         [JsonProperty("type")]
-        public WebhookEventTypes WebhookEventTypes { get; set; } = default!;
+        public EntityWebhookEventWebhookEventTypes WebhookEventTypes { get; set; } = default!;
 
         /// <summary>
         /// The entity token that triggered the event

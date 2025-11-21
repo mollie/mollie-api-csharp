@@ -30,6 +30,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this settlement.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -57,23 +60,26 @@ namespace Mollie.Models.Components
         [JsonProperty("settledAt")]
         public string? SettledAt { get; set; } = null;
 
-        /// <summary>
-        /// The status of the settlement.
-        /// </summary>
         [JsonProperty("status")]
-        public SettlementStatus Status { get; set; } = default!;
+        public EntitySettlementStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// The total amount of the settlement.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount Amount { get; set; } = default!;
+        public EntitySettlementAmount Amount { get; set; } = default!;
 
+        /// <summary>
+        /// The balance token that the settlement was settled to.
+        /// </summary>
         [JsonProperty("balanceId")]
         public string BalanceId { get; set; } = default!;
 
+        /// <summary>
+        /// The ID of the oldest invoice created for all the periods, if the invoice has been created yet.
+        /// </summary>
         [JsonProperty("invoiceId")]
-        public string? InvoiceId { get; set; }
+        public string? InvoiceId { get; set; } = null;
 
         /// <summary>
         /// For bookkeeping purposes, the settlement includes an overview of transactions included in the settlement. These<br/>

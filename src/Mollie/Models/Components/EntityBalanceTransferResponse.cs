@@ -26,6 +26,13 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this balance transfer. Mollie assigns this identifier at balance transfer creation time. Mollie<br/>
+        /// 
+        /// <remarks>
+        /// will always refer to the balance transfer by this ID. Example: `cbtr_j8NvRAM2WNZtsykpLEX8J`.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

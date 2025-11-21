@@ -50,8 +50,6 @@ var res = await sdk.Subscriptions.CreateAsync(
     customerId: "cst_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     subscriptionRequest: new SubscriptionRequest() {
-        Id = "sub_5B8cwPMGnU",
-        Status = SubscriptionStatus.Active,
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -69,7 +67,6 @@ var res = await sdk.Subscriptions.CreateAsync(
             Description = "Platform fee",
         },
         WebhookUrl = "https://example.com/webhook",
-        CustomerId = "cst_5B8cwPMGnU",
         MandateId = "mdt_5B8cwPMGnU",
         Testmode = false,
     }

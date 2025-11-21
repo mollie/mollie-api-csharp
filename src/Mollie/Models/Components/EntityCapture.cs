@@ -12,16 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     public class EntityCapture
     {
-
-        [JsonProperty("id")]
-        public string? Id { get; set; }
 
         /// <summary>
         /// The description of the capture.
@@ -36,18 +29,6 @@ namespace Mollie.Models.Components
         public AmountNullable? Amount { get; set; } = null;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public AmountNullable? SettlementAmount { get; set; } = null;
-
-        /// <summary>
-        /// The capture&apos;s status.
-        /// </summary>
-        [JsonProperty("status")]
-        public CaptureStatus? Status { get; set; }
-
-        /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// 
         /// <remarks>
@@ -56,14 +37,5 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
-
-        [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
-
-        [JsonProperty("shipmentId")]
-        public string? ShipmentId { get; set; }
-
-        [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
     }
 }

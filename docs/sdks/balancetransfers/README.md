@@ -30,7 +30,6 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.BalanceTransfers.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     entityBalanceTransfer: new EntityBalanceTransfer() {
-        Id = "cbtr_j8NvRAM2WNZtsykpLEX8J",
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",

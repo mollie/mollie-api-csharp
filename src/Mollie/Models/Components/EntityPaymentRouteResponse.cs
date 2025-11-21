@@ -26,6 +26,13 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this route. Mollie will always refer to the route by this ID.<br/>
+        /// 
+        /// <remarks>
+        /// Example: `rt_5B8cwPMGnU6qLbRvo7qEZo`.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

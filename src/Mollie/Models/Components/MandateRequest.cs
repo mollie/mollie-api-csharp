@@ -12,14 +12,13 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     public class MandateRequest
     {
 
+        /// <summary>
+        /// The identifier uniquely referring to this mandate. Example: `mdt_pWUnw6pkBN`.
+        /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -93,19 +92,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("payPalVaultId")]
         public string? PayPalVaultId { get; set; } = null;
-
-        /// <summary>
-        /// The status of the mandate. A status can be `pending` for mandates when the first payment is not yet finalized, or<br/>
-        /// 
-        /// <remarks>
-        /// when we did not received the IBAN yet from the first payment.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("status")]
-        public MandateStatus? Status { get; set; }
-
-        [JsonProperty("customerId")]
-        public string? CustomerId { get; set; }
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

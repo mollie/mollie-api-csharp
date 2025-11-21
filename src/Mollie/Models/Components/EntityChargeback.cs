@@ -26,6 +26,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this chargeback. Example: `chb_n9z0tp`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -36,10 +39,20 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
+        /// 
+        /// <remarks>
+        /// to the currency your account is settled in.<br/>
+        /// <br/>
+        /// The amount is a **negative** amount.<br/>
+        /// <br/>
+        /// Since the field contains an estimated amount during chargeback processing, it may change over time. To retrieve<br/>
+        /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a><br/>
+        /// instead.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
-        public AmountNullable? SettlementAmount { get; set; } = null;
+        public EntityChargebackSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
         /// Reason for the chargeback as given by the bank. Only available for chargebacks of SEPA Direct Debit payments.
@@ -47,11 +60,25 @@ namespace Mollie.Models.Components
         [JsonProperty("reason")]
         public Reason? Reason { get; set; } = null;
 
+        /// <summary>
+        /// The unique identifier of the payment this chargeback was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>
+        /// 
+        /// <remarks>
+        /// The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("paymentId")]
         public string PaymentId { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier referring to the settlement this payment was settled with. For example, `stl_BkEjN2eBb`. This field<br/>
+        /// 
+        /// <remarks>
+        /// is omitted if the refund is not settled (yet).
+        /// </remarks>
+        /// </summary>
         [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
+        public string? SettlementId { get; set; } = null;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

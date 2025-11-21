@@ -26,6 +26,13 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this refund. Mollie assigns this identifier at refund creation time. Mollie<br/>
+        /// 
+        /// <remarks>
+        /// will always refer to the refund by this ID. Example: `re_4qqhO89gsT`.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
@@ -48,10 +55,25 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
+        /// 
+        /// <remarks>
+        /// to the currency your account is settled in.<br/>
+        /// <br/>
+        /// The amount is a **negative** amount.<br/>
+        /// <br/>
+        /// If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be<br/>
+        /// zero.<br/>
+        /// <br/>
+        /// Since the field contains an estimated amount during refund processing, it may change over time. For example, while<br/>
+        /// the refund is queued the settlement amount is likely not yet available.<br/>
+        /// <br/>
+        /// To retrieve accurate settlement amounts we recommend using the<br/>
+        /// <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
+        /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
-        public AmountNullable? SettlementAmount { get; set; } = null;
+        public EntityRefundResponseSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
@@ -63,14 +85,24 @@ namespace Mollie.Models.Components
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; }
 
+        /// <summary>
+        /// The unique identifier of the payment this refund was created for.<br/>
+        /// 
+        /// <remarks>
+        /// The full payment object can be retrieved via the payment URL in the `_links` object.
+        /// </remarks>
+        /// </summary>
         [JsonProperty("paymentId")]
         public string? PaymentId { get; set; }
 
+        /// <summary>
+        /// The identifier referring to the settlement this refund was settled with. This field is omitted if the refund is not settled (yet).
+        /// </summary>
         [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
+        public string? SettlementId { get; set; } = null;
 
         [JsonProperty("status")]
-        public RefundStatus Status { get; set; } = default!;
+        public EntityRefundResponseStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

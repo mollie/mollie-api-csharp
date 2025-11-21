@@ -26,6 +26,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this permission. Example: `payments.read`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

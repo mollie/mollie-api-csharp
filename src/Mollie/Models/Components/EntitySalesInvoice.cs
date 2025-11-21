@@ -17,9 +17,6 @@ namespace Mollie.Models.Components
     public class EntitySalesInvoice
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
         /// 
@@ -159,35 +156,5 @@ namespace Mollie.Models.Components
 
         [JsonProperty("discount")]
         public SalesInvoiceDiscount? Discount { get; set; } = null;
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("amountDue")]
-        public Amount? AmountDue { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("subtotalAmount")]
-        public Amount? SubtotalAmount { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("totalAmount")]
-        public Amount? TotalAmount { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("totalVatAmount")]
-        public Amount? TotalVatAmount { get; set; }
-
-        /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("discountedSubtotalAmount")]
-        public Amount? DiscountedSubtotalAmount { get; set; }
     }
 }

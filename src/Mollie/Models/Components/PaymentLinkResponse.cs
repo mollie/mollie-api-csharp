@@ -30,6 +30,9 @@ namespace Mollie.Models.Components
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
+        /// <summary>
+        /// The identifier uniquely referring to this payment link. Example: `pl_4Y0eZitmBnQ6IDoMqZQKh`.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

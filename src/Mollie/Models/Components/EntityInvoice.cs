@@ -45,29 +45,31 @@ namespace Mollie.Models.Components
         [JsonProperty("vatNumber", NullValueHandling = NullValueHandling.Include)]
         public string? VatNumber { get; set; }
 
-        /// <summary>
-        /// Status of the invoice.
-        /// </summary>
         [JsonProperty("status")]
-        public InvoiceStatus Status { get; set; } = default!;
+        public EntityInvoiceStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// Total amount of the invoice, excluding VAT.
         /// </summary>
         [JsonProperty("netAmount")]
-        public Amount NetAmount { get; set; } = default!;
+        public NetAmount NetAmount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
+        /// 
+        /// <remarks>
+        /// be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside<br/>
+        /// the EU, no VAT will be charged.
+        /// </remarks>
         /// </summary>
         [JsonProperty("vatAmount")]
-        public Amount VatAmount { get; set; } = default!;
+        public VatAmount VatAmount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
+        /// Total amount of the invoice, including VAT.
         /// </summary>
         [JsonProperty("grossAmount")]
-        public Amount GrossAmount { get; set; } = default!;
+        public GrossAmount GrossAmount { get; set; } = default!;
 
         /// <summary>
         /// The collection of products which make up the invoice.

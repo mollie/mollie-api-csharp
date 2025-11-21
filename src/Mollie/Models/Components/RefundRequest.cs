@@ -12,16 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
     
     public class RefundRequest
     {
-
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
 
         /// <summary>
         /// The description of the refund that may be shown to your customer, depending on the payment method used.
@@ -36,12 +30,6 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public AmountNullable? SettlementAmount { get; set; } = null;
-
-        /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// 
         /// <remarks>
@@ -50,15 +38,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; }
-
-        [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
-
-        [JsonProperty("settlementId")]
-        public string? SettlementId { get; set; }
-
-        [JsonProperty("status")]
-        public RefundStatus Status { get; set; } = default!;
 
         [JsonProperty("externalReference")]
         public RefundRequestExternalReference? ExternalReference { get; set; }

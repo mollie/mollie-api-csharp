@@ -12,26 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     
     public class SubscriptionRequest
     {
-
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
-        /// <summary>
-        /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
-        /// 
-        /// <remarks>
-        /// enabling the subscription.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("status")]
-        public SubscriptionStatus? Status { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -124,9 +107,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("webhookUrl")]
         public string? WebhookUrl { get; set; }
-
-        [JsonProperty("customerId")]
-        public string? CustomerId { get; set; }
 
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
