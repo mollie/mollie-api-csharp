@@ -33,7 +33,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.SalesInvoices.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entitySalesInvoice: new EntitySalesInvoice() {
+    salesInvoiceRequest: new SalesInvoiceRequest() {
         Testmode = false,
         ProfileId = "pfl_QkEhN94Ba",
         Status = SalesInvoiceStatus.Draft,
@@ -86,7 +86,7 @@ var res = await sdk.SalesInvoices.CreateAsync(
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntitySalesInvoice`                                                             | [EntitySalesInvoice](../../Models/Components/EntitySalesInvoice.md)              | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `SalesInvoiceRequest`                                                            | [SalesInvoiceRequest](../../Models/Components/SalesInvoiceRequest.md)            | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

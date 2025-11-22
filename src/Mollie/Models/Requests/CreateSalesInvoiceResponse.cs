@@ -26,6 +26,6 @@ namespace Mollie.Models.Requests
         /// <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
         /// </remarks>
         /// </summary>
-        public EntitySalesInvoiceResponse? EntitySalesInvoiceResponse { get; set; }
+        public SalesInvoiceResponse? SalesInvoiceResponse { get; set; }
     }
 }

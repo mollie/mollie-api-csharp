@@ -37,7 +37,7 @@ namespace Mollie
         /// With the Sales Invoice API you can generate sales invoices to send to your customers.
         /// </remarks>
         /// </summary>
-        Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, SalesInvoiceRequest? salesInvoiceRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// List sales invoices
@@ -101,8 +101,8 @@ namespace Mollie
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.6";
-        private const string _sdkGenVersion = "2.755.9";
+        private const string _sdkVersion = "0.9.7";
+        private const string _sdkGenVersion = "2.760.2";
         private const string _openapiDocVersion = "1.0.0";
 
         public SalesInvoices(SDKConfig config)
@@ -110,12 +110,12 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, EntitySalesInvoice? entitySalesInvoice = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<CreateSalesInvoiceResponse> CreateAsync(string? idempotencyKey = null, SalesInvoiceRequest? salesInvoiceRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new CreateSalesInvoiceRequest()
             {
                 IdempotencyKey = idempotencyKey,
-                EntitySalesInvoice = entitySalesInvoice,
+                SalesInvoiceRequest = salesInvoiceRequest,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -125,7 +125,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntitySalesInvoice", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "SalesInvoiceRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -210,14 +210,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntitySalesInvoiceResponse obj;
+                    SalesInvoiceResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntitySalesInvoiceResponse>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<SalesInvoiceResponse>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntitySalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into SalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateSalesInvoiceResponse()
@@ -228,7 +228,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySalesInvoiceResponse = obj;
+                    response.SalesInvoiceResponse = obj;
                     return response;
                 }
 
@@ -527,14 +527,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntitySalesInvoiceResponse obj;
+                    SalesInvoiceResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntitySalesInvoiceResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<SalesInvoiceResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntitySalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into SalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetSalesInvoiceResponse()
@@ -545,7 +545,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySalesInvoiceResponse = obj;
+                    response.SalesInvoiceResponse = obj;
                     return response;
                 }
 
@@ -689,14 +689,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntitySalesInvoiceResponse obj;
+                    SalesInvoiceResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntitySalesInvoiceResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<SalesInvoiceResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntitySalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into SalesInvoiceResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new UpdateSalesInvoiceResponse()
@@ -707,7 +707,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySalesInvoiceResponse = obj;
+                    response.SalesInvoiceResponse = obj;
                     return response;
                 }
 

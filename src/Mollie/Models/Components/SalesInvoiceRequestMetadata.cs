@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
     /// </remarks>
     /// </summary>
-    public class EntitySalesInvoiceResponseMetadata
+    public class SalesInvoiceRequestMetadata
     {
     }
 }

@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The sales invoice object.
         /// </summary>
-        public EntitySalesInvoiceResponse? EntitySalesInvoiceResponse { get; set; }
+        public SalesInvoiceResponse? SalesInvoiceResponse { get; set; }
     }
 }

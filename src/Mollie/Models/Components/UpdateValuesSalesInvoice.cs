@@ -63,7 +63,7 @@ namespace Mollie.Models.Components
         public SalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
 
         [JsonProperty("paymentDetails")]
-        public SalesInvoicePaymentDetails? PaymentDetails { get; set; } = null;
+        public SalesInvoicePaymentDetails? PaymentDetails { get; set; }
 
         [JsonProperty("emailDetails")]
         public SalesInvoiceEmailDetails? EmailDetails { get; set; } = null;

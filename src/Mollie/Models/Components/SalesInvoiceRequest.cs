@@ -12,35 +12,36 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
     
-    public class EntitySalesInvoiceResponse
+    public class SalesInvoiceRequest
     {
 
         /// <summary>
-        /// Indicates the response contains a sales invoice object. Will always contain the string `sales-invoice` for this<br/>
+        /// Whether to create the entity in test mode or live mode.<br/>
         /// 
         /// <remarks>
-        /// endpoint.
+        /// <br/>
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </remarks>
         /// </summary>
-        [JsonProperty("resource")]
-        public string? Resource { get; set; }
+        [JsonProperty("testmode")]
+        public bool? Testmode { get; set; } = null;
 
         /// <summary>
-        /// The identifier uniquely referring to this invoice. Example: `invoice_4Y0eZitmBnQ6IDoMqZQKh`.
+        /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
+        /// 
+        /// <remarks>
+        /// <br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
+        /// </remarks>
         /// </summary>
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
-        /// <summary>
-        /// When issued, an invoice number will be set for the sales invoice.
-        /// </summary>
-        [JsonProperty("invoiceNumber")]
-        public string? InvoiceNumber { get; set; } = null;
+        [JsonProperty("profileId")]
+        public string? ProfileId { get; set; } = null;
 
         /// <summary>
         /// The status for the invoice to end up in.<br/>
@@ -61,13 +62,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("status")]
-        public SalesInvoiceStatusResponse? Status { get; set; }
+        public SalesInvoiceStatus Status { get; set; } = default!;
 
         /// <summary>
         /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]
-        public SalesInvoiceVatSchemeResponse? VatScheme { get; set; }
+        public SalesInvoiceVatScheme? VatScheme { get; set; }
 
         /// <summary>
         /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
@@ -77,7 +78,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
-        public SalesInvoiceVatModeResponse? VatMode { get; set; }
+        public SalesInvoiceVatMode? VatMode { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.
@@ -93,16 +94,16 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
-        public EntitySalesInvoiceResponseMetadata? Metadata { get; set; } = null;
+        public SalesInvoiceRequestMetadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// The payment term to be set on the invoice.
         /// </summary>
         [JsonProperty("paymentTerm")]
-        public SalesInvoicePaymentTermResponse? PaymentTerm { get; set; } = null;
+        public SalesInvoicePaymentTerm? PaymentTerm { get; set; } = null;
 
         [JsonProperty("paymentDetails")]
-        public SalesInvoicePaymentDetailsResponse? PaymentDetails { get; set; } = null;
+        public SalesInvoicePaymentDetails? PaymentDetails { get; set; }
 
         [JsonProperty("emailDetails")]
         public SalesInvoiceEmailDetails? EmailDetails { get; set; } = null;
@@ -136,10 +137,10 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("recipientIdentifier")]
-        public string? RecipientIdentifier { get; set; }
+        public string RecipientIdentifier { get; set; } = default!;
 
-        [JsonProperty("recipient")]
-        public SalesInvoiceRecipientResponse? Recipient { get; set; } = null;
+        [JsonProperty("recipient", NullValueHandling = NullValueHandling.Include)]
+        public SalesInvoiceRecipient? Recipient { get; set; }
 
         /// <summary>
         /// Provide the line items for the invoice. Each line contains details such as a description of the item<br/>
@@ -150,82 +151,10 @@ namespace Mollie.Models.Components
         /// All lines must have the same currency as the invoice.
         /// </remarks>
         /// </summary>
-        [JsonProperty("lines")]
-        public List<SalesInvoiceLineItemResponse>? Lines { get; set; } = null;
+        [JsonProperty("lines", NullValueHandling = NullValueHandling.Include)]
+        public List<SalesInvoiceLineItem>? Lines { get; set; }
 
         [JsonProperty("discount")]
-        public SalesInvoiceDiscountResponse? Discount { get; set; } = null;
-
-        /// <summary>
-        /// The amount that is left to be paid.
-        /// </summary>
-        [JsonProperty("amountDue")]
-        public AmountDue? AmountDue { get; set; }
-
-        /// <summary>
-        /// The total amount without VAT before discounts.
-        /// </summary>
-        [JsonProperty("subtotalAmount")]
-        public SubtotalAmount? SubtotalAmount { get; set; }
-
-        /// <summary>
-        /// The total amount with VAT.
-        /// </summary>
-        [JsonProperty("totalAmount")]
-        public TotalAmount? TotalAmount { get; set; }
-
-        /// <summary>
-        /// The total VAT amount.
-        /// </summary>
-        [JsonProperty("totalVatAmount")]
-        public TotalVatAmount? TotalVatAmount { get; set; }
-
-        /// <summary>
-        /// The total amount without VAT after discounts.
-        /// </summary>
-        [JsonProperty("discountedSubtotalAmount")]
-        public DiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
-
-        /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
-        /// </summary>
-        [JsonProperty("createdAt")]
-        public string? CreatedAt { get; set; }
-
-        /// <summary>
-        /// If issued, the date when the sales invoice was issued, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
-        /// format.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("issuedAt")]
-        public string? IssuedAt { get; set; } = null;
-
-        /// <summary>
-        /// If paid, the date when the sales invoice was paid, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
-        /// format.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("paidAt")]
-        public string? PaidAt { get; set; } = null;
-
-        /// <summary>
-        /// If issued, the date when the sales invoice payment is due, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
-        /// format.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("dueAt")]
-        public string? DueAt { get; set; } = null;
-
-        /// <summary>
-        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
-        /// </summary>
-        [JsonProperty("_links")]
-        public EntitySalesInvoiceResponseLinks? Links { get; set; }
+        public SalesInvoiceDiscount? Discount { get; set; } = null;
     }
 }
