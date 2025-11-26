@@ -479,3 +479,13 @@ Based on:
 - [csharp v0.9.7] .
 ### Releases
 - [NuGet v0.9.7] https://www.nuget.org/packages/Mollie/0.9.7 - .
+
+## 2025-11-26 00:06:17
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.2 (2.763.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [csharp v0.9.8] .
+### Releases
+- [NuGet v0.9.8] https://www.nuget.org/packages/Mollie/0.9.8 - .
