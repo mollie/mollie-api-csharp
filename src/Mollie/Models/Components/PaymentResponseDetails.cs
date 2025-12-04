@@ -262,7 +262,7 @@ namespace Mollie.Models.Components
         /// The Point of sale receipt object.
         /// </summary>
         [JsonProperty("receipt")]
-        public Receipt? Receipt { get; set; }
+        public PaymentResponseReceipt? Receipt { get; set; }
 
         /// <summary>
         /// The creditor identifier indicates who is authorized to execute the payment. In this case, it is a<br/>
@@ -341,7 +341,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("qrCode")]
-        public QrCode? QrCode { get; set; }
+        public PaymentResponseQrCode? QrCode { get; set; }
 
         /// <summary>
         /// For payments with gift cards: the masked gift card number of the first gift card applied to the payment.

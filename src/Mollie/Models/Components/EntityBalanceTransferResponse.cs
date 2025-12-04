@@ -79,6 +79,16 @@ namespace Mollie.Models.Components
         public BalanceTransferCategoryResponse? Category { get; set; }
 
         /// <summary>
+        /// A JSON object that you can attach to a balance transfer.<br/>
+        /// 
+        /// <remarks>
+        /// This can be useful for storing additional information about the transfer in a structured format. Maximum size is approximately 1KB.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("metadata")]
+        public Dictionary<string, object>? Metadata { get; set; }
+
+        /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]

@@ -68,7 +68,7 @@ namespace Mollie
         public async Task<ListInvoicesResponse> ListAsync(ListInvoicesRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/invoices", request);
+            var urlString = URLBuilder.Build(baseUrl, "/invoices", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -223,7 +223,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/invoices/{id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/invoices/{id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

@@ -52,7 +52,7 @@ namespace Mollie.Models.Components
         /// Total amount of the invoice, excluding VAT.
         /// </summary>
         [JsonProperty("netAmount")]
-        public NetAmount NetAmount { get; set; } = default!;
+        public EntityInvoiceNetAmount NetAmount { get; set; } = default!;
 
         /// <summary>
         /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
@@ -63,13 +63,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("vatAmount")]
-        public VatAmount VatAmount { get; set; } = default!;
+        public EntityInvoiceVatAmount VatAmount { get; set; } = default!;
 
         /// <summary>
         /// Total amount of the invoice, including VAT.
         /// </summary>
         [JsonProperty("grossAmount")]
-        public GrossAmount GrossAmount { get; set; } = default!;
+        public EntityInvoiceGrossAmount GrossAmount { get; set; } = default!;
 
         /// <summary>
         /// The collection of products which make up the invoice.

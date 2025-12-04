@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of customer objects.
         /// </summary>
         [JsonProperty("customers")]
-        public List<CustomerResponse> Customers { get; set; } = default!;
+        public List<ListCustomerResponse> Customers { get; set; } = default!;
     }
 }

@@ -22,6 +22,7 @@ that has authorized the `balance-transfers.write` scope for your organization.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -46,6 +47,10 @@ var res = await sdk.BalanceTransfers.CreateAsync(
         },
         Description = "Invoice fee",
         Category = BalanceTransferCategory.InvoiceCollection,
+        Metadata = new Dictionary<string, object>() {
+            { "order_id", 12345 },
+            { "customer_id", 9876 },
+        },
         Testmode = false,
     }
 );

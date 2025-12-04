@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of route objects.
         /// </summary>
         [JsonProperty("routes")]
-        public List<RouteGetResponse> Routes { get; set; } = default!;
+        public List<ListRouteGetResponse> Routes { get; set; } = default!;
     }
 }
