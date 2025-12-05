@@ -4,6 +4,8 @@ sources:
     Mollie API:
         inputs:
             - location: https://raw.githubusercontent.com/mollie/openapi-specs/main/specs.yaml
+        overlays:
+            - location: .speakeasy/overlays/webhook-event-types-fix.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/mollie-oom/mollie/mollie-api
