@@ -49,7 +49,6 @@ namespace Mollie.Models.Components
         public static readonly EntityMethodId Multibanco = new EntityMethodId("multibanco");
         public static readonly EntityMethodId Mybank = new EntityMethodId("mybank");
         public static readonly EntityMethodId Paybybank = new EntityMethodId("paybybank");
-        public static readonly EntityMethodId Payconiq = new EntityMethodId("payconiq");
         public static readonly EntityMethodId Paypal = new EntityMethodId("paypal");
         public static readonly EntityMethodId Paysafecard = new EntityMethodId("paysafecard");
         public static readonly EntityMethodId Pointofsale = new EntityMethodId("pointofsale");
@@ -64,6 +63,7 @@ namespace Mollie.Models.Components
         public static readonly EntityMethodId Klarnapaylater = new EntityMethodId("klarnapaylater");
         public static readonly EntityMethodId Klarnapaynow = new EntityMethodId("klarnapaynow");
         public static readonly EntityMethodId Klarnasliceit = new EntityMethodId("klarnasliceit");
+        public static readonly EntityMethodId Payconiq = new EntityMethodId("payconiq");
 
         private static readonly Dictionary <string, EntityMethodId> _knownValues =
             new Dictionary <string, EntityMethodId> ()
@@ -91,7 +91,6 @@ namespace Mollie.Models.Components
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
                 ["pointofsale"] = Pointofsale,
@@ -105,7 +104,8 @@ namespace Mollie.Models.Components
                 ["voucher"] = Voucher,
                 ["klarnapaylater"] = Klarnapaylater,
                 ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit
+                ["klarnasliceit"] = Klarnasliceit,
+                ["payconiq"] = Payconiq
             };
 
         private static readonly ConcurrentDictionary<string, EntityMethodId> _values =

@@ -52,7 +52,6 @@ namespace Mollie.Models.Components
         public static readonly PaymentMethod Multibanco = new PaymentMethod("multibanco");
         public static readonly PaymentMethod Mybank = new PaymentMethod("mybank");
         public static readonly PaymentMethod Paybybank = new PaymentMethod("paybybank");
-        public static readonly PaymentMethod Payconiq = new PaymentMethod("payconiq");
         public static readonly PaymentMethod Paypal = new PaymentMethod("paypal");
         public static readonly PaymentMethod Paysafecard = new PaymentMethod("paysafecard");
         public static readonly PaymentMethod Przelewy24 = new PaymentMethod("przelewy24");
@@ -100,7 +99,6 @@ namespace Mollie.Models.Components
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
                 ["przelewy24"] = Przelewy24,

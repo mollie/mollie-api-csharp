@@ -54,7 +54,6 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Multibanco = new MethodResponse("multibanco");
         public static readonly MethodResponse Mybank = new MethodResponse("mybank");
         public static readonly MethodResponse Paybybank = new MethodResponse("paybybank");
-        public static readonly MethodResponse Payconiq = new MethodResponse("payconiq");
         public static readonly MethodResponse Paypal = new MethodResponse("paypal");
         public static readonly MethodResponse Paysafecard = new MethodResponse("paysafecard");
         public static readonly MethodResponse Pointofsale = new MethodResponse("pointofsale");
@@ -69,6 +68,7 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Klarnapaylater = new MethodResponse("klarnapaylater");
         public static readonly MethodResponse Klarnapaynow = new MethodResponse("klarnapaynow");
         public static readonly MethodResponse Klarnasliceit = new MethodResponse("klarnasliceit");
+        public static readonly MethodResponse Payconiq = new MethodResponse("payconiq");
 
         private static readonly Dictionary <string, MethodResponse> _knownValues =
             new Dictionary <string, MethodResponse> ()
@@ -96,7 +96,6 @@ namespace Mollie.Models.Components
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
                 ["pointofsale"] = Pointofsale,
@@ -110,7 +109,8 @@ namespace Mollie.Models.Components
                 ["voucher"] = Voucher,
                 ["klarnapaylater"] = Klarnapaylater,
                 ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit
+                ["klarnasliceit"] = Klarnasliceit,
+                ["payconiq"] = Payconiq
             };
 
         private static readonly ConcurrentDictionary<string, MethodResponse> _values =

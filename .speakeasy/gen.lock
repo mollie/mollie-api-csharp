@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: adc1359a5f53bfc67f09961b0725e6f9
+  docChecksum: 79e6f18d3387e15909d697b963c156d5
   docVersion: 1.0.0
-  speakeasyVersion: 1.668.0
+  speakeasyVersion: 1.668.1
   generationVersion: 2.770.0
-  releaseVersion: 0.10.0
-  configChecksum: 08b0127599fe91bba5172d6dfdd8d7a9
+  releaseVersion: 0.10.1
+  configChecksum: 51b582db426206cd372216c21fc68acc
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 features:
@@ -486,6 +486,8 @@ generatedFiles:
   - docs/Models/Requests/CreateSalesInvoiceResponse.md
   - docs/Models/Requests/CreateSubscriptionRequest.md
   - docs/Models/Requests/CreateSubscriptionResponse.md
+  - docs/Models/Requests/CreateWebhookEventTypesListEnum.md
+  - docs/Models/Requests/CreateWebhookEventTypesListUnion.md
   - docs/Models/Requests/CreateWebhookRequest.md
   - docs/Models/Requests/CreateWebhookRequestBody.md
   - docs/Models/Requests/CreateWebhookResponse.md
@@ -743,6 +745,8 @@ generatedFiles:
   - docs/Models/Requests/UpdateSubscriptionRequest.md
   - docs/Models/Requests/UpdateSubscriptionRequestBody.md
   - docs/Models/Requests/UpdateSubscriptionResponse.md
+  - docs/Models/Requests/UpdateWebhookEventTypesListEnum.md
+  - docs/Models/Requests/UpdateWebhookEventTypesListUnion.md
   - docs/Models/Requests/UpdateWebhookRequest.md
   - docs/Models/Requests/UpdateWebhookRequestBody.md
   - docs/Models/Requests/UpdateWebhookResponse.md
@@ -1243,6 +1247,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/CreateSalesInvoiceResponse.cs
   - src/Mollie/Models/Requests/CreateSubscriptionRequest.cs
   - src/Mollie/Models/Requests/CreateSubscriptionResponse.cs
+  - src/Mollie/Models/Requests/CreateWebhookEventTypesListEnum.cs
+  - src/Mollie/Models/Requests/CreateWebhookEventTypesListUnion.cs
   - src/Mollie/Models/Requests/CreateWebhookRequest.cs
   - src/Mollie/Models/Requests/CreateWebhookRequestBody.cs
   - src/Mollie/Models/Requests/CreateWebhookResponse.cs
@@ -1500,6 +1506,8 @@ generatedFiles:
   - src/Mollie/Models/Requests/UpdateSubscriptionRequest.cs
   - src/Mollie/Models/Requests/UpdateSubscriptionRequestBody.cs
   - src/Mollie/Models/Requests/UpdateSubscriptionResponse.cs
+  - src/Mollie/Models/Requests/UpdateWebhookEventTypesListEnum.cs
+  - src/Mollie/Models/Requests/UpdateWebhookEventTypesListUnion.cs
   - src/Mollie/Models/Requests/UpdateWebhookRequest.cs
   - src/Mollie/Models/Requests/UpdateWebhookRequestBody.cs
   - src/Mollie/Models/Requests/UpdateWebhookResponse.cs
@@ -4845,4 +4853,4 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.List()`:  `response.Embedded.Webhooks.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Clients.List()`:  `response.Embedded.Clients.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Settlements.List-Payments()`:  `response.Embedded.Payments.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Settlements.List-Captures()`:  `response.Embedded.Captures.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Settlements.List-Refunds()`:  `response.Embedded.Refunds.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Settlements.List-Chargebacks()`:  `response.Embedded.Chargebacks.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Sales-Invoices.List()`:  `response.Embedded.SalesInvoices.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Permissions.List()`:  `response.Embedded.Permissions.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Profiles.List()`:  `response.Embedded.Profiles.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Customers.List()`:  `response.Embedded.Customers.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Settlements.List()`:  `response.Embedded.Settlements.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Subscriptions.List()`:  `response.Embedded.Subscriptions.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Balances.List()`:  `response.Embedded.Balances.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Mandates.List()`:  `response.Embedded.Mandates.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Methods.List()`:  `response.Embedded.Methods.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Terminals.List()`:  `response.Embedded.Terminals.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Delayed-Routing.List()`:  `response.Embedded.Routes.[].Links.Documentation` **Removed** **Breaking** :warning:\n* `Client.Invoices.List()`:  `response.Embedded.Invoices.[]` **Changed**\n* `Client.Balance-Transfers.Get()`:  `response.metadata` **Added**\n* `Client.Balance-Transfers.Create()`: \n  *  `request.entity-balance-transfer.Metadata` **Added**\n  *  `response.metadata` **Added**\n* `Client.Balance-Transfers.List()`:  `response.Embedded.ConnectBalanceTransfers.[].Metadata` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.Create()`:  `requestBody` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Update()`:  `requestBody` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Delete()`: \n  *  `requestBody.Testmode` **Changed** **Breaking** :warning:\n* `Client.Webhooks.Test()`: \n  *  `requestBody.Testmode` **Changed** **Breaking** :warning:\n* `Client.Balance-Transfers.Create()`: \n  *  `request.entity-balance-transfer.Testmode` **Changed** **Breaking** :warning:\n"

@@ -10,6 +10,7 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     
@@ -28,22 +29,18 @@ namespace Mollie.Models.Requests
         [JsonProperty("url")]
         public string? Url { get; set; }
 
-        /// <summary>
-        /// The event&apos;s type
-        /// </summary>
-        [JsonProperty("eventTypes")]
-        public WebhookEventTypes? WebhookEventTypes { get; set; }
+        [JsonProperty("eventTypes", NullValueHandling = NullValueHandling.Include)]
+        public UpdateWebhookEventTypesListUnion? EventTypesList { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
+        /// You can enable test mode by setting `testmode` to `true`.<br/>
         /// 
         /// <remarks>
-        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
-        public bool? Testmode { get; set; } = null;
+        public bool? Testmode { get; set; }
     }
 }

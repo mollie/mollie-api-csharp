@@ -73,8 +73,6 @@ namespace Mollie.Models.Components
         Mybank,
         [JsonProperty("paybybank")]
         Paybybank,
-        [JsonProperty("payconiq")]
-        Payconiq,
         [JsonProperty("paypal")]
         Paypal,
         [JsonProperty("paysafecard")]

@@ -49,7 +49,6 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Multibanco = new ListEntityMethodId("multibanco");
         public static readonly ListEntityMethodId Mybank = new ListEntityMethodId("mybank");
         public static readonly ListEntityMethodId Paybybank = new ListEntityMethodId("paybybank");
-        public static readonly ListEntityMethodId Payconiq = new ListEntityMethodId("payconiq");
         public static readonly ListEntityMethodId Paypal = new ListEntityMethodId("paypal");
         public static readonly ListEntityMethodId Paysafecard = new ListEntityMethodId("paysafecard");
         public static readonly ListEntityMethodId Pointofsale = new ListEntityMethodId("pointofsale");
@@ -64,6 +63,7 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Klarnapaylater = new ListEntityMethodId("klarnapaylater");
         public static readonly ListEntityMethodId Klarnapaynow = new ListEntityMethodId("klarnapaynow");
         public static readonly ListEntityMethodId Klarnasliceit = new ListEntityMethodId("klarnasliceit");
+        public static readonly ListEntityMethodId Payconiq = new ListEntityMethodId("payconiq");
 
         private static readonly Dictionary <string, ListEntityMethodId> _knownValues =
             new Dictionary <string, ListEntityMethodId> ()
@@ -91,7 +91,6 @@ namespace Mollie.Models.Components
                 ["multibanco"] = Multibanco,
                 ["mybank"] = Mybank,
                 ["paybybank"] = Paybybank,
-                ["payconiq"] = Payconiq,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
                 ["pointofsale"] = Pointofsale,
@@ -105,7 +104,8 @@ namespace Mollie.Models.Components
                 ["voucher"] = Voucher,
                 ["klarnapaylater"] = Klarnapaylater,
                 ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit
+                ["klarnasliceit"] = Klarnasliceit,
+                ["payconiq"] = Payconiq
             };
 
         private static readonly ConcurrentDictionary<string, ListEntityMethodId> _values =

@@ -48,11 +48,9 @@ namespace Mollie.Models.Requests
         public WebhookEventTypes? EventTypes { get; set; }
 
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
         /// 
         /// <remarks>
-        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </remarks>

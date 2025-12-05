@@ -36,7 +36,6 @@ payment methods from a specific country to your customer `['bancontact', 'belfiu
 | `Multibanco`   | multibanco     |
 | `Mybank`       | mybank         |
 | `Paybybank`    | paybybank      |
-| `Payconiq`     | payconiq       |
 | `Paypal`       | paypal         |
 | `Paysafecard`  | paysafecard    |
 | `Pointofsale`  | pointofsale    |

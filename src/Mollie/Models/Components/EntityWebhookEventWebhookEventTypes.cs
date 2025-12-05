@@ -17,7 +17,11 @@ namespace Mollie.Models.Components
     using System.Linq;
     
     /// <summary>
-    /// The event&apos;s type
+    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
+    /// 
+    /// <remarks>
+    /// that require explicit selection.
+    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityWebhookEventWebhookEventTypes : IEquatable<EntityWebhookEventWebhookEventTypes>
