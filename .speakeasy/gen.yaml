@@ -21,12 +21,13 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.10.1
+  version: 0.10.2
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException

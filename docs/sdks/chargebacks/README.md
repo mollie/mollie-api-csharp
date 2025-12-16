@@ -1,5 +1,4 @@
 # Chargebacks
-(*Chargebacks*)
 
 ## Overview
 

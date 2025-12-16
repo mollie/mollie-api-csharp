@@ -1,5 +1,4 @@
 # Terminals
-(*Terminals*)
 
 ## Overview
 

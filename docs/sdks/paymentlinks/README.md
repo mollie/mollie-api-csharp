@@ -1,5 +1,4 @@
 # PaymentLinks
-(*PaymentLinks*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # SalesInvoices
-(*SalesInvoices*)
 
 ## Overview
 

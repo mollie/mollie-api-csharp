@@ -1,5 +1,4 @@
 # ClientLinks
-(*ClientLinks*)
 
 ## Overview
 

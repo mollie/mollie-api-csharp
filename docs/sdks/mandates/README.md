@@ -1,5 +1,4 @@
 # Mandates
-(*Mandates*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # DelayedRouting
-(*DelayedRouting*)
 
 ## Overview
 

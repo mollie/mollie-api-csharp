@@ -1,5 +1,4 @@
 # Balances
-(*Balances*)
 
 ## Overview
 

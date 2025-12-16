@@ -1,5 +1,4 @@
 # Capabilities
-(*Capabilities*)
 
 ## Overview
 

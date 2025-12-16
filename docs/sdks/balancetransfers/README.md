@@ -1,5 +1,4 @@
 # BalanceTransfers
-(*BalanceTransfers*)
 
 ## Overview
 

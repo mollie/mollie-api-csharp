@@ -1,5 +1,4 @@
 # Profiles
-(*Profiles*)
 
 ## Overview
 

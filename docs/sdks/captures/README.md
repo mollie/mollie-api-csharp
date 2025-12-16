@@ -1,5 +1,4 @@
 # Captures
-(*Captures*)
 
 ## Overview
 

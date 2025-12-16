@@ -1,5 +1,4 @@
 # Onboarding
-(*Onboarding*)
 
 ## Overview
 
