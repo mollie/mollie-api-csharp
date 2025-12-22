@@ -27,6 +27,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("methods")]
-        public List<EntityMethod> Methods { get; set; } = default!;
+        public List<ListEntityMethod> Methods { get; set; } = default!;
     }
 }

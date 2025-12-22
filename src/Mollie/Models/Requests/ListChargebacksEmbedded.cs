@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// A list of chargeback objects.
         /// </summary>
         [JsonProperty("chargebacks")]
-        public List<EntityChargeback> Chargebacks { get; set; } = default!;
+        public List<ListEntityChargeback> Chargebacks { get; set; } = default!;
     }
 }

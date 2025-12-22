@@ -97,7 +97,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("periods")]
-        public Dictionary<string, Dictionary<string, Periods>>? Periods { get; set; }
+        public Dictionary<string, Dictionary<string, EntitySettlementPeriods>>? Periods { get; set; }
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

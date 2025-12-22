@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of profile objects.
         /// </summary>
         [JsonProperty("profiles")]
-        public List<ProfileResponse> Profiles { get; set; } = default!;
+        public List<ListProfileResponse> Profiles { get; set; } = default!;
     }
 }
