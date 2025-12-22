@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
         /// Reason for the chargeback as given by the bank. Only available for chargebacks of SEPA Direct Debit payments.
         /// </summary>
         [JsonProperty("reason")]
-        public EntityChargebackReason? Reason { get; set; } = null;
+        public Reason? Reason { get; set; } = null;
 
         /// <summary>
         /// The unique identifier of the payment this chargeback was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>

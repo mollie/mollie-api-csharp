@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of terminal objects.
         /// </summary>
         [JsonProperty("terminals")]
-        public List<ListEntityTerminal>? Terminals { get; set; }
+        public List<EntityTerminal>? Terminals { get; set; }
     }
 }

@@ -74,19 +74,19 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("amountRefunded")]
-        public PaymentResponseAmountRefunded? AmountRefunded { get; set; }
+        public AmountRefunded? AmountRefunded { get; set; }
 
         /// <summary>
         /// The remaining amount that can be refunded. Only available when refunds are available for this payment.
         /// </summary>
         [JsonProperty("amountRemaining")]
-        public PaymentResponseAmountRemaining? AmountRemaining { get; set; }
+        public AmountRemaining? AmountRemaining { get; set; }
 
         /// <summary>
         /// The total amount that is already captured for this payment. Only available when this payment supports captures.
         /// </summary>
         [JsonProperty("amountCaptured")]
-        public PaymentResponseAmountCaptured? AmountCaptured { get; set; }
+        public AmountCaptured? AmountCaptured { get; set; }
 
         /// <summary>
         /// The total amount that was charged back for this payment. Only available when the total charged back amount is not<br/>
@@ -96,7 +96,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("amountChargedBack")]
-        public PaymentResponseAmountChargedBack? AmountChargedBack { get; set; }
+        public AmountChargedBack? AmountChargedBack { get; set; }
 
         /// <summary>
         /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>

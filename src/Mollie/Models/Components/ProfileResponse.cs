@@ -108,7 +108,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("review")]
-        public ProfileResponseReview? Review { get; set; }
+        public Review? Review { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

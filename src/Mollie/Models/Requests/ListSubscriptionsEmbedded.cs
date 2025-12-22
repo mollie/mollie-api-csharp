@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of subscription objects.
         /// </summary>
         [JsonProperty("subscriptions")]
-        public List<ListSubscriptionResponse>? Subscriptions { get; set; }
+        public List<SubscriptionResponse>? Subscriptions { get; set; }
     }
 }

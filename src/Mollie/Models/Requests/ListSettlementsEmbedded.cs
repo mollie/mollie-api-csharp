@@ -25,6 +25,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("settlements")]
-        public List<ListEntitySettlement> Settlements { get; set; } = default!;
+        public List<EntitySettlement> Settlements { get; set; } = default!;
     }
 }

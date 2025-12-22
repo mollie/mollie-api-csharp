@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of payment objects.
         /// </summary>
         [JsonProperty("payments")]
-        public List<ListPaymentResponse>? Payments { get; set; }
+        public List<PaymentResponse>? Payments { get; set; }
     }
 }

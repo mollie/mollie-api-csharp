@@ -25,6 +25,6 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("sales_invoices")]
-        public List<ListSalesInvoiceResponse>? SalesInvoices { get; set; }
+        public List<SalesInvoiceResponse>? SalesInvoices { get; set; }
     }
 }

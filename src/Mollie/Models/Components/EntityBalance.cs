@@ -48,7 +48,7 @@ namespace Mollie.Models.Components
         /// The balance&apos;s ISO 4217 currency code.
         /// </summary>
         [JsonProperty("currency")]
-        public EntityBalanceCurrency Currency { get; set; } = default!;
+        public Currency Currency { get; set; } = default!;
 
         /// <summary>
         /// The description or name of the balance. Can be used to denote the purpose of the balance.
@@ -60,7 +60,7 @@ namespace Mollie.Models.Components
         public EntityBalanceStatus Status { get; set; } = default!;
 
         [JsonProperty("transferFrequency")]
-        public EntityBalanceTransferFrequency? TransferFrequency { get; set; }
+        public TransferFrequency? TransferFrequency { get; set; }
 
         /// <summary>
         /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
@@ -71,7 +71,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("transferThreshold")]
-        public EntityBalanceTransferThreshold? TransferThreshold { get; set; }
+        public TransferThreshold? TransferThreshold { get; set; }
 
         /// <summary>
         /// The transfer reference set to be included in all the transfers for this balance.
@@ -87,13 +87,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("transferDestination")]
-        public EntityBalanceTransferDestination? TransferDestination { get; set; } = null;
+        public TransferDestination? TransferDestination { get; set; } = null;
 
         /// <summary>
         /// The amount directly available on the balance, e.g. `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;100.00&quot;}`.
         /// </summary>
         [JsonProperty("availableAmount")]
-        public EntityBalanceAvailableAmount AvailableAmount { get; set; } = default!;
+        public AvailableAmount AvailableAmount { get; set; } = default!;
 
         /// <summary>
         /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
@@ -103,7 +103,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("pendingAmount")]
-        public EntityBalancePendingAmount PendingAmount { get; set; } = default!;
+        public PendingAmount PendingAmount { get; set; } = default!;
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

@@ -166,31 +166,31 @@ namespace Mollie.Models.Components
         /// The amount that is left to be paid.
         /// </summary>
         [JsonProperty("amountDue")]
-        public SalesInvoiceResponseAmountDue? AmountDue { get; set; }
+        public AmountDue? AmountDue { get; set; }
 
         /// <summary>
         /// The total amount without VAT before discounts.
         /// </summary>
         [JsonProperty("subtotalAmount")]
-        public SalesInvoiceResponseSubtotalAmount? SubtotalAmount { get; set; }
+        public SubtotalAmount? SubtotalAmount { get; set; }
 
         /// <summary>
         /// The total amount with VAT.
         /// </summary>
         [JsonProperty("totalAmount")]
-        public SalesInvoiceResponseTotalAmount? TotalAmount { get; set; }
+        public TotalAmount? TotalAmount { get; set; }
 
         /// <summary>
         /// The total VAT amount.
         /// </summary>
         [JsonProperty("totalVatAmount")]
-        public SalesInvoiceResponseTotalVatAmount? TotalVatAmount { get; set; }
+        public TotalVatAmount? TotalVatAmount { get; set; }
 
         /// <summary>
         /// The total amount without VAT after discounts.
         /// </summary>
         [JsonProperty("discountedSubtotalAmount")]
-        public SalesInvoiceResponseDiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
+        public DiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

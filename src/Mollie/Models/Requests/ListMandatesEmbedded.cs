@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of mandate objects.
         /// </summary>
         [JsonProperty("mandates")]
-        public List<ListMandateResponse> Mandates { get; set; } = default!;
+        public List<MandateResponse> Mandates { get; set; } = default!;
     }
 }

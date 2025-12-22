@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of capture objects.
         /// </summary>
         [JsonProperty("captures")]
-        public List<CaptureResponse> Captures { get; set; } = default!;
+        public List<ListCaptureResponse> Captures { get; set; } = default!;
     }
 }

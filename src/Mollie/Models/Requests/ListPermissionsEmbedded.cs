@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of permission objects.
         /// </summary>
         [JsonProperty("permissions")]
-        public List<ListEntityPermission> Permissions { get; set; } = default!;
+        public List<EntityPermission> Permissions { get; set; } = default!;
     }
 }
