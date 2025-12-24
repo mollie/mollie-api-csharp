@@ -111,6 +111,9 @@ namespace Mollie.Models.Components
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
 
+        [JsonProperty("profileId")]
+        public string? ProfileId { get; set; }
+
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
         /// 

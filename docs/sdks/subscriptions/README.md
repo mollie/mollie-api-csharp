@@ -67,6 +67,7 @@ var res = await sdk.Subscriptions.CreateAsync(
         },
         WebhookUrl = "https://example.com/webhook",
         MandateId = "mdt_5B8cwPMGnU",
+        ProfileId = "pfl_5B8cwPMGnU",
         Testmode = false,
     }
 );

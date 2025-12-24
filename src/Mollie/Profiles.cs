@@ -146,9 +146,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
@@ -302,9 +302,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
@@ -460,9 +460,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
@@ -622,9 +622,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
@@ -777,9 +777,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
@@ -914,9 +914,9 @@ namespace Mollie
                 {
                     var backoff = new BackoffStrategy(
                         initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
                     );
                     retryConfig = new RetryConfig(
                         strategy: RetryConfig.RetryStrategy.BACKOFF,
