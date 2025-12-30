@@ -150,8 +150,8 @@ namespace Mollie.Models.Components
         /// well. Be sure to verify the payment&apos;s subscription ID and its status.
         /// </remarks>
         /// </summary>
-        [JsonProperty("webhookUrl")]
-        public string WebhookUrl { get; set; } = default!;
+        [JsonProperty("webhookUrl", NullValueHandling = NullValueHandling.Include)]
+        public string? WebhookUrl { get; set; }
 
         /// <summary>
         /// The customer this subscription belongs to.

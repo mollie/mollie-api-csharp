@@ -106,7 +106,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
-        public string? WebhookUrl { get; set; }
+        public string? WebhookUrl { get; set; } = null;
 
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
