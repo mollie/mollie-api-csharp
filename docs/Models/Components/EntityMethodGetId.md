@@ -1,4 +1,4 @@
-# EntityMethodId
+# EntityMethodGetId
 
 The unique identifier of the payment method. When used during [payment creation](create-payment), the payment
 method selection screen will be skipped.

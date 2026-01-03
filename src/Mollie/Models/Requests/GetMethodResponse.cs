@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The payment method object.
         /// </summary>
-        public EntityMethod? EntityMethod { get; set; }
+        public EntityMethodGet? EntityMethodGet { get; set; }
     }
 }

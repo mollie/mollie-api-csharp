@@ -1,4 +1,4 @@
-# EntityMethodMinimumAmount
+# EntityMethodGetMinimumAmount
 
 The minimum payment amount required to use this payment method.
 

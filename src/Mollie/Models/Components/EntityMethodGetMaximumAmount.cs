@@ -13,9 +13,13 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
     
     /// <summary>
-    /// The minimum payment amount required to use this payment method.
+    /// The maximum payment amount allowed when using this payment method. If there is no method-specific maximum, `null`<br/>
+    /// 
+    /// <remarks>
+    /// is returned instead.
+    /// </remarks>
     /// </summary>
-    public class EntityMethodMinimumAmount
+    public class EntityMethodGetMaximumAmount
     {
 
         /// <summary>

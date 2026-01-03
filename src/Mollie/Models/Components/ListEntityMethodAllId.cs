@@ -51,7 +51,6 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodAllId Paybybank = new ListEntityMethodAllId("paybybank");
         public static readonly ListEntityMethodAllId Paypal = new ListEntityMethodAllId("paypal");
         public static readonly ListEntityMethodAllId Paysafecard = new ListEntityMethodAllId("paysafecard");
-        public static readonly ListEntityMethodAllId Pointofsale = new ListEntityMethodAllId("pointofsale");
         public static readonly ListEntityMethodAllId Przelewy24 = new ListEntityMethodAllId("przelewy24");
         public static readonly ListEntityMethodAllId Riverty = new ListEntityMethodAllId("riverty");
         public static readonly ListEntityMethodAllId Satispay = new ListEntityMethodAllId("satispay");
@@ -60,10 +59,6 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodAllId Twint = new ListEntityMethodAllId("twint");
         public static readonly ListEntityMethodAllId Vipps = new ListEntityMethodAllId("vipps");
         public static readonly ListEntityMethodAllId Voucher = new ListEntityMethodAllId("voucher");
-        public static readonly ListEntityMethodAllId Klarnapaylater = new ListEntityMethodAllId("klarnapaylater");
-        public static readonly ListEntityMethodAllId Klarnapaynow = new ListEntityMethodAllId("klarnapaynow");
-        public static readonly ListEntityMethodAllId Klarnasliceit = new ListEntityMethodAllId("klarnasliceit");
-        public static readonly ListEntityMethodAllId Payconiq = new ListEntityMethodAllId("payconiq");
 
         private static readonly Dictionary <string, ListEntityMethodAllId> _knownValues =
             new Dictionary <string, ListEntityMethodAllId> ()
@@ -93,7 +88,6 @@ namespace Mollie.Models.Components
                 ["paybybank"] = Paybybank,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
-                ["pointofsale"] = Pointofsale,
                 ["przelewy24"] = Przelewy24,
                 ["riverty"] = Riverty,
                 ["satispay"] = Satispay,
@@ -101,11 +95,7 @@ namespace Mollie.Models.Components
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
-                ["voucher"] = Voucher,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["payconiq"] = Payconiq
+                ["voucher"] = Voucher
             };
 
         private static readonly ConcurrentDictionary<string, ListEntityMethodAllId> _values =

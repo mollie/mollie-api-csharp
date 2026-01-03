@@ -1,4 +1,4 @@
-# EntityMethodIssuerImage
+# EntityMethodGetIssuerImage
 
 URLs of images representing the issuer.
 required:

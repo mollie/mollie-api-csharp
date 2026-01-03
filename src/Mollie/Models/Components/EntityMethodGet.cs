@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Collections.Generic;
     using System.Linq;
     
-    public class EntityMethod
+    public class EntityMethodGet
     {
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Include)]
-        public EntityMethodId? Id { get; set; }
+        public EntityMethodGetId? Id { get; set; }
 
         /// <summary>
         /// The full name of the payment method.<br/>
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
         /// The minimum payment amount required to use this payment method.
         /// </summary>
         [JsonProperty("minimumAmount")]
-        public EntityMethodMinimumAmount MinimumAmount { get; set; } = default!;
+        public EntityMethodGetMinimumAmount MinimumAmount { get; set; } = default!;
 
         /// <summary>
         /// The maximum payment amount allowed when using this payment method. If there is no method-specific maximum, `null`<br/>
@@ -65,13 +65,13 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("maximumAmount", NullValueHandling = NullValueHandling.Include)]
-        public EntityMethodMaximumAmount? MaximumAmount { get; set; }
+        public EntityMethodGetMaximumAmount? MaximumAmount { get; set; }
 
         /// <summary>
         /// URLs of images representing the payment method.
         /// </summary>
         [JsonProperty("image")]
-        public EntityMethodImage Image { get; set; } = default!;
+        public EntityMethodGetImage Image { get; set; } = default!;
 
         /// <summary>
         /// The payment method&apos;s activation status for this profile.
@@ -87,12 +87,12 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("issuers")]
-        public List<EntityMethodIssuer>? Issuers { get; set; }
+        public List<EntityMethodGetIssuer>? Issuers { get; set; }
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public EntityMethodLinks Links { get; set; } = default!;
+        public EntityMethodGetLinks Links { get; set; } = default!;
     }
 }

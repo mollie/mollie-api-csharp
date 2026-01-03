@@ -45,7 +45,10 @@ namespace Mollie
         /// <br/>
         /// By default, only payment methods for the Euro currency are returned. If you<br/>
         /// wish to retrieve payment methods which exclusively support other currencies (e.g. Twint), you need to use the<br/>
-        /// `amount` parameters.
+        /// `amount` parameters.<br/>
+        /// <br/>
+        /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
         /// </remarks>
         /// </summary>
         Task<ListMethodsResponse> ListAsync(ListMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
@@ -57,7 +60,10 @@ namespace Mollie
         /// Retrieve all payment methods that Mollie offers, regardless of the eligibility of the organization for the specific<br/>
         /// method. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
         /// <br/>
-        /// The list can optionally be filtered using a number of parameters described below.
+        /// The list can optionally be filtered using a number of parameters described below.<br/>
+        /// <br/>
+        /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
         /// </remarks>
         /// </summary>
         Task<ListAllMethodsResponse> AllAsync(ListAllMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
@@ -498,14 +504,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityMethod obj;
+                    EntityMethodGet obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityMethod>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityMethodGet>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityMethod.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityMethodGet.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetMethodResponse()
@@ -516,7 +522,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityMethod = obj;
+                    response.EntityMethodGet = obj;
                     return response;
                 }
 

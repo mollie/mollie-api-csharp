@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     
-    public class EntityMethodIssuer
+    public class EntityMethodGetIssuer
     {
 
         [JsonProperty("resource")]
@@ -39,6 +39,6 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("image")]
-        public EntityMethodIssuerImage Image { get; set; } = default!;
+        public EntityMethodGetIssuerImage Image { get; set; } = default!;
     }
 }

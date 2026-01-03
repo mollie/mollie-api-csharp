@@ -51,7 +51,6 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Paybybank = new ListEntityMethodId("paybybank");
         public static readonly ListEntityMethodId Paypal = new ListEntityMethodId("paypal");
         public static readonly ListEntityMethodId Paysafecard = new ListEntityMethodId("paysafecard");
-        public static readonly ListEntityMethodId Pointofsale = new ListEntityMethodId("pointofsale");
         public static readonly ListEntityMethodId Przelewy24 = new ListEntityMethodId("przelewy24");
         public static readonly ListEntityMethodId Riverty = new ListEntityMethodId("riverty");
         public static readonly ListEntityMethodId Satispay = new ListEntityMethodId("satispay");
@@ -60,10 +59,6 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Twint = new ListEntityMethodId("twint");
         public static readonly ListEntityMethodId Vipps = new ListEntityMethodId("vipps");
         public static readonly ListEntityMethodId Voucher = new ListEntityMethodId("voucher");
-        public static readonly ListEntityMethodId Klarnapaylater = new ListEntityMethodId("klarnapaylater");
-        public static readonly ListEntityMethodId Klarnapaynow = new ListEntityMethodId("klarnapaynow");
-        public static readonly ListEntityMethodId Klarnasliceit = new ListEntityMethodId("klarnasliceit");
-        public static readonly ListEntityMethodId Payconiq = new ListEntityMethodId("payconiq");
 
         private static readonly Dictionary <string, ListEntityMethodId> _knownValues =
             new Dictionary <string, ListEntityMethodId> ()
@@ -93,7 +88,6 @@ namespace Mollie.Models.Components
                 ["paybybank"] = Paybybank,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
-                ["pointofsale"] = Pointofsale,
                 ["przelewy24"] = Przelewy24,
                 ["riverty"] = Riverty,
                 ["satispay"] = Satispay,
@@ -101,11 +95,7 @@ namespace Mollie.Models.Components
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
-                ["voucher"] = Voucher,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["payconiq"] = Payconiq
+                ["voucher"] = Voucher
             };
 
         private static readonly ConcurrentDictionary<string, ListEntityMethodId> _values =

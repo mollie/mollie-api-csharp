@@ -1,4 +1,4 @@
-# EntityMethodImage
+# EntityMethodGetImage
 
 URLs of images representing the payment method.
 

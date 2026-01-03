@@ -13,29 +13,22 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
     
     /// <summary>
-    /// URLs of images representing the issuer.<br/>
-    /// 
-    /// <remarks>
-    /// required:<br/>
-    ///   - size1x<br/>
-    ///   - size2x<br/>
-    ///   - svg
-    /// </remarks>
+    /// URLs of images representing the payment method.
     /// </summary>
-    public class EntityMethodIssuerImage
+    public class EntityMethodGetImage
     {
 
         /// <summary>
         /// The URL pointing to an icon of 32 by 24 pixels.
         /// </summary>
         [JsonProperty("size1x")]
-        public string? Size1x { get; set; }
+        public string Size1x { get; set; } = default!;
 
         /// <summary>
         /// The URL pointing to an icon of 64 by 48 pixels.
         /// </summary>
         [JsonProperty("size2x")]
-        public string? Size2x { get; set; }
+        public string Size2x { get; set; } = default!;
 
         /// <summary>
         /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can<br/>
@@ -45,6 +38,6 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("svg")]
-        public string? Svg { get; set; }
+        public string Svg { get; set; } = default!;
     }
 }
