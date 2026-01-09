@@ -109,7 +109,7 @@ namespace Mollie.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("context")]
-        public Context? Context { get; set; }
+        public Context? Context { get; set; } = null;
 
         /// <summary>
         /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

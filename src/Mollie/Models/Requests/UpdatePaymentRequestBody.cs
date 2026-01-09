@@ -100,7 +100,7 @@ namespace Mollie.Models.Requests
         /// </remarks>
         /// </summary>
         [JsonProperty("method")]
-        public Method? Method { get; set; } = null;
+        public MethodEnum? Method { get; set; } = null;
 
         /// <summary>
         /// Allows you to preset the language to be used.

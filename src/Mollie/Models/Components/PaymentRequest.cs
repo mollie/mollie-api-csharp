@@ -123,19 +123,7 @@ namespace Mollie.Models.Components
         [JsonProperty("locale")]
         public Locale? Locale { get; set; } = null;
 
-        /// <summary>
-        /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>
-        /// 
-        /// <remarks>
-        /// method and your customer will skip the selection screen and is sent directly to the chosen payment method. The<br/>
-        /// parameter enables you to fully integrate the payment method selection into your website.<br/>
-        /// <br/>
-        /// You can also specify the methods in an array. By doing so we will still show the payment method selection screen<br/>
-        /// but will only show the methods specified in the array. For example, you can use this functionality to only show<br/>
-        /// payment methods from a specific country to your customer `[&apos;bancontact&apos;, &apos;belfius&apos;]`.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("method")]
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
         public Method? Method { get; set; } = null;
 
         /// <summary>

@@ -9,125 +9,199 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
-    
-    /// <summary>
-    /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>
-    /// 
-    /// <remarks>
-    /// method and your customer will skip the selection screen and is sent directly to the chosen payment method. The<br/>
-    /// parameter enables you to fully integrate the payment method selection into your website.<br/>
-    /// <br/>
-    /// You can also specify the methods in an array. By doing so we will still show the payment method selection screen<br/>
-    /// but will only show the methods specified in the array. For example, you can use this functionality to only show<br/>
-    /// payment methods from a specific country to your customer `[&apos;bancontact&apos;, &apos;belfius&apos;]`.
-    /// </remarks>
-    /// </summary>
-    public enum Method
-    {
-        [JsonProperty("alma")]
-        Alma,
-        [JsonProperty("applepay")]
-        Applepay,
-        [JsonProperty("bacs")]
-        Bacs,
-        [JsonProperty("bancomatpay")]
-        Bancomatpay,
-        [JsonProperty("bancontact")]
-        Bancontact,
-        [JsonProperty("banktransfer")]
-        Banktransfer,
-        [JsonProperty("belfius")]
-        Belfius,
-        [JsonProperty("billie")]
-        Billie,
-        [JsonProperty("bizum")]
-        Bizum,
-        [JsonProperty("blik")]
-        Blik,
-        [JsonProperty("creditcard")]
-        Creditcard,
-        [JsonProperty("directdebit")]
-        Directdebit,
-        [JsonProperty("eps")]
-        Eps,
-        [JsonProperty("giftcard")]
-        Giftcard,
-        [JsonProperty("ideal")]
-        Ideal,
-        [JsonProperty("in3")]
-        In3,
-        [JsonProperty("kbc")]
-        Kbc,
-        [JsonProperty("klarna")]
-        Klarna,
-        [JsonProperty("mbway")]
-        Mbway,
-        [JsonProperty("mobilepay")]
-        Mobilepay,
-        [JsonProperty("multibanco")]
-        Multibanco,
-        [JsonProperty("mybank")]
-        Mybank,
-        [JsonProperty("paybybank")]
-        Paybybank,
-        [JsonProperty("paypal")]
-        Paypal,
-        [JsonProperty("paysafecard")]
-        Paysafecard,
-        [JsonProperty("pointofsale")]
-        Pointofsale,
-        [JsonProperty("przelewy24")]
-        Przelewy24,
-        [JsonProperty("riverty")]
-        Riverty,
-        [JsonProperty("satispay")]
-        Satispay,
-        [JsonProperty("swish")]
-        Swish,
-        [JsonProperty("trustly")]
-        Trustly,
-        [JsonProperty("twint")]
-        Twint,
-        [JsonProperty("vipps")]
-        Vipps,
-        [JsonProperty("voucher")]
-        Voucher,
-    }
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
 
-    public static class MethodExtension
+    public class MethodType
     {
-        public static string Value(this Method value)
+        private MethodType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+
+        public static MethodType PaymentRequestMethodEnum { get { return new MethodType("payment-request_method_enum"); } }
+
+        public static MethodType ArrayOfAny { get { return new MethodType("arrayOfAny"); } }
+
+        public static MethodType Null { get { return new MethodType("null"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(MethodType v) { return v.Value; }
+        public static MethodType FromString(string v) {
+            switch(v) {
+                case "payment-request_method_enum": return PaymentRequestMethodEnum;
+                case "arrayOfAny": return ArrayOfAny;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for MethodType");
+            }
+        }
+        public override bool Equals(object? obj)
         {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((MethodType)obj).Value);
         }
 
-        public static Method ToEnum(this string value)
+        public override int GetHashCode()
         {
-            foreach(var field in typeof(Method).GetFields())
+            return Value.GetHashCode();
+        }
+    }
+
+
+    [JsonConverter(typeof(Method.MethodConverter))]
+    public class Method
+    {
+        public Method(MethodType type)
+        {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public PaymentRequestMethodEnum? PaymentRequestMethodEnum { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public List<object>? ArrayOfAny { get; set; }
+
+        public MethodType Type { get; set; }
+        public static Method CreatePaymentRequestMethodEnum(PaymentRequestMethodEnum paymentRequestMethodEnum)
+        {
+            MethodType typ = MethodType.PaymentRequestMethodEnum;
+
+            Method res = new Method(typ);
+            res.PaymentRequestMethodEnum = paymentRequestMethodEnum;
+            return res;
+        }
+        public static Method CreateArrayOfAny(List<object> arrayOfAny)
+        {
+            MethodType typ = MethodType.ArrayOfAny;
+
+            Method res = new Method(typ);
+            res.ArrayOfAny = arrayOfAny;
+            return res;
+        }
+
+        public static Method CreateNull()
+        {
+            MethodType typ = MethodType.Null;
+            return new Method(typ);
+        }
+
+        public class MethodConverter : JsonConverter
+        {
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(Method);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    continue;
+                    return null;
                 }
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+                var json = JRaw.Create(reader).ToString();
+                var fallbackCandidates = new List<(System.Type, object, string)>();
 
-                    if (enumVal is Method)
+                try
+                {
+                    return new Method(MethodType.PaymentRequestMethodEnum)
                     {
-                        return (Method)enumVal;
+                        PaymentRequestMethodEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<PaymentRequestMethodEnum>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(PaymentRequestMethodEnum), new Method(MethodType.PaymentRequestMethodEnum), "PaymentRequestMethodEnum"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Method(MethodType.ArrayOfAny)
+                    {
+                        ArrayOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<object>>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(List<object>), new Method(MethodType.ArrayOfAny), "ArrayOfAny"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
                     }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null)
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+
+                Method res = (Method)value;
+                if (MethodType.FromString(res.Type).Equals(MethodType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+
+                if (res.PaymentRequestMethodEnum != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.PaymentRequestMethodEnum));
+                    return;
+                }
+
+                if (res.ArrayOfAny != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfAny));
+                    return;
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Method");
         }
-    }
 
+    }
 }

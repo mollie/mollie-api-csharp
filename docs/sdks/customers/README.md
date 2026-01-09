@@ -363,7 +363,6 @@ var res = await sdk.Customers.CreatePaymentAsync(
             Country = "NL",
         },
         Locale = Locale.EnUS,
-        Method = Method.Ideal,
         Issuer = "ideal_INGBNL2A",
         RestrictPaymentMethodsToCountry = "NL",
         CaptureMode = CaptureMode.Manual,
