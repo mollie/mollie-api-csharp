@@ -15,10 +15,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Provide the ID of the item you want to perform this operation on.
+        /// Provide the ID of the related settlement.
         /// </summary>
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
-        public string Id { get; set; } = default!;
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=settlementId")]
+        public string SettlementId { get; set; } = default!;
 
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.

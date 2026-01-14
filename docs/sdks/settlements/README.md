@@ -80,7 +80,7 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-settlement" method="get" path="/settlements/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-settlement" method="get" path="/settlements/{settlementId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -90,7 +90,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Settlements.GetAsync(
-    id: "stl_jDk30akdN",
+    settlementId: "stl_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -101,7 +101,7 @@ var res = await sdk.Settlements.GetAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `SettlementId`                                                                   | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related settlement.                                        | stl_5B8cwPMGnU                                                                   |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
@@ -226,7 +226,7 @@ var sdk = new Client(
 );
 
 ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
-    SettlementId = "stl_jDk30akdN",
+    SettlementId = "stl_5B8cwPMGnU",
     From = "tr_5B8cwPMGnU",
     Limit = 50,
     Sort = Sorting.Desc,
@@ -277,7 +277,7 @@ var sdk = new Client(
 );
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
-    SettlementId = "stl_jDk30akdN",
+    SettlementId = "stl_5B8cwPMGnU",
     From = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Limit = 50,
     Embed = "payment",
@@ -328,7 +328,7 @@ var sdk = new Client(
 );
 
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
-    SettlementId = "stl_jDk30akdN",
+    SettlementId = "stl_5B8cwPMGnU",
     From = "re_5B8cwPMGnU",
     Limit = 50,
     Embed = "payment",
@@ -379,7 +379,7 @@ var sdk = new Client(
 );
 
 ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
-    SettlementId = "stl_jDk30akdN",
+    SettlementId = "stl_5B8cwPMGnU",
     From = "chb_xFzwUN4ci8HAmSGUACS4J",
     Limit = 50,
     Embed = "payment",

@@ -55,7 +55,7 @@ namespace Mollie
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.
         /// </remarks>
         /// </summary>
-        Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetSettlementResponse> GetAsync(string settlementId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get open settlement
@@ -300,15 +300,15 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSettlementResponse> GetAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetSettlementResponse> GetAsync(string settlementId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetSettlementRequest()
             {
-                Id = id,
+                SettlementId = settlementId,
                 IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

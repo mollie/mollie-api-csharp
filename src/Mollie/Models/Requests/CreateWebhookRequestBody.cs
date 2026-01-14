@@ -30,7 +30,7 @@ namespace Mollie.Models.Requests
         public string Url { get; set; } = default!;
 
         [JsonProperty("eventTypes", NullValueHandling = NullValueHandling.Include)]
-        public CreateWebhookEventTypesListUnion EventTypesList { get; set; } = default!;
+        public EventTypesList EventTypesList { get; set; } = default!;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

@@ -118,7 +118,7 @@ Retrieve a single profile by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{profileId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -131,7 +131,7 @@ var sdk = new Client(
 );
 
 var res = await sdk.Profiles.GetAsync(
-    id: "pfl_QkEhN94Ba",
+    profileId: "pfl_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -142,7 +142,7 @@ var res = await sdk.Profiles.GetAsync(
 
 | Parameter                                                                                                                                                               | Type                                                                                                                                                                    | Required                                                                                                                                                                | Description                                                                                                                                                             | Example                                                                                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                                                                    | *string*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Provide the ID of the item you want to perform this operation on.                                                                                                       |                                                                                                                                                                         |
+| `ProfileId`                                                                                                                                                             | *string*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Provide the ID of the related profile.                                                                                                                                  | pfl_5B8cwPMGnU                                                                                                                                                          |
 | `Testmode`                                                                                                                                                              | *bool*                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                      | You can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                         |
 | `IdempotencyKey`                                                                                                                                                        | *string*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                             |
 
@@ -166,7 +166,7 @@ Alternatively, you can use this endpoint to automate profile management.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -178,7 +178,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Profiles.UpdateAsync(
-    id: "pfl_QkEhN94Ba",
+    profileId: "pfl_5B8cwPMGnU",
     requestBody: new UpdateProfileRequestBody() {
         Name = "My new website name",
         Website = "https://example.com",
@@ -201,7 +201,7 @@ var res = await sdk.Profiles.UpdateAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
 | `RequestBody`                                                                    | [UpdateProfileRequestBody](../../Models/Requests/UpdateProfileRequestBody.md)    | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
@@ -222,7 +222,7 @@ Delete a profile. A deleted profile and its related credentials can no longer be
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="delete-profile" method="delete" path="/profiles/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="delete-profile" method="delete" path="/profiles/{profileId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -232,7 +232,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Profiles.DeleteAsync(
-    id: "pfl_QkEhN94Ba",
+    profileId: "pfl_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -243,7 +243,7 @@ var res = await sdk.Profiles.DeleteAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response

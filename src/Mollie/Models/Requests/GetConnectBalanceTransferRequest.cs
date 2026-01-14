@@ -15,10 +15,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Provide the ID of the item you want to perform this operation on.
+        /// Provide the ID of the related balance transfer.
         /// </summary>
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
-        public string Id { get; set; } = default!;
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=balanceTransferId")]
+        public string BalanceTransferId { get; set; } = default!;
 
         /// <summary>
         /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>

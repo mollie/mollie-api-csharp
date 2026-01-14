@@ -3,14 +3,14 @@
 
 ## Supported Types
 
-### PaymentRequestMethodEnum
+### MethodEnum
 
 ```csharp
-Method.CreatePaymentRequestMethodEnum(/* values here */);
+Method.CreateMethodEnum(/* values here */);
 ```
 
-### ArrayOfAny
+### ArrayOfMethodEnum
 
 ```csharp
-Method.CreateArrayOfAny(/* values here */);
+Method.CreateArrayOfMethodEnum(/* values here */);
 ```

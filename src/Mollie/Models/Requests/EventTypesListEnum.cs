@@ -20,7 +20,7 @@ namespace Mollie.Models.Requests
     /// that require explicit selection.
     /// </remarks>
     /// </summary>
-    public enum UpdateWebhookEventTypesListEnum
+    public enum EventTypesListEnum
     {
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
@@ -38,16 +38,16 @@ namespace Mollie.Models.Requests
         Wildcard,
     }
 
-    public static class UpdateWebhookEventTypesListEnumExtension
+    public static class EventTypesListEnumExtension
     {
-        public static string Value(this UpdateWebhookEventTypesListEnum value)
+        public static string Value(this EventTypesListEnum value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static UpdateWebhookEventTypesListEnum ToEnum(this string value)
+        public static EventTypesListEnum ToEnum(this string value)
         {
-            foreach(var field in typeof(UpdateWebhookEventTypesListEnum).GetFields())
+            foreach(var field in typeof(EventTypesListEnum).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -60,14 +60,14 @@ namespace Mollie.Models.Requests
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is UpdateWebhookEventTypesListEnum)
+                    if (enumVal is EventTypesListEnum)
                     {
-                        return (UpdateWebhookEventTypesListEnum)enumVal;
+                        return (EventTypesListEnum)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum UpdateWebhookEventTypesListEnum");
+            throw new Exception($"Unknown value {value} for enum EventTypesListEnum");
         }
     }
 

@@ -60,7 +60,7 @@ Retrieve a single client by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -70,7 +70,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Clients.GetAsync(
-    id: "org_12345678",
+    organizationId: "org_1234567",
     embed: "organization",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
@@ -82,7 +82,7 @@ var res = await sdk.Clients.GetAsync(
 
 | Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                       | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Provide the ID of the item you want to perform this operation on.                                                          |                                                                                                                            |
+| `OrganizationId`                                                                                                           | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Provide the ID of the related organization.                                                                                | org_1234567                                                                                                                |
 | `Embed`                                                                                                                    | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>parameter. |                                                                                                                            |
 | `IdempotencyKey`                                                                                                           | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                           | 123e4567-e89b-12d3-a456-426                                                                                                |
 

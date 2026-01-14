@@ -67,7 +67,7 @@ call the [List invoices](list-invoices) endpoint with the `reference` parameter.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{invoiceId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -77,7 +77,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Invoices.GetAsync(
-    id: "inv_FrvewDA3Pr",
+    invoiceId: "inv_aHbjjdrUdm",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -88,7 +88,7 @@ var res = await sdk.Invoices.GetAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `InvoiceId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related invoice.                                           | inv_aHbjjdrUdm                                                                   |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response

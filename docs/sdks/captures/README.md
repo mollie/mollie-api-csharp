@@ -137,7 +137,7 @@ var sdk = new Client(
 
 GetCaptureRequest req = new GetCaptureRequest() {
     PaymentId = "tr_5B8cwPMGnU",
-    CaptureId = "cpt_gVMhHKqSSRYJyPsuoPNFH",
+    CaptureId = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };

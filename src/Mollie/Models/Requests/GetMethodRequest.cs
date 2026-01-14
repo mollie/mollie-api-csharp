@@ -11,15 +11,20 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class GetMethodRequest
     {
 
         /// <summary>
-        /// Provide the ID of the item you want to perform this operation on.
+        /// Provide the ID of the related payment method.
         /// </summary>
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
-        public string Id { get; set; } = default!;
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=methodId")]
+        public MethodId? MethodId { get; set; }
 
         /// <summary>
         /// Response language

@@ -32,8 +32,8 @@ var res = await sdk.Webhooks.CreateAsync(
     requestBody: new CreateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
-        EventTypesList = CreateWebhookEventTypesListUnion.CreateCreateWebhookEventTypesListEnum(
-            CreateWebhookEventTypesListEnum.PaymentLinkPaid
+        EventTypesList = EventTypesList.CreateEventTypesListEnum(
+            EventTypesListEnum.PaymentLinkPaid
         ),
         Testmode = false,
     }
@@ -115,7 +115,7 @@ Updates the webhook. You may edit the name, url and the list of subscribed event
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/webhooks/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/webhooks/{webhookId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -126,13 +126,13 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Webhooks.UpdateAsync(
-    id: "hook_B2EyhTH5N4KWUnoYPcgiH",
+    webhookId: "hook_1234567890",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
-        EventTypesList = UpdateWebhookEventTypesListUnion.CreateUpdateWebhookEventTypesListEnum(
-            UpdateWebhookEventTypesListEnum.PaymentLinkPaid
+        EventTypes = EventTypes.CreateWebhookEventTypes(
+            WebhookEventTypes.PaymentLinkPaid
         ),
         Testmode = false,
     }
@@ -145,7 +145,7 @@ var res = await sdk.Webhooks.UpdateAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 | `RequestBody`                                                                    | [UpdateWebhookRequestBody](../../Models/Requests/UpdateWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
@@ -166,7 +166,7 @@ Retrieve a single webhook object by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{webhookId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -179,7 +179,7 @@ var sdk = new Client(
 );
 
 var res = await sdk.Webhooks.GetAsync(
-    id: "hook_B2EyhTH5N4KWUnoYPcgiH",
+    webhookId: "hook_1234567890",
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -190,7 +190,7 @@ var res = await sdk.Webhooks.GetAsync(
 
 | Parameter                                                                                                                                                               | Type                                                                                                                                                                    | Required                                                                                                                                                                | Description                                                                                                                                                             | Example                                                                                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Id`                                                                                                                                                                    | *string*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Provide the ID of the item you want to perform this operation on.                                                                                                       |                                                                                                                                                                         |
+| `WebhookId`                                                                                                                                                             | *string*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Provide the ID of the related webhook.                                                                                                                                  | hook_1234567890                                                                                                                                                         |
 | `Testmode`                                                                                                                                                              | *bool*                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                      | You can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                         |
 | `IdempotencyKey`                                                                                                                                                        | *string*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                             |
 
@@ -211,7 +211,7 @@ Delete a single webhook object by its webhook ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="delete-webhook" method="delete" path="/webhooks/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="delete-webhook" method="delete" path="/webhooks/{webhookId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -222,7 +222,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Webhooks.DeleteAsync(
-    id: "hook_B2EyhTH5N4KWUnoYPcgiH",
+    webhookId: "hook_1234567890",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new DeleteWebhookRequestBody() {
         Testmode = false,
@@ -236,7 +236,7 @@ var res = await sdk.Webhooks.DeleteAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 | `RequestBody`                                                                    | [DeleteWebhookRequestBody](../../Models/Requests/DeleteWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
@@ -257,7 +257,7 @@ Sends a test event to the webhook to verify the endpoint is working as expected.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="test-webhook" method="post" path="/webhooks/{id}/ping" -->
+<!-- UsageSnippet language="csharp" operationID="test-webhook" method="post" path="/webhooks/{webhookId}/ping" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -268,7 +268,7 @@ var sdk = new Client(security: new Security() {
 });
 
 var res = await sdk.Webhooks.TestAsync(
-    id: "hook_B2EyhTH5N4KWUnoYPcgiH",
+    webhookId: "hook_1234567890",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new TestWebhookRequestBody() {
         Testmode = false,
@@ -282,7 +282,7 @@ var res = await sdk.Webhooks.TestAsync(
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Id`                                                                             | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the item you want to perform this operation on.                |                                                                                  |
+| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 | `RequestBody`                                                                    | [TestWebhookRequestBody](../../Models/Requests/TestWebhookRequestBody.md)        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 

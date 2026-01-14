@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -19,23 +18,23 @@ namespace Mollie.Models.Requests
     using System.Numerics;
     using System.Reflection;
 
-    public class UpdateWebhookEventTypesListUnionType
+    public class EventTypesType
     {
-        private UpdateWebhookEventTypesListUnionType(string value) { Value = value; }
+        private EventTypesType(string value) { Value = value; }
 
         public string Value { get; private set; }
 
-        public static UpdateWebhookEventTypesListUnionType ArrayOfWebhookEventTypes { get { return new UpdateWebhookEventTypesListUnionType("arrayOfWebhookEventTypes"); } }
+        public static EventTypesType ArrayOfWebhookEventTypes { get { return new EventTypesType("arrayOfWebhookEventTypes"); } }
 
-        public static UpdateWebhookEventTypesListUnionType UpdateWebhookEventTypesListEnum { get { return new UpdateWebhookEventTypesListUnionType("update_webhook_EventTypesList_enum"); } }
+        public static EventTypesType WebhookEventTypes { get { return new EventTypesType("webhook-event-types"); } }
 
         public override string ToString() { return Value; }
-        public static implicit operator String(UpdateWebhookEventTypesListUnionType v) { return v.Value; }
-        public static UpdateWebhookEventTypesListUnionType FromString(string v) {
+        public static implicit operator String(EventTypesType v) { return v.Value; }
+        public static EventTypesType FromString(string v) {
             switch(v) {
                 case "arrayOfWebhookEventTypes": return ArrayOfWebhookEventTypes;
-                case "update_webhook_EventTypesList_enum": return UpdateWebhookEventTypesListEnum;
-                default: throw new ArgumentException("Invalid value for UpdateWebhookEventTypesListUnionType");
+                case "webhook-event-types": return WebhookEventTypes;
+                default: throw new ArgumentException("Invalid value for EventTypesType");
             }
         }
         public override bool Equals(object? obj)
@@ -44,7 +43,7 @@ namespace Mollie.Models.Requests
             {
                 return false;
             }
-            return Value.Equals(((UpdateWebhookEventTypesListUnionType)obj).Value);
+            return Value.Equals(((EventTypesType)obj).Value);
         }
 
         public override int GetHashCode()
@@ -54,10 +53,10 @@ namespace Mollie.Models.Requests
     }
 
 
-    [JsonConverter(typeof(UpdateWebhookEventTypesListUnion.UpdateWebhookEventTypesListUnionConverter))]
-    public class UpdateWebhookEventTypesListUnion
+    [JsonConverter(typeof(EventTypes.EventTypesConverter))]
+    public class EventTypes
     {
-        public UpdateWebhookEventTypesListUnion(UpdateWebhookEventTypesListUnionType type)
+        public EventTypes(EventTypesType type)
         {
             Type = type;
         }
@@ -66,29 +65,29 @@ namespace Mollie.Models.Requests
         public List<WebhookEventTypes>? ArrayOfWebhookEventTypes { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public UpdateWebhookEventTypesListEnum? UpdateWebhookEventTypesListEnum { get; set; }
+        public WebhookEventTypes? WebhookEventTypes { get; set; }
 
-        public UpdateWebhookEventTypesListUnionType Type { get; set; }
-        public static UpdateWebhookEventTypesListUnion CreateArrayOfWebhookEventTypes(List<WebhookEventTypes> arrayOfWebhookEventTypes)
+        public EventTypesType Type { get; set; }
+        public static EventTypes CreateArrayOfWebhookEventTypes(List<WebhookEventTypes> arrayOfWebhookEventTypes)
         {
-            UpdateWebhookEventTypesListUnionType typ = UpdateWebhookEventTypesListUnionType.ArrayOfWebhookEventTypes;
+            EventTypesType typ = EventTypesType.ArrayOfWebhookEventTypes;
 
-            UpdateWebhookEventTypesListUnion res = new UpdateWebhookEventTypesListUnion(typ);
+            EventTypes res = new EventTypes(typ);
             res.ArrayOfWebhookEventTypes = arrayOfWebhookEventTypes;
             return res;
         }
-        public static UpdateWebhookEventTypesListUnion CreateUpdateWebhookEventTypesListEnum(UpdateWebhookEventTypesListEnum updateWebhookEventTypesListEnum)
+        public static EventTypes CreateWebhookEventTypes(WebhookEventTypes webhookEventTypes)
         {
-            UpdateWebhookEventTypesListUnionType typ = UpdateWebhookEventTypesListUnionType.UpdateWebhookEventTypesListEnum;
+            EventTypesType typ = EventTypesType.WebhookEventTypes;
 
-            UpdateWebhookEventTypesListUnion res = new UpdateWebhookEventTypesListUnion(typ);
-            res.UpdateWebhookEventTypesListEnum = updateWebhookEventTypesListEnum;
+            EventTypes res = new EventTypes(typ);
+            res.WebhookEventTypes = webhookEventTypes;
             return res;
         }
 
-        public class UpdateWebhookEventTypesListUnionConverter : JsonConverter
+        public class EventTypesConverter : JsonConverter
         {
-            public override bool CanConvert(System.Type objectType) => objectType == typeof(UpdateWebhookEventTypesListUnion);
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(EventTypes);
 
             public override bool CanRead => true;
 
@@ -104,14 +103,14 @@ namespace Mollie.Models.Requests
 
                 try
                 {
-                    return new UpdateWebhookEventTypesListUnion(UpdateWebhookEventTypesListUnionType.ArrayOfWebhookEventTypes)
+                    return new EventTypes(EventTypesType.ArrayOfWebhookEventTypes)
                     {
                         ArrayOfWebhookEventTypes = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<WebhookEventTypes>>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(List<WebhookEventTypes>), new UpdateWebhookEventTypesListUnion(UpdateWebhookEventTypesListUnionType.ArrayOfWebhookEventTypes), "ArrayOfWebhookEventTypes"));
+                    fallbackCandidates.Add((typeof(List<WebhookEventTypes>), new EventTypes(EventTypesType.ArrayOfWebhookEventTypes), "ArrayOfWebhookEventTypes"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -124,14 +123,14 @@ namespace Mollie.Models.Requests
 
                 try
                 {
-                    return new UpdateWebhookEventTypesListUnion(UpdateWebhookEventTypesListUnionType.UpdateWebhookEventTypesListEnum)
+                    return new EventTypes(EventTypesType.WebhookEventTypes)
                     {
-                        UpdateWebhookEventTypesListEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<UpdateWebhookEventTypesListEnum>(json)
+                        WebhookEventTypes = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebhookEventTypes>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(UpdateWebhookEventTypesListEnum), new UpdateWebhookEventTypesListUnion(UpdateWebhookEventTypesListUnionType.UpdateWebhookEventTypesListEnum), "UpdateWebhookEventTypesListEnum"));
+                    fallbackCandidates.Add((typeof(WebhookEventTypes), new EventTypes(EventTypesType.WebhookEventTypes), "WebhookEventTypes"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -172,7 +171,7 @@ namespace Mollie.Models.Requests
                     throw new InvalidOperationException("Unexpected null JSON value.");
                 }
 
-                UpdateWebhookEventTypesListUnion res = (UpdateWebhookEventTypesListUnion)value;
+                EventTypes res = (EventTypes)value;
 
                 if (res.ArrayOfWebhookEventTypes != null)
                 {
@@ -180,9 +179,9 @@ namespace Mollie.Models.Requests
                     return;
                 }
 
-                if (res.UpdateWebhookEventTypesListEnum != null)
+                if (res.WebhookEventTypes != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.UpdateWebhookEventTypesListEnum));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.WebhookEventTypes));
                     return;
                 }
             }

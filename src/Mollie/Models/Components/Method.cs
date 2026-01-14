@@ -24,9 +24,9 @@ namespace Mollie.Models.Components
 
         public string Value { get; private set; }
 
-        public static MethodType PaymentRequestMethodEnum { get { return new MethodType("payment-request_method_enum"); } }
+        public static MethodType MethodEnum { get { return new MethodType("method_enum"); } }
 
-        public static MethodType ArrayOfAny { get { return new MethodType("arrayOfAny"); } }
+        public static MethodType ArrayOfMethodEnum { get { return new MethodType("arrayOfMethodEnum"); } }
 
         public static MethodType Null { get { return new MethodType("null"); } }
 
@@ -34,8 +34,8 @@ namespace Mollie.Models.Components
         public static implicit operator String(MethodType v) { return v.Value; }
         public static MethodType FromString(string v) {
             switch(v) {
-                case "payment-request_method_enum": return PaymentRequestMethodEnum;
-                case "arrayOfAny": return ArrayOfAny;
+                case "method_enum": return MethodEnum;
+                case "arrayOfMethodEnum": return ArrayOfMethodEnum;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for MethodType");
             }
@@ -65,26 +65,26 @@ namespace Mollie.Models.Components
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public PaymentRequestMethodEnum? PaymentRequestMethodEnum { get; set; }
+        public MethodEnum? MethodEnum { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public List<object>? ArrayOfAny { get; set; }
+        public List<MethodEnum?>? ArrayOfMethodEnum { get; set; }
 
         public MethodType Type { get; set; }
-        public static Method CreatePaymentRequestMethodEnum(PaymentRequestMethodEnum paymentRequestMethodEnum)
+        public static Method CreateMethodEnum(MethodEnum methodEnum)
         {
-            MethodType typ = MethodType.PaymentRequestMethodEnum;
+            MethodType typ = MethodType.MethodEnum;
 
             Method res = new Method(typ);
-            res.PaymentRequestMethodEnum = paymentRequestMethodEnum;
+            res.MethodEnum = methodEnum;
             return res;
         }
-        public static Method CreateArrayOfAny(List<object> arrayOfAny)
+        public static Method CreateArrayOfMethodEnum(List<MethodEnum?> arrayOfMethodEnum)
         {
-            MethodType typ = MethodType.ArrayOfAny;
+            MethodType typ = MethodType.ArrayOfMethodEnum;
 
             Method res = new Method(typ);
-            res.ArrayOfAny = arrayOfAny;
+            res.ArrayOfMethodEnum = arrayOfMethodEnum;
             return res;
         }
 
@@ -112,14 +112,14 @@ namespace Mollie.Models.Components
 
                 try
                 {
-                    return new Method(MethodType.PaymentRequestMethodEnum)
+                    return new Method(MethodType.MethodEnum)
                     {
-                        PaymentRequestMethodEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<PaymentRequestMethodEnum>(json)
+                        MethodEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<MethodEnum>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(PaymentRequestMethodEnum), new Method(MethodType.PaymentRequestMethodEnum), "PaymentRequestMethodEnum"));
+                    fallbackCandidates.Add((typeof(MethodEnum), new Method(MethodType.MethodEnum), "MethodEnum"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -132,14 +132,14 @@ namespace Mollie.Models.Components
 
                 try
                 {
-                    return new Method(MethodType.ArrayOfAny)
+                    return new Method(MethodType.ArrayOfMethodEnum)
                     {
-                        ArrayOfAny = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<object>>(json)
+                        ArrayOfMethodEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<List<MethodEnum?>>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(List<object>), new Method(MethodType.ArrayOfAny), "ArrayOfAny"));
+                    fallbackCandidates.Add((typeof(List<MethodEnum?>), new Method(MethodType.ArrayOfMethodEnum), "ArrayOfMethodEnum"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -188,15 +188,15 @@ namespace Mollie.Models.Components
                     return;
                 }
 
-                if (res.PaymentRequestMethodEnum != null)
+                if (res.MethodEnum != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.PaymentRequestMethodEnum));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.MethodEnum));
                     return;
                 }
 
-                if (res.ArrayOfAny != null)
+                if (res.ArrayOfMethodEnum != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfAny));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfMethodEnum));
                     return;
                 }
             }

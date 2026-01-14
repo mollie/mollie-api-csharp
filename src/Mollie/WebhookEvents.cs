@@ -33,7 +33,7 @@ namespace Mollie
         /// Retrieve a single webhook event object by its event ID.
         /// </remarks>
         /// </summary>
-        Task<GetWebhookEventResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetWebhookEventResponse> GetAsync(string webhookEventId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class WebhookEvents: IWebhookEvents
@@ -50,18 +50,18 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetWebhookEventResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetWebhookEventResponse> GetAsync(string webhookEventId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetWebhookEventRequest()
             {
-                Id = id,
+                WebhookEventId = webhookEventId,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/events/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/events/{webhookEventId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

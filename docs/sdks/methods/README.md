@@ -159,7 +159,7 @@ are enabled by passing the wallet ID (`applepay`) as the method ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{id}" -->
+<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{methodId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -174,7 +174,7 @@ var sdk = new Client(
 );
 
 GetMethodRequest req = new GetMethodRequest() {
-    Id = "ideal",
+    MethodId = MethodId.Ideal,
     Locale = Locale.EnUS,
     Currency = "EUR",
     Include = "issuers",

@@ -15,10 +15,10 @@ namespace Mollie.Models.Requests
     {
 
         /// <summary>
-        /// Provide the ID of the item you want to perform this operation on.
+        /// Provide the ID of the related sales invoice.
         /// </summary>
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
-        public string Id { get; set; } = default!;
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=salesInvoiceId")]
+        public string SalesInvoiceId { get; set; } = default!;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

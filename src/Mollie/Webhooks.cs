@@ -51,7 +51,7 @@ namespace Mollie
         /// Updates the webhook. You may edit the name, url and the list of subscribed event types.
         /// </remarks>
         /// </summary>
-        Task<UpdateWebhookResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<UpdateWebhookResponse> UpdateAsync(string webhookId, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get a webhook
@@ -60,7 +60,7 @@ namespace Mollie
         /// Retrieve a single webhook object by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetWebhookResponse> GetAsync(string webhookId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Delete a webhook
@@ -69,7 +69,7 @@ namespace Mollie
         /// Delete a single webhook object by its webhook ID.
         /// </remarks>
         /// </summary>
-        Task<DeleteWebhookResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<DeleteWebhookResponse> DeleteAsync(string webhookId, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Test a webhook
@@ -78,7 +78,7 @@ namespace Mollie
         /// Sends a test event to the webhook to verify the endpoint is working as expected.
         /// </remarks>
         /// </summary>
-        Task<TestWebhookResponse> TestAsync(string id, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<TestWebhookResponse> TestAsync(string webhookId, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Webhooks: IWebhooks
@@ -409,16 +409,16 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateWebhookResponse> UpdateAsync(string id, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<UpdateWebhookResponse> UpdateAsync(string webhookId, string? idempotencyKey = null, UpdateWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new UpdateWebhookRequest()
             {
-                Id = id,
+                WebhookId = webhookId,
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{webhookId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -571,18 +571,18 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWebhookResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetWebhookResponse> GetAsync(string webhookId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetWebhookRequest()
             {
-                Id = id,
+                WebhookId = webhookId,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{webhookId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -729,16 +729,16 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteWebhookResponse> DeleteAsync(string id, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<DeleteWebhookResponse> DeleteAsync(string webhookId, string? idempotencyKey = null, DeleteWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new DeleteWebhookRequest()
             {
-                Id = id,
+                WebhookId = webhookId,
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{webhookId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -873,16 +873,16 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<TestWebhookResponse> TestAsync(string id, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<TestWebhookResponse> TestAsync(string webhookId, string? idempotencyKey = null, TestWebhookRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new TestWebhookRequest()
             {
-                Id = id,
+                WebhookId = webhookId,
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{id}/ping", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/webhooks/{webhookId}/ping", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

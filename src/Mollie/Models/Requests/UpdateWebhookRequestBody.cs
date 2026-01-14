@@ -30,7 +30,7 @@ namespace Mollie.Models.Requests
         public string? Url { get; set; }
 
         [JsonProperty("eventTypes", NullValueHandling = NullValueHandling.Include)]
-        public UpdateWebhookEventTypesListUnion? EventTypesList { get; set; }
+        public EventTypes? EventTypes { get; set; }
 
         /// <summary>
         /// You can enable test mode by setting `testmode` to `true`.<br/>

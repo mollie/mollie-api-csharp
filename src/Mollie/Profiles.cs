@@ -56,7 +56,7 @@ namespace Mollie
         /// Retrieve a single profile by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetProfileResponse> GetAsync(string profileId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Update profile
@@ -68,7 +68,7 @@ namespace Mollie
         /// Alternatively, you can use this endpoint to automate profile management.
         /// </remarks>
         /// </summary>
-        Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<UpdateProfileResponse> UpdateAsync(string profileId, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Delete profile
@@ -77,7 +77,7 @@ namespace Mollie
         /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
         /// </remarks>
         /// </summary>
-        Task<DeleteProfileResponse> DeleteAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<DeleteProfileResponse> DeleteAsync(string profileId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get current profile
@@ -425,18 +425,19 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetProfileResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetProfileResponse> GetAsync(string profileId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetProfileRequest()
             {
-                Id = id,
+                ProfileId = profileId,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
+            request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -583,16 +584,18 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateProfileResponse> UpdateAsync(string id, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<UpdateProfileResponse> UpdateAsync(string profileId, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new UpdateProfileRequest()
             {
-                Id = id,
+                ProfileId = profileId,
                 RequestBody = requestBody,
                 IdempotencyKey = idempotencyKey,
             };
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -745,15 +748,17 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteProfileResponse> DeleteAsync(string id, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<DeleteProfileResponse> DeleteAsync(string profileId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new DeleteProfileRequest()
             {
-                Id = id,
+                ProfileId = profileId,
                 IdempotencyKey = idempotencyKey,
             };
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+            
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/profiles/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

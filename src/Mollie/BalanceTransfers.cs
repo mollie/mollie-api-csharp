@@ -54,7 +54,7 @@ namespace Mollie
         /// Retrieve a single Connect balance transfer object by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetConnectBalanceTransferResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetConnectBalanceTransferResponse> GetAsync(string balanceTransferId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class BalanceTransfers: IBalanceTransfers
@@ -385,18 +385,18 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetConnectBalanceTransferResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetConnectBalanceTransferResponse> GetAsync(string balanceTransferId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetConnectBalanceTransferRequest()
             {
-                Id = id,
+                BalanceTransferId = balanceTransferId,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers/{balanceTransferId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

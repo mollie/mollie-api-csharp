@@ -38,7 +38,7 @@ namespace Mollie
         /// If you have a *partner account*&apos;, you can retrieve organization details of connected organizations.
         /// </remarks>
         /// </summary>
-        Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetOrganizationResponse> GetAsync(string organizationId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
 
         /// <summary>
         /// Get current organization
@@ -78,18 +78,18 @@ namespace Mollie
             SDKConfiguration = config;
         }
 
-        public async Task<GetOrganizationResponse> GetAsync(string id, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetOrganizationResponse> GetAsync(string organizationId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetOrganizationRequest()
             {
-                Id = id,
+                OrganizationId = organizationId,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organizationId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

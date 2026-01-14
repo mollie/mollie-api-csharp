@@ -44,7 +44,7 @@ namespace Mollie
         /// Retrieve a single client by its ID.
         /// </remarks>
         /// </summary>
-        Task<GetClientResponse> GetAsync(string id, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        Task<GetClientResponse> GetAsync(string organizationId, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
     }
 
     public class Clients: IClients
@@ -218,16 +218,16 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetClientResponse> GetAsync(string id, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        public async Task<GetClientResponse> GetAsync(string organizationId, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
         {
             var request = new GetClientRequest()
             {
-                Id = id,
+                OrganizationId = organizationId,
                 Embed = embed,
                 IdempotencyKey = idempotencyKey,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/clients/{id}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/clients/{organizationId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
