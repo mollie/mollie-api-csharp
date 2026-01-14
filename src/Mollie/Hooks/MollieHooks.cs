@@ -15,6 +15,9 @@ namespace Mollie.Hooks
     {
         public Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
+            // Validate path parameters
+            ValidatePathParameters(request);
+
             // Add the idempotency key if it doesn't already exist
             HandleIdempotencyKey(request.Headers);
 
@@ -29,6 +32,25 @@ namespace Mollie.Hooks
             }
 
             return Task.FromResult(request);
+        }
+
+        private void ValidatePathParameters(HttpRequestMessage request)
+        {
+            var pathSegments = request.RequestUri.AbsolutePath.Split('/');
+
+            for (int i = 0; i < pathSegments.Length; i++)
+            {
+                if (i == 0 && pathSegments[i] == "")
+                {
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(pathSegments[i]) || string.IsNullOrWhiteSpace(pathSegments[i]))
+                {
+                    throw new InvalidOperationException(
+                        $"Invalid request: empty path parameter detected in [{request.Method}] '{request.RequestUri.AbsolutePath}'");
+                }
+            }
         }
 
         private bool IsOAuthRequest(HttpRequestHeaders headers, BeforeRequestContext hookCtx)
