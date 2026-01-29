@@ -12,15 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
-    /// 
-    /// <remarks>
     /// and capture at a later time.<br/>
     /// <br/>
     /// This field needs to be set to `manual` for method `riverty`.
-    /// </remarks>
     /// </summary>
     public enum CaptureMode
     {
@@ -62,5 +59,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum CaptureMode");
         }
     }
-
 }

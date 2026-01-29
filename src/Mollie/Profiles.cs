@@ -25,97 +25,220 @@ namespace Mollie
 
     public interface IProfiles
     {
-
         /// <summary>
-        /// Create profile
-        /// 
+        /// Create profile.
+        /// </summary>
         /// <remarks>
         /// Create a profile to process payments on.<br/>
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you<br/>
         /// can use this endpoint to automate profile creation.
         /// </remarks>
-        /// </summary>
-        Task<CreateProfileResponse> CreateAsync(ProfileRequest profileRequest, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileRequest"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if a profile name is missing or website URL is invalid. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateProfileResponse> CreateAsync(
+            ProfileRequest profileRequest,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// List profiles
-        /// 
+        /// List profiles.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of all of your profiles.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListProfilesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListProfilesResponse> ListAsync(
+            string? fromP = null,
+            long? limit = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get profile
-        /// 
+        /// Get profile.
+        /// </summary>
         /// <remarks>
         /// Retrieve a single profile by its ID.
         /// </remarks>
-        /// </summary>
-        Task<GetProfileResponse> GetAsync(string profileId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetProfileResponse> GetAsync(
+            string profileId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Update profile
-        /// 
+        /// Update profile.
+        /// </summary>
         /// <remarks>
         /// Update an existing profile.<br/>
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.<br/>
         /// Alternatively, you can use this endpoint to automate profile management.
         /// </remarks>
-        /// </summary>
-        Task<UpdateProfileResponse> UpdateAsync(string profileId, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="profileId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateProfileResponse> UpdateAsync(
+            string profileId,
+            UpdateProfileRequestBody requestBody,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Delete profile
-        /// 
+        /// Delete profile.
+        /// </summary>
         /// <remarks>
         /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
         /// </remarks>
-        /// </summary>
-        Task<DeleteProfileResponse> DeleteAsync(string profileId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteProfileResponse> DeleteAsync(
+            string profileId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get current profile
-        /// 
+        /// Get current profile.
+        /// </summary>
         /// <remarks>
-        /// Retrieve the currently authenticated profile. A convenient alias of the <a href="get-profile">Get profile</a><br/>
+        /// Retrieve the currently authenticated profile. A convenient alias of the <a href="get-profile">Get profile</a>
         /// endpoint.<br/>
         /// <br/>
         /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint<br/>
         /// documentation.
         /// </remarks>
-        /// </summary>
-        Task<GetCurrentProfileResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetCurrentProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetCurrentProfileResponse> GetCurrentAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Profiles: IProfiles
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Profiles(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreateProfileResponse> CreateAsync(ProfileRequest profileRequest, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Create profile.
+        /// </summary>
+        /// <remarks>
+        /// Create a profile to process payments on.<br/>
+        /// <br/>
+        /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you<br/>
+        /// can use this endpoint to automate profile creation.
+        /// </remarks>
+        /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileRequest"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if a profile name is missing or website URL is invalid. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateProfileResponse> CreateAsync(
+            ProfileRequest profileRequest,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (profileRequest == null) throw new ArgumentNullException(nameof(profileRequest));
+
             var request = new CreateProfileRequest()
             {
                 ProfileRequest = profileRequest,
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/profiles";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -176,7 +299,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -269,7 +392,36 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListProfilesResponse> ListAsync(string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// List profiles.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of all of your profiles.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListProfilesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListProfilesResponse> ListAsync(
+            string? fromP = null,
+            long? limit = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new ListProfilesRequest()
             {
@@ -277,6 +429,7 @@ namespace Mollie
                 Limit = limit,
                 IdempotencyKey = idempotencyKey,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles", request, null);
 
@@ -332,7 +485,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -425,8 +578,39 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetProfileResponse> GetAsync(string profileId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get profile.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single profile by its ID.
+        /// </remarks>
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetProfileResponse> GetAsync(
+            string profileId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (profileId == null) throw new ArgumentNullException(nameof(profileId));
+
             var request = new GetProfileRequest()
             {
                 ProfileId = profileId,
@@ -435,7 +619,7 @@ namespace Mollie
             };
             request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
@@ -491,7 +675,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 410 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -584,8 +768,39 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateProfileResponse> UpdateAsync(string profileId, UpdateProfileRequestBody requestBody, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Update profile.
+        /// </summary>
+        /// <remarks>
+        /// Update an existing profile.<br/>
+        /// <br/>
+        /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.<br/>
+        /// Alternatively, you can use this endpoint to automate profile management.
+        /// </remarks>
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="profileId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateProfileResponse> UpdateAsync(
+            string profileId,
+            UpdateProfileRequestBody requestBody,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (profileId == null) throw new ArgumentNullException(nameof(profileId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateProfileRequest()
             {
                 ProfileId = profileId,
@@ -593,7 +808,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.ProfileId ??= SDKConfiguration.ProfileId;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
@@ -655,7 +870,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 410 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -748,15 +963,40 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteProfileResponse> DeleteAsync(string profileId, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Delete profile.
+        /// </summary>
+        /// <remarks>
+        /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.
+        /// </remarks>
+        /// <param name="profileId">Provide the ID of the related profile.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteProfileResponse> DeleteAsync(
+            string profileId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (profileId == null) throw new ArgumentNullException(nameof(profileId));
+
             var request = new DeleteProfileRequest()
             {
                 ProfileId = profileId,
                 IdempotencyKey = idempotencyKey,
             };
             request.ProfileId ??= SDKConfiguration.ProfileId;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/profiles/{profileId}", request, null);
 
@@ -812,7 +1052,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 410 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -887,14 +1127,37 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCurrentProfileResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get current profile.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the currently authenticated profile. A convenient alias of the <a href="get-profile">Get profile</a>
+        /// endpoint.<br/>
+        /// <br/>
+        /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint<br/>
+        /// documentation.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetCurrentProfileResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetCurrentProfileResponse> GetCurrentAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new GetCurrentProfileRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/profiles/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -1015,5 +1278,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

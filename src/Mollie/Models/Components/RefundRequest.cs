@@ -13,10 +13,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class RefundRequest
     {
-
         /// <summary>
         /// The description of the refund that may be shown to your customer, depending on the payment method used.
         /// </summary>
@@ -31,10 +30,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; }
@@ -44,8 +40,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
         /// merchants, by providing the `routing` object during <a href="create-payment">payment creation</a>.<br/>
@@ -56,15 +50,12 @@ namespace Mollie.Models.Components
         /// `true` when issuing a full refund.<br/>
         /// <br/>
         /// For more fine-grained control and for partial refunds, use the `routingReversals` parameter instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("reverseRouting")]
         public bool? ReverseRouting { get; set; } = null;
 
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// When creating refunds for *routed* payments, by default the full amount is deducted from your balance.<br/>
         /// <br/>
@@ -72,20 +63,16 @@ namespace Mollie.Models.Components
         /// needs to be reversed from which merchant(s).<br/>
         /// <br/>
         /// If you simply want to fully reverse the routed funds, you can also use the `reverseRouting` parameter instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("routingReversals")]
         public List<RefundRequestRoutingReversal>? RoutingReversals { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
         /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;

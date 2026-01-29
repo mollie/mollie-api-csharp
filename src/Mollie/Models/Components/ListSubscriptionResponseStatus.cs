@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The subscription&apos;s current status is directly related to the status of the underlying customer or mandate that is<br/>
-    /// 
-    /// <remarks>
+    /// The subscription's current status is directly related to the status of the underlying customer or mandate that is<br/>
     /// enabling the subscription.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ListSubscriptionResponseStatus : IEquatable<ListSubscriptionResponseStatus>
@@ -84,5 +81,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

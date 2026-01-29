@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// The amount directly available on the balance, e.g. `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;100.00&quot;}`.
+    /// The amount directly available on the balance, e.g. `{"currency":"EUR", "value":"100.00"}`.
     /// </summary>
     public class EntityBalanceAvailableAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

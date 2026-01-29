@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListMandateResponse
     {
-
         /// <summary>
         /// Indicates the response contains a mandate object. Will always contain the string `mandate` for this endpoint.
         /// </summary>
@@ -40,11 +39,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Payment method of the mandate.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// SEPA Direct Debit and PayPal mandates can be created directly.
-        /// </remarks>
         /// </summary>
         [JsonProperty("method")]
         public MandateMethodResponse Method { get; set; } = default!;
@@ -60,10 +56,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will<br/>
-        /// 
-        /// <remarks>
         /// decline Direct Debit payments if the mandate reference is not unique.
-        /// </remarks>
         /// </summary>
         [JsonProperty("mandateReference", NullValueHandling = NullValueHandling.Include)]
         public string? MandateReference { get; set; }
@@ -78,7 +71,7 @@ namespace Mollie.Models.Components
         public string CustomerId { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

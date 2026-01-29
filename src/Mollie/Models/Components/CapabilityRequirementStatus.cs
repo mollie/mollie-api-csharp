@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The status of the requirement depends on its due date.<br/>
-    /// 
-    /// <remarks>
     /// If no due date is given, the status will be `requested`.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class CapabilityRequirementStatus : IEquatable<CapabilityRequirementStatus>
@@ -80,5 +77,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

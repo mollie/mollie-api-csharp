@@ -11,10 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ReturnedManagedFee
     {
-
         [JsonProperty("feeType")]
         public string? FeeType { get; set; }
 

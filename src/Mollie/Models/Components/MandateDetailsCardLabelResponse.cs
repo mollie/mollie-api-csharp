@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The card&apos;s label. Available for card mandates, if the card label could be detected.
+    /// The card's label. Available for card mandates, if the card label could be detected.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class MandateDetailsCardLabelResponse : IEquatable<MandateDetailsCardLabelResponse>
@@ -94,5 +94,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

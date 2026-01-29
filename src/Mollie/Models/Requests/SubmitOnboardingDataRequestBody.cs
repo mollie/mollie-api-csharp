@@ -12,10 +12,9 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class SubmitOnboardingDataRequestBody
     {
-
         [JsonProperty("organization")]
         public Organization? Organization { get; set; }
 

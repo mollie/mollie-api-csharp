@@ -12,11 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The status for the invoice to end up in.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
     /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
@@ -28,8 +26,7 @@ namespace Mollie.Models.Components
     /// Dependent parameters:<br/>
     ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
     ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
-    ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
-    /// </remarks>
+    ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
     /// </summary>
     public enum SalesInvoiceStatus
     {
@@ -73,5 +70,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoiceStatus");
         }
     }
-
 }

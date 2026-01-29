@@ -11,10 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class SalesInvoiceEmailDetails
     {
-
         /// <summary>
         /// The subject of the email to be sent.
         /// </summary>

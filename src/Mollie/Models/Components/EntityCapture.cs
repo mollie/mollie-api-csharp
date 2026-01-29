@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class EntityCapture
     {
-
         /// <summary>
         /// The description of the capture.
         /// </summary>
@@ -30,10 +29,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;

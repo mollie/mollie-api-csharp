@@ -16,15 +16,14 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The reason for the current status of the transfer, if applicable.
     /// </summary>
     public class EntityBalanceTransferResponseStatusReason
     {
-
         /// <summary>
-        /// A machine-readable code that indicates the reason for the transfer&apos;s status.
+        /// A machine-readable code that indicates the reason for the transfer's status.
         /// </summary>
         [JsonProperty("code")]
         public BalanceTransferStatusReasonResponse Code { get; set; } = default!;

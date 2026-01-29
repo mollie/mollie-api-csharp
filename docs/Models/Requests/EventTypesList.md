@@ -9,8 +9,8 @@
 EventTypesList.CreateArrayOfWebhookEventTypes(/* values here */);
 ```
 
-### EventTypesListEnum
+### WebhookEventTypes
 
 ```csharp
-EventTypesList.CreateEventTypesListEnum(/* values here */);
+EventTypesList.CreateWebhookEventTypes(/* values here */);
 ```

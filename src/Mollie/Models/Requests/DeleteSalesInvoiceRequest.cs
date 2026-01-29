@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class DeleteSalesInvoiceRequest
     {
-
         /// <summary>
         /// Provide the ID of the related sales invoice.
         /// </summary>

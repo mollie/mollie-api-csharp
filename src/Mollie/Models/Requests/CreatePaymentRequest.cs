@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class CreatePaymentRequest
     {
-
         /// <summary>
         /// This endpoint allows you to include additional information via the `include` query string parameter.
         /// </summary>

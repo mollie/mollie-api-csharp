@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ErrorResponseLinks
     {
-
         /// <summary>
         /// The URL to the generic Mollie API error handling guide.
         /// </summary>

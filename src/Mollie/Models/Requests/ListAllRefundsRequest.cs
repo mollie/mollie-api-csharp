@@ -11,16 +11,12 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class ListAllRefundsRequest
     {
-
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -33,46 +29,34 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
-        /// 
-        /// <remarks>
         /// newest to oldest.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
         public Sorting? Sort { get; set; }
 
         /// <summary>
         /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
-        /// 
-        /// <remarks>
         /// parameter.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public string? Embed { get; set; } = null;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
-        /// 
-        /// <remarks>
         /// retrieve the resources for.<br/>
         /// <br/>
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
         /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
         public string? ProfileId { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// 
-        /// <remarks>
         /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

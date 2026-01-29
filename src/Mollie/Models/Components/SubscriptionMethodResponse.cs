@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
+    /// The payment method used for this subscription. If omitted, any of the customer's valid mandates may be used.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SubscriptionMethodResponse : IEquatable<SubscriptionMethodResponse>
@@ -76,5 +76,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

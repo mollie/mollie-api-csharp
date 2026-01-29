@@ -11,11 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
-    /// 
-    /// <remarks>
     /// currency your account is settled in.<br/>
     /// <br/>
     /// Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is<br/>
@@ -23,11 +21,9 @@ namespace Mollie.Models.Components
     /// <br/>
     /// Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest<br/>
     /// using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
-    /// </remarks>
     /// </summary>
     public class PaymentResponseSettlementAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

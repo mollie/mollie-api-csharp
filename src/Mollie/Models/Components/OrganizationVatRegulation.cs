@@ -15,15 +15,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
-    /// 
-    /// <remarks>
     /// Kingdom, and shifted VAT for merchants in the European Union.<br/>
     /// <br/>
     /// The field is not present for merchants residing in other countries.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class OrganizationVatRegulation : IEquatable<OrganizationVatRegulation>
@@ -82,5 +79,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

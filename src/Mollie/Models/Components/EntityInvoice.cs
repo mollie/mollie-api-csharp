@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityInvoice
     {
-
         /// <summary>
         /// Indicates that the response contains an invoice object.<br/>
-        /// 
-        /// <remarks>
         /// Will always contain the string `invoice` for this endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -56,11 +52,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
-        /// 
-        /// <remarks>
         /// be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside<br/>
         /// the EU, no VAT will be charged.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatAmount")]
         public EntityInvoiceVatAmount VatAmount { get; set; } = default!;

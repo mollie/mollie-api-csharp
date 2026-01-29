@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum LineCategories
     {
         [JsonProperty("eco")]
@@ -61,5 +61,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum LineCategories");
         }
     }
-
 }

@@ -25,21 +25,32 @@ namespace Mollie
 
     public interface IBalances
     {
-
         /// <summary>
-        /// List balances
-        /// 
+        /// List balances.
+        /// </summary>
         /// <remarks>
-        /// Retrieve a list of the organization&apos;s balances, including the primary balance.<br/>
+        /// Retrieve a list of the organization's balances, including the primary balance.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListBalancesResponse> ListAsync(ListBalancesRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="ListBalancesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListBalancesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListBalancesResponse> ListAsync(
+            ListBalancesRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get balance
-        /// 
+        /// Get balance.
+        /// </summary>
         /// <remarks>
         /// When processing payments with Mollie, we put all pending funds — usually<br/>
         /// minus Mollie fees — on a balance. Once you have linked a bank account to your Mollie account, we can pay out your<br/>
@@ -57,74 +68,156 @@ namespace Mollie
         /// balance instantly. With slower payment methods, like credit card for example, it can take a few days before the<br/>
         /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
         /// </remarks>
-        /// </summary>
-        Task<GetBalanceResponse> GetAsync(string balanceId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="balanceId">Provide the ID of the related balance.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetBalanceResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="balanceId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetBalanceResponse> GetAsync(
+            string balanceId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get primary balance
-        /// 
+        /// Get primary balance.
+        /// </summary>
         /// <remarks>
-        /// Retrieve the primary balance. This is the balance of your account&apos;s primary<br/>
+        /// Retrieve the primary balance. This is the balance of your account's primary<br/>
         /// currency, where all payments are settled to by default.<br/>
         /// <br/>
-        /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a><br/>
+        /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a>
         /// endpoint.
         /// </remarks>
-        /// </summary>
-        Task<GetPrimaryBalanceResponse> GetPrimaryAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPrimaryBalanceResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPrimaryBalanceResponse> GetPrimaryAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get balance report
-        /// 
+        /// Get balance report.
+        /// </summary>
         /// <remarks>
         /// Retrieve a summarized report for all transactions on a given balance within a given timeframe.<br/>
         /// <br/>
-        /// The API also provides a detailed report on all &apos;prepayments&apos; for Mollie fees that were deducted from your balance<br/>
+        /// The API also provides a detailed report on all 'prepayments' for Mollie fees that were deducted from your balance<br/>
         /// during the reported period, ahead of your Mollie invoice.<br/>
         /// <br/>
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
-        /// organization&apos;s primary balance.
+        /// organization's primary balance.
         /// </remarks>
-        /// </summary>
-        Task<GetBalanceReportResponse> GetReportAsync(GetBalanceReportRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="GetBalanceReportRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetBalanceReportResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetBalanceReportResponse> GetReportAsync(
+            GetBalanceReportRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// List balance transactions
-        /// 
+        /// List balance transactions.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of all balance transactions. Transactions include for<br/>
         /// example payments, refunds, chargebacks, and settlements.<br/>
         /// <br/>
-        /// For an aggregated report of these balance transactions, refer to the [Get<br/>
-        /// balance report](get-balance-report) endpoint.<br/>
+        /// For an aggregated report of these balance transactions, refer to the <a href="get-balance-report">Get<br/>
+        /// balance report</a> endpoint.<br/>
         /// <br/>
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
-        /// organization&apos;s primary balance.<br/>
+        /// organization's primary balance.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListBalanceTransactionsResponse> ListTransactionsAsync(ListBalanceTransactionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="ListBalanceTransactionsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListBalanceTransactionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListBalanceTransactionsResponse> ListTransactionsAsync(
+            ListBalanceTransactionsRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Balances: IBalances
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Balances(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListBalancesResponse> ListAsync(ListBalancesRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// List balances.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of the organization's balances, including the primary balance.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListBalancesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListBalancesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListBalancesResponse> ListAsync(
+            ListBalancesRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (request == null)
+            {
+                request = new ListBalancesRequest();
+            }
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances", request, null);
 
@@ -180,7 +273,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -273,8 +366,53 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetBalanceResponse> GetAsync(string balanceId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get balance.
+        /// </summary>
+        /// <remarks>
+        /// When processing payments with Mollie, we put all pending funds — usually<br/>
+        /// minus Mollie fees — on a balance. Once you have linked a bank account to your Mollie account, we can pay out your<br/>
+        /// balance towards this bank account.<br/>
+        /// <br/>
+        /// With the Balances API you can retrieve your current balance. The response<br/>
+        /// includes two amounts:<br/>
+        /// <br/>
+        /// * The *pending amount*. These are payments that have been marked as `paid`,<br/>
+        /// but are not yet available on your balance.<br/>
+        /// * The *available amount*. This is the amount that you can get paid out to<br/>
+        /// your bank account, or use for refunds.<br/>
+        /// <br/>
+        /// With instant payment methods like iDEAL, payments are moved to the available<br/>
+        /// balance instantly. With slower payment methods, like credit card for example, it can take a few days before the<br/>
+        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
+        /// </remarks>
+        /// <param name="balanceId">Provide the ID of the related balance.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetBalanceResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="balanceId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetBalanceResponse> GetAsync(
+            string balanceId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (balanceId == null) throw new ArgumentNullException(nameof(balanceId));
+
             var request = new GetBalanceRequest()
             {
                 BalanceId = balanceId,
@@ -282,7 +420,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}", request, null);
 
@@ -338,7 +476,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -431,14 +569,37 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPrimaryBalanceResponse> GetPrimaryAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get primary balance.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the primary balance. This is the balance of your account's primary<br/>
+        /// currency, where all payments are settled to by default.<br/>
+        /// <br/>
+        /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a>
+        /// endpoint.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPrimaryBalanceResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPrimaryBalanceResponse> GetPrimaryAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new GetPrimaryBalanceRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/balances/primary";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -560,14 +721,38 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetBalanceReportResponse> GetReportAsync(GetBalanceReportRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get balance report.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a summarized report for all transactions on a given balance within a given timeframe.<br/>
+        /// <br/>
+        /// The API also provides a detailed report on all 'prepayments' for Mollie fees that were deducted from your balance<br/>
+        /// during the reported period, ahead of your Mollie invoice.<br/>
+        /// <br/>
+        /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
+        /// organization's primary balance.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetBalanceReportRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetBalanceReportResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetBalanceReportResponse> GetReportAsync(
+            GetBalanceReportRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
-            if (request == null)
-            {
-                request = new GetBalanceReportRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/report", request, null);
 
@@ -623,7 +808,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -716,14 +901,41 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListBalanceTransactionsResponse> ListTransactionsAsync(ListBalanceTransactionsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// List balance transactions.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of all balance transactions. Transactions include for<br/>
+        /// example payments, refunds, chargebacks, and settlements.<br/>
+        /// <br/>
+        /// For an aggregated report of these balance transactions, refer to the <a href="get-balance-report">Get<br/>
+        /// balance report</a> endpoint.<br/>
+        /// <br/>
+        /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
+        /// organization's primary balance.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListBalanceTransactionsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListBalanceTransactionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListBalanceTransactionsResponse> ListTransactionsAsync(
+            ListBalanceTransactionsRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
-            if (request == null)
-            {
-                request = new ListBalanceTransactionsRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/transactions", request, null);
 
@@ -779,7 +991,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 429 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -871,5 +1083,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

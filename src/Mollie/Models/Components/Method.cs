@@ -55,7 +55,6 @@ namespace Mollie.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(Method.MethodConverter))]
     public class Method
     {

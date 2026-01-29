@@ -11,10 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class Address
     {
-
         /// <summary>
         /// A street and street number.
         /// </summary>

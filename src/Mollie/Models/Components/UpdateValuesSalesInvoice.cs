@@ -13,26 +13,20 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateValuesSalesInvoice
     {
-
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
-        /// 
-        /// <remarks>
         /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;
 
         /// <summary>
         /// The status for the invoice to end up in.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
         /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
@@ -44,8 +38,7 @@ namespace Mollie.Models.Components
         /// Dependent parameters:<br/>
         ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
         ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
-        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
-        /// </remarks>
+        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
         /// </summary>
         [JsonProperty("status")]
         public SalesInvoiceStatus? Status { get; set; }
@@ -70,11 +63,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// An identifier tied to the recipient data. This should be a unique value based on data your system contains,<br/>
-        /// 
-        /// <remarks>
-        /// so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management<br/>
+        /// so that both you and us know who we're referring to. It is a value you provide to us so that recipient management<br/>
         /// is not required to send a first invoice to a recipient.
-        /// </remarks>
         /// </summary>
         [JsonProperty("recipientIdentifier")]
         public string? RecipientIdentifier { get; set; }
@@ -84,12 +74,9 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide the line items for the invoice. Each line contains details such as a description of the item<br/>
-        /// 
-        /// <remarks>
         /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the invoice.
-        /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
         public List<SalesInvoiceLineItem>? Lines { get; set; } = null;

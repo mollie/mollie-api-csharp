@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class GetPaymentLinkPaymentsRequest
     {
-
         /// <summary>
         /// Provide the ID of the related payment link.
         /// </summary>
@@ -23,10 +22,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -39,23 +35,17 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
-        /// 
-        /// <remarks>
         /// newest to oldest.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
         public Sorting? Sort { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// 
-        /// <remarks>
         /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

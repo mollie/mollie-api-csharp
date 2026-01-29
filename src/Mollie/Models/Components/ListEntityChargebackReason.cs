@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Reason for the chargeback as given by the bank. Only available for chargebacks of SEPA Direct Debit payments.
     /// </summary>
     public class ListEntityChargebackReason
     {
-
         /// <summary>
         /// Technical code provided by the bank.
         /// </summary>

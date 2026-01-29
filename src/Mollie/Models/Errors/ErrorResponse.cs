@@ -37,10 +37,7 @@ namespace Mollie.Models.Errors
 
         /// <summary>
         /// If the error was caused by a value provided by you in a specific field, the `field` property will contain the name<br/>
-        /// 
-        /// <remarks>
         /// of the field that caused the issue.
-        /// </remarks>
         /// </summary>
         [JsonProperty("field")]
         public string? Field { get; set; }
@@ -99,5 +96,4 @@ namespace Mollie.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

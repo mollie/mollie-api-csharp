@@ -12,14 +12,11 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// The `tip` payment line type is not available when creating a payment.
-    /// </remarks>
     /// </summary>
     public enum PaymentLineType
     {
@@ -73,5 +70,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum PaymentLineType");
         }
     }
-
 }

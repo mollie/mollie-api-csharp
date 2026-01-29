@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListEntityTerminal
     {
-
         /// <summary>
         /// Indicates the response contains a terminal object. Will always contain the string `terminal` for this endpoint.
         /// </summary>
@@ -40,11 +39,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A short description of the terminal. The description can be used as an identifier for the terminal. Currently, the<br/>
-        /// 
-        /// <remarks>
         /// description is set when the terminal is initially configured. It will be visible in the Mollie Dashboard, and it<br/>
         /// may be visible on the device itself depending on the device.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
@@ -59,7 +55,7 @@ namespace Mollie.Models.Components
         public TerminalBrand? Brand { get; set; }
 
         /// <summary>
-        /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.
+        /// The model of the terminal. For example for a PAX A920, this field's value will be `A920`.
         /// </summary>
         [JsonProperty("model", NullValueHandling = NullValueHandling.Include)]
         public TerminalModel? Model { get; set; }
@@ -72,35 +68,29 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The currency configured on the terminal, in ISO 4217 format. Currently most of our terminals are bound to a<br/>
-        /// 
-        /// <remarks>
         /// specific currency, chosen during setup.
-        /// </remarks>
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
         /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
         /// required.
-        /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
         public string ProfileId { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("updatedAt")]
         public string UpdatedAt { get; set; } = default!;

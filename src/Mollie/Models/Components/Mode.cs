@@ -15,7 +15,7 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
@@ -74,5 +74,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

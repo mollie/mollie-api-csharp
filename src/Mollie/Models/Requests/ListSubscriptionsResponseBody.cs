@@ -13,22 +13,18 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A list of subscription objects.
     /// </summary>
     public class ListSubscriptionsResponseBody
     {
-
         /// <summary>
         /// The number of items in this result set. If more items are available, a `_links.next` URL will be present in the result<br/>
-        /// 
-        /// <remarks>
         /// as well.<br/>
         /// <br/>
         /// The maximum number of items per result set is controlled by the `limit` property provided in the request. The default<br/>
         /// limit is 50 items.
-        /// </remarks>
         /// </summary>
         [JsonProperty("count")]
         public long Count { get; set; } = default!;

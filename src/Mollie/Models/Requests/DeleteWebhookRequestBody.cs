@@ -11,17 +11,13 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class DeleteWebhookRequestBody
     {
-
         /// <summary>
         /// You can enable test mode by setting `testmode` to `true`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; }

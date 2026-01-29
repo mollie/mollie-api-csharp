@@ -25,18 +25,17 @@ namespace Mollie
 
     public interface IWallets
     {
-
         /// <summary>
-        /// Request Apple Pay payment session
-        /// 
+        /// Request Apple Pay payment session.
+        /// </summary>
         /// <remarks>
         /// When integrating Apple Pay in your own checkout on the web, you need to<br/>
         /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/providing_merchant_validation">provide merchant validation</a>.<br/>
-        /// This is normally done using Apple&apos;s<br/>
+        /// This is normally done using Apple's<br/>
         /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/requesting_an_apple_pay_payment_session">Requesting an Apple Pay Session</a>.<br/>
         /// The merchant validation proves to Apple that a validated merchant is calling the Apple Pay Javascript APIs.<br/>
         /// <br/>
-        /// To integrate Apple Pay via Mollie, you will have to call the Mollie API instead of Apple&apos;s API. The response of this<br/>
+        /// To integrate Apple Pay via Mollie, you will have to call the Mollie API instead of Apple's API. The response of this<br/>
         /// API call can then be passed as-is to the completion method, `completeMerchantValidation`.<br/>
         /// <br/>
         /// Before requesting an Apple Pay Payment Session, you must place the domain validation file on your server at:<br/>
@@ -50,33 +49,85 @@ namespace Mollie
         /// full documentation, see the official<br/>
         /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
         /// </remarks>
-        /// </summary>
-        Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(string? idempotencyKey = null, RequestApplePayPaymentSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="RequestApplePayPaymentSessionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RequestApplePayPaymentSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(
+            string? idempotencyKey = null,
+            RequestApplePayPaymentSessionRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Wallets: IWallets
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Wallets(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(string? idempotencyKey = null, RequestApplePayPaymentSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Request Apple Pay payment session.
+        /// </summary>
+        /// <remarks>
+        /// When integrating Apple Pay in your own checkout on the web, you need to<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/providing_merchant_validation">provide merchant validation</a>.<br/>
+        /// This is normally done using Apple's<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/requesting_an_apple_pay_payment_session">Requesting an Apple Pay Session</a>.<br/>
+        /// The merchant validation proves to Apple that a validated merchant is calling the Apple Pay Javascript APIs.<br/>
+        /// <br/>
+        /// To integrate Apple Pay via Mollie, you will have to call the Mollie API instead of Apple's API. The response of this<br/>
+        /// API call can then be passed as-is to the completion method, `completeMerchantValidation`.<br/>
+        /// <br/>
+        /// Before requesting an Apple Pay Payment Session, you must place the domain validation file on your server at:<br/>
+        /// `https://[domain]/.well-known/apple-developer-merchantid-domain-association`. Without this file, it will not be<br/>
+        /// possible to use Apple Pay on your domain.<br/>
+        /// <br/>
+        /// Each new transaction requires a new payment session object. Merchant session objects are not reusable, and they<br/>
+        /// expire after five minutes.<br/>
+        /// <br/>
+        /// Payment sessions cannot be requested directly from the browser. The request must be sent from your server. For the<br/>
+        /// full documentation, see the official<br/>
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="RequestApplePayPaymentSessionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RequestApplePayPaymentSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(
+            string? idempotencyKey = null,
+            RequestApplePayPaymentSessionRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new RequestApplePayPaymentSessionRequest()
             {
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/wallets/applepay/sessions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -137,7 +188,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -229,5 +280,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

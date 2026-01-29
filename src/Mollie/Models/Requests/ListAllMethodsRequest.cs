@@ -11,68 +11,57 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class ListAllMethodsRequest
     {
-
         /// <summary>
-        /// Response language
+        /// Passing a locale will sort the payment methods in the preferred order<br/>
+        /// for the country, and translate the payment method names in the corresponding language.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=locale")]
         public Locale? Locale { get; set; } = null;
 
         /// <summary>
         /// If supplied, only payment methods that support the amount and currency<br/>
-        /// 
-        /// <remarks>
         /// are returned.<br/>
         /// <br/>
         /// Example: `/v2/methods/all?amount[value]=100.00&amp;amount[currency]=USD`
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=deepObject,explode=true,name=amount")]
         public Amount? Amount { get; set; }
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the `include` query string parameter.
+        /// This endpoint allows you to include additional information via the<br/>
+        /// `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
         public string? Include { get; set; } = null;
 
         /// <summary>
         /// Set this parameter to `first` to only return the methods that<br/>
-        /// 
-        /// <remarks>
         /// can be used for the first payment of a recurring sequence.<br/>
         /// <br/>
         /// Set it to `recurring` to only return methods that can be used for recurring payments or subscriptions.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
         public SequenceType? SequenceType { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
-        /// 
-        /// <remarks>
         /// retrieve the resources for.<br/>
         /// <br/>
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
         /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
         public string? ProfileId { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// 
-        /// <remarks>
         /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

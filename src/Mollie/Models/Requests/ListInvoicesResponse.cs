@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListInvoicesResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of invoice objects. For a complete reference of the invoice<br/>
-        /// 
-        /// <remarks>
         /// object, refer to the <a href="get-invoice">Get invoice endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListInvoicesResponseBody? Object { get; set; }
     }

@@ -15,15 +15,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
-    /// 
-    /// <remarks>
     /// and capture at a later time.<br/>
     /// <br/>
     /// This field needs to be set to `manual` for method `riverty`.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class CaptureModeResponse : IEquatable<CaptureModeResponse>
@@ -80,5 +77,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

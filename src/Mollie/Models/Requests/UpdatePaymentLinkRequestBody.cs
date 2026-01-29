@@ -13,18 +13,14 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdatePaymentLinkRequestBody
     {
-
         /// <summary>
         /// A short description of the payment link. The description is visible in the Dashboard and will be shown<br/>
-        /// 
-        /// <remarks>
-        /// on the customer&apos;s bank or card statement when possible.<br/>
+        /// on the customer's bank or card statement when possible.<br/>
         /// <br/>
         /// Updating the description does not affect any previously existing payments created for this payment link.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; }
@@ -37,34 +33,25 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Whether the payment link is archived. Customers will not be able to complete payments on archived<br/>
-        /// 
-        /// <remarks>
         /// payment links.
-        /// </remarks>
         /// </summary>
         [JsonProperty("archived")]
         public bool? Archived { get; set; }
 
         /// <summary>
         /// An array of payment methods that are allowed to be used for this payment link. When this parameter is<br/>
-        /// 
-        /// <remarks>
         /// not provided or is an empty array, all enabled payment methods will be available.
-        /// </remarks>
         /// </summary>
         [JsonProperty("allowedMethods")]
         public List<PaymentLinkMethod>? AllowedMethods { get; set; } = null;
 
         /// <summary>
         /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item<br/>
-        /// 
-        /// <remarks>
         /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the payment.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna`, `riverty` and `voucher`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
         public List<PaymentLineItem>? Lines { get; set; } = null;
@@ -77,12 +64,9 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
-        /// 
-        /// <remarks>
         /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;

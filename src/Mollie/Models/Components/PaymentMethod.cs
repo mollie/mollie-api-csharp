@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The payment method, if applicable
+    /// The payment method, if applicable.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentMethod : IEquatable<PaymentMethod>
@@ -156,5 +156,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

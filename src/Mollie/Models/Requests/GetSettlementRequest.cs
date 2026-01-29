@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class GetSettlementRequest
     {
-
         /// <summary>
         /// Provide the ID of the related settlement.
         /// </summary>

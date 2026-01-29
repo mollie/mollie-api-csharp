@@ -13,17 +13,13 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class PaymentRequestLine
     {
-
         /// <summary>
         /// The type of product purchased. For example, a physical or a digital product.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// The `tip` payment line type is not available when creating a payment.
-        /// </remarks>
         /// </summary>
         [JsonProperty("type")]
         public PaymentLineType? Type { get; set; }
@@ -66,10 +62,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The VAT rate applied to the line, for example `21.00` for 21%. The vatRate should be passed as a string and<br/>
-        /// 
-        /// <remarks>
         /// not as a float, to ensure the correct number of decimals are passed.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatRate")]
         public string? VatRate { get; set; }
@@ -88,10 +81,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// An array with the voucher categories, in case of a line eligible for a voucher. See the<br/>
-        /// 
-        /// <remarks>
         /// <a href="https://docs.mollie.com/docs/integrating-vouchers/">Integrating Vouchers</a> guide for more information.
-        /// </remarks>
         /// </summary>
         [JsonProperty("categories")]
         public List<LineCategories>? Categories { get; set; }

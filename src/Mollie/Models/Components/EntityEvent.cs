@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class EntityEvent
     {
-
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
@@ -23,7 +22,7 @@ namespace Mollie.Models.Components
         public long Type { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

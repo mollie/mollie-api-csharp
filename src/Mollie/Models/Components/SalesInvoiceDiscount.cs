@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class SalesInvoiceDiscount
     {
-
         /// <summary>
         /// The type of discount.
         /// </summary>

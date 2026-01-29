@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The method used to verify the cardholder&apos;s identity.
+    /// The method used to verify the cardholder's identity.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentDetailsReceiptCardVerificationMethodResponse : IEquatable<PaymentDetailsReceiptCardVerificationMethodResponse>
@@ -88,5 +88,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

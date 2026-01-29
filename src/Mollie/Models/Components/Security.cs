@@ -10,10 +10,9 @@
 namespace Mollie.Models.Components
 {
     using Mollie.Utils;
-    
+
     public class Security
     {
-
         [SpeakeasyMetadata("security:scheme=true,type=http,subType=bearer,name=Authorization")]
         public string? ApiKey { get; set; }
 

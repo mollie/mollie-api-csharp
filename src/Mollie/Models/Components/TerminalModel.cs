@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The model of the terminal. For example for a PAX A920, this field&apos;s value will be `A920`.
+    /// The model of the terminal. For example for a PAX A920, this field's value will be `A920`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class TerminalModel : IEquatable<TerminalModel>
@@ -82,5 +82,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

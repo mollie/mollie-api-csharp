@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The type of recipient, either `consumer` or `business`. This will determine what further fields are<br/>
-    /// 
-    /// <remarks>
     /// required on the `recipient` object.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SalesInvoiceRecipientTypeResponse : IEquatable<SalesInvoiceRecipientTypeResponse>
@@ -78,5 +75,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

@@ -13,16 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListBalancesEmbedded
     {
-
         /// <summary>
         /// An array of balance objects. For a complete reference of<br/>
-        /// 
-        /// <remarks>
         /// the balance object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("balances")]
         public List<ListEntityBalance> Balances { get; set; } = default!;

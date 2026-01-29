@@ -25,53 +25,92 @@ namespace Mollie
 
     public interface IOnboarding
     {
-
         /// <summary>
-        /// Get onboarding status
-        /// 
+        /// Get onboarding status.
+        /// </summary>
         /// <remarks>
         /// Retrieve the onboarding status of the currently authenticated organization.
         /// </remarks>
-        /// </summary>
-        Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOnboardingStatusResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOnboardingStatusResponse> GetAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Submit onboarding data
-        /// 
+        /// Submit onboarding data.
+        /// </summary>
         /// <remarks>
         /// **⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the<br/>
         /// onboarding process for your merchants.**<br/>
         /// <br/>
-        /// Submit data that will be prefilled in the merchant&apos;s onboarding. The data you submit will only be processed when the<br/>
+        /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
         /// onboarding status is `needs-data`.  <br/>
         /// Information that the merchant has entered in their dashboard will not be overwritten.
         /// </remarks>
-        /// </summary>
-        Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="SubmitOnboardingDataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<SubmitOnboardingDataResponse> SubmitAsync(
+            string? idempotencyKey = null,
+            SubmitOnboardingDataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Onboarding: IOnboarding
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Onboarding(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetOnboardingStatusResponse> GetAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Get onboarding status.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the onboarding status of the currently authenticated organization.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOnboardingStatusResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOnboardingStatusResponse> GetAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new GetOnboardingStatusRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/onboarding/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -193,15 +232,40 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<SubmitOnboardingDataResponse> SubmitAsync(string? idempotencyKey = null, SubmitOnboardingDataRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Submit onboarding data.
+        /// </summary>
+        /// <remarks>
+        /// **⚠️ We no longer recommend implementing this endpoint. Please refer to the Client Links API instead to kick off the<br/>
+        /// onboarding process for your merchants.**<br/>
+        /// <br/>
+        /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
+        /// onboarding status is `needs-data`.  <br/>
+        /// Information that the merchant has entered in their dashboard will not be overwritten.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="SubmitOnboardingDataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<SubmitOnboardingDataResponse> SubmitAsync(
+            string? idempotencyKey = null,
+            SubmitOnboardingDataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new SubmitOnboardingDataRequest()
             {
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/onboarding/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -310,5 +374,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

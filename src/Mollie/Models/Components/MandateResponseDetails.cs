@@ -16,30 +16,29 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class MandateResponseDetails
     {
-
         /// <summary>
-        /// The customer&apos;s name. Available for SEPA Direct Debit and PayPal mandates.
+        /// The customer's name. Available for SEPA Direct Debit and PayPal mandates.
         /// </summary>
         [JsonProperty("consumerName")]
         public string? ConsumerName { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s IBAN or email address. Available for SEPA Direct Debit and PayPal mandates.
+        /// The customer's IBAN or email address. Available for SEPA Direct Debit and PayPal mandates.
         /// </summary>
         [JsonProperty("consumerAccount")]
         public string? ConsumerAccount { get; set; } = null;
 
         /// <summary>
-        /// The BIC of the customer&apos;s bank. Available for SEPA Direct Debit mandates.
+        /// The BIC of the customer's bank. Available for SEPA Direct Debit mandates.
         /// </summary>
         [JsonProperty("consumerBic")]
         public string? ConsumerBic { get; set; } = null;
 
         /// <summary>
-        /// The card holder&apos;s name. Available for card mandates.
+        /// The card holder's name. Available for card mandates.
         /// </summary>
         [JsonProperty("cardHolder")]
         public string? CardHolder { get; set; } = null;
@@ -51,23 +50,20 @@ namespace Mollie.Models.Components
         public string? CardNumber { get; set; } = null;
 
         /// <summary>
-        /// The card&apos;s expiry date in `YYYY-MM-DD` format. Available for card mandates.
+        /// The card's expiry date in `YYYY-MM-DD` format. Available for card mandates.
         /// </summary>
         [JsonProperty("cardExpiryDate")]
         public string? CardExpiryDate { get; set; } = null;
 
         /// <summary>
-        /// The card&apos;s label. Available for card mandates, if the card label could be detected.
+        /// The card's label. Available for card mandates, if the card label could be detected.
         /// </summary>
         [JsonProperty("cardLabel")]
         public MandateDetailsCardLabelResponse? CardLabel { get; set; } = null;
 
         /// <summary>
         /// Unique alphanumeric representation of this specific card. Available for card mandates. Can be used to identify<br/>
-        /// 
-        /// <remarks>
         /// returning customers.
-        /// </remarks>
         /// </summary>
         [JsonProperty("cardFingerprint")]
         public string? CardFingerprint { get; set; } = null;

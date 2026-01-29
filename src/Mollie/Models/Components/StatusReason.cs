@@ -12,20 +12,16 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// This object offers details about the status of a payment. Currently it is only available for point-of-sale<br/>
-    /// 
-    /// <remarks>
     /// payments.<br/>
     /// <br/>
     /// You can find more information about the possible values of this object on<br/>
     /// <a href="status-reasons">this page</a>.**
-    /// </remarks>
     /// </summary>
     public class StatusReason
     {
-
         [JsonProperty("code")]
         public Code Code { get; set; } = default!;
 

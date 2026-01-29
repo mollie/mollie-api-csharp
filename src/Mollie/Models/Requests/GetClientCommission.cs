@@ -11,13 +11,12 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The commission object.
     /// </summary>
     public class GetClientCommission
     {
-
         /// <summary>
         /// The commission count.
         /// </summary>

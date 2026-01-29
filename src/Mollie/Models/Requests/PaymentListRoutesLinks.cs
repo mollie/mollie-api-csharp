@@ -12,13 +12,12 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Links to help navigate through the lists of items. Every URL object will contain an `href` and a `type` field.
     /// </summary>
     public class PaymentListRoutesLinks
     {
-
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>

@@ -11,18 +11,14 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The total amount that is already refunded. Only available when refunds are available for this payment. For some<br/>
-    /// 
-    /// <remarks>
     /// payment methods, this amount may be higher than the payment amount, for example to allow reimbursement of the<br/>
     /// costs for a return shipment to the customer.
-    /// </remarks>
     /// </summary>
     public class PaymentResponseAmountRefunded
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

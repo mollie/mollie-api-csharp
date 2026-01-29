@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// Specifies the reference type
+    /// Specifies the reference type.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class RefundExternalReferenceTypeResponse : IEquatable<RefundExternalReferenceTypeResponse>
@@ -72,5 +72,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

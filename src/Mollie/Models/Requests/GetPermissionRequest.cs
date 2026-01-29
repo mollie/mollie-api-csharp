@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class GetPermissionRequest
     {
-
         /// <summary>
         /// Provide the ID of the related permission.
         /// </summary>
@@ -22,11 +21,8 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

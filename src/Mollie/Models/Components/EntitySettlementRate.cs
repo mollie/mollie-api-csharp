@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The service rates, further divided into `fixed` and `percentage` costs.
     /// </summary>
     public class EntitySettlementRate
     {
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>

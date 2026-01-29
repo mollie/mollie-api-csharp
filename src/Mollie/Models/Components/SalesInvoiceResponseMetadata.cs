@@ -10,13 +10,10 @@
 namespace Mollie.Models.Components
 {
     using Mollie.Utils;
-    
+
     /// <summary>
     /// Provide any data you like as a JSON object. We will save the data alongside the entity. Whenever<br/>
-    /// 
-    /// <remarks>
     /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-    /// </remarks>
     /// </summary>
     public class SalesInvoiceResponseMetadata
     {

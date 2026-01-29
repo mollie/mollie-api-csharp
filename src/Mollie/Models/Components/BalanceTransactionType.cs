@@ -15,7 +15,7 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     [JsonConverter(typeof(OpenEnumConverter))]
     public class BalanceTransactionType : IEquatable<BalanceTransactionType>
     {
@@ -145,5 +145,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

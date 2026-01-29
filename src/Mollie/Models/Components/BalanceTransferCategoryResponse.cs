@@ -15,7 +15,7 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The type of the transfer. Different fees may apply to different types of transfers.
     /// </summary>
@@ -86,5 +86,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

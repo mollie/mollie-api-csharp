@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListMethodsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of payment method objects. For a complete reference of the<br/>
-        /// 
-        /// <remarks>
         /// payment method object, refer to the <a href="get-method">Get payment method endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListMethodsResponseBody? Object { get; set; }
     }

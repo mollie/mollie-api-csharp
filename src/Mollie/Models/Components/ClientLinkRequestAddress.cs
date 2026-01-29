@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Address of the organization.
     /// </summary>
     public class ClientLinkRequestAddress
     {
-
         /// <summary>
         /// The street name and house number of the organization.
         /// </summary>
@@ -26,10 +25,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The postal code of the organization. Required if a street address is provided and if the country has a postal<br/>
-        /// 
-        /// <remarks>
         /// code system.
-        /// </remarks>
         /// </summary>
         [JsonProperty("postalCode")]
         public string? PostalCode { get; set; } = null;
@@ -42,10 +38,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The country of the address in<br/>
-        /// 
-        /// <remarks>
         /// <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("country")]
         public string Country { get; set; } = default!;

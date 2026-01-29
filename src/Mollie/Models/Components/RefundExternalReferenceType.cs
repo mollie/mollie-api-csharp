@@ -12,9 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Specifies the reference type
+    /// Specifies the reference type.
     /// </summary>
     public enum RefundExternalReferenceType
     {
@@ -54,5 +54,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum RefundExternalReferenceType");
         }
     }
-
 }

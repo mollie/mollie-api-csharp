@@ -52,7 +52,6 @@ namespace Mollie.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(Entity.EntityConverter))]
     public class Entity
     {

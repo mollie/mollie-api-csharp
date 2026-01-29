@@ -13,6 +13,9 @@ namespace Mollie.Models.Errors
     using System;
     using System.Net.Http;
 
+    /// <summary>
+    /// Default API Exception.
+    /// </summary>
     public class APIException : BaseException
     {
         /// <summary>

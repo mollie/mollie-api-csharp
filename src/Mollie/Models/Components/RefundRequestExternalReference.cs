@@ -12,18 +12,17 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class RefundRequestExternalReference
     {
-
         /// <summary>
-        /// Specifies the reference type
+        /// Specifies the reference type.
         /// </summary>
         [JsonProperty("type")]
         public RefundExternalReferenceType? Type { get; set; }
 
         /// <summary>
-        /// Unique reference from the payment provider
+        /// Unique reference from the payment provider.
         /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }

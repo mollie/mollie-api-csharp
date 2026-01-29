@@ -16,24 +16,23 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListEntitySettlementCost
     {
-
         /// <summary>
-        /// A description of the cost subtotal
+        /// A description of the cost subtotal.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The payment method, if applicable
+        /// The payment method, if applicable.
         /// </summary>
         [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
         public PaymentMethod? Method { get; set; }
 
         /// <summary>
-        /// The number of fees
+        /// The number of fees.
         /// </summary>
         [JsonProperty("count")]
         public long Count { get; set; } = default!;

@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The card&apos;s target audience, if known.
+    /// The card's target audience, if known.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentDetailsCardAuditionResponse : IEquatable<PaymentDetailsCardAuditionResponse>
@@ -74,5 +74,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

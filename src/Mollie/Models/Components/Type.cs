@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The type of source. Currently only the source type `organization` is supported.
     /// </summary>
@@ -54,5 +54,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum Type");
         }
     }
-
 }

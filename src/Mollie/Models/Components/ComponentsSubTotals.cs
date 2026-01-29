@@ -16,21 +16,20 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ComponentsSubTotals
     {
-
         [JsonProperty("sub-totals")]
         public List<SubTotals>? SubTotals { get; set; } = null;
 
         /// <summary>
-        /// Number of transactions of this type
+        /// Number of transactions of this type.
         /// </summary>
         [JsonProperty("count")]
         public long? Count { get; set; }
 
         /// <summary>
-        /// The payment method, if applicable
+        /// The payment method, if applicable.
         /// </summary>
         [JsonProperty("method")]
         public PaymentMethod? Method { get; set; } = null;

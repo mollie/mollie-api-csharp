@@ -25,74 +25,177 @@ namespace Mollie
 
     public interface IMandates
     {
-
         /// <summary>
-        /// Create mandate
-        /// 
+        /// Create mandate.
+        /// </summary>
         /// <remarks>
-        /// Create a mandate for a specific customer. Mandates allow you to charge a customer&apos;s card, PayPal account or bank<br/>
+        /// Create a mandate for a specific customer. Mandates allow you to charge a customer's card, PayPal account or bank<br/>
         /// account recurrently.<br/>
         /// <br/>
         /// It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create<br/>
-        /// mandates for cards, your customers need to perform a &apos;first payment&apos; with their card.
+        /// mandates for cards, your customers need to perform a 'first payment' with their card.
         /// </remarks>
-        /// </summary>
-        Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, MandateRequest? mandateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="mandateRequest">A <see cref="MandateRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateMandateResponse> CreateAsync(
+            string customerId,
+            string? idempotencyKey = null,
+            MandateRequest? mandateRequest = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// List mandates
-        /// 
+        /// List mandates.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of all mandates.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListMandatesResponse> ListAsync(ListMandatesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="ListMandatesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMandatesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListMandatesResponse> ListAsync(
+            ListMandatesRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get mandate
-        /// 
+        /// Get mandate.
+        /// </summary>
         /// <remarks>
-        /// Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer&apos;s bank<br/>
+        /// Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer's bank<br/>
         /// account details, card details, or PayPal account details.
         /// </remarks>
-        /// </summary>
-        Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="mandateId">Provide the ID of the related mandate.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="customerId"/> or <paramref name="mandateId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetMandateResponse> GetAsync(
+            string customerId,
+            string mandateId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Revoke mandate
-        /// 
+        /// Revoke mandate.
+        /// </summary>
         /// <remarks>
-        /// Revoke a customer&apos;s mandate. You will no longer be able to charge the customer&apos;s bank account or card with this<br/>
+        /// Revoke a customer's mandate. You will no longer be able to charge the customer's bank account or card with this<br/>
         /// mandate, and all connected subscriptions will be canceled.
         /// </remarks>
-        /// </summary>
-        Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, string? idempotencyKey = null, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="mandateId">Provide the ID of the related mandate.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="RevokeMandateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="customerId"/> or <paramref name="mandateId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RevokeMandateResponse> RevokeAsync(
+            string customerId,
+            string mandateId,
+            string? idempotencyKey = null,
+            RevokeMandateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Mandates: IMandates
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Mandates(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreateMandateResponse> CreateAsync(string customerId, string? idempotencyKey = null, MandateRequest? mandateRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Create mandate.
+        /// </summary>
+        /// <remarks>
+        /// Create a mandate for a specific customer. Mandates allow you to charge a customer's card, PayPal account or bank<br/>
+        /// account recurrently.<br/>
+        /// <br/>
+        /// It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create<br/>
+        /// mandates for cards, your customers need to perform a 'first payment' with their card.
+        /// </remarks>
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="mandateRequest">A <see cref="MandateRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateMandateResponse> CreateAsync(
+            string customerId,
+            string? idempotencyKey = null,
+            MandateRequest? mandateRequest = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
+
             var request = new CreateMandateRequest()
             {
                 CustomerId = customerId,
                 IdempotencyKey = idempotencyKey,
                 MandateRequest = mandateRequest,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates", request, null);
 
@@ -154,7 +257,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -247,14 +350,34 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListMandatesResponse> ListAsync(ListMandatesRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// List mandates.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of all mandates.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListMandatesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMandatesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListMandatesResponse> ListAsync(
+            ListMandatesRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
-            if (request == null)
-            {
-                request = new ListMandatesRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates", request, null);
 
@@ -310,7 +433,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -403,8 +526,45 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetMandateResponse> GetAsync(string customerId, string mandateId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get mandate.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single mandate by its ID. Depending on the type of mandate, the object will contain the customer's bank<br/>
+        /// account details, card details, or PayPal account details.
+        /// </remarks>
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="mandateId">Provide the ID of the related mandate.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="customerId"/> or <paramref name="mandateId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetMandateResponse> GetAsync(
+            string customerId,
+            string mandateId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
+            if (mandateId == null) throw new ArgumentNullException(nameof(mandateId));
+
             var request = new GetMandateRequest()
             {
                 CustomerId = customerId,
@@ -413,7 +573,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates/{mandateId}", request, null);
 
@@ -469,7 +629,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -562,8 +722,39 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RevokeMandateResponse> RevokeAsync(string customerId, string mandateId, string? idempotencyKey = null, RevokeMandateRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Revoke mandate.
+        /// </summary>
+        /// <remarks>
+        /// Revoke a customer's mandate. You will no longer be able to charge the customer's bank account or card with this<br/>
+        /// mandate, and all connected subscriptions will be canceled.
+        /// </remarks>
+        /// <param name="customerId">Provide the ID of the related customer.</param>
+        /// <param name="mandateId">Provide the ID of the related mandate.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="RevokeMandateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeMandateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="customerId"/> or <paramref name="mandateId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RevokeMandateResponse> RevokeAsync(
+            string customerId,
+            string mandateId,
+            string? idempotencyKey = null,
+            RevokeMandateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
+            if (mandateId == null) throw new ArgumentNullException(nameof(mandateId));
+
             var request = new RevokeMandateRequest()
             {
                 CustomerId = customerId,
@@ -571,6 +762,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/customers/{customerId}/mandates/{mandateId}", request, null);
 
@@ -632,7 +824,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -706,5 +898,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -25,43 +25,139 @@ namespace Mollie
 
     public interface IClients
     {
-
         /// <summary>
-        /// List clients
-        /// 
+        /// List clients.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of all clients linked to your account.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="embed">
+        /// This endpoint allows embedding related API items by appending the<br/>
+        /// following values via the `embed` query string parameter.<br/>
+        /// <br/>
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
+        /// </param>
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListClientsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListClientsResponse> ListAsync(
+            string? embed = null,
+            string? fromP = null,
+            long? limit = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get client
-        /// 
+        /// Get client.
+        /// </summary>
         /// <remarks>
         /// Retrieve a single client by its ID.
         /// </remarks>
-        /// </summary>
-        Task<GetClientResponse> GetAsync(string organizationId, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="organizationId">Provide the ID of the related organization.</param>
+        /// <param name="embed">
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+        /// parameter.<br/>
+        /// <br/>
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetClientResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetClientResponse> GetAsync(
+            string organizationId,
+            string? embed = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Clients: IClients
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Clients(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListClientsResponse> ListAsync(string? embed = null, string? fromP = null, long? limit = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// List clients.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of all clients linked to your account.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="embed">
+        /// This endpoint allows embedding related API items by appending the<br/>
+        /// following values via the `embed` query string parameter.<br/>
+        /// <br/>
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
+        /// </param>
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListClientsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListClientsResponse> ListAsync(
+            string? embed = null,
+            string? fromP = null,
+            long? limit = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new ListClientsRequest()
             {
@@ -70,6 +166,7 @@ namespace Mollie
                 Limit = limit,
                 IdempotencyKey = idempotencyKey,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/clients", request, null);
 
@@ -125,7 +222,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -218,14 +315,52 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetClientResponse> GetAsync(string organizationId, string? embed = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get client.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single client by its ID.
+        /// </remarks>
+        /// <param name="organizationId">Provide the ID of the related organization.</param>
+        /// <param name="embed">
+        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
+        /// parameter.<br/>
+        /// <br/>
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetClientResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetClientResponse> GetAsync(
+            string organizationId,
+            string? embed = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+
             var request = new GetClientRequest()
             {
                 OrganizationId = organizationId,
                 Embed = embed,
                 IdempotencyKey = idempotencyKey,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/clients/{organizationId}", request, null);
 
@@ -281,7 +416,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -373,5 +508,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

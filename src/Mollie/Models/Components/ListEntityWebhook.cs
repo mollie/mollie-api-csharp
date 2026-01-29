@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListEntityWebhook
     {
-
         /// <summary>
         /// Indicates the response contains a webhook subscription object.<br/>
-        /// 
-        /// <remarks>
         /// Will always contain the string `webhook` for this endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -37,7 +33,7 @@ namespace Mollie.Models.Components
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The subscription&apos;s events destination.
+        /// The subscription's events destination.
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; } = default!;
@@ -49,13 +45,13 @@ namespace Mollie.Models.Components
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s date time of creation.
+        /// The subscription's date time of creation.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// The subscription&apos;s name.
+        /// The subscription's name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
@@ -67,7 +63,7 @@ namespace Mollie.Models.Components
         public List<WebhookEventTypes> EventTypes { get; set; } = default!;
 
         /// <summary>
-        /// The subscription&apos;s current status.
+        /// The subscription's current status.
         /// </summary>
         [JsonProperty("status")]
         public WebhookStatus Status { get; set; } = default!;

@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityRefundResponse
     {
-
         /// <summary>
         /// Indicates the response contains a refund object. Will always contain the string `refund` for this endpoint.
         /// </summary>
@@ -28,10 +27,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The identifier uniquely referring to this refund. Mollie assigns this identifier at refund creation time. Mollie<br/>
-        /// 
-        /// <remarks>
         /// will always refer to the refund by this ID. Example: `re_4qqhO89gsT`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
@@ -56,8 +52,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
-        /// 
-        /// <remarks>
         /// to the currency your account is settled in.<br/>
         /// <br/>
         /// The amount is a **negative** amount.<br/>
@@ -70,27 +64,20 @@ namespace Mollie.Models.Components
         /// <br/>
         /// To retrieve accurate settlement amounts we recommend using the<br/>
         /// <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
         public EntityRefundResponseSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; }
 
         /// <summary>
         /// The unique identifier of the payment this refund was created for.<br/>
-        /// 
-        /// <remarks>
         /// The full payment object can be retrieved via the payment URL in the `_links` object.
-        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string? PaymentId { get; set; }
@@ -105,7 +92,7 @@ namespace Mollie.Models.Components
         public EntityRefundResponseStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
@@ -115,8 +102,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// When creating refunds for *routed* payments, by default the full amount is deducted from your balance.<br/>
         /// <br/>
@@ -124,7 +109,6 @@ namespace Mollie.Models.Components
         /// needs to be reversed from which merchant(s).<br/>
         /// <br/>
         /// If you simply want to fully reverse the routed funds, you can also use the `reverseRouting` parameter instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("routingReversals")]
         public List<EntityRefundResponseRoutingReversal>? RoutingReversals { get; set; } = null;

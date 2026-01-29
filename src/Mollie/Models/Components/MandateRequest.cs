@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class MandateRequest
     {
-
         /// <summary>
         /// The identifier uniquely referring to this mandate. Example: `mdt_pWUnw6pkBN`.
         /// </summary>
@@ -24,35 +23,32 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Payment method of the mandate.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// SEPA Direct Debit and PayPal mandates can be created directly.
-        /// </remarks>
         /// </summary>
         [JsonProperty("method")]
         public MandateMethod Method { get; set; } = default!;
 
         /// <summary>
-        /// The customer&apos;s name.
+        /// The customer's name.
         /// </summary>
         [JsonProperty("consumerName")]
         public string ConsumerName { get; set; } = default!;
 
         /// <summary>
-        /// The customer&apos;s IBAN. Required for SEPA Direct Debit mandates.
+        /// The customer's IBAN. Required for SEPA Direct Debit mandates.
         /// </summary>
         [JsonProperty("consumerAccount")]
         public string? ConsumerAccount { get; set; } = null;
 
         /// <summary>
-        /// The BIC of the customer&apos;s bank.
+        /// The BIC of the customer's bank.
         /// </summary>
         [JsonProperty("consumerBic")]
         public string? ConsumerBic { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s email address. Required for PayPal mandates.
+        /// The customer's email address. Required for PayPal mandates.
         /// </summary>
         [JsonProperty("consumerEmail")]
         public string? ConsumerEmail { get; set; } = null;
@@ -65,43 +61,31 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A custom mandate reference. For SEPA Direct Debit, it is vital to provide a unique reference. Some banks will<br/>
-        /// 
-        /// <remarks>
         /// decline Direct Debit payments if the mandate reference is not unique.
-        /// </remarks>
         /// </summary>
         [JsonProperty("mandateReference")]
         public string? MandateReference { get; set; } = null;
 
         /// <summary>
         /// The billing agreement ID given by PayPal. For example: `B-12A34567B8901234CD`. Required for PayPal mandates.<br/>
-        /// 
-        /// <remarks>
         /// Must provide either this field or `payPalVaultId`, but not both.
-        /// </remarks>
         /// </summary>
         [JsonProperty("paypalBillingAgreementId")]
         public string? PaypalBillingAgreementId { get; set; } = null;
 
         /// <summary>
         /// The Vault ID given by PayPal. For example: `8kk8451t`. Required for PayPal mandates.<br/>
-        /// 
-        /// <remarks>
         /// Must provide either this field or `paypalBillingAgreementId`, but not both.
-        /// </remarks>
         /// </summary>
         [JsonProperty("payPalVaultId")]
         public string? PayPalVaultId { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
         /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;

@@ -13,29 +13,22 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// The partner status object.
     /// </summary>
     public class GetPartnerStatusResponseBody
     {
-
         /// <summary>
         /// Indicates the response contains a partner status object. Will always contain the string `partner` for<br/>
-        /// 
-        /// <remarks>
         /// this endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
         /// <summary>
         /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>
-        /// 
-        /// <remarks>
         /// enrolled as a partner.
-        /// </remarks>
         /// </summary>
         [JsonProperty("partnerType", NullValueHandling = NullValueHandling.Include)]
         public PartnerType? PartnerType { get; set; }
@@ -48,36 +41,27 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Array of User-Agent token objects. Present if the organization is a partner of type `useragent`, or if<br/>
-        /// 
-        /// <remarks>
         /// they were in the past.
-        /// </remarks>
         /// </summary>
         [JsonProperty("userAgentTokens")]
         public List<UserAgentToken>? UserAgentTokens { get; set; }
 
         /// <summary>
         /// The date the partner contract was signed, in ISO 8601 format. Omitted if no contract has been signed<br/>
-        /// 
-        /// <remarks>
         /// (yet).
-        /// </remarks>
         /// </summary>
         [JsonProperty("partnerContractSignedAt")]
         public string? PartnerContractSignedAt { get; set; } = null;
 
         /// <summary>
-        /// Whether an update to the partner contract is available and requiring the organization&apos;s agreement.
+        /// Whether an update to the partner contract is available and requiring the organization's agreement.
         /// </summary>
         [JsonProperty("partnerContractUpdateAvailable")]
         public bool? PartnerContractUpdateAvailable { get; set; }
 
         /// <summary>
         /// The expiration date of the signed partner contract, in ISO 8601 format. Omitted if contract has no<br/>
-        /// 
-        /// <remarks>
         /// expiration date (yet).
-        /// </remarks>
         /// </summary>
         [JsonProperty("partnerContractExpiresAt")]
         public string? PartnerContractExpiresAt { get; set; }

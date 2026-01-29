@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
     /// </summary>
     public class Url
     {
-
         /// <summary>
         /// The actual URL string.
         /// </summary>

@@ -12,13 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The type of recipient, either `consumer` or `business`. This will determine what further fields are<br/>
-    /// 
-    /// <remarks>
     /// required on the `recipient` object.
-    /// </remarks>
     /// </summary>
     public enum SalesInvoiceRecipientType
     {
@@ -60,5 +57,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoiceRecipientType");
         }
     }
-
 }

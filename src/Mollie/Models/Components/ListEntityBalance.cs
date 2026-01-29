@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListEntityBalance
     {
-
         /// <summary>
         /// Indicates the response contains a balance object. Will always contain the string `balance` for this endpoint.
         /// </summary>
@@ -39,13 +38,13 @@ namespace Mollie.Models.Components
         public Mode Mode { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// The balance&apos;s ISO 4217 currency code.
+        /// The balance's ISO 4217 currency code.
         /// </summary>
         [JsonProperty("currency")]
         public ListEntityBalanceCurrency Currency { get; set; } = default!;
@@ -64,11 +63,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
-        /// 
-        /// <remarks>
         /// this threshold, the complete balance will be paid out to the transfer destination according to the configured<br/>
         /// frequency.
-        /// </remarks>
         /// </summary>
         [JsonProperty("transferThreshold")]
         public ListEntityBalanceTransferThreshold? TransferThreshold { get; set; }
@@ -81,26 +77,20 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The destination where the available amount will be automatically transferred to according to the configured<br/>
-        /// 
-        /// <remarks>
         /// transfer frequency.
-        /// </remarks>
         /// </summary>
         [JsonProperty("transferDestination")]
         public ListEntityBalanceTransferDestination? TransferDestination { get; set; } = null;
 
         /// <summary>
-        /// The amount directly available on the balance, e.g. `{&quot;currency&quot;:&quot;EUR&quot;, &quot;value&quot;:&quot;100.00&quot;}`.
+        /// The amount directly available on the balance, e.g. `{"currency":"EUR", "value":"100.00"}`.
         /// </summary>
         [JsonProperty("availableAmount")]
         public ListEntityBalanceAvailableAmount AvailableAmount { get; set; } = default!;
 
         /// <summary>
         /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
-        /// 
-        /// <remarks>
         /// few days to clear.
-        /// </remarks>
         /// </summary>
         [JsonProperty("pendingAmount")]
         public ListEntityBalancePendingAmount PendingAmount { get; set; } = default!;

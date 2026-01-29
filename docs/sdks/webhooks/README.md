@@ -32,8 +32,8 @@ var res = await sdk.Webhooks.CreateAsync(
     requestBody: new CreateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
-        EventTypesList = EventTypesList.CreateEventTypesListEnum(
-            EventTypesListEnum.PaymentLinkPaid
+        EventTypesList = EventTypesList.CreateWebhookEventTypes(
+            WebhookEventTypes.PaymentLinkPaid
         ),
         Testmode = false,
     }

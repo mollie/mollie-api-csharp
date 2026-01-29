@@ -12,21 +12,17 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// With Mollie Connect you can charge fees on payment links that your app is processing on behalf of other Mollie<br/>
-    /// 
-    /// <remarks>
     /// merchants.<br/>
     /// <br/>
-    /// If you use OAuth to create payment links on a connected merchant&apos;s account, you can charge a fee using this<br/>
-    /// `applicationFee` parameter. If a payment on the payment link succeeds, the fee will be deducted from the merchant&apos;s balance and sent<br/>
+    /// If you use OAuth to create payment links on a connected merchant's account, you can charge a fee using this<br/>
+    /// `applicationFee` parameter. If a payment on the payment link succeeds, the fee will be deducted from the merchant's balance and sent<br/>
     /// to your own account balance.
-    /// </remarks>
     /// </summary>
     public class PaymentLinkResponseApplicationFee
     {
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
@@ -35,10 +31,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The description of the application fee. This will appear on settlement reports towards both you and the<br/>
-        /// 
-        /// <remarks>
         /// connected merchant.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;

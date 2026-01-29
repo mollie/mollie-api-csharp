@@ -16,18 +16,14 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
-    /// 
-    /// <remarks>
     /// automatically, unless a switch to a live profile has been requested. The review object will therefore usually be<br/>
     /// `null` in test mode.
-    /// </remarks>
     /// </summary>
     public class ListProfileResponseReview
     {
-
         /// <summary>
         /// The status of the requested changes.
         /// </summary>

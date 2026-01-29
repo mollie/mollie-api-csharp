@@ -25,10 +25,9 @@ namespace Mollie
 
     public interface IClientLinks
     {
-
         /// <summary>
-        /// Create client link
-        /// 
+        /// Create client link.
+        /// </summary>
         /// <remarks>
         /// Link a new or existing organization to your OAuth application, in effect creating a new client. The response<br/>
         /// contains a `clientLink` where you should redirect your customer to.<br/>
@@ -51,7 +50,7 @@ namespace Mollie
         /// <br/>
         /// * `scope` _string (required)_<br/>
         /// <br/>
-        ///   A space-separated list of permissions (&apos;scopes&apos;) your app requires. See the<br/>
+        ///   A space-separated list of permissions ('scopes') your app requires. See the<br/>
         ///   <a href="https://docs.mollie.com/docs/connect-permissions">permissions list</a> for more information about the available<br/>
         ///   scopes.<br/>
         /// <br/>
@@ -77,40 +76,126 @@ namespace Mollie
         /// ## Error Handling<br/>
         /// <br/>
         /// Error handling is also dealt with similar to the <a href="https://docs.mollie.com/reference/authorize">Authorize</a> endpoint:<br/>
-        /// the customer is redirected back to your app&apos;s redirect URL with the `error` and `error_description` parameters added<br/>
+        /// the customer is redirected back to your app's redirect URL with the `error` and `error_description` parameters added<br/>
         /// to the URL.<br/>
         /// <br/>
         /// &gt; 🚧<br/>
         /// &gt;<br/>
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
         /// </remarks>
-        /// </summary>
-        Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, ClientLinkRequest? clientLinkRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateClientLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateClientLinkResponse> CreateAsync(
+            string? idempotencyKey = null,
+            ClientLinkRequest? clientLinkRequest = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class ClientLinks: IClientLinks
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public ClientLinks(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreateClientLinkResponse> CreateAsync(string? idempotencyKey = null, ClientLinkRequest? clientLinkRequest = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Create client link.
+        /// </summary>
+        /// <remarks>
+        /// Link a new or existing organization to your OAuth application, in effect creating a new client. The response<br/>
+        /// contains a `clientLink` where you should redirect your customer to.<br/>
+        /// <br/>
+        /// ## Redirecting the Customer<br/>
+        /// <br/>
+        /// The `clientLink` URL behaves similarly to a standard OAuth authorization URL. Therefore, after receiving the<br/>
+        /// `clientLink` URL in the API response, you need to **append the following query parameters** *before* redirecting<br/>
+        /// the customer:<br/>
+        /// <br/>
+        /// * `client_id` _string (required)_<br/>
+        /// <br/>
+        ///   The client ID you received when you registered your OAuth app. The ID starts with `app_`. For example:<br/>
+        ///   `app_abc123qwerty`.<br/>
+        /// <br/>
+        /// * `state` _string (required)_<br/>
+        /// <br/>
+        ///   A random string **generated by your app** to prevent CSRF attacks. This will be reflected in the `state` query<br/>
+        ///   parameter when the user returns to the `redirect_uri` after authorizing your app.<br/>
+        /// <br/>
+        /// * `scope` _string (required)_<br/>
+        /// <br/>
+        ///   A space-separated list of permissions ('scopes') your app requires. See the<br/>
+        ///   <a href="https://docs.mollie.com/docs/connect-permissions">permissions list</a> for more information about the available<br/>
+        ///   scopes.<br/>
+        /// <br/>
+        ///   We recommend at least : `onboarding.read onboarding.write`<br/>
+        /// <br/>
+        /// * `approval_prompt` _string_<br/>
+        /// <br/>
+        ///   Can be set to `force` to force showing the consent screen to the merchant, *even when it is not necessary*. If you<br/>
+        ///   force an approval prompt and the user creates a new authorization, previously active authorizations will be<br/>
+        ///   revoked.<br/>
+        /// <br/>
+        ///   Possible values: `auto` `force` (default: `auto`)<br/>
+        /// <br/>
+        /// ### Example of a Complete Redirect URL<br/>
+        /// <br/>
+        /// After adding the above url parameter your URL will look something like this and you can redirect your client to this<br/>
+        /// page:<br/>
+        /// <br/>
+        /// ```<br/>
+        /// https://my.mollie.com/dashboard/client-link/{id}?client_id={your_client_id}&amp;state={unique_state}&amp;scope=onboarding.read%20onboarding.write<br/>
+        /// ```<br/>
+        /// <br/>
+        /// ## Error Handling<br/>
+        /// <br/>
+        /// Error handling is also dealt with similar to the <a href="https://docs.mollie.com/reference/authorize">Authorize</a> endpoint:<br/>
+        /// the customer is redirected back to your app's redirect URL with the `error` and `error_description` parameters added<br/>
+        /// to the URL.<br/>
+        /// <br/>
+        /// &gt; 🚧<br/>
+        /// &gt;<br/>
+        /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateClientLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateClientLinkResponse> CreateAsync(
+            string? idempotencyKey = null,
+            ClientLinkRequest? clientLinkRequest = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new CreateClientLinkRequest()
             {
                 IdempotencyKey = idempotencyKey,
                 ClientLinkRequest = clientLinkRequest,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/client-links";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -171,7 +256,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -263,5 +348,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

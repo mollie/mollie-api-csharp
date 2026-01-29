@@ -52,7 +52,6 @@ namespace Mollie.Models.Requests
         }
     }
 
-
     [JsonConverter(typeof(EventTypes.EventTypesConverter))]
     public class EventTypes
     {

@@ -16,24 +16,17 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The destination where the available amount will be automatically transferred to according to the configured<br/>
-    /// 
-    /// <remarks>
     /// transfer frequency.
-    /// </remarks>
     /// </summary>
     public class EntityBalanceTransferDestination
     {
-
         /// <summary>
         /// The default destination of automatic scheduled transfers. Currently only `bank-account` is supported.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
-        /// * `bank-account` — Transfer the balance amount to an external bank account
-        /// </remarks>
+        /// * `bank-account` — Transfer the balance amount to an external bank account.
         /// </summary>
         [JsonProperty("type")]
         public BalanceTransferDestinationType? Type { get; set; }

@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class GetPrimaryBalanceRequest
     {
-
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
         /// </summary>

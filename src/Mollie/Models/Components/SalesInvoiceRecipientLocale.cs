@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
     /// </summary>
@@ -70,5 +70,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoiceRecipientLocale");
         }
     }
-
 }

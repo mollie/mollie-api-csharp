@@ -16,16 +16,12 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListSettlementsRequest
     {
-
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;
@@ -38,22 +34,19 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Provide the token of the balance to filter the settlements by. This is<br/>
-        /// 
-        /// <remarks>
         /// the balance token that the settlement was settled to.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=balanceId")]
         public string? BalanceId { get; set; }
 
         /// <summary>
-        /// Provide the year to query the settlements. Must be used combined with `month` parameter
+        /// Provide the year to query the settlements. Must be used combined with `month` parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=year")]
         public string? Year { get; set; } = null;
 
         /// <summary>
-        /// Provide the month to query the settlements. Must be used combined with `year` parameter
+        /// Provide the month to query the settlements. Must be used combined with `year` parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=month")]
         public string? Month { get; set; } = null;

@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The subscription&apos;s current status.
+    /// The subscription's current status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class WebhookStatus : IEquatable<WebhookStatus>
@@ -78,5 +78,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
-    /// 
-    /// <remarks>
     /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SalesInvoiceVatModeResponse : IEquatable<SalesInvoiceVatModeResponse>
@@ -78,5 +75,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

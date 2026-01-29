@@ -15,14 +15,11 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The type of product purchased. For example, a physical or a digital product.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// The `tip` payment line type is not available when creating a payment.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentLineTypeResponse : IEquatable<PaymentLineTypeResponse>
@@ -91,5 +88,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

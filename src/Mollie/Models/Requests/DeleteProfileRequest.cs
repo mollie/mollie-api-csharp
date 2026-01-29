@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class DeleteProfileRequest
     {
-
         /// <summary>
         /// Provide the ID of the related profile.
         /// </summary>

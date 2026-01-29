@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListConnectBalanceTransfersResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of Connect balance transfers. For a complete reference of the Connect balance transfer<br/>
-        /// 
-        /// <remarks>
         /// object, refer to the <a href="get-balance-transfer">Get balance transfer endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListConnectBalanceTransfersResponseBody? Object { get; set; }
     }

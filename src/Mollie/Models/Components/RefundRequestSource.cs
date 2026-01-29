@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Where the funds will be pulled back from.
     /// </summary>
     public class RefundRequestSource
     {
-
         [JsonProperty("type")]
         public Models.Components.Type? Type { get; set; }
 

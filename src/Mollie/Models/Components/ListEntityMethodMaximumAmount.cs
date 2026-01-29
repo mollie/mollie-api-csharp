@@ -11,17 +11,13 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The maximum payment amount allowed when using this payment method. If there is no method-specific maximum, `null`<br/>
-    /// 
-    /// <remarks>
     /// is returned instead.
-    /// </remarks>
     /// </summary>
     public class ListEntityMethodMaximumAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

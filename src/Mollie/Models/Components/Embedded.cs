@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Full payload of the event.
     /// </summary>
     public class Embedded
     {
-
         [JsonProperty("entity", NullValueHandling = NullValueHandling.Include)]
         public Entity? Entity { get; set; }
     }

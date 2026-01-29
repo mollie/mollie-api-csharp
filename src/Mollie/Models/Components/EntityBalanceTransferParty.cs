@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A party involved in the balance transfer, either the sender or the receiver.
     /// </summary>
     public class EntityBalanceTransferParty
     {
-
         /// <summary>
         /// Defines the type of the party. At the moment, only `organization` is supported.
         /// </summary>

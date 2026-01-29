@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Total amount of the invoice, excluding VAT.
     /// </summary>
     public class ListEntityInvoiceNetAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

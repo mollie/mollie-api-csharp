@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class CancelSubscriptionResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// The updated subscription object with status `canceled`. For a complete reference of the subscription object,<br/>
-        /// 
-        /// <remarks>
         /// refer to the <a href="get-subscription">Get subscription endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public SubscriptionResponse? SubscriptionResponse { get; set; }
     }

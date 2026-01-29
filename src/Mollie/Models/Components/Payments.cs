@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Only available on `transaction-categories` grouping.
     /// </summary>
     public class Payments
     {
-
         [JsonProperty("pending")]
         public SubGroup? Pending { get; set; }
 

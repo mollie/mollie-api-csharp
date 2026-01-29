@@ -25,50 +25,130 @@ namespace Mollie
 
     public interface IPaymentLinks
     {
-
         /// <summary>
-        /// Create payment link
-        /// 
+        /// Create payment link.
+        /// </summary>
         /// <remarks>
         /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire.<br/>
         /// The payment link can be shared with your customers and will redirect them to them the payment page where they can<br/>
         /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
         /// </remarks>
-        /// </summary>
-        Task<CreatePaymentLinkResponse> CreateAsync(string? idempotencyKey = null, CreatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="CreatePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreatePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreatePaymentLinkResponse> CreateAsync(
+            string? idempotencyKey = null,
+            CreatePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// List payment links
-        /// 
+        /// List payment links.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of all payment links.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListPaymentLinksResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListPaymentLinksResponse> ListAsync(
+            string? fromP = null,
+            long? limit = null,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get payment link
-        /// 
+        /// Get payment link.
+        /// </summary>
         /// <remarks>
         /// Retrieve a single payment link by its ID.
         /// </remarks>
-        /// </summary>
-        Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPaymentLinkResponse> GetAsync(
+            string paymentLinkId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Update payment link
-        /// 
+        /// Update payment link.
+        /// </summary>
         /// <remarks>
         /// Certain details of an existing payment link can be updated.
         /// </remarks>
-        /// </summary>
-        Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, string? idempotencyKey = null, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="UpdatePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdatePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdatePaymentLinkResponse> UpdateAsync(
+            string paymentLinkId,
+            string? idempotencyKey = null,
+            UpdatePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Delete payment link
-        /// 
+        /// Delete payment link.
+        /// </summary>
         /// <remarks>
         /// Payment links which have not been opened and no payments have been made yet can be deleted entirely.<br/>
         /// This can be useful for removing payment links that have been incorrectly configured or that are no longer relevant.<br/>
@@ -78,44 +158,96 @@ namespace Mollie
         /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the<br/>
         /// <a href="update-payment-link">Update payment link</a> endpoint instead.
         /// </remarks>
-        /// </summary>
-        Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, string? idempotencyKey = null, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="DeletePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeletePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeletePaymentLinkResponse> DeleteAsync(
+            string paymentLinkId,
+            string? idempotencyKey = null,
+            DeletePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get payment link payments
-        /// 
+        /// Get payment link payments.
+        /// </summary>
         /// <remarks>
         /// Retrieve the list of payments for a specific payment link.<br/>
         /// <br/>
         /// The results are paginated.
         /// </remarks>
-        /// </summary>
-        Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(GetPaymentLinkPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="GetPaymentLinkPaymentsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPaymentLinkPaymentsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(
+            GetPaymentLinkPaymentsRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class PaymentLinks: IPaymentLinks
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public PaymentLinks(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreatePaymentLinkResponse> CreateAsync(string? idempotencyKey = null, CreatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Create payment link.
+        /// </summary>
+        /// <remarks>
+        /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire.<br/>
+        /// The payment link can be shared with your customers and will redirect them to them the payment page where they can<br/>
+        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="CreatePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreatePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreatePaymentLinkResponse> CreateAsync(
+            string? idempotencyKey = null,
+            CreatePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new CreatePaymentLinkRequest()
             {
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/payment-links";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -176,7 +308,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -269,7 +401,44 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListPaymentLinksResponse> ListAsync(string? fromP = null, long? limit = null, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// List payment links.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of all payment links.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="fromP">
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
+        /// result set.
+        /// </param>
+        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListPaymentLinksResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListPaymentLinksResponse> ListAsync(
+            string? fromP = null,
+            long? limit = null,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new ListPaymentLinksRequest()
             {
@@ -279,7 +448,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links", request, null);
 
@@ -335,7 +504,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -428,8 +597,41 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPaymentLinkResponse> GetAsync(string paymentLinkId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get payment link.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single payment link by its ID.
+        /// </remarks>
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPaymentLinkResponse> GetAsync(
+            string paymentLinkId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (paymentLinkId == null) throw new ArgumentNullException(nameof(paymentLinkId));
+
             var request = new GetPaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
@@ -437,7 +639,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
 
@@ -493,7 +695,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -586,14 +788,42 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdatePaymentLinkResponse> UpdateAsync(string paymentLinkId, string? idempotencyKey = null, UpdatePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Update payment link.
+        /// </summary>
+        /// <remarks>
+        /// Certain details of an existing payment link can be updated.
+        /// </remarks>
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="UpdatePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdatePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdatePaymentLinkResponse> UpdateAsync(
+            string paymentLinkId,
+            string? idempotencyKey = null,
+            UpdatePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (paymentLinkId == null) throw new ArgumentNullException(nameof(paymentLinkId));
+
             var request = new UpdatePaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
 
@@ -655,7 +885,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -748,14 +978,48 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeletePaymentLinkResponse> DeleteAsync(string paymentLinkId, string? idempotencyKey = null, DeletePaymentLinkRequestBody? requestBody = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Delete payment link.
+        /// </summary>
+        /// <remarks>
+        /// Payment links which have not been opened and no payments have been made yet can be deleted entirely.<br/>
+        /// This can be useful for removing payment links that have been incorrectly configured or that are no longer relevant.<br/>
+        /// <br/>
+        /// Once deleted, the payment link will no longer show up in the API or Mollie dashboard.<br/>
+        /// <br/>
+        /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the<br/>
+        /// <a href="update-payment-link">Update payment link</a> endpoint instead.
+        /// </remarks>
+        /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="DeletePaymentLinkRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeletePaymentLinkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentLinkId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeletePaymentLinkResponse> DeleteAsync(
+            string paymentLinkId,
+            string? idempotencyKey = null,
+            DeletePaymentLinkRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (paymentLinkId == null) throw new ArgumentNullException(nameof(paymentLinkId));
+
             var request = new DeletePaymentLinkRequest()
             {
                 PaymentLinkId = paymentLinkId,
                 IdempotencyKey = idempotencyKey,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
 
@@ -817,7 +1081,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -892,14 +1156,34 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(GetPaymentLinkPaymentsRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get payment link payments.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the list of payments for a specific payment link.<br/>
+        /// <br/>
+        /// The results are paginated.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetPaymentLinkPaymentsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPaymentLinkPaymentsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(
+            GetPaymentLinkPaymentsRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
-            if (request == null)
-            {
-                request = new GetPaymentLinkPaymentsRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}/payments", request, null);
 
@@ -955,7 +1239,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1047,5 +1331,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

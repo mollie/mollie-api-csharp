@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The current status of the organization&apos;s onboarding process.
+    /// The current status of the organization's onboarding process.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityOnboardingStatusStatus : IEquatable<EntityOnboardingStatusStatus>
@@ -76,5 +76,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

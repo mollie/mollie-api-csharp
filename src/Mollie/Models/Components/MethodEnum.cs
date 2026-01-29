@@ -12,18 +12,15 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific payment<br/>
-    /// 
-    /// <remarks>
     /// method and your customer will skip the selection screen and is sent directly to the chosen payment method. The<br/>
     /// parameter enables you to fully integrate the payment method selection into your website.<br/>
     /// <br/>
     /// You can also specify the methods in an array. By doing so we will still show the payment method selection screen<br/>
     /// but will only show the methods specified in the array. For example, you can use this functionality to only show<br/>
-    /// payment methods from a specific country to your customer `[&apos;bancontact&apos;, &apos;belfius&apos;]`.
-    /// </remarks>
+    /// payment methods from a specific country to your customer `['bancontact', 'belfius']`.
     /// </summary>
     public enum MethodEnum
     {
@@ -129,5 +126,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum MethodEnum");
         }
     }
-
 }

@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The payment method&apos;s activation status for this profile.
+    /// The payment method's activation status for this profile.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class MethodStatus : IEquatable<MethodStatus>
@@ -80,5 +80,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

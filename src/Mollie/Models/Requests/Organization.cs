@@ -12,10 +12,9 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class Organization
     {
-
         /// <summary>
         /// The name of the organization.
         /// </summary>
@@ -33,24 +32,18 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT<br/>
-        /// 
-        /// <remarks>
         /// numbers are verified against the international registry *VIES*.<br/>
         /// <br/>
         /// The field can be omitted for merchants residing in other countries.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
         /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in<br/>
-        /// 
-        /// <remarks>
         /// The United Kingdom, and shifted VAT for merchants in the European Union.<br/>
         /// <br/>
         /// The field can be omitted for merchants residing in other countries.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
         public OnboardingVatRegulation? VatRegulation { get; set; } = null;

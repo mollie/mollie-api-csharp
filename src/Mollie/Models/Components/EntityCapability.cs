@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityCapability
     {
-
         /// <summary>
         /// Always the word `capability` for this resource type.
         /// </summary>

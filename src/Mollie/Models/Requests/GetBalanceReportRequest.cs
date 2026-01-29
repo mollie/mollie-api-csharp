@@ -16,10 +16,9 @@ namespace Mollie.Models.Requests
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class GetBalanceReportRequest
     {
-
         /// <summary>
         /// Provide the ID of the related balance.
         /// </summary>
@@ -28,47 +27,35 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// The start date of the report, in `YYYY-MM-DD` format. The from date is<br/>
-        /// 
-        /// <remarks>
-        /// &apos;inclusive&apos;, and in Central European Time. This means a report with for example `from=2024-01-01` will<br/>
+        /// 'inclusive', and in Central European Time. This means a report with for example `from=2024-01-01` will<br/>
         /// include transactions from 2024-01-01 0:00:00 CET and onwards.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string From { get; set; } = default!;
 
         /// <summary>
-        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time.<br/>
-        /// 
-        /// <remarks>
+        /// The end date of the report, in `YYYY-MM-DD` format. The until date is 'exclusive', and in Central European Time.<br/>
         /// This means a report with for example `until=2024-02-01` will include transactions up until<br/>
         /// 2024-01-31 23:59:59 CET.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=until")]
         public string Until { get; set; } = default!;
 
         /// <summary>
         /// You can retrieve reports in two different formats. With the `status-balances` format, transactions are grouped<br/>
-        /// 
-        /// <remarks>
         /// by status (e.g. `pending`, `available`), then by transaction type, and then by other sub-groupings where<br/>
         /// available (e.g. payment method).<br/>
         /// <br/>
         /// With the `transaction-categories` format, transactions are grouped by<br/>
         /// transaction type, then by status, and then again by other sub-groupings where available.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=grouping")]
         public BalanceReportGrouping? Grouping { get; set; }
 
         /// <summary>
         /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

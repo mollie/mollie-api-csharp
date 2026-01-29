@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetCurrentProfileResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// The current profile object. For a complete reference of the profile object, refer to the<br/>
-        /// 
-        /// <remarks>
         /// <a href="get-profile">Get profile</a> endpoint documentation.
-        /// </remarks>
         /// </summary>
         public ProfileResponse? ProfileResponse { get; set; }
     }

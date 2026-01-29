@@ -11,22 +11,18 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
-    /// 
-    /// <remarks>
+    /// The customer's billing address details. We advise to provide these details to improve fraud protection and<br/>
     /// conversion.<br/>
     /// <br/>
     /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
     /// `country`.<br/>
     /// <br/>
-    /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
-    /// </remarks>
+    /// Required for payment method `alma`, `in3`, `klarna`, `billie` and `riverty`.
     /// </summary>
     public class ListPaymentResponseBillingAddress
     {
-
         /// <summary>
         /// The title of the person, for example *Mr.* or *Mrs.*.
         /// </summary>
@@ -35,46 +31,34 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The given name (first name) of the person should be at least two characters and cannot contain only<br/>
-        /// 
-        /// <remarks>
         /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("givenName")]
         public string? GivenName { get; set; }
 
         /// <summary>
         /// The given family name (surname) of the person should be at least two characters and cannot contain only<br/>
-        /// 
-        /// <remarks>
         /// numbers.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("familyName")]
         public string? FamilyName { get; set; }
 
         /// <summary>
         /// The name of the organization, in case the addressee is an organization.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Required for payment method `billie`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("organizationName")]
         public object? OrganizationName { get; set; }
 
         /// <summary>
         /// A street and street number.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("streetAndNumber")]
         public string? StreetAndNumber { get; set; }
@@ -87,25 +71,19 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A postal code. This field may be required if the provided country has a postal code system.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("postalCode")]
         public string? PostalCode { get; set; }
 
         /// <summary>
         /// A valid e-mail address.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions<br/>
         /// email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; }
@@ -118,11 +96,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A city name.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("city")]
         public string? City { get; set; }
@@ -135,11 +110,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A country code in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("country")]
         public string? Country { get; set; }

@@ -13,10 +13,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListEntitySettlementPeriods
     {
-
         /// <summary>
         /// An array of cost objects, describing the fees withheld for each payment method during this period.
         /// </summary>

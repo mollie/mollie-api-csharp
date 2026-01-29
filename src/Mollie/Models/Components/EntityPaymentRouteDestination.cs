@@ -12,13 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The destination of this portion of the payment.
     /// </summary>
     public class EntityPaymentRouteDestination
     {
-
         /// <summary>
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>

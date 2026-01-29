@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateCaptureResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// The newly created capture object. For a complete reference of the<br/>
-        /// 
-        /// <remarks>
         /// capture object, refer to the <a href="get-capture">Get capture endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public CaptureResponse? CaptureResponse { get; set; }
     }

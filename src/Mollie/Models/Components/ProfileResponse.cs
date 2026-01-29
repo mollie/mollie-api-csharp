@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ProfileResponse
     {
-
         /// <summary>
         /// Indicates the response contains a profile object. Will always contain the string `profile` for this endpoint.
         /// </summary>
@@ -39,59 +38,47 @@ namespace Mollie.Models.Components
         public Mode Mode { get; set; } = default!;
 
         /// <summary>
-        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website or<br/>
-        /// 
-        /// <remarks>
+        /// The profile's name, this will usually reflect the trade name or brand name of the profile's website or<br/>
         /// application.
-        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@` signs are<br/>
-        /// 
-        /// <remarks>
+        /// The URL to the profile's website or application. Only `https` or `http` URLs are allowed. No `@` signs are<br/>
         /// allowed.
-        /// </remarks>
         /// </summary>
         [JsonProperty("website")]
         public string Website { get; set; } = default!;
 
         /// <summary>
-        /// The email address associated with the profile&apos;s trade name or brand.
+        /// The email address associated with the profile's trade name or brand.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; } = default!;
 
         /// <summary>
-        /// The phone number associated with the profile&apos;s trade name or brand.
+        /// The phone number associated with the profile's trade name or brand.
         /// </summary>
         [JsonProperty("phone")]
         public string Phone { get; set; } = default!;
 
         /// <summary>
-        /// The products or services offered by the profile&apos;s website or application.
+        /// The products or services offered by the profile's website or application.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; }
 
         /// <summary>
-        /// A list of countries where you expect that the majority of the profile&apos;s customers reside,<br/>
-        /// 
-        /// <remarks>
+        /// A list of countries where you expect that the majority of the profile's customers reside,<br/>
         /// in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("countriesOfActivity")]
         public List<string>? CountriesOfActivity { get; set; }
 
         /// <summary>
-        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the<br/>
-        /// 
-        /// <remarks>
+        /// The industry associated with the profile's trade name or brand. Please refer to the<br/>
         /// <a href="common-data-types#business-category">business category list</a> for all possible options.
-        /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
         public string BusinessCategory { get; set; } = default!;
@@ -101,17 +88,14 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Present if changes have been made that have not yet been approved by Mollie. Changes to test profiles are approved<br/>
-        /// 
-        /// <remarks>
         /// automatically, unless a switch to a live profile has been requested. The review object will therefore usually be<br/>
         /// `null` in test mode.
-        /// </remarks>
         /// </summary>
         [JsonProperty("review")]
         public ProfileResponseReview? Review { get; set; }
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

@@ -15,15 +15,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The frequency with which the available amount on the balance will be settled to the configured transfer<br/>
-    /// 
-    /// <remarks>
     /// destination.<br/>
     /// <br/>
     /// Settlements created during weekends or on bank holidays will take place on the next business day.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ListEntityBalanceTransferFrequency : IEquatable<ListEntityBalanceTransferFrequency>
@@ -96,5 +93,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetOpenSettlementResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A settlement object describing your current balance. For a complete reference of the settlement object, refer to<br/>
-        /// 
-        /// <remarks>
         /// the <a href="get-settlement">Get settlement</a> endpoint documentation.
-        /// </remarks>
         /// </summary>
         public EntitySettlement? EntitySettlement { get; set; }
     }

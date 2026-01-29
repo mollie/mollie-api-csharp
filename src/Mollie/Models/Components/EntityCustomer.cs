@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityCustomer
     {
-
         /// <summary>
         /// The full name of the customer.
         /// </summary>
@@ -40,23 +39,17 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
         /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;

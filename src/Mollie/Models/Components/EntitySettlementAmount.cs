@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The total amount of the settlement.
     /// </summary>
     public class EntitySettlementAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListSettlementsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of settlement objects. For a complete reference of the settlement<br/>
-        /// 
-        /// <remarks>
         /// object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListSettlementsResponseBody? Object { get; set; }
     }

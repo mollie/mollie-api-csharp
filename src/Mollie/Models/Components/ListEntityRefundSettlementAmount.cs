@@ -11,11 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
-    /// 
-    /// <remarks>
     /// to the currency your account is settled in.<br/>
     /// <br/>
     /// The amount is a **negative** amount.<br/>
@@ -28,11 +26,9 @@ namespace Mollie.Models.Components
     /// <br/>
     /// To retrieve accurate settlement amounts we recommend using the<br/>
     /// <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
-    /// </remarks>
     /// </summary>
     public class ListEntityRefundSettlementAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

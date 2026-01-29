@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class SalesInvoiceLineItemResponse
     {
-
         /// <summary>
         /// A description of the line item. For example *LEGO 4440 Forest Police Station*.
         /// </summary>

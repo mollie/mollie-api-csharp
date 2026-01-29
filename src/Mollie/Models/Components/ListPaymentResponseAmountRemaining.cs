@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The remaining amount that can be refunded. Only available when refunds are available for this payment.
     /// </summary>
     public class ListPaymentResponseAmountRemaining
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

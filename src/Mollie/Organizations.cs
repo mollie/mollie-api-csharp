@@ -25,61 +25,137 @@ namespace Mollie
 
     public interface IOrganizations
     {
-
         /// <summary>
-        /// Get organization
-        /// 
+        /// Get organization.
+        /// </summary>
         /// <remarks>
         /// Retrieve a single organization by its ID.<br/>
         /// <br/>
         /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful<br/>
         /// for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
         /// <br/>
-        /// If you have a *partner account*&apos;, you can retrieve organization details of connected organizations.
+        /// If you have a *partner account*', you can retrieve organization details of connected organizations.
         /// </remarks>
-        /// </summary>
-        Task<GetOrganizationResponse> GetAsync(string organizationId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="organizationId">Provide the ID of the related organization.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOrganizationResponse> GetAsync(
+            string organizationId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get current organization
-        /// 
+        /// Get current organization.
+        /// </summary>
         /// <remarks>
-        /// Retrieve the currently authenticated organization. A convenient alias of the <a href="get-organization">Get organization</a><br/>
+        /// Retrieve the currently authenticated organization. A convenient alias of the <a href="get-organization">Get organization</a>
         /// endpoint.<br/>
         /// <br/>
         /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint<br/>
         /// documentation.
         /// </remarks>
-        /// </summary>
-        Task<GetCurrentOrganizationResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetCurrentOrganizationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetCurrentOrganizationResponse> GetCurrentAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get partner status
-        /// 
+        /// Get partner status.
+        /// </summary>
         /// <remarks>
         /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner<br/>
         /// accounts*.
         /// </remarks>
-        /// </summary>
-        Task<GetPartnerStatusResponse> GetPartnerAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPartnerStatusResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPartnerStatusResponse> GetPartnerAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Organizations: IOrganizations
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Organizations(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetOrganizationResponse> GetAsync(string organizationId, bool? testmode = null, string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// Get organization.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single organization by its ID.<br/>
+        /// <br/>
+        /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful<br/>
+        /// for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
+        /// <br/>
+        /// If you have a *partner account*', you can retrieve organization details of connected organizations.
+        /// </remarks>
+        /// <param name="organizationId">Provide the ID of the related organization.</param>
+        /// <param name="testmode">
+        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOrganizationResponse> GetAsync(
+            string organizationId,
+            bool? testmode = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+
             var request = new GetOrganizationRequest()
             {
                 OrganizationId = organizationId,
@@ -87,7 +163,7 @@ namespace Mollie
                 IdempotencyKey = idempotencyKey,
             };
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organizationId}", request, null);
 
@@ -143,7 +219,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -236,14 +312,37 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetCurrentOrganizationResponse> GetCurrentAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get current organization.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the currently authenticated organization. A convenient alias of the <a href="get-organization">Get organization</a>
+        /// endpoint.<br/>
+        /// <br/>
+        /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint<br/>
+        /// documentation.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetCurrentOrganizationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetCurrentOrganizationResponse> GetCurrentAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new GetCurrentOrganizationRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/organizations/me";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -365,14 +464,34 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPartnerStatusResponse> GetPartnerAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get partner status.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner<br/>
+        /// accounts*.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPartnerStatusResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPartnerStatusResponse> GetPartnerAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new GetPartnerStatusRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/organizations/me/partner";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -493,5 +612,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

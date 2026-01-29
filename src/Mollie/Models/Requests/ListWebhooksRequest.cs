@@ -11,16 +11,12 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class ListWebhooksRequest
     {
-
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;
@@ -33,10 +29,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
-        /// 
-        /// <remarks>
         /// newest to oldest.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
         public Sorting? Sort { get; set; }
@@ -49,11 +42,8 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

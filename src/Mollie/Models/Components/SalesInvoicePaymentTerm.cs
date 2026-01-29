@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The payment term to be set on the invoice.
     /// </summary>
@@ -66,5 +66,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoicePaymentTerm");
         }
     }
-
 }

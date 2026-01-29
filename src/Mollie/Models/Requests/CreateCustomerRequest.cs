@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class CreateCustomerRequest
     {
-
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
         /// </summary>

@@ -13,10 +13,9 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class PaymentListRoutesEmbedded
     {
-
         /// <summary>
         /// An array of route objects.
         /// </summary>

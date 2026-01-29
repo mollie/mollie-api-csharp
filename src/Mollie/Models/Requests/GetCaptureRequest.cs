@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class GetCaptureRequest
     {
-
         /// <summary>
         /// Provide the ID of the related payment.
         /// </summary>
@@ -27,24 +26,18 @@ namespace Mollie.Models.Requests
         public string CaptureId { get; set; } = default!;
 
         /// <summary>
-        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
-        /// 
-        /// <remarks>
-        /// parameter.
-        /// </remarks>
+        /// This endpoint allows you to embed additional resources via the<br/>
+        /// `embed` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public string? Embed { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// 
-        /// <remarks>
         /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

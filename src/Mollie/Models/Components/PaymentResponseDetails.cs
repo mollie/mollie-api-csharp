@@ -17,28 +17,22 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// An object containing payment details collected during the payment process. For example, details may include the<br/>
-    /// 
-    /// <remarks>
-    /// customer&apos;s card or bank details and a payment reference. For the full list of details, please refer to the<br/>
+    /// customer's card or bank details and a payment reference. For the full list of details, please refer to the<br/>
     /// <a href="extra-payment-parameters">method-specific parameters</a> guide.
-    /// </remarks>
     /// </summary>
     public class PaymentResponseDetails
     {
-
         /// <summary>
-        /// The customer&apos;s name, if made available by the payment method. For card payments, refer to details.cardHolder.
+        /// The customer's name, if made available by the payment method. For card payments, refer to details.cardHolder.
         /// </summary>
         [JsonProperty("consumerName")]
         public string? ConsumerName { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s account reference.<br/>
-        /// 
-        /// <remarks>
+        /// The customer's account reference.<br/>
         /// <br/>
         /// For banking-based payment methods — such as iDEAL — this is normally either an IBAN or a domestic bank account<br/>
         /// number.<br/>
@@ -46,33 +40,26 @@ namespace Mollie.Models.Components
         /// For PayPal, the account reference is an email address.<br/>
         /// <br/>
         /// For card and Bancontact payments, refer to details.cardNumber.
-        /// </remarks>
         /// </summary>
         [JsonProperty("consumerAccount")]
         public string? ConsumerAccount { get; set; } = null;
 
         /// <summary>
-        /// The BIC of the customer&apos;s bank account, if applicable.
+        /// The BIC of the customer's bank account, if applicable.
         /// </summary>
         [JsonProperty("consumerBic")]
         public string? ConsumerBic { get; set; } = null;
 
         /// <summary>
         /// For wallet payment methods — such as Apple Pay and PayPal — the shipping address is often already known by the<br/>
-        /// 
-        /// <remarks>
         /// wallet provider. In these cases the shipping address may be available as a payment detail.
-        /// </remarks>
         /// </summary>
         [JsonProperty("shippingAddress")]
         public Dictionary<string, object>? ShippingAddress { get; set; } = null;
 
         /// <summary>
-        /// For bancontact, it will be the customer&apos;s masked card number. For cards, it will be the last 4-digit of the<br/>
-        /// 
-        /// <remarks>
-        /// PAN. For Point-of-sale, it will be the the last 4 digits of the customer&apos;s masked card number.
-        /// </remarks>
+        /// For bancontact, it will be the customer's masked card number. For cards, it will be the last 4-digit of the<br/>
+        /// PAN. For Point-of-sale, it will be the the last 4 digits of the customer's masked card number.
         /// </summary>
         [JsonProperty("cardNumber")]
         public string? CardNumber { get; set; } = null;
@@ -97,41 +84,35 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any<br/>
-        /// 
-        /// <remarks>
         /// formatting here; show it to the customer as-is.
-        /// </remarks>
         /// </summary>
         [JsonProperty("transferReference")]
         public string? TransferReference { get; set; } = null;
 
         /// <summary>
         /// A unique fingerprint for a specific card. Can be used to identify returning customers.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
-        /// In the case of Point-of-sale payments, it&apos;s a unique identifier assigned to a cardholder&apos;s payment account,<br/>
+        /// In the case of Point-of-sale payments, it's a unique identifier assigned to a cardholder's payment account,<br/>
         /// linking multiple transactions from wallets and physical card to a single account, also across payment methods<br/>
         /// or when the card is reissued.
-        /// </remarks>
         /// </summary>
         [JsonProperty("cardFingerprint")]
         public string? CardFingerprint { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s name as shown on their card.
+        /// The customer's name as shown on their card.
         /// </summary>
         [JsonProperty("cardHolder")]
         public string? CardHolder { get; set; } = null;
 
         /// <summary>
-        /// The card&apos;s target audience, if known.
+        /// The card's target audience, if known.
         /// </summary>
         [JsonProperty("cardAudition")]
         public PaymentDetailsCardAuditionResponse? CardAudition { get; set; } = null;
 
         /// <summary>
-        /// The card&apos;s label, if known.
+        /// The card's label, if known.
         /// </summary>
         [JsonProperty("cardLabel")]
         public PaymentDetailsCardLabelResponse? CardLabel { get; set; } = null;
@@ -198,10 +179,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A human-friendly failure message that can be shown to the customer. The message is translated in accordance<br/>
-        /// 
-        /// <remarks>
-        /// with the payment&apos;s locale setting.
-        /// </remarks>
+        /// with the payment's locale setting.
         /// </summary>
         [JsonProperty("failureMessage")]
         public string? FailureMessage { get; set; } = null;
@@ -213,23 +191,20 @@ namespace Mollie.Models.Components
         public PaymentDetailsWalletResponse? Wallet { get; set; } = null;
 
         /// <summary>
-        /// PayPal&apos;s reference for the payment.
+        /// PayPal's reference for the payment.
         /// </summary>
         [JsonProperty("paypalReference")]
         public string? PaypalReference { get; set; } = null;
 
         /// <summary>
-        /// ID of the customer&apos;s PayPal account.
+        /// ID of the customer's PayPal account.
         /// </summary>
         [JsonProperty("paypalPayerId")]
         public string? PaypalPayerId { get; set; } = null;
 
         /// <summary>
-        /// Indicates to what extent the payment is eligible for PayPal&apos;s Seller Protection. Only available for PayPal<br/>
-        /// 
-        /// <remarks>
+        /// Indicates to what extent the payment is eligible for PayPal's Seller Protection. Only available for PayPal<br/>
         /// payments, and if the information is made available by PayPal.
-        /// </remarks>
         /// </summary>
         [JsonProperty("sellerProtection")]
         public PaymentDetailsSellerProtectionResponse? SellerProtection { get; set; } = null;
@@ -253,7 +228,7 @@ namespace Mollie.Models.Components
         public string? TerminalId { get; set; }
 
         /// <summary>
-        /// The first 6 digits &amp; last 4 digits of the customer&apos;s masked card number.
+        /// The first 6 digits &amp; last 4 digits of the customer's masked card number.
         /// </summary>
         [JsonProperty("maskedNumber")]
         public string? MaskedNumber { get; set; } = null;
@@ -266,36 +241,27 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The creditor identifier indicates who is authorized to execute the payment. In this case, it is a<br/>
-        /// 
-        /// <remarks>
         /// reference to Mollie.
-        /// </remarks>
         /// </summary>
         [JsonProperty("creditorIdentifier")]
         public string? CreditorIdentifier { get; set; } = null;
 
         /// <summary>
-        /// Estimated date the payment is debited from the customer&apos;s bank account, in YYYY-MM-DD format.
+        /// Estimated date the payment is debited from the customer's bank account, in YYYY-MM-DD format.
         /// </summary>
         [JsonProperty("dueDate")]
         public LocalDate? DueDate { get; set; } = null;
 
         /// <summary>
         /// Date the payment has been signed by the customer, in YYYY-MM-DD format. Only available if the payment<br/>
-        /// 
-        /// <remarks>
         /// has been signed.
-        /// </remarks>
         /// </summary>
         [JsonProperty("signatureDate")]
         public LocalDate? SignatureDate { get; set; } = null;
 
         /// <summary>
         /// The official reason why this payment has failed. A detailed description of each reason is available on the<br/>
-        /// 
-        /// <remarks>
         /// website of the European Payments Council.
-        /// </remarks>
         /// </summary>
         [JsonProperty("bankReasonCode")]
         public string? BankReasonCode { get; set; } = null;
@@ -332,13 +298,10 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Optional include. If a QR code was requested during payment creation for a QR-compatible payment method,<br/>
-        /// 
-        /// <remarks>
         /// the QR code details will be available in this object.<br/>
         /// <br/>
         /// The QR code can be scanned by the customer to complete the payment on their mobile device. For example,<br/>
         /// Bancontact QR payments can be completed by the customer using the Bancontact app.
-        /// </remarks>
         /// </summary>
         [JsonProperty("qrCode")]
         public PaymentResponseQrCode? QrCode { get; set; }
@@ -386,13 +349,13 @@ namespace Mollie.Models.Components
         public Dictionary<string, object>? RemainderDetails { get; set; }
 
         /// <summary>
-        /// Multibanco payment reference of the transaction
+        /// Multibanco payment reference of the transaction.
         /// </summary>
         [JsonProperty("multibancoReference")]
         public string? MultibancoReference { get; set; } = null;
 
         /// <summary>
-        /// Multibanco entity reference of the transaction
+        /// Multibanco entity reference of the transaction.
         /// </summary>
         [JsonProperty("multibancoEntity")]
         public string? MultibancoEntity { get; set; } = null;

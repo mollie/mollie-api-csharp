@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityOrganization
     {
-
         /// <summary>
         /// Indicates the response contains an organization object. Will always contain the string `organization` for this<br/>
-        /// 
-        /// <remarks>
         /// resource type.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -62,24 +58,18 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are<br/>
-        /// 
-        /// <remarks>
         /// verified against the international registry *VIES*.<br/>
         /// <br/>
         /// The field is not present for merchants residing in other countries.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
         /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in The United<br/>
-        /// 
-        /// <remarks>
         /// Kingdom, and shifted VAT for merchants in the European Union.<br/>
         /// <br/>
         /// The field is not present for merchants residing in other countries.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatRegulation")]
         public OrganizationVatRegulation? VatRegulation { get; set; } = null;

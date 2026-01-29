@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class RecurringLineItem
     {
-
         /// <summary>
         /// A description of the recurring item. If not present, the main description of the item will be used.
         /// </summary>
@@ -24,11 +23,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Cadence unit of the recurring item. For example: `12 months`, `52 weeks` or `365 days`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Possible values: `... days`, `... weeks`, `... months`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
         public string Interval { get; set; } = default!;
@@ -46,7 +42,7 @@ namespace Mollie.Models.Components
         public long? Times { get; set; }
 
         /// <summary>
-        /// The start date of the subscription if it does not start right away (format `YYYY-MM-DD`)
+        /// The start date of the subscription if it does not start right away (format `YYYY-MM-DD`).
         /// </summary>
         [JsonProperty("startDate")]
         public string? StartDate { get; set; } = null;

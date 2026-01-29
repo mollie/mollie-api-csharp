@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListRouteGetResponse
     {
-
         /// <summary>
         /// Indicates the response contains a route object. Will always contain the string `route` for this endpoint.
         /// </summary>
@@ -24,20 +23,14 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The identifier uniquely referring to this route. Mollie assigns this identifier at route creation time. Mollie<br/>
-        /// 
-        /// <remarks>
         /// will always refer to the route by this ID. Example: `crt_dyARQ3JzCgtPDhU2Pbq3J`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
         /// The unique identifier of the payment. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>
-        /// 
-        /// <remarks>
         /// The full payment object can be retrieved via the payment URL in the `_links` object.
-        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string PaymentId { get; set; } = default!;
@@ -67,7 +60,7 @@ namespace Mollie.Models.Components
         public ListRouteGetResponseLinks Links { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

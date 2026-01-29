@@ -12,9 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The payment method used for this subscription. If omitted, any of the customer&apos;s valid mandates may be used.
+    /// The payment method used for this subscription. If omitted, any of the customer's valid mandates may be used.
     /// </summary>
     public enum SubscriptionMethod
     {
@@ -58,5 +58,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SubscriptionMethod");
         }
     }
-
 }

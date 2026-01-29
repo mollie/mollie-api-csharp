@@ -12,16 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ClientLinkResponse
     {
-
         /// <summary>
         /// Indicates the response contains a client link object. Will always contain the string `client-link` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;

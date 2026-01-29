@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ClientLinkRequest
     {
-
         /// <summary>
         /// Personal data of your customer.
         /// </summary>
@@ -42,10 +41,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union. VAT numbers are verified against the<br/>
-        /// 
-        /// <remarks>
         /// international registry *VIES*.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;

@@ -16,13 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The Point of sale receipt object.
     /// </summary>
     public class PaymentResponseReceipt
     {
-
         /// <summary>
         /// A unique code provided by the cardholder’s bank to confirm that the transaction was successfully approved.
         /// </summary>
@@ -42,7 +41,7 @@ namespace Mollie.Models.Components
         public PaymentDetailsReceiptCardReadMethodResponse? CardReadMethod { get; set; } = null;
 
         /// <summary>
-        /// The method used to verify the cardholder&apos;s identity.
+        /// The method used to verify the cardholder's identity.
         /// </summary>
         [JsonProperty("cardVerificationMethod")]
         public PaymentDetailsReceiptCardVerificationMethodResponse? CardVerificationMethod { get; set; } = null;

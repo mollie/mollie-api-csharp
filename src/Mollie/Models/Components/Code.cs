@@ -12,9 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// A machine-readable code that indicates the reason for the payment&apos;s status.
+    /// A machine-readable code that indicates the reason for the payment's status.
     /// </summary>
     public enum Code
     {
@@ -284,5 +284,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum Code");
         }
     }
-
 }

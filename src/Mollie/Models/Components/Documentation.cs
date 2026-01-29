@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The URL to the generic Mollie API error handling guide.
     /// </summary>
     public class Documentation
     {
-
         [JsonProperty("href")]
         public string Href { get; set; } = default!;
 

@@ -16,13 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Personal data of your customer.
     /// </summary>
     public class Owner
     {
-
         /// <summary>
         /// The email address of your customer.
         /// </summary>

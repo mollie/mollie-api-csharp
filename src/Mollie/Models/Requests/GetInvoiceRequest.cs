@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class GetInvoiceRequest
     {
-
         /// <summary>
         /// Provide the ID of the related invoice.
         /// </summary>

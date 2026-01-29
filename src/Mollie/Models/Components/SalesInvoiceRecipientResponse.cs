@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class SalesInvoiceRecipientResponse
     {
-
         /// <summary>
         /// The type of recipient, either `consumer` or `business`. This will determine what further fields are<br/>
-        /// 
-        /// <remarks>
         /// required on the `recipient` object.
-        /// </remarks>
         /// </summary>
         [JsonProperty("type")]
         public SalesInvoiceRecipientTypeResponse Type { get; set; } = default!;
@@ -38,20 +34,14 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The given name (first name) of the `consumer` type recipient should be at least two characters and cannot contain<br/>
-        /// 
-        /// <remarks>
         /// only numbers.
-        /// </remarks>
         /// </summary>
         [JsonProperty("givenName")]
         public string? GivenName { get; set; } = null;
 
         /// <summary>
         /// The given name (last name) of the `consumer` type recipient should be at least two characters and cannot contain<br/>
-        /// 
-        /// <remarks>
         /// only numbers.
-        /// </remarks>
         /// </summary>
         [JsonProperty("familyName")]
         public string? FamilyName { get; set; } = null;
@@ -64,20 +54,14 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The Chamber of Commerce number of the organization for a `business` type recipient. Either this or `vatNumber`<br/>
-        /// 
-        /// <remarks>
         /// has to be provided.
-        /// </remarks>
         /// </summary>
         [JsonProperty("organizationNumber")]
         public string? OrganizationNumber { get; set; } = null;
 
         /// <summary>
         /// The VAT number of the organization for a `business` type recipient. Either this or `organizationNumber`<br/>
-        /// 
-        /// <remarks>
         /// has to be provided.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;
@@ -113,13 +97,13 @@ namespace Mollie.Models.Components
         public string PostalCode { get; set; } = default!;
 
         /// <summary>
-        /// The recipient&apos;s city.
+        /// The recipient's city.
         /// </summary>
         [JsonProperty("city")]
         public string City { get; set; } = default!;
 
         /// <summary>
-        /// The recipient&apos;s region.
+        /// The recipient's region.
         /// </summary>
         [JsonProperty("region")]
         public string? Region { get; set; } = null;

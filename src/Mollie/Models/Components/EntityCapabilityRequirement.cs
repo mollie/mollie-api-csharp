@@ -16,27 +16,20 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityCapabilityRequirement
     {
-
         /// <summary>
         /// The name of this requirement, referring to the task to be fulfilled by the organization<br/>
-        /// 
-        /// <remarks>
         /// to enable or re-enable the capability. The name is unique among other requirements<br/>
         /// of the same capability.
-        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
         /// The status of the requirement depends on its due date.<br/>
-        /// 
-        /// <remarks>
         /// If no due date is given, the status will be `requested`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("status")]
         public CapabilityRequirementStatus Status { get; set; } = default!;

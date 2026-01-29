@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The way through which the invoice is to be set to paid.
     /// </summary>
@@ -58,5 +58,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoicePaymentDetailsSource");
         }
     }
-
 }

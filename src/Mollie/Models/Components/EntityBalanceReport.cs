@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityBalanceReport
     {
-
         /// <summary>
         /// Indicates the response contains a balance report object. Will always contain the string `balance-report` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -40,22 +36,16 @@ namespace Mollie.Models.Components
         public string TimeZone { get; set; } = default!;
 
         /// <summary>
-        /// The start date of the report, in `YYYY-MM-DD` format. The from date is &apos;inclusive&apos;, and in Central European Time.<br/>
-        /// 
-        /// <remarks>
+        /// The start date of the report, in `YYYY-MM-DD` format. The from date is 'inclusive', and in Central European Time.<br/>
         /// This means a report with for example `from=2024-01-01` will include movements of 2024-01-01 00:00:00 CET and<br/>
         /// onwards.
-        /// </remarks>
         /// </summary>
         [JsonProperty("from")]
         public string From { get; set; } = default!;
 
         /// <summary>
-        /// The end date of the report, in `YYYY-MM-DD` format. The until date is &apos;exclusive&apos;, and in Central European Time.<br/>
-        /// 
-        /// <remarks>
+        /// The end date of the report, in `YYYY-MM-DD` format. The until date is 'exclusive', and in Central European Time.<br/>
         /// This means a report with for example `until=2024-02-01` will include movements up until 2024-01-31 23:59:59 CET.
-        /// </remarks>
         /// </summary>
         [JsonProperty("until")]
         public string Until { get; set; } = default!;
@@ -65,8 +55,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>
-        /// 
-        /// <remarks>
         /// typical grouping looks like.<br/>
         /// <br/>
         /// If grouping `status-balances` is chosen, the main grouping is as follows:<br/>
@@ -83,10 +71,9 @@ namespace Mollie.Models.Components
         /// <br/>
         /// Each sub-group typically has:<br/>
         /// <br/>
-        /// * An `amount` object containing the group&apos;s total amount<br/>
+        /// * An `amount` object containing the group's total amount<br/>
         /// * A `count` integer if relevant (for example, counting the number of refunds)<br/>
-        /// * A `subtotals` array containing more sub-group objects if applicable
-        /// </remarks>
+        /// * A `subtotals` array containing more sub-group objects if applicable.
         /// </summary>
         [JsonProperty("totals")]
         public Totals Totals { get; set; } = default!;

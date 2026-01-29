@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The type of the transfer. Different fees may apply to different types of transfers.
     /// </summary>
@@ -68,5 +68,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum BalanceTransferCategory");
         }
     }
-
 }

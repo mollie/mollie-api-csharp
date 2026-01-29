@@ -15,14 +15,11 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The default destination of automatic scheduled transfers. Currently only `bank-account` is supported.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
-    /// * `bank-account` — Transfer the balance amount to an external bank account
-    /// </remarks>
+    /// * `bank-account` — Transfer the balance amount to an external bank account.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class BalanceTransferDestinationType : IEquatable<BalanceTransferDestinationType>
@@ -77,5 +74,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

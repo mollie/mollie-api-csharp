@@ -12,17 +12,13 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A list of payment method objects. For a complete reference of the<br/>
-    /// 
-    /// <remarks>
     /// payment method object, refer to the <a href="get-method">Get payment method endpoint</a> documentation.
-    /// </remarks>
     /// </summary>
     public class ListAllMethodsResponseBody
     {
-
         /// <summary>
         /// The number of payment method objects in this result set. Results are **not** paginated.
         /// </summary>

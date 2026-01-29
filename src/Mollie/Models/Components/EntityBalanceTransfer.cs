@@ -13,10 +13,9 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class EntityBalanceTransfer
     {
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
@@ -49,21 +48,15 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// A JSON object that you can attach to a balance transfer.<br/>
-        /// 
-        /// <remarks>
         /// This can be useful for storing additional information about the transfer in a structured format. Maximum size is approximately 1KB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public Dictionary<string, object>? Metadata { get; set; }
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// You can enable test mode by setting `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; }

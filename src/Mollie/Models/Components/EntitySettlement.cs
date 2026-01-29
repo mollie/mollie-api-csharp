@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntitySettlement
     {
-
         /// <summary>
         /// Indicates the response contains a settlement object. Will always contain the string `settlement` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -37,25 +33,22 @@ namespace Mollie.Models.Components
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string? CreatedAt { get; set; }
 
         /// <summary>
-        /// The settlement&apos;s bank reference, as found in your Mollie account and on your bank statement.
+        /// The settlement's bank reference, as found in your Mollie account and on your bank statement.
         /// </summary>
         [JsonProperty("reference")]
         public string? Reference { get; set; } = null;
 
         /// <summary>
         /// The date on which the settlement was settled, in ISO 8601 format.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// For an <a href="get-open-settlement">open settlement</a> or for the <a href="get-next-settlement">next settlement</a>, no settlement<br/>
         /// date is available.
-        /// </remarks>
         /// </summary>
         [JsonProperty("settledAt")]
         public string? SettledAt { get; set; } = null;
@@ -83,18 +76,15 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// For bookkeeping purposes, the settlement includes an overview of transactions included in the settlement. These<br/>
-        /// 
-        /// <remarks>
-        /// transactions are grouped into &apos;period&apos; objects — one for each calendar month.<br/>
+        /// transactions are grouped into 'period' objects — one for each calendar month.<br/>
         /// <br/>
         /// For example, if a settlement includes funds from 15 April until 4 May, it will include two period objects. One for<br/>
         /// all transactions processed between 15 April and 30 April, and one for all transactions between 1 May and 4 May.<br/>
         /// <br/>
         /// Period objects are grouped by year, and then by month. So in the above example, the full `periods` collection will<br/>
-        /// look as follows: `{&quot;2024&quot;: {&quot;04&quot;: {...}, &quot;05&quot;: {...}}}`. The year and month in this documentation are referred as `&lt;year&gt;` and `&lt;month&gt;`.<br/>
+        /// look as follows: `{"2024": {"04": {...}, "05": {...}}}`. The year and month in this documentation are referred as `&lt;year&gt;` and `&lt;month&gt;`.<br/>
         /// <br/>
         /// The example response should give a good idea of what this looks like in practise.
-        /// </remarks>
         /// </summary>
         [JsonProperty("periods")]
         public Dictionary<string, Dictionary<string, EntitySettlementPeriods>>? Periods { get; set; }

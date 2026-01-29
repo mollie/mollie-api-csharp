@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListWebhooksResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of webhooks. For a complete reference of the webhook<br/>
-        /// 
-        /// <remarks>
         /// object, refer to the <a href="get-webhook">Get hook endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListWebhooksResponseBody? Object { get; set; }
     }

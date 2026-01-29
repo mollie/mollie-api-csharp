@@ -12,11 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Totals are grouped according to the chosen grouping rule. The example response should give a good idea of what a<br/>
-    /// 
-    /// <remarks>
     /// typical grouping looks like.<br/>
     /// <br/>
     /// If grouping `status-balances` is chosen, the main grouping is as follows:<br/>
@@ -33,14 +31,12 @@ namespace Mollie.Models.Components
     /// <br/>
     /// Each sub-group typically has:<br/>
     /// <br/>
-    /// * An `amount` object containing the group&apos;s total amount<br/>
+    /// * An `amount` object containing the group's total amount<br/>
     /// * A `count` integer if relevant (for example, counting the number of refunds)<br/>
-    /// * A `subtotals` array containing more sub-group objects if applicable
-    /// </remarks>
+    /// * A `subtotals` array containing more sub-group objects if applicable.
     /// </summary>
     public class Totals
     {
-
         /// <summary>
         /// The pending balance. Only available if grouping is `status-balances`.
         /// </summary>

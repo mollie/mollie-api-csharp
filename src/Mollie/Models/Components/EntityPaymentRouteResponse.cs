@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityPaymentRouteResponse
     {
-
         /// <summary>
         /// Indicates the response contains a route object. Will always contain the string `route` for this endpoint.
         /// </summary>
@@ -28,10 +27,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The identifier uniquely referring to this route. Mollie will always refer to the route by this ID.<br/>
-        /// 
-        /// <remarks>
         /// Example: `rt_5B8cwPMGnU6qLbRvo7qEZo`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
@@ -62,12 +58,9 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The<br/>
-        /// 
-        /// <remarks>
         /// date must be given in `YYYY-MM-DD` format.<br/>
         /// <br/>
         /// If no date is given, the funds become available to the connected merchant as soon as the payment succeeds.
-        /// </remarks>
         /// </summary>
         [JsonProperty("releaseDate")]
         public string? ReleaseDate { get; set; } = null;

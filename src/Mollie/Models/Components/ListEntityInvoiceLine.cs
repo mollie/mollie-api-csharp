@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListEntityInvoiceLine
     {
-
         /// <summary>
         /// The administrative period in `YYYY-MM` on which the line should be booked.
         /// </summary>

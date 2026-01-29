@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The balance&apos;s ISO 4217 currency code.
+    /// The balance's ISO 4217 currency code.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityBalanceCurrency : IEquatable<EntityBalanceCurrency>
@@ -94,5 +94,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

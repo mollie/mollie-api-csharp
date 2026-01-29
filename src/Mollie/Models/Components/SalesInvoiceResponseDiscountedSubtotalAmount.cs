@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The total amount without VAT after discounts.
     /// </summary>
     public class SalesInvoiceResponseDiscountedSubtotalAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

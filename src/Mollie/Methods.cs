@@ -25,10 +25,9 @@ namespace Mollie
 
     public interface IMethods
     {
-
         /// <summary>
-        /// List payment methods
-        /// 
+        /// List payment methods.
+        /// </summary>
         /// <remarks>
         /// Retrieve all enabled payment methods. The results of this endpoint are<br/>
         /// **not** paginated — unlike most other list endpoints in our API.<br/>
@@ -50,12 +49,27 @@ namespace Mollie
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
         /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
         /// </remarks>
-        /// </summary>
-        Task<ListMethodsResponse> ListAsync(ListMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="ListMethodsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMethodsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListMethodsResponse> ListAsync(
+            ListMethodsRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// List all payment methods
-        /// 
+        /// List all payment methods.
+        /// </summary>
         /// <remarks>
         /// Retrieve all payment methods that Mollie offers, regardless of the eligibility of the organization for the specific<br/>
         /// method. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
@@ -65,12 +79,27 @@ namespace Mollie
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
         /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
         /// </remarks>
-        /// </summary>
-        Task<ListAllMethodsResponse> AllAsync(ListAllMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="ListAllMethodsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllMethodsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified `locale`&lt;br/&gt;<br/>
+        /// value is invalid. Thrown when the API returns a 400 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListAllMethodsResponse> AllAsync(
+            ListAllMethodsRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
 
         /// <summary>
-        /// Get payment method
-        /// 
+        /// Get payment method.
+        /// </summary>
         /// <remarks>
         /// Retrieve a single payment method by its ID.<br/>
         /// <br/>
@@ -79,35 +108,94 @@ namespace Mollie
         /// payments methods via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API, or via<br/>
         /// the Mollie Dashboard.<br/>
         /// <br/>
-        /// If you do not know the method&apos;s ID, you can use the [methods list<br/>
-        /// endpoint](list-methods) to retrieve all payment methods that are available.<br/>
+        /// If you do not know the method's ID, you can use the <a href="list-methods">methods list<br/>
+        /// endpoint</a> to retrieve all payment methods that are available.<br/>
         /// <br/>
         /// Additionally, it is possible to check if wallet methods such as Apple Pay<br/>
         /// are enabled by passing the wallet ID (`applepay`) as the method ID.
         /// </remarks>
-        /// </summary>
-        Task<GetMethodResponse> GetAsync(GetMethodRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="request">A <see cref="GetMethodRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMethodResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 404 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetMethodResponse> GetAsync(
+            GetMethodRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Methods: IMethods
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Methods(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListMethodsResponse> ListAsync(ListMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// List payment methods.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve all enabled payment methods. The results of this endpoint are<br/>
+        /// **not** paginated — unlike most other list endpoints in our API.<br/>
+        /// <br/>
+        /// For test mode, all pending and enabled payment methods are returned. If no<br/>
+        /// payment methods are requested yet, the most popular payment methods are returned in the test mode. For live<br/>
+        /// mode, only fully enabled payment methods are returned.<br/>
+        /// <br/>
+        /// Payment methods can be requested and enabled via the Mollie Dashboard, or<br/>
+        /// via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API.<br/>
+        /// <br/>
+        /// The list can optionally be filtered using a number of parameters described<br/>
+        /// below.<br/>
+        /// <br/>
+        /// By default, only payment methods for the Euro currency are returned. If you<br/>
+        /// wish to retrieve payment methods which exclusively support other currencies (e.g. Twint), you need to use the<br/>
+        /// `amount` parameters.<br/>
+        /// <br/>
+        /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListMethodsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMethodsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListMethodsResponse> ListAsync(
+            ListMethodsRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (request == null)
+            {
+                request = new ListMethodsRequest();
+            }
             request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods", request, null);
 
@@ -163,7 +251,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -256,11 +344,44 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListAllMethodsResponse> AllAsync(ListAllMethodsRequest? request = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// List all payment methods.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve all payment methods that Mollie offers, regardless of the eligibility of the organization for the specific<br/>
+        /// method. The results of this endpoint are **not** paginated — unlike most other list endpoints in our API.<br/>
+        /// <br/>
+        /// The list can optionally be filtered using a number of parameters described below.<br/>
+        /// <br/>
+        /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListAllMethodsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllMethodsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified `locale`&lt;br/&gt;<br/>
+        /// value is invalid. Thrown when the API returns a 400 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListAllMethodsResponse> AllAsync(
+            ListAllMethodsRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
+            if (request == null)
+            {
+                request = new ListAllMethodsRequest();
+            }
             request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods/all", request, null);
 
@@ -316,7 +437,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -409,15 +530,47 @@ namespace Mollie
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetMethodResponse> GetAsync(GetMethodRequest request, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+
+        /// <summary>
+        /// Get payment method.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single payment method by its ID.<br/>
+        /// <br/>
+        /// If a method is not available on this profile, a `404 Not Found` response is<br/>
+        /// returned. If the method is available but not enabled yet, a status `403 Forbidden` is returned. You can enable<br/>
+        /// payments methods via the <a href="enable-method">Enable payment method endpoint</a> of the Profiles API, or via<br/>
+        /// the Mollie Dashboard.<br/>
+        /// <br/>
+        /// If you do not know the method's ID, you can use the <a href="list-methods">methods list<br/>
+        /// endpoint</a> to retrieve all payment methods that are available.<br/>
+        /// <br/>
+        /// Additionally, it is possible to check if wallet methods such as Apple Pay<br/>
+        /// are enabled by passing the wallet ID (`applepay`) as the method ID.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetMethodRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMethodResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 404 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetMethodResponse> GetAsync(
+            GetMethodRequest request,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
-            if (request == null)
-            {
-                request = new GetMethodRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
-            
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/methods/{methodId}", request, null);
 
@@ -473,7 +626,7 @@ namespace Mollie
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -565,5 +718,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

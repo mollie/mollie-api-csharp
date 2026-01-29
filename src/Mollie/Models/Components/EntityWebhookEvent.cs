@@ -16,10 +16,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityWebhookEvent
     {
-
         /// <summary>
         /// Indicates the response contains a webhook event object. Will always contain the string `event` for this endpoint.
         /// </summary>
@@ -36,13 +35,13 @@ namespace Mollie.Models.Components
         public EntityWebhookEventWebhookEventTypes WebhookEventTypes { get; set; } = default!;
 
         /// <summary>
-        /// The entity token that triggered the event
+        /// The entity token that triggered the event.
         /// </summary>
         [JsonProperty("entityId")]
         public string EntityId { get; set; } = default!;
 
         /// <summary>
-        /// The event&apos;s date time of creation.
+        /// The event's date time of creation.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

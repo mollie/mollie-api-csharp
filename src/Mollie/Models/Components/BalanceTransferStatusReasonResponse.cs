@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// A machine-readable code that indicates the reason for the transfer&apos;s status.
+    /// A machine-readable code that indicates the reason for the transfer's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class BalanceTransferStatusReasonResponse : IEquatable<BalanceTransferStatusReasonResponse>
@@ -88,5 +88,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

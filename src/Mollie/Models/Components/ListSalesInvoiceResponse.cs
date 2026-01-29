@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListSalesInvoiceResponse
     {
-
         /// <summary>
         /// Indicates the response contains a sales invoice object. Will always contain the string `sales-invoice` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -50,8 +46,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The status for the invoice to end up in.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
         /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
@@ -63,8 +57,7 @@ namespace Mollie.Models.Components
         /// Dependent parameters:<br/>
         ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
         ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
-        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
-        /// </remarks>
+        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
         /// </summary>
         [JsonProperty("status")]
         public SalesInvoiceStatusResponse? Status { get; set; }
@@ -77,10 +70,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
-        /// 
-        /// <remarks>
         /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
-        /// </remarks>
         /// </summary>
         [JsonProperty("vatMode")]
         public SalesInvoiceVatModeResponse? VatMode { get; set; }
@@ -93,10 +83,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide any data you like as a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata")]
         public ListSalesInvoiceResponseMetadata? Metadata { get; set; } = null;
@@ -115,31 +102,22 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The identifier referring to the <a href="get-customer">customer</a> you want to attempt an automated payment for. If<br/>
-        /// 
-        /// <remarks>
         /// provided, `mandateId` becomes required as well. Only allowed for invoices with status `paid`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-mandate">mandate</a> you want to use for the automated payment. If provided,<br/>
-        /// 
-        /// <remarks>
         /// `customerId` becomes required as well. Only allowed for invoices with status `paid`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; }
 
         /// <summary>
         /// An identifier tied to the recipient data. This should be a unique value based on data your system contains,<br/>
-        /// 
-        /// <remarks>
-        /// so that both you and us know who we&apos;re referring to. It is a value you provide to us so that recipient management<br/>
+        /// so that both you and us know who we're referring to. It is a value you provide to us so that recipient management<br/>
         /// is not required to send a first invoice to a recipient.
-        /// </remarks>
         /// </summary>
         [JsonProperty("recipientIdentifier")]
         public string? RecipientIdentifier { get; set; }
@@ -149,12 +127,9 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Provide the line items for the invoice. Each line contains details such as a description of the item<br/>
-        /// 
-        /// <remarks>
         /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the invoice.
-        /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
         public List<SalesInvoiceLineItemResponse>? Lines { get; set; } = null;
@@ -193,37 +168,28 @@ namespace Mollie.Models.Components
         public ListSalesInvoiceResponseDiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string? CreatedAt { get; set; }
 
         /// <summary>
-        /// If issued, the date when the sales invoice was issued, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
+        /// If issued, the date when the sales invoice was issued, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
         /// format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("issuedAt")]
         public string? IssuedAt { get; set; } = null;
 
         /// <summary>
-        /// If paid, the date when the sales invoice was paid, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
+        /// If paid, the date when the sales invoice was paid, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
         /// format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("paidAt")]
         public string? PaidAt { get; set; } = null;
 
         /// <summary>
-        /// If issued, the date when the sales invoice payment is due, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
+        /// If issued, the date when the sales invoice payment is due, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
         /// format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("dueAt")]
         public string? DueAt { get; set; } = null;

@@ -25,10 +25,9 @@ namespace Mollie
 
     public interface ICapabilities
     {
-
         /// <summary>
-        /// List capabilities
-        /// 
+        /// List capabilities.
+        /// </summary>
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
@@ -36,40 +35,80 @@ namespace Mollie
         /// <br/>
         /// Retrieve a list of capabilities for an organization.<br/>
         /// <br/>
-        /// This API provides detailed insights into the specific requirements and status of each client&apos;s onboarding journey.<br/>
+        /// This API provides detailed insights into the specific requirements and status of each client's onboarding journey.<br/>
         /// <br/>
         /// Capabilities are at the organization level, indicating if the organization can perform a given capability.<br/>
         /// <br/>
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
-        /// This means that if at least one of the clients&apos;s profiles can receive payments,<br/>
+        /// This means that if at least one of the clients's profiles can receive payments,<br/>
         /// the payments capability is enabled, communicating that the organization can indeed receive payments.
         /// </remarks>
-        /// </summary>
-        Task<ListCapabilitiesResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null);
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListCapabilitiesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListCapabilitiesResponse> ListAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Capabilities: ICapabilities
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Capabilities(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListCapabilitiesResponse> ListAsync(string? idempotencyKey = null, RetryConfig? retryConfig = null, CancellationToken? cancellationToken = null)
+        /// <summary>
+        /// List capabilities.
+        /// </summary>
+        /// <remarks>
+        /// &gt; 🚧 Beta feature<br/>
+        /// &gt;<br/>
+        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// <br/>
+        /// Retrieve a list of capabilities for an organization.<br/>
+        /// <br/>
+        /// This API provides detailed insights into the specific requirements and status of each client's onboarding journey.<br/>
+        /// <br/>
+        /// Capabilities are at the organization level, indicating if the organization can perform a given capability.<br/>
+        /// <br/>
+        /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
+        /// This means that if at least one of the clients's profiles can receive payments,<br/>
+        /// the payments capability is enabled, communicating that the organization can indeed receive payments.
+        /// </remarks>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListCapabilitiesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListCapabilitiesResponse> ListAsync(
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
         {
             var request = new ListCapabilitiesRequest()
             {
                 IdempotencyKey = idempotencyKey,
             };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/capabilities";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -190,5 +229,6 @@ namespace Mollie
 
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

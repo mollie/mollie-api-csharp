@@ -12,117 +12,94 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using System;
-    
+
     public class ListMethodsRequest
     {
-
         /// <summary>
         /// Set this parameter to `first` to only return the enabled methods that<br/>
-        /// 
-        /// <remarks>
         /// can be used for the first payment of a recurring sequence.<br/>
         /// <br/>
         /// Set it to `recurring` to only return enabled methods that can be used for recurring payments or subscriptions.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sequenceType")]
         public SequenceType? SequenceType { get; set; }
 
         /// <summary>
-        /// Response language
+        /// Passing a locale will sort the payment methods in the preferred order<br/>
+        /// for the country, and translate the payment method names in the corresponding language.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=locale")]
         public Locale? Locale { get; set; } = null;
 
         /// <summary>
         /// If supplied, only payment methods that support the amount and currency<br/>
-        /// 
-        /// <remarks>
         /// are returned.<br/>
         /// <br/>
         /// Example: `/v2/methods?amount[value]=100.00&amp;amount[currency]=USD`
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=deepObject,explode=true,name=amount")]
         public Amount? Amount { get; set; }
 
         /// <summary>
         /// **⚠️ We no longer recommend using the Orders API. Please refer to the <a href="payments-api">Payments API</a> instead.**<br/>
-        /// 
-        /// <remarks>
         /// <br/>
-        /// Indicate if you will use the result for the <a href="create-order">Create order</a><br/>
+        /// Indicate if you will use the result for the <a href="create-order">Create order</a>
         /// or the <a href="create-payment">Create payment</a> endpoint.<br/>
         /// <br/>
         /// When passing the value `orders`, the result will include payment methods<br/>
         /// that are only available for payments created via the Orders API.
-        /// </remarks>
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=resource")]
         public MethodResourceParameter? Resource { get; set; }
 
         /// <summary>
-        /// The country taken from your customer&apos;s billing address in ISO 3166-1 alpha-2 format. This parameter can be used<br/>
-        /// 
-        /// <remarks>
+        /// The country taken from your customer's billing address in ISO 3166-1 alpha-2 format. This parameter can be used<br/>
         /// to check whether your customer is eligible for certain payment methods, for example for Klarna.<br/>
         /// <br/>
         /// Example: `/v2/methods?resource=orders&amp;billingCountry=DE`
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=billingCountry")]
         public string? BillingCountry { get; set; }
 
         /// <summary>
         /// A comma-separated list of the wallets you support in your checkout. Wallets often require wallet specific code<br/>
-        /// 
-        /// <remarks>
         /// to check if they are available on the shoppers device, hence the need to indicate your support.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeWallets")]
         public MethodIncludeWalletsParameter? IncludeWallets { get; set; }
 
         /// <summary>
         /// A comma-separated list of the line categories you support in your checkout.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Example: `/v2/methods?orderLineCategories=eco,meal`
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=orderLineCategories")]
         public LineCategories? OrderLineCategories { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
-        /// 
-        /// <remarks>
         /// retrieve the resources for.<br/>
         /// <br/>
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
         /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the `include` query string parameter.
+        /// This endpoint allows you to include additional information via the<br/>
+        /// `include` query string parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
         public string? Include { get; set; } = null;
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// 
-        /// <remarks>
         /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

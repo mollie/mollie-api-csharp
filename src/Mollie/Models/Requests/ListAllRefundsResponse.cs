@@ -13,15 +13,14 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListAllRefundsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of refund objects
+        /// A list of refund objects.
         /// </summary>
         public ListAllRefundsResponseBody? Object { get; set; }
     }

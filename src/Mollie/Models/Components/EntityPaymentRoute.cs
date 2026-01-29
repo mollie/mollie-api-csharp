@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class EntityPaymentRoute
     {
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
@@ -30,12 +29,9 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Optionally, schedule this portion of the payment to be transferred to its destination on a later date. The<br/>
-        /// 
-        /// <remarks>
         /// date must be given in `YYYY-MM-DD` format.<br/>
         /// <br/>
         /// If no date is given, the funds become available to the connected merchant as soon as the payment succeeds.
-        /// </remarks>
         /// </summary>
         [JsonProperty("releaseDate")]
         public string? ReleaseDate { get; set; } = null;

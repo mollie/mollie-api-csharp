@@ -12,13 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The VAT mode to use for VAT calculation. `exclusive` mode means we will apply the relevant VAT on top of the<br/>
-    /// 
-    /// <remarks>
     /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
-    /// </remarks>
     /// </summary>
     public enum SalesInvoiceVatMode
     {
@@ -60,5 +57,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoiceVatMode");
         }
     }
-
 }

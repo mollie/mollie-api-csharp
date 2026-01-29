@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Allows you to preset the language to be used.
     /// </summary>
@@ -98,5 +98,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum Locale");
         }
     }
-
 }

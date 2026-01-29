@@ -12,10 +12,9 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class Client
     {
-
         /// <summary>
         /// Indicates the response contains a client object. Will always contain the string `client` for this resource type.
         /// </summary>
@@ -35,11 +34,8 @@ namespace Mollie.Models.Requests
         public ListClientsCommission? Commission { get; set; } = null;
 
         /// <summary>
-        /// The date and time the client organization was created, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a><br/>
-        /// 
-        /// <remarks>
+        /// The date and time the client organization was created, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
         /// format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("organizationCreatedAt")]
         public string? OrganizationCreatedAt { get; set; }

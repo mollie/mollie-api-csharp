@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The payment&apos;s status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
-    /// 
-    /// <remarks>
+    /// The payment's status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
     /// statuses occur at what point.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ListPaymentResponseStatus : IEquatable<ListPaymentResponseStatus>
@@ -88,5 +85,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// Indicates to what extent the payment is eligible for PayPal&apos;s Seller Protection. Only available for PayPal<br/>
-    /// 
-    /// <remarks>
+    /// Indicates to what extent the payment is eligible for PayPal's Seller Protection. Only available for PayPal<br/>
     /// payments, and if the information is made available by PayPal.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentDetailsSellerProtectionResponse : IEquatable<PaymentDetailsSellerProtectionResponse>
@@ -90,5 +87,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

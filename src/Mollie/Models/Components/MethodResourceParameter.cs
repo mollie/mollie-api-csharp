@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum MethodResourceParameter
     {
         [JsonProperty("payments")]
@@ -53,5 +53,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum MethodResourceParameter");
         }
     }
-
 }

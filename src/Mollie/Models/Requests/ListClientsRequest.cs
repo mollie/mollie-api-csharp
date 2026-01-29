@@ -10,26 +10,26 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class ListClientsRequest
     {
-
         /// <summary>
-        /// This endpoint allows embedding related API items by appending the following values via the `embed` query string<br/>
-        /// 
-        /// <remarks>
-        /// parameter.
-        /// </remarks>
+        /// This endpoint allows embedding related API items by appending the<br/>
+        /// following values via the `embed` query string parameter.<br/>
+        /// <br/>
+        /// * `organization`: Include the organization of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `organizations.read` scope.<br/>
+        /// * `onboarding`: Include the onboarding status of the client. Available for `signuplink` partners, or for `oauth`<br/>
+        ///   partners with the `onboarding.read` scope.<br/>
+        /// * `capabilities`: Include the <a href="list-capabilities">capabilities</a> of the client organization.<br/>
+        ///   Available for *oauth* partners with the `onboarding.read` scope.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public string? Embed { get; set; } = null;
 
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;

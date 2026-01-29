@@ -12,13 +12,10 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
-    /// 
-    /// <remarks>
+    /// The list of events to enable for this webhook. You may specify `'*'` to add all events, except those<br/>
     /// that require explicit selection.
-    /// </remarks>
     /// </summary>
     public enum WebhookEventTypes
     {
@@ -70,5 +67,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum WebhookEventTypes");
         }
     }
-
 }

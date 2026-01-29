@@ -11,20 +11,16 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Optional include. If a QR code was requested during payment creation for a QR-compatible payment method,<br/>
-    /// 
-    /// <remarks>
     /// the QR code details will be available in this object.<br/>
     /// <br/>
     /// The QR code can be scanned by the customer to complete the payment on their mobile device. For example,<br/>
     /// Bancontact QR payments can be completed by the customer using the Bancontact app.
-    /// </remarks>
     /// </summary>
     public class ListPaymentResponseQrCode
     {
-
         /// <summary>
         /// The height of the QR code image in pixels.
         /// </summary>
@@ -39,10 +35,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The URL to the QR code image. The image is a PNG file, and can be displayed directly in the browser or<br/>
-        /// 
-        /// <remarks>
         /// downloaded.
-        /// </remarks>
         /// </summary>
         [JsonProperty("src")]
         public string? Src { get; set; }

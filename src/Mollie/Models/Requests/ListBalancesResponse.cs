@@ -13,19 +13,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListBalancesResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// A list of balance objects. For a complete reference of the balance<br/>
-        /// 
-        /// <remarks>
         /// object, refer to the <a href="get-balance">Get balance endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public ListBalancesResponseBody? Object { get; set; }
     }

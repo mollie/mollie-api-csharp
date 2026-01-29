@@ -12,13 +12,12 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A list of capabilities.
     /// </summary>
     public class ListCapabilitiesResponseBody
     {
-
         /// <summary>
         /// The number of items in this result set.
         /// </summary>

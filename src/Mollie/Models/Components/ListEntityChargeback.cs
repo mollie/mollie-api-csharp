@@ -12,16 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListEntityChargeback
     {
-
         /// <summary>
         /// Indicates the response contains a chargeback object. Will always contain the string `chargeback` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -40,16 +36,13 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
-        /// 
-        /// <remarks>
         /// to the currency your account is settled in.<br/>
         /// <br/>
         /// The amount is a **negative** amount.<br/>
         /// <br/>
         /// Since the field contains an estimated amount during chargeback processing, it may change over time. To retrieve<br/>
-        /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a><br/>
+        /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a>
         /// instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("settlementAmount")]
         public ListEntityChargebackSettlementAmount? SettlementAmount { get; set; } = null;
@@ -62,36 +55,27 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The unique identifier of the payment this chargeback was created for. For example: `tr_5B8cwPMGnU6qLbRvo7qEZo`.<br/>
-        /// 
-        /// <remarks>
         /// The full payment object can be retrieved via the payment URL in the `_links` object.
-        /// </remarks>
         /// </summary>
         [JsonProperty("paymentId")]
         public string PaymentId { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the settlement this payment was settled with. For example, `stl_BkEjN2eBb`. This field<br/>
-        /// 
-        /// <remarks>
         /// is omitted if the refund is not settled (yet).
-        /// </remarks>
         /// </summary>
         [JsonProperty("settlementId")]
         public string? SettlementId { get; set; } = null;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// The date and time the chargeback was reversed if applicable, in<br/>
-        /// 
-        /// <remarks>
         /// <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
-        /// </remarks>
         /// </summary>
         [JsonProperty("reversedAt")]
         public string? ReversedAt { get; set; } = null;

@@ -12,14 +12,11 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Payment method of the mandate.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// SEPA Direct Debit and PayPal mandates can be created directly.
-    /// </remarks>
     /// </summary>
     public enum MandateMethod
     {
@@ -63,5 +60,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum MandateMethod");
         }
     }
-
 }

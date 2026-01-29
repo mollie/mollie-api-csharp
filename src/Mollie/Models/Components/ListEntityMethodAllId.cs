@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The unique identifier of the payment method. When used during <a href="create-payment">payment creation</a>, the payment<br/>
-    /// 
-    /// <remarks>
     /// method selection screen will be skipped.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ListEntityMethodAllId : IEquatable<ListEntityMethodAllId>
@@ -140,5 +137,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

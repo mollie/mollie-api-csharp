@@ -16,13 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The destination of this portion of the payment.
     /// </summary>
     public class EntityPaymentRouteResponseDestination
     {
-
         /// <summary>
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>

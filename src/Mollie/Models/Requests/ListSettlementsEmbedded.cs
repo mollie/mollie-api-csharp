@@ -13,16 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListSettlementsEmbedded
     {
-
         /// <summary>
         /// An array of settlement objects. For a complete reference<br/>
-        /// 
-        /// <remarks>
         /// of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("settlements")]
         public List<ListEntitySettlement> Settlements { get; set; } = default!;

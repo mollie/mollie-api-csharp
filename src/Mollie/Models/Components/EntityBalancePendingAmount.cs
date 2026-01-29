@@ -11,17 +11,13 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
-    /// 
-    /// <remarks>
     /// few days to clear.
-    /// </remarks>
     /// </summary>
     public class EntityBalancePendingAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

@@ -15,14 +15,11 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// Payment method of the mandate.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// SEPA Direct Debit and PayPal mandates can be created directly.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class MandateMethodResponse : IEquatable<MandateMethodResponse>
@@ -81,5 +78,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

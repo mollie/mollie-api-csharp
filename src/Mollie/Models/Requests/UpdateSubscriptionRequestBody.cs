@@ -12,10 +12,9 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateSubscriptionRequestBody
     {
-
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
@@ -23,26 +22,20 @@ namespace Mollie.Models.Requests
         public Amount? Amount { get; set; }
 
         /// <summary>
-        /// The subscription&apos;s description will be used as the description of the resulting individual payments and so showing<br/>
-        /// 
-        /// <remarks>
+        /// The subscription's description will be used as the description of the resulting individual payments and so showing<br/>
         /// up on the bank statement of the consumer.<br/>
         /// <br/>
         /// **Please note:** the description needs to be unique for the Customer in case it has multiple active subscriptions.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; }
 
         /// <summary>
         /// Interval to wait between payments, for example `1 month` or `14 days`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// The maximum interval is one year (`12 months`, `52 weeks`, or `365 days`).<br/>
         /// <br/>
         /// Possible values: `... days`, `... weeks`, `... months`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("interval")]
         public string? Interval { get; set; }
@@ -55,34 +48,25 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Total number of payments for the subscription. Once this number of payments is reached, the subscription is<br/>
-        /// 
-        /// <remarks>
         /// considered completed.<br/>
         /// <br/>
         /// Test mode subscriptions will get canceled automatically after 10 payments.
-        /// </remarks>
         /// </summary>
         [JsonProperty("times")]
         public long? Times { get; set; }
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// We will call this URL for any payment status changes of payments resulting from this subscription.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
-        /// This webhook will receive **all** events for the subscription&apos;s payments. This may include payment<br/>
-        /// failures as well. Be sure to verify the payment&apos;s subscription ID and its status.
-        /// </remarks>
+        /// This webhook will receive **all** events for the subscription's payments. This may include payment<br/>
+        /// failures as well. Be sure to verify the payment's subscription ID and its status.
         /// </summary>
         [JsonProperty("webhookUrl")]
         public string? WebhookUrl { get; set; }
@@ -92,12 +76,9 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
-        /// 
-        /// <remarks>
         /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;

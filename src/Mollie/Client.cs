@@ -20,73 +20,176 @@ namespace Mollie
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
-
     public interface IClient
     {
         public IBalances Balances { get; }
+
         public ISettlements Settlements { get; }
+
         public IInvoices Invoices { get; }
+
         public IPermissions Permissions { get; }
+
         public IOrganizations Organizations { get; }
+
         public IProfiles Profiles { get; }
+
         public IOnboarding Onboarding { get; }
+
         public ICapabilities Capabilities { get; }
+
         public IClients Clients { get; }
+
         public IClientLinks ClientLinks { get; }
+
         public IWebhooks Webhooks { get; }
+
         public IWebhookEvents WebhookEvents { get; }
+
         public IBalanceTransfers BalanceTransfers { get; }
+
         public IPayments Payments { get; }
+
         public IMethods Methods { get; }
+
         public IRefunds Refunds { get; }
+
         public IChargebacks Chargebacks { get; }
+
         public ICaptures Captures { get; }
+
         public IWallets Wallets { get; }
+
         public IPaymentLinks PaymentLinks { get; }
+
         public ITerminals Terminals { get; }
+
         public IDelayedRouting DelayedRouting { get; }
+
         public ICustomers Customers { get; }
+
         public IMandates Mandates { get; }
+
         public ISubscriptions Subscriptions { get; }
+
         public ISalesInvoices SalesInvoices { get; }
     }
 
-
     public class Client: IClient
     {
+        /// <summary>
+        /// The main SDK Configuration.
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
+        /// <summary>
+        /// The Balances sub-SDK.
+        /// </summary>
         public IBalances Balances { get; private set; }
+        /// <summary>
+        /// The Settlements sub-SDK.
+        /// </summary>
         public ISettlements Settlements { get; private set; }
+        /// <summary>
+        /// The Invoices sub-SDK.
+        /// </summary>
         public IInvoices Invoices { get; private set; }
+        /// <summary>
+        /// The Permissions sub-SDK.
+        /// </summary>
         public IPermissions Permissions { get; private set; }
+        /// <summary>
+        /// The Organizations sub-SDK.
+        /// </summary>
         public IOrganizations Organizations { get; private set; }
+        /// <summary>
+        /// The Profiles sub-SDK.
+        /// </summary>
         public IProfiles Profiles { get; private set; }
+        /// <summary>
+        /// The Onboarding sub-SDK.
+        /// </summary>
         public IOnboarding Onboarding { get; private set; }
+        /// <summary>
+        /// The Capabilities sub-SDK.
+        /// </summary>
         public ICapabilities Capabilities { get; private set; }
+        /// <summary>
+        /// The Clients sub-SDK.
+        /// </summary>
         public IClients Clients { get; private set; }
+        /// <summary>
+        /// The ClientLinks sub-SDK.
+        /// </summary>
         public IClientLinks ClientLinks { get; private set; }
+        /// <summary>
+        /// The Webhooks sub-SDK.
+        /// </summary>
         public IWebhooks Webhooks { get; private set; }
+        /// <summary>
+        /// The WebhookEvents sub-SDK.
+        /// </summary>
         public IWebhookEvents WebhookEvents { get; private set; }
+        /// <summary>
+        /// The BalanceTransfers sub-SDK.
+        /// </summary>
         public IBalanceTransfers BalanceTransfers { get; private set; }
+        /// <summary>
+        /// The Payments sub-SDK.
+        /// </summary>
         public IPayments Payments { get; private set; }
+        /// <summary>
+        /// The Methods sub-SDK.
+        /// </summary>
         public IMethods Methods { get; private set; }
+        /// <summary>
+        /// The Refunds sub-SDK.
+        /// </summary>
         public IRefunds Refunds { get; private set; }
+        /// <summary>
+        /// The Chargebacks sub-SDK.
+        /// </summary>
         public IChargebacks Chargebacks { get; private set; }
+        /// <summary>
+        /// The Captures sub-SDK.
+        /// </summary>
         public ICaptures Captures { get; private set; }
+        /// <summary>
+        /// The Wallets sub-SDK.
+        /// </summary>
         public IWallets Wallets { get; private set; }
+        /// <summary>
+        /// The PaymentLinks sub-SDK.
+        /// </summary>
         public IPaymentLinks PaymentLinks { get; private set; }
+        /// <summary>
+        /// The Terminals sub-SDK.
+        /// </summary>
         public ITerminals Terminals { get; private set; }
+        /// <summary>
+        /// The DelayedRouting sub-SDK.
+        /// </summary>
         public IDelayedRouting DelayedRouting { get; private set; }
+        /// <summary>
+        /// The Customers sub-SDK.
+        /// </summary>
         public ICustomers Customers { get; private set; }
+        /// <summary>
+        /// The Mandates sub-SDK.
+        /// </summary>
         public IMandates Mandates { get; private set; }
+        /// <summary>
+        /// The Subscriptions sub-SDK.
+        /// </summary>
         public ISubscriptions Subscriptions { get; private set; }
+        /// <summary>
+        /// The SalesInvoices sub-SDK.
+        /// </summary>
         public ISalesInvoices SalesInvoices { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
+        /// </summary>
+        /// <param name="config">The SDK configuration object.</param>
         public Client(SDKConfig config)
         {
             SDKConfiguration = config;
@@ -150,22 +253,46 @@ namespace Mollie
         /// </summary>
         /// <param name="security">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
         /// <param name="securitySource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
-        /// <param name="profileId">The identifier referring to the <a href="get-profile">profile</a> you wish to<br/></param>
-        /// <param name="testmode">Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/></param>
+        /// <param name="profileId">
+        /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
+        /// retrieve the resources for.<br/>
+        /// <br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
+        /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
+        /// </param>
+        /// <param name="testmode">
+        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
+        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// setting the `testmode` query parameter to `true`.<br/>
+        /// <br/>
+        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// </param>
         /// <param name="customUserAgent">Custom user agent string to be appended to the default Mollie SDK user agent.</param>
         /// <param name="serverIndex">The index of the server to use from the predefined server list. Must be between 0 and the length of the server list. Defaults to 0 if not specified.</param>
         /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
         /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
         /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
         /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
-        /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
-        public Client(Mollie.Models.Components.Security? security = null, Func<Mollie.Models.Components.Security>? securitySource = null, string? profileId = null, bool? testmode = null, string? customUserAgent = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
+        /// <exception cref="ArgumentOutOfRangeException">Invalid value provided for <paramref name="serverIndex"/>: must be between 0 (inclusive) and 1 (exclusive).</exception>
+        /// <exception cref="ArgumentException">None of <paramref name="security"/> and <paramref name="securitySource"/> were provided.</exception>
+        public Client(
+            Mollie.Models.Components.Security? security = null,
+            Func<Mollie.Models.Components.Security>? securitySource = null,
+            string? profileId = null,
+            bool? testmode = null,
+            string? customUserAgent = null,
+            int? serverIndex = null,
+            string? serverUrl = null,
+            Dictionary<string, string>? urlParams = null,
+            ISpeakeasyHttpClient? client = null,
+            RetryConfig? retryConfig = null
+        )
         {
             if (serverIndex != null)
             {
                 if (serverIndex.Value < 0 || serverIndex.Value >= SDKConfig.ServerList.Length)
                 {
-                    throw new Exception($"Invalid server index {serverIndex.Value}");
+                    throw new ArgumentOutOfRangeException($"Invalid server index {serverIndex}: must be between 0 (inclusive) and {SDKConfig.ServerList.Length} (exclusive)." );
                 }
             }
 
@@ -188,7 +315,7 @@ namespace Mollie
             }
             else
             {
-                throw new Exception("security and securitySource cannot both be null");
+                throw new ArgumentException("security and securitySource cannot both be null");
             }
 
             SDKConfiguration = new SDKConfig(client)
@@ -262,22 +389,31 @@ namespace Mollie
             SDKConfiguration = SDKConfiguration.Hooks.SDKInit(SDKConfiguration);
         }
 
+        /// <summary>
+        /// Builder class for constructing an instance of the SDK.
+        /// </summary>
         public class SDKBuilder
         {
             private SDKConfig _sdkConfig = new SDKConfig(client: new SpeakeasyHttpClient());
 
             public SDKBuilder() { }
 
+            /// <summary>
+            /// Overrides the default server by index.
+            /// </summary>
             public SDKBuilder WithServerIndex(int serverIndex)
             {
                 if (serverIndex < 0 || serverIndex >= SDKConfig.ServerList.Length)
                 {
-                    throw new Exception($"Invalid server index {serverIndex}");
+                    throw new ArgumentOutOfRangeException($"Invalid server index {serverIndex}: must be between 0 (inclusive) and {SDKConfig.ServerList.Length} (exclusive)." );
                 }
                 _sdkConfig.ServerIndex = serverIndex;
                 return this;
             }
 
+            /// <summary>
+            /// Overrides the default server URL for the SDK.
+            /// </summary>
             public SDKBuilder WithServerUrl(string serverUrl, Dictionary<string, string>? serverVariables = null)
             {
                 if (serverVariables != null)
@@ -287,53 +423,74 @@ namespace Mollie
                 _sdkConfig.ServerUrl = serverUrl;
                 return this;
             }
-
+            /// <summary>
+            /// Sets the ProfileId global parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithProfileId(string profileId)
             {
                 _sdkConfig.ProfileId = profileId;
                 return this;
             }
-
+            /// <summary>
+            /// Sets the Testmode global parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithTestmode(bool testmode)
             {
                 _sdkConfig.Testmode = testmode;
                 return this;
             }
-
+            /// <summary>
+            /// Sets the CustomUserAgent global parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithCustomUserAgent(string customUserAgent)
             {
                 _sdkConfig.CustomUserAgent = customUserAgent;
                 return this;
             }
 
+            /// <summary>
+            /// Sets the securitySource security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithSecuritySource(Func<Mollie.Models.Components.Security> securitySource)
             {
                 _sdkConfig.SecuritySource = securitySource;
                 return this;
             }
 
+            /// <summary>
+            /// Sets the security security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithSecurity(Mollie.Models.Components.Security security)
             {
                 _sdkConfig.SecuritySource = () => security;
                 return this;
             }
 
+            /// <summary>
+            /// Sets a custom HTTP client to be used by the SDK.
+            /// </summary>
             public SDKBuilder WithClient(ISpeakeasyHttpClient client)
             {
                 _sdkConfig.Client = client;
                 return this;
             }
 
+            /// <summary>
+            /// Sets the retry configuration for the SDK.
+            /// </summary>
             public SDKBuilder WithRetryConfig(RetryConfig retryConfig)
             {
                 _sdkConfig.RetryConfig = retryConfig;
                 return this;
             }
 
+            /// <summary>
+            /// Builds and returns the SDK instance.
+            /// </summary>
             public Client Build()
             {
               if (_sdkConfig.SecuritySource == null) {
-                  throw new Exception("securitySource cannot be null. One of `Security` or `securitySource` needs to be defined.");
+                  throw new ArgumentException("securitySource cannot be null. One of `Security` or `securitySource` needs to be defined.");
               }
               return new Client(_sdkConfig);
             }

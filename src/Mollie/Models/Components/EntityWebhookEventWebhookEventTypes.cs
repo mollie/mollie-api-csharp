@@ -15,13 +15,10 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The list of events to enable for this webhook. You may specify `&apos;*&apos;` to add all events, except those<br/>
-    /// 
-    /// <remarks>
+    /// The list of events to enable for this webhook. You may specify `'*'` to add all events, except those<br/>
     /// that require explicit selection.
-    /// </remarks>
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityWebhookEventWebhookEventTypes : IEquatable<EntityWebhookEventWebhookEventTypes>
@@ -88,5 +85,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

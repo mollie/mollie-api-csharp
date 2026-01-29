@@ -12,15 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Mollie applies Dutch VAT for merchants based in The Netherlands, British VAT for merchants based in<br/>
-    /// 
-    /// <remarks>
     /// The United Kingdom, and shifted VAT for merchants in the European Union.<br/>
     /// <br/>
     /// The field can be omitted for merchants residing in other countries.
-    /// </remarks>
     /// </summary>
     public enum OnboardingVatRegulation
     {
@@ -64,5 +61,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum OnboardingVatRegulation");
         }
     }
-
 }

@@ -13,16 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListClientsEmbedded
     {
-
         /// <summary>
         /// An array of client objects. For a complete reference of the client object, refer to the<br/>
-        /// 
-        /// <remarks>
         /// <a href="get-client">Get client endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("clients")]
         public List<Models.Requests.Client>? Clients { get; set; }

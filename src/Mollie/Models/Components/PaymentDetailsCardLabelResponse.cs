@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The card&apos;s label, if known.
+    /// The card's label, if known.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentDetailsCardLabelResponse : IEquatable<PaymentDetailsCardLabelResponse>
@@ -96,5 +96,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

@@ -12,13 +12,10 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Indicates the type of partner. Will be `null` if the currently authenticated organization is not<br/>
-    /// 
-    /// <remarks>
     /// enrolled as a partner.
-    /// </remarks>
     /// </summary>
     public enum PartnerType
     {
@@ -62,5 +59,4 @@ namespace Mollie.Models.Requests
             throw new Exception($"Unknown value {value} for enum PartnerType");
         }
     }
-
 }

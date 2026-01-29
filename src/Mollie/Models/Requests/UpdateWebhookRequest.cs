@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Requests;
     using Mollie.Utils;
-    
+
     public class UpdateWebhookRequest
     {
-
         /// <summary>
         /// Provide the ID of the related webhook.
         /// </summary>

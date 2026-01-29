@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The minimum payment amount required to use this payment method.
     /// </summary>
     public class EntityMethodGetMinimumAmount
     {
-
         /// <summary>
         /// A three-character ISO 4217 currency code.
         /// </summary>

@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetNextSettlementResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// The next settlement object. For a complete reference of the settlement object, refer to the<br/>
-        /// 
-        /// <remarks>
         /// <a href="get-settlement">Get settlement</a> endpoint documentation.
-        /// </remarks>
         /// </summary>
         public EntitySettlement? EntitySettlement { get; set; }
     }

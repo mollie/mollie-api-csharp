@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityBalanceTransaction
     {
-
         /// <summary>
         /// Indicates the response contains a balance transaction object. Will always contain the string `balance-transaction`<br/>
-        /// 
-        /// <remarks>
         /// for this endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
@@ -59,10 +55,8 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Depending on the type of the balance transaction, we will try to give more context about the specific event that<br/>
-        /// 
-        /// <remarks>
         /// triggered it. For example, the context object for a payment transaction will look like<br/>
-        /// `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
+        /// `{"paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "paymentDescription": "Description"}`.<br/>
         /// <br/>
         /// Below is a complete list of the context values that each type of transaction will have.<br/>
         /// <br/>
@@ -105,14 +99,13 @@ namespace Mollie.Models.Components
         /// * Type `movement`: none<br/>
         /// * Type `post-payment-split-payment`: `paymentId`<br/>
         /// * Type `cash-collateral-issuance`: none<br/>
-        /// * Type `cash-collateral-release`: none
-        /// </remarks>
+        /// * Type `cash-collateral-release`: none.
         /// </summary>
         [JsonProperty("context")]
         public Context? Context { get; set; } = null;
 
         /// <summary>
-        /// The entity&apos;s date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
+        /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;

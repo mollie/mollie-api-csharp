@@ -13,16 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListSalesInvoicesEmbedded
     {
-
         /// <summary>
         /// An array of sales invoice objects. For a complete reference of the sales invoice object, refer to<br/>
-        /// 
-        /// <remarks>
         /// the <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("sales_invoices")]
         public List<ListSalesInvoiceResponse>? SalesInvoices { get; set; }

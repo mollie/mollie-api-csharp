@@ -16,16 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityOnboardingStatus
     {
-
         /// <summary>
         /// Indicates the response contains an onboarding status object. Will always contain the string `onboarding` for this<br/>
-        /// 
-        /// <remarks>
         /// resource type.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;

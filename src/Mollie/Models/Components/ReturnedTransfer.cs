@@ -11,10 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ReturnedTransfer
     {
-
         [JsonProperty("transferId")]
         public string? TransferId { get; set; }
 

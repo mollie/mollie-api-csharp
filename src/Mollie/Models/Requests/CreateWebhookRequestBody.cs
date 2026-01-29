@@ -13,10 +13,9 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateWebhookRequestBody
     {
-
         /// <summary>
         /// A name that identifies the webhook.
         /// </summary>
@@ -34,11 +33,8 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// You can enable test mode by setting `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; }

@@ -16,13 +16,12 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
     /// The destination of the route.
     /// </summary>
     public class RouteCreateResponseDestination
     {
-
         /// <summary>
         /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>

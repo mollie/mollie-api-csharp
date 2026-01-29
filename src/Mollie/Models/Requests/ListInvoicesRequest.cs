@@ -11,16 +11,12 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
-    
+
     public class ListInvoicesRequest
     {
-
         /// <summary>
         /// Filter for an invoice with a specific invoice reference, for example<br/>
-        /// 
-        /// <remarks>
         /// `2024.10000`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=reference")]
         public string? Reference { get; set; } = null;
@@ -39,10 +35,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;
@@ -55,10 +48,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Used for setting the direction of the result set. Defaults to descending order, meaning the results are ordered from<br/>
-        /// 
-        /// <remarks>
         /// newest to oldest.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
         public Sorting? Sort { get; set; }

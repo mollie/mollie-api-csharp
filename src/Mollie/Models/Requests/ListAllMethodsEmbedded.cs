@@ -13,17 +13,13 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListAllMethodsEmbedded
     {
-
         /// <summary>
         /// An array of payment method objects. For a complete<br/>
-        /// 
-        /// <remarks>
-        /// reference of the payment method object, refer to the <a href="get-method">Get payment method endpoint</a><br/>
+        /// reference of the payment method object, refer to the <a href="get-method">Get payment method endpoint</a>
         /// documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("methods")]
         public List<ListEntityMethodAll> Methods { get; set; } = default!;

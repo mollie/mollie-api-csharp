@@ -12,7 +12,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
     /// </summary>
@@ -56,5 +56,4 @@ namespace Mollie.Models.Components
             throw new Exception($"Unknown value {value} for enum SalesInvoiceVatScheme");
         }
     }
-
 }

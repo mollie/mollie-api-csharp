@@ -14,14 +14,11 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
     using NodaTime;
     using System.Collections.Generic;
-    
+
     public class PaymentRequest
     {
-
         /// <summary>
         /// The description of the payment. This will be shown to your customer on their card or bank statement when possible.<br/>
-        /// 
-        /// <remarks>
         /// We truncate the description automatically according to the limits of the used payment method. The description is<br/>
         /// also visible in any exports you generate.<br/>
         /// <br/>
@@ -30,7 +27,6 @@ namespace Mollie.Models.Components
         /// <br/>
         /// The maximum length of the description field differs per payment method, with the absolute maximum being 255<br/>
         /// characters. The API will not reject strings longer than the maximum length but it will truncate them to fit.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
@@ -43,73 +39,58 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the<br/>
         /// right page referencing the order when your customer returns.<br/>
         /// <br/>
         /// The parameter is normally required, but can be omitted for recurring payments (`sequenceType: recurring`) and for<br/>
         /// Apple Pay payments with an `applePayPaymentToken`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("redirectUrl", NullValueHandling = NullValueHandling.Include)]
         public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The URL your customer will be redirected to when the customer explicitly cancels the payment. If this URL is not<br/>
-        /// 
-        /// <remarks>
         /// provided, the customer will be redirected to the `redirectUrl` instead — see above.<br/>
         /// <br/>
         /// Mollie will always give you status updates via webhooks, including for the canceled status. This parameter is<br/>
         /// therefore entirely optional, but can be useful when implementing a dedicated customer-facing flow to handle<br/>
         /// payment cancellations.
-        /// </remarks>
         /// </summary>
         [JsonProperty("cancelUrl")]
         public string? CancelUrl { get; set; } = null;
 
         /// <summary>
         /// The webhook URL where we will send payment status updates to.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// The webhookUrl is optional, but without a webhook you will miss out on important status changes to your payment.<br/>
         /// <br/>
-        /// The webhookUrl must be reachable from Mollie&apos;s point of view, so you cannot use `localhost`. If you want to use<br/>
+        /// The webhookUrl must be reachable from Mollie's point of view, so you cannot use `localhost`. If you want to use<br/>
         /// webhook during development on `localhost`, you must use a tool like ngrok to have the webhooks delivered to your<br/>
         /// local machine.
-        /// </remarks>
         /// </summary>
         [JsonProperty("webhookUrl")]
         public string? WebhookUrl { get; set; } = null;
 
         /// <summary>
         /// Optionally provide the order lines for the payment. Each line contains details such as a description of the item<br/>
-        /// 
-        /// <remarks>
         /// ordered and its price.<br/>
         /// <br/>
         /// All lines must have the same currency as the payment.<br/>
         /// <br/>
         /// Required for payment methods `billie`, `in3`, `klarna`, `riverty` and `voucher`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("lines")]
         public List<PaymentRequestLine>? Lines { get; set; } = null;
 
         /// <summary>
-        /// The customer&apos;s billing address details. We advise to provide these details to improve fraud protection and<br/>
-        /// 
-        /// <remarks>
+        /// The customer's billing address details. We advise to provide these details to improve fraud protection and<br/>
         /// conversion.<br/>
         /// <br/>
         /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
         /// `country`.<br/>
         /// <br/>
-        /// Required for payment method `in3`, `klarna`, `billie` and `riverty`.
-        /// </remarks>
+        /// Required for payment method `alma`, `in3`, `klarna`, `billie` and `riverty`.
         /// </summary>
         [JsonProperty("billingAddress")]
         public PaymentRequestBillingAddress? BillingAddress { get; set; }
@@ -128,8 +109,6 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// **Only relevant for iDEAL, KBC/CBC, gift card, and voucher payments.**<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// **⚠️ With the introduction of iDEAL 2 in 2025, this field will be ignored for iDEAL payments. For more information<br/>
         /// on the migration, refer to our <a href="https://help.mollie.com/hc/articles/19100313768338-iDEAL-2-0">help center</a>.**<br/>
@@ -144,58 +123,46 @@ namespace Mollie.Models.Components
         /// `issuers` include.<br/>
         /// <br/>
         /// A valid issuer for iDEAL is for example `ideal_INGBNL2A` (for ING Bank).
-        /// </remarks>
         /// </summary>
         [JsonProperty("issuer")]
         public string? Issuer { get; set; } = null;
 
         /// <summary>
-        /// For digital goods in most jurisdictions, you must apply the VAT rate from your customer&apos;s country. Choose the VAT<br/>
-        /// 
-        /// <remarks>
-        /// rates you have used for the order to ensure your customer&apos;s country matches the VAT country.<br/>
+        /// For digital goods in most jurisdictions, you must apply the VAT rate from your customer's country. Choose the VAT<br/>
+        /// rates you have used for the order to ensure your customer's country matches the VAT country.<br/>
         /// <br/>
         /// Use this parameter to restrict the payment methods available to your customer to those from a single country.<br/>
         /// <br/>
         /// If available, the credit card method will still be offered, but only cards from the allowed country are accepted.<br/>
         /// <br/>
         /// The field expects a country code in ISO 3166-1 alpha-2 format, for example `NL`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("restrictPaymentMethodsToCountry")]
         public string? RestrictPaymentMethodsToCountry { get; set; } = null;
 
         /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
-        /// 
-        /// <remarks>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
-        /// </remarks>
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// Indicate if the funds should be captured immediately or if you want to <a href="https://docs.mollie.com/docs/place-a-hold-for-a-payment#/">place a hold</a> <br/>
-        /// 
-        /// <remarks>
         /// and capture at a later time.<br/>
         /// <br/>
         /// This field needs to be set to `manual` for method `riverty`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("captureMode")]
         public CaptureMode? CaptureMode { get; set; } = null;
 
         /// <summary>
         /// **Only relevant if you wish to manage authorization and capturing separately.**<br/>
-        /// 
-        /// <remarks>
         /// <br/>
-        /// Some payment methods allow placing a hold on the card or bank account. This hold or &apos;authorization&apos; can then at a<br/>
-        /// later point either be &apos;captured&apos; or canceled.<br/>
+        /// Some payment methods allow placing a hold on the card or bank account. This hold or 'authorization' can then at a<br/>
+        /// later point either be 'captured' or canceled.<br/>
         /// <br/>
-        /// By default, we charge the customer&apos;s card or bank account immediately when they complete the payment. If you set a<br/>
+        /// By default, we charge the customer's card or bank account immediately when they complete the payment. If you set a<br/>
         /// capture delay however, we will delay the automatic capturing of the payment for the specified amount of time. For<br/>
         /// example `8 hours` or `2 days`.<br/>
         /// <br/>
@@ -204,32 +171,26 @@ namespace Mollie.Models.Components
         /// The maximum delay is 7 days (168 hours).<br/>
         /// <br/>
         /// Possible values: `... hours` `... days`
-        /// </remarks>
         /// </summary>
         [JsonProperty("captureDelay")]
         public string? CaptureDelay { get; set; } = null;
 
         /// <summary>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
-        /// 
-        /// <remarks>
         /// merchants.<br/>
         /// <br/>
-        /// If you use OAuth to create payments on a connected merchant&apos;s account, you can charge a fee using this<br/>
-        /// `applicationFee` parameter. If the payment succeeds, the fee will be deducted from the merchant&apos;s balance and sent<br/>
+        /// If you use OAuth to create payments on a connected merchant's account, you can charge a fee using this<br/>
+        /// `applicationFee` parameter. If the payment succeeds, the fee will be deducted from the merchant's balance and sent<br/>
         /// to your own account balance.<br/>
         /// <br/>
         /// If instead you want to split a payment on your own account between yourself and a connected merchant, refer to the<br/>
         /// `routing` parameter.
-        /// </remarks>
         /// </summary>
         [JsonProperty("applicationFee")]
         public PaymentRequestApplicationFee? ApplicationFee { get; set; } = null;
 
         /// <summary>
         /// *This functionality is not enabled by default. Reach out to our partner management team if you wish to use it.*<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// With Mollie Connect you can charge fees on payments that your app is processing on behalf of other Mollie<br/>
         /// merchants.<br/>
@@ -243,9 +204,8 @@ namespace Mollie.Models.Components
         /// It is not necessary to indicate in the array which portion goes to yourself. After all portions of the total<br/>
         /// payment amount have been routed, the amount left will be routed to the current organization automatically.<br/>
         /// <br/>
-        /// If instead you use OAuth to create payments on a connected merchant&apos;s account, refer to the `applicationFee`<br/>
+        /// If instead you use OAuth to create payments on a connected merchant's account, refer to the `applicationFee`<br/>
         /// parameter.
-        /// </remarks>
         /// </summary>
         [JsonProperty("routing")]
         public List<EntityPaymentRoute>? Routing { get; set; } = null;
@@ -255,12 +215,9 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// **Only relevant for recurring payments.**<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// When creating recurring payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
-        /// the customer&apos;s accounts should be credited.
-        /// </remarks>
+        /// the customer's accounts should be credited.
         /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; } = null;
@@ -270,77 +227,59 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
         /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
         /// required.
-        /// </remarks>
         /// </summary>
         [JsonProperty("profileId")]
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// The date by which the payment should be completed in `YYYY-MM-DD` format
+        /// The date by which the payment should be completed in `YYYY-MM-DD` format.
         /// </summary>
         [JsonProperty("dueDate")]
         public string? DueDate { get; set; }
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
         /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("testmode")]
         public bool? Testmode { get; set; } = null;
 
         /// <summary>
         /// The Apple Pay Payment token object (encoded as JSON) that is part of the result of authorizing a payment request.<br/>
-        /// 
-        /// <remarks>
         /// The token contains the payment information needed to authorize the payment.<br/>
         /// <br/>
         /// The object should be passed encoded in a JSON string.
-        /// </remarks>
         /// </summary>
         [JsonProperty("applePayPaymentToken")]
         public string? ApplePayPaymentToken { get; set; }
 
         /// <summary>
         /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the organization<br/>
-        /// 
-        /// <remarks>
         /// that is completing the payment. It is recommended to include these parameters up front for a seamless flow.<br/>
         /// Otherwise, Billie will ask the customer to complete the missing fields during checkout.
-        /// </remarks>
         /// </summary>
         [JsonProperty("company")]
         public Company? Company { get; set; }
 
         /// <summary>
         /// When creating credit card payments using Mollie Components, you need to provide the card token you received from<br/>
-        /// 
-        /// <remarks>
-        /// the card component in this field. The token represents the customer&apos;s card information needed to complete the<br/>
+        /// the card component in this field. The token represents the customer's card information needed to complete the<br/>
         /// payment. Note: field only valid for oneoff and first payments. For recurring payments, the customerId alone is<br/>
         /// enough.
-        /// </remarks>
         /// </summary>
         [JsonProperty("cardToken")]
         public string? CardToken { get; set; }
 
         /// <summary>
-        /// The card token you received from the card component of Mollie Components. The token represents the customer&apos;s card<br/>
-        /// 
-        /// <remarks>
+        /// The card token you received from the card component of Mollie Components. The token represents the customer's card<br/>
         /// information needed to complete the payment.
-        /// </remarks>
         /// </summary>
         [JsonProperty("voucherNumber")]
         public string? VoucherNumber { get; set; }
@@ -352,52 +291,37 @@ namespace Mollie.Models.Components
         public string? VoucherPin { get; set; }
 
         /// <summary>
-        /// The customer&apos;s date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it during<br/>
-        /// 
-        /// <remarks>
+        /// The customer's date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it during<br/>
         /// the payment process.
-        /// </remarks>
         /// </summary>
         [JsonProperty("consumerDateOfBirth")]
         public LocalDate? ConsumerDateOfBirth { get; set; }
 
         /// <summary>
         /// For some industries, additional purchase information can be sent to Klarna to increase the authorization rate.<br/>
-        /// 
-        /// <remarks>
         /// You can submit your extra data in this field if you have agreed upon this with Klarna. This field should be an<br/>
         /// object containing any of the allowed keys and sub-objects described at the Klarna Developer Documentation.
-        /// </remarks>
         /// </summary>
         [JsonProperty("extraMerchantData")]
         public Dictionary<string, object>? ExtraMerchantData { get; set; }
 
         /// <summary>
         /// The unique ID you have used for the PayPal fraud library. You should include this if you use PayPal for an<br/>
-        /// 
-        /// <remarks>
         /// on-demand payment.
-        /// </remarks>
         /// </summary>
         [JsonProperty("sessionId")]
         public string? SessionId { get; set; }
 
         /// <summary>
         /// Indicate if you are about to deliver digital goods, such as for example a software license. Setting this parameter<br/>
-        /// 
-        /// <remarks>
-        /// can have consequences for your PayPal Seller Protection. Refer to PayPal&apos;s documentation for more information.
-        /// </remarks>
+        /// can have consequences for your PayPal Seller Protection. Refer to PayPal's documentation for more information.
         /// </summary>
         [JsonProperty("digitalGoods")]
         public bool? DigitalGoods { get; set; }
 
         /// <summary>
         /// Used by paysafecard for customer identification across payments. When you generate a customer reference yourself,<br/>
-        /// 
-        /// <remarks>
         /// make sure not to put personal identifiable information or IP addresses in the customer reference directly.
-        /// </remarks>
         /// </summary>
         [JsonProperty("customerReference")]
         public string? CustomerReference { get; set; }

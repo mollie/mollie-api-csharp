@@ -12,16 +12,12 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class Pricing
     {
-
         /// <summary>
         /// A description of what the pricing applies to. For example, a specific country (`The Netherlands`) or a<br/>
-        /// 
-        /// <remarks>
         /// category of cards (`American Express`). If a `locale` is provided, the description may be translated.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
@@ -40,10 +36,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// Only present for credit card pricing. It will correspond with the `feeRegion` of credit card payments as<br/>
-        /// 
-        /// <remarks>
         /// returned in the <a href="get-payment">Payments API</a>.
-        /// </remarks>
         /// </summary>
         [JsonProperty("feeRegion")]
         public string? FeeRegion { get; set; } = null;

@@ -13,10 +13,9 @@ namespace Mollie.Models.Requests
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListRefundsEmbedded
     {
-
         /// <summary>
         /// An array of refund objects.
         /// </summary>

@@ -16,37 +16,27 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class ListEntityMethodAll
     {
-
         /// <summary>
         /// Indicates the response contains a payment method object. Will always contain the string `method` for this<br/>
-        /// 
-        /// <remarks>
         /// endpoint.
-        /// </remarks>
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
         /// <summary>
         /// The unique identifier of the payment method. When used during <a href="create-payment">payment creation</a>, the payment<br/>
-        /// 
-        /// <remarks>
         /// method selection screen will be skipped.
-        /// </remarks>
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Include)]
         public ListEntityMethodAllId? Id { get; set; }
 
         /// <summary>
         /// The full name of the payment method.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// If a `locale` parameter is provided, the name is translated to the given locale if possible.
-        /// </remarks>
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
@@ -59,10 +49,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The maximum payment amount allowed when using this payment method. If there is no method-specific maximum, `null`<br/>
-        /// 
-        /// <remarks>
         /// is returned instead.
-        /// </remarks>
         /// </summary>
         [JsonProperty("maximumAmount", NullValueHandling = NullValueHandling.Include)]
         public ListEntityMethodAllMaximumAmount? MaximumAmount { get; set; }
@@ -74,17 +61,14 @@ namespace Mollie.Models.Components
         public ListEntityMethodAllImage Image { get; set; } = default!;
 
         /// <summary>
-        /// The payment method&apos;s activation status for this profile.
+        /// The payment method's activation status for this profile.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Include)]
         public MethodStatus? Status { get; set; }
 
         /// <summary>
-        /// **Optional include.** Array of objects for each &apos;issuer&apos; that is available for this payment method. Only relevant<br/>
-        /// 
-        /// <remarks>
+        /// **Optional include.** Array of objects for each 'issuer' that is available for this payment method. Only relevant<br/>
         /// for iDEAL, KBC/CBC, gift cards, and vouchers.
-        /// </remarks>
         /// </summary>
         [JsonProperty("issuers")]
         public List<ListEntityMethodAllIssuer>? Issuers { get; set; }
@@ -97,10 +81,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// **Optional include.** Array of objects describing the pricing configuration applicable for this payment method on<br/>
-        /// 
-        /// <remarks>
         /// your account.
-        /// </remarks>
         /// </summary>
         [JsonProperty("pricing")]
         public List<Pricing>? Pricing { get; set; }

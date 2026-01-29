@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Requests;
     using Mollie.Utils;
-    
+
     public class UpdatePaymentRequest
     {
-
         /// <summary>
         /// Provide the ID of the related payment.
         /// </summary>

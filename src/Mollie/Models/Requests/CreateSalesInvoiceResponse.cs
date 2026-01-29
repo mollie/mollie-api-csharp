@@ -12,19 +12,15 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSalesInvoiceResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
         /// The newly created invoice object. For a complete reference of the invoice object, refer to the<br/>
-        /// 
-        /// <remarks>
         /// <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
-        /// </remarks>
         /// </summary>
         public SalesInvoiceResponse? SalesInvoiceResponse { get; set; }
     }

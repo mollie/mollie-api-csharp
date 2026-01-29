@@ -11,10 +11,9 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Requests;
     using Mollie.Utils;
-    
+
     public class DeleteCustomerRequest
     {
-
         /// <summary>
         /// Provide the ID of the related customer.
         /// </summary>

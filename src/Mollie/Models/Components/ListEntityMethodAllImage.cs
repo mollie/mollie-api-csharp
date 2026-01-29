@@ -11,13 +11,12 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// URLs of images representing the payment method.
     /// </summary>
     public class ListEntityMethodAllImage
     {
-
         /// <summary>
         /// The URL pointing to an icon of 32 by 24 pixels.
         /// </summary>
@@ -32,10 +31,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The URL pointing to a vector version of the icon. Usage of this format is preferred, since the icon can<br/>
-        /// 
-        /// <remarks>
         /// scale to any desired size without compromising visual quality.
-        /// </remarks>
         /// </summary>
         [JsonProperty("svg")]
         public string Svg { get; set; } = default!;

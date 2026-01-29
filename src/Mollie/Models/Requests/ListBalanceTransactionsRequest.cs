@@ -10,10 +10,9 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
-    
+
     public class ListBalanceTransactionsRequest
     {
-
         /// <summary>
         /// Provide the ID of the related balance.
         /// </summary>
@@ -22,10 +21,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// 
-        /// <remarks>
         /// result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; } = null;
@@ -38,11 +34,8 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
         public bool? Testmode { get; set; }

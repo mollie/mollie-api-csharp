@@ -16,18 +16,17 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class EntityRefundResponseExternalReference
     {
-
         /// <summary>
-        /// Specifies the reference type
+        /// Specifies the reference type.
         /// </summary>
         [JsonProperty("type")]
         public RefundExternalReferenceTypeResponse? Type { get; set; }
 
         /// <summary>
-        /// Unique reference from the payment provider
+        /// Unique reference from the payment provider.
         /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }

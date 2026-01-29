@@ -10,7 +10,6 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -27,14 +26,14 @@ namespace Mollie.Models.Requests
 
         public static EventTypesListType ArrayOfWebhookEventTypes { get { return new EventTypesListType("arrayOfWebhookEventTypes"); } }
 
-        public static EventTypesListType EventTypesListEnum { get { return new EventTypesListType("EventTypesList_enum"); } }
+        public static EventTypesListType WebhookEventTypes { get { return new EventTypesListType("webhook-event-types"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(EventTypesListType v) { return v.Value; }
         public static EventTypesListType FromString(string v) {
             switch(v) {
                 case "arrayOfWebhookEventTypes": return ArrayOfWebhookEventTypes;
-                case "EventTypesList_enum": return EventTypesListEnum;
+                case "webhook-event-types": return WebhookEventTypes;
                 default: throw new ArgumentException("Invalid value for EventTypesListType");
             }
         }
@@ -53,7 +52,6 @@ namespace Mollie.Models.Requests
         }
     }
 
-
     [JsonConverter(typeof(EventTypesList.EventTypesListConverter))]
     public class EventTypesList
     {
@@ -66,7 +64,7 @@ namespace Mollie.Models.Requests
         public List<WebhookEventTypes>? ArrayOfWebhookEventTypes { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public EventTypesListEnum? EventTypesListEnum { get; set; }
+        public WebhookEventTypes? WebhookEventTypes { get; set; }
 
         public EventTypesListType Type { get; set; }
         public static EventTypesList CreateArrayOfWebhookEventTypes(List<WebhookEventTypes> arrayOfWebhookEventTypes)
@@ -77,12 +75,12 @@ namespace Mollie.Models.Requests
             res.ArrayOfWebhookEventTypes = arrayOfWebhookEventTypes;
             return res;
         }
-        public static EventTypesList CreateEventTypesListEnum(EventTypesListEnum eventTypesListEnum)
+        public static EventTypesList CreateWebhookEventTypes(WebhookEventTypes webhookEventTypes)
         {
-            EventTypesListType typ = EventTypesListType.EventTypesListEnum;
+            EventTypesListType typ = EventTypesListType.WebhookEventTypes;
 
             EventTypesList res = new EventTypesList(typ);
-            res.EventTypesListEnum = eventTypesListEnum;
+            res.WebhookEventTypes = webhookEventTypes;
             return res;
         }
 
@@ -124,14 +122,14 @@ namespace Mollie.Models.Requests
 
                 try
                 {
-                    return new EventTypesList(EventTypesListType.EventTypesListEnum)
+                    return new EventTypesList(EventTypesListType.WebhookEventTypes)
                     {
-                        EventTypesListEnum = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EventTypesListEnum>(json)
+                        WebhookEventTypes = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<WebhookEventTypes>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(EventTypesListEnum), new EventTypesList(EventTypesListType.EventTypesListEnum), "EventTypesListEnum"));
+                    fallbackCandidates.Add((typeof(WebhookEventTypes), new EventTypesList(EventTypesListType.WebhookEventTypes), "WebhookEventTypes"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -180,9 +178,9 @@ namespace Mollie.Models.Requests
                     return;
                 }
 
-                if (res.EventTypesListEnum != null)
+                if (res.WebhookEventTypes != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.EventTypesListEnum));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.WebhookEventTypes));
                     return;
                 }
             }

@@ -12,10 +12,9 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListEntityMethodIssuer
     {
-
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
 
@@ -30,13 +29,10 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// URLs of images representing the issuer.<br/>
-        /// 
-        /// <remarks>
         /// required:<br/>
         ///   - size1x<br/>
         ///   - size2x<br/>
-        ///   - svg
-        /// </remarks>
+        ///   - svg.
         /// </summary>
         [JsonProperty("image")]
         public ListEntityMethodIssuerImage Image { get; set; } = default!;

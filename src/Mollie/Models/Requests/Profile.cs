@@ -11,54 +11,44 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class Profile
     {
-
         /// <summary>
-        /// The profile&apos;s name, this will usually reflect the trade name or brand name of the profile&apos;s website<br/>
-        /// 
-        /// <remarks>
+        /// The profile's name, this will usually reflect the trade name or brand name of the profile's website<br/>
         /// or application.
-        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The URL to the profile&apos;s website or application. Only `https` or `http` URLs are allowed. No `@`<br/>
-        /// 
-        /// <remarks>
+        /// The URL to the profile's website or application. Only `https` or `http` URLs are allowed. No `@`<br/>
         /// signs are allowed.
-        /// </remarks>
         /// </summary>
         [JsonProperty("url")]
         public string? Url { get; set; }
 
         /// <summary>
-        /// The email address associated with the profile&apos;s trade name or brand.
+        /// The email address associated with the profile's trade name or brand.
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; }
 
         /// <summary>
-        /// The phone number associated with the profile&apos;s trade name or brand.
+        /// The phone number associated with the profile's trade name or brand.
         /// </summary>
         [JsonProperty("phone")]
         public string? Phone { get; set; }
 
         /// <summary>
-        /// The products or services offered by the profile&apos;s website or application.
+        /// The products or services offered by the profile's website or application.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; } = null;
 
         /// <summary>
-        /// The industry associated with the profile&apos;s trade name or brand. Please refer to the<br/>
-        /// 
-        /// <remarks>
+        /// The industry associated with the profile's trade name or brand. Please refer to the<br/>
         /// <a href="common-data-types">business category list</a> for all possible options.
-        /// </remarks>
         /// </summary>
         [JsonProperty("businessCategory")]
         public string? BusinessCategory { get; set; }

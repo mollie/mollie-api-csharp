@@ -15,9 +15,9 @@ namespace Mollie.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// The capture&apos;s status.
+    /// The capture's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ListCaptureResponseStatus : IEquatable<ListCaptureResponseStatus>
@@ -76,5 +76,4 @@ namespace Mollie.Models.Components
 
         public override int GetHashCode() => Value.GetHashCode();
     }
-
 }

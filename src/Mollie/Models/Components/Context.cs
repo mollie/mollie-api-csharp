@@ -12,13 +12,11 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Depending on the type of the balance transaction, we will try to give more context about the specific event that<br/>
-    /// 
-    /// <remarks>
     /// triggered it. For example, the context object for a payment transaction will look like<br/>
-    /// `{&quot;paymentId&quot;: &quot;tr_5B8cwPMGnU6qLbRvo7qEZo&quot;, &quot;paymentDescription&quot;: &quot;Description&quot;}`.<br/>
+    /// `{"paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "paymentDescription": "Description"}`.<br/>
     /// <br/>
     /// Below is a complete list of the context values that each type of transaction will have.<br/>
     /// <br/>
@@ -61,12 +59,10 @@ namespace Mollie.Models.Components
     /// * Type `movement`: none<br/>
     /// * Type `post-payment-split-payment`: `paymentId`<br/>
     /// * Type `cash-collateral-issuance`: none<br/>
-    /// * Type `cash-collateral-release`: none
-    /// </remarks>
+    /// * Type `cash-collateral-release`: none.
     /// </summary>
     public class Context
     {
-
         [JsonProperty("payment")]
         public Payment? Payment { get; set; } = null;
 

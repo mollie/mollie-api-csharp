@@ -11,10 +11,9 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
-    
+
     public class InvoiceCompensation
     {
-
         [JsonProperty("invoiceId")]
         public string? InvoiceId { get; set; }
     }
