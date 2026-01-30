@@ -252,6 +252,8 @@ namespace Mollie.Models.Components
         InvalidEanCode,
         [JsonProperty("card_error")]
         CardError,
+        [JsonProperty("terminal_configuration_issue")]
+        TerminalConfigurationIssue,
     }
 
     public static class CodeExtension

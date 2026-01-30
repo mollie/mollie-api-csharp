@@ -124,3 +124,4 @@ A machine-readable code that indicates the reason for the payment's status.
 | `LoginFailedInvalidPassword`                     | login_failed_invalid_password                    |
 | `InvalidEanCode`                                 | invalid_ean_code                                 |
 | `CardError`                                      | card_error                                       |
+| `TerminalConfigurationIssue`                     | terminal_configuration_issue                     |
