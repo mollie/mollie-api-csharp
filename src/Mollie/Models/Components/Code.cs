@@ -250,6 +250,8 @@ namespace Mollie.Models.Components
         LoginFailedInvalidPassword,
         [JsonProperty("invalid_ean_code")]
         InvalidEanCode,
+        [JsonProperty("card_error")]
+        CardError,
     }
 
     public static class CodeExtension

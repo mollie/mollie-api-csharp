@@ -28,12 +28,6 @@ namespace Mollie.Models.Requests
         public string? Year { get; set; } = null;
 
         /// <summary>
-        /// Filter for invoices of a specific month, for example `01`.
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=month")]
-        public string? Month { get; set; } = null;
-
-        /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
         /// result set.
         /// </summary>

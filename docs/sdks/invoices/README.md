@@ -29,7 +29,6 @@ var sdk = new Client(security: new Security() {
 ListInvoicesRequest req = new ListInvoicesRequest() {
     Reference = "2024.10000",
     Year = "2024",
-    Month = "01",
     From = "inv_xBEbP9rvAq",
     Limit = 50,
     Sort = Sorting.Desc,
