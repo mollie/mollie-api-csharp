@@ -90,7 +90,9 @@ var res = await sdk.ClientLinks.CreateAsync(
             Country = "NL",
         },
         RegistrationNumber = "12345678",
-        VatNumber = "123456789B01",
+        LegalEntity = LegalEntity.CreateNl(
+            Nl.NlBv
+        ),
     }
 );
 

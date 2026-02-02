@@ -45,5 +45,11 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("vatNumber")]
         public string? VatNumber { get; set; } = null;
+
+        /// <summary>
+        /// The legal entity type of the organization, based on its country of origin.
+        /// </summary>
+        [JsonProperty("legalEntity", NullValueHandling = NullValueHandling.Include)]
+        public LegalEntity? LegalEntity { get; set; }
     }
 }
