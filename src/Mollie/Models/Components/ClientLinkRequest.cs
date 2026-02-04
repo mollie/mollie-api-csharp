@@ -47,9 +47,23 @@ namespace Mollie.Models.Components
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
-        /// The legal entity type of the organization, based on its country of origin.
+        /// The legal entity type of the organization, based on its country of origin. Please refer to the<br/>
+        /// <a href="common-data-types#legal-entity">legal entity list</a> for all possible options.
         /// </summary>
-        [JsonProperty("legalEntity", NullValueHandling = NullValueHandling.Include)]
-        public LegalEntity? LegalEntity { get; set; }
+        [JsonProperty("legalEntity")]
+        public string? LegalEntity { get; set; }
+
+        /// <summary>
+        /// The registration office that the organization was registered at. Please refer to the<br/>
+        /// <a href="common-data-types#registration-office">registration office list</a> for all possible options.
+        /// </summary>
+        [JsonProperty("registrationOffice")]
+        public string? RegistrationOffice { get; set; }
+
+        /// <summary>
+        /// The incorporation date of the organization (format `YYYY-MM-DD`).
+        /// </summary>
+        [JsonProperty("incorporationDate")]
+        public string? IncorporationDate { get; set; } = null;
     }
 }

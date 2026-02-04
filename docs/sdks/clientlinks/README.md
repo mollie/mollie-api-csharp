@@ -90,9 +90,9 @@ var res = await sdk.ClientLinks.CreateAsync(
             Country = "NL",
         },
         RegistrationNumber = "12345678",
-        LegalEntity = LegalEntity.CreateNl(
-            Nl.NlBv
-        ),
+        LegalEntity = "nl-bv",
+        RegistrationOffice = "aachen",
+        IncorporationDate = "2024-12-24",
     }
 );
 

@@ -17,7 +17,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     /// <summary>
-    /// The payment's status. Refer to the <a href="https://docs.mollie.com/docs/status-change#/">documentation regarding statuses</a> for more info about which<br/>
+    /// The payment's status. Refer to the <a href="https://docs.mollie.com/docs/handling-payment-status">documentation regarding statuses</a> for more info about which<br/>
     /// statuses occur at what point.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
