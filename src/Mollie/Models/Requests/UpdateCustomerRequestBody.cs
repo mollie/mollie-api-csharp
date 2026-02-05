@@ -10,26 +10,39 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
-    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public class UpdateWebhookRequestBody
+    public class UpdateCustomerRequestBody
     {
         /// <summary>
-        /// A name that identifies the webhook.
+        /// The full name of the customer.
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The URL Mollie will send the events to. This URL must be publicly accessible.
+        /// The email address of the customer.
         /// </summary>
-        [JsonProperty("url")]
-        public string? Url { get; set; }
+        [JsonProperty("email")]
+        public string? Email { get; set; } = null;
 
-        [JsonProperty("eventTypes", NullValueHandling = NullValueHandling.Include)]
-        public EventTypes? EventTypes { get; set; }
+        /// <summary>
+        /// Allows you to preset the language to be used.
+        /// </summary>
+        [JsonProperty("locale")]
+        public LocaleResponse? Locale { get; set; } = null;
+
+        /// <summary>
+        /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
+        /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
+        /// </summary>
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
+        public Metadata? Metadata { get; set; } = null;
 
         /// <summary>
         /// Whether the entity was created in test mode or live mode. This field does not update the mode of the entity.<br/>

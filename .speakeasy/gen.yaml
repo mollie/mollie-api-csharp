@@ -29,7 +29,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.10.14
+  version: 0.10.15
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -59,6 +59,7 @@ csharp:
   outputModelSuffix: output
   packageName: Mollie
   packageTags: sdk api client
+  respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sourceDirectory: src
   useNodatime: true

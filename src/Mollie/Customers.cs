@@ -118,7 +118,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="customerId">Provide the ID of the related customer.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="entityCustomer">A <see cref="EntityCustomer"/> parameter.</param>
+        /// <param name="requestBody">A <see cref="UpdateCustomerRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateCustomerResponse"/> response envelope when completed.</returns>
@@ -131,7 +131,7 @@ namespace Mollie
         public  Task<UpdateCustomerResponse> UpdateAsync(
             string customerId,
             string? idempotencyKey = null,
-            EntityCustomer? entityCustomer = null,
+            UpdateCustomerRequestBody? requestBody = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -806,7 +806,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="customerId">Provide the ID of the related customer.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="entityCustomer">A <see cref="EntityCustomer"/> parameter.</param>
+        /// <param name="requestBody">A <see cref="UpdateCustomerRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateCustomerResponse"/> response envelope when completed.</returns>
@@ -819,7 +819,7 @@ namespace Mollie
         public async  Task<UpdateCustomerResponse> UpdateAsync(
             string customerId,
             string? idempotencyKey = null,
-            EntityCustomer? entityCustomer = null,
+            UpdateCustomerRequestBody? requestBody = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -830,7 +830,7 @@ namespace Mollie
             {
                 CustomerId = customerId,
                 IdempotencyKey = idempotencyKey,
-                EntityCustomer = entityCustomer,
+                RequestBody = requestBody,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -840,7 +840,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityCustomer", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

@@ -216,6 +216,7 @@ respectively).
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
@@ -225,7 +226,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.SalesInvoices.UpdateAsync(
     salesInvoiceId: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    updateValuesSalesInvoice: new UpdateValuesSalesInvoice() {
+    requestBody: new UpdateSalesInvoiceRequestBody() {
         Testmode = false,
         Status = SalesInvoiceStatus.Draft,
         Memo = "An updated memo!",
@@ -284,11 +285,11 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `SalesInvoiceId`                                                                 | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related sales invoice.                                     | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                    |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `UpdateValuesSalesInvoice`                                                       | [UpdateValuesSalesInvoice](../../Models/Components/UpdateValuesSalesInvoice.md)  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `SalesInvoiceId`                                                                        | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related sales invoice.                                            | invoice_4Y0eZitmBnQ6IDoMqZQKh                                                           |
+| `IdempotencyKey`                                                                        | *string*                                                                                | :heavy_minus_sign:                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.        | 123e4567-e89b-12d3-a456-426                                                             |
+| `RequestBody`                                                                           | [UpdateSalesInvoiceRequestBody](../../Models/Requests/UpdateSalesInvoiceRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
 
 ### Response
 

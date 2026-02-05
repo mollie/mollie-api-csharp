@@ -144,7 +144,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="updateValuesSalesInvoice">A <see cref="UpdateValuesSalesInvoice"/> parameter.</param>
+        /// <param name="requestBody">A <see cref="UpdateSalesInvoiceRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateSalesInvoiceResponse"/> response envelope when completed.</returns>
@@ -157,7 +157,7 @@ namespace Mollie
         public  Task<UpdateSalesInvoiceResponse> UpdateAsync(
             string salesInvoiceId,
             string? idempotencyKey = null,
-            UpdateValuesSalesInvoice? updateValuesSalesInvoice = null,
+            UpdateSalesInvoiceRequestBody? requestBody = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -804,7 +804,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="updateValuesSalesInvoice">A <see cref="UpdateValuesSalesInvoice"/> parameter.</param>
+        /// <param name="requestBody">A <see cref="UpdateSalesInvoiceRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateSalesInvoiceResponse"/> response envelope when completed.</returns>
@@ -817,7 +817,7 @@ namespace Mollie
         public async  Task<UpdateSalesInvoiceResponse> UpdateAsync(
             string salesInvoiceId,
             string? idempotencyKey = null,
-            UpdateValuesSalesInvoice? updateValuesSalesInvoice = null,
+            UpdateSalesInvoiceRequestBody? requestBody = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -828,7 +828,7 @@ namespace Mollie
             {
                 SalesInvoiceId = salesInvoiceId,
                 IdempotencyKey = idempotencyKey,
-                UpdateValuesSalesInvoice = updateValuesSalesInvoice,
+                RequestBody = requestBody,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -838,7 +838,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "UpdateValuesSalesInvoice", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

@@ -170,6 +170,7 @@ For an in-depth explanation of each parameter, refer to the [Create customer](cr
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
@@ -178,7 +179,7 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.Customers.UpdateAsync(
     customerId: "cst_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityCustomer: new EntityCustomer() {
+    requestBody: new UpdateCustomerRequestBody() {
         Name = "John Doe",
         Email = "example@email.com",
         Locale = LocaleResponse.EnUS,
@@ -195,7 +196,7 @@ var res = await sdk.Customers.UpdateAsync(
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `CustomerId`                                                                     | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related customer.                                          | cst_5B8cwPMGnU                                                                   |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityCustomer`                                                                 | [EntityCustomer](../../Models/Components/EntityCustomer.md)                      | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `RequestBody`                                                                    | [UpdateCustomerRequestBody](../../Models/Requests/UpdateCustomerRequestBody.md)  | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 

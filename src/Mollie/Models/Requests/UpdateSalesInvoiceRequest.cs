@@ -9,7 +9,7 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Components;
+    using Mollie.Models.Requests;
     using Mollie.Utils;
 
     public class UpdateSalesInvoiceRequest
@@ -27,6 +27,6 @@ namespace Mollie.Models.Requests
         public string? IdempotencyKey { get; set; }
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdateValuesSalesInvoice? UpdateValuesSalesInvoice { get; set; }
+        public UpdateSalesInvoiceRequestBody? RequestBody { get; set; }
     }
 }

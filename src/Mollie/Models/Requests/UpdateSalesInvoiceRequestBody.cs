@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Mollie.Models.Components
+namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
 
-    public class UpdateValuesSalesInvoice
+    public class UpdateSalesInvoiceRequestBody
     {
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
-        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Whether the entity was created in test mode or live mode. This field does not update the mode of the entity.<br/>
         /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
+        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.
         /// </summary>
         [JsonProperty("testmode")]
-        public bool? Testmode { get; set; } = null;
+        public bool? Testmode { get; set; }
 
         /// <summary>
         /// The status for the invoice to end up in.<br/>
