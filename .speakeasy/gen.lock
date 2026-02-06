@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: d38526cbc4aa7789003b4c2755c768a5
+  docChecksum: 4d2b6b6c01bf4dc1f1b31c6d5c557c7b
   docVersion: 1.0.0
-  speakeasyVersion: 1.704.0
-  generationVersion: 2.806.4
-  releaseVersion: 0.10.15
-  configChecksum: c5830f71fb0d102c371b01f0091679d9
+  speakeasyVersion: 1.706.1
+  generationVersion: 2.809.2
+  releaseVersion: 0.10.16
+  configChecksum: e66d3642e412cd7fb634ba74a29776ee
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 persistentEdits:
-  generation_id: 2c908ea4-9779-49c4-9367-4ead0ad21bf0
-  pristine_commit_hash: 168a2696670604232b581d66d64818c5f3e795a8
-  pristine_tree_hash: c5fd9de1d3d82f144b74fcc6d4d9926d9d07a1b1
+  generation_id: a63e25ee-6797-44ba-93ce-912a239da911
+  pristine_commit_hash: 2683da007af45b2dab4481f9e0247abef87e81a3
+  pristine_tree_hash: 80287551ba3d23540ea50e53d1132818c8b23dd7
 features:
   csharp:
     additionalDependencies: 0.1.0
     core: 3.15.11
     deprecations: 2.81.2
     flattening: 2.81.3
-    globalSecurity: 2.83.8
+    globalSecurity: 2.83.9
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.83.0
     globals: 2.82.2
@@ -535,14 +535,6 @@ trackedFiles:
     id: f422d31323fd
     last_write_checksum: sha1:a8fa8f8f756e6b6fb0b277fc7905c698512ec9f8
     pristine_git_object: c471d78de3bb992df90e139cc20a677d6e352e2b
-  docs/Models/Components/EntityRoute.md:
-    id: 5c5fbc4b786b
-    last_write_checksum: sha1:d40a021e8787dc895331823ba9d44d6991d5d717
-    pristine_git_object: 7faabbedd592828de108b77f39de8dec73bd8615
-  docs/Models/Components/EntityRouteDestination.md:
-    id: 1a3d7ab56bb7
-    last_write_checksum: sha1:103a8e45cb3b7a0530b8a0b63a801a8dbb26893d
-    pristine_git_object: fcd172900d9572650e31322ef708fb3d4f1e0aa4
   docs/Models/Components/EntitySettlement.md:
     id: 4cf65367be9a
     last_write_checksum: sha1:198943e14686f68741ee7c8be598c4595f108524
@@ -989,16 +981,16 @@ trackedFiles:
     pristine_git_object: d054a84f7e89ce90c99592ecf1590aaa4856862d
   docs/Models/Components/ListRouteGetResponse.md:
     id: bb7199ccbc53
-    last_write_checksum: sha1:7917087f60f8871a6a3b27b1c9f56ebc36ad1546
-    pristine_git_object: d09dd56013a3a805d864cb1b94e8316b3c823319
+    last_write_checksum: sha1:d3c6e8681d527258b447574a28742cad5c385510
+    pristine_git_object: d8d379dc8601ef27aea9d1087b12e4bf32bb5872
   docs/Models/Components/ListRouteGetResponseDestination.md:
     id: f0a09e4806c1
     last_write_checksum: sha1:ad157e514886f97df05861cbeaf856ab190a6b98
     pristine_git_object: a7a8701b09ea25234e79cba979e7acc93a1cb04f
   docs/Models/Components/ListRouteGetResponseLinks.md:
     id: e9d573f90c37
-    last_write_checksum: sha1:7f4fd66577aff3a065f182253aa13add4ed64c48
-    pristine_git_object: 7b1a1f55d7cf34809b8c47d753a19daaa090fd2d
+    last_write_checksum: sha1:d9c95f9a8c0eda043e3aded21c3c087dcf56b5fc
+    pristine_git_object: 5ae3f4deb578086c36f163d9bb365f6bab713449
   docs/Models/Components/ListSalesInvoiceResponse.md:
     id: f10319ac000d
     last_write_checksum: sha1:162a62fb7feab13e7177b8da9a0acb7da518fcaf
@@ -1443,18 +1435,26 @@ trackedFiles:
     id: 8c5fabe65c25
     last_write_checksum: sha1:551b091524c433f61da93d7d7bdc3f65d680872e
     pristine_git_object: ceafa7cf32c1eb15207087d9214c71fb80d366ad
+  docs/Models/Components/RouteCreateRequest.md:
+    id: 4bc104a4710e
+    last_write_checksum: sha1:1a99e4f8c05e5ca6aa07c347950d53fe8e0f2c24
+    pristine_git_object: 71441877fc2fb4918f304e50ad4674a086def8b9
+  docs/Models/Components/RouteCreateRequestDestination.md:
+    id: 24fc5719e4b7
+    last_write_checksum: sha1:1b0b4990985b3bde8d20446b7ef028b7344fc5b2
+    pristine_git_object: bd0755669f0bb37ce4a383bd26c86f78cade08c7
   docs/Models/Components/RouteCreateResponse.md:
     id: 8f8b2725766f
-    last_write_checksum: sha1:c2cfe763c9f6c11b388a3827f296a475027c6e9b
-    pristine_git_object: 9809925106a1248c07cea17b4bd0605b6eb541fb
+    last_write_checksum: sha1:a37408c90dc2c2f3b1a7fa7561b2a67dd8668c53
+    pristine_git_object: 2c608d0f6f038be63d07c4b471268fb9dcbb9e60
   docs/Models/Components/RouteCreateResponseDestination.md:
     id: ad2a19601229
     last_write_checksum: sha1:8cfd85662e302dd7dc44f4b27d7cab5c30d46657
     pristine_git_object: d9116c3824b4275ac9c0e1bc0656094cc3ff9512
   docs/Models/Components/RouteCreateResponseLinks.md:
     id: ab12055c7f0b
-    last_write_checksum: sha1:85077b67cf1f8c31365cbf21de83d052d7ef1b41
-    pristine_git_object: 61c9a05a3dafa16335e1023054b1a4b378ce8fca
+    last_write_checksum: sha1:a57ad57fdea3a1769f89a623089ee2ec7f24bb25
+    pristine_git_object: e863c43b227320f4a98a96390ee45f76b5ab267f
   docs/Models/Components/RouteDestinationType.md:
     id: 3e37ca376775
     last_write_checksum: sha1:8e77e87f300d06bf89b44e399c538cf616fe97f5
@@ -1463,6 +1463,18 @@ trackedFiles:
     id: 4657427fb978
     last_write_checksum: sha1:b0c1492b6a3d010f8bfbbb44e9eeea8bb5f37513
     pristine_git_object: 7ad93fffd21be3136c220c693519f26ca3f0f279
+  docs/Models/Components/RouteGetResponse.md:
+    id: 8dcbef538b68
+    last_write_checksum: sha1:f95527374440977b8076748ec23f5ddd6023cdb8
+    pristine_git_object: 49611a8cab24180556a54487ca23e37ce9aca543
+  docs/Models/Components/RouteGetResponseDestination.md:
+    id: 58aee737253c
+    last_write_checksum: sha1:fa588779a1190a7461a001469ed604bf38bc2635
+    pristine_git_object: c07be4d5dc0459c094d9b6d3f9030957bf1cbe0b
+  docs/Models/Components/RouteGetResponseLinks.md:
+    id: 092fb9aa7c08
+    last_write_checksum: sha1:5571bf6564ced77f30eff5f8312616380357881f
+    pristine_git_object: 13bffb1b8c88c0adf4c55bad88a72481c9be4116
   docs/Models/Components/SalesInvoiceDiscount.md:
     id: 35731326946f
     last_write_checksum: sha1:90f60077a0be8cd4a2f4b80bde5231fbead2b500
@@ -2741,12 +2753,20 @@ trackedFiles:
     pristine_git_object: 9e839557980eddaa4343c2eb5fd879a1b38e4ea4
   docs/Models/Requests/PaymentCreateRouteRequest.md:
     id: 9de85ab4fd55
-    last_write_checksum: sha1:b1e40f410b735f3d97fd6f05a7adc22fe8bb8421
-    pristine_git_object: c7fccbe9ee5d99e79efa9eecf2ef45c08620e9ab
+    last_write_checksum: sha1:c9c044a28cfc1f6c3841eba0fc381803a240c0b4
+    pristine_git_object: 125714d7472c594190fb33e6329d2d2f0dad059a
   docs/Models/Requests/PaymentCreateRouteResponse.md:
     id: f0374a29a53a
     last_write_checksum: sha1:08bd98a2967addba41ddf14323aea3918fe71b07
     pristine_git_object: 8a37434bb843c082355fb536a952fb08073ab398
+  docs/Models/Requests/PaymentGetRouteRequest.md:
+    id: 4d39591da5ee
+    last_write_checksum: sha1:9e0ea725efc352252fc2f283e9fe39be63fd656d
+    pristine_git_object: d3f7a7a3c8208691bf7caa58e85637e97096f58f
+  docs/Models/Requests/PaymentGetRouteResponse.md:
+    id: afb5ae52e457
+    last_write_checksum: sha1:65d32e88cdb075e744de1fa2f5912faa8a7cde5e
+    pristine_git_object: 896a3b9d670def7872abe93d7b7a8d96c510cfa2
   docs/Models/Requests/PaymentListRoutesEmbedded.md:
     id: 046c34f42879
     last_write_checksum: sha1:cd57f548890b6dbcde1b1f518738f72b15b3cc40
@@ -2953,8 +2973,8 @@ trackedFiles:
     pristine_git_object: 2416c877d23ec0d18772348cc16a41932bc6af00
   docs/sdks/delayedrouting/README.md:
     id: a720b5755911
-    last_write_checksum: sha1:d6d5c756fb688c78c6dbe01e0b9c2250a93f2ed0
-    pristine_git_object: 5c5236575983dcf9a58011a228422134f369aac0
+    last_write_checksum: sha1:f68a89940aca2f6d52c20ddcf3c63cb8ffe5acc3
+    pristine_git_object: 94ffccc96c913a1c40ca3204185c5accc325dd1f
   docs/sdks/invoices/README.md:
     id: a3f76a06eded
     last_write_checksum: sha1:7bc3a3fff24dd94568aad50956e87501c0e0fbc3
@@ -3065,8 +3085,8 @@ trackedFiles:
     pristine_git_object: 887a32220d4195ab2e6180e936e14c96e6510caa
   src/Mollie/DelayedRouting.cs:
     id: 5226324e7be2
-    last_write_checksum: sha1:ec5ff6d6b4969e14af6792feb3587f48aeb7a61d
-    pristine_git_object: 1a808d865dc158e4c4af0ea83cc54a92cf92ab5b
+    last_write_checksum: sha1:3160db2e2b04695fdaab0315b8797c5b290afdbe
+    pristine_git_object: 11353f19d52ffa63173b28f32e7c21a8fae3194c
   src/Mollie/Hooks/HookTypes.cs:
     id: 5c5b474aa47e
     last_write_checksum: sha1:dd4398d3269ec8f27a845c769930a058a4481b98
@@ -3571,14 +3591,6 @@ trackedFiles:
     id: d5b44715fa2d
     last_write_checksum: sha1:b10a283b720f200e3aa429cac1f728676fe13e55
     pristine_git_object: 3e2d5e20512a0611dade5c5ad6071cca463b96f6
-  src/Mollie/Models/Components/EntityRoute.cs:
-    id: cc65d14a4ece
-    last_write_checksum: sha1:2e1257344e00fbd7bd1f93265c106c6573d02e68
-    pristine_git_object: 5d7c372878fd5fc5c160e47b65a01f28efd51be6
-  src/Mollie/Models/Components/EntityRouteDestination.cs:
-    id: 08fe295d92cb
-    last_write_checksum: sha1:45e6e2d91257aaaf172f5c41846f58f122e9ffb6
-    pristine_git_object: a1654e2eb0442f1efcdc599d7fb4d52cf92af28d
   src/Mollie/Models/Components/EntitySettlement.cs:
     id: 72aee4e4f584
     last_write_checksum: sha1:0a20181ab2ffc8b6d89928c05d88e95b25c54cbc
@@ -4025,16 +4037,16 @@ trackedFiles:
     pristine_git_object: 5fc04e1df2df83f95375289d09b24c8140e2c7ef
   src/Mollie/Models/Components/ListRouteGetResponse.cs:
     id: 987ff2450809
-    last_write_checksum: sha1:a9f5ad6467a7c6da7e6d0b7a59ff1538e2bef5e1
-    pristine_git_object: 8e91ebaa0c9193251f99629124cb588650d4d717
+    last_write_checksum: sha1:80b609ed8597cb9f229f901f767bfc20693623bd
+    pristine_git_object: 46082de4052b6fd7cb79da49dc533bf9df87ea3e
   src/Mollie/Models/Components/ListRouteGetResponseDestination.cs:
     id: a50599d49d47
     last_write_checksum: sha1:1cd9b87f1c6443292d075417a6928d964571727d
     pristine_git_object: fd7d669e2ef60fd357048079667893d008f066af
   src/Mollie/Models/Components/ListRouteGetResponseLinks.cs:
     id: 68730dfac522
-    last_write_checksum: sha1:54e738c3ee171c525433328f70dca7b6d388e2dc
-    pristine_git_object: bb916f232451baa394bb635b688e25ef756d50b7
+    last_write_checksum: sha1:ea11d4333122a67aada4c0a40a203f5b374b94a7
+    pristine_git_object: 5695c0d3f10898f80a5832f442edefdff6da7ff4
   src/Mollie/Models/Components/ListSalesInvoiceResponse.cs:
     id: 7006e3a65777
     last_write_checksum: sha1:63cc1b26908a80c3747bdd4685d5789492bbb50a
@@ -4479,18 +4491,26 @@ trackedFiles:
     id: 32ec074a11ee
     last_write_checksum: sha1:28a43099d33ececd9c475dff7ba357ae6fd8e315
     pristine_git_object: 09e6b1e57e3cda6eab1102db5535fab6117f9775
+  src/Mollie/Models/Components/RouteCreateRequest.cs:
+    id: e1647717dbec
+    last_write_checksum: sha1:f3a1038f4d14bef6bce0897554546a85bab7a56f
+    pristine_git_object: 5d79b17511a504ec369b308873f32266ec37de4c
+  src/Mollie/Models/Components/RouteCreateRequestDestination.cs:
+    id: b06aade49e83
+    last_write_checksum: sha1:bf0660ec4a69c20b7dfd6a4285e823065c506edf
+    pristine_git_object: 8cd9723c8b88074c888e5704be9fbc097040df31
   src/Mollie/Models/Components/RouteCreateResponse.cs:
     id: ac18d94af8a6
-    last_write_checksum: sha1:5751cf74bf19bead37838212231e24d06adefd21
-    pristine_git_object: ac85d0250ac28c8b7235d2541d4a7b2d64af0728
+    last_write_checksum: sha1:e329b616f30a4fc14f0d0168c4c4e56efd7a2ed2
+    pristine_git_object: 26629233b602fc3f34e79555f057d9009cbf5d9a
   src/Mollie/Models/Components/RouteCreateResponseDestination.cs:
     id: 7528329c2169
     last_write_checksum: sha1:0952f9c8e76d9b5a2a6ee375547391652389d108
     pristine_git_object: 957e88794d0d41ebb8dbff22d95a028f2cacb92a
   src/Mollie/Models/Components/RouteCreateResponseLinks.cs:
     id: d8ada79f8668
-    last_write_checksum: sha1:2fbb21c31967cf7d0871a343a947fb409b318b7e
-    pristine_git_object: 504c93374702d65d6a69ca825f77b01a58ed06aa
+    last_write_checksum: sha1:e85e3df2ae2004e0c5c65b1d16b978fcb0c4138f
+    pristine_git_object: 5a0c2c0209ea75256cad26ea0863f44d3503a8f4
   src/Mollie/Models/Components/RouteDestinationType.cs:
     id: 9c2426cd518f
     last_write_checksum: sha1:ea522adc30ded00427d7cb697bad3a755ec9a526
@@ -4499,6 +4519,18 @@ trackedFiles:
     id: 899e65027d8e
     last_write_checksum: sha1:48e2947b15588890b34187617004d0be6b2ae3f7
     pristine_git_object: 8a5ee4f5f760e8ff2e441af1d6f4c4fb20496e9e
+  src/Mollie/Models/Components/RouteGetResponse.cs:
+    id: fbc9f9248aeb
+    last_write_checksum: sha1:f0fe54f7cd72ee442cddb4f5a21bbd1f58124a91
+    pristine_git_object: 2eb0b878241457274f5835f36b89ac05074e994c
+  src/Mollie/Models/Components/RouteGetResponseDestination.cs:
+    id: 072611d9c05c
+    last_write_checksum: sha1:25f54c2b5a61925b5d12aa1955dabf4363d317db
+    pristine_git_object: 848fd023a2e4cc71cc279829197ac29bc5d7bb17
+  src/Mollie/Models/Components/RouteGetResponseLinks.cs:
+    id: 352af7b1b736
+    last_write_checksum: sha1:b25240852d4879310a75847689f1af9044daceba
+    pristine_git_object: d14da3e040b180acaa2808b0e98e29e69593e16c
   src/Mollie/Models/Components/SalesInvoiceDiscount.cs:
     id: 99cd9dd369eb
     last_write_checksum: sha1:7679f32a4172a9953466ca335f0f4903310e7102
@@ -5789,12 +5821,20 @@ trackedFiles:
     pristine_git_object: 8fcd72b80fb0402d6552e69ddc8b69ba38ced64c
   src/Mollie/Models/Requests/PaymentCreateRouteRequest.cs:
     id: 1a653677ce20
-    last_write_checksum: sha1:c90ab26deb9530c6b4d3681769b9a5a8db275cfd
-    pristine_git_object: 8f305679b39ac9f876ee37ff1e91d08611f8d8f9
+    last_write_checksum: sha1:08b9031186f0cc1032ae9e74dbb666cb9c0e55e6
+    pristine_git_object: d19e436a2f419bd9e4a5155ec23faeb18c4c776d
   src/Mollie/Models/Requests/PaymentCreateRouteResponse.cs:
     id: 8f7468d4d064
     last_write_checksum: sha1:37f597da34b3397b61c4c5e001b1107a7fb93c9c
     pristine_git_object: a2f9031d697362ebb024530343a463ffc3a6bde1
+  src/Mollie/Models/Requests/PaymentGetRouteRequest.cs:
+    id: 0087a7236cbc
+    last_write_checksum: sha1:3303614d208ff0443ec4161a809f0b4b52e63398
+    pristine_git_object: d8d6ea1b8a9b98b7911b0da08690c8a2b00ca37a
+  src/Mollie/Models/Requests/PaymentGetRouteResponse.cs:
+    id: ff49604c85b2
+    last_write_checksum: sha1:451303e489e05ec64dbb515ebbf965d60e0c3939
+    pristine_git_object: 022a44dc460eb424cdb22feceb9b25230ac8f29e
   src/Mollie/Models/Requests/PaymentListRoutesEmbedded.cs:
     id: 2ebc4acf3620
     last_write_checksum: sha1:9c728b1291d30b8b1a0d67f2a2b91070d4b303fa
@@ -5969,8 +6009,8 @@ trackedFiles:
     pristine_git_object: cacd2fddd8f665e10c2390b8b023ff4e211e9b02
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:edbb390c21ecad7ff67c11909c4941bda1b5d85b
-    pristine_git_object: fd7b396da3ccd3aa2149541698a415a0f656c696
+    last_write_checksum: sha1:7c9fc772bd116526c23575df5fad8b3cb515e11b
+    pristine_git_object: 00cd9c5930b14042da91fb458c02775e0e46b931
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:3ede8e36ac9050a59313f993aa388c6db9a3d6c8
@@ -6001,8 +6041,8 @@ trackedFiles:
     pristine_git_object: d1ebe28156580a5deeaa2e1dbbbea3ab962a1163
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:4e9c95f5386ae3037bb7bb4daef13cb90a56f467
-    pristine_git_object: abcca84719a996c34e26e1eb04ffd42aa9d1bc4b
+    last_write_checksum: sha1:717397b5e686608a25953a9c0f6ce2e2c3cd9483
+    pristine_git_object: b6352146d9ebc0f3becd84ae0541169a2b2768d6
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:af30550a88117f29f34e77c8a037c17236b0bafc
@@ -6029,8 +6069,8 @@ trackedFiles:
     pristine_git_object: 709cb99ddf5fb66de22fab4c4305510b8d32dbf6
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:2f4096f619f6bfd45b0bc818d0fab7d8ad89bf87
-    pristine_git_object: 31d1b3bac6ba18f0fddb83160134dec24e1262f8
+    last_write_checksum: sha1:043d202c638eaf032cd0f4eaaae1c698b22993d5
+    pristine_git_object: d79a6eb02c7c158fcb371990a2e34c2190ff16ab
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:0ad9284b2b8a5834944e37e324c65279661a2eeb
@@ -7366,10 +7406,10 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "testmode": false}
+        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "destination": {"type": "organization", "organizationId": "org_1234567"}, "description": "Payment for Order #12345"}
       responses:
         "201":
-          application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "createdAt": "2024-05-22T15:11:19+02:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}
     speakeasy-default-payment-create-route:
       parameters:
         path:
@@ -7377,10 +7417,10 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "testmode": false}
+        application/json: {"amount": {"currency": "EUR", "value": "10.00"}, "destination": {"type": "organization", "organizationId": "org_1234567"}, "description": "Payment for Order #12345"}
       responses:
         "201":
-          application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   payment-list-routes:
@@ -7394,7 +7434,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 3, "_embedded": {"routes": [{"resource": "route", "id": "crt_kSq9CDTa6FzW7c6gpYq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "1.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}}, "createdAt": "2024-05-22T15:11:19+02:00"}, {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "2.00"}, "description": "Payment for Order #12346", "destination": {"type": "organization", "organizationId": "org_456"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}}, "createdAt": "2024-05-22T15:11:19+02:00"}, {"resource": "route", "id": "crt_tntKsr6tffuVdqnEvhq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "3.00"}, "description": "Payment for Order #12347", "destination": {"type": "organization", "organizationId": "org_789"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}}, "createdAt": "2024-05-22T15:11:19+02:00"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+          application/hal+json: {"count": 3, "_embedded": {"routes": [{"resource": "route", "id": "crt_kSq9CDTa6FzW7c6gpYq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "1.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_123"}, "createdAt": "2024-05-22T15:11:19+02:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}, {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "2.00"}, "description": "Payment for Order #12346", "destination": {"type": "organization", "organizationId": "org_456"}, "createdAt": "2024-05-22T15:11:19+02:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}, {"resource": "route", "id": "crt_tntKsr6tffuVdqnEvhq3J", "paymentId": "tr_sva3o24VKn", "amount": {"currency": "EUR", "value": "3.00"}, "description": "Payment for Order #12347", "destination": {"type": "organization", "organizationId": "org_789"}, "createdAt": "2024-05-22T15:11:19+02:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-payment-list-routes:
       parameters:
         path:
@@ -7405,7 +7445,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 5, "_embedded": {"routes": [{"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}}, "createdAt": "2024-03-20T09:13:37.0Z"}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"count": 5, "_embedded": {"routes": [{"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "createdAt": "2024-03-20T09:13:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   create-customer:
@@ -9448,8 +9488,31 @@ examples:
           application/hal+json: {"resource": "connect-balance-transfer", "id": "cbtr_j8NvRAM2WNZtsykpLEX8J", "amount": {"currency": "EUR", "value": "10.00"}, "source": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "destination": {"type": "organization", "id": "org_1234567", "description": "Invoice fee"}, "description": "Invoice fee", "status": "created", "statusReason": {"code": "insufficient_funds", "message": "Insufficient funds in the source balance."}, "category": "invoice_collection", "metadata": {"order_id": 12345, "customer_id": 9876}, "createdAt": "2024-03-20T09:13:37+00:00", "executedAt": "2024-03-20T09:28:37+00:00", "mode": "live"}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  payment-get-route:
+    get-route-200-1:
+      parameters:
+        path:
+          paymentId: "tr_5B8cwPMGnU"
+          routeId: "crt_dyARQ3JzCgtPDhU2Pbq3J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "route", "id": "crt_YQ2KwmkrGDyZhejzTbUJJ", "paymentId": "tr_VRQGmASmUXBtj3DQJbUJJ", "amount": {"currency": "EUR", "value": "5.00"}, "description": "A-312345", "destination": {"type": "organization", "organizationId": "org_19303380"}, "createdAt": "2025-12-17T17:25:34+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}
+    speakeasy-default-payment-get-route:
+      parameters:
+        path:
+          paymentId: "tr_5B8cwPMGnU"
+          routeId: "crt_dyARQ3JzCgtPDhU2Pbq3J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "route", "id": "crt_dyARQ3JzCgtPDhU2Pbq3J", "paymentId": "tr_5B8cwPMGnU", "amount": {"currency": "EUR", "value": "10.00"}, "description": "Payment for Order #12345", "destination": {"type": "organization", "organizationId": "org_1234567"}, "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Payments.Update()`: \n  *  `requestBody.Testmode` **Changed** (Breaking ⚠️)\n* `Client.PaymentLinks.Update()`: \n  *  `requestBody.Testmode` **Changed** (Breaking ⚠️)\n* `Client.Customers.Update()`:  `request` **Changed** (Breaking ⚠️)\n* `Client.Subscriptions.Update()`: \n  *  `requestBody.Testmode` **Changed** (Breaking ⚠️)\n* `Client.SalesInvoices.Update()`:  `request` **Changed** (Breaking ⚠️)\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.DelayedRouting.Create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n* `Client.DelayedRouting.Get()`: **Added**\n* `Client.DelayedRouting.List()`:  `response.Embedded.Routes[].Links.Payment` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

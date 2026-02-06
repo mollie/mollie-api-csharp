@@ -34,7 +34,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="paymentId">Provide the ID of the related payment.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="entityRoute">A <see cref="EntityRoute"/> parameter.</param>
+        /// <param name="routeCreateRequest">A <see cref="RouteCreateRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="PaymentCreateRouteResponse"/> response envelope when completed.</returns>
@@ -47,7 +47,7 @@ namespace Mollie
         public  Task<PaymentCreateRouteResponse> CreateAsync(
             string paymentId,
             string? idempotencyKey = null,
-            EntityRoute? entityRoute = null,
+            RouteCreateRequest? routeCreateRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -83,6 +83,32 @@ namespace Mollie
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
+
+        /// <summary>
+        /// Get a delayed route.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single route created for a specific payment.
+        /// </remarks>
+        /// <param name="paymentId">Provide the ID of the related payment.</param>
+        /// <param name="routeId">Provide the ID of the route.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="PaymentGetRouteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="paymentId"/> or <paramref name="routeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<PaymentGetRouteResponse> GetAsync(
+            string paymentId,
+            string routeId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class DelayedRouting: IDelayedRouting
@@ -107,7 +133,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="paymentId">Provide the ID of the related payment.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="entityRoute">A <see cref="EntityRoute"/> parameter.</param>
+        /// <param name="routeCreateRequest">A <see cref="RouteCreateRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="PaymentCreateRouteResponse"/> response envelope when completed.</returns>
@@ -120,7 +146,7 @@ namespace Mollie
         public async  Task<PaymentCreateRouteResponse> CreateAsync(
             string paymentId,
             string? idempotencyKey = null,
-            EntityRoute? entityRoute = null,
+            RouteCreateRequest? routeCreateRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -131,7 +157,7 @@ namespace Mollie
             {
                 PaymentId = paymentId,
                 IdempotencyKey = idempotencyKey,
-                EntityRoute = entityRoute,
+                RouteCreateRequest = routeCreateRequest,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -141,7 +167,7 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "EntityRoute", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RouteCreateRequest", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -436,6 +462,191 @@ namespace Mollie
                         }
                     };
                     response.Object = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 404)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Get a delayed route.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a single route created for a specific payment.
+        /// </remarks>
+        /// <param name="paymentId">Provide the ID of the related payment.</param>
+        /// <param name="routeId">Provide the ID of the route.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="PaymentGetRouteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="paymentId"/> or <paramref name="routeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<PaymentGetRouteResponse> GetAsync(
+            string paymentId,
+            string routeId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (paymentId == null) throw new ArgumentNullException(nameof(paymentId));
+            if (routeId == null) throw new ArgumentNullException(nameof(routeId));
+
+            var request = new PaymentGetRouteRequest()
+            {
+                PaymentId = paymentId,
+                RouteId = routeId,
+                IdempotencyKey = idempotencyKey,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/routes/{routeId}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "payment-get-route", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    RouteGetResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RouteGetResponse>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into RouteGetResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new PaymentGetRouteResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.RouteGetResponse = obj;
                     return response;
                 }
 

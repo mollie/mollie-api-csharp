@@ -54,15 +54,15 @@ namespace Mollie.Models.Components
         public ListRouteGetResponseDestination Destination { get; set; } = default!;
 
         /// <summary>
-        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
-        /// </summary>
-        [JsonProperty("_links")]
-        public ListRouteGetResponseLinks Links { get; set; } = default!;
-
-        /// <summary>
         /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+        /// </summary>
+        [JsonProperty("_links")]
+        public ListRouteGetResponseLinks Links { get; set; } = default!;
     }
 }

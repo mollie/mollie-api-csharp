@@ -14,20 +14,17 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+    /// The destination of the route.
     /// </summary>
-    public class ListRouteGetResponseLinks
+    public class RouteCreateRequestDestination
     {
         /// <summary>
-        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
+        /// The type of destination. Currently only the destination type `organization` is supported.
         /// </summary>
-        [JsonProperty("self")]
-        public Url Self { get; set; } = default!;
+        [JsonProperty("type")]
+        public RouteDestinationType Type { get; set; } = default!;
 
-        /// <summary>
-        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
-        /// </summary>
-        [JsonProperty("payment")]
-        public Url Payment { get; set; } = default!;
+        [JsonProperty("organizationId")]
+        public string OrganizationId { get; set; } = default!;
     }
 }

@@ -9,10 +9,9 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
-    using Mollie.Models.Components;
     using Mollie.Utils;
 
-    public class PaymentCreateRouteRequest
+    public class PaymentGetRouteRequest
     {
         /// <summary>
         /// Provide the ID of the related payment.
@@ -21,12 +20,15 @@ namespace Mollie.Models.Requests
         public string PaymentId { get; set; } = default!;
 
         /// <summary>
+        /// Provide the ID of the route.
+        /// </summary>
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=routeId")]
+        public string RouteId { get; set; } = default!;
+
+        /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
         /// </summary>
         [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
         public string? IdempotencyKey { get; set; }
-
-        [SpeakeasyMetadata("request:mediaType=application/json")]
-        public RouteCreateRequest? RouteCreateRequest { get; set; }
     }
 }

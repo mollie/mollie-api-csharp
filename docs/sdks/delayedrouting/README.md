@@ -6,6 +6,7 @@
 
 * [Create](#create) - Create a delayed route
 * [List](#list) - List payment routes
+* [Get](#get) - Get a delayed route
 
 ## Create
 
@@ -26,17 +27,16 @@ var sdk = new Client(security: new Security() {
 var res = await sdk.DelayedRouting.CreateAsync(
     paymentId: "tr_5B8cwPMGnU",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityRoute: new EntityRoute() {
+    routeCreateRequest: new RouteCreateRequest() {
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
         },
-        Description = "Payment for Order #12345",
-        Destination = new EntityRouteDestination() {
-            Type = RouteDestinationTypeResponse.Organization,
+        Destination = new RouteCreateRequestDestination() {
+            Type = RouteDestinationType.Organization,
             OrganizationId = "org_1234567",
         },
-        Testmode = false,
+        Description = "Payment for Order #12345",
     }
 );
 
@@ -49,7 +49,7 @@ var res = await sdk.DelayedRouting.CreateAsync(
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityRoute`                                                                    | [EntityRoute](../../Models/Components/EntityRoute.md)                            | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `RouteCreateRequest`                                                             | [RouteCreateRequest](../../Models/Components/RouteCreateRequest.md)              | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 
 ### Response
 
@@ -99,6 +99,49 @@ var res = await sdk.DelayedRouting.ListAsync(
 ### Response
 
 **[PaymentListRoutesResponse](../../Models/Requests/PaymentListRoutesResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
+
+## Get
+
+Retrieve a single route created for a specific payment.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="payment-get-route" method="get" path="/payments/{paymentId}/routes/{routeId}" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.DelayedRouting.GetAsync(
+    paymentId: "tr_5B8cwPMGnU",
+    routeId: "crt_dyARQ3JzCgtPDhU2Pbq3J",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
+| `RouteId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the route.                                                     | crt_dyARQ3JzCgtPDhU2Pbq3J                                                        |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+
+### Response
+
+**[PaymentGetRouteResponse](../../Models/Requests/PaymentGetRouteResponse.md)**
 
 ### Errors
 

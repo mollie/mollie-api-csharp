@@ -20,7 +20,7 @@ namespace Mollie.Models.Components
     /// <summary>
     /// The destination of the route.
     /// </summary>
-    public class EntityRouteDestination
+    public class RouteGetResponseDestination
     {
         /// <summary>
         /// The type of destination. Currently only the destination type `organization` is supported.

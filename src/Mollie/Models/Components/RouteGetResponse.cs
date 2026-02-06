@@ -13,7 +13,7 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
 
-    public class RouteCreateResponse
+    public class RouteGetResponse
     {
         /// <summary>
         /// Indicates the response contains a route object. Will always contain the string `route` for this endpoint.
@@ -45,13 +45,13 @@ namespace Mollie.Models.Components
         /// The description of the route. This description is shown in the reports.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// The destination of the route.
         /// </summary>
         [JsonProperty("destination")]
-        public RouteCreateResponseDestination Destination { get; set; } = default!;
+        public RouteGetResponseDestination Destination { get; set; } = default!;
 
         /// <summary>
         /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -63,6 +63,6 @@ namespace Mollie.Models.Components
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
-        public RouteCreateResponseLinks Links { get; set; } = default!;
+        public RouteGetResponseLinks Links { get; set; } = default!;
     }
 }

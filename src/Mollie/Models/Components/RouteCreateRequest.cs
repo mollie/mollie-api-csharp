@@ -13,34 +13,27 @@ namespace Mollie.Models.Components
     using Mollie.Utils;
     using Newtonsoft.Json;
 
-    public class EntityRoute
+    /// <summary>
+    /// Payload to create a new delayed route for a payment.
+    /// </summary>
+    public class RouteCreateRequest
     {
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
-
-        /// <summary>
-        /// The description of the route. This description is shown in the reports.
-        /// </summary>
-        [JsonProperty("description")]
-        public string? Description { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         /// <summary>
         /// The destination of the route.
         /// </summary>
         [JsonProperty("destination")]
-        public EntityRouteDestination? Destination { get; set; }
+        public RouteCreateRequestDestination Destination { get; set; } = default!;
 
         /// <summary>
-        /// Whether to create the entity in test mode or live mode.<br/>
-        /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
-        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
-        /// `testmode` to `true`.
+        /// Description shown in reports.
         /// </summary>
-        [JsonProperty("testmode")]
-        public bool? Testmode { get; set; } = null;
+        [JsonProperty("description")]
+        public string? Description { get; set; }
     }
 }

@@ -265,6 +265,7 @@ var sdk = new Mollie.Client(
 
 * [Create](docs/sdks/delayedrouting/README.md#create) - Create a delayed route
 * [List](docs/sdks/delayedrouting/README.md#list) - List payment routes
+* [Get](docs/sdks/delayedrouting/README.md#get) - Get a delayed route
 
 ### [Invoices](docs/sdks/invoices/README.md)
 

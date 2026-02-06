@@ -29,5 +29,11 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("documentation")]
         public Url Documentation { get; set; } = default!;
+
+        /// <summary>
+        /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
+        /// </summary>
+        [JsonProperty("payment")]
+        public Url Payment { get; set; } = default!;
     }
 }
