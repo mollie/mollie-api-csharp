@@ -17,7 +17,7 @@ A webhook must have a name, an url and a list of event types. You can also creat
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="create-webhook" method="post" path="/webhooks" -->
+<!-- UsageSnippet language="csharp" operationID="create-webhook" method="post" path="/webhooks" example="create-webhook-200" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -66,7 +66,7 @@ Returns a paginated list of your webhooks. If no webhook endpoints are available
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-webhooks" method="get" path="/webhooks" -->
+<!-- UsageSnippet language="csharp" operationID="list-webhooks" method="get" path="/webhooks" example="list-webhook-200" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -115,7 +115,7 @@ Updates the webhook. You may edit the name, url and the list of subscribed event
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/webhooks/{webhookId}" -->
+<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/webhooks/{webhookId}" example="create-webhook-200" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -164,9 +164,30 @@ var res = await sdk.Webhooks.UpdateAsync(
 
 Retrieve a single webhook object by its ID.
 
-### Example Usage
+### Example Usage: get-webhook-200
 
-<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{webhookId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{webhookId}" example="get-webhook-200" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+var res = await sdk.Webhooks.GetAsync(
+    webhookId: "hook_1234567890",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: get-webhook-200-1
+
+<!-- UsageSnippet language="csharp" operationID="get-webhook" method="get" path="/webhooks/{webhookId}" example="get-webhook-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

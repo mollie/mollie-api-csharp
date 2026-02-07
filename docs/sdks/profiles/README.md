@@ -18,9 +18,39 @@ Create a profile to process payments on.
 Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you
 can use this endpoint to automate profile creation.
 
-### Example Usage
+### Example Usage: create-profile-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" -->
+<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" example="create-profile-201-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using System.Collections.Generic;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Profiles.CreateAsync(
+    profileRequest: new ProfileRequest() {
+        Name = "My website name",
+        Website = "https://example.com",
+        Email = "test@mollie.com",
+        Phone = "+31208202070",
+        Description = "My website description",
+        CountriesOfActivity = new List<string>() {
+            "NL",
+            "GB",
+        },
+        BusinessCategory = "OTHER_MERCHANDISE",
+    },
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: create-profile-201-2
+
+<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" example="create-profile-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -75,7 +105,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/profiles" -->
+<!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/profiles" example="list-profiles-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -118,7 +148,7 @@ Retrieve a single profile by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{profileId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{profileId}" example="get-profile-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -164,9 +194,41 @@ Update an existing profile.
 Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.
 Alternatively, you can use this endpoint to automate profile management.
 
-### Example Usage
+### Example Usage: update-profile-200-1
 
-<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" -->
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" example="update-profile-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+using System.Collections.Generic;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Profiles.UpdateAsync(
+    profileId: "pfl_5B8cwPMGnU",
+    requestBody: new UpdateProfileRequestBody() {
+        Name = "My new website name",
+        Website = "https://example.com",
+        Email = "test@mollie.com",
+        Phone = "+31208202071",
+        Description = "My website description",
+        CountriesOfActivity = new List<string>() {
+            "NL",
+            "GB",
+        },
+        BusinessCategory = "OTHER_MERCHANDISE",
+    },
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: update-profile-200-2
+
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" example="update-profile-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -267,7 +329,7 @@ documentation.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-current-profile" method="get" path="/profiles/me" -->
+<!-- UsageSnippet language="csharp" operationID="get-current-profile" method="get" path="/profiles/me" example="get-current-profile-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -13,9 +13,35 @@ Retrieve a list of all physical point-of-sale devices.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-terminals-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" -->
+<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" example="list-terminals-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListTerminalsRequest req = new ListTerminalsRequest() {
+    From = "term_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Terminals.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-terminals-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" example="list-terminals-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -63,7 +89,7 @@ Retrieve a single terminal by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-terminal" method="get" path="/terminals/{terminalId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-terminal" method="get" path="/terminals/{terminalId}" example="get-terminal-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

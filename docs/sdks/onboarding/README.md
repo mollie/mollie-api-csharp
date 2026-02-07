@@ -13,7 +13,7 @@ Retrieve the onboarding status of the currently authenticated organization.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-onboarding-status" method="get" path="/onboarding/me" -->
+<!-- UsageSnippet language="csharp" operationID="get-onboarding-status" method="get" path="/onboarding/me" example="get-onboarding-status-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -19,9 +19,34 @@ By default, Mollie captures payments automatically. If however you
 configured your payment with `captureMode: manual`, you can capture the payment using this endpoint after
 having collected the customer's authorization.
 
-### Example Usage
+### Example Usage: get-capture-200-1
 
-<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" -->
+<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" example="get-capture-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Captures.CreateAsync(
+    paymentId: "tr_5B8cwPMGnU",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    entityCapture: new EntityCapture() {
+        Description = "Capture for cart #12345",
+        Amount = new AmountNullable() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+    }
+);
+
+// handle response
+```
+### Example Usage: get-capture-200-2
+
+<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" example="get-capture-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -70,9 +95,36 @@ Retrieve a list of all captures created for a specific payment.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-captures-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" -->
+<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" example="list-captures-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListCapturesRequest req = new ListCapturesRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    From = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Captures.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-captures-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" example="list-captures-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -120,9 +172,35 @@ var res = await sdk.Captures.ListAsync(req);
 Retrieve a single payment capture by its ID and the ID of its parent
 payment.
 
-### Example Usage
+### Example Usage: get-capture-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" example="get-capture-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+GetCaptureRequest req = new GetCaptureRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    CaptureId = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Captures.GetAsync(req);
+
+// handle response
+```
+### Example Usage: get-capture-200-2
+
+<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" example="get-capture-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -14,9 +14,63 @@ Retrieve the chargebacks initiated for a specific payment.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-chargeback-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" -->
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListChargebacksRequest req = new ListChargebacksRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Chargebacks.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-chargeback-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListChargebacksRequest req = new ListChargebacksRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Chargebacks.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-chargeback-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -63,9 +117,35 @@ var res = await sdk.Chargebacks.ListAsync(req);
 
 Retrieve a single payment chargeback by its ID and the ID of its parent payment.
 
-### Example Usage
+### Example Usage: get-chargeback-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+GetChargebackRequest req = new GetChargebackRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    ChargebackId = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Chargebacks.GetAsync(req);
+
+// handle response
+```
+### Example Usage: get-chargeback-200-2
+
+<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -113,9 +193,65 @@ Retrieve all chargebacks initiated for all your payments.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-all-chargebacks-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Chargebacks.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-all-chargebacks-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Chargebacks.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-all-chargebacks-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

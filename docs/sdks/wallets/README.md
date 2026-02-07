@@ -30,7 +30,7 @@ full documentation, see the official
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="request-apple-pay-payment-session" method="post" path="/wallets/applepay/sessions" -->
+<!-- UsageSnippet language="csharp" operationID="request-apple-pay-payment-session" method="post" path="/wallets/applepay/sessions" example="request-apple-pay-payment-session-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

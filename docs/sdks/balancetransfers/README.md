@@ -15,9 +15,50 @@ You can also create a balance transfer between two connected organizations.
 To create a balance transfer, you must be authenticated as the source organization, and the destination organization must be a connected organization
 that has authorized the `balance-transfers.write` scope for your organization.
 
-### Example Usage
+### Example Usage: create-balance-transfer-200-1
 
-<!-- UsageSnippet language="csharp" operationID="create-connect-balance-transfer" method="post" path="/connect/balance-transfers" -->
+<!-- UsageSnippet language="csharp" operationID="create-connect-balance-transfer" method="post" path="/connect/balance-transfers" example="create-balance-transfer-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using System.Collections.Generic;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.BalanceTransfers.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    entityBalanceTransfer: new EntityBalanceTransfer() {
+        Amount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Source = new EntityBalanceTransferParty() {
+            Type = BalanceTransferPartyType.Organization,
+            Id = "org_1234567",
+            Description = "Invoice fee",
+        },
+        Destination = new EntityBalanceTransferParty() {
+            Type = BalanceTransferPartyType.Organization,
+            Id = "org_1234567",
+            Description = "Invoice fee",
+        },
+        Description = "Invoice fee",
+        Category = BalanceTransferCategory.InvoiceCollection,
+        Metadata = new Dictionary<string, object>() {
+            { "order_id", 12345 },
+            { "customer_id", 9876 },
+        },
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: create-balance-transfer-422-1
+
+<!-- UsageSnippet language="csharp" operationID="create-connect-balance-transfer" method="post" path="/connect/balance-transfers" example="create-balance-transfer-422-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -81,7 +122,7 @@ Returns a paginated list of balance transfers associated with your organization.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-connect-balance-transfers" method="get" path="/connect/balance-transfers" -->
+<!-- UsageSnippet language="csharp" operationID="list-connect-balance-transfers" method="get" path="/connect/balance-transfers" example="list-balance-transfer-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -128,7 +169,7 @@ Retrieve a single Connect balance transfer object by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-connect-balance-transfer" method="get" path="/connect/balance-transfers/{balanceTransferId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-connect-balance-transfer" method="get" path="/connect/balance-transfers/{balanceTransferId}" example="get-balance-transfer-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

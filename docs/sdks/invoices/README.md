@@ -14,9 +14,84 @@ invoice reference.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-invoices-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" -->
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListInvoicesRequest req = new ListInvoicesRequest() {
+    Reference = "2024.10000",
+    Year = "2024",
+    From = "inv_xBEbP9rvAq",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Invoices.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-invoices-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListInvoicesRequest req = new ListInvoicesRequest() {
+    Reference = "2024.10000",
+    Year = "2024",
+    From = "inv_xBEbP9rvAq",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Invoices.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-invoices-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-3" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListInvoicesRequest req = new ListInvoicesRequest() {
+    Reference = "2024.10000",
+    Year = "2024",
+    From = "inv_xBEbP9rvAq",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Invoices.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-invoices-200-4
+
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -66,7 +141,7 @@ call the [List invoices](list-invoices) endpoint with the `reference` parameter.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{invoiceId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{invoiceId}" example="get-invoice-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

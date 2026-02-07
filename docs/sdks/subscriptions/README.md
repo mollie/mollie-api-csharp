@@ -36,7 +36,7 @@ Your customer will be charged €10 on the last day of each month, starting in A
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="create-subscription" method="post" path="/customers/{customerId}/subscriptions" -->
+<!-- UsageSnippet language="csharp" operationID="create-subscription" method="post" path="/customers/{customerId}/subscriptions" example="get-subscription-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -102,7 +102,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-subscriptions" method="get" path="/customers/{customerId}/subscriptions" -->
+<!-- UsageSnippet language="csharp" operationID="list-subscriptions" method="get" path="/customers/{customerId}/subscriptions" example="list-subscriptions-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -151,7 +151,7 @@ Retrieve a single subscription by its ID and the ID of its parent customer.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-subscription" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-subscription" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}" example="get-subscription-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -200,9 +200,42 @@ Canceled subscriptions cannot be updated.
 
 For an in-depth explanation of each parameter, refer to the [Create subscription](create-subscription) endpoint.
 
-### Example Usage
+### Example Usage: update-subscription-200-1
 
-<!-- UsageSnippet language="csharp" operationID="update-subscription" method="patch" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
+<!-- UsageSnippet language="csharp" operationID="update-subscription" method="patch" path="/customers/{customerId}/subscriptions/{subscriptionId}" example="update-subscription-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Subscriptions.UpdateAsync(
+    customerId: "cst_5B8cwPMGnU",
+    subscriptionId: "sub_5B8cwPMGnU",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new UpdateSubscriptionRequestBody() {
+        Amount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Description = "Subscription of streaming channel",
+        Interval = "1 months",
+        StartDate = "2025-01-01",
+        Times = 6,
+        WebhookUrl = "https://example.com/webhook",
+        MandateId = "mdt_5B8cwPMGnU",
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: update-subscription-200-2
+
+<!-- UsageSnippet language="csharp" operationID="update-subscription" method="patch" path="/customers/{customerId}/subscriptions/{subscriptionId}" example="update-subscription-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -260,7 +293,7 @@ Cancel an existing subscription. Canceling a subscription has no effect on the m
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="cancel-subscription" method="delete" path="/customers/{customerId}/subscriptions/{subscriptionId}" -->
+<!-- UsageSnippet language="csharp" operationID="cancel-subscription" method="delete" path="/customers/{customerId}/subscriptions/{subscriptionId}" example="cancel-subscription-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -308,9 +341,9 @@ Retrieve all subscriptions initiated across all your customers.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-payments-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" example="list-payments-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -326,6 +359,81 @@ var sdk = new Client(
 
 ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     From = "tr_5B8cwPMGnU",
+    Limit = 50,
+};
+
+var res = await sdk.Subscriptions.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" example="list-payments-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+};
+
+var res = await sdk.Subscriptions.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" example="list-payments-200-3" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+};
+
+var res = await sdk.Subscriptions.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-subscriptions-200-1
+
+<!-- UsageSnippet language="csharp" operationID="list-all-subscriptions" method="get" path="/subscriptions" example="list-subscriptions-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
+    From = "sub_rVKGtNd6s3",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
@@ -358,9 +466,67 @@ Retrieve all payments of a specific subscription.
 
 The results are paginated.
 
-### Example Usage
+### Example Usage: list-payments-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" -->
+<!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" example="list-payments-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" example="list-payments-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-subscription-payments" method="get" path="/customers/{customerId}/subscriptions/{subscriptionId}/payments" example="list-payments-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -21,7 +21,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-settlements" method="get" path="/settlements" -->
+<!-- UsageSnippet language="csharp" operationID="list-settlements" method="get" path="/settlements" example="list-settlements-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -80,7 +80,7 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-settlement" method="get" path="/settlements/{settlementId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-settlement" method="get" path="/settlements/{settlementId}" example="get-settlement-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -128,7 +128,7 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-open-settlement" method="get" path="/settlements/open" -->
+<!-- UsageSnippet language="csharp" operationID="get-open-settlement" method="get" path="/settlements/open" example="get-settlement-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -170,7 +170,7 @@ For more accurate bookkeeping, refer to the [balance report](get-balance-report)
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-next-settlement" method="get" path="/settlements/next" -->
+<!-- UsageSnippet language="csharp" operationID="get-next-settlement" method="get" path="/settlements/next" example="get-settlement-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -209,9 +209,65 @@ The response is in the same format as the response of the [List payments endpoin
 For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the
 [List captures endpoint](list-captures) endpoint instead.
 
-### Example Usage
+### Example Usage: list-payments-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" -->
+<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" example="list-payments-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Settlements.ListPaymentsAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" example="list-payments-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Settlements.ListPaymentsAsync(req);
+
+// handle response
+```
+### Example Usage: list-payments-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" example="list-payments-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -261,9 +317,36 @@ Retrieve all captures included in the given settlement.
 
 The response is in the same format as the response of the [List captures endpoint](list-captures).
 
-### Example Usage
+### Example Usage: list-captures-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-settlement-captures" method="get" path="/settlements/{settlementId}/captures" -->
+<!-- UsageSnippet language="csharp" operationID="list-settlement-captures" method="get" path="/settlements/{settlementId}/captures" example="list-captures-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Settlements.ListCapturesAsync(req);
+
+// handle response
+```
+### Example Usage: list-captures-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-captures" method="get" path="/settlements/{settlementId}/captures" example="list-captures-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -314,7 +397,7 @@ The response is in the same format as the response of the [List refunds endpoint
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" -->
+<!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" example="list-refunds-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -363,9 +446,63 @@ Retrieve all chargebacks 'deducted' from the given settlement.
 
 The response is in the same format as the response of the [List chargebacks endpoint](list-chargebacks).
 
-### Example Usage
+### Example Usage: list-chargeback-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-settlement-chargebacks" method="get" path="/settlements/{settlementId}/chargebacks" -->
+<!-- UsageSnippet language="csharp" operationID="list-settlement-chargebacks" method="get" path="/settlements/{settlementId}/chargebacks" example="list-chargeback-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Settlements.ListChargebacksAsync(req);
+
+// handle response
+```
+### Example Usage: list-chargeback-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-chargebacks" method="get" path="/settlements/{settlementId}/chargebacks" example="list-chargeback-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "chb_xFzwUN4ci8HAmSGUACS4J",
+    Limit = 50,
+    Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Settlements.ListChargebacksAsync(req);
+
+// handle response
+```
+### Example Usage: list-chargeback-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-chargebacks" method="get" path="/settlements/{settlementId}/chargebacks" example="list-chargeback-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

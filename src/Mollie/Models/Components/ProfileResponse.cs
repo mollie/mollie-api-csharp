@@ -76,12 +76,8 @@ namespace Mollie.Models.Components
         [JsonProperty("countriesOfActivity")]
         public List<string>? CountriesOfActivity { get; set; }
 
-        /// <summary>
-        /// The industry associated with the profile's trade name or brand. Please refer to the<br/>
-        /// <a href="common-data-types#business-category">business category list</a> for all possible options.
-        /// </summary>
         [JsonProperty("businessCategory")]
-        public string BusinessCategory { get; set; } = default!;
+        public string? BusinessCategory { get; set; } = null;
 
         [JsonProperty("status")]
         public ProfileResponseStatus Status { get; set; } = default!;

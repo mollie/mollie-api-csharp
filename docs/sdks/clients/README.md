@@ -15,7 +15,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-clients" method="get" path="/clients" -->
+<!-- UsageSnippet language="csharp" operationID="list-clients" method="get" path="/clients" example="list-clients-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -58,9 +58,66 @@ var res = await sdk.Clients.ListAsync(
 
 Retrieve a single client by its ID.
 
-### Example Usage
+### Example Usage: get-client-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Clients.GetAsync(
+    organizationId: "org_1234567",
+    embed: "organization",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: get-client-200-2
+
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Clients.GetAsync(
+    organizationId: "org_1234567",
+    embed: "organization",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: get-client-200-3
+
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-3" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Clients.GetAsync(
+    organizationId: "org_1234567",
+    embed: "organization",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+### Example Usage: get-client-200-4
+
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

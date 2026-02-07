@@ -62,9 +62,81 @@ to the URL.
 >
 > A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.
 
-### Example Usage
+### Example Usage: create-client-link-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" -->
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.ClientLinks.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    clientLinkRequest: new ClientLinkRequest() {
+        Owner = new Owner() {
+            Email = "john@example.org",
+            GivenName = "John",
+            FamilyName = "Doe",
+            Locale = LocaleResponse.EnUS,
+        },
+        Name = "Acme Corporation",
+        Address = new ClientLinkRequestAddress() {
+            StreetAndNumber = "Main Street 123",
+            PostalCode = "1234AB",
+            City = "Amsterdam",
+            Country = "NL",
+        },
+        RegistrationNumber = "12345678",
+        LegalEntity = "nl-bv",
+        RegistrationOffice = "aachen",
+        IncorporationDate = "2024-12-24",
+    }
+);
+
+// handle response
+```
+### Example Usage: create-client-link-201-2
+
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.ClientLinks.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    clientLinkRequest: new ClientLinkRequest() {
+        Owner = new Owner() {
+            Email = "john@example.org",
+            GivenName = "John",
+            FamilyName = "Doe",
+            Locale = LocaleResponse.EnUS,
+        },
+        Name = "Acme Corporation",
+        Address = new ClientLinkRequestAddress() {
+            StreetAndNumber = "Main Street 123",
+            PostalCode = "1234AB",
+            City = "Amsterdam",
+            Country = "NL",
+        },
+        RegistrationNumber = "12345678",
+        LegalEntity = "nl-bv",
+        RegistrationOffice = "aachen",
+        IncorporationDate = "2024-12-24",
+    }
+);
+
+// handle response
+```
+### Example Usage: create-client-link-201-3
+
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

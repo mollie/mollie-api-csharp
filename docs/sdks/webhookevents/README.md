@@ -12,7 +12,7 @@ Retrieve a single webhook event object by its event ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-webhook-event" method="get" path="/events/{webhookEventId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-webhook-event" method="get" path="/events/{webhookEventId}" example="get-webhook-event-200" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

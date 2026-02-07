@@ -17,9 +17,40 @@ account recurrently.
 It is only possible to create mandates for IBANs and PayPal billing agreements with this endpoint. To create
 mandates for cards, your customers need to perform a 'first payment' with their card.
 
-### Example Usage
+### Example Usage: create-mandate-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" -->
+<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" example="create-mandate-201-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Mandates.CreateAsync(
+    customerId: "cst_5B8cwPMGnU",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    mandateRequest: new MandateRequest() {
+        Id = "mdt_5B8cwPMGnU",
+        Method = MandateMethod.Directdebit,
+        ConsumerName = "John Doe",
+        ConsumerAccount = "NL55INGB0000000000",
+        ConsumerBic = "BANKBIC",
+        ConsumerEmail = "example@email.com",
+        SignatureDate = "2025-01-01",
+        MandateReference = "ID-1023892",
+        PaypalBillingAgreementId = "B-12A34567B8901234CD",
+        PayPalVaultId = "8kk8451t",
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: create-mandate-201-2
+
+<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" example="create-mandate-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -76,7 +107,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/customers/{customerId}/mandates" -->
+<!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/customers/{customerId}/mandates" example="list-mandates-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -126,7 +157,7 @@ account details, card details, or PayPal account details.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-mandate" method="get" path="/customers/{customerId}/mandates/{mandateId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-mandate" method="get" path="/customers/{customerId}/mandates/{mandateId}" example="get-mandate-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

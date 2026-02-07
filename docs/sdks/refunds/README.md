@@ -15,9 +15,58 @@
 Creates a refund for a specific payment. The refunded amount is credited to your customer usually either via a bank
 transfer or by refunding the amount to your customer's credit card.
 
-### Example Usage
+### Example Usage: create-refund-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" -->
+<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" example="create-refund-201-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using System.Collections.Generic;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Refunds.CreateAsync(
+    paymentId: "tr_5B8cwPMGnU",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    refundRequest: new RefundRequest() {
+        Description = "Refunding a Chess Board",
+        Amount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        Metadata = Metadata.CreateMapOfAny(
+            new Dictionary<string, object>() {
+
+            }
+        ),
+        ExternalReference = new RefundRequestExternalReference() {
+            Type = RefundExternalReferenceType.AcquirerReference,
+            Id = "123456789012345",
+        },
+        ReverseRouting = false,
+        RoutingReversals = new List<RefundRequestRoutingReversal>() {
+            new RefundRequestRoutingReversal() {
+                Amount = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                Source = new RefundRequestSource() {
+                    Type = Mollie.Models.Components.Type.Organization,
+                    OrganizationId = "org_1234567",
+                },
+            },
+        },
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: create-refund-201-2
+
+<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" example="create-refund-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -92,7 +141,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-refunds" method="get" path="/payments/{paymentId}/refunds" -->
+<!-- UsageSnippet language="csharp" operationID="list-refunds" method="get" path="/payments/{paymentId}/refunds" example="list-refunds-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -141,7 +190,7 @@ Retrieve a single payment refund by its ID and the ID of its parent payment.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-refund" method="get" path="/payments/{paymentId}/refunds/{refundId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-refund" method="get" path="/payments/{paymentId}/refunds/{refundId}" example="get-refund-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -242,7 +291,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-all-refunds" method="get" path="/refunds" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-refunds" method="get" path="/refunds" example="list-refunds-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

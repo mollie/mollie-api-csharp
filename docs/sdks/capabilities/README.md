@@ -24,7 +24,7 @@ the payments capability is enabled, communicating that the organization can inde
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-capabilities" method="get" path="/capabilities" -->
+<!-- UsageSnippet language="csharp" operationID="list-capabilities" method="get" path="/capabilities" example="successful-response-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

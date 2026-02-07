@@ -30,9 +30,79 @@ wish to retrieve payment methods which exclusively support other currencies (e.g
 ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about
 a non-online payment method, you can use the [Get payment method endpoint](get-method).
 
-### Example Usage
+### Example Usage: list-method-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" -->
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-method-200-3" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListMethodsRequest req = new ListMethodsRequest() {
+    SequenceType = SequenceType.Oneoff,
+    Locale = Locale.EnUS,
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    Resource = MethodResourceParameter.Payments,
+    BillingCountry = "DE",
+    IncludeWallets = MethodIncludeWalletsParameter.Applepay,
+    OrderLineCategories = LineCategories.Eco,
+    Include = "issuers",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Methods.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-methods-200-1
+
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-methods-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListMethodsRequest req = new ListMethodsRequest() {
+    SequenceType = SequenceType.Oneoff,
+    Locale = Locale.EnUS,
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    Resource = MethodResourceParameter.Payments,
+    BillingCountry = "DE",
+    IncludeWallets = MethodIncludeWalletsParameter.Applepay,
+    OrderLineCategories = LineCategories.Eco,
+    Include = "issuers",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Methods.ListAsync(req);
+
+// handle response
+```
+### Example Usage: list-methods-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-methods-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -93,9 +163,102 @@ The list can optionally be filtered using a number of parameters described below
 ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about
 a non-online payment method, you can use the [Get payment method endpoint](get-method).
 
-### Example Usage
+### Example Usage: list-all-methods-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllMethodsRequest req = new ListAllMethodsRequest() {
+    Locale = Locale.EnUS,
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    Include = "issuers",
+    SequenceType = SequenceType.Oneoff,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Methods.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-all-methods-200-2
+
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-2" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllMethodsRequest req = new ListAllMethodsRequest() {
+    Locale = Locale.EnUS,
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    Include = "issuers",
+    SequenceType = SequenceType.Oneoff,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Methods.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-all-methods-200-3
+
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-3" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    testmode: false,
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListAllMethodsRequest req = new ListAllMethodsRequest() {
+    Locale = Locale.EnUS,
+    Amount = new Amount() {
+        Currency = "EUR",
+        Value = "10.00",
+    },
+    Include = "issuers",
+    SequenceType = SequenceType.Oneoff,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Methods.AllAsync(req);
+
+// handle response
+```
+### Example Usage: list-all-methods-200-4
+
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -159,7 +322,7 @@ are enabled by passing the wallet ID (`applepay`) as the method ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{methodId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{methodId}" example="get-method-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
