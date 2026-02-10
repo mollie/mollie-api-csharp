@@ -76,8 +76,8 @@ namespace Mollie.Models.Components
         [JsonProperty("countriesOfActivity")]
         public List<string>? CountriesOfActivity { get; set; }
 
-        [JsonProperty("businessCategory")]
-        public string? BusinessCategory { get; set; } = null;
+        [JsonProperty("businessCategory", NullValueHandling = NullValueHandling.Include)]
+        public string? BusinessCategory { get; set; }
 
         [JsonProperty("status")]
         public ProfileResponseStatus Status { get; set; } = default!;

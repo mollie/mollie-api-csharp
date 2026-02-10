@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 46bf91e555299729cd918a7a1663cae9
+  docChecksum: cdb98b3eb71ec8316abe967eb978559f
   docVersion: 1.0.0
-  speakeasyVersion: 1.708.2
-  generationVersion: 2.811.4
-  releaseVersion: 0.10.17
-  configChecksum: c5b1c92886aaa7e43c7886b9dfd50084
+  speakeasyVersion: 1.709.3
+  generationVersion: 2.814.0
+  releaseVersion: 0.10.18
+  configChecksum: 0beb49e4ebe491ab71a424f7992bf39e
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   published: true
 persistentEdits:
-  generation_id: 741c5cda-5a00-4871-a731-20c0ca231e4f
-  pristine_commit_hash: 5ef0296e2c20a941787a01174d6e3e988977604d
-  pristine_tree_hash: fcf8cd111d21662bf8220c78a8483ed6c72dfa28
+  generation_id: 4320955b-329d-4479-a22c-094c17752868
+  pristine_commit_hash: 9baddaa8b8f93eb9d4124b95d44c1c1c11f1d75b
+  pristine_tree_hash: a36ae364b0d8f8f7d1bd56730a06c072454a0af1
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -965,8 +965,8 @@ trackedFiles:
     pristine_git_object: e8f487bfbc754a76a17569080ac9fffed3014bc4
   docs/Models/Components/ListProfileResponse.md:
     id: a026f73ca3d3
-    last_write_checksum: sha1:e183a298d57e87061eb814b5d38a46912d3e793d
-    pristine_git_object: ceecbe253533e95c1244ff4689b016bff3192210
+    last_write_checksum: sha1:21d102dbd3dec4414a21f6896c1120db683f2e1d
+    pristine_git_object: 76b36c9aedebaa1466a9f907bb0b42e3dd8ac025
   docs/Models/Components/ListProfileResponseLinks.md:
     id: feb0f0596e6d
     last_write_checksum: sha1:7b6dbd815b98fb11f0b96aa1518290e514870891
@@ -1345,8 +1345,8 @@ trackedFiles:
     pristine_git_object: b75eea7cfde78419e8e48d6ae85a29c5ac42868f
   docs/Models/Components/ProfileResponse.md:
     id: 3d899fa3376d
-    last_write_checksum: sha1:e29615fd73f65a87063f877a7ef617595c50c8d0
-    pristine_git_object: 7414577e4867e73b0fb671e21033f275ec289cbd
+    last_write_checksum: sha1:2fa17db8d68319b81507b5168560b84181132dfe
+    pristine_git_object: 30fdb3757cc3c91b3698d701332af791d827fd98
   docs/Models/Components/ProfileResponseLinks.md:
     id: 312eb6fb2113
     last_write_checksum: sha1:fa15e4bb9055f3798275d2698e835e35551a5779
@@ -4021,8 +4021,8 @@ trackedFiles:
     pristine_git_object: 72d11145e0ac465c0c493ac54d14a61e13a28440
   src/Mollie/Models/Components/ListProfileResponse.cs:
     id: b8bb07c07bab
-    last_write_checksum: sha1:eed326d1419f0e3ce6b3a4e7ee48c6036f5a2411
-    pristine_git_object: cafb84c17e40ce99a7775ecadc15a45036d53ad1
+    last_write_checksum: sha1:850d82043e99f7e26e53c435a434978755bff0b7
+    pristine_git_object: 6fdbf7c8b0a01d6f8309dc41655fe7a4fd926638
   src/Mollie/Models/Components/ListProfileResponseLinks.cs:
     id: 1ae16010a152
     last_write_checksum: sha1:e1d63bfc068af718d69b7a99e0dbb2dd67d983b0
@@ -4401,8 +4401,8 @@ trackedFiles:
     pristine_git_object: 527ce1603fbab32109c90c259cf9a16467fc3a38
   src/Mollie/Models/Components/ProfileResponse.cs:
     id: c8f739df4768
-    last_write_checksum: sha1:5cb8e68eda279b0255e8bfbbef7900a14c298baf
-    pristine_git_object: 5e8be7896b9383e86f2e7884663f82d2a9059050
+    last_write_checksum: sha1:e3216d1605d786fd6b8acef2b4ed44e32ab19403
+    pristine_git_object: a8d531c2c5d62375fb67249039e2586df6ae3edb
   src/Mollie/Models/Components/ProfileResponseLinks.cs:
     id: c4a276fabca4
     last_write_checksum: sha1:5e18e9974bfb41028c0924bfcc8f61ba531198d6
@@ -6009,8 +6009,8 @@ trackedFiles:
     pristine_git_object: cacd2fddd8f665e10c2390b8b023ff4e211e9b02
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:f448682e9652bc1dd8d831992a3b2ef80fa28652
-    pristine_git_object: f62da5d3ca2987cce11281c51c504a05a6879f43
+    last_write_checksum: sha1:d82b8a53484bc17937b55b95bc9ced8e95e1c098
+    pristine_git_object: 48bac0e673540a732fba186db76a9331b17187b6
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:3ede8e36ac9050a59313f993aa388c6db9a3d6c8
@@ -6041,8 +6041,8 @@ trackedFiles:
     pristine_git_object: d1ebe28156580a5deeaa2e1dbbbea3ab962a1163
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:b9c9b7fac56acba714e1e4522973bf686a15f7a8
-    pristine_git_object: a23b98c510da162ef447de23c8d3683287532db5
+    last_write_checksum: sha1:9912bb8add84217a19aa2e639f16805502f49061
+    pristine_git_object: 5e9f152ead71ee5457147f9dc3e093dfab3d2a89
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:af30550a88117f29f34e77c8a037c17236b0bafc
@@ -6069,8 +6069,8 @@ trackedFiles:
     pristine_git_object: 709cb99ddf5fb66de22fab4c4305510b8d32dbf6
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:10798475f56ab9f49f3984678b1d24a0d5f0ce4f
-    pristine_git_object: 1825df5f963067a85a0b2ce787217a97d6cdd049
+    last_write_checksum: sha1:71f3cca59b072197494777ce319ebbeb3bfaf609
+    pristine_git_object: 584b36f9ff1b92ce4893a95d37e7235a3da7907d
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:0ad9284b2b8a5834944e37e324c65279661a2eeb
@@ -9514,12 +9514,12 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Csharp SDK Changes:
-  * `Client.Profiles.Create()`:  `response.businessCategory` **Changed** (Breaking ⚠️)
-  * `Client.Profiles.List()`:  `response.Embedded.Profiles[].BusinessCategory` **Changed** (Breaking ⚠️)
-  * `Client.Profiles.Get()`:  `response.businessCategory` **Changed** (Breaking ⚠️)
-  * `Client.Profiles.Update()`:  `response.businessCategory` **Changed** (Breaking ⚠️)
-  * `Client.Profiles.GetCurrent()`:  `response.businessCategory` **Changed** (Breaking ⚠️)
-  * `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(profile-response).BusinessCategory` **Changed** (Breaking ⚠️)
+  * `Client.Profiles.Create()`:  `response.businessCategory` **Changed**
+  * `Client.Profiles.List()`:  `response.Embedded.Profiles[].BusinessCategory` **Changed**
+  * `Client.Profiles.Get()`:  `response.businessCategory` **Changed**
+  * `Client.Profiles.Update()`:  `response.businessCategory` **Changed**
+  * `Client.Profiles.GetCurrent()`:  `response.businessCategory` **Changed**
+  * `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(profile-response).BusinessCategory` **Changed**
 generatedFiles:
   - .gitattributes
   - Mollie.sln
