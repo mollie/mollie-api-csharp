@@ -50,7 +50,7 @@ namespace Mollie.Models.Requests
         /// The identifier referring to the <a href="get-profile">profile</a> you wish to<br/>
         /// retrieve the resources for.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For<br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent. For<br/>
         /// organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=profileId")]
@@ -58,7 +58,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
+        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.

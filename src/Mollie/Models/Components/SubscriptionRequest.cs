@@ -98,8 +98,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
-        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter must<br/>
+        /// not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
         /// </summary>
         [JsonProperty("testmode")]

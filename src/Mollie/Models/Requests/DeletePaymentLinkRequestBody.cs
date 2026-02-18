@@ -15,8 +15,9 @@ namespace Mollie.Models.Requests
     public class DeletePaymentLinkRequestBody
     {
         /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. For organization-level credentials<br/>
-        /// such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.<br/>
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter must<br/>
+        /// not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// `testmode` to `true`.<br/>
         /// <br/>
         /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
         /// </summary>

@@ -17715,7 +17715,7 @@ paths:
                   description: |-
                     The identifier referring to the [profile](get-profile) this entity belongs to.
 
-                    Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in
+                    Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in
                     the creation request. For organization-level credentials such as OAuth access tokens however, the
                     `profileId` parameter is required.
               required:
@@ -17904,7 +17904,7 @@ paths:
                   description: |-
                     The identifier referring to the [profile](get-profile) this entity belongs to.
 
-                    Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+                    Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
                     request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
                     required.
                   example: pfl_QkEhN94Ba
@@ -19172,6 +19172,9 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+                      payment:
+                        href: '...'
+                        type: application/hal+json
         '404':
           $ref: '#/components/responses/404-invalid-id'
       x-readme:
@@ -19284,6 +19287,9 @@ paths:
                             documentation:
                               href: '...'
                               type: text/html
+                            payment:
+                              href: '...'
+                              type: application/hal+json
                         - resource: route
                           id: crt_dyARQ3JzCgtPDhU2Pbq3J
                           paymentId: tr_sva3o24VKn
@@ -19302,6 +19308,9 @@ paths:
                             documentation:
                               href: '...'
                               type: text/html
+                            payment:
+                              href: '...'
+                              type: application/hal+json
                         - resource: route
                           id: crt_tntKsr6tffuVdqnEvhq3J
                           paymentId: tr_sva3o24VKn
@@ -19320,6 +19329,9 @@ paths:
                             documentation:
                               href: '...'
                               type: text/html
+                            payment:
+                              href: '...'
+                              type: application/hal+json
                     _links:
                       self:
                         href: '...'
@@ -19409,6 +19421,8 @@ paths:
             code: |-
               curl -X GET https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo/routes \
                   -H "Authorization: Bearer live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM"
+          - language: php
+            code: ''
           - language: node
             code: ''
           - language: python
@@ -27019,7 +27033,7 @@ components:
         The identifier referring to the [profile](get-profile) you wish to
         retrieve the resources for.
 
-        Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For
+        Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent. For
         organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
       in: query
       schema:
@@ -27028,7 +27042,7 @@ components:
       name: testmode
       description: |-
         Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query
-        parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by
+        parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by
         setting the `testmode` query parameter to `true`.
 
         Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
@@ -29540,8 +29554,8 @@ components:
       description: |-
         Whether to create the entity in test mode or live mode.
 
-        Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be
-        omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting
+        Most API credentials are specifically created for either live mode or test mode, in which case this parameter must
+        not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting
         `testmode` to `true`.
       writeOnly: true
       example: false
@@ -29913,7 +29927,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+            When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
             Organization tokens, the `profileId` is required.
 
             For more information, see [Authentication](authentication).
@@ -31368,9 +31382,10 @@ components:
             - _links
           properties:
             businessCategory:
-              allOf:
-                - $ref: '#/components/schemas/businessCategory'
-                - nullable: true
+              $ref: '#/components/schemas/businessCategory'
+              type:
+                - string
+                - 'null'
       x-speakeasy-unknown-values: allow
     profile-request:
       allOf:
@@ -31706,6 +31721,7 @@ components:
             The VAT number of the organization, if based in the European Union. VAT numbers are verified against the
             international registry *VIES*.
           writeOnly: true
+          example: NL123456789B01
         legalEntity:
           type: string
           description: |-
@@ -31960,8 +31976,8 @@ components:
       description: |-
         Whether the entity was created in test mode or live mode. This field does not update the mode of the entity.
 
-        Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be
-        omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting
+        Most API credentials are specifically created for either live mode or test mode, in which case this parameter must
+        not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting
         `testmode` to `true`.
       writeOnly: true
       example: false
@@ -32120,7 +32136,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
           example: pfl_QkEhN94Ba
@@ -33117,8 +33133,9 @@ components:
         - boolean
         - 'null'
       description: |-
-        Most API credentials are specifically created for either live mode or test mode. For organization-level credentials
-        such as OAuth access tokens, you can enable test mode by setting `testmode` to `true`.
+        Most API credentials are specifically created for either live mode or test mode, in which case this parameter must
+        not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting
+        `testmode` to `true`.
 
         Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
       writeOnly: true
@@ -33231,7 +33248,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
         createdAt:
@@ -33871,7 +33888,7 @@ components:
               description: |-
                 The identifier referring to the [profile](get-profile) this entity belongs to.
 
-                When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+                When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
                 Organization tokens, the `profileId` is required.
 
                 For more information, see [Authentication](authentication).
@@ -34070,7 +34087,7 @@ components:
               description: |-
                 The identifier referring to the [profile](get-profile) this entity belongs to.
 
-                When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+                When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
                 Organization tokens, the `profileId` is required.
 
                 For more information, see [Authentication](authentication).
@@ -34387,11 +34404,10 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
           example: pfl_QkEhN94Ba
-          writeOnly: true
         status:
           $ref: '#/components/schemas/sales-invoice-status'
         vatScheme:
@@ -35333,7 +35349,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+            When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
             Organization tokens, the `profileId` is required.
 
             For more information, see [Authentication](authentication).
@@ -36581,9 +36597,10 @@ components:
             - _links
           properties:
             businessCategory:
-              allOf:
-                - $ref: '#/components/schemas/businessCategory'
-                - nullable: true
+              $ref: '#/components/schemas/businessCategory'
+              type:
+                - string
+                - 'null'
     list-entity-client:
       type: object
       required:
@@ -36931,7 +36948,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
         createdAt:
@@ -37413,7 +37430,7 @@ components:
               description: |-
                 The identifier referring to the [profile](get-profile) this entity belongs to.
 
-                When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+                When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
                 Organization tokens, the `profileId` is required.
 
                 For more information, see [Authentication](authentication).
@@ -37501,11 +37518,10 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
           example: pfl_QkEhN94Ba
-          writeOnly: true
         status:
           $ref: '#/components/schemas/sales-invoice-status-response'
         vatScheme:
@@ -38037,7 +38053,7 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            When using an API Key, the `profileId` can be omitted since it is linked to the key. However, for OAuth and
+            When using an API Key, the `profileId` must not be sent since it is linked to the key. However, for OAuth and
             Organization tokens, the `profileId` is required.
 
             For more information, see [Authentication](authentication).
@@ -39588,6 +39604,7 @@ components:
             The VAT number of the organization, if based in the European Union. VAT numbers are verified against the
             international registry *VIES*.
           writeOnly: true
+          example: NL123456789B01
         legalEntity:
           type: string
           description: |-
@@ -40174,11 +40191,10 @@ components:
           description: |-
             The identifier referring to the [profile](get-profile) this entity belongs to.
 
-            Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation
+            Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation
             request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is
             required.
           example: pfl_QkEhN94Ba
-          writeOnly: true
         status:
           $ref: '#/components/schemas/sales-invoice-status-response'
         vatScheme:
@@ -40965,7 +40981,7 @@ x-speakeasy-globals:
         The identifier referring to the [profile](get-profile) you wish to
         retrieve the resources for.
 
-        Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted. For
+        Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent. For
         organization-level credentials such as OAuth access tokens however, the `profileId` parameter is required.
       in: query
       schema:
@@ -40973,7 +40989,7 @@ x-speakeasy-globals:
     - name: testmode
       description: |-
         Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query
-        parameter can be omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by
+        parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by
         setting the `testmode` query parameter to `true`.
 
         Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.

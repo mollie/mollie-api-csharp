@@ -103,7 +103,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation<br/>
         /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
         /// required.
         /// </summary>

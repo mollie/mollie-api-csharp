@@ -19,8 +19,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
         /// <br/>
-        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter can be<br/>
-        /// omitted. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
+        /// Most API credentials are specifically created for either live mode or test mode, in which case this parameter must<br/>
+        /// not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by setting<br/>
         /// `testmode` to `true`.
         /// </summary>
         [JsonProperty("testmode")]
@@ -29,7 +29,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
         /// <br/>
-        /// Most API credentials are linked to a single profile. In these cases the `profileId` can be omitted in the creation<br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation<br/>
         /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
         /// required.
         /// </summary>

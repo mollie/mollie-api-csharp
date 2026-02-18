@@ -45,6 +45,16 @@ namespace Mollie.Models.Components
         public string? InvoiceNumber { get; set; } = null;
 
         /// <summary>
+        /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
+        /// <br/>
+        /// Most API credentials are linked to a single profile. In these cases the `profileId` must not be sent in the creation<br/>
+        /// request. For organization-level credentials such as OAuth access tokens however, the `profileId` parameter is<br/>
+        /// required.
+        /// </summary>
+        [JsonProperty("profileId")]
+        public string? ProfileId { get; set; } = null;
+
+        /// <summary>
         /// The status for the invoice to end up in.<br/>
         /// <br/>
         /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
