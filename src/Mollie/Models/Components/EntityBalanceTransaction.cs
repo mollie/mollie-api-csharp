@@ -54,6 +54,13 @@ namespace Mollie.Models.Components
         public AmountNullable? Deductions { get; set; } = null;
 
         /// <summary>
+        /// A detailed breakdown of the deductions withheld from the movement. Each field represents a specific type of<br/>
+        /// deduction applied to the transaction. Only the applicable fields will be present.
+        /// </summary>
+        [JsonProperty("deductionDetails")]
+        public DeductionDetails? DeductionDetails { get; set; } = null;
+
+        /// <summary>
         /// Depending on the type of the balance transaction, we will try to give more context about the specific event that<br/>
         /// triggered it. For example, the context object for a payment transaction will look like<br/>
         /// `{"paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "paymentDescription": "Description"}`.<br/>
