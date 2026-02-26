@@ -27,7 +27,6 @@ namespace Mollie.Hooks
             // Then populate profile ID and testmode if OAuth
             if (IsOAuthRequest(request.Headers, hookCtx))
             {
-                Console.WriteLine("Populating profileId and testmode for OAuth request");
                 PopulateProfileIdAndTestmode(request, hookCtx);
             }
 
