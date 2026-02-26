@@ -14,6 +14,7 @@ generation:
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
     sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -29,7 +30,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.10.20
+  version: 0.10.21
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -38,6 +39,7 @@ csharp:
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
   enableCancellationToken: true
+  enableFormatting: false
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first

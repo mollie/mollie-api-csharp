@@ -254,6 +254,11 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
@@ -456,6 +461,11 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
@@ -647,6 +657,11 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
@@ -830,6 +845,11 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
@@ -1027,6 +1047,11 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
@@ -1190,6 +1215,11 @@ namespace Mollie
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
 
             if (SDKConfiguration.SecuritySource != null)
             {

@@ -202,6 +202,11 @@ namespace Mollie
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "ClientLinkRequest", "json", false, true);
             if (serializedBody != null)
             {
