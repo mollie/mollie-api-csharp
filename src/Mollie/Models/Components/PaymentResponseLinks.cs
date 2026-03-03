@@ -40,7 +40,7 @@ namespace Mollie.Models.Components
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
         [JsonProperty("changePaymentState")]
-        public Url? ChangePaymentState { get; set; }
+        public UrlNullable? ChangePaymentState { get; set; } = null;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.

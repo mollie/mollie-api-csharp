@@ -29287,6 +29287,7 @@ components:
     metadata:
       oneOf:
         - type: string
+        - type: number
         - type: object
           properties: {}
           additionalProperties: true
@@ -30590,7 +30591,7 @@ components:
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
             changePaymentState:
-              $ref: '#/components/schemas/url'
+              $ref: '#/components/schemas/url-nullable'
               description: |-
                 For test mode payments in certain scenarios, a hosted interface is available to help you test different
                 payment states.
@@ -31423,6 +31424,7 @@ components:
           description: |-
             The URL to the profile's website or application. Only `https` or `http` URLs are allowed. No `@` signs are
             allowed.
+          maxLength: 255
           example: https://example.com
         email:
           type: string
@@ -36012,7 +36014,7 @@ components:
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
             changePaymentState:
-              $ref: '#/components/schemas/url'
+              $ref: '#/components/schemas/url-nullable'
               description: |-
                 For test mode payments in certain scenarios, a hosted interface is available to help you test different
                 payment states.
@@ -36646,6 +36648,7 @@ components:
           description: |-
             The URL to the profile's website or application. Only `https` or `http` URLs are allowed. No `@` signs are
             allowed.
+          maxLength: 255
           example: https://example.com
         email:
           type: string
@@ -38716,7 +38719,7 @@ components:
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
             changePaymentState:
-              $ref: '#/components/schemas/url'
+              $ref: '#/components/schemas/url-nullable'
               description: |-
                 For test mode payments in certain scenarios, a hosted interface is available to help you test different
                 payment states.
@@ -39547,6 +39550,7 @@ components:
           description: |-
             The URL to the profile's website or application. Only `https` or `http` URLs are allowed. No `@` signs are
             allowed.
+          maxLength: 255
           example: https://example.com
         email:
           type: string

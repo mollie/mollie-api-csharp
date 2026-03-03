@@ -12,6 +12,12 @@ you fetch the entity with our API, we will also include the metadata. You can us
 Metadata.CreateStr(/* values here */);
 ```
 
+### Number
+
+```csharp
+Metadata.CreateNumber(/* values here */);
+```
+
 ### MapOfAny
 
 ```csharp

@@ -25,6 +25,8 @@ namespace Mollie.Models.Components
 
         public static MetadataType Str { get { return new MetadataType("str"); } }
 
+        public static MetadataType Number { get { return new MetadataType("number"); } }
+
         public static MetadataType MapOfAny { get { return new MetadataType("mapOfAny"); } }
 
         public static MetadataType ArrayOfStr { get { return new MetadataType("arrayOfStr"); } }
@@ -36,6 +38,7 @@ namespace Mollie.Models.Components
         public static MetadataType FromString(string v) {
             switch(v) {
                 case "str": return Str;
+                case "number": return Number;
                 case "mapOfAny": return MapOfAny;
                 case "arrayOfStr": return ArrayOfStr;
                 case "null": return Null;
@@ -73,6 +76,9 @@ namespace Mollie.Models.Components
         public string? Str { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public double? Number { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public Dictionary<string, object>? MapOfAny { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
@@ -85,6 +91,14 @@ namespace Mollie.Models.Components
 
             Metadata res = new Metadata(typ);
             res.Str = str;
+            return res;
+        }
+        public static Metadata CreateNumber(double number)
+        {
+            MetadataType typ = MetadataType.Number;
+
+            Metadata res = new Metadata(typ);
+            res.Number = number;
             return res;
         }
         public static Metadata CreateMapOfAny(Dictionary<string, object> mapOfAny)
@@ -131,6 +145,19 @@ namespace Mollie.Models.Components
                     {
                         Str = json[1..^1]
                     };
+                }
+
+                try
+                {
+                    var converted = Convert.ToDouble(json);
+                    return new Metadata(MetadataType.Number)
+                    {
+                        Number = converted
+                    };
+                }
+                catch (System.FormatException)
+                {
+                    // try next option
                 }
 
                 try
@@ -214,6 +241,12 @@ namespace Mollie.Models.Components
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
+                    return;
+                }
+
+                if (res.Number != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Number));
                     return;
                 }
 
