@@ -2,6 +2,17 @@
 
 A machine-readable code that indicates the reason for the transfer's status.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = BalanceTransferStatusReasonResponse.RequestCreated;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = BalanceTransferStatusReasonResponse.Of("custom_value");
+```
+
 
 ## Values
 

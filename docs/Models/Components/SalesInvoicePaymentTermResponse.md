@@ -2,6 +2,17 @@
 
 The payment term to be set on the invoice.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = SalesInvoicePaymentTermResponse.Sevendays;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = SalesInvoicePaymentTermResponse.Of("custom_value");
+```
+
 
 ## Values
 

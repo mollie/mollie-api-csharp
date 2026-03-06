@@ -1,4 +1,4 @@
-# Payment
+# EntityBalanceTransactionPayment
 
 
 ## Fields

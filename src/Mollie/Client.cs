@@ -50,6 +50,8 @@ namespace Mollie
 
         public IPayments Payments { get; }
 
+        public ISessions Sessions { get; }
+
         public IMethods Methods { get; }
 
         public IRefunds Refunds { get; }
@@ -138,6 +140,10 @@ namespace Mollie
         /// </summary>
         public IPayments Payments { get; private set; }
         /// <summary>
+        /// The Sessions sub-SDK.
+        /// </summary>
+        public ISessions Sessions { get; private set; }
+        /// <summary>
         /// The Methods sub-SDK.
         /// </summary>
         public IMethods Methods { get; private set; }
@@ -222,6 +228,8 @@ namespace Mollie
             BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
+
+            Sessions = new Sessions(SDKConfiguration);
 
             Methods = new Methods(SDKConfiguration);
 
@@ -358,6 +366,8 @@ namespace Mollie
             BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
+
+            Sessions = new Sessions(SDKConfiguration);
 
             Methods = new Methods(SDKConfiguration);
 

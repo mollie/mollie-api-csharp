@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Mollie.Models.Components
+namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
-    public class Payment
+    public class CreateSessionResponse
     {
-        [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
+        [JsonProperty("-")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
 
-        [JsonProperty("paymentDescription")]
-        public string? PaymentDescription { get; set; }
+        /// <summary>
+        /// The newly created session object.
+        /// </summary>
+        public SessionResponse? SessionResponse { get; set; }
     }
 }

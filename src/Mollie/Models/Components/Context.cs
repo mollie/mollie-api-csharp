@@ -64,7 +64,7 @@ namespace Mollie.Models.Components
     public class Context
     {
         [JsonProperty("payment")]
-        public Payment? Payment { get; set; } = null;
+        public EntityBalanceTransactionPayment? Payment { get; set; } = null;
 
         [JsonProperty("capture")]
         public Capture? Capture { get; set; } = null;

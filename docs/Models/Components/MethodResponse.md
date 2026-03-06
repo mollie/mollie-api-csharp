@@ -8,6 +8,17 @@ You can also specify the methods in an array. By doing so we will still show the
 but will only show the methods specified in the array. For example, you can use this functionality to only show
 payment methods from a specific country to your customer `['bancontact', 'belfius']`.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = MethodResponse.Alma;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = MethodResponse.Of("custom_value");
+```
+
 
 ## Values
 

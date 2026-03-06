@@ -68,7 +68,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -344,6 +344,11 @@ var sdk = new Mollie.Client(
 * [Update](docs/sdks/salesinvoices/README.md#update) - Update sales invoice
 * [Delete](docs/sdks/salesinvoices/README.md#delete) - Delete sales invoice
 
+### [Sessions](docs/sdks/sessions/README.md)
+
+* [Create](docs/sdks/sessions/README.md#create) - Create session [BETA]
+* [Get](docs/sdks/sessions/README.md#get) - Get session
+
 ### [Settlements](docs/sdks/settlements/README.md)
 
 * [List](docs/sdks/settlements/README.md#list) - List settlements
@@ -420,7 +425,7 @@ var sdk = new Client(
     profileId: "<id>",
     customUserAgent: "<value>",
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -451,7 +456,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -498,7 +503,7 @@ var sdk = new Client(
     ),
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -539,7 +544,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -624,7 +629,7 @@ var sdk = new Client(
     serverUrl: "https://api.mollie.com/v2",
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 

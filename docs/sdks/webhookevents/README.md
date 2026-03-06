@@ -20,7 +20,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 

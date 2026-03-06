@@ -5,6 +5,14 @@ and capture at a later time.
 
 This field needs to be set to `manual` for method `riverty`.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = CaptureMode.Automatic;
+```
+
 
 ## Values
 

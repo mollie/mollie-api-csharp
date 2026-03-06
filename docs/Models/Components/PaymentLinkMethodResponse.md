@@ -1,5 +1,16 @@
 # PaymentLinkMethodResponse
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = PaymentLinkMethodResponse.Applepay;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = PaymentLinkMethodResponse.Of("custom_value");
+```
+
 
 ## Values
 

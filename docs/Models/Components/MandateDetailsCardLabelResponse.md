@@ -2,6 +2,17 @@
 
 The card's label. Available for card mandates, if the card label could be detected.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = MandateDetailsCardLabelResponse.AmericanExpress;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = MandateDetailsCardLabelResponse.Of("custom_value");
+```
+
 
 ## Values
 

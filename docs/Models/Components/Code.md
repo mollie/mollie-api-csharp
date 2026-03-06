@@ -2,6 +2,14 @@
 
 A machine-readable code that indicates the reason for the payment's status.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = Code.ApprovedOrCompletedSuccessfully;
+```
+
 
 ## Values
 

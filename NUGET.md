@@ -48,7 +48,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -133,7 +133,7 @@ var sdk = new Client(
     profileId: "<id>",
     customUserAgent: "<value>",
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -164,7 +164,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -211,7 +211,7 @@ var sdk = new Client(
     ),
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -252,7 +252,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -336,7 +336,7 @@ var sdk = new Client(
     serverUrl: "https://api.mollie.com/v2",
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 

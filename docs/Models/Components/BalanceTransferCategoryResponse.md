@@ -2,6 +2,17 @@
 
 The type of the transfer. Different fees may apply to different types of transfers.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = BalanceTransferCategoryResponse.InvoiceCollection;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = BalanceTransferCategoryResponse.Of("custom_value");
+```
+
 
 ## Values
 

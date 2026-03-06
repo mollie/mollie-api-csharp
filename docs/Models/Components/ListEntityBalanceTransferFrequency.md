@@ -5,6 +5,17 @@ destination.
 
 Settlements created during weekends or on bank holidays will take place on the next business day.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = ListEntityBalanceTransferFrequency.EveryDay;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = ListEntityBalanceTransferFrequency.Of("custom_value");
+```
+
 
 ## Values
 

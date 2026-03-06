@@ -3,6 +3,17 @@
 The unique identifier of the payment method. When used during [payment creation](create-payment), the payment
 method selection screen will be skipped.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = ListEntityMethodAllId.Alma;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = ListEntityMethodAllId.Of("custom_value");
+```
+
 
 ## Values
 

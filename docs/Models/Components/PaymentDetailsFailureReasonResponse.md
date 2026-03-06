@@ -2,6 +2,17 @@
 
 A failure code to help understand why the payment failed.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = PaymentDetailsFailureReasonResponse.AuthenticationAbandoned;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = PaymentDetailsFailureReasonResponse.Of("custom_value");
+```
+
 
 ## Values
 

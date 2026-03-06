@@ -2,6 +2,17 @@
 
 The locale for the recipient, to be used for translations in PDF generation and payment pages.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = SalesInvoiceRecipientLocaleResponse.EnUS;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = SalesInvoiceRecipientLocaleResponse.Of("custom_value");
+```
+
 
 ## Values
 

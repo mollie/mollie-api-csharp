@@ -5,6 +5,17 @@ and capture at a later time.
 
 This field needs to be set to `manual` for method `riverty`.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = CaptureModeResponse.Automatic;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = CaptureModeResponse.Of("custom_value");
+```
+
 
 ## Values
 

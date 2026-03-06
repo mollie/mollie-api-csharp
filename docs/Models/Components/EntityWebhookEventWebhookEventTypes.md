@@ -3,6 +3,17 @@
 The list of events to enable for this webhook. You may specify `'*'` to add all events, except those
 that require explicit selection.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = EntityWebhookEventWebhookEventTypes.PaymentLinkPaid;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
+```
+
 
 ## Values
 

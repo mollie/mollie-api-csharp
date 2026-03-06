@@ -14,6 +14,17 @@ Dependent parameters:
   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`
   - `emailDetails` optional for `issued` and `paid` to send the invoice by email
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = SalesInvoiceStatusResponse.Draft;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = SalesInvoiceStatusResponse.Of("custom_value");
+```
+
 
 ## Values
 

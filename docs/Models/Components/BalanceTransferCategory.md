@@ -2,6 +2,14 @@
 
 The type of the transfer. Different fees may apply to different types of transfers.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = BalanceTransferCategory.InvoiceCollection;
+```
+
 
 ## Values
 

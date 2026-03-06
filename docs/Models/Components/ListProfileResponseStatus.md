@@ -6,6 +6,17 @@ The profile status determines whether the profile is able to receive live paymen
 * `verified`: The profile has been verified and can be used to create live payments and test payments.
 * `blocked`: The profile is blocked and can no longer be used or changed.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = ListProfileResponseStatus.Unverified;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = ListProfileResponseStatus.Of("custom_value");
+```
+
 
 ## Values
 

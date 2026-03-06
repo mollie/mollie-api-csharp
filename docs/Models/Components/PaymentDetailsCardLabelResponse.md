@@ -2,6 +2,17 @@
 
 The card's label, if known.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = PaymentDetailsCardLabelResponse.AmericanExpress;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = PaymentDetailsCardLabelResponse.Of("custom_value");
+```
+
 
 ## Values
 

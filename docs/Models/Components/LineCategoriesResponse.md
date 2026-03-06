@@ -1,5 +1,16 @@
 # LineCategoriesResponse
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = LineCategoriesResponse.Eco;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = LineCategoriesResponse.Of("custom_value");
+```
+
 
 ## Values
 

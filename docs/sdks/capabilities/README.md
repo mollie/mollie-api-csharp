@@ -30,7 +30,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Capabilities.ListAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");

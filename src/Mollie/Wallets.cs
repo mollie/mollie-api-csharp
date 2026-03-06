@@ -242,7 +242,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySession = obj;
+                    response.EntitySession2 = obj;
                     return response;
                 }
 

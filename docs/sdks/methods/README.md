@@ -337,7 +337,7 @@ var sdk = new Client(
 );
 
 GetMethodRequest req = new GetMethodRequest() {
-    MethodId = MethodId.Ideal,
+    MethodId = MethodEnum.Ideal,
     Locale = Locale.EnUS,
     Currency = "EUR",
     Include = "issuers",

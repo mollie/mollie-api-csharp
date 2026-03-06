@@ -2,6 +2,17 @@
 
 Allows you to preset the language to be used.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = LocaleResponse.EnUS;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = LocaleResponse.Of("custom_value");
+```
+
 
 ## Values
 

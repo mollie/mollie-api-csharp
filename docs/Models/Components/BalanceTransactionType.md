@@ -1,5 +1,16 @@
 # BalanceTransactionType
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = BalanceTransactionType.Payment;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = BalanceTransactionType.Of("custom_value");
+```
+
 
 ## Values
 

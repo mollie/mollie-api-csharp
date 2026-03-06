@@ -27,7 +27,7 @@ using Mollie.Models.Components;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.CreateAsync(
@@ -57,7 +57,7 @@ using Mollie.Models.Components;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.CreateAsync(
@@ -111,7 +111,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.ListAsync(
@@ -156,7 +156,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
@@ -204,7 +204,7 @@ using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.UpdateAsync(
@@ -236,7 +236,7 @@ using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.UpdateAsync(
@@ -290,7 +290,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
 var res = await sdk.Profiles.DeleteAsync(

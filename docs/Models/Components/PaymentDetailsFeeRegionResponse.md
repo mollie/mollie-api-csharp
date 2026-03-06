@@ -2,6 +2,17 @@
 
 The applicable card fee region.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = PaymentDetailsFeeRegionResponse.AmericanExpress;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = PaymentDetailsFeeRegionResponse.Of("custom_value");
+```
+
 
 ## Values
 

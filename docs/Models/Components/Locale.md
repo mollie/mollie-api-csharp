@@ -2,6 +2,14 @@
 
 Allows you to preset the language to be used.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = Locale.EnUS;
+```
+
 
 ## Values
 

@@ -2,6 +2,17 @@
 
 The balance's ISO 4217 currency code.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = ListEntityBalanceCurrency.Eur;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = ListEntityBalanceCurrency.Of("custom_value");
+```
+
 
 ## Values
 

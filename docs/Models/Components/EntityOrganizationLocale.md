@@ -2,6 +2,17 @@
 
 The preferred locale of the merchant, as set in their Mollie dashboard.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = EntityOrganizationLocale.EnUS;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = EntityOrganizationLocale.Of("custom_value");
+```
+
 
 ## Values
 

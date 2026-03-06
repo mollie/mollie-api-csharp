@@ -1,5 +1,13 @@
 # MethodIncludeWalletsParameter
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = MethodIncludeWalletsParameter.Applepay;
+```
+
 
 ## Values
 

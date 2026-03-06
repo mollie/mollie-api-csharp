@@ -2,6 +2,14 @@
 
 The payment term to be set on the invoice.
 
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = SalesInvoicePaymentTerm.Sevendays;
+```
+
 
 ## Values
 
