@@ -26,7 +26,7 @@ namespace Mollie
     public interface ISessions
     {
         /// <summary>
-        /// Create session [BETA]
+        /// Create session.
         /// </summary>
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
@@ -94,7 +94,7 @@ namespace Mollie
         }
 
         /// <summary>
-        /// Create session [BETA]
+        /// Create session.
         /// </summary>
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>

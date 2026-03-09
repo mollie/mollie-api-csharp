@@ -13,9 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Threading.Tasks;
 
     public class ListBalanceTransactionsResponse
     {
+        public Func<Task<ListBalanceTransactionsResponse?>>? Next {get;set;}
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 

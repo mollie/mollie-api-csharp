@@ -38,9 +38,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-balances-200-2
 
@@ -64,9 +69,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -350,9 +360,14 @@ ListBalanceTransactionsRequest req = new ListBalanceTransactionsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListTransactionsAsync(req);
+ListBalanceTransactionsResponse? res = await sdk.Balances.ListTransactionsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-balance-transactions-200-2
 
@@ -376,9 +391,14 @@ ListBalanceTransactionsRequest req = new ListBalanceTransactionsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListTransactionsAsync(req);
+ListBalanceTransactionsResponse? res = await sdk.Balances.ListTransactionsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

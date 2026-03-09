@@ -1936,9 +1936,14 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Payments.ListAsync(req);
+ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-2
 
@@ -1963,9 +1968,14 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Payments.ListAsync(req);
+ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-3
 
@@ -1990,9 +2000,14 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Payments.ListAsync(req);
+ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

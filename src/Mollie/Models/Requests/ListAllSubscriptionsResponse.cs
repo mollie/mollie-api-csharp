@@ -13,9 +13,12 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Threading.Tasks;
 
     public class ListAllSubscriptionsResponse
     {
+        public Func<Task<ListAllSubscriptionsResponse?>>? Next {get;set;}
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 

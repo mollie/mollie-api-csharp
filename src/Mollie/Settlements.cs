@@ -16,8 +16,10 @@ namespace Mollie
     using Mollie.Utils;
     using Mollie.Utils.Retries;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading;
@@ -35,6 +37,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementsResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
@@ -45,6 +48,7 @@ namespace Mollie
         public  Task<ListSettlementsResponse> ListAsync(
             ListSettlementsRequest? request = null,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
 
@@ -149,6 +153,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementPaymentsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -160,6 +165,7 @@ namespace Mollie
         public  Task<ListSettlementPaymentsResponse> ListPaymentsAsync(
             ListSettlementPaymentsRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
 
@@ -173,6 +179,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementCapturesResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -184,6 +191,7 @@ namespace Mollie
         public  Task<ListSettlementCapturesResponse> ListCapturesAsync(
             ListSettlementCapturesRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
 
@@ -197,6 +205,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementRefundsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -208,6 +217,7 @@ namespace Mollie
         public  Task<ListSettlementRefundsResponse> ListRefundsAsync(
             ListSettlementRefundsRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
 
@@ -221,6 +231,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementChargebacksResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -232,6 +243,7 @@ namespace Mollie
         public  Task<ListSettlementChargebacksResponse> ListChargebacksAsync(
             ListSettlementChargebacksRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
     }
@@ -259,6 +271,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementsResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
@@ -269,11 +282,16 @@ namespace Mollie
         public async  Task<ListSettlementsResponse> ListAsync(
             ListSettlementsRequest? request = null,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -356,6 +374,44 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListSettlementsResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListSettlementsRequest
+                {
+                    From = request?.From,
+                    Limit = request?.Limit,
+                    BalanceId = request?.BalanceId,
+                    Year = request?.Year,
+                    Month = request?.Month,
+                    Currencies = request?.Currencies,
+                    IdempotencyKey = request?.IdempotencyKey
+                };
+
+                return await ListAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -379,7 +435,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;
@@ -955,6 +1012,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementPaymentsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -966,6 +1024,7 @@ namespace Mollie
         public async  Task<ListSettlementPaymentsResponse> ListPaymentsAsync(
             ListSettlementPaymentsRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
@@ -975,6 +1034,10 @@ namespace Mollie
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1057,6 +1120,44 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListSettlementPaymentsResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListSettlementPaymentsRequest
+                {
+                    SettlementId = request.SettlementId,
+                    From = request.From,
+                    Limit = request.Limit,
+                    Sort = request.Sort,
+                    ProfileId = request.ProfileId,
+                    Testmode = request.Testmode,
+                    IdempotencyKey = request.IdempotencyKey
+                };
+
+                return await ListPaymentsAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -1080,7 +1181,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;
@@ -1137,6 +1239,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementCapturesResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -1148,6 +1251,7 @@ namespace Mollie
         public async  Task<ListSettlementCapturesResponse> ListCapturesAsync(
             ListSettlementCapturesRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
@@ -1156,6 +1260,10 @@ namespace Mollie
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1238,6 +1346,43 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListSettlementCapturesResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListSettlementCapturesRequest
+                {
+                    SettlementId = request.SettlementId,
+                    From = request.From,
+                    Limit = request.Limit,
+                    Embed = request.Embed,
+                    Testmode = request.Testmode,
+                    IdempotencyKey = request.IdempotencyKey
+                };
+
+                return await ListCapturesAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -1261,7 +1406,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;
@@ -1318,6 +1464,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementRefundsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -1329,6 +1476,7 @@ namespace Mollie
         public async  Task<ListSettlementRefundsResponse> ListRefundsAsync(
             ListSettlementRefundsRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
@@ -1337,6 +1485,10 @@ namespace Mollie
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1419,6 +1571,43 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListSettlementRefundsResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListSettlementRefundsRequest
+                {
+                    SettlementId = request.SettlementId,
+                    From = request.From,
+                    Limit = request.Limit,
+                    Embed = request.Embed,
+                    Testmode = request.Testmode,
+                    IdempotencyKey = request.IdempotencyKey
+                };
+
+                return await ListRefundsAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -1442,7 +1631,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;
@@ -1499,6 +1689,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSettlementChargebacksResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
@@ -1510,6 +1701,7 @@ namespace Mollie
         public async  Task<ListSettlementChargebacksResponse> ListChargebacksAsync(
             ListSettlementChargebacksRequest request,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
@@ -1518,6 +1710,10 @@ namespace Mollie
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/chargebacks", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1600,6 +1796,43 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListSettlementChargebacksResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListSettlementChargebacksRequest
+                {
+                    SettlementId = request.SettlementId,
+                    From = request.From,
+                    Limit = request.Limit,
+                    Embed = request.Embed,
+                    Testmode = request.Testmode,
+                    IdempotencyKey = request.IdempotencyKey
+                };
+
+                return await ListChargebacksAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -1623,7 +1856,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;

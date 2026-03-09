@@ -109,18 +109,24 @@ The results are paginated.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
-var res = await sdk.Profiles.ListAsync(
+ListProfilesResponse? res = await sdk.Profiles.ListAsync(
     fromP: "pfl_QkEhN94Ba",
     limit: 50,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

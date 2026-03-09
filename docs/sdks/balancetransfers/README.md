@@ -141,9 +141,14 @@ ListConnectBalanceTransfersRequest req = new ListConnectBalanceTransfersRequest(
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.BalanceTransfers.ListAsync(req);
+ListConnectBalanceTransfersResponse? res = await sdk.BalanceTransfers.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

@@ -16,8 +16,10 @@ namespace Mollie
     using Mollie.Utils;
     using Mollie.Utils.Retries;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading;
@@ -35,6 +37,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListTerminalsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListTerminalsResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
@@ -45,6 +48,7 @@ namespace Mollie
         public  Task<ListTerminalsResponse> ListAsync(
             ListTerminalsRequest? request = null,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         );
 
@@ -104,6 +108,7 @@ namespace Mollie
         /// </remarks>
         /// <param name="request">A <see cref="ListTerminalsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ListTerminalsResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
@@ -114,6 +119,7 @@ namespace Mollie
         public async  Task<ListTerminalsResponse> ListAsync(
             ListTerminalsRequest? request = null,
             RetryConfig? retryConfig = null,
+            string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
@@ -125,6 +131,10 @@ namespace Mollie
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/terminals", request, null);
+            if (urlOverride != null)
+            {
+                urlString = urlOverride;
+            }
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -207,6 +217,42 @@ namespace Mollie
 
             httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
 
+            Func<Task<ListTerminalsResponse?>> nextFunc = async delegate()
+            {
+                var body = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
+                var nextURLToken = body.SelectToken("$._links.next.href");
+                if (nextURLToken == null)
+                {
+                    return null;
+                }
+
+                var nextURL = nextURLToken.Value<string>();
+                if (string.IsNullOrWhiteSpace(nextURL))
+                {
+                    return null;
+                }
+
+                if (nextURL.StartsWith("/"))
+                {
+                    nextURL = baseUrl + nextURL;
+                }
+
+                var newRequest = new ListTerminalsRequest
+                {
+                    From = request?.From,
+                    Limit = request?.Limit,
+                    Sort = request?.Sort,
+                    Testmode = request?.Testmode,
+                    IdempotencyKey = request?.IdempotencyKey
+                };
+
+                return await ListAsync (
+                    request: newRequest,
+                    retryConfig: retryConfig,
+                    urlOverride: nextURL
+                );
+            };
+
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
@@ -230,7 +276,8 @@ namespace Mollie
                         {
                             Response = httpResponse,
                             Request = httpRequest
-                        }
+                        },
+                        Next = nextFunc
                     };
                     response.Object = obj;
                     return response;

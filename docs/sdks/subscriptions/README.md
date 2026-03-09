@@ -123,9 +123,14 @@ ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Subscriptions.ListAsync(req);
+ListSubscriptionsResponse? res = await sdk.Subscriptions.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -362,9 +367,14 @@ ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     Limit = 50,
 };
 
-var res = await sdk.Subscriptions.AllAsync(req);
+ListAllSubscriptionsResponse? res = await sdk.Subscriptions.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-2
 
@@ -387,9 +397,14 @@ ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     Limit = 50,
 };
 
-var res = await sdk.Subscriptions.AllAsync(req);
+ListAllSubscriptionsResponse? res = await sdk.Subscriptions.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-3
 
@@ -412,9 +427,14 @@ ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     Limit = 50,
 };
 
-var res = await sdk.Subscriptions.AllAsync(req);
+ListAllSubscriptionsResponse? res = await sdk.Subscriptions.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-subscriptions-200-1
 
@@ -438,9 +458,14 @@ ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Subscriptions.AllAsync(req);
+ListAllSubscriptionsResponse? res = await sdk.Subscriptions.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -491,9 +516,14 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-2
 
@@ -520,9 +550,14 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-3
 
@@ -549,9 +584,14 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Subscriptions.ListPaymentsAsync(req);
+ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

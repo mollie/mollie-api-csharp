@@ -118,9 +118,14 @@ ListCapturesRequest req = new ListCapturesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Captures.ListAsync(req);
+ListCapturesResponse? res = await sdk.Captures.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-captures-200-2
 
@@ -145,9 +150,14 @@ ListCapturesRequest req = new ListCapturesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Captures.ListAsync(req);
+ListCapturesResponse? res = await sdk.Captures.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

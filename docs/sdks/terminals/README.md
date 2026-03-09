@@ -35,9 +35,14 @@ ListTerminalsRequest req = new ListTerminalsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Terminals.ListAsync(req);
+ListTerminalsResponse? res = await sdk.Terminals.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-terminals-200-2
 
@@ -61,9 +66,14 @@ ListTerminalsRequest req = new ListTerminalsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Terminals.ListAsync(req);
+ListTerminalsResponse? res = await sdk.Terminals.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

@@ -115,6 +115,7 @@ The results are paginated.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -123,13 +124,18 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.SalesInvoices.ListAsync(
+ListSalesInvoicesResponse? res = await sdk.SalesInvoices.ListAsync(
     fromP: "invoice_4Y0eZitmBnQ6IDoMqZQKh",
     limit: 50,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

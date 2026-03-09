@@ -62,6 +62,15 @@ namespace Mollie.Models.Components
         public string Description { get; set; } = default!;
 
         /// <summary>
+        /// List of items the customer will pay for in this session. The sum of all line items must equal the<br/>
+        /// session's amount.<br/>
+        /// <br/>
+        /// All lines must have the same currency as the session.
+        /// </summary>
+        [JsonProperty("lines")]
+        public List<SessionLineItemResponse> Lines { get; set; } = default!;
+
+        /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
         /// <br/>
         /// It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the<br/>
@@ -93,15 +102,6 @@ namespace Mollie.Models.Components
 
         [JsonProperty("payment")]
         public SessionResponsePayment? Payment { get; set; }
-
-        /// <summary>
-        /// List of items the customer will pay for in this session. The sum of all line items must equal the<br/>
-        /// session's amount.<br/>
-        /// <br/>
-        /// All lines must have the same currency as the session.
-        /// </summary>
-        [JsonProperty("lines")]
-        public List<SessionLineItemResponse> Lines { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>

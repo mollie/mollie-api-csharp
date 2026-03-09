@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [Create](#create) - Create session [BETA]
+* [Create](#create) - Create session
 * [Get](#get) - Get session
 
 ## Create
@@ -35,6 +35,7 @@ var res = await sdk.Sessions.CreateAsync(
             Value = "10.00",
         },
         Description = "Order #12345",
+        Lines = new List<SessionLineItem>() {},
         RedirectUrl = "https://example.org/redirect",
         BillingAddress = new PaymentAddress() {
             Title = "Mr.",
@@ -69,7 +70,6 @@ var res = await sdk.Sessions.CreateAsync(
         Payment = new SessionRequestPayment() {
             WebhookUrl = "https://example.org/webhook",
         },
-        Lines = new List<SessionLineItem>() {},
         ProfileId = "pfl_5B8cwPMGnU",
         Testmode = false,
     }

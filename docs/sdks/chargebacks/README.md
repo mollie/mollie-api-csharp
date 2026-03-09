@@ -37,9 +37,14 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.ListAsync(req);
+ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-chargeback-200-2
 
@@ -64,9 +69,14 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.ListAsync(req);
+ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-chargeback-200-3
 
@@ -91,9 +101,14 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.ListAsync(req);
+ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -217,9 +232,14 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.AllAsync(req);
+ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-all-chargebacks-200-2
 
@@ -245,9 +265,14 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.AllAsync(req);
+ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-all-chargebacks-200-3
 
@@ -273,9 +298,14 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Chargebacks.AllAsync(req);
+ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

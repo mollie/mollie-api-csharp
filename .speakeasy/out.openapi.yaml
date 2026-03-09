@@ -13647,7 +13647,7 @@ paths:
         - $ref: '#/components/parameters/idempotency-key'
   /sessions:
     post:
-      summary: Create session [BETA]
+      summary: Create session
       x-speakeasy-name-override: create
       tags:
         - Sessions API
@@ -13714,7 +13714,7 @@ paths:
               $mollie = new \Mollie\Api\MollieApiClient();
               $mollie->setApiKey("live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM");
 
-              $payment = $mollie->send(
+              $session = $mollie->send(
                   new CreateSessionRequest(
                       description: "Order #12345",
                       amount: new Money(currency: "EUR", value: "10.00"),
@@ -13740,7 +13740,7 @@ paths:
               const { createMollieClient } = require('@mollie/api-client');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
-              const payment = await mollieClient.payments.create({
+              const session = await mollieClient.sessions.create({
                 amount: {
                   currency: 'EUR',
                   value: '10.00'
@@ -33088,12 +33088,6 @@ components:
       readOnly: true
       example: open
       x-speakeasy-unknown-values: allow
-    session-sequence-type:
-      type: string
-      enum:
-        - oneoff
-        - first
-      example: oneoff
     session-line-item:
       type: object
       required:
@@ -33169,6 +33163,12 @@ components:
           type: string
           description: A link pointing to the product page in your web shop of the product sold.
           example: https://...
+    session-sequence-type:
+      type: string
+      enum:
+        - oneoff
+        - first
+      example: oneoff
     entity-session:
       type: object
       properties:
@@ -33201,6 +33201,15 @@ components:
           type: string
           description: "A user-friendly description of the session that may be shown to the customer during the checkout process. \n\nAny payment created for the session will use the same description."
           example: 'Order #12345'
+        lines:
+          type: array
+          description: |-
+            List of items the customer will pay for in this session. The sum of all line items must equal the
+            session's amount.
+
+            All lines must have the same currency as the session.
+          items:
+            $ref: '#/components/schemas/session-line-item'
         redirectUrl:
           type: string
           description: |-
@@ -33258,15 +33267,6 @@ components:
 
                 This URL will be automatically set as the webhook URL for all payments created for this session.
               example: https://example.org/webhook
-        lines:
-          type: array
-          description: |-
-            List of items the customer will pay for in this session. The sum of all line items must equal the
-            session's amount.
-
-            All lines must have the same currency as the session.
-          items:
-            $ref: '#/components/schemas/session-line-item'
         profileId:
           $ref: '#/components/schemas/profileToken'
           description: |-
@@ -40534,6 +40534,15 @@ components:
           type: string
           description: "A user-friendly description of the session that may be shown to the customer during the checkout process. \n\nAny payment created for the session will use the same description."
           example: 'Order #12345'
+        lines:
+          type: array
+          description: |-
+            List of items the customer will pay for in this session. The sum of all line items must equal the
+            session's amount.
+
+            All lines must have the same currency as the session.
+          items:
+            $ref: '#/components/schemas/session-line-item-response'
         redirectUrl:
           type: string
           description: |-
@@ -40591,15 +40600,6 @@ components:
 
                 This URL will be automatically set as the webhook URL for all payments created for this session.
               example: https://example.org/webhook
-        lines:
-          type: array
-          description: |-
-            List of items the customer will pay for in this session. The sum of all line items must equal the
-            session's amount.
-
-            All lines must have the same currency as the session.
-          items:
-            $ref: '#/components/schemas/session-line-item-response'
         profileId:
           $ref: '#/components/schemas/profileToken'
           description: |-
@@ -40622,13 +40622,6 @@ components:
             self:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
-    session-sequence-type-response:
-      type: string
-      enum:
-        - oneoff
-        - first
-      example: oneoff
       x-speakeasy-unknown-values: allow
     session-line-item-response:
       type: object
@@ -40705,6 +40698,13 @@ components:
           type: string
           description: A link pointing to the product page in your web shop of the product sold.
           example: https://...
+      x-speakeasy-unknown-values: allow
+    session-sequence-type-response:
+      type: string
+      enum:
+        - oneoff
+        - first
+      example: oneoff
       x-speakeasy-unknown-values: allow
     entity-customer-response:
       type: object

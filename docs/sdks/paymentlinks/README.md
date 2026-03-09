@@ -472,6 +472,7 @@ The results are paginated.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -480,13 +481,18 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.PaymentLinks.ListAsync(
+ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(
     fromP: "pl_d9fQur83kFdhH8hIhaZfq",
     limit: 50,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payment-links-200-2
 
@@ -494,6 +500,7 @@ var res = await sdk.PaymentLinks.ListAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -502,13 +509,18 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.PaymentLinks.ListAsync(
+ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(
     fromP: "pl_d9fQur83kFdhH8hIhaZfq",
     limit: 50,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -742,9 +754,14 @@ GetPaymentLinkPaymentsRequest req = new GetPaymentLinkPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.PaymentLinks.ListPaymentsAsync(req);
+GetPaymentLinkPaymentsResponse? res = await sdk.PaymentLinks.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

@@ -59,9 +59,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 <!-- End SDK Example Usage [usage] -->
 
@@ -97,9 +102,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 <!-- End Authentication [security] -->
 
@@ -144,11 +154,54 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 <!-- End Global Parameters [global-parameters] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `null`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    testmode: false,
+    security: new Security() {
+        OAuth = "<YOUR_O_AUTH_HERE>",
+    }
+);
+
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
+
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -175,7 +228,7 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(
+ListBalancesResponse? res = await sdk.Balances.ListAsync(
     retryConfig: new RetryConfig(
         strategy: RetryConfig.RetryStrategy.BACKOFF,
         backoff: new BackoffStrategy(
@@ -189,7 +242,12 @@ var res = await sdk.Balances.ListAsync(
     request: req
 );
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
@@ -222,9 +280,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 <!-- End Retries [retries] -->
 
@@ -265,9 +328,14 @@ try
         IdempotencyKey = "123e4567-e89b-12d3-a456-426",
     };
 
-    var res = await sdk.Balances.ListAsync(req);
+    ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-    // handle response
+    while(res != null)
+    {
+        // handle items
+
+        res = await res.Next!();
+    }
 }
 catch (BaseException ex)  // all SDK exceptions inherit from BaseException
 {
@@ -347,9 +415,14 @@ ListBalancesRequest req = new ListBalancesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Balances.ListAsync(req);
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 <!-- End Server Selection [server] -->
 

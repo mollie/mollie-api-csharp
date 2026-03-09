@@ -89,9 +89,14 @@ ListCustomersRequest req = new ListCustomersRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Customers.ListAsync(req);
+ListCustomersResponse? res = await sdk.Customers.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -2203,9 +2208,14 @@ ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Customers.ListPaymentsAsync(req);
+ListCustomerPaymentsResponse? res = await sdk.Customers.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-2
 
@@ -2231,9 +2241,14 @@ ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Customers.ListPaymentsAsync(req);
+ListCustomerPaymentsResponse? res = await sdk.Customers.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-3
 
@@ -2259,9 +2274,14 @@ ListCustomerPaymentsRequest req = new ListCustomerPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Customers.ListPaymentsAsync(req);
+ListCustomerPaymentsResponse? res = await sdk.Customers.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

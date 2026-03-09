@@ -162,9 +162,14 @@ ListRefundsRequest req = new ListRefundsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Refunds.ListAsync(req);
+ListRefundsResponse? res = await sdk.Refunds.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -313,9 +318,14 @@ ListAllRefundsRequest req = new ListAllRefundsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Refunds.AllAsync(req);
+ListAllRefundsResponse? res = await sdk.Refunds.AllAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

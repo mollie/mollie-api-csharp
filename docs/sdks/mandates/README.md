@@ -128,9 +128,14 @@ ListMandatesRequest req = new ListMandatesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Mandates.ListAsync(req);
+ListMandatesResponse? res = await sdk.Mandates.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

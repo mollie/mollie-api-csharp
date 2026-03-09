@@ -35,9 +35,14 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Invoices.ListAsync(req);
+ListInvoicesResponse? res = await sdk.Invoices.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-invoices-200-2
 
@@ -60,9 +65,14 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Invoices.ListAsync(req);
+ListInvoicesResponse? res = await sdk.Invoices.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-invoices-200-3
 
@@ -85,9 +95,14 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Invoices.ListAsync(req);
+ListInvoicesResponse? res = await sdk.Invoices.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-invoices-200-4
 
@@ -110,9 +125,14 @@ ListInvoicesRequest req = new ListInvoicesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Invoices.ListAsync(req);
+ListInvoicesResponse? res = await sdk.Invoices.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters

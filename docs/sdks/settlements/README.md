@@ -41,9 +41,14 @@ ListSettlementsRequest req = new ListSettlementsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListAsync(req);
+ListSettlementsResponse? res = await sdk.Settlements.ListAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -233,9 +238,14 @@ ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListPaymentsAsync(req);
+ListSettlementPaymentsResponse? res = await sdk.Settlements.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-2
 
@@ -261,9 +271,14 @@ ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListPaymentsAsync(req);
+ListSettlementPaymentsResponse? res = await sdk.Settlements.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-payments-200-3
 
@@ -289,9 +304,14 @@ ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListPaymentsAsync(req);
+ListSettlementPaymentsResponse? res = await sdk.Settlements.ListPaymentsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -340,9 +360,14 @@ ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListCapturesAsync(req);
+ListSettlementCapturesResponse? res = await sdk.Settlements.ListCapturesAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-captures-200-2
 
@@ -367,9 +392,14 @@ ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListCapturesAsync(req);
+ListSettlementCapturesResponse? res = await sdk.Settlements.ListCapturesAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -418,9 +448,14 @@ ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListRefundsAsync(req);
+ListSettlementRefundsResponse? res = await sdk.Settlements.ListRefundsAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
@@ -469,9 +504,14 @@ ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListChargebacksAsync(req);
+ListSettlementChargebacksResponse? res = await sdk.Settlements.ListChargebacksAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-chargeback-200-2
 
@@ -496,9 +536,14 @@ ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListChargebacksAsync(req);
+ListSettlementChargebacksResponse? res = await sdk.Settlements.ListChargebacksAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 ### Example Usage: list-chargeback-200-3
 
@@ -523,9 +568,14 @@ ListSettlementChargebacksRequest req = new ListSettlementChargebacksRequest() {
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
-var res = await sdk.Settlements.ListChargebacksAsync(req);
+ListSettlementChargebacksResponse? res = await sdk.Settlements.ListChargebacksAsync(req);
 
-// handle response
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
 ```
 
 ### Parameters
