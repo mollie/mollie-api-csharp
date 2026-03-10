@@ -22,7 +22,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The name of this requirement, referring to the task to be fulfilled by the organization<br/>
         /// to enable or re-enable the capability. The name is unique among other requirements<br/>
-        /// of the same capability.
+        /// of the same capability. Requirements related to the onboarding process start with 'onboarding-', while<br/>
+        /// requirements related to information requests start with 'information-request-'.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;

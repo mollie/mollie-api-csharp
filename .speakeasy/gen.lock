@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: cfb6b249bf1228c75939f367173c182d
+  docChecksum: 834f703299e3aaebf1a3e56c35fff5d5
   docVersion: 1.0.0
-  speakeasyVersion: 1.749.1
-  generationVersion: 2.855.2
-  releaseVersion: 0.11.0
-  configChecksum: ab25d22de2a93f0087e23338bd76e97a
+  speakeasyVersion: 1.750.0
+  generationVersion: 2.856.1
+  releaseVersion: 0.11.1
+  configChecksum: e8e732ad792eadb066ffaeb817c5d007
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 5fff026f-d27d-41fe-9fc0-626db16ed4ff
-  pristine_commit_hash: 53063d9d3260e418aa8d494328bc87c58245314a
-  pristine_tree_hash: 549c5f0a4648244846405fa2f0d0f65d0d8c22bc
+  generation_id: 05d3b9fd-a0db-406f-9630-e4857fc35be1
+  pristine_commit_hash: 765a98ec4fcc93e5e8bda715765376b53fcb9d8a
+  pristine_tree_hash: 79440b494ca787fe4d706c895451fe85b5b859af
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -363,8 +363,8 @@ trackedFiles:
     pristine_git_object: 316d3c741e3f6705347885b2bc6693e32a4eb440
   docs/Models/Components/EntityCapabilityRequirement.md:
     id: 7708a8566718
-    last_write_checksum: sha1:0b7f0588396b201cf2d8b540d95156eb3cbd08e7
-    pristine_git_object: 669646d1f11f59b32390d137f794c1626a56652d
+    last_write_checksum: sha1:ac662c69b867d3da5eda8de60bfd01ce9001c144
+    pristine_git_object: 56d9c1776971a18f6caa7ca7719ed808288001ca
   docs/Models/Components/EntityCapabilityRequirementLinks.md:
     id: 5c60a2ac49fe
     last_write_checksum: sha1:29eed918d4c329ddb1cee5e4e39bc3fa18f6cd1f
@@ -3007,8 +3007,8 @@ trackedFiles:
     pristine_git_object: c21eb4ae31eaa5e3d108bbcee616c7fd1717e9a9
   docs/sdks/capabilities/README.md:
     id: 551490ea0d3d
-    last_write_checksum: sha1:3623cd3e2c16b18844ecd94ccb2b8bf693a31a51
-    pristine_git_object: 25f5b8206c856300fd052fa620caefa910e07a2e
+    last_write_checksum: sha1:a041383ef6d2ec33802ef476513136aa11560b34
+    pristine_git_object: 1d0b7df0a181f5980c96ced267e2105841a09a3e
   docs/sdks/captures/README.md:
     id: 7598191d8c6a
     last_write_checksum: sha1:e72aeda473dcc042edac59762e8784957eeb0af6
@@ -3119,8 +3119,8 @@ trackedFiles:
     pristine_git_object: 2d9963c6d25e6a195f5b46789ef23e7e43f7c3b7
   src/Mollie/Capabilities.cs:
     id: 843e68b84efb
-    last_write_checksum: sha1:ee2b5928e6beaa2f36704cf6d3e6e81628fe9074
-    pristine_git_object: 52c1ff2a8650279d59828c8347df99c71e937f9d
+    last_write_checksum: sha1:e21152aa1ce27bb674c051d43dff7071069cb714
+    pristine_git_object: fb79d97ce836341f417092f49f555eb457071be7
   src/Mollie/Captures.cs:
     id: bc0429d536ea
     last_write_checksum: sha1:aeec6095ab8b7e43a0fff0ac5be644593537dae1
@@ -3479,8 +3479,8 @@ trackedFiles:
     pristine_git_object: 4be98935ee136778dc093c5f6da2147b0dcfb702
   src/Mollie/Models/Components/EntityCapabilityRequirement.cs:
     id: 87102b995fe6
-    last_write_checksum: sha1:741b3215285e28de8ab1f14b9ef1a2589556b62e
-    pristine_git_object: d3a15dd5601b823b8d849f5ef1c930185b487326
+    last_write_checksum: sha1:9e8ad5bab52c97f9bf712a52d6e56f393f59d00b
+    pristine_git_object: 7c25d21cdce4376135e595870f4a97ccd0ae1f91
   src/Mollie/Models/Components/EntityCapabilityRequirementLinks.cs:
     id: f96c441a44c1
     last_write_checksum: sha1:569b669f3cf86738a2fa6020c5e4f2d67f9c9fa5
@@ -6127,8 +6127,8 @@ trackedFiles:
     pristine_git_object: cacd2fddd8f665e10c2390b8b023ff4e211e9b02
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:3605386d35cfd686cb8f090280c0c64b2ab8918b
-    pristine_git_object: 24d5c5a53e00c71a334aa1f51e7f6e74e31f613c
+    last_write_checksum: sha1:76731406f683d3df438484c2280584bc342c1360
+    pristine_git_object: 1b1f08a53ef1b06852302be6a11e55f115d99bf3
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:45d1081b88e27ea551af7d329a4250b180e5d1a9
@@ -6159,8 +6159,8 @@ trackedFiles:
     pristine_git_object: 5e0273b8fb69ce47ec3d0840676661584c797654
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:2f406175fc44bf4cf8be66fc1459b7d496ef0501
-    pristine_git_object: bcc9d14250a1f7f8affc60f45cc20f8f6440663a
+    last_write_checksum: sha1:59ebb25e8545d4ce8ab7e65593cf4ccb0fffdf3d
+    pristine_git_object: e35098f45989ce962a7d0ffe431cc9ef0d87a594
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:f64d9d608182a4abc5e93b0a1774607a3ead5c47
@@ -6191,8 +6191,8 @@ trackedFiles:
     pristine_git_object: 709cb99ddf5fb66de22fab4c4305510b8d32dbf6
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:32749f5813a5684cc8e63717a0775c9d5894bdaf
-    pristine_git_object: 117052ecce68730063de5e8e235e401667f0c5d4
+    last_write_checksum: sha1:8c0ef8aa33f497a9af6efe02d46eeace0f9bf993
+    pristine_git_object: 63a3f8b4cab124c2527bd21522decaec182f9104
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:0ad9284b2b8a5834944e37e324c65279661a2eeb
@@ -8576,7 +8576,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"count": 1, "_embedded": {"capabilities": [{"resource": "capability", "name": "payments", "status": "pending", "statusReason": "onboarding-information-needed", "requirements": [{"id": "legal-representatives", "status": "requested", "dueDate": null, "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}, {"id": "bank-account", "status": "past-due", "dueDate": "2024-05-14T01:29:09+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}]}, "_links": {"documentation": {"href": "https://docs.mollie.com/reference/list-capabilities", "type": "text/html"}}}
+          application/hal+json: {"count": 1, "_embedded": {"capabilities": [{"resource": "capability", "name": "payments", "status": "pending", "statusReason": "onboarding-information-needed", "requirements": [{"id": "onboarding-stakeholder-ubo-identity-document", "status": "requested", "dueDate": null, "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}, {"id": "onboarding-bank-account", "status": "past-due", "dueDate": "2024-05-14T01:29:09+00:00", "_links": {"dashboard": {"href": "https://my.mollie.com/dashboard/...", "type": "text/html"}}}]}]}, "_links": {"documentation": {"href": "https://docs.mollie.com/reference/list-capabilities", "type": "text/html"}}}
   list-clients:
     list-clients-200-1:
       parameters:

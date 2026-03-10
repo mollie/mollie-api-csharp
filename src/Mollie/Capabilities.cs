@@ -38,6 +38,9 @@ namespace Mollie
         /// This API provides detailed insights into the specific requirements and status of each client's onboarding journey.<br/>
         /// <br/>
         /// Capabilities are at the organization level, indicating if the organization can perform a given capability.<br/>
+        /// Capabilities may have requirements, which provide more information on what is needed to use this capability. <br/>
+        /// Requirements may have a due date, which indicates the date by which the requirement should be fulfilled. <br/>
+        /// If a requirement is past due, the capability is disabled until the requirement is fulfilled.<br/>
         /// <br/>
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
@@ -84,6 +87,9 @@ namespace Mollie
         /// This API provides detailed insights into the specific requirements and status of each client's onboarding journey.<br/>
         /// <br/>
         /// Capabilities are at the organization level, indicating if the organization can perform a given capability.<br/>
+        /// Capabilities may have requirements, which provide more information on what is needed to use this capability. <br/>
+        /// Requirements may have a due date, which indicates the date by which the requirement should be fulfilled. <br/>
+        /// If a requirement is past due, the capability is disabled until the requirement is fulfilled.<br/>
         /// <br/>
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
