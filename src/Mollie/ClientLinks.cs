@@ -51,7 +51,7 @@ namespace Mollie
         /// * `scope` _string (required)_<br/>
         /// <br/>
         ///   A space-separated list of permissions ('scopes') your app requires. See the<br/>
-        ///   <a href="https://docs.mollie.com/docs/connect-permissions">permissions list</a> for more information about the available<br/>
+        ///   <a href="https://docs.mollie.com/docs/permissions">permissions list</a> for more information about the available<br/>
         ///   scopes.<br/>
         /// <br/>
         ///   We recommend at least : `onboarding.read onboarding.write`<br/>
@@ -140,7 +140,7 @@ namespace Mollie
         /// * `scope` _string (required)_<br/>
         /// <br/>
         ///   A space-separated list of permissions ('scopes') your app requires. See the<br/>
-        ///   <a href="https://docs.mollie.com/docs/connect-permissions">permissions list</a> for more information about the available<br/>
+        ///   <a href="https://docs.mollie.com/docs/permissions">permissions list</a> for more information about the available<br/>
         ///   scopes.<br/>
         /// <br/>
         ///   We recommend at least : `onboarding.read onboarding.write`<br/>
