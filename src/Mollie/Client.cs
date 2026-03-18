@@ -392,6 +392,28 @@ namespace Mollie
             Subscriptions = new Subscriptions(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
+
+            if (!CanHaveGlobalFields(SDKConfiguration) && hasGlobalFields(SDKConfiguration))
+            {
+                throw new ArgumentException("Global fields like testmode and profileId can only be set when using an Access or oAuth Key.");
+            }
+        }
+
+        private bool CanHaveGlobalFields(SDKConfig config)
+        {
+            if (config.SecuritySource == null)
+            {
+                return false;
+            }
+
+            var security = config.SecuritySource();
+            var token = security.ApiKey ?? security.OAuth;
+            return token != null && token.StartsWith("access_");
+        }
+
+        private bool hasGlobalFields(SDKConfig config)
+        {
+            return config.ProfileId != null || config.Testmode != null;
         }
 
         private void InitHooks()
