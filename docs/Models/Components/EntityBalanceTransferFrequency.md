@@ -1,0 +1,33 @@
+# EntityBalanceTransferFrequency
+
+The frequency with which the available amount on the balance will be settled to the configured transfer
+destination.
+
+Settlements created during weekends or on bank holidays will take place on the next business day.
+
+## Example Usage
+
+```csharp
+using Mollie.Models.Components;
+
+var value = EntityBalanceTransferFrequency.EveryDay;
+
+// Open enum: use .Of() to create instances from custom string values
+var custom = EntityBalanceTransferFrequency.Of("custom_value");
+```
+
+
+## Values
+
+| Name             | Value            |
+| ---------------- | ---------------- |
+| `EveryDay`       | every-day        |
+| `Daily`          | daily            |
+| `EveryMonday`    | every-monday     |
+| `EveryTuesday`   | every-tuesday    |
+| `EveryWednesday` | every-wednesday  |
+| `EveryThursday`  | every-thursday   |
+| `EveryFriday`    | every-friday     |
+| `Monthly`        | monthly          |
+| `RevenueDay`     | revenue-day      |
+| `Never`          | never            |

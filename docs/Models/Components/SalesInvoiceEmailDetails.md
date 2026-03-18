@@ -1,0 +1,9 @@
+# SalesInvoiceEmailDetails
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Subject`                                                                      | *string*                                                                       | :heavy_check_mark:                                                             | The subject of the email to be sent.                                           | Your invoice is available                                                      |
+| `Body`                                                                         | *string*                                                                       | :heavy_check_mark:                                                             | The body of the email to be sent. To add newline characters, you can use `\n`. | Please find your invoice enclosed.                                             |

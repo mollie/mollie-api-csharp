@@ -1,0 +1,10 @@
+# DeleteWebhookRequest
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| `RequestBody`                                                                    | [DeleteWebhookRequestBody](../../Models/Requests/DeleteWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |

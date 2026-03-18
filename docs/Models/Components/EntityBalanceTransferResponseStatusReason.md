@@ -1,0 +1,11 @@
+# EntityBalanceTransferResponseStatusReason
+
+The reason for the current status of the transfer, if applicable.
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Code`                                                                                                | [BalanceTransferStatusReasonResponse](../../Models/Components/BalanceTransferStatusReasonResponse.md) | :heavy_check_mark:                                                                                    | A machine-readable code that indicates the reason for the transfer's status.                          | insufficient_funds                                                                                    |
+| `Message`                                                                                             | *string*                                                                                              | :heavy_check_mark:                                                                                    | A description of the status reason, localized according to the transfer.                              | Insufficient funds in the source balance.                                                             |
