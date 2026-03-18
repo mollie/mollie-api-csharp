@@ -23,11 +23,14 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class PaymentDetailsSellerProtectionResponse : IEquatable<PaymentDetailsSellerProtectionResponse>
     {
-        public static readonly PaymentDetailsSellerProtectionResponse Eligible = new PaymentDetailsSellerProtectionResponse("Eligible");
+        public static readonly PaymentDetailsSellerProtectionResponse EligibleUpper = new PaymentDetailsSellerProtectionResponse("ELIGIBLE");
+        public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligibleUpper = new PaymentDetailsSellerProtectionResponse("PARTIALLY_ELIGIBLE");
+        public static readonly PaymentDetailsSellerProtectionResponse NotEligible = new PaymentDetailsSellerProtectionResponse("NOT_ELIGIBLE");
+        public static readonly PaymentDetailsSellerProtectionResponse EligibleMixed = new PaymentDetailsSellerProtectionResponse("Eligible");
         public static readonly PaymentDetailsSellerProtectionResponse Ineligible = new PaymentDetailsSellerProtectionResponse("Ineligible");
         public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligibleINROnly = new PaymentDetailsSellerProtectionResponse("Partially Eligible - INR Only");
         public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligibleUnauthOnly = new PaymentDetailsSellerProtectionResponse("Partially Eligible - Unauth Only");
-        public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligible = new PaymentDetailsSellerProtectionResponse("Partially Eligible");
+        public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligibleMixed = new PaymentDetailsSellerProtectionResponse("Partially Eligible");
         public static readonly PaymentDetailsSellerProtectionResponse None = new PaymentDetailsSellerProtectionResponse("None");
         public static readonly PaymentDetailsSellerProtectionResponse Active = new PaymentDetailsSellerProtectionResponse("Active");
         public static readonly PaymentDetailsSellerProtectionResponse FraudControlUnauthPremiumEligible = new PaymentDetailsSellerProtectionResponse("Fraud Control - Unauth Premium Eligible");
@@ -35,11 +38,14 @@ namespace Mollie.Models.Components
         private static readonly Dictionary <string, PaymentDetailsSellerProtectionResponse> _knownValues =
             new Dictionary <string, PaymentDetailsSellerProtectionResponse> ()
             {
-                ["Eligible"] = Eligible,
+                ["ELIGIBLE"] = EligibleUpper,
+                ["PARTIALLY_ELIGIBLE"] = PartiallyEligibleUpper,
+                ["NOT_ELIGIBLE"] = NotEligible,
+                ["Eligible"] = EligibleMixed,
                 ["Ineligible"] = Ineligible,
                 ["Partially Eligible - INR Only"] = PartiallyEligibleINROnly,
                 ["Partially Eligible - Unauth Only"] = PartiallyEligibleUnauthOnly,
-                ["Partially Eligible"] = PartiallyEligible,
+                ["Partially Eligible"] = PartiallyEligibleMixed,
                 ["None"] = None,
                 ["Active"] = Active,
                 ["Fraud Control - Unauth Premium Eligible"] = FraudControlUnauthPremiumEligible

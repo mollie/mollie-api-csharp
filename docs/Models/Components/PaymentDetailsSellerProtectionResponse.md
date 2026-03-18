@@ -8,7 +8,7 @@ payments, and if the information is made available by PayPal.
 ```csharp
 using Mollie.Models.Components;
 
-var value = PaymentDetailsSellerProtectionResponse.Eligible;
+var value = PaymentDetailsSellerProtectionResponse.EligibleUpper;
 
 // Open enum: use .Of() to create instances from custom string values
 var custom = PaymentDetailsSellerProtectionResponse.Of("custom_value");
@@ -19,11 +19,14 @@ var custom = PaymentDetailsSellerProtectionResponse.Of("custom_value");
 
 | Name                                    | Value                                   |
 | --------------------------------------- | --------------------------------------- |
-| `Eligible`                              | Eligible                                |
+| `EligibleUpper`                         | ELIGIBLE                                |
+| `PartiallyEligibleUpper`                | PARTIALLY_ELIGIBLE                      |
+| `NotEligible`                           | NOT_ELIGIBLE                            |
+| `EligibleMixed`                         | Eligible                                |
 | `Ineligible`                            | Ineligible                              |
 | `PartiallyEligibleINROnly`              | Partially Eligible - INR Only           |
 | `PartiallyEligibleUnauthOnly`           | Partially Eligible - Unauth Only        |
-| `PartiallyEligible`                     | Partially Eligible                      |
+| `PartiallyEligibleMixed`                | Partially Eligible                      |
 | `None`                                  | None                                    |
 | `Active`                                | Active                                  |
 | `FraudControlUnauthPremiumEligible`     | Fraud Control - Unauth Premium Eligible |
