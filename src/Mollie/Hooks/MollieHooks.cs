@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,26 @@ namespace Mollie.Hooks
 {
     public class MollieHooks : IBeforeRequestHook
     {
+        private readonly Dictionary<string, HashSet<string>> _globalUsage;
+
+        public MollieHooks()
+        {
+            _globalUsage = new Dictionary<string, HashSet<string>>();
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "Mollie.Hooks.global_usage.json";
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream != null)
+            {
+                using var reader = new StreamReader(stream);
+                var json = reader.ReadToEnd();
+                var raw = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(json);
+                if (raw != null)
+                {
+                    foreach (var kv in raw)
+                        _globalUsage[kv.Key] = new HashSet<string>(kv.Value);
+                }
+            }
+        }
         public Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
             // Validate path parameters
@@ -24,10 +46,10 @@ namespace Mollie.Hooks
             // Customize the User Agent header
             CustomizeUserAgent(request.Headers, hookCtx);
 
-            // Then populate profile ID and testmode if OAuth
-            if (IsOAuthRequest(request.Headers, hookCtx))
+            // Inject global fields (profileId, testmode) based on operation ID
+            if (MollieAuthUtils.CanHaveGlobalFields(hookCtx.SecuritySource))
             {
-                PopulateProfileIdAndTestmode(request, hookCtx);
+                InjectGlobalFields(request, hookCtx);
             }
 
             return Task.FromResult(request);
@@ -125,81 +147,54 @@ namespace Mollie.Hooks
             headers.Add(userAgentKey, mollieUserAgent);
         }
 
-        private void PopulateProfileIdAndTestmode(HttpRequestMessage request, BeforeRequestContext hookCtx)
+        private void InjectGlobalFields(HttpRequestMessage request, BeforeRequestContext hookCtx)
         {
-            var clientProfileId = hookCtx.SDKConfiguration.ProfileId;
-            var clientTestmode = hookCtx.SDKConfiguration.Testmode;
+            var operationId = hookCtx.OperationID;
 
-            // Get the HTTP method
-            var method = request.Method;
+            // Build globals dict from SDKConfiguration (only non-null values)
+            var globals = new Dictionary<string, object>();
+            if (!string.IsNullOrEmpty(hookCtx.SDKConfiguration.ProfileId))
+                globals["profileId"] = hookCtx.SDKConfiguration.ProfileId!;
+            if (hookCtx.SDKConfiguration.Testmode.HasValue)
+                globals["testmode"] = hookCtx.SDKConfiguration.Testmode.Value;
 
-            if (method == HttpMethod.Get)
+            // Find fields whose operation list contains this operation ID and that have a value
+            var fieldsToInject = _globalUsage
+                .Where(kv => kv.Value.Contains(operationId) && globals.ContainsKey(kv.Key))
+                .ToDictionary(kv => kv.Key, kv => globals[kv.Key]);
+
+            if (fieldsToInject.Count == 0)
+                return;
+            
+            if (request.Content == null)
+                return;
+
+            var contentString = request.Content.ReadAsStringAsync().Result;
+            JsonDocument body;
+
+            try
             {
-                // Update the query parameters. If testmode or profileId are not present, add them.
-                var uriBuilder = new UriBuilder(request.RequestUri);
-                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-
-                // Add profileId if not already present
-                if (!string.IsNullOrEmpty(clientProfileId) && string.IsNullOrEmpty(query["profileId"]))
-                {
-                    query["profileId"] = clientProfileId;
-                }
-
-                // Add testmode if not already present
-                if (clientTestmode.HasValue && string.IsNullOrEmpty(query["testmode"]))
-                {
-                    query["testmode"] = clientTestmode.Value.ToString().ToLower();
-                }
-
-                uriBuilder.Query = query.ToString();
-                request.RequestUri = uriBuilder.Uri;
+                body = string.IsNullOrEmpty(contentString)
+                    ? JsonDocument.Parse("{}")
+                    : JsonDocument.Parse(contentString);
             }
-            else
+            catch (JsonException)
             {
-                // It's POST, DELETE, PATCH
-                // Update the JSON body. If testmode or profileId are not present, add them.
-                if (request.Content != null)
-                {
-                    var contentString = request.Content.ReadAsStringAsync().Result;
-                    JsonDocument body;
-
-                    try
-                    {
-                        body = string.IsNullOrEmpty(contentString)
-                            ? JsonDocument.Parse("{}")
-                            : JsonDocument.Parse(contentString);
-                    }
-                    catch (JsonException)
-                    {
-                        // If it's not JSON, return unchanged
-                        return;
-                    }
-
-                    var bodyDict = new Dictionary<string, object>();
-                    foreach (var property in body.RootElement.EnumerateObject())
-                    {
-                        bodyDict[property.Name] = JsonSerializer.Deserialize<object>(property.Value.GetRawText());
-                    }
-
-                    // Add profileId if not already present
-                    if (!string.IsNullOrEmpty(clientProfileId) && !bodyDict.ContainsKey("profileId"))
-                    {
-                        bodyDict["profileId"] = clientProfileId;
-                    }
-
-                    // Add testmode if not already present
-                    if (clientTestmode.HasValue && !bodyDict.ContainsKey("testmode"))
-                    {
-                        bodyDict["testmode"] = clientTestmode.Value;
-                    }
-
-                    // Create new content with updated body
-                    var newContentString = JsonSerializer.Serialize(bodyDict);
-                    var newContent = new StringContent(newContentString, Encoding.UTF8, "application/json");
-
-                    request.Content = newContent;
-                }
+                return;
             }
+
+            var bodyDict = new Dictionary<string, JsonElement>();
+            foreach (var property in body.RootElement.EnumerateObject())
+                bodyDict[property.Name] = property.Value.Clone();
+
+            foreach (var (field, value) in fieldsToInject)
+            {
+                if (!bodyDict.ContainsKey(field))
+                    bodyDict[field] = JsonSerializer.SerializeToElement(value);
+            }
+
+            request.Content = new StringContent(
+                JsonSerializer.Serialize(bodyDict), Encoding.UTF8, "application/json");
         }
 
         private static string GenerateIdempotencyKey()
