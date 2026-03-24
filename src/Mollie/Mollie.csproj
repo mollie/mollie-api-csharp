@@ -29,6 +29,7 @@
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath="\"/>
     <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
     <None Include="..\..\docs\**\*" Pack="true" PackagePath="\docs"  CopyToOutputDirectory="PreserveNewest"/>
+    <EmbeddedResource Include="Hooks\global_usage.json" />
   </ItemGroup>
 
   <PropertyGroup>
