@@ -98,10 +98,11 @@ while(res != null)
 
 This SDK supports the following security schemes globally:
 
-| Name     | Type   | Scheme       |
-| -------- | ------ | ------------ |
-| `ApiKey` | http   | HTTP Bearer  |
-| `OAuth`  | oauth2 | OAuth2 token |
+| Name                      | Type   | Scheme       |
+| ------------------------- | ------ | ------------ |
+| `ApiKey`                  | http   | HTTP Bearer  |
+| `OrganizationAccessToken` | http   | HTTP Bearer  |
+| `OAuth`                   | oauth2 | OAuth2 token |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```csharp

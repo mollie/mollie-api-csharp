@@ -17,6 +17,9 @@ namespace Mollie.Models.Components
         [SpeakeasyMetadata("security:scheme=true,type=http,subType=bearer,name=Authorization")]
         public string? ApiKey { get; set; }
 
+        [SpeakeasyMetadata("security:scheme=true,type=http,subType=bearer,name=Authorization")]
+        public string? OrganizationAccessToken { get; set; }
+
         [SpeakeasyMetadata("security:scheme=true,type=oauth2,name=Authorization")]
         public string? OAuth { get; set; }
     }

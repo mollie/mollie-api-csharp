@@ -165,7 +165,7 @@ namespace Mollie.Hooks
 
             if (fieldsToInject.Count == 0)
                 return;
-            
+
             if (request.Content == null)
                 return;
 
