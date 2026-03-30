@@ -21,7 +21,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Permissions.ListAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
@@ -36,7 +36,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Permissions.ListAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
@@ -75,7 +75,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -96,7 +96,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 

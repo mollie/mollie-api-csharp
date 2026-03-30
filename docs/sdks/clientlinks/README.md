@@ -70,7 +70,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.ClientLinks.CreateAsync(
@@ -107,7 +107,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.ClientLinks.CreateAsync(
@@ -144,7 +144,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.ClientLinks.CreateAsync(

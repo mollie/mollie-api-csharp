@@ -7,7 +7,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
