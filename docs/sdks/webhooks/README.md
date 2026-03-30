@@ -24,7 +24,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Webhooks.CreateAsync(
@@ -75,7 +75,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -127,7 +127,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Webhooks.UpdateAsync(
@@ -179,7 +179,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -200,7 +200,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -244,7 +244,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Webhooks.DeleteAsync(
@@ -290,7 +290,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Webhooks.TestAsync(

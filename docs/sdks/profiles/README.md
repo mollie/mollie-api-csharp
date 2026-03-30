@@ -27,7 +27,7 @@ using Mollie.Models.Components;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Profiles.CreateAsync(
@@ -57,7 +57,7 @@ using Mollie.Models.Components;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Profiles.CreateAsync(
@@ -94,7 +94,7 @@ var res = await sdk.Profiles.CreateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 403, 422                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
@@ -112,7 +112,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListProfilesResponse? res = await sdk.Profiles.ListAsync(
@@ -162,7 +162,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -210,7 +210,7 @@ using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Profiles.UpdateAsync(
@@ -242,7 +242,7 @@ using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Profiles.UpdateAsync(
@@ -281,7 +281,7 @@ var res = await sdk.Profiles.UpdateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 410, 422                      | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 403, 404, 410, 422                 | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
@@ -296,7 +296,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Profiles.DeleteAsync(

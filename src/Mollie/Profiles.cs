@@ -46,7 +46,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if a profile name is missing or website URL is invalid. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403 or 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
@@ -136,7 +136,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410 or 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateProfileResponse> UpdateAsync(
             string profileId,
@@ -226,7 +226,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if a profile name is missing or website URL is invalid. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403 or 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
@@ -364,7 +364,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 422)
+            else if(new List<int>{403, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -844,7 +844,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410 or 422 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateProfileResponse> UpdateAsync(
             string profileId,
@@ -986,7 +986,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 410, 422}.Contains(responseStatusCode))
+            else if(new List<int>{403, 404, 410, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
