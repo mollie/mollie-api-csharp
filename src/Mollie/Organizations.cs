@@ -35,7 +35,8 @@ namespace Mollie
         /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful<br/>
         /// for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
         /// <br/>
-        /// If you have a *partner account*', you can retrieve organization details of connected organizations.
+        /// If you have a *partner account*', you can retrieve organization details of connected organizations.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="organizationId">Provide the ID of the related organization.</param>
         /// <param name="testmode">
@@ -69,7 +70,8 @@ namespace Mollie
         /// endpoint.<br/>
         /// <br/>
         /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint<br/>
-        /// documentation.
+        /// documentation.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -90,7 +92,8 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner<br/>
-        /// accounts*.
+        /// accounts*.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -129,7 +132,8 @@ namespace Mollie
         /// You can normally only retrieve the currently authenticated organization with this endpoint. This is primarily useful<br/>
         /// for OAuth apps. See also <a href="get-current-organization">Get current organization</a>.<br/>
         /// <br/>
-        /// If you have a *partner account*', you can retrieve organization details of connected organizations.
+        /// If you have a *partner account*', you can retrieve organization details of connected organizations.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="organizationId">Provide the ID of the related organization.</param>
         /// <param name="testmode">
@@ -179,7 +183,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-organization", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -327,7 +331,8 @@ namespace Mollie
         /// endpoint.<br/>
         /// <br/>
         /// For a complete reference of the organization object, refer to the <a href="get-organization">Get organization</a> endpoint<br/>
-        /// documentation.
+        /// documentation.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -362,7 +367,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-current-organization", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -481,7 +486,8 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve partnership details about the currently authenticated organization. Only relevant for so-called *partner<br/>
-        /// accounts*.
+        /// accounts*.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -516,7 +522,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-partner-status", null, SDKConfiguration.SecuritySource, cancellationToken);
