@@ -394,10 +394,9 @@ namespace Mollie
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
 
-            if (!MollieAuthUtils.CanHaveGlobalFields(SDKConfiguration.SecuritySource) && MollieAuthUtils.HasGlobalFields(SDKConfiguration))
-            {
-                throw new ArgumentException("Global fields like testmode and profileId can only be set when using an Access or oAuth Key.");
-            }
+            Transfers = new Transfers(SDKConfiguration);
+
+            VerifyPayees = new VerifyPayees(SDKConfiguration);
         }
 
         private void InitHooks()

@@ -25,6 +25,8 @@ namespace Mollie.Hooks
         /// </remarks>
         public static void InitHooks(IHooks hooks)
         {
+            hooks.RegisterSDKInitHook(new MollieSDKInitHook());
+
             var myHook = new MollieHooks();
 
             hooks.RegisterBeforeRequestHook(myHook);
