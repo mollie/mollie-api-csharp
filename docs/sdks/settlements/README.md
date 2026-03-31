@@ -224,7 +224,6 @@ using Mollie.Models.Requests;
 
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
-    testmode: false,
     security: new Security() {
         OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
@@ -257,7 +256,6 @@ using Mollie.Models.Requests;
 
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
-    testmode: false,
     security: new Security() {
         OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
@@ -290,7 +288,6 @@ using Mollie.Models.Requests;
 
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
-    testmode: false,
     security: new Security() {
         OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
@@ -345,12 +342,9 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_5B8cwPMGnU",
@@ -377,12 +371,9 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
     SettlementId = "stl_5B8cwPMGnU",
@@ -433,12 +424,9 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
 
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     SettlementId = "stl_5B8cwPMGnU",
