@@ -34,8 +34,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of the organization's balances, including the primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// The results are paginated.
         /// </remarks>
         /// <param name="request">A <see cref="ListBalancesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -72,8 +71,7 @@ namespace Mollie
         /// <br/>
         /// With instant payment methods like iDEAL, payments are moved to the available<br/>
         /// balance instantly. With slower payment methods, like credit card for example, it can take a few days before the<br/>
-        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
         /// </remarks>
         /// <param name="balanceId">Provide the ID of the related balance.</param>
         /// <param name="testmode">
@@ -107,8 +105,7 @@ namespace Mollie
         /// currency, where all payments are settled to by default.<br/>
         /// <br/>
         /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a>
-        /// endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// endpoint.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -134,8 +131,7 @@ namespace Mollie
         /// during the reported period, ahead of your Mollie invoice.<br/>
         /// <br/>
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
-        /// organization's primary balance.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// organization's primary balance.
         /// </remarks>
         /// <param name="request">A <see cref="GetBalanceReportRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -166,8 +162,7 @@ namespace Mollie
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
         /// organization's primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// The results are paginated.
         /// </remarks>
         /// <param name="request">A <see cref="ListBalanceTransactionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -207,8 +202,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of the organization's balances, including the primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// The results are paginated.
         /// </remarks>
         /// <param name="request">A <see cref="ListBalancesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -251,7 +245,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-balances", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -446,8 +440,7 @@ namespace Mollie
         /// <br/>
         /// With instant payment methods like iDEAL, payments are moved to the available<br/>
         /// balance instantly. With slower payment methods, like credit card for example, it can take a few days before the<br/>
-        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// funds are available on your balance. These funds will be shown under the *pending amount* in the meanwhile.
         /// </remarks>
         /// <param name="balanceId">Provide the ID of the related balance.</param>
         /// <param name="testmode">
@@ -497,7 +490,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-balance", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -645,8 +638,7 @@ namespace Mollie
         /// currency, where all payments are settled to by default.<br/>
         /// <br/>
         /// This endpoint is a convenient alias of the <a href="get-balance">Get balance</a>
-        /// endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// endpoint.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -681,7 +673,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-primary-balance", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -805,8 +797,7 @@ namespace Mollie
         /// during the reported period, ahead of your Mollie invoice.<br/>
         /// <br/>
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
-        /// organization's primary balance.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// organization's primary balance.
         /// </remarks>
         /// <param name="request">A <see cref="GetBalanceReportRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -841,7 +832,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-balance-report", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -994,8 +985,7 @@ namespace Mollie
         /// The alias `primary` can be used instead of the balance ID to refer to the<br/>
         /// organization's primary balance.<br/>
         /// <br/>
-        /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// The results are paginated.
         /// </remarks>
         /// <param name="request">A <see cref="ListBalanceTransactionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1036,7 +1026,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-balance-transactions", null, SDKConfiguration.SecuritySource, cancellationToken);

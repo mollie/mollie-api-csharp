@@ -45,8 +45,7 @@ namespace Mollie
         /// <br/>
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
-        /// the payments capability is enabled, communicating that the organization can indeed receive payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// the payments capability is enabled, communicating that the organization can indeed receive payments.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -95,8 +94,7 @@ namespace Mollie
         /// <br/>
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
-        /// the payments capability is enabled, communicating that the organization can indeed receive payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// the payments capability is enabled, communicating that the organization can indeed receive payments.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -131,7 +129,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-capabilities", null, SDKConfiguration.SecuritySource, cancellationToken);

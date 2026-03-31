@@ -35,8 +35,7 @@ namespace Mollie
         /// This API endpoint allows you to create a balance transfer from your organization's balance to a connected organization's balance, or vice versa.<br/>
         /// You can also create a balance transfer between two connected organizations.<br/>
         /// To create a balance transfer, you must be authenticated as the source organization, and the destination organization must be a connected organization<br/>
-        /// that has authorized the `balance-transfers.write` scope for your organization.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// that has authorized the `balance-transfers.write` scope for your organization.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="entityBalanceTransfer">A <see cref="EntityBalanceTransfer"/> parameter.</param>
@@ -59,8 +58,7 @@ namespace Mollie
         /// List all Connect balance transfers.
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of balance transfers associated with your organization. These may be a balance transfer that was received or sent from your balance, or a balance transfer that you initiated on behalf of your clients. If no balance transfers are available, the resulting array will be empty. This request should never throw an error.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// Returns a paginated list of balance transfers associated with your organization. These may be a balance transfer that was received or sent from your balance, or a balance transfer that you initiated on behalf of your clients. If no balance transfers are available, the resulting array will be empty. This request should never throw an error.
         /// </remarks>
         /// <param name="request">A <see cref="ListConnectBalanceTransfersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -83,8 +81,7 @@ namespace Mollie
         /// Get a Connect balance transfer.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single Connect balance transfer object by its ID.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// Retrieve a single Connect balance transfer object by its ID.
         /// </remarks>
         /// <param name="balanceTransferId">Provide the ID of the related balance transfer.</param>
         /// <param name="testmode">
@@ -131,8 +128,7 @@ namespace Mollie
         /// This API endpoint allows you to create a balance transfer from your organization's balance to a connected organization's balance, or vice versa.<br/>
         /// You can also create a balance transfer between two connected organizations.<br/>
         /// To create a balance transfer, you must be authenticated as the source organization, and the destination organization must be a connected organization<br/>
-        /// that has authorized the `balance-transfers.write` scope for your organization.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// that has authorized the `balance-transfers.write` scope for your organization.
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="entityBalanceTransfer">A <see cref="EntityBalanceTransfer"/> parameter.</param>
@@ -177,7 +173,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-connect-balance-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -321,8 +317,7 @@ namespace Mollie
         /// List all Connect balance transfers.
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of balance transfers associated with your organization. These may be a balance transfer that was received or sent from your balance, or a balance transfer that you initiated on behalf of your clients. If no balance transfers are available, the resulting array will be empty. This request should never throw an error.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// Returns a paginated list of balance transfers associated with your organization. These may be a balance transfer that was received or sent from your balance, or a balance transfer that you initiated on behalf of your clients. If no balance transfers are available, the resulting array will be empty. This request should never throw an error.
         /// </remarks>
         /// <param name="request">A <see cref="ListConnectBalanceTransfersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -365,7 +360,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-connect-balance-transfers", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -546,8 +541,7 @@ namespace Mollie
         /// Get a Connect balance transfer.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single Connect balance transfer object by its ID.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// Retrieve a single Connect balance transfer object by its ID.
         /// </remarks>
         /// <param name="balanceTransferId">Provide the ID of the related balance transfer.</param>
         /// <param name="testmode">
@@ -597,7 +591,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-connect-balance-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);
