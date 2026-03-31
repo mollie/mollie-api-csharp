@@ -1044,7 +1044,6 @@ namespace Mollie
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             request.ProfileId ??= SDKConfiguration.ProfileId;
-            request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request, null);
@@ -1161,7 +1160,6 @@ namespace Mollie
                     Limit = request.Limit,
                     Sort = request.Sort,
                     ProfileId = request.ProfileId,
-                    Testmode = request.Testmode,
                     IdempotencyKey = request.IdempotencyKey
                 };
 
@@ -1271,7 +1269,6 @@ namespace Mollie
         )
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request, null);
@@ -1387,7 +1384,6 @@ namespace Mollie
                     From = request.From,
                     Limit = request.Limit,
                     Embed = request.Embed,
-                    Testmode = request.Testmode,
                     IdempotencyKey = request.IdempotencyKey
                 };
 
@@ -1497,7 +1493,6 @@ namespace Mollie
         )
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request, null);
@@ -1613,7 +1608,6 @@ namespace Mollie
                     From = request.From,
                     Limit = request.Limit,
                     Embed = request.Embed,
-                    Testmode = request.Testmode,
                     IdempotencyKey = request.IdempotencyKey
                 };
 

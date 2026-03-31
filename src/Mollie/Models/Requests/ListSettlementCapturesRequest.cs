@@ -21,8 +21,8 @@ namespace Mollie.Models.Requests
         public string SettlementId { get; set; } = default!;
 
         /// <summary>
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// result set.
+        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate<br/>
+        /// the result set.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }
@@ -39,16 +39,6 @@ namespace Mollie.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=embed")]
         public string? Embed { get; set; } = null;
-
-        /// <summary>
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=testmode")]
-        public bool? Testmode { get; set; }
 
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
