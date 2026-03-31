@@ -34,7 +34,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all your settlements.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -68,7 +69,8 @@ namespace Mollie
         /// settlement and the previous one.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="settlementId">Provide the ID of the related settlement.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -99,7 +101,8 @@ namespace Mollie
         /// documentation.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -125,7 +128,8 @@ namespace Mollie
         /// documentation.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -150,7 +154,8 @@ namespace Mollie
         /// The response is in the same format as the response of the <a href="list-payments">List payments endpoint</a>.<br/>
         /// <br/>
         /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the<br/>
-        /// <a href="list-captures">List captures endpoint</a> endpoint instead.
+        /// <a href="list-captures">List captures endpoint</a> endpoint instead.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -176,7 +181,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all captures included in the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -202,7 +208,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all refunds 'deducted' from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -228,7 +235,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all chargebacks 'deducted' from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -268,7 +276,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all your settlements.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -305,7 +314,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlements", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -499,7 +508,8 @@ namespace Mollie
         /// settlement and the previous one.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="settlementId">Provide the ID of the related settlement.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -541,7 +551,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-settlement", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -692,7 +702,8 @@ namespace Mollie
         /// documentation.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -727,7 +738,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-open-settlement", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -851,7 +862,8 @@ namespace Mollie
         /// documentation.<br/>
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
-        /// <a href="list-balance-transactions">balance transactions</a> endpoint.
+        /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -886,7 +898,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-next-settlement", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1009,7 +1021,8 @@ namespace Mollie
         /// The response is in the same format as the response of the <a href="list-payments">List payments endpoint</a>.<br/>
         /// <br/>
         /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the<br/>
-        /// <a href="list-captures">List captures endpoint</a> endpoint instead.
+        /// <a href="list-captures">List captures endpoint</a> endpoint instead.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1051,7 +1064,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-payments", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1236,7 +1249,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all captures included in the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1277,7 +1291,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-captures", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1461,7 +1475,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all refunds 'deducted' from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1502,7 +1517,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-refunds", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1686,7 +1701,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve all chargebacks 'deducted' from the given settlement.<br/>
         /// <br/>
-        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.
+        /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1727,7 +1743,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-settlement-chargebacks", null, SDKConfiguration.SecuritySource, cancellationToken);

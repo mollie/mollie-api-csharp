@@ -34,7 +34,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all clients linked to your account.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="embed">
         /// This endpoint allows embedding related API items by appending the<br/>
@@ -76,7 +77,8 @@ namespace Mollie
         /// Get client.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single client by its ID.
+        /// Retrieve a single client by its ID.<br/>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="organizationId">Provide the ID of the related organization.</param>
         /// <param name="embed">
@@ -128,7 +130,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all clients linked to your account.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="embed">
         /// This endpoint allows embedding related API items by appending the<br/>
@@ -192,7 +195,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-clients", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -367,7 +370,8 @@ namespace Mollie
         /// Get client.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single client by its ID.
+        /// Retrieve a single client by its ID.<br/>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="organizationId">Provide the ID of the related organization.</param>
         /// <param name="embed">
@@ -422,7 +426,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-client", null, SDKConfiguration.SecuritySource, cancellationToken);
