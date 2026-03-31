@@ -76,6 +76,10 @@ namespace Mollie
         public ISubscriptions Subscriptions { get; }
 
         public ISalesInvoices SalesInvoices { get; }
+
+        public ITransfers Transfers { get; }
+
+        public IVerifyPayees VerifyPayees { get; }
     }
 
     public class Client: IClient
@@ -192,6 +196,14 @@ namespace Mollie
         /// The SalesInvoices sub-SDK.
         /// </summary>
         public ISalesInvoices SalesInvoices { get; private set; }
+        /// <summary>
+        /// The Transfers sub-SDK.
+        /// </summary>
+        public ITransfers Transfers { get; private set; }
+        /// <summary>
+        /// The VerifyPayees sub-SDK.
+        /// </summary>
+        public IVerifyPayees VerifyPayees { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
@@ -255,6 +267,10 @@ namespace Mollie
             Subscriptions = new Subscriptions(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
+
+            Transfers = new Transfers(SDKConfiguration);
+
+            VerifyPayees = new VerifyPayees(SDKConfiguration);
         }
 
         /// <summary>

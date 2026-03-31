@@ -32,7 +32,8 @@ namespace Mollie
         /// Create a webhook.
         /// </summary>
         /// <remarks>
-        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.
+        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="CreateWebhookRequestBody"/> parameter.</param>
@@ -55,7 +56,8 @@ namespace Mollie
         /// List all webhooks.
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.
+        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListWebhooksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -78,7 +80,8 @@ namespace Mollie
         /// Update a webhook.
         /// </summary>
         /// <remarks>
-        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.
+        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -104,7 +107,8 @@ namespace Mollie
         /// Get a webhook.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single webhook object by its ID.
+        /// Retrieve a single webhook object by its ID.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="testmode">
@@ -134,7 +138,8 @@ namespace Mollie
         /// Delete a webhook.
         /// </summary>
         /// <remarks>
-        /// Delete a single webhook object by its webhook ID.
+        /// Delete a single webhook object by its webhook ID.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -160,7 +165,8 @@ namespace Mollie
         /// Test a webhook.
         /// </summary>
         /// <remarks>
-        /// Sends a test event to the webhook to verify the endpoint is working as expected.
+        /// Sends a test event to the webhook to verify the endpoint is working as expected.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -200,7 +206,8 @@ namespace Mollie
         /// Create a webhook.
         /// </summary>
         /// <remarks>
-        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.
+        /// A webhook must have a name, an url and a list of event types. You can also create webhooks in the webhooks settings section of the Dashboard.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="CreateWebhookRequestBody"/> parameter.</param>
@@ -245,7 +252,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-webhook", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -389,7 +396,8 @@ namespace Mollie
         /// List all webhooks.
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.
+        /// Returns a paginated list of your webhooks. If no webhook endpoints are available, the resulting array will be empty. This request should never throw an error.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListWebhooksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -432,7 +440,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-webhooks", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -614,7 +622,8 @@ namespace Mollie
         /// Update a webhook.
         /// </summary>
         /// <remarks>
-        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.
+        /// Updates the webhook. You may edit the name, url and the list of subscribed event types.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -665,7 +674,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-webhook", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -809,7 +818,8 @@ namespace Mollie
         /// Get a webhook.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single webhook object by its ID.
+        /// Retrieve a single webhook object by its ID.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="testmode">
@@ -859,7 +869,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-webhook", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1003,7 +1013,8 @@ namespace Mollie
         /// Delete a webhook.
         /// </summary>
         /// <remarks>
-        /// Delete a single webhook object by its webhook ID.
+        /// Delete a single webhook object by its webhook ID.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -1054,7 +1065,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "delete-webhook", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1180,7 +1191,8 @@ namespace Mollie
         /// Test a webhook.
         /// </summary>
         /// <remarks>
-        /// Sends a test event to the webhook to verify the endpoint is working as expected.
+        /// Sends a test event to the webhook to verify the endpoint is working as expected.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="webhookId">Provide the ID of the related webhook.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -1231,7 +1243,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "test-webhook", null, SDKConfiguration.SecuritySource, cancellationToken);

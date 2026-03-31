@@ -90,7 +90,7 @@ namespace Mollie.Models.Components
         /// Only available on `transaction-categories` grouping.
         /// </summary>
         [JsonProperty("transfers")]
-        public Transfers? Transfers { get; set; }
+        public Models.Components.Transfers? Transfers { get; set; }
 
         /// <summary>
         /// Only available on `transaction-categories` grouping.
