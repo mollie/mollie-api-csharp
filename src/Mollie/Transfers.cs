@@ -53,8 +53,7 @@ namespace Mollie
         /// | `11.00` | Transfer initiated, pending review by Mollie       | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
         /// | `12.00` | Transfer initiated, blocked by Mollie              | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
         /// | `13.00` | Transfer initiated, failed on scheme submission    | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
-        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -84,8 +83,7 @@ namespace Mollie
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
-        /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// and details of a previously created transfer.
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -154,8 +152,7 @@ namespace Mollie
         /// | `11.00` | Transfer initiated, pending review by Mollie       | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
         /// | `12.00` | Transfer initiated, blocked by Mollie              | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
         /// | `13.00` | Transfer initiated, failed on scheme submission    | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
-        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -198,7 +195,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -373,8 +370,7 @@ namespace Mollie
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
-        /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// and details of a previously created transfer.
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -426,7 +422,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);

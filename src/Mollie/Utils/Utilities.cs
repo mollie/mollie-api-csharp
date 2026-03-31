@@ -131,25 +131,11 @@ namespace Mollie.Utils
                 && o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
         }
 
-        public static bool IsModelNamespace(string ns)
-        {
-            var modelNamespaces = new[]
-            {
-                "Mollie.Models.Requests",
-                "Mollie.Models.Components",
-                "Mollie.Models.Errors",
-            };
-
-            return modelNamespaces.Contains(ns);
-        }
-
         public static bool IsClass(object? o)
         {
             if (o == null)
                 return false;
-            if (!o.GetType().IsClass)
-                return false;
-            return IsModelNamespace(o.GetType().Namespace ?? "");
+            return o.GetType().IsClass && (o.GetType().FullName ?? "").StartsWith("Mollie.Models");
         }
 
         // TODO: code review polyfilled for IsAssignableTo
