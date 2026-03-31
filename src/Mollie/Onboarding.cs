@@ -30,7 +30,8 @@ namespace Mollie
         /// Get onboarding status.
         /// </summary>
         /// <remarks>
-        /// Retrieve the onboarding status of the currently authenticated organization.
+        /// Retrieve the onboarding status of the currently authenticated organization.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -55,7 +56,8 @@ namespace Mollie
         /// <br/>
         /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
         /// onboarding status is `needs-data`.  <br/>
-        /// Information that the merchant has entered in their dashboard will not be overwritten.
+        /// Information that the merchant has entered in their dashboard will not be overwritten.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
@@ -90,7 +92,8 @@ namespace Mollie
         /// Get onboarding status.
         /// </summary>
         /// <remarks>
-        /// Retrieve the onboarding status of the currently authenticated organization.
+        /// Retrieve the onboarding status of the currently authenticated organization.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -125,7 +128,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-onboarding-status", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -248,7 +251,8 @@ namespace Mollie
         /// <br/>
         /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
         /// onboarding status is `needs-data`.  <br/>
-        /// Information that the merchant has entered in their dashboard will not be overwritten.
+        /// Information that the merchant has entered in their dashboard will not be overwritten.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
@@ -291,7 +295,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "submit-onboarding-data", null, SDKConfiguration.SecuritySource, cancellationToken);

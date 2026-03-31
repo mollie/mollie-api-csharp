@@ -32,7 +32,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all permissions available to the current access token.<br/>
         /// <br/>
-        /// The results are **not** paginated.
+        /// The results are **not** paginated.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -53,7 +54,8 @@ namespace Mollie
         /// Get permission.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.
+        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="permissionId">Provide the ID of the related permission.</param>
         /// <param name="testmode">
@@ -99,7 +101,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all permissions available to the current access token.<br/>
         /// <br/>
-        /// The results are **not** paginated.
+        /// The results are **not** paginated.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -135,7 +138,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-permissions", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -279,7 +282,8 @@ namespace Mollie
         /// Get permission.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.
+        /// Retrieve a single permission by its ID, and see if the permission is granted to the current access token.<br/>
+        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="permissionId">Provide the ID of the related permission.</param>
         /// <param name="testmode">
@@ -329,7 +333,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-permission", null, SDKConfiguration.SecuritySource, cancellationToken);
