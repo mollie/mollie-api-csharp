@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 0a78b7e4dfdb983ad58e46b8f6c58082
+  docChecksum: 1d21de66ed6340572d2ce0881c180583
   docVersion: 1.0.0
   speakeasyVersion: 1.761.0
   generationVersion: 2.879.1
-  releaseVersion: 0.12.4
-  configChecksum: f6f72633f7c0940694339804e113a6a4
+  releaseVersion: 0.12.5
+  configChecksum: 1188f67106bf6fdb794a0ec24ef1e57b
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 08461932-7e17-4667-95d0-99e07d65fa85
-  pristine_commit_hash: d1c1f2981fb5d8697378a762bfa283eb12b0c219
-  pristine_tree_hash: 4ede0885fa7277ffbd45b8ae02464cd22f8820a5
+  generation_id: a63bb920-5d9c-4853-a92b-843eff857352
+  pristine_commit_hash: 1724ec6e74b3b79bb3d79c7167258788a7defa86
+  pristine_tree_hash: 6c4b77f9b082f79156a3746c02be971aa352063f
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -2119,8 +2119,8 @@ trackedFiles:
     pristine_git_object: 5624ac33210cf950a27d06716f08a739c7d6610f
   docs/Models/Requests/CreateTransferRequest.md:
     id: a95fca0e9226
-    last_write_checksum: sha1:2dc8343d30ae7168bd344af558290f29057b4c12
-    pristine_git_object: b12ed76cce50297eda5662a7b8650b21badccfe6
+    last_write_checksum: sha1:baafcf61bcfb116aaa2269d8ef866e3928a3cba7
+    pristine_git_object: 76ca1d5cc06f4191979a238e49217c6ad5d60c88
   docs/Models/Requests/CreateTransferResponse.md:
     id: 3f0297c2648e
     last_write_checksum: sha1:377a0f8f95928a965d8d544df1a2eeab9ae3e070
@@ -3303,8 +3303,8 @@ trackedFiles:
     pristine_git_object: 2fe854fc05fd2fa96f74d46dd641b4fea084e6d5
   docs/sdks/settlements/README.md:
     id: c0b0673bed80
-    last_write_checksum: sha1:113e9f21c8687a4c0bf9fadc36db20133f32f4e4
-    pristine_git_object: 40a6ebba0804eef4a146ad8cafab6e5a5df8f5a5
+    last_write_checksum: sha1:407eca6d33c0c21644b7fb7debaf33b9aee3655d
+    pristine_git_object: f73fb455e0abaa8cdb5a73a861aeb9714396c078
   docs/sdks/subscriptions/README.md:
     id: 298b9ab3c3e0
     last_write_checksum: sha1:9ce03f9508821f032c78eef640315ae678e18875
@@ -6575,8 +6575,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:92d9d379c3a45bddc94c88ea22186f6a91689d34
-    pristine_git_object: 7c9e313be1b91486391430af42834bcf23e67eea
+    last_write_checksum: sha1:ca405296a70206d1dcb626efb9ad20d9fbcd1caf
+    pristine_git_object: 61eda2a7030997a3a9d8524586230900ecf8feaf
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:4cd286b326535a7fb5e967d83d4ac8312a59e9ea
@@ -6607,8 +6607,8 @@ trackedFiles:
     pristine_git_object: 7eb3d19ed5b565ef7d5e3097a54be7440127f96e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:dc921b3e7baac54f7082d2814c66c8a777a4384f
-    pristine_git_object: 59074fb1769cfb09dd06b53a20d25246aeedfa54
+    last_write_checksum: sha1:ec8a877179040c798a1c79f3e65940877e8c1ea6
+    pristine_git_object: 4d94f9d3295c6c231a35775331e450a1c36f9061
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:ec5262ed04cb68b4e94690b5076d03bffccad1c9
@@ -6643,8 +6643,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:b94c064a1ea25399ce3f81c52bfa4b1dcc877562
-    pristine_git_object: d66e0b230b16b8fec1404695b6c2c38a6273aeb0
+    last_write_checksum: sha1:b85772d7bec0eff9de8088d5857a5e1de82dbe5f
+    pristine_git_object: 328e192f81b4d0362f300b20af406c752ecc0845
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -9681,6 +9681,19 @@ examples:
           application/hal+json: {"count": 5, "_embedded": {"payments": [{"resource": "payment", "id": "tr_5B8cwPMGnU", "mode": "live", "description": "Chess Board", "amount": {"currency": "EUR", "value": "10.00"}, "amountRefunded": {"currency": "EUR", "value": "10.00"}, "amountRemaining": {"currency": "EUR", "value": "10.00"}, "amountCaptured": {"currency": "EUR", "value": "10.00"}, "amountChargedBack": {"currency": "EUR", "value": "10.00"}, "settlementAmount": {"currency": "EUR", "value": "10.00"}, "redirectUrl": "https://example.org/redirect", "cancelUrl": "https://example.org/cancel", "webhookUrl": "https://example.org/webhooks", "lines": [{"type": "physical", "description": "LEGO 4440 Forest Police Station", "quantity": 1, "quantityUnit": "pcs", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discountAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "vatRate": "21.00", "vatAmount": {"currency": "EUR", "value": "10.00"}, "sku": "9780241661628", "categories": ["meal", "eco"], "imageUrl": "https://...", "productUrl": "https://...", "recurring": {"description": "Gym subscription", "interval": "... weeks", "amount": {"currency": "EUR", "value": "10.00"}, "times": 1, "startDate": "2024-12-12"}}], "billingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "shippingAddress": {"title": "Mr.", "givenName": "Piet", "familyName": "Mondriaan", "organizationName": "Mollie B.V.", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "Apt. 1", "postalCode": "1234AB", "email": "piet@example.org", "phone": "31208202070", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "locale": "en_US", "countryCode": "BE", "method": "ideal", "restrictPaymentMethodsToCountry": "NL", "captureMode": "manual", "captureDelay": "... days", "captureBefore": "2024-03-20T09:28:37.0Z", "applicationFee": {"amount": {"currency": "EUR", "value": "10.00"}, "description": "10"}, "routing": [{"resource": "route", "id": "rt_5B8cwPMGnU", "mode": "live", "amount": {"currency": "EUR", "value": "10.00"}, "destination": {"type": "organization", "organizationId": "org_1234567"}, "createdAt": "2024-12-12T10:00:00Z", "releaseDate": "2024-12-12", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}}}], "sequenceType": "oneoff", "subscriptionId": "sub_5B8cwPMGnU", "mandateId": "mdt_5B8cwPMGnU", "customerId": "cst_5B8cwPMGnU", "profileId": "pfl_5B8cwPMGnU", "settlementId": "stl_5B8cwPMGnU", "orderId": "ord_5B8cwPMGnU", "status": "paid", "statusReason": {"code": "insufficient_funds", "message": "The account associated with the card has insufficient funds. The shopper should use another payment method or\ncontact their bank."}, "isCancelable": true, "createdAt": "2024-03-20T09:13:37.0Z", "authorizedAt": "2024-03-20T09:28:37.0Z", "paidAt": "2024-03-20T09:28:37.0Z", "canceledAt": "2024-03-20T09:28:37.0Z", "expiresAt": "2024-03-20T09:28:37.0Z", "expiredAt": "2024-03-20T09:28:37.0Z", "failedAt": "2024-03-20T09:28:37.0Z", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "checkout": {"href": "https://...", "type": "application/hal+json"}, "mobileAppCheckout": {"href": "https://...", "type": "application/hal+json"}, "changePaymentState": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "refunds": {"href": "https://...", "type": "application/hal+json"}, "chargebacks": {"href": "https://...", "type": "application/hal+json"}, "captures": {"href": "https://...", "type": "application/hal+json"}, "settlement": {"href": "https://...", "type": "application/hal+json"}, "customer": {"href": "https://...", "type": "application/hal+json"}, "mandate": {"href": "https://...", "type": "application/hal+json"}, "subscription": {"href": "https://...", "type": "application/hal+json"}, "order": {"href": "https://...", "type": "application/hal+json"}, "terminal": {"href": "https://...", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+    list-settlement-payments-200-1:
+      parameters:
+        path:
+          settlementId: "stl_5B8cwPMGnU"
+        query:
+          from: "tr_5B8cwPMGnU"
+          limit: 50
+          sort: "desc"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 1, "_embedded": {"payments": [{"resource": "payment", "id": "tr_5B8cwPMGnU6qLbRvo7qEZo", "mode": "live", "description": "Order #12345", "amount": {"currency": "EUR", "value": "75.00"}, "redirectUrl": "https://webshop.example.org/order/12345/", "method": "ideal", "metadata": null, "sequenceType": "oneoff", "profileId": "pfl_QkEhN94Ba", "settlementId": "stl_jDk30akdN", "status": "paid", "details": null, "createdAt": "2024-02-12T11:58:35+00:00", "paidAt": "2024-02-12T12:01:35+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_12345678/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "text/html"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/settlements/stl_jDk30akdN/payments?from=tr_SDkzMggpvx&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
   list-settlement-captures:
     list-captures-200-1:
       parameters:
@@ -9728,6 +9741,18 @@ examples:
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+    list-settlement-captures-200-1:
+      parameters:
+        path:
+          settlementId: "stl_5B8cwPMGnU"
+        query:
+          from: "cpt_vytxeTZskVKR7C7WgdSP3d"
+          limit: 50
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 1, "_embedded": {"captures": [{"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "live", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "35.95"}, "status": "succeeded", "metadata": "{\"bookkeeping_id\":12345}", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "settlementId": "stl_jDk30akdN", "createdAt": "2023-08-02T09:29:56+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/settlements/stl_jDk30akdN/captures?from=cpt_vytxeTZskVKR7C7WgdSP3d&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
   list-settlement-refunds:
     list-refunds-200-1:
       parameters:
@@ -9763,6 +9788,18 @@ examples:
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+    list-settlement-refunds-200-1:
+      parameters:
+        path:
+          settlementId: "stl_5B8cwPMGnU"
+        query:
+          from: "re_5B8cwPMGnU"
+          limit: 50
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 1, "_embedded": {"refunds": [{"resource": "refund", "id": "re_4qqhO89gsT", "mode": "live", "description": "Order", "amount": {"currency": "EUR", "value": "5.95"}, "metadata": {"bookkeeping_id": 12345}, "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "settlementId": "stl_jDk30akdN", "status": "refunded", "createdAt": "2023-03-14T17:09:02+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}}}]}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": null, "next": {"href": "https://api.mollie.com/v2/settlements/stl_jDk30akdN/refunds?from=re_APBiGPH2vV&limit=5", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
   list-settlement-chargebacks:
     list-chargeback-200-1:
       parameters:
@@ -10234,7 +10271,6 @@ examples:
         "503":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Settlements.ListPayments()`: \n  *  `request.Testmode` **Removed** (Breaking ⚠️)\n  *  `response.Embedded.Payments[]` **Changed** (Breaking ⚠️)\n* `Client.Settlements.ListCaptures()`: \n  *  `request.Testmode` **Removed** (Breaking ⚠️)\n  *  `response.Embedded.Captures[]` **Changed** (Breaking ⚠️)\n* `Client.Settlements.ListRefunds()`: \n  *  `request.Testmode` **Removed** (Breaking ⚠️)\n  *  `response.Embedded.Refunds[]` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln
