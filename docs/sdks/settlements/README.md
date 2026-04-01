@@ -310,6 +310,38 @@ while(res != null)
     res = await res.Next!();
 }
 ```
+### Example Usage: list-settlement-payments-200-1
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-payments" method="get" path="/settlements/{settlementId}/payments" example="list-settlement-payments-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "pfl_5B8cwPMGnU",
+    security: new Security() {
+        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+ListSettlementPaymentsRequest req = new ListSettlementPaymentsRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "tr_5B8cwPMGnU",
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+ListSettlementPaymentsResponse? res = await sdk.Settlements.ListPaymentsAsync(req);
+
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
+```
 
 ### Parameters
 
@@ -392,6 +424,34 @@ while(res != null)
     res = await res.Next!();
 }
 ```
+### Example Usage: list-settlement-captures-200-1
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-captures" method="get" path="/settlements/{settlementId}/captures" example="list-settlement-captures-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "cpt_vytxeTZskVKR7C7WgdSP3d",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+ListSettlementCapturesResponse? res = await sdk.Settlements.ListCapturesAsync(req);
+
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
+```
 
 ### Parameters
 
@@ -416,7 +476,7 @@ Retrieve all refunds 'deducted' from the given settlement.
 
 The response is in the same format as the response of the [List refunds endpoint](list-refunds).
 
-### Example Usage
+### Example Usage: list-refunds-200-1
 
 <!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" example="list-refunds-200-1" -->
 ```csharp
@@ -433,6 +493,34 @@ ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
     From = "re_5B8cwPMGnU",
     Limit = 50,
     Embed = "payment",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+ListSettlementRefundsResponse? res = await sdk.Settlements.ListRefundsAsync(req);
+
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
+```
+### Example Usage: list-settlement-refunds-200-1
+
+<!-- UsageSnippet language="csharp" operationID="list-settlement-refunds" method="get" path="/settlements/{settlementId}/refunds" example="list-settlement-refunds-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
+    SettlementId = "stl_5B8cwPMGnU",
+    From = "re_5B8cwPMGnU",
+    Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 
