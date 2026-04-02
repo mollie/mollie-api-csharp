@@ -224,6 +224,13 @@ var sdk = new Mollie.Client(
 <details open>
 <summary>Available methods</summary>
 
+### [Accounts](docs/sdks/accounts/README.md)
+
+* [ListAccounts](docs/sdks/accounts/README.md#listaccounts) - List business accounts
+* [GetAccount](docs/sdks/accounts/README.md#getaccount) - Get business account
+* [List](docs/sdks/accounts/README.md#list) - List transactions
+* [Get](docs/sdks/accounts/README.md#get) - Get transaction
+
 ### [BalanceTransfers](docs/sdks/balancetransfers/README.md)
 
 * [Create](docs/sdks/balancetransfers/README.md#create) - Create a Connect balance transfer

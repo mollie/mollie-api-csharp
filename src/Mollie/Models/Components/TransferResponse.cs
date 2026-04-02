@@ -84,7 +84,7 @@ namespace Mollie.Models.Components
         public TransferSchemeResponse TransferScheme { get; set; } = default!;
 
         /// <summary>
-        /// Indicates whether the transfer is a credit or debit transaction from the perspective of the account holder.
+        /// Indicates whether the entry is a credit or debit from the perspective of the account holder.
         /// </summary>
         [JsonProperty("creditDebitIndicator")]
         public CreditDebitIndicator CreditDebitIndicator { get; set; } = default!;
