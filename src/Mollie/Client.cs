@@ -77,6 +77,8 @@ namespace Mollie
 
         public ISalesInvoices SalesInvoices { get; }
 
+        public IAccounts Accounts { get; }
+
         public ITransfers Transfers { get; }
 
         public IVerifyPayees VerifyPayees { get; }
@@ -197,6 +199,10 @@ namespace Mollie
         /// </summary>
         public ISalesInvoices SalesInvoices { get; private set; }
         /// <summary>
+        /// The Accounts sub-SDK.
+        /// </summary>
+        public IAccounts Accounts { get; private set; }
+        /// <summary>
         /// The Transfers sub-SDK.
         /// </summary>
         public ITransfers Transfers { get; private set; }
@@ -267,6 +273,8 @@ namespace Mollie
             Subscriptions = new Subscriptions(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
+
+            Accounts = new Accounts(SDKConfiguration);
 
             Transfers = new Transfers(SDKConfiguration);
 
@@ -409,6 +417,8 @@ namespace Mollie
             Subscriptions = new Subscriptions(SDKConfiguration);
 
             SalesInvoices = new SalesInvoices(SDKConfiguration);
+
+            Accounts = new Accounts(SDKConfiguration);
 
             Transfers = new Transfers(SDKConfiguration);
 
