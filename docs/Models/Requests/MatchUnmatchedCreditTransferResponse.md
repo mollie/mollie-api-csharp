@@ -1,0 +1,9 @@
+# MatchUnmatchedCreditTransferResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                                | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                                   | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `UnmatchedCreditTransferActionResponse`                                                                   | [UnmatchedCreditTransferActionResponse](../../Models/Components/UnmatchedCreditTransferActionResponse.md) | :heavy_minus_sign:                                                                                        | The unmatched credit transfer action object.                                                              |
