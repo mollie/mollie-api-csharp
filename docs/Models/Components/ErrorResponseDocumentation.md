@@ -1,4 +1,4 @@
-# Documentation
+# ErrorResponseDocumentation
 
 The URL to the generic Mollie API error handling guide.
 

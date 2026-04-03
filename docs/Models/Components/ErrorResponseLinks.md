@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field                                                     | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `Documentation`                                           | [Documentation](../../Models/Components/Documentation.md) | :heavy_check_mark:                                        | The URL to the generic Mollie API error handling guide.   |
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Documentation`                                                                     | [ErrorResponseDocumentation](../../Models/Components/ErrorResponseDocumentation.md) | :heavy_check_mark:                                                                  | The URL to the generic Mollie API error handling guide.                             |

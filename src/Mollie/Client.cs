@@ -51,6 +51,8 @@ namespace Mollie
 
         public IPayments Payments { get; }
 
+        public IUnmatchedCreditTransfers UnmatchedCreditTransfers { get; }
+
         public ISessions Sessions { get; }
 
         public IMethods Methods { get; }
@@ -146,6 +148,10 @@ namespace Mollie
         /// The Payments sub-SDK.
         /// </summary>
         public IPayments Payments { get; private set; }
+        /// <summary>
+        /// The UnmatchedCreditTransfers sub-SDK.
+        /// </summary>
+        public IUnmatchedCreditTransfers UnmatchedCreditTransfers { get; private set; }
         /// <summary>
         /// The Sessions sub-SDK.
         /// </summary>
@@ -247,6 +253,8 @@ namespace Mollie
             BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
+
+            UnmatchedCreditTransfers = new UnmatchedCreditTransfers(SDKConfiguration);
 
             Sessions = new Sessions(SDKConfiguration);
 
@@ -391,6 +399,8 @@ namespace Mollie
             BalanceTransfers = new BalanceTransfers(SDKConfiguration);
 
             Payments = new Payments(SDKConfiguration);
+
+            UnmatchedCreditTransfers = new UnmatchedCreditTransfers(SDKConfiguration);
 
             Sessions = new Sessions(SDKConfiguration);
 
