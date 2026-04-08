@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:ea64afd807f370af188cab224a9aaa74939da504c8397dda2a842bf99fb9a6fa
         sourceBlobDigest: sha256:b21883e67a851b87d50419974be663465b72fc3fa822516d30813e5d32b4a726
         codeSamplesNamespace: mollie-api-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:216c334e1e356d2560d906081d095b5cd0bb90880b49e6f6b3ed5fe4af3ce8a7
+        codeSamplesRevisionDigest: sha256:7154c955cb6b5a73453ee172d2acf7482d51befdd7df20fc4b84a1a3fdd08534
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

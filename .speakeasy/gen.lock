@@ -5,15 +5,15 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 0.12.7
-  configChecksum: 915ee38aed72418bdce33dc203345217
+  releaseVersion: 0.13.0
+  configChecksum: 2a34ab6adf6bc24497c9709a83f799ab
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 0b7517c3-be50-45de-83fe-46c435bae402
-  pristine_commit_hash: 0d259beb0062f163c919eb398058fce7ad876d65
-  pristine_tree_hash: e85731e814ca35ec282156fcd1e2fc8bd5d6dbd5
+  generation_id: fb0a2560-bb0c-4545-bc2c-f3135c6dad5a
+  pristine_commit_hash: 125e0259ff3886e9c076fe118aecedd30e7ef97f
+  pristine_tree_hash: 0cb331d1c8537e11b1b9f6c55624e51086e59911
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -7003,8 +7003,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:2952c6a3d6c912205824b5469f97b83490e5e259
-    pristine_git_object: 48d28e35ed37af2c5654e79a74f863b0206ee055
+    last_write_checksum: sha1:da5f7b010fe0db92f6e7efbb9127c262d71e0173
+    pristine_git_object: 304ddeb82da1bd584b2e55143696b80ef61cf9bc
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:4cd286b326535a7fb5e967d83d4ac8312a59e9ea
@@ -7035,8 +7035,8 @@ trackedFiles:
     pristine_git_object: 7eb3d19ed5b565ef7d5e3097a54be7440127f96e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:ded75c83e66c413b20ea35cc54c266be7d7e63f4
-    pristine_git_object: e36b0d58af58a83cd009a2b8bb19a88f18904553
+    last_write_checksum: sha1:dffebc57dcd474d7018157b722f828f2ec732782
+    pristine_git_object: cb68ebdd6c320a28caa9c1e5ee35a5712703d24b
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:ec5262ed04cb68b4e94690b5076d03bffccad1c9
@@ -7075,8 +7075,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:6e5d0c8597cc50a2ef5db7175637cb70953ace83
-    pristine_git_object: 9efba0c86947e0789a3ccd2c84e45b207213f5d3
+    last_write_checksum: sha1:4b1ba8a2afb07cda8b961293d1878af31d984447
+    pristine_git_object: 90001ed02738ae598b36fe4a9848559ccacf7870
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -10899,12 +10899,6 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Client.UnmatchedCreditTransfers.List()`: **Added**
-  * `Client.UnmatchedCreditTransfers.Get()`: **Added**
-  * `Client.UnmatchedCreditTransfers.Match()`: **Added**
-  * `Client.UnmatchedCreditTransfers.Return()`: **Added**
 generatedFiles:
   - .gitattributes
   - Mollie.sln
