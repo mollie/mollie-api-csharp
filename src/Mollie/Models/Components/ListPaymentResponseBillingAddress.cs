@@ -84,7 +84,9 @@ namespace Mollie.Models.Components
         /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions<br/>
         /// email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.<br/>
+        /// <br/>
+        /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; }

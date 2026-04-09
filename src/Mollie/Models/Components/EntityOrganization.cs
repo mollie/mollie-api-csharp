@@ -37,7 +37,9 @@ namespace Mollie.Models.Components
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The email address associated with the organization.
+        /// The email address associated with the organization.<br/>
+        /// <br/>
+        /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; } = default!;

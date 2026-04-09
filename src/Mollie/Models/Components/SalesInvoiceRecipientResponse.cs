@@ -68,7 +68,9 @@ namespace Mollie.Models.Components
         public string? VatNumber { get; set; } = null;
 
         /// <summary>
-        /// The email address of the recipient.
+        /// The email address of the recipient.<br/>
+        /// <br/>
+        /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; } = default!;

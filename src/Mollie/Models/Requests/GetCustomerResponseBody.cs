@@ -49,7 +49,9 @@ namespace Mollie.Models.Requests
         public string? Name { get; set; }
 
         /// <summary>
-        /// The email address of the customer.
+        /// The email address of the customer.<br/>
+        /// <br/>
+        /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
         [JsonProperty("email", NullValueHandling = NullValueHandling.Include)]
         public string? Email { get; set; }
