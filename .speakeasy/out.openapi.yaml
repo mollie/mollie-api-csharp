@@ -5937,7 +5937,10 @@ paths:
                   type:
                     - string
                     - 'null'
-                  description: The email address associated with the profile's trade name or brand.
+                  description: |-
+                    The email address associated with the profile's trade name or brand.
+
+                    If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
                   example: test@mollie.com
                 phone:
                   type:
@@ -6477,7 +6480,10 @@ paths:
                       example: https://www.mollie.com
                     email:
                       type: string
-                      description: The email address associated with the profile's trade name or brand.
+                      description: |-
+                        The email address associated with the profile's trade name or brand.
+
+                        If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
                       example: info@mollie.com
                     phone:
                       type: string
@@ -28808,6 +28814,8 @@ components:
             email upon payment creation. The language of the email will follow the locale parameter of the payment.
 
             Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: piet@example.org
         phone:
           type: string
@@ -31019,7 +31027,10 @@ components:
           readOnly: true
         email:
           type: string
-          description: The email address associated with the organization.
+          description: |-
+            The email address associated with the organization.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: example@mail.com
           readOnly: true
         locale:
@@ -31111,7 +31122,10 @@ components:
           example: https://example.com
         email:
           type: string
-          description: The email address associated with the profile's trade name or brand.
+          description: |-
+            The email address associated with the profile's trade name or brand.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: test@mollie.com
         phone:
           type: string
@@ -31495,7 +31509,10 @@ components:
           properties:
             email:
               type: string
-              description: The email address of your customer.
+              description: |-
+                The email address of your customer.
+
+                If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
               example: john@example.org
             givenName:
               type: string
@@ -33767,7 +33784,10 @@ components:
           type:
             - string
             - 'null'
-          description: The email address of the customer.
+          description: |-
+            The email address of the customer.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: example@email.com
         locale:
           type:
@@ -34624,7 +34644,10 @@ components:
         email:
           example: example@email.com
           type: string
-          description: The email address of the recipient.
+          description: |-
+            The email address of the recipient.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
         phone:
           example: '+0123456789'
           type:
@@ -37408,7 +37431,10 @@ components:
           example: https://example.com
         email:
           type: string
-          description: The email address associated with the profile's trade name or brand.
+          description: |-
+            The email address associated with the profile's trade name or brand.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: test@mollie.com
         phone:
           type: string
@@ -38105,7 +38131,10 @@ components:
           type:
             - string
             - 'null'
-          description: The email address of the customer.
+          description: |-
+            The email address of the customer.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: example@email.com
         locale:
           type:
@@ -40447,7 +40476,10 @@ components:
           example: https://example.com
         email:
           type: string
-          description: The email address associated with the profile's trade name or brand.
+          description: |-
+            The email address associated with the profile's trade name or brand.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: test@mollie.com
         phone:
           type: string
@@ -40589,7 +40621,10 @@ components:
           properties:
             email:
               type: string
-              description: The email address of your customer.
+              description: |-
+                The email address of your customer.
+
+                If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
               example: john@example.org
             givenName:
               type: string
@@ -41154,7 +41189,10 @@ components:
           type:
             - string
             - 'null'
-          description: The email address of the customer.
+          description: |-
+            The email address of the customer.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
           example: example@email.com
         locale:
           type:
@@ -41743,7 +41781,10 @@ components:
         email:
           example: example@email.com
           type: string
-          description: The email address of the recipient.
+          description: |-
+            The email address of the recipient.
+
+            If the domain contains non-ASCII characters, encode it as Punycode per [RFC 3492](https://www.rfc-editor.org/rfc/rfc3492).
         phone:
           example: '+0123456789'
           type:

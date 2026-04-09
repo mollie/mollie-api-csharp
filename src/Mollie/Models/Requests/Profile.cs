@@ -30,7 +30,9 @@ namespace Mollie.Models.Requests
         public string? Url { get; set; }
 
         /// <summary>
-        /// The email address associated with the profile's trade name or brand.
+        /// The email address associated with the profile's trade name or brand.<br/>
+        /// <br/>
+        /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; }
