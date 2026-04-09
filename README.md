@@ -29,6 +29,7 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
   * [Global Parameters](#global-parameters)
   * [Pagination](#pagination)
   * [Retries](#retries)
+  * [Webhook Signature Validation](#webhook-signature-validation)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
@@ -607,6 +608,61 @@ while(res != null)
 }
 ```
 <!-- End Retries [retries] -->
+
+<!-- Start Webhook Signature Validation [webhook-signature-validation] -->
+## Webhook Signature Validation
+
+The SDK includes a helper to validate Mollie webhook signatures using HMAC-SHA256.
+Use it with the raw request body exactly as received by your web framework and the value of the
+`X-Mollie-Signature` header.
+
+```csharp
+using Mollie.Utils.Webhooks;
+
+static void HandleWebhook(string rawBody, string? signatureHeader)
+{
+    var validator = new SignatureValidator(
+        Environment.GetEnvironmentVariable("MOLLIE_WEBHOOK_SECRET") ?? string.Empty
+    );
+
+    try
+    {
+        var isVerified = validator.ValidatePayload(rawBody, signatureHeader);
+
+        if (!isVerified)
+        {
+            Console.WriteLine("No signature header was provided; treating it as a legacy webhook");
+            return;
+        }
+
+        Console.WriteLine("Webhook signature is valid");
+    }
+    catch (InvalidSignatureException)
+    {
+        Console.WriteLine("Webhook signature is invalid");
+    }
+}
+```
+
+You can also use the static helper when you do not want to instantiate the validator yourself:
+
+```csharp
+using Mollie.Utils.Webhooks;
+
+var isVerified = SignatureValidator.Validate(
+    payload: rawBody,
+    signingSecrets: new[] { "current_secret", "previous_secret" },
+    signatures: signatureHeader != null ? new[] { signatureHeader } : null
+);
+```
+
+Notes:
+
+- `ValidatePayload()` returns `true` when at least one signature matches.
+- It returns `false` when no signature is present, which lets you support legacy webhooks.
+- It throws `InvalidSignatureException` when a signature is present but does not match.
+- Header values with the `sha256=` prefix are supported automatically.
+<!-- End Webhook Signature Validation [webhook-signature-validation] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
