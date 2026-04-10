@@ -163,6 +163,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -318,6 +319,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -473,6 +475,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -628,6 +631,162 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
+        Testmode = false,
+        ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
+        Company = new Company() {
+            RegistrationNumber = "12345678",
+            VatNumber = "NL123456789B01",
+        },
+        CardToken = "tkn_12345",
+        VoucherNumber = "1234567890",
+        VoucherPin = "1234",
+        ConsumerDateOfBirth = LocalDate.FromDateTime(System.DateTime.Parse("2000-01-01")),
+        DigitalGoods = true,
+        CustomerReference = "1234567890",
+        TerminalId = "term_1234567890",
+    }
+);
+
+// handle response
+```
+### Example Usage: create-payment-201-13
+
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-13" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using NodaTime;
+using System.Collections.Generic;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Payments.CreateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    paymentRequest: new PaymentRequest() {
+        Description = "Chess Board",
+        Amount = new Amount() {
+            Currency = "EUR",
+            Value = "10.00",
+        },
+        RedirectUrl = "https://example.org/redirect",
+        CancelUrl = "https://example.org/cancel",
+        WebhookUrl = "https://example.org/webhooks",
+        Lines = new List<PaymentRequestLine>() {
+            new PaymentRequestLine() {
+                Type = PaymentLineType.Physical,
+                Description = "LEGO 4440 Forest Police Station",
+                Quantity = 1,
+                QuantityUnit = "pcs",
+                UnitPrice = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                DiscountAmount = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                TotalAmount = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                VatRate = "21.00",
+                VatAmount = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                Sku = "9780241661628",
+                Categories = new List<LineCategories>() {
+                    LineCategories.Meal,
+                    LineCategories.Eco,
+                },
+                ImageUrl = "https://...",
+                ProductUrl = "https://...",
+                Recurring = new RecurringLineItem() {
+                    Description = "Gym subscription",
+                    Interval = "... days",
+                    Amount = new Amount() {
+                        Currency = "EUR",
+                        Value = "10.00",
+                    },
+                    Times = 1,
+                    StartDate = "2024-12-12",
+                },
+            },
+        },
+        BillingAddress = new PaymentRequestBillingAddress() {
+            Title = "Mr.",
+            GivenName = "Piet",
+            FamilyName = "Mondriaan",
+            StreetAndNumber = "Keizersgracht 126",
+            StreetAdditional = "Apt. 1",
+            PostalCode = "1234AB",
+            Email = "piet@example.org",
+            Phone = "31208202070",
+            City = "Amsterdam",
+            Region = "Noord-Holland",
+            Country = "NL",
+        },
+        ShippingAddress = new PaymentAddress() {
+            Title = "Mr.",
+            GivenName = "Piet",
+            FamilyName = "Mondriaan",
+            OrganizationName = "Mollie B.V.",
+            StreetAndNumber = "Keizersgracht 126",
+            StreetAdditional = "Apt. 1",
+            PostalCode = "1234AB",
+            Email = "piet@example.org",
+            Phone = "31208202070",
+            City = "Amsterdam",
+            Region = "Noord-Holland",
+            Country = "NL",
+        },
+        Locale = Locale.EnUS,
+        Method = Method.CreateMethodEnum(
+            MethodEnum.Ideal
+        ),
+        Issuer = "ideal_INGBNL2A",
+        RestrictPaymentMethodsToCountry = "NL",
+        CaptureMode = CaptureMode.Manual,
+        CaptureDelay = "8 hours",
+        ApplicationFee = new PaymentRequestApplicationFee() {
+            Amount = new Amount() {
+                Currency = "EUR",
+                Value = "10.00",
+            },
+            Description = "10",
+        },
+        Routing = new List<EntityPaymentRoute>() {
+            new EntityPaymentRoute() {
+                Amount = new Amount() {
+                    Currency = "EUR",
+                    Value = "10.00",
+                },
+                Destination = new EntityPaymentRouteDestination() {
+                    Type = RouteDestinationType.Organization,
+                    OrganizationId = "org_1234567",
+                },
+                ReleaseDate = "2024-12-12",
+                Links = new EntityPaymentRouteLinks() {
+                    Self = new Url() {
+                        Href = "https://...",
+                        Type = "application/hal+json",
+                    },
+                    Payment = new Url() {
+                        Href = "https://...",
+                        Type = "application/hal+json",
+                    },
+                },
+            },
+        },
+        SequenceType = SequenceType.Oneoff,
+        MandateId = "mdt_5B8cwPMGnU",
+        CustomerId = "cst_5B8cwPMGnU",
+        ProfileId = "pfl_5B8cwPMGnU",
+        DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -783,6 +942,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -938,6 +1098,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1093,6 +1254,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1248,6 +1410,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1403,6 +1566,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1558,6 +1722,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1713,6 +1878,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {
@@ -1868,6 +2034,7 @@ var res = await sdk.Payments.CreateAsync(
         CustomerId = "cst_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         DueDate = "2025-01-01",
+        StoreCredentials = true,
         Testmode = false,
         ApplePayPaymentToken = "{\"paymentData\": {\"version\": \"EC_v1\", \"data\": \"vK3BbrCbI/....\"}}",
         Company = new Company() {

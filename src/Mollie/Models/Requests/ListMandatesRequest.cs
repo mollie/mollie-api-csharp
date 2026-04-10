@@ -12,6 +12,7 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
+    using System.Collections.Generic;
 
     public class ListMandatesRequest
     {
@@ -40,6 +41,12 @@ namespace Mollie.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
         public Sorting? Sort { get; set; }
+
+        /// <summary>
+        /// Returns only mandates that include the specified scopes.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=scopes")]
+        public List<MandateScopes>? Scopes { get; set; }
 
         /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>

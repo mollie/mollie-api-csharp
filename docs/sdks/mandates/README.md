@@ -112,6 +112,7 @@ The results are paginated.
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using System.Collections.Generic;
 
 var sdk = new Client(
     testmode: false,
@@ -125,6 +126,9 @@ ListMandatesRequest req = new ListMandatesRequest() {
     From = "mdt_5B8cwPMGnU",
     Limit = 50,
     Sort = Sorting.Desc,
+    Scopes = new List<MandateScopes>() {
+        MandateScopes.CustomerPresent,
+    },
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
 };
 

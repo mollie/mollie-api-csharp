@@ -286,10 +286,10 @@ namespace Mollie.Models.Components
         public string? SubscriptionId { get; set; } = null;
 
         /// <summary>
-        /// **Only relevant for recurring payments.**<br/>
+        /// **Only relevant for recurring payments and stored cards.**<br/>
         /// <br/>
-        /// When creating recurring payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
-        /// the customer's accounts should be credited.
+        /// When creating recurring or stored cards payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
+        /// the customer's accounts should be debited.
         /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; } = null;

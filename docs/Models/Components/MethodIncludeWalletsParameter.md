@@ -11,6 +11,7 @@ var value = MethodIncludeWalletsParameter.Applepay;
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Applepay` | applepay   |
+| Name        | Value       |
+| ----------- | ----------- |
+| `Applepay`  | applepay    |
+| `Googlepay` | googlepay   |

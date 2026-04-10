@@ -38,6 +38,7 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Directdebit = new ListEntityMethodId("directdebit");
         public static readonly ListEntityMethodId Eps = new ListEntityMethodId("eps");
         public static readonly ListEntityMethodId Giftcard = new ListEntityMethodId("giftcard");
+        public static readonly ListEntityMethodId Googlepay = new ListEntityMethodId("googlepay");
         public static readonly ListEntityMethodId Ideal = new ListEntityMethodId("ideal");
         public static readonly ListEntityMethodId In3 = new ListEntityMethodId("in3");
         public static readonly ListEntityMethodId Kbc = new ListEntityMethodId("kbc");
@@ -75,6 +76,7 @@ namespace Mollie.Models.Components
                 ["directdebit"] = Directdebit,
                 ["eps"] = Eps,
                 ["giftcard"] = Giftcard,
+                ["googlepay"] = Googlepay,
                 ["ideal"] = Ideal,
                 ["in3"] = In3,
                 ["kbc"] = Kbc,
