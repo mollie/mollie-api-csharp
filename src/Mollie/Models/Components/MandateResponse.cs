@@ -62,6 +62,13 @@ namespace Mollie.Models.Components
         [JsonProperty("mandateReference", NullValueHandling = NullValueHandling.Include)]
         public string? MandateReference { get; set; }
 
+        /// <summary>
+        /// An array defining the eligible use cases for the mandate. This field will always be <br/>
+        /// present and can contain one or both of the following values:
+        /// </summary>
+        [JsonProperty("scopes")]
+        public List<MandateResponseScope>? Scopes { get; set; } = null;
+
         [JsonProperty("status")]
         public MandateResponseStatus Status { get; set; } = default!;
 

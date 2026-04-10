@@ -504,6 +504,7 @@ namespace Mollie
                     From = request.From,
                     Limit = request.Limit,
                     Sort = request.Sort,
+                    Scopes = request.Scopes,
                     Testmode = request.Testmode,
                     IdempotencyKey = request.IdempotencyKey
                 };

@@ -33,6 +33,7 @@ var custom = ListEntityMethodAllId.Of("custom_value");
 | `Directdebit`  | directdebit    |
 | `Eps`          | eps            |
 | `Giftcard`     | giftcard       |
+| `Googlepay`    | googlepay      |
 | `Ideal`        | ideal          |
 | `In3`          | in3            |
 | `Kbc`          | kbc            |

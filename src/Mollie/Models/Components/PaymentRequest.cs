@@ -215,10 +215,10 @@ namespace Mollie.Models.Components
         public SequenceType? SequenceType { get; set; }
 
         /// <summary>
-        /// **Only relevant for recurring payments.**<br/>
+        /// **Only relevant for recurring payments and stored cards.**<br/>
         /// <br/>
-        /// When creating recurring payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
-        /// the customer's accounts should be credited.
+        /// When creating recurring or stored cards payments, the ID of a specific <a href="get-mandate">mandate</a> can be supplied to indicate which of<br/>
+        /// the customer's accounts should be debited.
         /// </summary>
         [JsonProperty("mandateId")]
         public string? MandateId { get; set; } = null;
@@ -241,6 +241,13 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("dueDate")]
         public string? DueDate { get; set; }
+
+        /// <summary>
+        /// Whether the card details should be stored for the customer after a successful payment. This will create a mandate for the customer, <br/>
+        /// allowing for future customer present saved-card CIT payments. Requires customerId, cardToken, and the creditcard method to be specified.
+        /// </summary>
+        [JsonProperty("storeCredentials")]
+        public bool? StoreCredentials { get; set; }
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>
