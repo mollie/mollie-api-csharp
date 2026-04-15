@@ -24,6 +24,6 @@ namespace Mollie.Models.Components
         public Amount? Amount { get; set; }
 
         [JsonProperty("subtotals")]
-        public List<ComponentsSubTotals>? Subtotals { get; set; } = null;
+        public List<SubTotals2>? Subtotals { get; set; } = null;
     }
 }
