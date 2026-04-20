@@ -116,11 +116,5 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("country")]
         public string Country { get; set; } = default!;
-
-        /// <summary>
-        /// The locale for the recipient, to be used for translations in PDF generation and payment pages.
-        /// </summary>
-        [JsonProperty("locale")]
-        public SalesInvoiceRecipientLocaleResponse Locale { get; set; } = default!;
     }
 }
