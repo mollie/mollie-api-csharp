@@ -13,6 +13,10 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// The Verification of Payee response object. Contains the result of verifying the creditor's<br/>
@@ -26,6 +30,12 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("resource")]
         public string Resource { get; set; } = default!;
+
+        /// <summary>
+        /// Whether this entity was created in live mode or in test mode.
+        /// </summary>
+        [JsonProperty("mode")]
+        public Mode Mode { get; set; } = default!;
 
         /// <summary>
         /// The bank account details of the creditor (recipient) for Verification of Payee.

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 89837e24b2d37354eff4ac4acf2849af
+  docChecksum: 95389f323bbd1ca749c9021866d92c6b
   docVersion: 1.0.0
-  speakeasyVersion: 1.761.8
-  generationVersion: 2.881.2
-  releaseVersion: 0.13.4
-  configChecksum: c2c89e51c8b6a773a9d16e6f903a3530
+  speakeasyVersion: 1.761.9
+  generationVersion: 2.881.4
+  releaseVersion: 0.13.5
+  configChecksum: 893a2ea462413fa45c32a2e460ae6dcc
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 969f50a3-174d-4f80-8598-e1c614d0aea3
-  pristine_commit_hash: b275ab6b6060aa893e1572676000f0d2df85bb37
-  pristine_tree_hash: 7541b9fa4f579e39030918c2981449306d2d3e53
+  generation_id: 8d958441-aa3f-4911-9113-ca31904d2447
+  pristine_commit_hash: 652ad1f82c0b1cd5c8dd33ed01b892b9c26c14b0
+  pristine_tree_hash: ab9f86761dba5d59693f368e9271ab105661d78a
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -1107,8 +1107,8 @@ trackedFiles:
     pristine_git_object: 5ae3f4deb578086c36f163d9bb365f6bab713449
   docs/Models/Components/ListSalesInvoiceResponse.md:
     id: f10319ac000d
-    last_write_checksum: sha1:94b6ef52f47a3160c3c6e0c2b236f2a39822862f
-    pristine_git_object: e63c42118578541676b8a452e28c7eab13dfd521
+    last_write_checksum: sha1:6ab555db7a96a96ca7a7b137a748366ca1afeee1
+    pristine_git_object: efbf280ac512010c97ca373817d6814494723892
   docs/Models/Components/ListSalesInvoiceResponseAmountDue.md:
     id: 4bcfd1ef5e61
     last_write_checksum: sha1:c033b21f44e44873be7fafe868cae31bd862a382
@@ -1121,10 +1121,6 @@ trackedFiles:
     id: f649196e12fe
     last_write_checksum: sha1:383369de63afa052f3dcc520649ca5656eb2c4df
     pristine_git_object: e85d40ece85f107eedfdd9d2713cc9f010294b98
-  docs/Models/Components/ListSalesInvoiceResponseMetadata.md:
-    id: 7b625d27c5cc
-    last_write_checksum: sha1:4f7a8b97091517ef1427ab7947690a4d30d03956
-    pristine_git_object: 8d6c71d209b0c43980bc37682a0a53c649e32eb7
   docs/Models/Components/ListSalesInvoiceResponseSubtotalAmount.md:
     id: 4cdeae8e2de8
     last_write_checksum: sha1:1839a490c804a20a63fde71ae7f189c4b3797d85
@@ -1751,16 +1747,12 @@ trackedFiles:
     pristine_git_object: 43f62204043c1da8d51a5eaa8149b7ecce370ac6
   docs/Models/Components/SalesInvoiceRequest.md:
     id: 0b2362d5d0c4
-    last_write_checksum: sha1:40b4988780ed7eb50b6b4e0a2b18a392a7d3bb9a
-    pristine_git_object: 9abdf6af6fc9a1ab0aecc936871e145cd9c78bb6
-  docs/Models/Components/SalesInvoiceRequestMetadata.md:
-    id: 6d73cea927ad
-    last_write_checksum: sha1:7bcd7a78f578225744a76e0ac0baa25bd31d7be1
-    pristine_git_object: 91fff29230cfd04d041dcd74e1703c3b8d7b408f
+    last_write_checksum: sha1:e475d21dac0ced066ae8cc205522f016aece4eb9
+    pristine_git_object: df14bdbe4cc6cd44835445019e7118b01084d3aa
   docs/Models/Components/SalesInvoiceResponse.md:
     id: fac68b5de5ac
-    last_write_checksum: sha1:751cd1e2160adcb876a7a47b310ee271863084c3
-    pristine_git_object: 87cf69f02b5ed0465234e31cfe82c248d191da17
+    last_write_checksum: sha1:7d32c7c7fd4550f9a3ce7f01b4ec05752167fb27
+    pristine_git_object: 8020963a562900e044dab617703f9ecc4b8d0bb6
   docs/Models/Components/SalesInvoiceResponseAmountDue.md:
     id: a47e4adf95a4
     last_write_checksum: sha1:a04e2291588e20ade7171193b32982f06b9361c0
@@ -1773,10 +1765,6 @@ trackedFiles:
     id: 0b0a1da6488f
     last_write_checksum: sha1:fcf5093740029703a6d144668e19366e4100c325
     pristine_git_object: 272cea80692fd46e93b18e69d0d71df1126852f6
-  docs/Models/Components/SalesInvoiceResponseMetadata.md:
-    id: cf047a2ddfcb
-    last_write_checksum: sha1:d821928c1b1b333ebc875de16019df2b570040cd
-    pristine_git_object: 02ac232ffee98d47840429f9590f0ed821e5c3e2
   docs/Models/Components/SalesInvoiceResponseSubtotalAmount.md:
     id: 7ca122138c4e
     last_write_checksum: sha1:47acc7b95e022ab983d862bbd14752d8005520e4
@@ -2011,8 +1999,8 @@ trackedFiles:
     pristine_git_object: 7a01cb78148d899adc57f9f2e19fc7c729a5fd52
   docs/Models/Components/TransferStatus.md:
     id: 8016d5bfad26
-    last_write_checksum: sha1:7f27a852b9b63725e6398238c7e5dfbe4acaa7d0
-    pristine_git_object: 20cbe1ecbe8e4924237a6b76ae7ec033d1c89fca
+    last_write_checksum: sha1:c3bcdaf76dddf39c149c04d351bc58631af32bd5
+    pristine_git_object: f378218eccc0e1fe84cdc4fc8d7e7f858eb33049
   docs/Models/Components/Transfers.md:
     id: 25b39d678d5d
     last_write_checksum: sha1:0ca1543ed78076078ec0bc8efcd2d2ca84844b04
@@ -2071,8 +2059,8 @@ trackedFiles:
     pristine_git_object: 5197c072e6571634d3ef56d647b9d1c22cbd59e7
   docs/Models/Components/VerificationOfPayeeResponse.md:
     id: 2e844ffd5f4c
-    last_write_checksum: sha1:53aa636f513fabaae0af73e44261f4efa29cce1d
-    pristine_git_object: ceeffef542bbbda02f92b3a9bcf066c9ace85b6e
+    last_write_checksum: sha1:efe8f9a94741e5bb4d8ef3662f1a8970762be450
+    pristine_git_object: 4f9fef23bc40984bcd4bd9c919d30723fc33ec22
   docs/Models/Components/VerificationOfPayeeResponseVerificationResult.md:
     id: b220bdaebf19
     last_write_checksum: sha1:946922a0c2628373115e19c0a95ff8fb2ec72f84
@@ -3535,8 +3523,8 @@ trackedFiles:
     pristine_git_object: 58a336022491f6f188de31f7c15b223926527fa4
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:e4bcbbb529bc115468db98b1d88e8b4da15be052
-    pristine_git_object: 15cf800ff4aea50cb320e2756bc320e26dbc11d6
+    last_write_checksum: sha1:ff62423b45aa2b38f067fe57a0dad052484ef38e
+    pristine_git_object: 6845b96bdf3f1115e782c5cc0e2dbd4edc591227
   docs/sdks/unmatchedcredittransfers/README.md:
     id: e15033c49a61
     last_write_checksum: sha1:42bbe985eb007eb3657d07a58721c06d0dcb42ac
@@ -4679,8 +4667,8 @@ trackedFiles:
     pristine_git_object: 6d0fb504573c1d0dba99bc4c67ceeab22e45b412
   src/Mollie/Models/Components/ListSalesInvoiceResponse.cs:
     id: 7006e3a65777
-    last_write_checksum: sha1:e562b66d0856b2436fdcfe5ff2e9a380228e7efd
-    pristine_git_object: 6b62e327b32acf276bec87e1e4db5d05eab6bff9
+    last_write_checksum: sha1:ab9f556965e9a1ef1908aba8aa273507dc42b420
+    pristine_git_object: 7cedea907558035a51f0e9947816d650270c7cef
   src/Mollie/Models/Components/ListSalesInvoiceResponseAmountDue.cs:
     id: 1b5b28896009
     last_write_checksum: sha1:97a36cec4d12a9406a136af77b26d8e54c9f16d0
@@ -4693,10 +4681,6 @@ trackedFiles:
     id: 99c885fe5c55
     last_write_checksum: sha1:ba187f8f41d1ab0c4e41b6d43660852a3722c39f
     pristine_git_object: 077e27b6dd53f9583b14d57c8a79caf291c87f9a
-  src/Mollie/Models/Components/ListSalesInvoiceResponseMetadata.cs:
-    id: bf38bedb4b48
-    last_write_checksum: sha1:97b81dae54e99ff901e202271cfaf33e6ee42fdb
-    pristine_git_object: 7a8eec780989ac683f6ead8458ebb2bf9edfdbf9
   src/Mollie/Models/Components/ListSalesInvoiceResponseSubtotalAmount.cs:
     id: 5219f2d73664
     last_write_checksum: sha1:9ef296570918c6fd7e313fc95f102448159ef0fe
@@ -5323,16 +5307,12 @@ trackedFiles:
     pristine_git_object: cc799c533eaefa6226830cfe6991f003853f549f
   src/Mollie/Models/Components/SalesInvoiceRequest.cs:
     id: 65a1e80d7889
-    last_write_checksum: sha1:235e48cbee0cc07f29ffc240a36f510535ea62e5
-    pristine_git_object: be6de0be4b2cdfd6f9877727f983d427ee893725
-  src/Mollie/Models/Components/SalesInvoiceRequestMetadata.cs:
-    id: b647132816b5
-    last_write_checksum: sha1:77008208502027e3015f54e466f2a10747331fc3
-    pristine_git_object: 3e25a53149d16aa797d2084c58232c69444016e9
+    last_write_checksum: sha1:30a9a1974ff373646ccff535236c349b709fa610
+    pristine_git_object: ca9be22be9c502abe22cb73b59cf659062ec1d85
   src/Mollie/Models/Components/SalesInvoiceResponse.cs:
     id: 4bda1d03d925
-    last_write_checksum: sha1:41153ff43523d26a1459ea1b88ac7e533f79aa77
-    pristine_git_object: 1984007c6b8a3acfa9fd478e2d5efb7376ce0734
+    last_write_checksum: sha1:35ecb42216d6b9425a0117ed757533e80ed5b3e3
+    pristine_git_object: fc003b87b8e4a67d7f870869f3202a8d50df6932
   src/Mollie/Models/Components/SalesInvoiceResponseAmountDue.cs:
     id: a01a105dd6a7
     last_write_checksum: sha1:9a3b396c11becc4c8d46a7b1fc643e3e075117f2
@@ -5345,10 +5325,6 @@ trackedFiles:
     id: e09835ce9439
     last_write_checksum: sha1:15c67ae7219e7fbdb0744daa8c503f3964211542
     pristine_git_object: 0bbb8cb4bece135ad8697b4b9eec47d46c1ec2e8
-  src/Mollie/Models/Components/SalesInvoiceResponseMetadata.cs:
-    id: a6a81fccd494
-    last_write_checksum: sha1:d373bb55cd8e3f8a96934b5270eea39a624f4af2
-    pristine_git_object: 319546a54b544c28f24df453670d8d62514e8237
   src/Mollie/Models/Components/SalesInvoiceResponseSubtotalAmount.cs:
     id: 9ad9cee7176e
     last_write_checksum: sha1:d83c4c25484910330067741c856b4b2768254403
@@ -5583,8 +5559,8 @@ trackedFiles:
     pristine_git_object: 3f2fda14a0bac64c3b110b6fa667a07ca5f1a7da
   src/Mollie/Models/Components/TransferStatus.cs:
     id: eaccdf902eea
-    last_write_checksum: sha1:7b8040a080a9cdbbcf421e751615d15db05255ba
-    pristine_git_object: d48a9d5149fb5afb58854a1c4edca66e0308ad8a
+    last_write_checksum: sha1:ab9ae8fc3807768ccb2526af4c7c491d987b91e9
+    pristine_git_object: 6b902e9a4415e493d680ecf6d65830468ede7f2f
   src/Mollie/Models/Components/Transfers.cs:
     id: d2e27d2fc042
     last_write_checksum: sha1:cc5c2be1c1e5571a178f9e3243ed407333bb1a78
@@ -5643,8 +5619,8 @@ trackedFiles:
     pristine_git_object: 5959b6f3e5d69ac0243e670245610b6d9f0e027a
   src/Mollie/Models/Components/VerificationOfPayeeResponse.cs:
     id: 7784a13816cd
-    last_write_checksum: sha1:f801d568062f9bc08bcc184a9821085aec683163
-    pristine_git_object: fb6d410a83fa3150e998ed8e6e1c5896f341a574
+    last_write_checksum: sha1:ae7baace54b01502524362cf80c5843619977b7b
+    pristine_git_object: 5a3f1069514c3ea866e3a10de2db2f8dfaa3f0a1
   src/Mollie/Models/Components/VerificationOfPayeeResponseVerificationResult.cs:
     id: ecb5bf60c083
     last_write_checksum: sha1:acfdeabfbb80ab6bfde811c8ee222f404c5a43d7
@@ -7019,8 +6995,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:7ec27bfaa2c36024e892db9091a6d34463914841
-    pristine_git_object: a9fdd8220077ec990aa402c39f1edcfb4bf56565
+    last_write_checksum: sha1:c9be7d0cc50268c4b1edbbf624f431e5a29bb8bd
+    pristine_git_object: 6d9d777ed829de446bdff27fb6d6f761dd803cb6
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:4cd286b326535a7fb5e967d83d4ac8312a59e9ea
@@ -7051,8 +7027,8 @@ trackedFiles:
     pristine_git_object: 7eb3d19ed5b565ef7d5e3097a54be7440127f96e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:a6bc84b6e55410b361f31e5af5ba8c65ab97c8f0
-    pristine_git_object: 48bc8f4d79587c4d18cc9b3d84fdca5aa88adf43
+    last_write_checksum: sha1:b7ba29ced8bf325f8ee92468b0c52f5a8e0ac7ee
+    pristine_git_object: 9776a5da16d05d045074e4b73a4737df6eb890a3
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:ec5262ed04cb68b4e94690b5076d03bffccad1c9
@@ -7075,8 +7051,8 @@ trackedFiles:
     pristine_git_object: 017b506b3d5ee572dfe3ed51c3f874190e6365ff
   src/Mollie/Transfers.cs:
     id: 4a50c876e8cd
-    last_write_checksum: sha1:6dad41452708e02325bb09d3028a6116f56b63ce
-    pristine_git_object: 9d6deff7a5e5f3410b7185b5dfcf6854d4ec08d9
+    last_write_checksum: sha1:703c4791d9419d62a774f55ba794a8531381683b
+    pristine_git_object: e0f7fb87fcfaec70e2cae3b796cca6ba83ef839d
   src/Mollie/UnmatchedCreditTransfers.cs:
     id: 80086eeb53a9
     last_write_checksum: sha1:e5d221b5437767043acb268ad490189ecce9ceef
@@ -7091,8 +7067,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:bf73000aa0b0bb9d491e71418210dc90e52440a6
-    pristine_git_object: 16d894336f15317e932091d1268f404564a37f31
+    last_write_checksum: sha1:ba224d2e343bc10006c5fd6c41d1cf62d84da990
+    pristine_git_object: dfdbc855dd6f81c69c52a8eb5f23dce0865e7b19
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -10699,7 +10675,7 @@ examples:
         application/json: {"creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "business-account-payee-verification", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "match"}, "createdAt": "2025-01-01T12:00:00+00:00"}
+          application/hal+json: {"resource": "business-account-payee-verification", "mode": "live", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "match"}, "createdAt": "2025-01-01T12:00:00+00:00"}
     verify-payee-200-no-match:
       parameters:
         header:
@@ -10708,7 +10684,7 @@ examples:
         application/json: {"creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "business-account-payee-verification", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "no-match"}, "createdAt": "2025-01-01T12:00:00+00:00"}
+          application/hal+json: {"resource": "business-account-payee-verification", "mode": "live", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "no-match"}, "createdAt": "2025-01-01T12:00:00+00:00"}
     verify-payee-200-close-match:
       parameters:
         header:
@@ -10717,7 +10693,7 @@ examples:
         application/json: {"creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "business-account-payee-verification", "creditorBankAccount": {"accountHolderName": "Jan Jans", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "close-match", "accountHolderName": "Jan Jansen"}, "createdAt": "2025-01-01T12:00:00+00:00"}
+          application/hal+json: {"resource": "business-account-payee-verification", "mode": "live", "creditorBankAccount": {"accountHolderName": "Jan Jans", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "close-match", "accountHolderName": "Jan Jansen"}, "createdAt": "2025-01-01T12:00:00+00:00"}
     verify-payee-200-not-available:
       parameters:
         header:
@@ -10726,7 +10702,7 @@ examples:
         application/json: {"creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "business-account-payee-verification", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "not-available"}, "createdAt": "2025-01-01T12:00:00+00:00"}
+          application/hal+json: {"resource": "business-account-payee-verification", "mode": "live", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "not-available"}, "createdAt": "2025-01-01T12:00:00+00:00"}
     speakeasy-default-verify-payee:
       parameters:
         header:
@@ -10735,7 +10711,7 @@ examples:
         application/json: {"creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "testmode": false}
       responses:
         "200":
-          application/hal+json: {"resource": "business-account-payee-verification", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "not-available", "accountHolderName": "Jan Jansen"}, "createdAt": "2024-03-20T09:13:37+00:00"}
+          application/hal+json: {"resource": "business-account-payee-verification", "mode": "live", "creditorBankAccount": {"accountHolderName": "Jan Jansen", "format": "iban", "accountNumber": "NL02ABNA0123456789"}, "verificationResult": {"outcome": "not-available", "accountHolderName": "Jan Jansen"}, "createdAt": "2024-03-20T09:13:37+00:00"}
         "422":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "503":
@@ -10937,12 +10913,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Client.SalesInvoices.Create()`:  `response.recipient.Locale` **Removed** (Breaking ⚠️)
-  * `Client.SalesInvoices.List()`:  `response.Embedded.SalesInvoices[].Recipient.Locale` **Removed** (Breaking ⚠️)
-  * `Client.SalesInvoices.Get()`:  `response.recipient.Locale` **Removed** (Breaking ⚠️)
-  * `Client.SalesInvoices.Update()`:  `response.recipient.Locale` **Removed** (Breaking ⚠️)
+releaseNotes: "## Csharp SDK Changes:\n* `Client.SalesInvoices.Create()`: \n  *  `request.salesInvoiceRequest.Metadata` **Changed** (Breaking ⚠️)\n  *  `response.metadata` **Changed** (Breaking ⚠️)\n* `Client.SalesInvoices.List()`:  `response.Embedded.SalesInvoices[].Metadata` **Changed** (Breaking ⚠️)\n* `Client.SalesInvoices.Get()`:  `response.metadata` **Changed** (Breaking ⚠️)\n* `Client.SalesInvoices.Update()`:  `response.metadata` **Changed** (Breaking ⚠️)\n* `Client.Transfers.Create()`:  `response.status` **Changed** (Breaking ⚠️)\n* `Client.Transfers.Get()`:  `response.status` **Changed** (Breaking ⚠️)\n* `Client.VerifyPayees.Create()`:  `response.mode` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

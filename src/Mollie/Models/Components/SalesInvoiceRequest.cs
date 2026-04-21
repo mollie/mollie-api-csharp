@@ -79,7 +79,7 @@ namespace Mollie.Models.Components
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </summary>
         [JsonProperty("metadata")]
-        public SalesInvoiceRequestMetadata? Metadata { get; set; } = null;
+        public Dictionary<string, object>? Metadata { get; set; } = null;
 
         /// <summary>
         /// The payment term to be set on the invoice.
