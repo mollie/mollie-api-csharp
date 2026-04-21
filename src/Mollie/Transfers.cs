@@ -46,14 +46,15 @@ namespace Mollie
         /// <br/>
         /// In test mode, you can simulate various transfer scenarios by adjusting the transfer amount. This allows you to<br/>
         /// mimic the typical status progression of a real-world transfer. Note that a transfer's progression will stop once<br/>
-        /// it reaches a final status: `blocked`, `failed`, or `processed`.<br/>
+        /// it reaches a final status: `blocked`, `failed`, `processed`, or `returned`.<br/>
         /// <br/>
-        /// | Amount  | Scenario                                           | Webhook sequence                                                                                                                                                   |<br/>
-        /// |---------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|<br/>
-        /// | `11.00` | Transfer initiated, pending review by Mollie       | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
-        /// | `12.00` | Transfer initiated, blocked by Mollie              | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
-        /// | `13.00` | Transfer initiated, failed on scheme submission    | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
-        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
+        /// | Amount  | Scenario                                            | Webhook sequence                                                                                                                                                   |<br/>
+        /// |---------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|<br/>
+        /// | `11.00` | Transfer initiated, pending review by Mollie        | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
+        /// | `12.00` | Transfer initiated, blocked by Mollie               | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
+        /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
+        /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
+        /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
         /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
@@ -147,14 +148,15 @@ namespace Mollie
         /// <br/>
         /// In test mode, you can simulate various transfer scenarios by adjusting the transfer amount. This allows you to<br/>
         /// mimic the typical status progression of a real-world transfer. Note that a transfer's progression will stop once<br/>
-        /// it reaches a final status: `blocked`, `failed`, or `processed`.<br/>
+        /// it reaches a final status: `blocked`, `failed`, `processed`, or `returned`.<br/>
         /// <br/>
-        /// | Amount  | Scenario                                           | Webhook sequence                                                                                                                                                   |<br/>
-        /// |---------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|<br/>
-        /// | `11.00` | Transfer initiated, pending review by Mollie       | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
-        /// | `12.00` | Transfer initiated, blocked by Mollie              | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
-        /// | `13.00` | Transfer initiated, failed on scheme submission    | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
-        /// | Other   | Default: transfer is processed                     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
+        /// | Amount  | Scenario                                            | Webhook sequence                                                                                                                                                   |<br/>
+        /// |---------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|<br/>
+        /// | `11.00` | Transfer initiated, pending review by Mollie        | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review`                                         |<br/>
+        /// | `12.00` | Transfer initiated, blocked by Mollie               | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.pending-review` → `business-account-transfer.blocked`   |<br/>
+        /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
+        /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
+        /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
         /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>

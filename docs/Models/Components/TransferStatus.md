@@ -16,12 +16,12 @@ var custom = TransferStatus.Of("custom_value");
 
 ## Values
 
-| Name              | Value             |
-| ----------------- | ----------------- |
-| `Requested`       | requested         |
-| `Initiated`       | initiated         |
-| `PendingReview`   | pending-review    |
-| `Processed`       | processed         |
-| `Failed`          | failed            |
-| `Blocked`         | blocked           |
-| `IncomingSettled` | incoming-settled  |
+| Name            | Value           |
+| --------------- | --------------- |
+| `Requested`     | requested       |
+| `Initiated`     | initiated       |
+| `PendingReview` | pending-review  |
+| `Processed`     | processed       |
+| `Failed`        | failed          |
+| `Blocked`       | blocked         |
+| `Returned`      | returned        |

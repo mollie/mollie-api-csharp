@@ -29,7 +29,7 @@ namespace Mollie.Models.Components
         public static readonly TransferStatus Processed = new TransferStatus("processed");
         public static readonly TransferStatus Failed = new TransferStatus("failed");
         public static readonly TransferStatus Blocked = new TransferStatus("blocked");
-        public static readonly TransferStatus IncomingSettled = new TransferStatus("incoming-settled");
+        public static readonly TransferStatus Returned = new TransferStatus("returned");
 
         private static readonly Dictionary <string, TransferStatus> _knownValues =
             new Dictionary <string, TransferStatus> ()
@@ -40,7 +40,7 @@ namespace Mollie.Models.Components
                 ["processed"] = Processed,
                 ["failed"] = Failed,
                 ["blocked"] = Blocked,
-                ["incoming-settled"] = IncomingSettled
+                ["returned"] = Returned
             };
 
         private static readonly ConcurrentDictionary<string, TransferStatus> _values =
