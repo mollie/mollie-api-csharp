@@ -37,7 +37,7 @@ it reaches a final status: `blocked`, `failed`, `processed`, or `returned`.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="create-transfer" method="post" path="/business-accounts/transfers" example="create-transfer-201" -->
+<!-- UsageSnippet language="csharp" operationID="create-transfer" method="post" path="/v2/business-accounts/transfers" example="create-transfer-201" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -106,7 +106,7 @@ and details of a previously created transfer.
 
 ### Example Usage: get-transfer-200
 
-<!-- UsageSnippet language="csharp" operationID="get-transfer" method="get" path="/business-accounts/transfers/{businessAccountsTransferId}" example="get-transfer-200" -->
+<!-- UsageSnippet language="csharp" operationID="get-transfer" method="get" path="/v2/business-accounts/transfers/{businessAccountsTransferId}" example="get-transfer-200" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -127,7 +127,7 @@ var res = await sdk.Transfers.GetAsync(
 ```
 ### Example Usage: processed-transfer
 
-<!-- UsageSnippet language="csharp" operationID="get-transfer" method="get" path="/business-accounts/transfers/{businessAccountsTransferId}" example="processed-transfer" -->
+<!-- UsageSnippet language="csharp" operationID="get-transfer" method="get" path="/v2/business-accounts/transfers/{businessAccountsTransferId}" example="processed-transfer" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

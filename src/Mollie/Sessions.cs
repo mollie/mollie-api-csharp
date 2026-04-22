@@ -128,7 +128,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/sessions";
+            var urlString = baseUrl + "/v2/sessions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -323,7 +323,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{sessionId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/sessions/{sessionId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

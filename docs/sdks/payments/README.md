@@ -28,7 +28,7 @@ guide on [method-specific parameters](extra-payment-parameters).
 
 ### Example Usage: create-payment-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -184,7 +184,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-10
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-10" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-10" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -340,7 +340,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-11
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-11" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-11" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -496,7 +496,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-12
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-12" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-12" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -652,7 +652,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-13
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-13" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-13" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -807,7 +807,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -963,7 +963,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-3
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-3" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1119,7 +1119,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-4
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-4" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1275,7 +1275,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-5
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-5" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-5" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1431,7 +1431,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-6
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-6" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-6" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1587,7 +1587,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-7
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-7" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-7" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1743,7 +1743,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-8
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-8" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-8" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -1899,7 +1899,7 @@ var res = await sdk.Payments.CreateAsync(
 ```
 ### Example Usage: create-payment-201-9
 
-<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/payments" example="create-payment-201-9" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment" method="post" path="/v2/payments" example="create-payment-201-9" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2082,7 +2082,7 @@ The results are paginated.
 
 ### Example Usage: list-payments-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/payments" example="list-payments-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/v2/payments" example="list-payments-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2114,7 +2114,7 @@ while(res != null)
 ```
 ### Example Usage: list-payments-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/payments" example="list-payments-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/v2/payments" example="list-payments-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2146,7 +2146,7 @@ while(res != null)
 ```
 ### Example Usage: list-payments-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/payments" example="list-payments-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-payments" method="get" path="/v2/payments" example="list-payments-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2200,7 +2200,7 @@ Retrieve a single payment object by its payment ID.
 
 ### Example Usage: get-payment-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/payments/{paymentId}" example="get-payment-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/v2/payments/{paymentId}" example="get-payment-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2226,7 +2226,7 @@ var res = await sdk.Payments.GetAsync(req);
 ```
 ### Example Usage: get-payment-200-2
 
-<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/payments/{paymentId}" example="get-payment-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/v2/payments/{paymentId}" example="get-payment-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2252,7 +2252,7 @@ var res = await sdk.Payments.GetAsync(req);
 ```
 ### Example Usage: get-payment-200-3
 
-<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/payments/{paymentId}" example="get-payment-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="get-payment" method="get" path="/v2/payments/{paymentId}" example="get-payment-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2302,7 +2302,7 @@ Updating the payment details will not result in a webhook call.
 
 ### Example Usage: update-payment-200-1
 
-<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/payments/{paymentId}" example="update-payment-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/v2/payments/{paymentId}" example="update-payment-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2361,7 +2361,7 @@ var res = await sdk.Payments.UpdateAsync(
 ```
 ### Example Usage: update-payment-200-2
 
-<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/payments/{paymentId}" example="update-payment-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/v2/payments/{paymentId}" example="update-payment-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2420,7 +2420,7 @@ var res = await sdk.Payments.UpdateAsync(
 ```
 ### Example Usage: update-payment-200-3
 
-<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/payments/{paymentId}" example="update-payment-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="update-payment" method="patch" path="/v2/payments/{paymentId}" example="update-payment-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2508,7 +2508,7 @@ The `isCancelable` property on the [Payment object](get-payment) will indicate i
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="cancel-payment" method="delete" path="/payments/{paymentId}" example="cancel-payment-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="cancel-payment" method="delete" path="/v2/payments/{paymentId}" example="cancel-payment-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -2561,7 +2561,7 @@ If there is a successful capture, the payment will transition to `paid`.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="release-authorization" method="post" path="/payments/{paymentId}/release-authorization" -->
+<!-- UsageSnippet language="csharp" operationID="release-authorization" method="post" path="/v2/payments/{paymentId}/release-authorization" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -158,7 +158,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/connect/balance-transfers";
+            var urlString = baseUrl + "/v2/connect/balance-transfers";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -348,7 +348,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/connect/balance-transfers", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -584,7 +584,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/connect/balance-transfers/{balanceTransferId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/connect/balance-transfers/{balanceTransferId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

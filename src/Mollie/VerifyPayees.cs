@@ -143,7 +143,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/business-accounts/payee-verifications";
+            var urlString = baseUrl + "/v2/business-accounts/payee-verifications";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

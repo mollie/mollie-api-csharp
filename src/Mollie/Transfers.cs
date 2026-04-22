@@ -181,7 +181,7 @@ namespace Mollie
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/business-accounts/transfers";
+            var urlString = baseUrl + "/v2/business-accounts/transfers";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -415,7 +415,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/business-accounts/transfers/{businessAccountsTransferId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/business-accounts/transfers/{businessAccountsTransferId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

@@ -2,29 +2,13 @@
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OAuth = "<YOUR_O_AUTH_HERE>",
+});
 
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
+var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
-ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
+// handle response
 ```
 <!-- End SDK Example Usage [usage] -->

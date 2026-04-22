@@ -297,7 +297,7 @@ namespace Mollie
         )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -538,7 +538,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements/{settlementId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -725,7 +725,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/settlements/open";
+            var urlString = baseUrl + "/v2/settlements/open";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -885,7 +885,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/settlements/next";
+            var urlString = baseUrl + "/v2/settlements/next";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1046,7 +1046,7 @@ namespace Mollie
             request.ProfileId ??= SDKConfiguration.ProfileId;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/payments", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements/{settlementId}/payments", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -1271,7 +1271,7 @@ namespace Mollie
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/captures", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements/{settlementId}/captures", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -1495,7 +1495,7 @@ namespace Mollie
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/refunds", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements/{settlementId}/refunds", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -1720,7 +1720,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/settlements/{settlementId}/chargebacks", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/settlements/{settlementId}/chargebacks", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;

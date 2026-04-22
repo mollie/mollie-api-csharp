@@ -21,7 +21,7 @@ having collected the customer's authorization.
 
 ### Example Usage: get-capture-200-1
 
-<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" example="get-capture-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/v2/payments/{paymentId}/captures" example="get-capture-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -46,7 +46,7 @@ var res = await sdk.Captures.CreateAsync(
 ```
 ### Example Usage: get-capture-200-2
 
-<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/payments/{paymentId}/captures" example="get-capture-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-capture" method="post" path="/v2/payments/{paymentId}/captures" example="get-capture-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -97,7 +97,7 @@ The results are paginated.
 
 ### Example Usage: list-captures-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" example="list-captures-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/v2/payments/{paymentId}/captures" example="list-captures-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -129,7 +129,7 @@ while(res != null)
 ```
 ### Example Usage: list-captures-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/payments/{paymentId}/captures" example="list-captures-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-captures" method="get" path="/v2/payments/{paymentId}/captures" example="list-captures-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -184,7 +184,7 @@ payment.
 
 ### Example Usage: get-capture-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" example="get-capture-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/v2/payments/{paymentId}/captures/{captureId}" example="get-capture-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -210,7 +210,7 @@ var res = await sdk.Captures.GetAsync(req);
 ```
 ### Example Usage: get-capture-200-2
 
-<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/payments/{paymentId}/captures/{captureId}" example="get-capture-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="get-capture" method="get" path="/v2/payments/{paymentId}/captures/{captureId}" example="get-capture-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

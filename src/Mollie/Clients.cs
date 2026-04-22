@@ -178,7 +178,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/clients", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/clients", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -413,7 +413,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/clients/{organizationId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/clients/{organizationId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

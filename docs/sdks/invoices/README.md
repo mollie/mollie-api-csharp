@@ -16,7 +16,7 @@ The results are paginated.
 
 ### Example Usage: list-invoices-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/v2/invoices" example="list-invoices-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -46,7 +46,7 @@ while(res != null)
 ```
 ### Example Usage: list-invoices-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/v2/invoices" example="list-invoices-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -76,7 +76,7 @@ while(res != null)
 ```
 ### Example Usage: list-invoices-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/v2/invoices" example="list-invoices-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -106,7 +106,7 @@ while(res != null)
 ```
 ### Example Usage: list-invoices-200-4
 
-<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/invoices" example="list-invoices-200-4" -->
+<!-- UsageSnippet language="csharp" operationID="list-invoices" method="get" path="/v2/invoices" example="list-invoices-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -161,7 +161,7 @@ call the [List invoices](list-invoices) endpoint with the `reference` parameter.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/invoices/{invoiceId}" example="get-invoice-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-invoice" method="get" path="/v2/invoices/{invoiceId}" example="get-invoice-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

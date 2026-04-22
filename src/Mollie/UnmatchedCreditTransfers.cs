@@ -208,7 +208,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/unmatched-credit-transfers", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/unmatched-credit-transfers", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -432,7 +432,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/unmatched-credit-transfers/{unmatchedCreditTransferId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/unmatched-credit-transfers/{unmatchedCreditTransferId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -625,7 +625,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/unmatched-credit-transfers/{unmatchedCreditTransferId}/match", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/unmatched-credit-transfers/{unmatchedCreditTransferId}/match", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -821,7 +821,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/unmatched-credit-transfers/{unmatchedCreditTransferId}/return", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/unmatched-credit-transfers/{unmatchedCreditTransferId}/return", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

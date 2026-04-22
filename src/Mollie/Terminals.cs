@@ -131,7 +131,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/terminals", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -368,7 +368,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/terminals/{terminalId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/{terminalId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

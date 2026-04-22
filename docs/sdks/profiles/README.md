@@ -20,7 +20,7 @@ can use this endpoint to automate profile creation.
 
 ### Example Usage: create-profile-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" example="create-profile-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/v2/profiles" example="create-profile-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -50,7 +50,7 @@ var res = await sdk.Profiles.CreateAsync(
 ```
 ### Example Usage: create-profile-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/profiles" example="create-profile-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-profile" method="post" path="/v2/profiles" example="create-profile-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -105,7 +105,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/profiles" example="list-profiles-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-profiles" method="get" path="/v2/profiles" example="list-profiles-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -154,7 +154,7 @@ Retrieve a single profile by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/profiles/{profileId}" example="get-profile-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-profile" method="get" path="/v2/profiles/{profileId}" example="get-profile-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -202,7 +202,7 @@ Alternatively, you can use this endpoint to automate profile management.
 
 ### Example Usage: update-profile-200-1
 
-<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" example="update-profile-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/v2/profiles/{profileId}" example="update-profile-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -234,7 +234,7 @@ var res = await sdk.Profiles.UpdateAsync(
 ```
 ### Example Usage: update-profile-200-2
 
-<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/profiles/{profileId}" example="update-profile-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="update-profile" method="patch" path="/v2/profiles/{profileId}" example="update-profile-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -290,7 +290,7 @@ Delete a profile. A deleted profile and its related credentials can no longer be
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="delete-profile" method="delete" path="/profiles/{profileId}" -->
+<!-- UsageSnippet language="csharp" operationID="delete-profile" method="delete" path="/v2/profiles/{profileId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -335,7 +335,7 @@ documentation.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-current-profile" method="get" path="/profiles/me" example="get-current-profile-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-current-profile" method="get" path="/v2/profiles/me" example="get-current-profile-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -19,7 +19,7 @@ mandates for cards, your customers need to perform a 'first payment' with their 
 
 ### Example Usage: create-mandate-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" example="create-mandate-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/v2/customers/{customerId}/mandates" example="create-mandate-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -50,7 +50,7 @@ var res = await sdk.Mandates.CreateAsync(
 ```
 ### Example Usage: create-mandate-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/customers/{customerId}/mandates" example="create-mandate-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-mandate" method="post" path="/v2/customers/{customerId}/mandates" example="create-mandate-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -107,7 +107,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/customers/{customerId}/mandates" example="list-mandates-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-mandates" method="get" path="/v2/customers/{customerId}/mandates" example="list-mandates-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -166,7 +166,7 @@ account details, card details, or PayPal account details.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-mandate" method="get" path="/customers/{customerId}/mandates/{mandateId}" example="get-mandate-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-mandate" method="get" path="/v2/customers/{customerId}/mandates/{mandateId}" example="get-mandate-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -214,7 +214,7 @@ mandate, and all connected subscriptions will be canceled.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="revoke-mandate" method="delete" path="/customers/{customerId}/mandates/{mandateId}" -->
+<!-- UsageSnippet language="csharp" operationID="revoke-mandate" method="delete" path="/v2/customers/{customerId}/mandates/{mandateId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

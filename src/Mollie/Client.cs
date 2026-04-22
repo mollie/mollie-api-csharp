@@ -23,6 +23,8 @@ namespace Mollie
     using System.Threading.Tasks;
     public interface IClient
     {
+        public IOauth Oauth { get; }
+
         public IBalances Balances { get; }
 
         public ISettlements Settlements { get; }
@@ -92,6 +94,10 @@ namespace Mollie
         /// The main SDK Configuration.
         /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
+        /// <summary>
+        /// The Oauth sub-SDK.
+        /// </summary>
+        public IOauth Oauth { get; private set; }
         /// <summary>
         /// The Balances sub-SDK.
         /// </summary>
@@ -225,6 +231,8 @@ namespace Mollie
         {
             SDKConfiguration = config;
             InitHooks();
+
+            Oauth = new Oauth(SDKConfiguration);
 
             Balances = new Balances(SDKConfiguration);
 
@@ -371,6 +379,8 @@ namespace Mollie
             };
 
             InitHooks();
+
+            Oauth = new Oauth(SDKConfiguration);
 
             Balances = new Balances(SDKConfiguration);
 

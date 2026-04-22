@@ -15,7 +15,7 @@ The results are **not** paginated.
 
 ### Example Usage: list-permissions-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-permissions" method="get" path="/permissions" example="list-permissions-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-permissions" method="get" path="/v2/permissions" example="list-permissions-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -30,7 +30,7 @@ var res = await sdk.Permissions.ListAsync(idempotencyKey: "123e4567-e89b-12d3-a4
 ```
 ### Example Usage: list-permissions-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-permissions" method="get" path="/permissions" example="list-permissions-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-permissions" method="get" path="/v2/permissions" example="list-permissions-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -67,7 +67,7 @@ Retrieve a single permission by its ID, and see if the permission is granted to 
 
 ### Example Usage: get-permission-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-permission" method="get" path="/permissions/{permissionId}" example="get-permission-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-permission" method="get" path="/v2/permissions/{permissionId}" example="get-permission-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -88,7 +88,7 @@ var res = await sdk.Permissions.GetAsync(
 ```
 ### Example Usage: get-permission-200-2
 
-<!-- UsageSnippet language="csharp" operationID="get-permission" method="get" path="/permissions/{permissionId}" example="get-permission-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="get-permission" method="get" path="/v2/permissions/{permissionId}" example="get-permission-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
