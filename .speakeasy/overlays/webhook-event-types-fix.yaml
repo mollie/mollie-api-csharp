@@ -4,11 +4,11 @@ info:
   version: 1.0.0
 actions:
   # Fix naming conflict in Create Webhook operation
-  - target: $.paths['/webhooks'].post.requestBody.content['application/json'].schema.properties.eventTypes
+  - target: $.paths['/v2/webhooks'].post.requestBody.content['application/json'].schema.properties.eventTypes
     update:
       x-speakeasy-name-override: EventTypesList
 
   # Fix naming conflict in Update Webhook operation
-  - target: $.paths['/webhooks/{id}'].patch.requestBody.content['application/json'].schema.properties.eventTypes
+  - target: $.paths['/v2/webhooks/{id}'].patch.requestBody.content['application/json'].schema.properties.eventTypes
     update:
       x-speakeasy-name-override: EventTypesList
