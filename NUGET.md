@@ -43,30 +43,14 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OAuth = "<YOUR_O_AUTH_HERE>",
+});
 
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
+var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
-ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
+// handle response
 ```
 <!-- End SDK Example Usage [usage] -->
 
@@ -87,30 +71,14 @@ You can set the security parameters through the `security` optional parameter wh
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
-var sdk = new Client(
-    security: new Security() {
-        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-    },
-    testmode: false
-);
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
 
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
+var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
-ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
+// handle response
 ```
 <!-- End Authentication [security] -->
 
@@ -213,23 +181,12 @@ To change the default retry strategy for a single API call, simply pass a `Retry
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client(security: new Security() {
+    OAuth = "<YOUR_O_AUTH_HERE>",
+});
 
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
-
-ListBalancesResponse? res = await sdk.Balances.ListAsync(
+var res = await sdk.Oauth.GenerateAsync(
     retryConfig: new RetryConfig(
         strategy: RetryConfig.RetryStrategy.BACKOFF,
         backoff: new BackoffStrategy(
@@ -240,22 +197,16 @@ ListBalancesResponse? res = await sdk.Balances.ListAsync(
         ),
         retryConnectionErrors: false
     ),
-    request: req
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
+// handle response
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
-using Mollie.Models.Requests;
 
 var sdk = new Client(
     retryConfig: new RetryConfig(
@@ -268,27 +219,14 @@ var sdk = new Client(
         ),
         retryConnectionErrors: false
     ),
-    testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        OAuth = "<YOUR_O_AUTH_HERE>",
     }
 );
 
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
+var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
 
-ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
+// handle response
 ```
 <!-- End Retries [retries] -->
 
@@ -402,7 +340,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(
-    serverUrl: "https://api.mollie.com/v2",
+    serverUrl: "https://api.mollie.com",
     testmode: false,
     security: new Security() {
         OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
@@ -424,6 +362,25 @@ while(res != null)
 
     res = await res.Next!();
 }
+```
+
+### Override Server URL Per-Operation
+
+The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    OAuth = "<YOUR_O_AUTH_HERE>",
+});
+
+var res = await sdk.Oauth.GenerateAsync(
+    serverUrl: "https://api.mollie.com/oauth2",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
 ```
 <!-- End Server Selection [server] -->
 

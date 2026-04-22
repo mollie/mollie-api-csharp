@@ -167,7 +167,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/captures", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -356,7 +356,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/captures", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -578,7 +578,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/captures/{captureId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/captures/{captureId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

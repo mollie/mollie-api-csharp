@@ -255,7 +255,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/payment-links";
+            var urlString = baseUrl + "/v2/payment-links";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -464,7 +464,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payment-links", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payment-links", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -695,7 +695,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payment-links/{paymentLinkId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -884,7 +884,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payment-links/{paymentLinkId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1085,7 +1085,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payment-links/{paymentLinkId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1256,7 +1256,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payment-links/{paymentLinkId}/payments", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payment-links/{paymentLinkId}/payments", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;

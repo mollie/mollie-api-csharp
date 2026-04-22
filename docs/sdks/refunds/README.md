@@ -17,7 +17,7 @@ transfer or by refunding the amount to your customer's credit card.
 
 ### Example Usage: create-refund-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" example="create-refund-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/v2/payments/{paymentId}/refunds" example="create-refund-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -66,7 +66,7 @@ var res = await sdk.Refunds.CreateAsync(
 ```
 ### Example Usage: create-refund-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/payments/{paymentId}/refunds" example="create-refund-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-refund" method="post" path="/v2/payments/{paymentId}/refunds" example="create-refund-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -141,7 +141,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-refunds" method="get" path="/payments/{paymentId}/refunds" example="list-refunds-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-refunds" method="get" path="/v2/payments/{paymentId}/refunds" example="list-refunds-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -195,7 +195,7 @@ Retrieve a single payment refund by its ID and the ID of its parent payment.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-refund" method="get" path="/payments/{paymentId}/refunds/{refundId}" example="get-refund-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-refund" method="get" path="/v2/payments/{paymentId}/refunds/{refundId}" example="get-refund-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -247,7 +247,7 @@ A refund can only be canceled while its `status` field is either `queued` or `pe
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="cancel-refund" method="delete" path="/payments/{paymentId}/refunds/{refundId}" -->
+<!-- UsageSnippet language="csharp" operationID="cancel-refund" method="delete" path="/v2/payments/{paymentId}/refunds/{refundId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -296,7 +296,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-all-refunds" method="get" path="/refunds" example="list-refunds-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-refunds" method="get" path="/v2/refunds" example="list-refunds-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

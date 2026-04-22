@@ -15,7 +15,7 @@ The results are paginated.
 
 ### Example Usage: list-terminals-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" example="list-terminals-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/v2/terminals" example="list-terminals-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -46,7 +46,7 @@ while(res != null)
 ```
 ### Example Usage: list-terminals-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/terminals" example="list-terminals-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-terminals" method="get" path="/v2/terminals" example="list-terminals-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -99,7 +99,7 @@ Retrieve a single terminal by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-terminal" method="get" path="/terminals/{terminalId}" example="get-terminal-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-terminal" method="get" path="/v2/terminals/{terminalId}" example="get-terminal-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -16,7 +16,7 @@ The results are paginated.
 
 ### Example Usage: list-chargeback-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/v2/payments/{paymentId}/chargebacks" example="list-chargeback-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -48,7 +48,7 @@ while(res != null)
 ```
 ### Example Usage: list-chargeback-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/v2/payments/{paymentId}/chargebacks" example="list-chargeback-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -80,7 +80,7 @@ while(res != null)
 ```
 ### Example Usage: list-chargeback-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/payments/{paymentId}/chargebacks" example="list-chargeback-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-chargebacks" method="get" path="/v2/payments/{paymentId}/chargebacks" example="list-chargeback-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -134,7 +134,7 @@ Retrieve a single payment chargeback by its ID and the ID of its parent payment.
 
 ### Example Usage: get-chargeback-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/v2/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -160,7 +160,7 @@ var res = await sdk.Chargebacks.GetAsync(req);
 ```
 ### Example Usage: get-chargeback-200-2
 
-<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="get-chargeback" method="get" path="/v2/payments/{paymentId}/chargebacks/{chargebackId}" example="get-chargeback-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -210,7 +210,7 @@ The results are paginated.
 
 ### Example Usage: list-all-chargebacks-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/v2/chargebacks" example="list-all-chargebacks-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -243,7 +243,7 @@ while(res != null)
 ```
 ### Example Usage: list-all-chargebacks-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/v2/chargebacks" example="list-all-chargebacks-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -276,7 +276,7 @@ while(res != null)
 ```
 ### Example Usage: list-all-chargebacks-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/chargebacks" example="list-all-chargebacks-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-chargebacks" method="get" path="/v2/chargebacks" example="list-all-chargebacks-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

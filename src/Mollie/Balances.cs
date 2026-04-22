@@ -234,7 +234,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/balances", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/balances", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -484,7 +484,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/balances/{balanceId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -668,7 +668,7 @@ namespace Mollie
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = baseUrl + "/balances/primary";
+            var urlString = baseUrl + "/v2/balances/primary";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -828,7 +828,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/report", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/balances/{balanceId}/report", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1019,7 +1019,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/balances/{balanceId}/transactions", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/balances/{balanceId}/transactions", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;

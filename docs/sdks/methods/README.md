@@ -32,7 +32,7 @@ a non-online payment method, you can use the [Get payment method endpoint](get-m
 
 ### Example Usage: list-method-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-method-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/v2/methods" example="list-method-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -67,7 +67,7 @@ var res = await sdk.Methods.ListAsync(req);
 ```
 ### Example Usage: list-methods-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-methods-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/v2/methods" example="list-methods-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -102,7 +102,7 @@ var res = await sdk.Methods.ListAsync(req);
 ```
 ### Example Usage: list-methods-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/methods" example="list-methods-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-methods" method="get" path="/v2/methods" example="list-methods-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -165,7 +165,7 @@ a non-online payment method, you can use the [Get payment method endpoint](get-m
 
 ### Example Usage: list-all-methods-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/v2/methods/all" example="list-all-methods-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -196,7 +196,7 @@ var res = await sdk.Methods.AllAsync(req);
 ```
 ### Example Usage: list-all-methods-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/v2/methods/all" example="list-all-methods-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -227,7 +227,7 @@ var res = await sdk.Methods.AllAsync(req);
 ```
 ### Example Usage: list-all-methods-200-3
 
-<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/v2/methods/all" example="list-all-methods-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -258,7 +258,7 @@ var res = await sdk.Methods.AllAsync(req);
 ```
 ### Example Usage: list-all-methods-200-4
 
-<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/methods/all" example="list-all-methods-200-4" -->
+<!-- UsageSnippet language="csharp" operationID="list-all-methods" method="get" path="/v2/methods/all" example="list-all-methods-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -322,7 +322,7 @@ are enabled by passing the wallet ID (`applepay`) as the method ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/methods/{methodId}" example="get-method-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-method" method="get" path="/v2/methods/{methodId}" example="get-method-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

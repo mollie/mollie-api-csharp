@@ -64,7 +64,7 @@ to the URL.
 
 ### Example Usage: create-client-link-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/v2/client-links" example="create-client-link-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -101,7 +101,7 @@ var res = await sdk.ClientLinks.CreateAsync(
 ```
 ### Example Usage: create-client-link-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/v2/client-links" example="create-client-link-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -138,7 +138,7 @@ var res = await sdk.ClientLinks.CreateAsync(
 ```
 ### Example Usage: create-client-link-201-3
 
-<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/client-links" example="create-client-link-201-3" -->
+<!-- UsageSnippet language="csharp" operationID="create-client-link" method="post" path="/v2/client-links" example="create-client-link-201-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

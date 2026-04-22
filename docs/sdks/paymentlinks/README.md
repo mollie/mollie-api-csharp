@@ -19,7 +19,7 @@ complete the payment. A [payment](get-payment) will only be created once the cus
 
 ### Example Usage: create-payment-link-201-1
 
-<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/payment-links" example="create-payment-link-201-1" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/v2/payment-links" example="create-payment-link-201-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -125,7 +125,7 @@ var res = await sdk.PaymentLinks.CreateAsync(
 ```
 ### Example Usage: create-payment-link-201-2
 
-<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/payment-links" example="create-payment-link-201-2" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/v2/payment-links" example="create-payment-link-201-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -231,7 +231,7 @@ var res = await sdk.PaymentLinks.CreateAsync(
 ```
 ### Example Usage: create-payment-link-201-3
 
-<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/payment-links" example="create-payment-link-201-3" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/v2/payment-links" example="create-payment-link-201-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -337,7 +337,7 @@ var res = await sdk.PaymentLinks.CreateAsync(
 ```
 ### Example Usage: create-payment-link-201-4
 
-<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/payment-links" example="create-payment-link-201-4" -->
+<!-- UsageSnippet language="csharp" operationID="create-payment-link" method="post" path="/v2/payment-links" example="create-payment-link-201-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -468,7 +468,7 @@ The results are paginated.
 
 ### Example Usage: list-payment-links-200-1
 
-<!-- UsageSnippet language="csharp" operationID="list-payment-links" method="get" path="/payment-links" example="list-payment-links-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-payment-links" method="get" path="/v2/payment-links" example="list-payment-links-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -496,7 +496,7 @@ while(res != null)
 ```
 ### Example Usage: list-payment-links-200-2
 
-<!-- UsageSnippet language="csharp" operationID="list-payment-links" method="get" path="/payment-links" example="list-payment-links-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="list-payment-links" method="get" path="/v2/payment-links" example="list-payment-links-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -549,7 +549,7 @@ Retrieve a single payment link by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-payment-link" method="get" path="/payment-links/{paymentLinkId}" example="get-payment-link-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-payment-link" method="get" path="/v2/payment-links/{paymentLinkId}" example="get-payment-link-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -594,7 +594,7 @@ Certain details of an existing payment link can be updated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="update-payment-link" method="patch" path="/payment-links/{paymentLinkId}" example="update-payment-link-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="update-payment-link" method="patch" path="/v2/payment-links/{paymentLinkId}" example="update-payment-link-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -685,7 +685,7 @@ To simply disable a payment link without fully deleting it, you can use the `arc
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="delete-payment-link" method="delete" path="/payment-links/{paymentLinkId}" -->
+<!-- UsageSnippet language="csharp" operationID="delete-payment-link" method="delete" path="/v2/payment-links/{paymentLinkId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -733,7 +733,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-payment-link-payments" method="get" path="/payment-links/{paymentLinkId}/payments" example="get-payment-link-payments-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-payment-link-payments" method="get" path="/v2/payment-links/{paymentLinkId}/payments" example="get-payment-link-payments-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

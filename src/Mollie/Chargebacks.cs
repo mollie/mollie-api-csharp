@@ -145,7 +145,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/chargebacks", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/chargebacks", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;
@@ -366,7 +366,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/payments/{paymentId}/chargebacks/{chargebackId}", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/chargebacks/{chargebackId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -552,7 +552,7 @@ namespace Mollie
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/chargebacks", request, null);
+            var urlString = URLBuilder.Build(baseUrl, "/v2/chargebacks", request, null);
             if (urlOverride != null)
             {
                 urlString = urlOverride;

@@ -20,7 +20,7 @@ With the Sales Invoice API you can generate sales invoices to send to your custo
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="create-sales-invoice" method="post" path="/sales-invoices" -->
+<!-- UsageSnippet language="csharp" operationID="create-sales-invoice" method="post" path="/v2/sales-invoices" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -111,7 +111,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-sales-invoices" method="get" path="/sales-invoices" -->
+<!-- UsageSnippet language="csharp" operationID="list-sales-invoices" method="get" path="/v2/sales-invoices" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -168,7 +168,7 @@ Retrieve a single sales invoice by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="get-sales-invoice" method="get" path="/sales-invoices/{salesInvoiceId}" -->
+<!-- UsageSnippet language="csharp" operationID="get-sales-invoice" method="get" path="/v2/sales-invoices/{salesInvoiceId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -219,7 +219,7 @@ respectively).
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="update-sales-invoice" method="patch" path="/sales-invoices/{salesInvoiceId}" -->
+<!-- UsageSnippet language="csharp" operationID="update-sales-invoice" method="patch" path="/v2/sales-invoices/{salesInvoiceId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -321,7 +321,7 @@ Sales invoices which are in status `draft` can be deleted. For all other statuse
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="delete-sales-invoice" method="delete" path="/sales-invoices/{salesInvoiceId}" -->
+<!-- UsageSnippet language="csharp" operationID="delete-sales-invoice" method="delete" path="/v2/sales-invoices/{salesInvoiceId}" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;

@@ -15,7 +15,7 @@ The results are paginated.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="list-clients" method="get" path="/clients" example="list-clients-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="list-clients" method="get" path="/v2/clients" example="list-clients-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -66,7 +66,7 @@ Retrieve a single client by its ID.
 
 ### Example Usage: get-client-200-1
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-1" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/v2/clients/{organizationId}" example="get-client-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -85,7 +85,7 @@ var res = await sdk.Clients.GetAsync(
 ```
 ### Example Usage: get-client-200-2
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-2" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/v2/clients/{organizationId}" example="get-client-200-2" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -104,7 +104,7 @@ var res = await sdk.Clients.GetAsync(
 ```
 ### Example Usage: get-client-200-3
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-3" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/v2/clients/{organizationId}" example="get-client-200-3" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
@@ -123,7 +123,7 @@ var res = await sdk.Clients.GetAsync(
 ```
 ### Example Usage: get-client-200-4
 
-<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/clients/{organizationId}" example="get-client-200-4" -->
+<!-- UsageSnippet language="csharp" operationID="get-client" method="get" path="/v2/clients/{organizationId}" example="get-client-200-4" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
