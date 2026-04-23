@@ -19,7 +19,7 @@ namespace Mollie.Models.Components
     public class PaymentRequest
     {
         /// <summary>
-        /// The description of the payment. This will be shown to your customer on their card or bank statement when possible.<br/>
+        /// The description of the payment will be shown to your customer on their card or bank statement when possible.<br/>
         /// We truncate the description automatically according to the limits of the used payment method. The description is<br/>
         /// also visible in any exports you generate.<br/>
         /// <br/>
