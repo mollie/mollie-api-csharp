@@ -158,7 +158,7 @@ namespace Mollie
 
             if (!httpRequest.Headers.Contains("Accept"))
             {
-                httpRequest.Headers.Add("Accept", "application/hal+json");
+                httpRequest.Headers.Add("Accept", "application/json");
             }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
@@ -243,7 +243,7 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
             {
-                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     OauthGenerateTokensResponseBody obj;

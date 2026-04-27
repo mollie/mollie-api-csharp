@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 3104e7f64e745038e756f9725e4307cc
+  docChecksum: 63d75c8a3735af1f2203497ce3b69d90
   docVersion: 1.0.0
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 0.14.2
-  configChecksum: fc5f0a0c49c26aa234ed4f705c9acf2f
+  releaseVersion: 0.14.3
+  configChecksum: 04c51a1ef4d9a0ed6135040119142db7
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: beb5fbdd-8a34-4ea3-bdaa-53c64d9f68b9
-  pristine_commit_hash: c9113d84cbed76895494ed4777eabf40d7842e43
-  pristine_tree_hash: 0a2916438784417465c4faabd0b6acc80cfe638e
+  generation_id: d8ea8db3-b1c1-4a0a-8b79-7441c8093b7c
+  pristine_commit_hash: 5228b64a8892bdb799325632ca050b2e0733f78f
+  pristine_tree_hash: e25d1d3a07ed084aaa0ef1553c1dd5f332ebda93
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -7072,12 +7072,12 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:ba4d438cfeef70c64cfda0f6eeb3697c645dba5f
-    pristine_git_object: 4153b44ca03628df8472118d12a8efed3f42b697
+    last_write_checksum: sha1:0e7360d2162035ca515210bc422be2a786bdbd51
+    pristine_git_object: 07433df64c994a415f0b69a9867d735af9d86e6e
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
-    last_write_checksum: sha1:fc96a344704891cef4bf8a64358f91cf4ab21511
-    pristine_git_object: db70ff89c65261a903f26f07ee816614714b60ef
+    last_write_checksum: sha1:67a0713114977ed6f68ffe32b145848c809f7573
+    pristine_git_object: 5ec9b0dc3f1bf5afd835f6e5ac369d1a8c3dd104
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:077978d35e642d54e8234073f0ee370eef1e66a3
@@ -7108,8 +7108,8 @@ trackedFiles:
     pristine_git_object: 02f2143ddd7d28b6ff8da98e969e002af6ece44e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:32aee05be6cf7fabe26abc94c7b8fd7cf3cac2d7
-    pristine_git_object: 45e9fc9e6664d84391d23519fb9e752c8959cc70
+    last_write_checksum: sha1:79a82e93e6efbced866b56bf9e997a58a2e231ff
+    pristine_git_object: c5f0deb3ab6dbbc3340b24bae84c84bbef654093
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:797f649a68bc2839b3af2ef47553826383d02f9c
@@ -7148,8 +7148,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:14e2eea1f79eea8bfe6a871bf8f1c1d98a536ccb
-    pristine_git_object: 5b3e9e966617596498cec6914189a296f4066542
+    last_write_checksum: sha1:0135086b067558233e2bbbe2064a3c71c05f61f7
+    pristine_git_object: c9742bb79e5c20626c919ba6937992d101274e6c
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11004,6 +11004,7 @@ examples:
         "200":
           text/html: "{\"access_token\":\"access_46EUJ6x8jFJZZeAvhNH4JVey6qVpqR\",\"refresh_token\":\"refresh_FS4xc3Mgci2xQ5s5DzaLXh3HhaTZOP\",\"expires_in\":3600,\"token_type\":\"bearer\",\"scope\":\"payments.read organizations.read\"}"
           application/hal+json: {"access_token": "access_46EUJ6x8jFJZZeAvhNH4JVey6qVpqR", "refresh_token": "refresh_FS4xc3Mgci2xQ5s5DzaLXh3HhaTZOP", "expires_in": 3600, "token_type": "bearer", "scope": "payments.read organizations.read"}
+          application/json: {"access_token": "access_46EUJ6x8jFJZZeAvhNH4JVey6qVpqR", "refresh_token": "refresh_FS4xc3Mgci2xQ5s5DzaLXh3HhaTZOP", "expires_in": 3600, "token_type": "bearer", "scope": "payments.read organizations.read"}
   oauth-revoke-tokens:
     speakeasy-default-oauth-revoke-tokens:
       parameters:
@@ -11012,7 +11013,9 @@ examples:
       requestBody:
         application/json: {"token_type_hint": "access_token", "token": "access_..."}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Oauth.Generate()`: \n  *  `requestBody` **Changed** (Breaking ⚠️)\n  *  `response.status[200]` **Changed** (Breaking ⚠️)\n* `Client.Oauth.Revoke()`: \n  *  `requestBody.TokenTypeHint` **Changed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Client.Oauth.Generate()`:  `response.status[200]` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - Mollie.sln
