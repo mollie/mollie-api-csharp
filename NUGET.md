@@ -43,12 +43,21 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Moll
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     OAuth = "<YOUR_O_AUTH_HERE>",
 });
 
-var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
+var res = await sdk.Oauth.GenerateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new OauthGenerateTokensRequestBody() {
+        GrantType = OauthGrantType.AuthorizationCode,
+        Code = "auth_...",
+        RefreshToken = "refresh_...",
+        RedirectUri = "https://example.com/redirect",
+    }
+);
 
 // handle response
 ```
@@ -71,12 +80,21 @@ You can set the security parameters through the `security` optional parameter wh
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
+var res = await sdk.Oauth.GenerateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new OauthGenerateTokensRequestBody() {
+        GrantType = OauthGrantType.AuthorizationCode,
+        Code = "auth_...",
+        RefreshToken = "refresh_...",
+        RedirectUri = "https://example.com/redirect",
+    }
+);
 
 // handle response
 ```
@@ -181,6 +199,7 @@ To change the default retry strategy for a single API call, simply pass a `Retry
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     OAuth = "<YOUR_O_AUTH_HERE>",
@@ -197,7 +216,13 @@ var res = await sdk.Oauth.GenerateAsync(
         ),
         retryConnectionErrors: false
     ),
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new OauthGenerateTokensRequestBody() {
+        GrantType = OauthGrantType.AuthorizationCode,
+        Code = "auth_...",
+        RefreshToken = "refresh_...",
+        RedirectUri = "https://example.com/redirect",
+    }
 );
 
 // handle response
@@ -207,6 +232,7 @@ If you'd like to override the default retry strategy for all operations that sup
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     retryConfig: new RetryConfig(
@@ -224,7 +250,15 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Oauth.GenerateAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
+var res = await sdk.Oauth.GenerateAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new OauthGenerateTokensRequestBody() {
+        GrantType = OauthGrantType.AuthorizationCode,
+        Code = "auth_...",
+        RefreshToken = "refresh_...",
+        RedirectUri = "https://example.com/redirect",
+    }
+);
 
 // handle response
 ```
@@ -370,6 +404,7 @@ The server URL can also be overridden on a per-operation basis, provided a serve
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     OAuth = "<YOUR_O_AUTH_HERE>",
@@ -377,7 +412,13 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Oauth.GenerateAsync(
     serverUrl: "https://api.mollie.com/oauth2",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new OauthGenerateTokensRequestBody() {
+        GrantType = OauthGrantType.AuthorizationCode,
+        Code = "auth_...",
+        RefreshToken = "refresh_...",
+        RedirectUri = "https://example.com/redirect",
+    }
 );
 
 // handle response

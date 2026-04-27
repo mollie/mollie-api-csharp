@@ -10,34 +10,28 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
     public class OauthGenerateTokensRequestBody
     {
-        /// <summary>
-        /// If you wish to exchange your authorization code for an app access token, use grant type<br/>
-        /// `authorization_code`. If you wish to renew your app access token with your refresh token, use grant type<br/>
-        /// `refresh_token`.<br/>
-        /// <br/>
-        /// Possible values: `authorization_code` `refresh_token`
-        /// </summary>
         [JsonProperty("grant_type")]
-        public string GrantType { get; set; } = default!;
+        public OauthGrantType GrantType { get; set; } = default!;
 
         /// <summary>
         /// The authorization code you received when creating the authorization. Only use this field when using<br/>
         /// grant type `authorization_code`.
         /// </summary>
         [JsonProperty("code")]
-        public string? Code { get; set; } = null;
+        public string? Code { get; set; }
 
         /// <summary>
         /// The refresh token you received when creating the authorization. Only use this field when using grant<br/>
         /// type `refresh_token`.
         /// </summary>
         [JsonProperty("refresh_token")]
-        public string? RefreshToken { get; set; } = null;
+        public string? RefreshToken { get; set; }
 
         /// <summary>
         /// The URL the merchant is sent back to once the request has been authorized. It must match the URL you set<br/>
@@ -47,6 +41,6 @@ namespace Mollie.Models.Requests
         /// code grant request also contained a `redirect_uri`.
         /// </summary>
         [JsonProperty("redirect_uri")]
-        public string? RedirectUri { get; set; } = null;
+        public string? RedirectUri { get; set; }
     }
 }

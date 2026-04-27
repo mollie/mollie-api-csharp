@@ -11,6 +11,7 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Utils;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The newly generated access token and refresh token.
@@ -20,18 +21,21 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The app access token, with which you will be able to access the Mollie API on the merchant's behalf.
         /// </summary>
+        [JsonProperty("access_token")]
         public string? AccessToken { get; set; }
 
         /// <summary>
         /// The refresh token, with which you will be able to retrieve new app access tokens on this endpoint. The<br/>
         /// refresh token does not expire.
         /// </summary>
+        [JsonProperty("refresh_token")]
         public string? RefreshToken { get; set; }
 
         /// <summary>
         /// The number of seconds left before the app access token expires. Be sure to renew your app access token<br/>
         /// before this reaches zero.
         /// </summary>
+        [JsonProperty("expires_in")]
         public long? ExpiresIn { get; set; }
 
         /// <summary>
@@ -39,11 +43,13 @@ namespace Mollie.Models.Requests
         /// <br/>
         /// Possible values: `bearer`
         /// </summary>
+        [JsonProperty("token_type")]
         public string? TokenType { get; set; }
 
         /// <summary>
         /// A space-separated list of <a href="https://docs.mollie.com/docs/permissions">permissions</a>.
         /// </summary>
+        [JsonProperty("scope")]
         public string? Scope { get; set; }
     }
 }
