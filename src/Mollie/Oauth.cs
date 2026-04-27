@@ -16,6 +16,7 @@ namespace Mollie
     using Mollie.Models.Requests;
     using Mollie.Utils;
     using Mollie.Utils.Retries;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
@@ -157,7 +158,7 @@ namespace Mollie
 
             if (!httpRequest.Headers.Contains("Accept"))
             {
-                httpRequest.Headers.Add("Accept", "text/html");
+                httpRequest.Headers.Add("Accept", "application/hal+json");
             }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
@@ -242,8 +243,19 @@ namespace Mollie
             int responseStatusCode = (int)httpResponse.StatusCode;
             if(responseStatusCode == 200)
             {
-                if(Utilities.IsContentTypeMatch("text/html", contentType))
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    OauthGenerateTokensResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<OauthGenerateTokensResponseBody>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into OauthGenerateTokensResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new OauthGenerateTokensResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -252,7 +264,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Body = await httpResponse.Content.ReadAsByteArrayAsync();
+                    response.Object = obj;
                     return response;
                 }
 

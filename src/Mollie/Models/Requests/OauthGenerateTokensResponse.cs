@@ -11,6 +11,7 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
@@ -19,6 +20,9 @@ namespace Mollie.Models.Requests
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
-        public byte[]? Body { get; set; }
+        /// <summary>
+        /// The newly generated access token and refresh token.
+        /// </summary>
+        public OauthGenerateTokensResponseBody? Object { get; set; }
     }
 }

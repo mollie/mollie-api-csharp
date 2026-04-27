@@ -10,18 +10,14 @@
 #nullable enable
 namespace Mollie.Models.Requests
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
     public class OauthRevokeTokensRequestBody
     {
-        /// <summary>
-        /// The type of token you want to revoke.<br/>
-        /// <br/>
-        /// Possible values: `access_token` `refresh_token`
-        /// </summary>
         [JsonProperty("token_type_hint")]
-        public string TokenTypeHint { get; set; } = default!;
+        public OauthTokenTypeHint TokenTypeHint { get; set; } = default!;
 
         /// <summary>
         /// The token you want to revoke.
