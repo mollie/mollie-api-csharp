@@ -9,8 +9,14 @@
 Entity.CreatePaymentLinkResponse(/* values here */);
 ```
 
-### ProfileResponse
+### SalesInvoiceResponse
 
 ```csharp
-Entity.CreateProfileResponse(/* values here */);
+Entity.CreateSalesInvoiceResponse(/* values here */);
+```
+
+### TransferResponse
+
+```csharp
+Entity.CreateTransferResponse(/* values here */);
 ```
