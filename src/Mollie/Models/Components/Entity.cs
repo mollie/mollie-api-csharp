@@ -27,14 +27,17 @@ namespace Mollie.Models.Components
 
         public static EntityType PaymentLinkResponse { get { return new EntityType("payment-link-response"); } }
 
-        public static EntityType ProfileResponse { get { return new EntityType("profile-response"); } }
+        public static EntityType SalesInvoiceResponse { get { return new EntityType("sales-invoice-response"); } }
+
+        public static EntityType TransferResponse { get { return new EntityType("transfer-response"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
             switch(v) {
                 case "payment-link-response": return PaymentLinkResponse;
-                case "profile-response": return ProfileResponse;
+                case "sales-invoice-response": return SalesInvoiceResponse;
+                case "transfer-response": return TransferResponse;
                 default: throw new ArgumentException("Invalid value for EntityType");
             }
         }
@@ -65,7 +68,10 @@ namespace Mollie.Models.Components
         public PaymentLinkResponse? PaymentLinkResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public ProfileResponse? ProfileResponse { get; set; }
+        public SalesInvoiceResponse? SalesInvoiceResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public TransferResponse? TransferResponse { get; set; }
 
         public EntityType Type { get; set; }
         public static Entity CreatePaymentLinkResponse(PaymentLinkResponse paymentLinkResponse)
@@ -76,12 +82,20 @@ namespace Mollie.Models.Components
             res.PaymentLinkResponse = paymentLinkResponse;
             return res;
         }
-        public static Entity CreateProfileResponse(ProfileResponse profileResponse)
+        public static Entity CreateSalesInvoiceResponse(SalesInvoiceResponse salesInvoiceResponse)
         {
-            EntityType typ = EntityType.ProfileResponse;
+            EntityType typ = EntityType.SalesInvoiceResponse;
 
             Entity res = new Entity(typ);
-            res.ProfileResponse = profileResponse;
+            res.SalesInvoiceResponse = salesInvoiceResponse;
+            return res;
+        }
+        public static Entity CreateTransferResponse(TransferResponse transferResponse)
+        {
+            EntityType typ = EntityType.TransferResponse;
+
+            Entity res = new Entity(typ);
+            res.TransferResponse = transferResponse;
             return res;
         }
 
@@ -103,14 +117,14 @@ namespace Mollie.Models.Components
 
                 try
                 {
-                    return new Entity(EntityType.ProfileResponse)
+                    return new Entity(EntityType.TransferResponse)
                     {
-                        ProfileResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ProfileResponse>(json)
+                        TransferResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<TransferResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ProfileResponse), new Entity(EntityType.ProfileResponse), "ProfileResponse"));
+                    fallbackCandidates.Add((typeof(TransferResponse), new Entity(EntityType.TransferResponse), "TransferResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -131,6 +145,26 @@ namespace Mollie.Models.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(PaymentLinkResponse), new Entity(EntityType.PaymentLinkResponse), "PaymentLinkResponse"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Entity(EntityType.SalesInvoiceResponse)
+                    {
+                        SalesInvoiceResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<SalesInvoiceResponse>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(SalesInvoiceResponse), new Entity(EntityType.SalesInvoiceResponse), "SalesInvoiceResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -179,9 +213,15 @@ namespace Mollie.Models.Components
                     return;
                 }
 
-                if (res.ProfileResponse != null)
+                if (res.SalesInvoiceResponse != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.ProfileResponse));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.SalesInvoiceResponse));
+                    return;
+                }
+
+                if (res.TransferResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.TransferResponse));
                     return;
                 }
             }

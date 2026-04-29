@@ -30,6 +30,13 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceIssued = new EntityWebhookEventWebhookEventTypes("sales-invoice.issued");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceCanceled = new EntityWebhookEventWebhookEventTypes("sales-invoice.canceled");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoicePaid = new EntityWebhookEventWebhookEventTypes("sales-invoice.paid");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferRequested = new EntityWebhookEventWebhookEventTypes("business-account-transfer.requested");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferInitiated = new EntityWebhookEventWebhookEventTypes("business-account-transfer.initiated");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferPendingReview = new EntityWebhookEventWebhookEventTypes("business-account-transfer.pending-review");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferProcessed = new EntityWebhookEventWebhookEventTypes("business-account-transfer.processed");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferFailed = new EntityWebhookEventWebhookEventTypes("business-account-transfer.failed");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferBlocked = new EntityWebhookEventWebhookEventTypes("business-account-transfer.blocked");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferReturned = new EntityWebhookEventWebhookEventTypes("business-account-transfer.returned");
         public static readonly EntityWebhookEventWebhookEventTypes Wildcard = new EntityWebhookEventWebhookEventTypes("*");
 
         private static readonly Dictionary <string, EntityWebhookEventWebhookEventTypes> _knownValues =
@@ -41,6 +48,13 @@ namespace Mollie.Models.Components
                 ["sales-invoice.issued"] = SalesInvoiceIssued,
                 ["sales-invoice.canceled"] = SalesInvoiceCanceled,
                 ["sales-invoice.paid"] = SalesInvoicePaid,
+                ["business-account-transfer.requested"] = BusinessAccountTransferRequested,
+                ["business-account-transfer.initiated"] = BusinessAccountTransferInitiated,
+                ["business-account-transfer.pending-review"] = BusinessAccountTransferPendingReview,
+                ["business-account-transfer.processed"] = BusinessAccountTransferProcessed,
+                ["business-account-transfer.failed"] = BusinessAccountTransferFailed,
+                ["business-account-transfer.blocked"] = BusinessAccountTransferBlocked,
+                ["business-account-transfer.returned"] = BusinessAccountTransferReturned,
                 ["*"] = Wildcard
             };
 

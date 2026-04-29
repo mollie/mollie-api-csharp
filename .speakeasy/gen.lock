@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 63d75c8a3735af1f2203497ce3b69d90
+  docChecksum: 83a14461a999686afdf3dd56c1c49aa0
   docVersion: 1.0.0
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 0.14.3
-  configChecksum: 04c51a1ef4d9a0ed6135040119142db7
+  releaseVersion: 1.0.0
+  configChecksum: edc714c7d7a379ee485adfd7d1637ff7
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: d8ea8db3-b1c1-4a0a-8b79-7441c8093b7c
-  pristine_commit_hash: 5228b64a8892bdb799325632ca050b2e0733f78f
-  pristine_tree_hash: e25d1d3a07ed084aaa0ef1553c1dd5f332ebda93
+  generation_id: a651a322-c4c6-42b9-9b17-279a80de1074
+  pristine_commit_hash: db72a0d0d106fa7fe21864516dc379fb58edd6e4
+  pristine_tree_hash: 220f532afff5912bb06e7d344a70e9244883127d
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -324,8 +324,8 @@ trackedFiles:
     pristine_git_object: 580ecf758512e6121f628cd58069db326579f532
   docs/Models/Components/Entity.md:
     id: 4d86bee192ca
-    last_write_checksum: sha1:79bce6ea6c9f82aae72d78d3b8029bc867497a17
-    pristine_git_object: 2345c1c890605ab81f10b733fb14c3df05ca36b8
+    last_write_checksum: sha1:d67932e3cea394ab54ae1a80d5a9411748787b42
+    pristine_git_object: 261ed97f075d00dd6ef24a84a6abefd562f34721
   docs/Models/Components/EntityBalance.md:
     id: bf92ea1491c7
     last_write_checksum: sha1:a3c54f21f88be4c1afcfe87851e8cdd1ad772a6e
@@ -676,8 +676,8 @@ trackedFiles:
     pristine_git_object: ddf2725ab97df46ec7c9199fa7601bad4932355b
   docs/Models/Components/EntityWebhookEventWebhookEventTypes.md:
     id: 950aac5c5608
-    last_write_checksum: sha1:36749a46b914c02e054942db316c02c99307dbc2
-    pristine_git_object: a27956cc1b560c5f6ea1649c58ece8dba63e2178
+    last_write_checksum: sha1:26822c9642d5a03736996c3cc74263525c87ca36
+    pristine_git_object: f25c4d65aca3a62ed21e2a7e8d0a8cbaf8a1b7f3
   docs/Models/Components/EntityWebhookLinks.md:
     id: 4d7dd6f75bd5
     last_write_checksum: sha1:08c288986f76cc19cec5431806582c5af5a89da0
@@ -2080,8 +2080,8 @@ trackedFiles:
     pristine_git_object: 7ca6bf161cb096b7e0a0f24e9702e13ca8f88963
   docs/Models/Components/WebhookEventTypes.md:
     id: 8f114a99ea2d
-    last_write_checksum: sha1:70ae182eb97f25fd90c1dbcf41387d1beea4eba0
-    pristine_git_object: ac9798c8a262c2c014bace92501637837d1125d3
+    last_write_checksum: sha1:dd17143ff2110ee7963d5f17ff4220534c7ba325
+    pristine_git_object: 69ef233f36c6dba9b2f13b9140be2ad239840328
   docs/Models/Components/WebhookStatus.md:
     id: 2af02c3db301
     last_write_checksum: sha1:844fc9505307dd7389b3b16918c4a931f598aad9
@@ -3924,8 +3924,8 @@ trackedFiles:
     pristine_git_object: 9d02e879594f6c15af7ad09cf8927910ef51c8ea
   src/Mollie/Models/Components/Entity.cs:
     id: d8ae9092a4ba
-    last_write_checksum: sha1:680321363db7e31b58242f32d367d873e2fb89cb
-    pristine_git_object: f60ed9344dd0db54e2df50b83ba72eb4b9a987df
+    last_write_checksum: sha1:8e86c4bfc7f3dd07ceb983937d9ee2ad0f294873
+    pristine_git_object: 76e0e02587467531e1c43d06f3f558eb4a4e950b
   src/Mollie/Models/Components/EntityBalance.cs:
     id: 58e7290b00c8
     last_write_checksum: sha1:64435f35fa8893118195bb65fad96ab0fc04650a
@@ -4276,8 +4276,8 @@ trackedFiles:
     pristine_git_object: 80759dfbe90d068a75a2a5cb8f07155d7804270b
   src/Mollie/Models/Components/EntityWebhookEventWebhookEventTypes.cs:
     id: 90f46a8b2d27
-    last_write_checksum: sha1:e177fd26882d939a9822b4304060429ae64c1eaa
-    pristine_git_object: 3f324e9004c66d050610926b8647f9903570a80d
+    last_write_checksum: sha1:44ea5b45492b3e6fcd25e264dcbaacfd0a7d18a5
+    pristine_git_object: 75c24d2fd97d6bfa3d4380fa654fd5cf111a980a
   src/Mollie/Models/Components/EntityWebhookLinks.cs:
     id: e7b8b3c12ba5
     last_write_checksum: sha1:36d2130cc85fa574dc82a2a7befe5261ea79f5f6
@@ -5680,8 +5680,8 @@ trackedFiles:
     pristine_git_object: e0a4b98f0127abae5b74cd3275e23a91af7001b7
   src/Mollie/Models/Components/WebhookEventTypes.cs:
     id: ee490627bb01
-    last_write_checksum: sha1:29b54a890efad7fd6d83e1484810b4ce831b8dbd
-    pristine_git_object: 528369f139e9dbaa320ce2815a676c3a5dc9b71d
+    last_write_checksum: sha1:615ca7469c5ff743d89a1463be8f98e1c435aa49
+    pristine_git_object: 837d3dc7065c9844f346fb3aff56f13f7d46ca06
   src/Mollie/Models/Components/WebhookStatus.cs:
     id: 786ae58626ff
     last_write_checksum: sha1:921bf8f181207efc0c39cdde62a79775db7931a6
@@ -7072,8 +7072,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:0e7360d2162035ca515210bc422be2a786bdbd51
-    pristine_git_object: 07433df64c994a415f0b69a9867d735af9d86e6e
+    last_write_checksum: sha1:c5e643c877479c105ac6d61e2492adf513fa2d8c
+    pristine_git_object: 20923cc3a08026d96b954cfd79c0ce4c8180de88
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:67a0713114977ed6f68ffe32b145848c809f7573
@@ -7108,8 +7108,8 @@ trackedFiles:
     pristine_git_object: 02f2143ddd7d28b6ff8da98e969e002af6ece44e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:79a82e93e6efbced866b56bf9e997a58a2e231ff
-    pristine_git_object: c5f0deb3ab6dbbc3340b24bae84c84bbef654093
+    last_write_checksum: sha1:cbb3c491c7d68aeb3e258b3abc05f182366be0b3
+    pristine_git_object: 6eeae1f5b1ffb89d8724ee1777652bb8e83b5b50
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:797f649a68bc2839b3af2ef47553826383d02f9c
@@ -7148,8 +7148,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:0135086b067558233e2bbbe2064a3c71c05f61f7
-    pristine_git_object: c9742bb79e5c20626c919ba6937992d101274e6c
+    last_write_checksum: sha1:39a022dba6deeff9453af66ad40d5e7f24af1c66
+    pristine_git_object: 619d5e2b59747864391ff46c20f03f33056ef6f7
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -9875,7 +9875,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "event", "id": "event_GvJ8WHrp5isUdRub9CJyH", "type": "payment-link.paid", "entityId": "pl_qng5gbbv8NAZ5gpM5ZYgx", "createdAt": "2024-06-10T14:23:45+00:00", "_embedded": {"entity": {"resource": "profile", "id": "pfl_QkEhN94Ba", "mode": "live", "name": "My website name", "website": "https://example.com", "email": "test@mollie.com", "phone": "+31208202070", "description": "My website description", "countriesOfActivity": ["NL", "GB"], "businessCategory": "OTHER_MERCHANDISE", "status": "unverified", "review": {"status": "pending"}, "createdAt": "2022-01-19T12:30:22+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://www.mollie.com/dashboard/org_7049691/settings/profiles/pfl_2q3RyuMGry", "type": "text/html"}, "chargebacks": {"href": "https://api.mollie.com/v2/chargebacks?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "methods": {"href": "https://api.mollie.com/v2/methods?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "payments": {"href": "https://api.mollie.com/v2/payments?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "refunds": {"href": "https://api.mollie.com/v2/refunds?profileId=pfl_2q3RyuMGry", "type": "application/hal+json"}, "checkoutPreviewUrl": {"href": "https://www.mollie.com/checkout/preview/pfl_2q3RyuMGry", "type": "text/html"}, "documentation": {"href": "https://...", "type": "text/html"}}}}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}, "entity": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "event", "id": "event_GvJ8WHrp5isUdRub9CJyH", "type": "payment-link.paid", "entityId": "pl_qng5gbbv8NAZ5gpM5ZYgx", "createdAt": "2024-06-10T14:23:45+00:00", "_embedded": {"entity": {"resource": "profile", "id": "pfl_QkEhN94Ba", "mode": "live", "invoiceNumber": "INV-0000001", "profileId": "pfl_QkEhN94Ba", "status": "paid", "vatScheme": "standard", "vatMode": "exclusive", "memo": "This is a memo!", "paymentTerm": "30 days", "paymentDetails": {"source": "payment-link", "sourceReference": "pl_d9fQur83kFdhH8hIhaZfq"}, "emailDetails": {"subject": "Your invoice is available", "body": "Please find your invoice enclosed."}, "customerId": "cst_8wmqcHMN4U", "mandateId": "mdt_pWUnw6pkBN", "recipientIdentifier": "customer-xyz-0123", "recipient": {"type": "consumer", "title": "Mrs.", "givenName": "Jane", "familyName": "Doe", "organizationName": "Organization Corp.", "organizationNumber": "12345678", "vatNumber": "NL123456789B01", "email": "example@email.com", "phone": "+0123456789", "streetAndNumber": "Keizersgracht 126", "streetAdditional": "4th floor", "postalCode": "5678AB", "city": "Amsterdam", "region": "Noord-Holland", "country": "NL"}, "lines": [{"description": "LEGO 4440 Forest Police Station", "quantity": 1, "vatRate": "21.00", "unitPrice": {"currency": "EUR", "value": "10.00"}, "discount": {"type": "amount", "value": "10.00"}}], "discount": {"type": "amount", "value": "10.00"}, "isEInvoice": false, "amountDue": {"currency": "EUR", "value": "10.00"}, "subtotalAmount": {"currency": "EUR", "value": "10.00"}, "totalAmount": {"currency": "EUR", "value": "10.00"}, "totalVatAmount": {"currency": "EUR", "value": "10.00"}, "discountedSubtotalAmount": {"currency": "EUR", "value": "10.00"}, "createdAt": "2022-01-19T12:30:22+00:00", "issuedAt": "2024-10-03T10:47:38+00:00", "paidAt": "2024-10-04T10:47:38+00:00", "dueAt": "2024-11-01T10:47:38+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "invoicePayment": {"href": "https://...", "type": "application/hal+json"}, "pdfLink": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}, "next": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}}}}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}, "entity": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   list-balances:
@@ -11013,9 +11013,7 @@ examples:
       requestBody:
         application/json: {"token_type_hint": "access_token", "token": "access_..."}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Client.Oauth.Generate()`:  `response.status[200]` **Changed** (Breaking ⚠️)
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.Create()`: \n  *  `requestBody.EventTypesList.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response.Embedded.Webhooks[].EventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Update()`: \n  *  `requestBody.EventTypes.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Get()`:  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.WebhookEvents.Get()`:  `response` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

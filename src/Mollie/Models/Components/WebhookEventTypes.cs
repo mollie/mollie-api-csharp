@@ -32,6 +32,20 @@ namespace Mollie.Models.Components
         SalesInvoiceCanceled,
         [JsonProperty("sales-invoice.paid")]
         SalesInvoicePaid,
+        [JsonProperty("business-account-transfer.requested")]
+        BusinessAccountTransferRequested,
+        [JsonProperty("business-account-transfer.initiated")]
+        BusinessAccountTransferInitiated,
+        [JsonProperty("business-account-transfer.pending-review")]
+        BusinessAccountTransferPendingReview,
+        [JsonProperty("business-account-transfer.processed")]
+        BusinessAccountTransferProcessed,
+        [JsonProperty("business-account-transfer.failed")]
+        BusinessAccountTransferFailed,
+        [JsonProperty("business-account-transfer.blocked")]
+        BusinessAccountTransferBlocked,
+        [JsonProperty("business-account-transfer.returned")]
+        BusinessAccountTransferReturned,
         [JsonProperty("*")]
         Wildcard,
     }
