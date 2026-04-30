@@ -34,16 +34,13 @@ namespace Mollie.Models.Requests
         /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
         /// mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
         /// <br/>
-        /// A status value that cannot be set but can be returned is `canceled`, for invoices which were<br/>
-        /// issued, but then canceled. Currently this can only be done for invoices created in the dashboard.<br/>
-        /// <br/>
         /// Dependent parameters:<br/>
         ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
         ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
         ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
         /// </summary>
         [JsonProperty("status")]
-        public SalesInvoiceStatus? Status { get; set; }
+        public SalesInvoiceStatusUpdate? Status { get; set; }
 
         /// <summary>
         /// A free-form memo you can set on the invoice, and will be shown on the invoice PDF.

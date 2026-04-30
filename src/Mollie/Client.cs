@@ -85,7 +85,7 @@ namespace Mollie
 
         public ITransfers Transfers { get; }
 
-        public IVerifyPayees VerifyPayees { get; }
+        public IVerifyPayee VerifyPayee { get; }
     }
 
     public class Client: IClient
@@ -219,9 +219,9 @@ namespace Mollie
         /// </summary>
         public ITransfers Transfers { get; private set; }
         /// <summary>
-        /// The VerifyPayees sub-SDK.
+        /// The VerifyPayee sub-SDK.
         /// </summary>
-        public IVerifyPayees VerifyPayees { get; private set; }
+        public IVerifyPayee VerifyPayee { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
@@ -294,7 +294,7 @@ namespace Mollie
 
             Transfers = new Transfers(SDKConfiguration);
 
-            VerifyPayees = new VerifyPayees(SDKConfiguration);
+            VerifyPayee = new VerifyPayee(SDKConfiguration);
         }
 
         /// <summary>
@@ -442,7 +442,7 @@ namespace Mollie
 
             Transfers = new Transfers(SDKConfiguration);
 
-            VerifyPayees = new VerifyPayees(SDKConfiguration);
+            VerifyPayee = new VerifyPayee(SDKConfiguration);
         }
 
         private void InitHooks()

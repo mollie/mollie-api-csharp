@@ -235,7 +235,7 @@ var res = await sdk.SalesInvoices.UpdateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new UpdateSalesInvoiceRequestBody() {
         Testmode = false,
-        Status = SalesInvoiceStatus.Draft,
+        Status = SalesInvoiceStatusUpdate.Draft,
         Memo = "An updated memo!",
         PaymentTerm = SalesInvoicePaymentTerm.Thirtydays,
         PaymentDetails = new SalesInvoicePaymentDetails() {

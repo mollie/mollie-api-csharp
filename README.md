@@ -398,9 +398,9 @@ var sdk = new Mollie.Client(
 * [Match](docs/sdks/unmatchedcredittransfers/README.md#match) - Match unmatched credit transfer
 * [Return](docs/sdks/unmatchedcredittransfers/README.md#return) - Return unmatched credit transfer
 
-### [VerifyPayees](docs/sdks/verifypayees/README.md)
+### [VerifyPayee](docs/sdks/verifypayee/README.md)
 
-* [Create](docs/sdks/verifypayees/README.md#create) - Verify Payee
+* [Create](docs/sdks/verifypayee/README.md#create) - Verify Payee
 
 ### [Wallets](docs/sdks/wallets/README.md)
 
