@@ -1,4 +1,4 @@
-# SalesInvoiceStatusResponse
+# SalesInvoiceStatusUpdate
 
 The status for the invoice to end up in.
 
@@ -16,17 +16,15 @@ Dependent parameters:
 ```csharp
 using Mollie.Models.Components;
 
-var value = SalesInvoiceStatusResponse.Draft;
-
-// Open enum: use .Of() to create instances from custom string values
-var custom = SalesInvoiceStatusResponse.Of("custom_value");
+var value = SalesInvoiceStatusUpdate.Draft;
 ```
 
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `Draft`  | draft    |
-| `Issued` | issued   |
-| `Paid`   | paid     |
+| Name        | Value       |
+| ----------- | ----------- |
+| `Draft`     | draft       |
+| `Issued`    | issued      |
+| `Paid`      | paid        |
+| `Cancelled` | cancelled   |

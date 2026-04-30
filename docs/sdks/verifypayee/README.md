@@ -1,4 +1,4 @@
-# VerifyPayees
+# VerifyPayee
 
 ## Overview
 
@@ -42,7 +42,7 @@ var sdk = new Client(security: new Security() {
     OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.VerifyPayees.CreateAsync(
+var res = await sdk.VerifyPayee.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     verificationOfPayeeRequest: new VerificationOfPayeeRequest() {
         CreditorBankAccount = new CreditorBankAccount() {
@@ -67,7 +67,7 @@ var sdk = new Client(security: new Security() {
     OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.VerifyPayees.CreateAsync(
+var res = await sdk.VerifyPayee.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     verificationOfPayeeRequest: new VerificationOfPayeeRequest() {
         CreditorBankAccount = new CreditorBankAccount() {
@@ -92,7 +92,7 @@ var sdk = new Client(security: new Security() {
     OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.VerifyPayees.CreateAsync(
+var res = await sdk.VerifyPayee.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     verificationOfPayeeRequest: new VerificationOfPayeeRequest() {
         CreditorBankAccount = new CreditorBankAccount() {
@@ -117,7 +117,7 @@ var sdk = new Client(security: new Security() {
     OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.VerifyPayees.CreateAsync(
+var res = await sdk.VerifyPayee.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     verificationOfPayeeRequest: new VerificationOfPayeeRequest() {
         CreditorBankAccount = new CreditorBankAccount() {
