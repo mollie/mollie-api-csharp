@@ -12,17 +12,19 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
-    /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
-    /// currency your account is settled in.<br/>
+    /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
+    /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
     /// <br/>
-    /// Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is<br/>
-    /// settled by Mollie the `settlementAmount` is omitted from the response.<br/>
+    /// The amount that will be settled to your account, converted to the currency your account is settled in. Only<br/>
+    /// available once the payment is finalized and the final settlement amount has been determined.<br/>
     /// <br/>
-    /// Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest<br/>
-    /// using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
+    /// Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by<br/>
+    /// Mollie, this field is omitted from the response.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class ListPaymentResponseSettlementAmount
     {
         /// <summary>

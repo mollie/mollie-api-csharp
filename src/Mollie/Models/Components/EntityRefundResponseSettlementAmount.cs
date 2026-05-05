@@ -12,22 +12,19 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
-    /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
-    /// to the currency your account is settled in.<br/>
+    /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
+    /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
     /// <br/>
-    /// The amount is a **negative** amount.<br/>
+    /// The amount deducted from your account balance for this refund, converted to the currency your account is settled<br/>
+    /// in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has<br/>
+    /// been determined.<br/>
     /// <br/>
-    /// If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be<br/>
-    /// zero.<br/>
-    /// <br/>
-    /// Since the field contains an estimated amount during refund processing, it may change over time. For example, while<br/>
-    /// the refund is queued the settlement amount is likely not yet available.<br/>
-    /// <br/>
-    /// To retrieve accurate settlement amounts we recommend using the<br/>
-    /// <a href="list-balance-transactions">List balance transactions endpoint</a> instead.
+    /// For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class EntityRefundResponseSettlementAmount
     {
         /// <summary>

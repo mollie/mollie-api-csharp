@@ -51,12 +51,7 @@ namespace Mollie.Models.Components
         public AmountNullable? Amount { get; set; }
 
         /// <summary>
-        /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
-        /// currency your account is settled in.<br/>
-        /// <br/>
-        /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve<br/>
-        /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a>
-        /// instead.
+        /// The amount settled to your account for this capture, converted to the currency your account is settled in.
         /// </summary>
         [JsonProperty("settlementAmount")]
         public ListSettlementCaptureResponseSettlementAmount? SettlementAmount { get; set; } = null;

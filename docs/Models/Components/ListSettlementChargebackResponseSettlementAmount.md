@@ -1,9 +1,7 @@
-# ListSettlementPaymentResponseSettlementAmount
+# ListSettlementChargebackResponseSettlementAmount
 
-The amount settled to your account for this payment, converted to the currency your account is settled in.
-
-Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
-Mollie, this field is omitted from the response.
+The amount deducted from your account balance for this chargeback, converted to the currency your account is
+settled in. Always a **negative** amount.
 
 
 ## Fields

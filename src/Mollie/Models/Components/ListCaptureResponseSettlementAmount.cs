@@ -12,15 +12,16 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
-    /// This optional field will contain the approximate amount that will be settled to your account, converted to the<br/>
-    /// currency your account is settled in.<br/>
+    /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
+    /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
     /// <br/>
-    /// Since the field contains an estimated amount during capture processing, it may change over time. To retrieve<br/>
-    /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a>
-    /// instead.
+    /// The amount that will be settled to your account for this capture, converted to the currency your account is<br/>
+    /// settled in. Only available once the capture is finalized and the final settlement amount has been determined.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class ListCaptureResponseSettlementAmount
     {
         /// <summary>
