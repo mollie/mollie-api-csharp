@@ -12,17 +12,17 @@ namespace Mollie.Models.Components
 {
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
-    /// This optional field will contain the approximate amount that will be deducted from your account balance, converted<br/>
-    /// to the currency your account is settled in.<br/>
+    /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
+    /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
     /// <br/>
-    /// The amount is a **negative** amount.<br/>
-    /// <br/>
-    /// Since the field contains an estimated amount during chargeback processing, it may change over time. To retrieve<br/>
-    /// accurate settlement amounts we recommend using the <a href="list-balance-transactions">List balance transactions endpoint</a>
-    /// instead.
+    /// The amount deducted from your account balance for this chargeback, converted to the currency your account is<br/>
+    /// settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement<br/>
+    /// amount has been determined.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class ListEntityChargebackSettlementAmount
     {
         /// <summary>

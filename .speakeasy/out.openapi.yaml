@@ -3623,7 +3623,7 @@ paths:
                         description: A list of chargeback objects.
                         type: array
                         items:
-                          $ref: '#/components/schemas/list-entity-chargeback'
+                          $ref: '#/components/schemas/list-settlement-chargeback-response'
                   _links:
                     $ref: '#/components/schemas/list-links'
               examples:
@@ -27288,7 +27288,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     url-nullable:
       type:
         - object
@@ -27589,7 +27588,6 @@ components:
             - 'null'
           $ref: '#/components/schemas/balance-transaction-type'
           description: Represents the transaction type
-      x-speakeasy-unknown-values: allow
     sub-totals-2:
       type: object
       properties:
@@ -27642,7 +27640,6 @@ components:
             - 'null'
           $ref: '#/components/schemas/balance-transaction-type'
           description: Represents the transaction type
-      x-speakeasy-unknown-values: allow
     sub-group:
       type: object
       properties:
@@ -27654,7 +27651,6 @@ components:
             - 'null'
           items:
             $ref: '#/components/schemas/sub-totals-2'
-      x-speakeasy-unknown-values: allow
     entity-balance-report:
       type: object
       required:
@@ -27853,7 +27849,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     balanceTransactionToken:
       type: string
       pattern: ^baltr_.+$
@@ -28418,7 +28413,6 @@ components:
                   $ref: '#/components/schemas/paymentToken'
         createdAt:
           $ref: '#/components/schemas/created-at'
-      x-speakeasy-unknown-values: allow
     settlement-status:
       type: string
       description: The status of the settlement.
@@ -28629,7 +28623,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     sorting:
       type: string
       enum:
@@ -29226,13 +29219,13 @@ components:
                 - card_error
                 - terminal_configuration_issue
               x-methodSpecific: true
+              x-speakeasy-unknown-values: allow
         message:
           type: string
           description: A description of the status reason, localized according to the payment `locale`.
           example: |-
             The account associated with the card has insufficient funds. The shopper should use another payment method or
             contact their bank.
-      x-speakeasy-unknown-values: allow
     payment-details-card-audition:
       type:
         - string
@@ -29449,17 +29442,18 @@ components:
             zero.
           readOnly: true
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is
-            settled by Mollie the `settlementAmount` is omitted from the response.
+            The amount that will be settled to your account, converted to the currency your account is settled in. Only
+            available once the payment is finalized and the final settlement amount has been determined.
 
-            Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest
-            using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
+            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
+            Mollie, this field is omitted from the response.
           readOnly: true
         redirectUrl:
           type:
@@ -30338,7 +30332,6 @@ components:
               description: |-
                 The payment method used for this transaction. If a specific method was selected during payment initialization,
                 this field reflects that choice.
-      x-speakeasy-unknown-values: allow
     settlement-mode:
       type: string
       description: Whether this entity was created in live mode or in test mode. Settlements are always in live mode.
@@ -30364,7 +30357,15 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-payment-status'
-      x-speakeasy-unknown-values: allow
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount'
+              description: |-
+                The amount settled to your account for this payment, converted to the currency your account is settled in.
+
+                Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
+                Mollie, this field is omitted from the response.
+              readOnly: true
     capture-status:
       type: string
       description: The capture's status.
@@ -30401,15 +30402,15 @@ components:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Since the field contains an estimated amount during capture processing, it may change over time. To retrieve
-            accurate settlement amounts we recommend using the [List balance transactions endpoint](list-balance-transactions)
-            instead.
+            The amount that will be settled to your account for this capture, converted to the currency your account is
+            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
           readOnly: true
         status:
           allOf:
@@ -30485,7 +30486,6 @@ components:
             - createdAt
             - paymentId
             - _links
-      x-speakeasy-unknown-values: allow
     settlement-capture-status:
       type: string
       description: The capture's status. Settlement captures always have a status of `succeeded`.
@@ -30503,7 +30503,11 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-capture-status'
-      x-speakeasy-unknown-values: allow
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: The amount settled to your account for this capture, converted to the currency your account is settled in.
+              readOnly: true
     refund-status:
       type: string
       enum:
@@ -30564,22 +30568,18 @@ components:
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be deducted from your account balance, converted
-            to the currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            The amount is a **negative** amount.
+            The amount deducted from your account balance for this refund, converted to the currency your account is settled
+            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
+            been determined.
 
-            If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be
-            zero.
-
-            Since the field contains an estimated amount during refund processing, it may change over time. For example, while
-            the refund is queued the settlement amount is likely not yet available.
-
-            To retrieve accurate settlement amounts we recommend using the
-            [List balance transactions endpoint](list-balance-transactions) instead.
+            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
           readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
@@ -30703,7 +30703,15 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-refund-status'
-      x-speakeasy-unknown-values: allow
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: |-
+                The amount deducted from your account balance for this refund, converted to the currency your account is
+                settled in. Always a **negative** amount.
+
+                For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
+              readOnly: true
     entity-chargeback:
       type: object
       required:
@@ -30730,17 +30738,16 @@ components:
           $ref: '#/components/schemas/amount'
           description: The amount charged back by the customer.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be deducted from your account balance, converted
-            to the currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            The amount is a **negative** amount.
-
-            Since the field contains an estimated amount during chargeback processing, it may change over time. To retrieve
-            accurate settlement amounts we recommend using the [List balance transactions endpoint](list-balance-transactions)
-            instead.
+            The amount deducted from your account balance for this chargeback, converted to the currency your account is
+            settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement
+            amount has been determined.
           readOnly: true
         reason:
           type:
@@ -30809,6 +30816,20 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
+    settlement-chargeback-response:
+      allOf:
+        - $ref: '#/components/schemas/entity-chargeback'
+        - type: object
+          properties:
+            mode:
+              $ref: '#/components/schemas/settlement-mode'
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: |-
+                The amount deducted from your account balance for this chargeback, converted to the currency your account is
+                settled in. Always a **negative** amount.
+              readOnly: true
     invoice-status:
       type: string
       description: Status of the invoice.
@@ -30947,7 +30968,6 @@ components:
               $ref: '#/components/schemas/url'
               description: URL to the API documentation.
           readOnly: true
-      x-speakeasy-unknown-values: allow
     permissionToken:
       type: string
       minLength: 1
@@ -31103,7 +31123,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     profile-status:
       type: string
       description: |-
@@ -31284,7 +31303,6 @@ components:
               type:
                 - string
                 - 'null'
-      x-speakeasy-unknown-values: allow
     profile-request:
       allOf:
         - $ref: '#/components/schemas/entity-profile'
@@ -31366,7 +31384,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     onboarding-vat-regulation:
       type:
         - string
@@ -31443,7 +31460,6 @@ components:
               description: |-
                 If known, a deep link to the Mollie dashboard of the client, where the requirement can be fulfilled.
                 For example, where necessary documents are to be uploaded.
-      x-speakeasy-unknown-values: allow
     entity-capability:
       type: object
       required:
@@ -31469,7 +31485,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/entity-capability-requirement'
-      x-speakeasy-unknown-values: allow
     entity-client:
       type: object
       required:
@@ -31675,7 +31690,6 @@ components:
             - resource
             - id
             - _links
-      x-speakeasy-unknown-values: allow
     webhook-event-types:
       type: string
       description: |-
@@ -31793,7 +31807,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     oauth-testmode-create:
       type: boolean
       description: |-
@@ -31874,7 +31887,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     webhookToken:
       type: string
       pattern: ^hook_.+$
@@ -32147,7 +32159,6 @@ components:
               $ref: '#/components/schemas/url'
               description: The URL your customer should visit to make the payment. This is where you should redirect the customer to.
           readOnly: true
-      x-speakeasy-unknown-values: allow
     payment-link-response:
       allOf:
         - $ref: '#/components/schemas/entity-payment-link'
@@ -32168,7 +32179,6 @@ components:
             - expiresAt
             - allowedMethods
             - _links
-      x-speakeasy-unknown-values: allow
     salesInvoiceToken:
       type: string
       pattern: ^invoice_.+$
@@ -32682,7 +32692,6 @@ components:
                 provided details. Required for `paid` status.
               items:
                 $ref: '#/components/schemas/sales-invoice-payment-details-response'
-      x-speakeasy-unknown-values: allow
     businessAccountTransferToken:
       type: string
       pattern: ^batrf_.+$
@@ -32797,7 +32806,6 @@ components:
             - 'null'
           description: Provides further details about failure indicated. This field is only populated if the`code` field is set to `error`.
           example: The creditor account does not exist.
-      x-speakeasy-unknown-values: allow
     status-history-entry:
       type: object
       description: Represents an entry in the transfer's status history, recording a past status transition.
@@ -32906,7 +32914,6 @@ components:
             - status
             - statusHistory
             - createdAt
-      x-speakeasy-unknown-values: allow
     entity-webhook-event:
       type: object
       required:
@@ -32971,7 +32978,6 @@ components:
               $ref: '#/components/schemas/url'
               description: The API resource URL of the entity that this event belongs to.
           readOnly: true
-      x-speakeasy-unknown-values: allow
     connectBalanceTransferToken:
       type: string
       pattern: ^cbtr_.+$
@@ -33504,7 +33510,6 @@ components:
                 type:
                   type: string
                   example: text/html
-      x-speakeasy-unknown-values: allow
     unmatched-credit-transfer-match-request:
       type: object
       required:
@@ -33600,7 +33605,6 @@ components:
                 type:
                   type: string
                   example: text/html
-      x-speakeasy-unknown-values: allow
     unmatched-credit-transfer-action-response:
       allOf:
         - $ref: '#/components/schemas/entity-unmatched-credit-transfer-action'
@@ -33613,7 +33617,6 @@ components:
             - status
             - createdAt
             - _links
-      x-speakeasy-unknown-values: allow
     sessionToken:
       type: string
       pattern: ^sess_.+$
@@ -33855,7 +33858,6 @@ components:
             - status
             - profileId
             - _links
-      x-speakeasy-unknown-values: allow
     method-resource-parameter:
       type: string
       enum:
@@ -34078,7 +34080,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     entity-method-all:
       allOf:
         - $ref: '#/components/schemas/entity-method'
@@ -34118,7 +34119,6 @@ components:
                       returned in the [Payments API](get-payment).
                     example: other
               readOnly: true
-      x-speakeasy-unknown-values: allow
     entity-method-get:
       allOf:
         - $ref: '#/components/schemas/entity-method'
@@ -34133,7 +34133,6 @@ components:
                 method selection screen will be skipped.
               example: ideal
               readOnly: true
-      x-speakeasy-unknown-values: allow
     profile-path-id:
       type: string
       enum:
@@ -34194,7 +34193,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     voucher:
       type: object
       required:
@@ -34269,7 +34267,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     refund-request:
       allOf:
         - $ref: '#/components/schemas/entity-refund'
@@ -34421,7 +34418,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     connectRouteToken:
       type: string
       pattern: ^crt_.+$
@@ -34491,7 +34487,6 @@ components:
             payment:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     route-get-response:
       allOf:
         - $ref: '#/components/schemas/entity-route'
@@ -34505,7 +34500,6 @@ components:
             - destination
             - createdAt
             - _links
-      x-speakeasy-unknown-values: allow
     route-create-request:
       type: object
       description: Payload to create a new delayed route for a payment.
@@ -34547,7 +34541,6 @@ components:
             - destination
             - createdAt
             - _links
-      x-speakeasy-unknown-values: allow
     entity-customer:
       type: object
       properties:
@@ -34636,7 +34629,6 @@ components:
             - metadata
             - createdAt
             - _links
-      x-speakeasy-unknown-values: allow
     entity-event:
       type: object
       required:
@@ -34890,7 +34882,6 @@ components:
             - signatureDate
             - createdAt
             - _links
-      x-speakeasy-unknown-values: allow
     mandate-request:
       allOf:
         - $ref: '#/components/schemas/entity-mandate'
@@ -35097,7 +35088,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     subscription-response:
       allOf:
         - $ref: '#/components/schemas/entity-subscription'
@@ -35119,7 +35109,6 @@ components:
             - webhookUrl
             - metadata
             - _links
-      x-speakeasy-unknown-values: allow
     subscription-request:
       type: object
       properties:
@@ -35481,7 +35470,6 @@ components:
           $ref: '#/components/schemas/mode'
         createdAt:
           $ref: '#/components/schemas/created-at'
-      x-speakeasy-unknown-values: allow
     business-account-response:
       allOf:
         - $ref: '#/components/schemas/entity-business-account'
@@ -35494,7 +35482,6 @@ components:
             - status
             - balance
             - createdAt
-      x-speakeasy-unknown-values: allow
     transaction-type:
       type: string
       description: "Indicates what kind of transaction this is.\n\nWe may introduce new transaction types as we expand the product. We recommend building your integration\nto handle unexpected values gracefully, so nothing breaks when that happens. "
@@ -35594,7 +35581,6 @@ components:
           $ref: '#/components/schemas/mode'
         createdAt:
           $ref: '#/components/schemas/created-at'
-      x-speakeasy-unknown-values: allow
     transaction-response:
       allOf:
         - $ref: '#/components/schemas/entity-transaction'
@@ -35608,7 +35594,6 @@ components:
             - type
             - amount
             - createdAt
-      x-speakeasy-unknown-values: allow
     transfer-request:
       allOf:
         - $ref: '#/components/schemas/entity-transfer'
@@ -35710,7 +35695,6 @@ components:
               example: Jan Jansen
         createdAt:
           $ref: '#/components/schemas/created-at'
-      x-speakeasy-unknown-values: allow
     list-entity-balance:
       type: object
       required:
@@ -36070,17 +36054,18 @@ components:
             zero.
           readOnly: true
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is
-            settled by Mollie the `settlementAmount` is omitted from the response.
+            The amount that will be settled to your account, converted to the currency your account is settled in. Only
+            available once the payment is finalized and the final settlement amount has been determined.
 
-            Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest
-            using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
+            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
+            Mollie, this field is omitted from the response.
           readOnly: true
         redirectUrl:
           type:
@@ -36966,6 +36951,15 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-payment-status'
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount'
+              description: |-
+                The amount settled to your account for this payment, converted to the currency your account is settled in.
+
+                Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
+                Mollie, this field is omitted from the response.
+              readOnly: true
     list-entity-capture:
       type: object
       properties:
@@ -36990,15 +36984,15 @@ components:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Since the field contains an estimated amount during capture processing, it may change over time. To retrieve
-            accurate settlement amounts we recommend using the [List balance transactions endpoint](list-balance-transactions)
-            instead.
+            The amount that will be settled to your account for this capture, converted to the currency your account is
+            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
           readOnly: true
         status:
           allOf:
@@ -37080,6 +37074,11 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-capture-status'
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: The amount settled to your account for this capture, converted to the currency your account is settled in.
+              readOnly: true
     list-entity-refund:
       type: object
       required:
@@ -37118,22 +37117,18 @@ components:
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be deducted from your account balance, converted
-            to the currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            The amount is a **negative** amount.
+            The amount deducted from your account balance for this refund, converted to the currency your account is settled
+            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
+            been determined.
 
-            If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be
-            zero.
-
-            Since the field contains an estimated amount during refund processing, it may change over time. For example, while
-            the refund is queued the settlement amount is likely not yet available.
-
-            To retrieve accurate settlement amounts we recommend using the
-            [List balance transactions endpoint](list-balance-transactions) instead.
+            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
           readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
@@ -37246,6 +37241,15 @@ components:
               $ref: '#/components/schemas/settlement-mode'
             status:
               $ref: '#/components/schemas/settlement-refund-status'
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: |-
+                The amount deducted from your account balance for this refund, converted to the currency your account is
+                settled in. Always a **negative** amount.
+
+                For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
+              readOnly: true
     list-entity-chargeback:
       type: object
       required:
@@ -37272,17 +37276,16 @@ components:
           $ref: '#/components/schemas/amount'
           description: The amount charged back by the customer.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be deducted from your account balance, converted
-            to the currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            The amount is a **negative** amount.
-
-            Since the field contains an estimated amount during chargeback processing, it may change over time. To retrieve
-            accurate settlement amounts we recommend using the [List balance transactions endpoint](list-balance-transactions)
-            instead.
+            The amount deducted from your account balance for this chargeback, converted to the currency your account is
+            settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement
+            amount has been determined.
           readOnly: true
         reason:
           type:
@@ -37348,6 +37351,20 @@ components:
                 The API resource URL of the [settlement](get-settlement) this chargeback has been settled with. Not present if
                 not yet settled.
           readOnly: true
+    list-settlement-chargeback-response:
+      allOf:
+        - $ref: '#/components/schemas/list-entity-chargeback'
+        - type: object
+          properties:
+            mode:
+              $ref: '#/components/schemas/settlement-mode'
+            settlementAmount:
+              allOf:
+                - $ref: '#/components/schemas/amount-nullable'
+              description: |-
+                The amount deducted from your account balance for this chargeback, converted to the currency your account is
+                settled in. Always a **negative** amount.
+              readOnly: true
     list-entity-invoice:
       type: object
       required:
@@ -38955,17 +38972,18 @@ components:
             zero.
           readOnly: true
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Any amounts not settled by Mollie will not be reflected in this amount, e.g. PayPal or gift cards. If no amount is
-            settled by Mollie the `settlementAmount` is omitted from the response.
+            The amount that will be settled to your account, converted to the currency your account is settled in. Only
+            available once the payment is finalized and the final settlement amount has been determined.
 
-            Please note that this amount might be recalculated and changed when the status of the payment changes. We suggest
-            using the List balance transactions endpoint instead to get more accurate settlement amounts for your payments.
+            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
+            Mollie, this field is omitted from the response.
           readOnly: true
         redirectUrl:
           type:
@@ -39822,7 +39840,6 @@ components:
                 bank transfer.
               x-methodSpecific: true
           readOnly: true
-      x-speakeasy-unknown-values: allow
     payment-line-item-response:
       type: object
       required:
@@ -39908,7 +39925,6 @@ components:
           type: string
           description: A link pointing to the product page in your web shop of the product sold.
           example: https://...
-      x-speakeasy-unknown-values: allow
     payment-line-type-response:
       type: string
       description: |-
@@ -40105,7 +40121,6 @@ components:
             payment:
               $ref: '#/components/schemas/url'
               description: The API resource URL of the [payment](get-payment) that belong to this route.
-      x-speakeasy-unknown-values: allow
     route-destination-type-response:
       type: string
       description: The type of destination. Currently only the destination type `organization` is supported.
@@ -40309,15 +40324,15 @@ components:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be settled to your account, converted to the
-            currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            Since the field contains an estimated amount during capture processing, it may change over time. To retrieve
-            accurate settlement amounts we recommend using the [List balance transactions endpoint](list-balance-transactions)
-            instead.
+            The amount that will be settled to your account for this capture, converted to the currency your account is
+            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
           readOnly: true
         status:
           allOf:
@@ -40380,7 +40395,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     capture-status-response:
       type: string
       description: The capture's status.
@@ -40428,22 +40442,18 @@ components:
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
         settlementAmount:
+          deprecated: true
           allOf:
             - $ref: '#/components/schemas/amount-nullable'
           description: |-
-            This optional field will contain the approximate amount that will be deducted from your account balance, converted
-            to the currency your account is settled in.
+            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
+            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
 
-            The amount is a **negative** amount.
+            The amount deducted from your account balance for this refund, converted to the currency your account is settled
+            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
+            been determined.
 
-            If the refund is not directly processed by Mollie, for example for PayPal refunds, the settlement amount will be
-            zero.
-
-            Since the field contains an estimated amount during refund processing, it may change over time. For example, while
-            the refund is queued the settlement amount is likely not yet available.
-
-            To retrieve accurate settlement amounts we recommend using the
-            [List balance transactions endpoint](list-balance-transactions) instead.
+            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
           readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
@@ -40550,7 +40560,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     refund-status-response:
       type: string
       enum:
@@ -40708,7 +40717,6 @@ components:
             documentation:
               href: '...'
               type: text/html
-      x-speakeasy-unknown-values: allow
     profile-status-response:
       type: string
       description: |-
@@ -40869,7 +40877,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     webhook-event-types-response:
       type: string
       description: |-
@@ -40917,7 +40924,6 @@ components:
         not provided or is an empty array, all enabled payment methods will be available.
       items:
         $ref: '#/components/schemas/payment-link-method-response'
-      x-speakeasy-unknown-values: allow
     payment-link-method-response:
       type: string
       enum:
@@ -41162,7 +41168,6 @@ components:
                 - 'null'
           readOnly: true
           writeOnly: false
-      x-speakeasy-unknown-values: allow
     sales-invoice-vat-scheme-response:
       type: string
       description: The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
@@ -41300,7 +41305,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/sales-invoice-recipient-locale-response'
           writeOnly: true
-      x-speakeasy-unknown-values: allow
     sales-invoice-recipient-type-response:
       type: string
       description: |-
@@ -41359,7 +41363,6 @@ components:
         discount:
           $ref: '#/components/schemas/sales-invoice-discount-response'
           description: The discount to be applied to the line item.
-      x-speakeasy-unknown-values: allow
     sales-invoice-discount-response:
       type:
         - object
@@ -41374,7 +41377,6 @@ components:
           example: '10.00'
           type: string
           description: A string containing an exact monetary amount in the given currency, or the percentage.
-      x-speakeasy-unknown-values: allow
     sales-invoice-discount-type-response:
       type: string
       description: The type of discount.
@@ -41398,7 +41400,6 @@ components:
           description: |-
             A reference to the payment the sales invoice is paid by. Required for `source` values `payment-link` and
             `payment`.
-      x-speakeasy-unknown-values: allow
     sales-invoice-payment-details-source-response:
       type: string
       description: The way through which the invoice is to be set to paid.
@@ -41485,7 +41486,6 @@ components:
           $ref: '#/components/schemas/metadata'
         testmode:
           $ref: '#/components/schemas/testmode-create'
-      x-speakeasy-unknown-values: allow
     transfer-scheme-response:
       type: object
       description: The scheme, as requested by the client.
@@ -41494,7 +41494,6 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/transfer-scheme-type-response'
-      x-speakeasy-unknown-values: allow
     transfer-scheme-type-response:
       type: string
       description: The transfer scheme to be used for the transfer. The transfer scheme determines the processing time and method of the transfer.
@@ -41520,7 +41519,6 @@ components:
           $ref: '#/components/schemas/created-at'
         statusReason:
           $ref: '#/components/schemas/status-reason-2'
-      x-speakeasy-unknown-values: allow
     status-reason-code-response:
       type: string
       description: A machine-readable code indicating the reason for the transfer's terminal status.
@@ -41614,7 +41612,6 @@ components:
         - statusReason
         - createdAt
         - mode
-      x-speakeasy-unknown-values: allow
     entity-balance-transfer-party-response:
       type: object
       description: A party involved in the balance transfer, either the sender or the receiver.
@@ -41633,7 +41630,6 @@ components:
         - type
         - id
         - description
-      x-speakeasy-unknown-values: allow
     balance-transfer-party-type-response:
       type: string
       description: Defines the type of the party. At the moment, only `organization` is supported.
@@ -41800,7 +41796,6 @@ components:
             self:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     session-line-item-response:
       type: object
       required:
@@ -41876,7 +41871,6 @@ components:
           type: string
           description: A link pointing to the product page in your web shop of the product sold.
           example: https://...
-      x-speakeasy-unknown-values: allow
     session-sequence-type-response:
       type: string
       enum:
@@ -41958,7 +41952,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     entity-mandate-response:
       type: object
       properties:
@@ -42121,7 +42114,6 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
-      x-speakeasy-unknown-values: allow
     mandate-method-response:
       type: string
       description: |-
@@ -42220,7 +42212,6 @@ components:
           type: string
           description: The bank account details of the creditor.
           example: NL02ABNA0123456789
-      x-speakeasy-unknown-values: allow
     account-number-format-response:
       type: string
       description: The format of the account number.
