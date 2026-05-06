@@ -25,8 +25,10 @@ var custom = EntityOrganizationLocale.Of("custom_value");
 | `Dede` | de_DE  |
 | `DeAT` | de_AT  |
 | `DeCH` | de_CH  |
+| `DeLU` | de_LU  |
 | `Frfr` | fr_FR  |
 | `FrBE` | fr_BE  |
+| `FrLU` | fr_LU  |
 | `Eses` | es_ES  |
 | `CaES` | ca_ES  |
 | `Ptpt` | pt_PT  |

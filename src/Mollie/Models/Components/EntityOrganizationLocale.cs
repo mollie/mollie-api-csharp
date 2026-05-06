@@ -30,8 +30,10 @@ namespace Mollie.Models.Components
         public static readonly EntityOrganizationLocale Dede = new EntityOrganizationLocale("de_DE");
         public static readonly EntityOrganizationLocale DeAT = new EntityOrganizationLocale("de_AT");
         public static readonly EntityOrganizationLocale DeCH = new EntityOrganizationLocale("de_CH");
+        public static readonly EntityOrganizationLocale DeLU = new EntityOrganizationLocale("de_LU");
         public static readonly EntityOrganizationLocale Frfr = new EntityOrganizationLocale("fr_FR");
         public static readonly EntityOrganizationLocale FrBE = new EntityOrganizationLocale("fr_BE");
+        public static readonly EntityOrganizationLocale FrLU = new EntityOrganizationLocale("fr_LU");
         public static readonly EntityOrganizationLocale Eses = new EntityOrganizationLocale("es_ES");
         public static readonly EntityOrganizationLocale CaES = new EntityOrganizationLocale("ca_ES");
         public static readonly EntityOrganizationLocale Ptpt = new EntityOrganizationLocale("pt_PT");
@@ -57,8 +59,10 @@ namespace Mollie.Models.Components
                 ["de_DE"] = Dede,
                 ["de_AT"] = DeAT,
                 ["de_CH"] = DeCH,
+                ["de_LU"] = DeLU,
                 ["fr_FR"] = Frfr,
                 ["fr_BE"] = FrBE,
+                ["fr_LU"] = FrLU,
                 ["es_ES"] = Eses,
                 ["ca_ES"] = CaES,
                 ["pt_PT"] = Ptpt,

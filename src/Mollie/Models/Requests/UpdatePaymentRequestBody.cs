@@ -85,7 +85,7 @@ namespace Mollie.Models.Requests
         public MethodEnum? Method { get; set; } = null;
 
         /// <summary>
-        /// Allows you to preset the language to be used.
+        /// Sets the language for customer-facing content and communications.
         /// </summary>
         [JsonProperty("locale")]
         public Locale? Locale { get; set; } = null;
