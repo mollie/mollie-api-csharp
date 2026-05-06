@@ -15,7 +15,7 @@ namespace Mollie.Models.Components
     using System;
 
     /// <summary>
-    /// Allows you to preset the language to be used.
+    /// Sets the language for customer-facing content and communications.
     /// </summary>
     public enum Locale
     {
@@ -33,10 +33,14 @@ namespace Mollie.Models.Components
         DeAT,
         [JsonProperty("de_CH")]
         DeCH,
+        [JsonProperty("de_LU")]
+        DeLU,
         [JsonProperty("fr_FR")]
         Frfr,
         [JsonProperty("fr_BE")]
         FrBE,
+        [JsonProperty("fr_LU")]
+        FrLU,
         [JsonProperty("es_ES")]
         Eses,
         [JsonProperty("ca_ES")]

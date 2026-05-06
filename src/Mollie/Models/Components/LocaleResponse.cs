@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     /// <summary>
-    /// Allows you to preset the language to be used.
+    /// Sets the language for customer-facing content and communications.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class LocaleResponse : IEquatable<LocaleResponse>
@@ -30,8 +30,10 @@ namespace Mollie.Models.Components
         public static readonly LocaleResponse Dede = new LocaleResponse("de_DE");
         public static readonly LocaleResponse DeAT = new LocaleResponse("de_AT");
         public static readonly LocaleResponse DeCH = new LocaleResponse("de_CH");
+        public static readonly LocaleResponse DeLU = new LocaleResponse("de_LU");
         public static readonly LocaleResponse Frfr = new LocaleResponse("fr_FR");
         public static readonly LocaleResponse FrBE = new LocaleResponse("fr_BE");
+        public static readonly LocaleResponse FrLU = new LocaleResponse("fr_LU");
         public static readonly LocaleResponse Eses = new LocaleResponse("es_ES");
         public static readonly LocaleResponse CaES = new LocaleResponse("ca_ES");
         public static readonly LocaleResponse Ptpt = new LocaleResponse("pt_PT");
@@ -57,8 +59,10 @@ namespace Mollie.Models.Components
                 ["de_DE"] = Dede,
                 ["de_AT"] = DeAT,
                 ["de_CH"] = DeCH,
+                ["de_LU"] = DeLU,
                 ["fr_FR"] = Frfr,
                 ["fr_BE"] = FrBE,
+                ["fr_LU"] = FrLU,
                 ["es_ES"] = Eses,
                 ["ca_ES"] = CaES,
                 ["pt_PT"] = Ptpt,

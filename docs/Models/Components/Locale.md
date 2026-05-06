@@ -1,6 +1,6 @@
 # Locale
 
-Allows you to preset the language to be used.
+Sets the language for customer-facing content and communications.
 
 ## Example Usage
 
@@ -22,8 +22,10 @@ var value = Locale.EnUS;
 | `Dede` | de_DE  |
 | `DeAT` | de_AT  |
 | `DeCH` | de_CH  |
+| `DeLU` | de_LU  |
 | `Frfr` | fr_FR  |
 | `FrBE` | fr_BE  |
+| `FrLU` | fr_LU  |
 | `Eses` | es_ES  |
 | `CaES` | ca_ES  |
 | `Ptpt` | pt_PT  |

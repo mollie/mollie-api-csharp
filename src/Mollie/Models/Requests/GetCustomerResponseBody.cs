@@ -57,7 +57,7 @@ namespace Mollie.Models.Requests
         public string? Email { get; set; }
 
         /// <summary>
-        /// Allows you to preset the language to be used.
+        /// Sets the language for customer-facing content and communications.
         /// </summary>
         [JsonProperty("locale", NullValueHandling = NullValueHandling.Include)]
         public LocaleResponse? Locale { get; set; }
