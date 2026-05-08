@@ -25,6 +25,7 @@ namespace Mollie.Models.Components
     {
         public static readonly ListEntitySettlementStatus Open = new ListEntitySettlementStatus("open");
         public static readonly ListEntitySettlementStatus Pending = new ListEntitySettlementStatus("pending");
+        public static readonly ListEntitySettlementStatus ProcessingAtBank = new ListEntitySettlementStatus("processing-at-bank");
         public static readonly ListEntitySettlementStatus Paidout = new ListEntitySettlementStatus("paidout");
         public static readonly ListEntitySettlementStatus Failed = new ListEntitySettlementStatus("failed");
 
@@ -33,6 +34,7 @@ namespace Mollie.Models.Components
             {
                 ["open"] = Open,
                 ["pending"] = Pending,
+                ["processing-at-bank"] = ProcessingAtBank,
                 ["paidout"] = Paidout,
                 ["failed"] = Failed
             };
