@@ -16,9 +16,10 @@ var custom = ListEntitySettlementStatus.Of("custom_value");
 
 ## Values
 
-| Name      | Value     |
-| --------- | --------- |
-| `Open`    | open      |
-| `Pending` | pending   |
-| `Paidout` | paidout   |
-| `Failed`  | failed    |
+| Name               | Value              |
+| ------------------ | ------------------ |
+| `Open`             | open               |
+| `Pending`          | pending            |
+| `ProcessingAtBank` | processing-at-bank |
+| `Paidout`          | paidout            |
+| `Failed`           | failed             |
