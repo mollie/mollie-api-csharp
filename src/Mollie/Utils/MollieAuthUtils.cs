@@ -21,7 +21,7 @@ namespace Mollie.Utils
             if (security == null)
                 return false;
 
-            string? token = security.ApiKey ?? security.OrganizationAccessToken ?? security.OAuth;
+            string? token = security.ApiKey ?? security.AdvancedAccessToken ?? security.OAuth;
             return token != null && token.StartsWith("access_");
         }
 
