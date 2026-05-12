@@ -20,7 +20,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 

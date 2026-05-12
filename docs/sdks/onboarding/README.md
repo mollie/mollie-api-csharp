@@ -19,7 +19,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Onboarding.GetAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
@@ -61,7 +61,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Onboarding.SubmitAsync(

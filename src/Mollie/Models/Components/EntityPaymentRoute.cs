@@ -36,11 +36,5 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("releaseDate")]
         public string? ReleaseDate { get; set; } = null;
-
-        /// <summary>
-        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
-        /// </summary>
-        [JsonProperty("_links")]
-        public EntityPaymentRouteLinks Links { get; set; } = default!;
     }
 }

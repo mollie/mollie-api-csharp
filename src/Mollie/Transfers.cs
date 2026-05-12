@@ -55,7 +55,7 @@ namespace Mollie
         /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
         /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -86,7 +86,7 @@ namespace Mollie
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
         /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -157,7 +157,7 @@ namespace Mollie
         /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
         /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -200,7 +200,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -376,7 +376,7 @@ namespace Mollie
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
         /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -428,7 +428,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-transfer", null, SDKConfiguration.SecuritySource, cancellationToken);
