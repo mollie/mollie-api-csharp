@@ -92,11 +92,11 @@ var res = await sdk.Oauth.GenerateAsync(
 
 This SDK supports the following security schemes globally:
 
-| Name                      | Type   | Scheme       |
-| ------------------------- | ------ | ------------ |
-| `ApiKey`                  | http   | HTTP Bearer  |
-| `OrganizationAccessToken` | http   | HTTP Bearer  |
-| `OAuth`                   | oauth2 | OAuth2 token |
+| Name                  | Type   | Scheme       |
+| --------------------- | ------ | ------------ |
+| `ApiKey`              | http   | HTTP Bearer  |
+| `AdvancedAccessToken` | http   | HTTP Bearer  |
+| `OAuth`               | oauth2 | OAuth2 token |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```csharp
@@ -452,7 +452,7 @@ var sdk = new Client(
     profileId: "<id>",
     customUserAgent: "<value>",
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -490,7 +490,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -665,7 +665,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -755,7 +755,7 @@ var sdk = new Client(
     serverUrl: "https://api.mollie.com",
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 

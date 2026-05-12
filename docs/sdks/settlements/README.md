@@ -28,7 +28,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementsRequest req = new ListSettlementsRequest() {
@@ -91,7 +91,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Settlements.GetAsync(
@@ -139,7 +139,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Settlements.GetOpenAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
@@ -181,7 +181,7 @@ using Mollie;
 using Mollie.Models.Components;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 var res = await sdk.Settlements.GetNextAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
@@ -225,7 +225,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -257,7 +257,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -289,7 +289,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -321,7 +321,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     profileId: "pfl_5B8cwPMGnU",
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -375,7 +375,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
@@ -404,7 +404,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
@@ -433,7 +433,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementCapturesRequest req = new ListSettlementCapturesRequest() {
@@ -485,7 +485,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
@@ -514,7 +514,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 ListSettlementRefundsRequest req = new ListSettlementRefundsRequest() {
@@ -568,7 +568,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -600,7 +600,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -632,7 +632,7 @@ using Mollie.Models.Requests;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 

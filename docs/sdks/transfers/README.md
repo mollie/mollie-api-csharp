@@ -44,7 +44,7 @@ using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
-    OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 CreateTransferRequest req = new CreateTransferRequest() {
@@ -114,7 +114,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 
@@ -135,7 +135,7 @@ using Mollie.Models.Components;
 var sdk = new Client(
     testmode: false,
     security: new Security() {
-        OrganizationAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
     }
 );
 

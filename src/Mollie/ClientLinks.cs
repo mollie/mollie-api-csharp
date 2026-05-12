@@ -83,7 +83,7 @@ namespace Mollie
         /// &gt; 🚧<br/>
         /// &gt;<br/>
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
@@ -173,7 +173,7 @@ namespace Mollie
         /// &gt; 🚧<br/>
         /// &gt;<br/>
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OrganizationAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
@@ -218,7 +218,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OrganizationAccessToken" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-client-link", null, SDKConfiguration.SecuritySource, cancellationToken);

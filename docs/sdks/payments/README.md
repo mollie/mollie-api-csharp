@@ -146,16 +146,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -302,16 +292,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -458,16 +438,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -614,16 +584,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -769,16 +729,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -925,16 +875,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1081,16 +1021,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1237,16 +1167,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1393,16 +1313,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1549,16 +1459,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1705,16 +1605,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -1861,16 +1751,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
@@ -2017,16 +1897,6 @@ var res = await sdk.Payments.CreateAsync(
                     OrganizationId = "org_1234567",
                 },
                 ReleaseDate = "2024-12-12",
-                Links = new EntityPaymentRouteLinks() {
-                    Self = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                    Payment = new Url() {
-                        Href = "https://...",
-                        Type = "application/hal+json",
-                    },
-                },
             },
         },
         SequenceType = SequenceType.Oneoff,
