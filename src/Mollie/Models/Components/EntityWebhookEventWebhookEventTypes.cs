@@ -26,6 +26,11 @@ namespace Mollie.Models.Components
     {
         public static readonly EntityWebhookEventWebhookEventTypes PaymentLinkPaid = new EntityWebhookEventWebhookEventTypes("payment-link.paid");
         public static readonly EntityWebhookEventWebhookEventTypes BalanceTransactionCreated = new EntityWebhookEventWebhookEventTypes("balance-transaction.created");
+        public static readonly EntityWebhookEventWebhookEventTypes PayoutInitiated = new EntityWebhookEventWebhookEventTypes("payout.initiated");
+        public static readonly EntityWebhookEventWebhookEventTypes PayoutProcessingAtBank = new EntityWebhookEventWebhookEventTypes("payout.processing-at-bank");
+        public static readonly EntityWebhookEventWebhookEventTypes PayoutCompleted = new EntityWebhookEventWebhookEventTypes("payout.completed");
+        public static readonly EntityWebhookEventWebhookEventTypes PayoutCanceled = new EntityWebhookEventWebhookEventTypes("payout.canceled");
+        public static readonly EntityWebhookEventWebhookEventTypes PayoutFailed = new EntityWebhookEventWebhookEventTypes("payout.failed");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceCreated = new EntityWebhookEventWebhookEventTypes("sales-invoice.created");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceIssued = new EntityWebhookEventWebhookEventTypes("sales-invoice.issued");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceCanceled = new EntityWebhookEventWebhookEventTypes("sales-invoice.canceled");
@@ -44,6 +49,11 @@ namespace Mollie.Models.Components
             {
                 ["payment-link.paid"] = PaymentLinkPaid,
                 ["balance-transaction.created"] = BalanceTransactionCreated,
+                ["payout.initiated"] = PayoutInitiated,
+                ["payout.processing-at-bank"] = PayoutProcessingAtBank,
+                ["payout.completed"] = PayoutCompleted,
+                ["payout.canceled"] = PayoutCanceled,
+                ["payout.failed"] = PayoutFailed,
                 ["sales-invoice.created"] = SalesInvoiceCreated,
                 ["sales-invoice.issued"] = SalesInvoiceIssued,
                 ["sales-invoice.canceled"] = SalesInvoiceCanceled,

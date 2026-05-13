@@ -24,6 +24,16 @@ namespace Mollie.Models.Components
         PaymentLinkPaid,
         [JsonProperty("balance-transaction.created")]
         BalanceTransactionCreated,
+        [JsonProperty("payout.initiated")]
+        PayoutInitiated,
+        [JsonProperty("payout.processing-at-bank")]
+        PayoutProcessingAtBank,
+        [JsonProperty("payout.completed")]
+        PayoutCompleted,
+        [JsonProperty("payout.canceled")]
+        PayoutCanceled,
+        [JsonProperty("payout.failed")]
+        PayoutFailed,
         [JsonProperty("sales-invoice.created")]
         SalesInvoiceCreated,
         [JsonProperty("sales-invoice.issued")]
