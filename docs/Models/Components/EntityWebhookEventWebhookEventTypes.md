@@ -21,6 +21,11 @@ var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
 | ---------------------------------------- | ---------------------------------------- |
 | `PaymentLinkPaid`                        | payment-link.paid                        |
 | `BalanceTransactionCreated`              | balance-transaction.created              |
+| `PayoutInitiated`                        | payout.initiated                         |
+| `PayoutProcessingAtBank`                 | payout.processing-at-bank                |
+| `PayoutCompleted`                        | payout.completed                         |
+| `PayoutCanceled`                         | payout.canceled                          |
+| `PayoutFailed`                           | payout.failed                            |
 | `SalesInvoiceCreated`                    | sales-invoice.created                    |
 | `SalesInvoiceIssued`                     | sales-invoice.issued                     |
 | `SalesInvoiceCanceled`                   | sales-invoice.canceled                   |

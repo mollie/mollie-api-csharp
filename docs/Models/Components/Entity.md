@@ -9,6 +9,12 @@
 Entity.CreatePaymentLinkResponse(/* values here */);
 ```
 
+### EntityPayoutResponse
+
+```csharp
+Entity.CreateEntityPayoutResponse(/* values here */);
+```
+
 ### SalesInvoiceResponse
 
 ```csharp

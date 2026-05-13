@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 90a2a15ca48f754729dad115e2c8fd91
+  docChecksum: fa7c56ab3edfc0b84d37bec4a789745c
   docVersion: 1.0.0
   speakeasyVersion: 1.762.0
   generationVersion: 2.882.0
-  releaseVersion: 1.1.0
-  configChecksum: 2a9f5da896ec4565ef8f90d340fed8e7
+  releaseVersion: 1.1.1
+  configChecksum: af53cf290e2525672edddf5ff9732a19
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 77fc1b70-5dfe-4b44-905f-bea410558c49
-  pristine_commit_hash: 04dfe8cc39a0297511054f49c905497e75000c39
-  pristine_tree_hash: bb999fb74586124c932acffb98d5a0279cf7b55b
+  generation_id: a9223df5-1dea-485c-9070-af0c8b891152
+  pristine_commit_hash: 0da705c4ae0a4d80afc668b688861a389e1efb4c
+  pristine_tree_hash: 67bee785af3deda26ecdbd33bb5206ba22c47c6b
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -324,8 +324,8 @@ trackedFiles:
     pristine_git_object: 580ecf758512e6121f628cd58069db326579f532
   docs/Models/Components/Entity.md:
     id: 4d86bee192ca
-    last_write_checksum: sha1:d67932e3cea394ab54ae1a80d5a9411748787b42
-    pristine_git_object: 261ed97f075d00dd6ef24a84a6abefd562f34721
+    last_write_checksum: sha1:c0a326c6a079e60f87cc7f765ad512a1150c397f
+    pristine_git_object: 4d49d082dba5c1ea5bf0dc54dc0c3a7abc2a0e49
   docs/Models/Components/EntityBalance.md:
     id: bf92ea1491c7
     last_write_checksum: sha1:a3c54f21f88be4c1afcfe87851e8cdd1ad772a6e
@@ -550,6 +550,14 @@ trackedFiles:
     id: b53f7a736226
     last_write_checksum: sha1:4142838bb6990cf3e9db27137532ea13dd3aaa48
     pristine_git_object: 3c00a26aeedb86fba242e3a847446b7b19c96b5c
+  docs/Models/Components/EntityPayoutResponse.md:
+    id: 91b546eb9a18
+    last_write_checksum: sha1:200a34c62d8ba6417de49dbc5b990972a6c14000
+    pristine_git_object: 4a96b5f3b6376e25b16681ae4f24622886735fca
+  docs/Models/Components/EntityPayoutResponseLinks.md:
+    id: a36f0eb51076
+    last_write_checksum: sha1:1a9df33c2a43c0b9a408562df867477b405a9ffd
+    pristine_git_object: b39b5d51806d8bb53680bb7af383d75a2acc549a
   docs/Models/Components/EntityPermission.md:
     id: 9a9b80a7fe70
     last_write_checksum: sha1:4944b32a7f7a019dbeaacdadb20b0a6c8b9f8c8d
@@ -672,8 +680,8 @@ trackedFiles:
     pristine_git_object: ddf2725ab97df46ec7c9199fa7601bad4932355b
   docs/Models/Components/EntityWebhookEventWebhookEventTypes.md:
     id: 950aac5c5608
-    last_write_checksum: sha1:26822c9642d5a03736996c3cc74263525c87ca36
-    pristine_git_object: f25c4d65aca3a62ed21e2a7e8d0a8cbaf8a1b7f3
+    last_write_checksum: sha1:ec86f126cce4bdcdb0cc6785c041016db5b17370
+    pristine_git_object: d527fb388fb549291bd4e60a7bf0c6275e5d9b5c
   docs/Models/Components/EntityWebhookLinks.md:
     id: 4d7dd6f75bd5
     last_write_checksum: sha1:08c288986f76cc19cec5431806582c5af5a89da0
@@ -882,6 +890,14 @@ trackedFiles:
     id: 20c99e1d1f9e
     last_write_checksum: sha1:97c4a08cf638895795954210464b8ff17401af37
     pristine_git_object: ffd9218cd0a7882ab40fdd9b4bcbc47586bd6e20
+  docs/Models/Components/ListEntityPayout.md:
+    id: 14f0fb95c054
+    last_write_checksum: sha1:207daa76159b84fb0ea86c13d9192e7b33039dc6
+    pristine_git_object: f05c1e154f1d5f3dff2eb492701d658094e329d2
+  docs/Models/Components/ListEntityPayoutLinks.md:
+    id: e12152f1c705
+    last_write_checksum: sha1:7c7302b573b8eeece2a443e209bac40688f5c32c
+    pristine_git_object: 9f85b0f5dc1f91884bc7049fe4c7fc48f8e9a6c7
   docs/Models/Components/ListEntityPermission.md:
     id: ced5173d40fd
     last_write_checksum: sha1:c872a8f1934090cc83e27ff7e14d740c86ea4f62
@@ -1538,6 +1554,22 @@ trackedFiles:
     id: 37146c02cdd3
     last_write_checksum: sha1:42761b54888eb381129b4675b659f8b888275f7f
     pristine_git_object: fa43cb019d11553de2d61b664d09eb514691bb98
+  docs/Models/Components/PayoutRequest.md:
+    id: 3e1f06decb95
+    last_write_checksum: sha1:61ed94cbeac8d58372932597a507981a5b49113c
+    pristine_git_object: 4b203ee2df82ce76b67266a5cb2aeb0080629e04
+  docs/Models/Components/PayoutStatus.md:
+    id: 56ec0d135271
+    last_write_checksum: sha1:fbc34676722cca5fe77ac374c21749bfabfafc05
+    pristine_git_object: b07410ffd135dd774fb48963d1256b01766d873c
+  docs/Models/Components/PayoutStatusReason.md:
+    id: d5b89db41c2e
+    last_write_checksum: sha1:d2243dc5cc642d3cf5de3d2c64bcc3a482109777
+    pristine_git_object: 293e03f759c44a6be21cf5b1a34322bdb4480809
+  docs/Models/Components/PayoutStatusReasonCode.md:
+    id: 2408928318b7
+    last_write_checksum: sha1:8ae6fc359796a961b041aac38529b8beffcc5664
+    pristine_git_object: 5d3f6add46c90e4b8107f9fbd1aec19ba17b8ce0
   docs/Models/Components/PendingBalance.md:
     id: 0fb830f6faec
     last_write_checksum: sha1:32dcd4e9d9e0fcef78fd0505d1f93fd17aca9838
@@ -2096,8 +2128,8 @@ trackedFiles:
     pristine_git_object: 7ca6bf161cb096b7e0a0f24e9702e13ca8f88963
   docs/Models/Components/WebhookEventTypes.md:
     id: 8f114a99ea2d
-    last_write_checksum: sha1:dd17143ff2110ee7963d5f17ff4220534c7ba325
-    pristine_git_object: 69ef233f36c6dba9b2f13b9140be2ad239840328
+    last_write_checksum: sha1:950ee0357538a1b675a64e12247f3124c4e806b3
+    pristine_git_object: a81ee29a8c246fc011d980efe3e3a6c7f6022bbe
   docs/Models/Components/WebhookStatus.md:
     id: 2af02c3db301
     last_write_checksum: sha1:844fc9505307dd7389b3b16918c4a931f598aad9
@@ -2122,6 +2154,14 @@ trackedFiles:
     id: 94e816c26c06
     last_write_checksum: sha1:8e95d5772fb9a278ee88e61f40e1420e3ba33583
     pristine_git_object: 1debd83711d2ec1825f9b86fcc7f1c648c6fc5a3
+  docs/Models/Requests/CancelPayoutRequest.md:
+    id: 62dedf832c25
+    last_write_checksum: sha1:18d6ca8c77ef3fc6bfaa7cd08fb3e75534b70f7c
+    pristine_git_object: 8427a666b7b545618af642960f615a054b0f60fe
+  docs/Models/Requests/CancelPayoutResponse.md:
+    id: "728267523866"
+    last_write_checksum: sha1:6212c1f80cbf9a353d1abea7af416baa0a0d2009
+    pristine_git_object: 581ce677502b2f4b014bb8839fb9c5a3ee68eb48
   docs/Models/Requests/CancelRefundRequest.md:
     id: 80a2771839f0
     last_write_checksum: sha1:9a322902bab0f7eb340fa9b2ff557b8bf1edfa69
@@ -2218,6 +2258,14 @@ trackedFiles:
     id: 3b8417223211
     last_write_checksum: sha1:e04011a2c9ddbb967e5b5bf47d183b5d17eee13b
     pristine_git_object: 806f1f731f4223155b6e2fd26131361278f26286
+  docs/Models/Requests/CreatePayoutRequest.md:
+    id: "963921404672"
+    last_write_checksum: sha1:544c9dcc662be7092db7fd1b80aabcae5c3b5bb8
+    pristine_git_object: 8b72ad7a030f6d8541f9dc94677d73c0577608c0
+  docs/Models/Requests/CreatePayoutResponse.md:
+    id: 46de95ec4fe9
+    last_write_checksum: sha1:c5b3fd438a7ada8d9967e8c9b68037fa756c8bd6
+    pristine_git_object: 849a3afbe2ed938edf7ba3c41244f455783d99de
   docs/Models/Requests/CreateProfileRequest.md:
     id: 0432182728d9
     last_write_checksum: sha1:83d8a85b77845ba490b3b99318cda17115fdf10e
@@ -2554,6 +2602,14 @@ trackedFiles:
     id: a6b0ca056a50
     last_write_checksum: sha1:b8d31b01cc0ed7c805e9a040071e5a33094db61e
     pristine_git_object: a874b0ed7a180a5391ca6157a3fd2203f1631b92
+  docs/Models/Requests/GetPayoutRequest.md:
+    id: e22b19f3cba5
+    last_write_checksum: sha1:bb990300b236da59ae25ef1ea613d60153e27cfd
+    pristine_git_object: be5ce2a55568d99fc79a88bf8bdb76dd572116d6
+  docs/Models/Requests/GetPayoutResponse.md:
+    id: e1dcd433c8f1
+    last_write_checksum: sha1:7ccb7ebf613b145f62485f03b09f731db945f2e4
+    pristine_git_object: 10ece3951e0fc3a778a227189076260086d2ab10
   docs/Models/Requests/GetPermissionRequest.md:
     id: 7be5cb1a25ab
     last_write_checksum: sha1:9d73e6eca74a54a12a0336063293be687423c3aa
@@ -2998,6 +3054,22 @@ trackedFiles:
     id: 8882b30ad221
     last_write_checksum: sha1:2636f7d717721a418ecec87c2e87efa9aff41f62
     pristine_git_object: 26660aa3983b99c5175911dcf029d196b965f7d5
+  docs/Models/Requests/ListPayoutsEmbedded.md:
+    id: 585280b82b8f
+    last_write_checksum: sha1:0fed48493d09c95ab0b1571c7f3edb57c256ed62
+    pristine_git_object: 7febcb0714c98502633fa1ac69f9ca594743e980
+  docs/Models/Requests/ListPayoutsRequest.md:
+    id: 84fadabbccd5
+    last_write_checksum: sha1:592bdd5809c0c1bb54ea2c585c42336c79100563
+    pristine_git_object: 03d8721bad6e568061dd40c3b393edc57891a1df
+  docs/Models/Requests/ListPayoutsResponse.md:
+    id: aa30fb4d77bd
+    last_write_checksum: sha1:ed0adce5bb9dea215e8e91d4314c9bde6d87fa39
+    pristine_git_object: 6cad95223aa79c9a2e3fd108caf5da8c72670f82
+  docs/Models/Requests/ListPayoutsResponseBody.md:
+    id: bcd02cfaa4be
+    last_write_checksum: sha1:0e9ce2494c10e77189b6a0b44ceb1b13c6510131
+    pristine_git_object: 16c0966fff11a3eb40a3e1c082f44df90d943085
   docs/Models/Requests/ListPermissionsEmbedded.md:
     id: c4bb75280706
     last_write_checksum: sha1:21abce9642fc34d090361c6401571a231a999000
@@ -3546,6 +3618,10 @@ trackedFiles:
     id: 0ddb15ec8c20
     last_write_checksum: sha1:aa934be457db6c7244fd53f1af4700b9b653e711
     pristine_git_object: 7ab5e04cc8227ad421cd19917014c9edd2589d00
+  docs/sdks/payouts/README.md:
+    id: 184ed4a74471
+    last_write_checksum: sha1:6f72c71a7c7a05bcb5f74c20d571b66f12bed883
+    pristine_git_object: 2c60f6e639ffee248edeb768bbd4e82de9ba1a04
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
     last_write_checksum: sha1:b9ca47065987bde3f008462b81f2bd36342f85d7
@@ -3632,8 +3708,8 @@ trackedFiles:
     pristine_git_object: 896dbfaaee597157d9abb505321f86fe3104b968
   src/Mollie/Client.cs:
     id: 2a31e0b4b8fb
-    last_write_checksum: sha1:5fd9f710c1511b3dfa5d6d340f970aa7c4a18e4b
-    pristine_git_object: 7b87c770624dbe1617e8b8b04ce7a23c8cc07a81
+    last_write_checksum: sha1:df2bd8e9b521cb9c4cc75e05c01e25eb9a83dad7
+    pristine_git_object: 1799e4f29ea5bc6cfe12a7e5d863e505ad4ed119
   src/Mollie/ClientLinks.cs:
     id: 5f057d3715ba
     last_write_checksum: sha1:f8fce632492ed89d67b69b3549727141a988022b
@@ -3940,8 +4016,8 @@ trackedFiles:
     pristine_git_object: 9d02e879594f6c15af7ad09cf8927910ef51c8ea
   src/Mollie/Models/Components/Entity.cs:
     id: d8ae9092a4ba
-    last_write_checksum: sha1:8e86c4bfc7f3dd07ceb983937d9ee2ad0f294873
-    pristine_git_object: 76e0e02587467531e1c43d06f3f558eb4a4e950b
+    last_write_checksum: sha1:a689a26566580b6cf77edcf4160b9f7deaf34f5c
+    pristine_git_object: 410a7b93e0aaee49413c6c0456e10bb6c0be5286
   src/Mollie/Models/Components/EntityBalance.cs:
     id: 58e7290b00c8
     last_write_checksum: sha1:64435f35fa8893118195bb65fad96ab0fc04650a
@@ -4166,6 +4242,14 @@ trackedFiles:
     id: 78b67a232074
     last_write_checksum: sha1:c7668b624293b532a962b47714736af4c0c7482e
     pristine_git_object: f1a127ea22cada6554954f409c3cef90cbf95891
+  src/Mollie/Models/Components/EntityPayoutResponse.cs:
+    id: a990172e8f3f
+    last_write_checksum: sha1:375503b76157130abbbe4031c8b8c8ff69007a46
+    pristine_git_object: 121847dcef9e9ff181e3b7984a4b8b779a18c469
+  src/Mollie/Models/Components/EntityPayoutResponseLinks.cs:
+    id: 60d9522ba627
+    last_write_checksum: sha1:03aa7b9bbcb81e6922f0c7a714d96e2ee000bb8e
+    pristine_git_object: c52fa81c5d2dccab7bde8528a92d1fad8d2f2bbc
   src/Mollie/Models/Components/EntityPermission.cs:
     id: c9ebed7fad81
     last_write_checksum: sha1:986f4b51d9acd5d1f0fc0c717cb739d88e7a8db6
@@ -4288,8 +4372,8 @@ trackedFiles:
     pristine_git_object: 80759dfbe90d068a75a2a5cb8f07155d7804270b
   src/Mollie/Models/Components/EntityWebhookEventWebhookEventTypes.cs:
     id: 90f46a8b2d27
-    last_write_checksum: sha1:44ea5b45492b3e6fcd25e264dcbaacfd0a7d18a5
-    pristine_git_object: 75c24d2fd97d6bfa3d4380fa654fd5cf111a980a
+    last_write_checksum: sha1:16a059d27458472022074cac106b0870cb1e08e4
+    pristine_git_object: 7860df96037e50aed7cd63f9b8aab4123476d2d3
   src/Mollie/Models/Components/EntityWebhookLinks.cs:
     id: e7b8b3c12ba5
     last_write_checksum: sha1:36d2130cc85fa574dc82a2a7befe5261ea79f5f6
@@ -4498,6 +4582,14 @@ trackedFiles:
     id: af3c398c5804
     last_write_checksum: sha1:8a9a0fb3b430a1257861c448d8f181930c80bbf9
     pristine_git_object: f2a8b25589d401b6d5570baa346051586b7cba42
+  src/Mollie/Models/Components/ListEntityPayout.cs:
+    id: 10460302c452
+    last_write_checksum: sha1:2fdbe2d3cb26bf02e58b109b14a217eab9e67383
+    pristine_git_object: c643317535bef7ab4ff28ec11a65e77247d24ba7
+  src/Mollie/Models/Components/ListEntityPayoutLinks.cs:
+    id: 26eb83effa5b
+    last_write_checksum: sha1:9eaf0f7b73864f5c80aa834bdb04a943d72d74c6
+    pristine_git_object: 0c1bd9ae830b4b1ab9fabe8aae2374868853c6e0
   src/Mollie/Models/Components/ListEntityPermission.cs:
     id: 38bcea626ddc
     last_write_checksum: sha1:200bffd56709829bfeb509b86947a1dc579f8839
@@ -5154,6 +5246,22 @@ trackedFiles:
     id: 2df3d893c96a
     last_write_checksum: sha1:948838882de8cb0124bba206db48d3df575c9b0c
     pristine_git_object: 10012f5d2c1ec356195a53005a019e468a44a6cb
+  src/Mollie/Models/Components/PayoutRequest.cs:
+    id: eb7e84ea0ae0
+    last_write_checksum: sha1:1e1bf1157b101b48e0d7a19639420c6c84ef8d77
+    pristine_git_object: baa5c53c3212b5bcad06a07058ef3c57745e5ffa
+  src/Mollie/Models/Components/PayoutStatus.cs:
+    id: 0c682f7ab569
+    last_write_checksum: sha1:0a325d1e11aaf458ec217b6001a8ef1177aec7d3
+    pristine_git_object: 6626543901a4b376c83a725073730c2f49fb5419
+  src/Mollie/Models/Components/PayoutStatusReason.cs:
+    id: f4ef7b08339d
+    last_write_checksum: sha1:52697062c9ab7e71647a40cb18abc30cfdd6ba5d
+    pristine_git_object: 6dd6aa4713b0207bddc3c814979ee7319e6a75ae
+  src/Mollie/Models/Components/PayoutStatusReasonCode.cs:
+    id: a24eef4c752f
+    last_write_checksum: sha1:a20cf9c3b56531090aa4de64b151fac6950a47fd
+    pristine_git_object: f31b142ed036e6a2ef7650254e0eccf3e59f0f36
   src/Mollie/Models/Components/PendingBalance.cs:
     id: c781edca75cb
     last_write_checksum: sha1:cef9b59cda6cd1973b91513ca4d07d8176c3abff
@@ -5712,8 +5820,8 @@ trackedFiles:
     pristine_git_object: e0a4b98f0127abae5b74cd3275e23a91af7001b7
   src/Mollie/Models/Components/WebhookEventTypes.cs:
     id: ee490627bb01
-    last_write_checksum: sha1:615ca7469c5ff743d89a1463be8f98e1c435aa49
-    pristine_git_object: 837d3dc7065c9844f346fb3aff56f13f7d46ca06
+    last_write_checksum: sha1:63fe03f44cb122f9b3e5a524e734714e75460d82
+    pristine_git_object: 3dff823cf60e192b72bd1300bc32bf377cd07f5c
   src/Mollie/Models/Components/WebhookStatus.cs:
     id: 786ae58626ff
     last_write_checksum: sha1:921bf8f181207efc0c39cdde62a79775db7931a6
@@ -5750,6 +5858,14 @@ trackedFiles:
     id: f1dfef7407f9
     last_write_checksum: sha1:e59cab26387442df423b652c0fd8b4c3bdfe3578
     pristine_git_object: 9d16cc617939924662cb961c27b8a097afa57f3b
+  src/Mollie/Models/Requests/CancelPayoutRequest.cs:
+    id: b9170d9ce72a
+    last_write_checksum: sha1:6b9adab034776c6d89ef71d1c75dc49f476f268e
+    pristine_git_object: 30e579859e29b24b0a4f99630356f27b36a07c8e
+  src/Mollie/Models/Requests/CancelPayoutResponse.cs:
+    id: 5fef4f3ce8e8
+    last_write_checksum: sha1:3a01c12f6830a3b69798b7de23f3e9387c4f9f22
+    pristine_git_object: cd1282a0683ecd8c01d3837cf15d9ae69ecd9065
   src/Mollie/Models/Requests/CancelRefundRequest.cs:
     id: aaf2085260e1
     last_write_checksum: sha1:d76388536b2be7b963ca8d1cb59fa8aa61cd8ba7
@@ -5846,6 +5962,14 @@ trackedFiles:
     id: 47990e42b272
     last_write_checksum: sha1:77d5e210126b788086197940c5755cf455deaee2
     pristine_git_object: 44819b98c066d0c7f59c9e66a0c7de902195d2fa
+  src/Mollie/Models/Requests/CreatePayoutRequest.cs:
+    id: 2b2e1eae56c7
+    last_write_checksum: sha1:84df5c6e5ad44aa15e53400eeef9f715e17ded88
+    pristine_git_object: 6262fa199e49b5b020fc40278e241e5545417feb
+  src/Mollie/Models/Requests/CreatePayoutResponse.cs:
+    id: d69822c3ce9a
+    last_write_checksum: sha1:14de2b1e4b7655a55f5c945d17e62f5c89166cc2
+    pristine_git_object: ed5bb67e1dc3ba1439339c67637eec1980144b84
   src/Mollie/Models/Requests/CreateProfileRequest.cs:
     id: 2301557aca13
     last_write_checksum: sha1:991183ce4016230763efb92dbf9deee0a3387d3d
@@ -6182,6 +6306,14 @@ trackedFiles:
     id: 6d7036c6911e
     last_write_checksum: sha1:369d9150b3eba849f61107b4444378e70d0fd4f0
     pristine_git_object: 1b6ab832039f79e1da57a610d8c9b0c47a67371b
+  src/Mollie/Models/Requests/GetPayoutRequest.cs:
+    id: 28fdcebaa122
+    last_write_checksum: sha1:7f818fae4f7f2daf67d077ba5339afb1ea92a39b
+    pristine_git_object: 8a3d43a088889e071519182d214c36e45578ae6c
+  src/Mollie/Models/Requests/GetPayoutResponse.cs:
+    id: a4b184503b89
+    last_write_checksum: sha1:a778678e9018b00fef816445a904d544e11c11a0
+    pristine_git_object: 09eefe73c31e1e5ac9934bacc22d5511b199541e
   src/Mollie/Models/Requests/GetPermissionRequest.cs:
     id: aeb383695746
     last_write_checksum: sha1:8643aa201878cf9a0937b15e3f05afd98f2739a4
@@ -6626,6 +6758,22 @@ trackedFiles:
     id: 98178b6d5a57
     last_write_checksum: sha1:27b483f4c24f9b7e43a319b7abe8f9f398c9896e
     pristine_git_object: 05dc7fb31f942d89758773e74645d54cea4e5544
+  src/Mollie/Models/Requests/ListPayoutsEmbedded.cs:
+    id: 6553cb9bdc48
+    last_write_checksum: sha1:ad71eea520bb97e8caeddfbcdad5a83db22d0816
+    pristine_git_object: 610d52f919140211075b86ce3e05b15eb72ad3be
+  src/Mollie/Models/Requests/ListPayoutsRequest.cs:
+    id: c796f5fe6ef4
+    last_write_checksum: sha1:d952343862b8443c21c7556d712316724a7b904d
+    pristine_git_object: 8d2fcd019b5d1f37b3ce39dd4eee430ce298bcf6
+  src/Mollie/Models/Requests/ListPayoutsResponse.cs:
+    id: 3a7958f1fd0a
+    last_write_checksum: sha1:e0d6709f7e2350b0edf0bbcb24657b352fe26afb
+    pristine_git_object: c9580dd8e8ed3ce04594e17039939221558115a9
+  src/Mollie/Models/Requests/ListPayoutsResponseBody.cs:
+    id: 27e72a93ad7e
+    last_write_checksum: sha1:12d0c4ce5b21895adc9ca743490458ade53a245d
+    pristine_git_object: 6fb47e1135bb386ca128d7a714e0ca3957dc6248
   src/Mollie/Models/Requests/ListPermissionsEmbedded.cs:
     id: b7d036392794
     last_write_checksum: sha1:5818ea355b48cf54d5f4e21e43bc021d69d381da
@@ -7104,8 +7252,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:7131601f4c1e2664c19b5c51428c6871494d85e7
-    pristine_git_object: 893907544f78ca9694ae7a3d956338221ba070f1
+    last_write_checksum: sha1:903969d9208c879b7fe5afb71a74815724580e40
+    pristine_git_object: a7621fca54fee35198dddd9538382685cc5c491f
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:67a0713114977ed6f68ffe32b145848c809f7573
@@ -7126,6 +7274,10 @@ trackedFiles:
     id: 0aa26f382590
     last_write_checksum: sha1:1ba768790ed64b117b3e4eb30624aff93e682cc5
     pristine_git_object: a2f477f2557f3303437722da6dce4e87a07c132e
+  src/Mollie/Payouts.cs:
+    id: 462a1921e8c6
+    last_write_checksum: sha1:a5bda381382bbe05fd7d119612815db7c2f78dcd
+    pristine_git_object: 90bcc31daa5db1957818990c5261cb9993fd21f6
   src/Mollie/Permissions.cs:
     id: eef18eddcf28
     last_write_checksum: sha1:afd02df1807190a9848a42af51d23d2fdf0762cc
@@ -7140,8 +7292,8 @@ trackedFiles:
     pristine_git_object: 02f2143ddd7d28b6ff8da98e969e002af6ece44e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:bf4d87e2eee47ac39f7074455941a743ab3baae1
-    pristine_git_object: ca0784e1d6d5067fbc774da92dc23a0b64c2a4a0
+    last_write_checksum: sha1:4a025b7f9d52f723b15cca5fefd20748cd725931
+    pristine_git_object: 75e27b1753866d6763da1b3c1dcaf856efc87ba5
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:797f649a68bc2839b3af2ef47553826383d02f9c
@@ -7180,8 +7332,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:110342270d9563071f8e0142e23307f43b4de139
-    pristine_git_object: 366627b3ab1973dea1750dae729ccdc279626500
+    last_write_checksum: sha1:c1c6b6fd70b448df09565fa5dcec097f30e86e5d
+    pristine_git_object: 44d0d8d06e96ce43855ce152181816ddac17b05b
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11044,8 +11196,114 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
         application/json: {"token_type_hint": "access_token", "token": "access_..."}
+  create-payout:
+    create-payout-201:
+      parameters:
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      requestBody:
+        application/json: {"balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "testmode": false}
+      responses:
+        "201":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": null, "completedAt": null, "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://api.mollie.com/v2/payouts/payout_j8NvRAM2WNZtsykpLEX8J", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-payout", "type": "text/html"}}}
+    speakeasy-default-create-payout:
+      parameters:
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      requestBody:
+        application/json: {"balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "testmode": false}
+      responses:
+        "201":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-20T09:13:40+00:00", "completedAt": "2024-03-20T14:00:00+00:00", "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "422":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  list-payouts:
+    list-payouts-200:
+      parameters:
+        query:
+          balanceId: "bal_gVMhHKqSSRYJyPsuoPNFH"
+          limit: 50
+          sort: "desc"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 2, "_embedded": {"payouts": [{"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "completed", "statusReason": {"code": "completed", "message": "The payout has been completed successfully."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-21T06:00:01+00:00", "completedAt": "2024-03-21T10:30:00+00:00", "canceledAt": null, "mode": "live"}, {"resource": "payout", "id": "payout_apsdreg13fsBa7GByBu", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "250.00"}, "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-21T08:00:00+00:00", "initiatedAt": null, "completedAt": null, "canceledAt": null, "mode": "live"}]}, "_links": {"self": {"href": "https://api.mollie.com/v2/payouts?limit=50", "type": "application/hal+json"}, "previous": null, "next": null, "documentation": {"href": "https://docs.mollie.com/reference/list-payouts", "type": "text/html"}}}
+    speakeasy-default-list-payouts:
+      parameters:
+        query:
+          balanceId: "bal_gVMhHKqSSRYJyPsuoPNFH"
+          limit: 50
+          sort: "desc"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 5, "_embedded": {"payouts": []}, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "400":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  get-payout:
+    get-payout-200-requested:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": null, "completedAt": null, "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://api.mollie.com/v2/payouts/payout_j8NvRAM2WNZtsykpLEX8J", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-payout", "type": "text/html"}}}
+    get-payout-200-completed:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "completed", "statusReason": {"code": "completed", "message": "The payout has been completed successfully."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-21T06:00:01+00:00", "completedAt": "2024-03-21T10:30:00+00:00", "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://api.mollie.com/v2/payouts/payout_j8NvRAM2WNZtsykpLEX8J", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-payout", "type": "text/html"}}}
+    get-payout-200-failed:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "failed", "statusReason": {"code": "insufficient_funds", "message": "Insufficient funds on the balance to complete the payout."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-21T06:00:01+00:00", "completedAt": null, "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://api.mollie.com/v2/payouts/payout_j8NvRAM2WNZtsykpLEX8J", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-payout", "type": "text/html"}}}
+    speakeasy-default-get-payout:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-20T09:13:40+00:00", "completedAt": "2024-03-20T14:00:00+00:00", "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  cancel-payout:
+    cancel-payout-200:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "canceled", "statusReason": {"code": "canceled", "message": "The payout has been canceled."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": null, "completedAt": null, "canceledAt": "2024-03-20T15:00:00+00:00", "mode": "live", "_links": {"self": {"href": "https://api.mollie.com/v2/payouts/payout_j8NvRAM2WNZtsykpLEX8J", "type": "application/hal+json"}, "documentation": {"href": "https://docs.mollie.com/reference/get-payout", "type": "text/html"}}}
+    speakeasy-default-cancel-payout:
+      parameters:
+        path:
+          payoutId: "payout_j8NvRAM2WNZtsykpLEX8J"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-20T09:13:40+00:00", "completedAt": "2024-03-20T14:00:00+00:00", "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Payments.Create()`: \n  *  `request.paymentRequest.Routing[].Links` **Removed** (Breaking ⚠️)\n* `Client.Customers.CreatePayment()`: \n  *  `request.paymentRequest.Routing[].Links` **Removed** (Breaking ⚠️)\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.Create()`: \n  *  `requestBody.EventTypesList.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response.Embedded.Webhooks[].EventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Update()`: \n  *  `requestBody.EventTypes.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Get()`:  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.WebhookEvents.Get()`:  `response` **Changed** (Breaking ⚠️)\n* `Client.Payouts.Create()`: **Added**\n* `Client.Payouts.List()`: **Added**\n* `Client.Payouts.Get()`: **Added**\n* `Client.Payouts.Cancel()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

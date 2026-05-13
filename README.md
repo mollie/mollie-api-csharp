@@ -325,6 +325,13 @@ var sdk = new Mollie.Client(
 * [Cancel](docs/sdks/payments/README.md#cancel) - Cancel payment
 * [ReleaseAuthorization](docs/sdks/payments/README.md#releaseauthorization) - Release payment authorization
 
+### [Payouts](docs/sdks/payouts/README.md)
+
+* [Create](docs/sdks/payouts/README.md#create) - Create payout
+* [List](docs/sdks/payouts/README.md#list) - List payouts
+* [Get](docs/sdks/payouts/README.md#get) - Get payout
+* [Cancel](docs/sdks/payouts/README.md#cancel) - Cancel payout
+
 ### [Permissions](docs/sdks/permissions/README.md)
 
 * [List](docs/sdks/permissions/README.md#list) - List permissions

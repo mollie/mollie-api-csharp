@@ -27,6 +27,8 @@ namespace Mollie.Models.Components
 
         public static EntityType PaymentLinkResponse { get { return new EntityType("payment-link-response"); } }
 
+        public static EntityType EntityPayoutResponse { get { return new EntityType("entity-payout-response"); } }
+
         public static EntityType SalesInvoiceResponse { get { return new EntityType("sales-invoice-response"); } }
 
         public static EntityType TransferResponse { get { return new EntityType("transfer-response"); } }
@@ -36,6 +38,7 @@ namespace Mollie.Models.Components
         public static EntityType FromString(string v) {
             switch(v) {
                 case "payment-link-response": return PaymentLinkResponse;
+                case "entity-payout-response": return EntityPayoutResponse;
                 case "sales-invoice-response": return SalesInvoiceResponse;
                 case "transfer-response": return TransferResponse;
                 default: throw new ArgumentException("Invalid value for EntityType");
@@ -68,6 +71,9 @@ namespace Mollie.Models.Components
         public PaymentLinkResponse? PaymentLinkResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public EntityPayoutResponse? EntityPayoutResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public SalesInvoiceResponse? SalesInvoiceResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
@@ -80,6 +86,14 @@ namespace Mollie.Models.Components
 
             Entity res = new Entity(typ);
             res.PaymentLinkResponse = paymentLinkResponse;
+            return res;
+        }
+        public static Entity CreateEntityPayoutResponse(EntityPayoutResponse entityPayoutResponse)
+        {
+            EntityType typ = EntityType.EntityPayoutResponse;
+
+            Entity res = new Entity(typ);
+            res.EntityPayoutResponse = entityPayoutResponse;
             return res;
         }
         public static Entity CreateSalesInvoiceResponse(SalesInvoiceResponse salesInvoiceResponse)
@@ -114,6 +128,26 @@ namespace Mollie.Models.Components
 
                 var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new Entity(EntityType.EntityPayoutResponse)
+                    {
+                        EntityPayoutResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EntityPayoutResponse>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(EntityPayoutResponse), new Entity(EntityType.EntityPayoutResponse), "EntityPayoutResponse"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
                 try
                 {
@@ -210,6 +244,12 @@ namespace Mollie.Models.Components
                 if (res.PaymentLinkResponse != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.PaymentLinkResponse));
+                    return;
+                }
+
+                if (res.EntityPayoutResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.EntityPayoutResponse));
                     return;
                 }
 
