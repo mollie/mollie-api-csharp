@@ -23,13 +23,7 @@ namespace Mollie.Models.Components
         public string BalanceId { get; set; } = default!;
 
         /// <summary>
-        /// The amount to pay out. When omitted from the request, the full available balance minus any configured<br/>
-        /// balance reserve is paid out.<br/>
-        /// <br/>
-        /// Merchants registered in the United Kingdom cannot specify a custom amount — omit this field to pay out<br/>
-        /// the full available balance.<br/>
-        /// <br/>
-        /// The value in the response reflects the amount paid out, excluding any applicable fees.
+        /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
         public AmountNullable? Amount { get; set; } = null;
