@@ -286,6 +286,15 @@ namespace Mollie.Models.Components
         public string? CardToken { get; set; }
 
         /// <summary>
+        /// The Google Pay payment token object (encoded as JSON) returned by the Google Pay SDK after the customer authorizes<br/>
+        /// the payment. The token contains the payment information needed to complete the payment.<br/>
+        /// <br/>
+        /// The object should be passed encoded in a JSON string.
+        /// </summary>
+        [JsonProperty("googlePayPaymentToken")]
+        public string? GooglePayPaymentToken { get; set; }
+
+        /// <summary>
         /// The card token you received from the card component of Mollie Components. The token represents the customer's card<br/>
         /// information needed to complete the payment.
         /// </summary>
