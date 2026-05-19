@@ -70,13 +70,6 @@ namespace Mollie
         /// - The payout destination (bank account) is invalid or not configured.
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -89,7 +82,6 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreatePayoutResponse> CreateAsync(
             PayoutRequest payoutRequest,
-            bool? testmode = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -247,13 +239,6 @@ namespace Mollie
         /// - The payout destination (bank account) is invalid or not configured.
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -266,7 +251,6 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreatePayoutResponse> CreateAsync(
             PayoutRequest payoutRequest,
-            bool? testmode = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -277,13 +261,11 @@ namespace Mollie
             var request = new CreatePayoutRequest()
             {
                 PayoutRequest = payoutRequest,
-                Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
-            request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v2/payouts", request, null);
+            var urlString = baseUrl + "/v2/payouts";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
