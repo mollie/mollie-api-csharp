@@ -27068,9 +27068,6 @@ paths:
         - The balance has queued refunds.
         - One of the organization's balances is below the negative balance threshold.
         - The payout destination (bank account) is invalid or not configured.
-      parameters:
-        - $ref: '#/components/parameters/testmode'
-        - $ref: '#/components/parameters/idempotency-key'
       requestBody:
         required: true
         content:
@@ -27177,6 +27174,8 @@ paths:
                 description: 'My payout description'
               )
       x-speakeasy-group: payouts
+      parameters:
+        - $ref: '#/components/parameters/idempotency-key'
     get:
       summary: List payouts
       x-speakeasy-name-override: list
