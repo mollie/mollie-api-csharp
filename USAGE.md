@@ -4,11 +4,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,

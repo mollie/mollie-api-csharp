@@ -48,7 +48,8 @@ namespace Mollie
         /// <br/>
         /// Payment sessions cannot be requested directly from the browser. The request must be sent from your server. For the<br/>
         /// full documentation, see the official<br/>
-        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="RequestApplePayPaymentSessionRequestBody"/> parameter.</param>
@@ -58,7 +59,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(
             string? idempotencyKey = null,
@@ -103,7 +104,8 @@ namespace Mollie
         /// <br/>
         /// Payment sessions cannot be requested directly from the browser. The request must be sent from your server. For the<br/>
         /// full documentation, see the official<br/>
-        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.
+        /// <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api">Apple Pay JS API</a> documentation.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="RequestApplePayPaymentSessionRequestBody"/> parameter.</param>
@@ -113,7 +115,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the validation URL is missing. Thrown when the API returns a 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<RequestApplePayPaymentSessionResponse> RequestApplePaySessionAsync(
             string? idempotencyKey = null,
@@ -148,7 +150,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "request-apple-pay-payment-session", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -178,6 +180,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -249,7 +252,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 422)
+            else if(new List<int>{422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

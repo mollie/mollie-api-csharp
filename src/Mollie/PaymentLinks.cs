@@ -34,7 +34,8 @@ namespace Mollie
         /// <remarks>
         /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire.<br/>
         /// The payment link can be shared with your customers and will redirect them to them the payment page where they can<br/>
-        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
+        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="CreatePaymentLinkRequestBody"/> parameter.</param>
@@ -44,7 +45,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreatePaymentLinkResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -59,7 +60,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all payment links.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -81,7 +83,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListPaymentLinksResponse> ListAsync(
             string? fromP = null,
@@ -97,7 +99,8 @@ namespace Mollie
         /// Get payment link.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single payment link by its ID.
+        /// Retrieve a single payment link by its ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="testmode">
@@ -115,7 +118,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetPaymentLinkResponse> GetAsync(
             string paymentLinkId,
@@ -129,7 +132,8 @@ namespace Mollie
         /// Update payment link.
         /// </summary>
         /// <remarks>
-        /// Certain details of an existing payment link can be updated.
+        /// Certain details of an existing payment link can be updated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -141,7 +145,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdatePaymentLinkResponse> UpdateAsync(
             string paymentLinkId,
@@ -161,7 +165,8 @@ namespace Mollie
         /// Once deleted, the payment link will no longer show up in the API or Mollie dashboard.<br/>
         /// <br/>
         /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the<br/>
-        /// <a href="update-payment-link">Update payment link</a> endpoint instead.
+        /// <a href="update-payment-link">Update payment link</a> endpoint instead.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -173,7 +178,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<DeletePaymentLinkResponse> DeleteAsync(
             string paymentLinkId,
@@ -189,7 +194,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve the list of payments for a specific payment link.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetPaymentLinkPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -200,7 +206,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(
             GetPaymentLinkPaymentsRequest request,
@@ -229,7 +235,8 @@ namespace Mollie
         /// <remarks>
         /// With the Payment links API you can generate payment links that by default, unlike regular payments, do not expire.<br/>
         /// The payment link can be shared with your customers and will redirect them to them the payment page where they can<br/>
-        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.
+        /// complete the payment. A <a href="get-payment">payment</a> will only be created once the customer initiates the payment.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="CreatePaymentLinkRequestBody"/> parameter.</param>
@@ -239,7 +246,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreatePaymentLinkResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -274,7 +281,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-payment-link", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -304,6 +311,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -375,7 +383,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -420,7 +428,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all payment links.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -442,7 +451,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListPaymentLinksResponse> ListAsync(
             string? fromP = null,
@@ -481,7 +490,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-payment-links", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -511,6 +520,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -613,7 +623,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -656,7 +666,8 @@ namespace Mollie
         /// Get payment link.
         /// </summary>
         /// <remarks>
-        /// Retrieve a single payment link by its ID.
+        /// Retrieve a single payment link by its ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="testmode">
@@ -674,7 +685,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetPaymentLinkResponse> GetAsync(
             string paymentLinkId,
@@ -708,7 +719,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-payment-link", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -738,6 +749,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -809,7 +821,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -852,7 +864,8 @@ namespace Mollie
         /// Update payment link.
         /// </summary>
         /// <remarks>
-        /// Certain details of an existing payment link can be updated.
+        /// Certain details of an existing payment link can be updated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -864,7 +877,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdatePaymentLinkResponse> UpdateAsync(
             string paymentLinkId,
@@ -903,7 +916,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-payment-link", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -933,6 +946,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1004,7 +1018,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1053,7 +1067,8 @@ namespace Mollie
         /// Once deleted, the payment link will no longer show up in the API or Mollie dashboard.<br/>
         /// <br/>
         /// To simply disable a payment link without fully deleting it, you can use the `archived` parameter on the<br/>
-        /// <a href="update-payment-link">Update payment link</a> endpoint instead.
+        /// <a href="update-payment-link">Update payment link</a> endpoint instead.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentLinkId">Provide the ID of the related payment link.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -1065,7 +1080,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<DeletePaymentLinkResponse> DeleteAsync(
             string paymentLinkId,
@@ -1104,7 +1119,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "delete-payment-link", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1134,6 +1149,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1187,7 +1203,7 @@ namespace Mollie
                     }
                 };
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1232,7 +1248,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve the list of payments for a specific payment link.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetPaymentLinkPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1243,7 +1260,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetPaymentLinkPaymentsResponse> ListPaymentsAsync(
             GetPaymentLinkPaymentsRequest request,
@@ -1273,7 +1290,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-payment-link-payments", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1303,6 +1320,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1412,7 +1430,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

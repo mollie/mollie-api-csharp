@@ -36,7 +36,8 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// With the Sales Invoice API you can generate sales invoices to send to your customers.
+        /// With the Sales Invoice API you can generate sales invoices to send to your customers.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="salesInvoiceRequest">A <see cref="SalesInvoiceRequest"/> parameter.</param>
@@ -46,7 +47,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateSalesInvoiceResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -65,7 +66,8 @@ namespace Mollie
         /// <br/>
         /// Retrieve a list of all sales invoices created through the API.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -87,7 +89,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSalesInvoicesResponse> ListAsync(
             string? fromP = null,
@@ -107,7 +109,8 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// Retrieve a single sales invoice by its ID.
+        /// Retrieve a single sales invoice by its ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="testmode">
@@ -125,7 +128,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetSalesInvoiceResponse> GetAsync(
             string salesInvoiceId,
@@ -145,7 +148,8 @@ namespace Mollie
         /// <br/>
         /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for<br/>
         /// statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,<br/>
-        /// respectively).
+        /// respectively).<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -157,7 +161,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateSalesInvoiceResponse> UpdateAsync(
             string salesInvoiceId,
@@ -176,7 +180,8 @@ namespace Mollie
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
         /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the<br/>
-        /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.
+        /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -188,7 +193,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<DeleteSalesInvoiceResponse> DeleteAsync(
             string salesInvoiceId,
@@ -220,7 +225,8 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// With the Sales Invoice API you can generate sales invoices to send to your customers.
+        /// With the Sales Invoice API you can generate sales invoices to send to your customers.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="salesInvoiceRequest">A <see cref="SalesInvoiceRequest"/> parameter.</param>
@@ -230,7 +236,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateSalesInvoiceResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -265,7 +271,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-sales-invoice", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -295,6 +301,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -366,7 +373,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -415,7 +422,8 @@ namespace Mollie
         /// <br/>
         /// Retrieve a list of all sales invoices created through the API.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -437,7 +445,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSalesInvoicesResponse> ListAsync(
             string? fromP = null,
@@ -476,7 +484,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-sales-invoices", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -506,6 +514,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -608,7 +617,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -655,7 +664,8 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
-        /// Retrieve a single sales invoice by its ID.
+        /// Retrieve a single sales invoice by its ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="testmode">
@@ -673,7 +683,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetSalesInvoiceResponse> GetAsync(
             string salesInvoiceId,
@@ -707,7 +717,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-sales-invoice", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -737,6 +747,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -808,7 +819,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -857,7 +868,8 @@ namespace Mollie
         /// <br/>
         /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for<br/>
         /// statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,<br/>
-        /// respectively).
+        /// respectively).<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -869,7 +881,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateSalesInvoiceResponse> UpdateAsync(
             string salesInvoiceId,
@@ -908,7 +920,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "update-sales-invoice", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -938,6 +950,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1009,7 +1022,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1057,7 +1070,8 @@ namespace Mollie
         /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
         /// <br/>
         /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the<br/>
-        /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.
+        /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="salesInvoiceId">Provide the ID of the related sales invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -1069,7 +1083,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<DeleteSalesInvoiceResponse> DeleteAsync(
             string salesInvoiceId,
@@ -1108,7 +1122,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "delete-sales-invoice", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -1138,6 +1152,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1191,7 +1206,7 @@ namespace Mollie
                     }
                 };
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

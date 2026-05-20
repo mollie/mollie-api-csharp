@@ -35,7 +35,7 @@ namespace Mollie
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListBusinessAccountsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -45,7 +45,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListBusinessAccountsResponse> ListAccountsAsync(
             ListBusinessAccountsRequest? request = null,
@@ -60,7 +60,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountId">Provide the ID of the related business account.</param>
         /// <param name="testmode">
@@ -78,7 +78,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetBusinessAccountResponse> GetAccountAsync(
             string businessAccountId,
@@ -95,7 +95,7 @@ namespace Mollie
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListBusinessAccountTransactionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -106,7 +106,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListBusinessAccountTransactionsResponse> ListAsync(
             ListBusinessAccountTransactionsRequest request,
@@ -121,7 +121,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountId">Provide the ID of the related business account.</param>
         /// <param name="transactionId">Provide the ID of the related transaction.</param>
@@ -140,7 +140,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetBusinessAccountTransactionResponse> GetAsync(
             string businessAccountId,
@@ -172,7 +172,7 @@ namespace Mollie
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListBusinessAccountsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -182,7 +182,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListBusinessAccountsResponse> ListAccountsAsync(
             ListBusinessAccountsRequest? request = null,
@@ -245,6 +245,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -353,7 +354,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -398,7 +399,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountId">Provide the ID of the related business account.</param>
         /// <param name="testmode">
@@ -416,7 +417,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetBusinessAccountResponse> GetAccountAsync(
             string businessAccountId,
@@ -480,6 +481,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -551,7 +553,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -597,7 +599,7 @@ namespace Mollie
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListBusinessAccountTransactionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -608,7 +610,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListBusinessAccountTransactionsResponse> ListAsync(
             ListBusinessAccountTransactionsRequest request,
@@ -668,6 +670,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -777,7 +780,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -822,7 +825,7 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountId">Provide the ID of the related business account.</param>
         /// <param name="transactionId">Provide the ID of the related transaction.</param>
@@ -841,7 +844,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetBusinessAccountTransactionResponse> GetAsync(
             string businessAccountId,
@@ -908,6 +911,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -979,7 +983,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

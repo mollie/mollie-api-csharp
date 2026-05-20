@@ -22,11 +22,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,
@@ -43,6 +45,7 @@ var res = await sdk.Oauth.GenerateAsync(
 
 | Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `security`                                                                                | [OauthGenerateTokensSecurity](../../Models/Requests/OauthGenerateTokensSecurity.md)       | :heavy_check_mark:                                                                        | The security requirements to use for the request.                                         |                                                                                           |
 | `IdempotencyKey`                                                                          | *string*                                                                                  | :heavy_minus_sign:                                                                        | A unique key to ensure idempotent requests. This key should be a UUID v4 string.          | 123e4567-e89b-12d3-a456-426                                                               |
 | `RequestBody`                                                                             | [OauthGenerateTokensRequestBody](../../Models/Requests/OauthGenerateTokensRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
 | `serverURL`                                                                               | *string*                                                                                  | :heavy_minus_sign:                                                                        | An optional server URL to use.                                                            | http://localhost:8080                                                                     |
@@ -53,9 +56,10 @@ var res = await sdk.Oauth.GenerateAsync(
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Revoke
 
@@ -73,11 +77,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.RevokeAsync(
+    security: new OauthRevokeTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthRevokeTokensRequestBody() {
         TokenTypeHint = OauthTokenTypeHint.AccessToken,
@@ -92,6 +98,7 @@ var res = await sdk.Oauth.RevokeAsync(
 
 | Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `security`                                                                            | [OauthRevokeTokensSecurity](../../Models/Requests/OauthRevokeTokensSecurity.md)       | :heavy_check_mark:                                                                    | The security requirements to use for the request.                                     |                                                                                       |
 | `IdempotencyKey`                                                                      | *string*                                                                              | :heavy_minus_sign:                                                                    | A unique key to ensure idempotent requests. This key should be a UUID v4 string.      | 123e4567-e89b-12d3-a456-426                                                           |
 | `RequestBody`                                                                         | [OauthRevokeTokensRequestBody](../../Models/Requests/OauthRevokeTokensRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |
 | `serverURL`                                                                           | *string*                                                                              | :heavy_minus_sign:                                                                    | An optional server URL to use.                                                        | http://localhost:8080                                                                 |
@@ -102,6 +109,7 @@ var res = await sdk.Oauth.RevokeAsync(
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

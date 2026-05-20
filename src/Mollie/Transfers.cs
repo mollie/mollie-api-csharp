@@ -55,7 +55,7 @@ namespace Mollie
         /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
         /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -67,7 +67,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the transfer amount is&lt;br/&gt;<br/>
-        /// missing, or if the debtor IBAN does not belong to your organization. Thrown when the API returns a 422 or 503 response.
+        /// missing, or if the debtor IBAN does not belong to your organization. Thrown when the API returns a 422, 429 or 503 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateTransferResponse> CreateAsync(
@@ -86,7 +86,7 @@ namespace Mollie
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
         /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -104,7 +104,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetTransferResponse> GetAsync(
             string businessAccountsTransferId,
@@ -157,7 +157,7 @@ namespace Mollie
         /// | `13.00` | Transfer initiated, failed on scheme submission     | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.failed`                                                 |<br/>
         /// | `14.00` | Transfer processed, then returned by receiving bank | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed` → `business-account-transfer.returned`       |<br/>
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -169,7 +169,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the transfer amount is&lt;br/&gt;<br/>
-        /// missing, or if the debtor IBAN does not belong to your organization. Thrown when the API returns a 422 or 503 response.
+        /// missing, or if the debtor IBAN does not belong to your organization. Thrown when the API returns a 422, 429 or 503 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateTransferResponse> CreateAsync(
@@ -230,6 +230,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -301,7 +302,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 422)
+            else if(new List<int>{422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -376,7 +377,7 @@ namespace Mollie
         /// <br/>
         /// Retrieve a single transfer object by its transfer ID. This allows you to check the current status<br/>
         /// and details of a previously created transfer.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
         /// <param name="testmode">
@@ -394,7 +395,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetTransferResponse> GetAsync(
             string businessAccountsTransferId,
@@ -458,6 +459,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -529,7 +531,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

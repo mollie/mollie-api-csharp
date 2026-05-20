@@ -60,7 +60,7 @@ while(res != null)
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
@@ -105,7 +105,7 @@ var res = await sdk.UnmatchedCreditTransfers.GetAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Match
@@ -157,7 +157,7 @@ var res = await sdk.UnmatchedCreditTransfers.MatchAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Return
@@ -202,5 +202,5 @@ var res = await sdk.UnmatchedCreditTransfers.ReturnAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

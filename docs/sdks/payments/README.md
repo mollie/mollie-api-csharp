@@ -1953,7 +1953,7 @@ var res = await sdk.Payments.CreateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 422, 429                           | application/hal+json               |
 | Mollie.Models.Errors.ErrorResponse | 503                                | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
@@ -2074,7 +2074,7 @@ while(res != null)
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
@@ -2174,7 +2174,7 @@ var res = await sdk.Payments.GetAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
@@ -2377,7 +2377,7 @@ var res = await sdk.Payments.UpdateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Cancel
@@ -2428,7 +2428,7 @@ var res = await sdk.Payments.CancelAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## ReleaseAuthorization
@@ -2482,5 +2482,5 @@ var res = await sdk.Payments.ReleaseAuthorizationAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

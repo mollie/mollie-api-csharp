@@ -93,7 +93,7 @@ var res = await sdk.Sessions.CreateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 422, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
@@ -136,6 +136,7 @@ var res = await sdk.Sessions.GetAsync(
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

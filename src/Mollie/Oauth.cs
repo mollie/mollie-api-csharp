@@ -33,20 +33,23 @@ namespace Mollie
         /// Exchange the authorization code you received from the <a href="oauth-authorize">Authorize endpoint</a> for an 'access token'<br/>
         /// API credential, with which you can communicate with the Mollie API on behalf of the consenting merchant.<br/>
         /// <br/>
-        /// This endpoint can only be accessed using **OAuth client credentials**.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// This endpoint can only be accessed using **OAuth client credentials**.
         /// </remarks>
+        /// <param name="security">A <see cref="OauthGenerateTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthGenerateTokensRequestBody"/> parameter.</param>
         /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthGenerateTokensResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="security"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<OauthGenerateTokensResponse> GenerateAsync(
+            OauthGenerateTokensSecurity security,
             string? idempotencyKey = null,
             OauthGenerateTokensRequestBody? requestBody = null,
             string? serverUrl = null,
@@ -62,19 +65,23 @@ namespace Mollie
         /// <br/>
         /// Revoking a refresh token revokes all access tokens that were created using the same authorization.<br/>
         /// <br/>
-        /// This endpoint can only be accessed using **OAuth client credentials**.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// This endpoint can only be accessed using **OAuth client credentials**.
         /// </remarks>
+        /// <param name="security">A <see cref="OauthRevokeTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthRevokeTokensRequestBody"/> parameter.</param>
         /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthRevokeTokensResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="security"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<OauthRevokeTokensResponse> RevokeAsync(
+            OauthRevokeTokensSecurity security,
             string? idempotencyKey = null,
             OauthRevokeTokensRequestBody? requestBody = null,
             string? serverUrl = null,
@@ -117,20 +124,23 @@ namespace Mollie
         /// Exchange the authorization code you received from the <a href="oauth-authorize">Authorize endpoint</a> for an 'access token'<br/>
         /// API credential, with which you can communicate with the Mollie API on behalf of the consenting merchant.<br/>
         /// <br/>
-        /// This endpoint can only be accessed using **OAuth client credentials**.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// This endpoint can only be accessed using **OAuth client credentials**.
         /// </remarks>
+        /// <param name="security">A <see cref="OauthGenerateTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthGenerateTokensRequestBody"/> parameter.</param>
         /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthGenerateTokensResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="security"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<OauthGenerateTokensResponse> GenerateAsync(
+            OauthGenerateTokensSecurity security,
             string? idempotencyKey = null,
             OauthGenerateTokensRequestBody? requestBody = null,
             string? serverUrl = null,
@@ -138,6 +148,8 @@ namespace Mollie
             CancellationToken? cancellationToken = null
         )
         {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+
             var request = new OauthGenerateTokensRequest()
             {
                 IdempotencyKey = idempotencyKey,
@@ -167,12 +179,13 @@ namespace Mollie
                 httpRequest.Content = serializedBody;
             }
 
-            if (SDKConfiguration.SecuritySource != null)
+            if (security == null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OAuth" }).Apply(httpRequest);
+                throw new ArgumentNullException(nameof(security), "security cannot be null.");
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "oauth-generate-tokens", null, SDKConfiguration.SecuritySource, cancellationToken);
+            httpRequest = new SecurityMetadata(() => security).Apply(httpRequest);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "oauth-generate-tokens", null, () => security, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -199,6 +212,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -270,6 +284,32 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -291,19 +331,23 @@ namespace Mollie
         /// <br/>
         /// Revoking a refresh token revokes all access tokens that were created using the same authorization.<br/>
         /// <br/>
-        /// This endpoint can only be accessed using **OAuth client credentials**.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// This endpoint can only be accessed using **OAuth client credentials**.
         /// </remarks>
+        /// <param name="security">A <see cref="OauthRevokeTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthRevokeTokensRequestBody"/> parameter.</param>
         /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthRevokeTokensResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="security"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<OauthRevokeTokensResponse> RevokeAsync(
+            OauthRevokeTokensSecurity security,
             string? idempotencyKey = null,
             OauthRevokeTokensRequestBody? requestBody = null,
             string? serverUrl = null,
@@ -311,6 +355,8 @@ namespace Mollie
             CancellationToken? cancellationToken = null
         )
         {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+
             var request = new OauthRevokeTokensRequest()
             {
                 IdempotencyKey = idempotencyKey,
@@ -331,7 +377,7 @@ namespace Mollie
 
             if (!httpRequest.Headers.Contains("Accept"))
             {
-                httpRequest.Headers.Add("Accept", "*/*");
+                httpRequest.Headers.Add("Accept", "application/hal+json");
             }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
@@ -340,12 +386,13 @@ namespace Mollie
                 httpRequest.Content = serializedBody;
             }
 
-            if (SDKConfiguration.SecuritySource != null)
+            if (security == null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OAuth" }).Apply(httpRequest);
+                throw new ArgumentNullException(nameof(security), "security cannot be null.");
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "oauth-revoke-tokens", null, SDKConfiguration.SecuritySource, cancellationToken);
+            httpRequest = new SecurityMetadata(() => security).Apply(httpRequest);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "oauth-revoke-tokens", null, () => security, cancellationToken);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -372,6 +419,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -424,6 +472,32 @@ namespace Mollie
                         Request = httpRequest
                     }
                 };
+            }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {

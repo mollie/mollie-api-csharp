@@ -55,7 +55,7 @@ var res = await sdk.Organizations.GetAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## GetCurrent
@@ -94,9 +94,10 @@ var res = await sdk.Organizations.GetCurrentAsync(idempotencyKey: "123e4567-e89b
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## GetPartner
 
@@ -131,6 +132,7 @@ var res = await sdk.Organizations.GetPartnerAsync(idempotencyKey: "123e4567-e89b
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

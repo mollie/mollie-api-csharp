@@ -39,9 +39,10 @@ var res = await sdk.Onboarding.GetAsync(idempotencyKey: "123e4567-e89b-12d3-a456
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Submit
 
@@ -106,6 +107,7 @@ var res = await sdk.Onboarding.SubmitAsync(
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

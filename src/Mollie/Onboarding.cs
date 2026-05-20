@@ -31,7 +31,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve the onboarding status of the currently authenticated organization.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -40,6 +40,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetOnboardingStatusResponse> GetAsync(
             string? idempotencyKey = null,
@@ -57,7 +58,7 @@ namespace Mollie
         /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
         /// onboarding status is `needs-data`.  <br/>
         /// Information that the merchant has entered in their dashboard will not be overwritten.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
@@ -66,6 +67,8 @@ namespace Mollie
         /// <returns>An awaitable task that returns a <see cref="SubmitOnboardingDataResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<SubmitOnboardingDataResponse> SubmitAsync(
             string? idempotencyKey = null,
@@ -93,7 +96,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve the onboarding status of the currently authenticated organization.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -102,6 +105,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetOnboardingStatusResponse> GetAsync(
             string? idempotencyKey = null,
@@ -158,6 +162,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -229,6 +234,32 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -252,7 +283,7 @@ namespace Mollie
         /// Submit data that will be prefilled in the merchant's onboarding. The data you submit will only be processed when the<br/>
         /// onboarding status is `needs-data`.  <br/>
         /// Information that the merchant has entered in their dashboard will not be overwritten.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="SubmitOnboardingDataRequestBody"/> parameter.</param>
@@ -261,6 +292,8 @@ namespace Mollie
         /// <returns>An awaitable task that returns a <see cref="SubmitOnboardingDataResponse"/> response envelope when completed.</returns>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<SubmitOnboardingDataResponse> SubmitAsync(
             string? idempotencyKey = null,
@@ -284,7 +317,7 @@ namespace Mollie
 
             if (!httpRequest.Headers.Contains("Accept"))
             {
-                httpRequest.Headers.Add("Accept", "*/*");
+                httpRequest.Headers.Add("Accept", "application/hal+json");
             }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
@@ -325,6 +358,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -377,6 +411,32 @@ namespace Mollie
                         Request = httpRequest
                     }
                 };
+            }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {

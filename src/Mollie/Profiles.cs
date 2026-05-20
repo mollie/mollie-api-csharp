@@ -36,7 +36,7 @@ namespace Mollie
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you<br/>
         /// can use this endpoint to automate profile creation.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -47,7 +47,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
@@ -63,7 +63,7 @@ namespace Mollie
         /// Retrieve a list of all of your profiles.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -78,7 +78,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListProfilesResponse> ListAsync(
             string? fromP = null,
@@ -94,7 +94,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single profile by its ID.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="testmode">
@@ -110,7 +110,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetProfileResponse> GetAsync(
             string profileId,
@@ -128,7 +128,7 @@ namespace Mollie
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.<br/>
         /// Alternatively, you can use this endpoint to automate profile management.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
@@ -140,7 +140,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateProfileResponse> UpdateAsync(
             string profileId,
@@ -155,7 +155,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -166,7 +166,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<DeleteProfileResponse> DeleteAsync(
             string profileId,
@@ -184,7 +184,7 @@ namespace Mollie
         /// <br/>
         /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint<br/>
         /// documentation.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.ApiKey"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.ApiKey"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -193,6 +193,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetCurrentProfileResponse> GetCurrentAsync(
             string? idempotencyKey = null,
@@ -222,7 +223,7 @@ namespace Mollie
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created via the Mollie dashboard. Alternatively, you<br/>
         /// can use this endpoint to automate profile creation.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -233,7 +234,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">Profile limit has been reached for demo accounts. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
@@ -300,6 +301,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -371,7 +373,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{403, 422}.Contains(responseStatusCode))
+            else if(new List<int>{403, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -417,7 +419,7 @@ namespace Mollie
         /// Retrieve a list of all of your profiles.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="fromP">
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
@@ -432,7 +434,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListProfilesResponse> ListAsync(
             string? fromP = null,
@@ -498,6 +500,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -599,7 +602,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -643,7 +646,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single profile by its ID.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="testmode">
@@ -659,7 +662,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetProfileResponse> GetAsync(
             string profileId,
@@ -724,6 +727,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -795,7 +799,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 410}.Contains(responseStatusCode))
+            else if(new List<int>{404, 410, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -842,7 +846,7 @@ namespace Mollie
         /// <br/>
         /// Profiles are required for payment processing. Normally they are created and updated via the Mollie dashboard.<br/>
         /// Alternatively, you can use this endpoint to automate profile management.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
@@ -854,7 +858,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateProfileResponse> UpdateAsync(
             string profileId,
@@ -925,6 +929,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -996,7 +1001,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{403, 404, 410, 422}.Contains(responseStatusCode))
+            else if(new List<int>{403, 404, 410, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1040,7 +1045,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Delete a profile. A deleted profile and its related credentials can no longer be used for accepting payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -1051,7 +1056,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 410 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<DeleteProfileResponse> DeleteAsync(
             string profileId,
@@ -1113,6 +1118,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1166,7 +1172,7 @@ namespace Mollie
                     }
                 };
             }
-            else if(new List<int>{404, 410}.Contains(responseStatusCode))
+            else if(new List<int>{404, 410, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1214,7 +1220,7 @@ namespace Mollie
         /// <br/>
         /// For a complete reference of the profile object, refer to the <a href="get-profile">Get profile</a> endpoint<br/>
         /// documentation.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.ApiKey"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.ApiKey"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1223,6 +1229,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetCurrentProfileResponse> GetCurrentAsync(
             string? idempotencyKey = null,
@@ -1279,6 +1286,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1346,6 +1354,32 @@ namespace Mollie
                     };
                     response.ProfileResponse = obj;
                     return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

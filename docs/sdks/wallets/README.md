@@ -67,5 +67,5 @@ var res = await sdk.Wallets.RequestApplePaySessionAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 422, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

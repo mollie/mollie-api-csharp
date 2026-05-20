@@ -67,11 +67,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,
@@ -104,11 +106,45 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
-});
+var sdk = new Client(
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    },
+    testmode: false
+);
+
+ListBalancesRequest req = new ListBalancesRequest() {
+    Currency = "EUR",
+    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
+
+while(res != null)
+{
+    // handle items
+
+    res = await res.Next!();
+}
+```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,
@@ -530,9 +566,7 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
     retryConfig: new RetryConfig(
@@ -545,6 +579,10 @@ var res = await sdk.Oauth.GenerateAsync(
         ),
         retryConnectionErrors: false
     ),
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,
@@ -563,23 +601,22 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    retryConfig: new RetryConfig(
-        strategy: RetryConfig.RetryStrategy.BACKOFF,
-        backoff: new BackoffStrategy(
-            initialIntervalMs: 1L,
-            maxIntervalMs: 50L,
-            maxElapsedTimeMs: 100L,
-            exponent: 1.1
-        ),
-        retryConnectionErrors: false
+var sdk = new Client(retryConfig: new RetryConfig(
+    strategy: RetryConfig.RetryStrategy.BACKOFF,
+    backoff: new BackoffStrategy(
+        initialIntervalMs: 1L,
+        maxIntervalMs: 50L,
+        maxElapsedTimeMs: 100L,
+        exponent: 1.1
     ),
-    security: new Security() {
-        OAuth = "<YOUR_O_AUTH_HERE>",
-    }
-);
+    retryConnectionErrors: false
+));
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,
@@ -669,30 +706,25 @@ using Mollie.Models.Components;
 using Mollie.Models.Errors;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    testmode: false,
-    security: new Security() {
-        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
+var sdk = new Client();
 
 try
 {
-    ListBalancesRequest req = new ListBalancesRequest() {
-        Currency = "EUR",
-        From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-        Limit = 50,
-        IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-    };
+    var res = await sdk.Oauth.GenerateAsync(
+        security: new OauthGenerateTokensSecurity() {
+            Username = "",
+            Password = "",
+        },
+        idempotencyKey: "123e4567-e89b-12d3-a456-426",
+        requestBody: new OauthGenerateTokensRequestBody() {
+            GrantType = OauthGrantType.AuthorizationCode,
+            Code = "auth_...",
+            RefreshToken = "refresh_...",
+            RedirectUri = "https://example.com/redirect",
+        }
+    );
 
-    ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-    while(res != null)
-    {
-        // handle items
-
-        res = await res.Next!();
-    }
+    // handle response
 }
 catch (BaseException ex)  // all SDK exceptions inherit from BaseException
 {
@@ -734,7 +766,7 @@ catch (System.Net.Http.HttpRequestException ex)
 
 **Primary exceptions:**
 * [`BaseException`](./src/Mollie/Models/Errors/BaseException.cs): The base class for HTTP error responses.
-  * [`ErrorResponse`](./src/Mollie/Models/Errors/ErrorResponse.cs): An error response object. *
+  * [`ErrorResponse`](./src/Mollie/Models/Errors/ErrorResponse.cs): An error response object.
 
 <details><summary>Less common exceptions (2)</summary>
 
@@ -743,8 +775,6 @@ catch (System.Net.Http.HttpRequestException ex)
 * Inheriting from [`BaseException`](./src/Mollie/Models/Errors/BaseException.cs):
   * [`ResponseValidationError`](./src/Mollie/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
-
-\* Refer to the [relevant documentation](#available-resources-and-operations) to determine whether an exception applies to a specific operation.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -791,11 +821,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(security: new Security() {
-    OAuth = "<YOUR_O_AUTH_HERE>",
-});
+var sdk = new Client();
 
 var res = await sdk.Oauth.GenerateAsync(
+    security: new OauthGenerateTokensSecurity() {
+        Username = "",
+        Password = "",
+    },
     serverUrl: "https://api.mollie.com/oauth2",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {

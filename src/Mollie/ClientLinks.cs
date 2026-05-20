@@ -83,7 +83,7 @@ namespace Mollie
         /// &gt; 🚧<br/>
         /// &gt;<br/>
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
@@ -93,7 +93,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateClientLinkResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -173,7 +173,7 @@ namespace Mollie
         /// &gt; 🚧<br/>
         /// &gt;<br/>
         /// &gt; A client link must be used within 30 days of creation. After that period, it will expire and you will need to create a new client link.<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="clientLinkRequest">A <see cref="ClientLinkRequest"/> parameter.</param>
@@ -183,7 +183,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateClientLinkResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -248,6 +248,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -319,7 +320,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

@@ -96,7 +96,7 @@ var res = await sdk.SalesInvoices.CreateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## List
@@ -155,7 +155,7 @@ while(res != null)
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
@@ -204,7 +204,7 @@ var res = await sdk.SalesInvoices.GetAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
@@ -307,7 +307,7 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
@@ -357,5 +357,5 @@ var res = await sdk.SalesInvoices.DeleteAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 422                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

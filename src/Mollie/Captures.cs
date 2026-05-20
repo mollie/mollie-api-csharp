@@ -39,7 +39,8 @@ namespace Mollie
         /// <br/>
         /// By default, Mollie captures payments automatically. If however you<br/>
         /// configured your payment with `captureMode: manual`, you can capture the payment using this endpoint after<br/>
-        /// having collected the customer's authorization.
+        /// having collected the customer's authorization.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentId">Provide the ID of the related payment.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -51,7 +52,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateCaptureResponse> CreateAsync(
             string paymentId,
@@ -67,7 +68,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all captures created for a specific payment.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -78,7 +80,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListCapturesResponse> ListAsync(
             ListCapturesRequest request,
@@ -92,7 +94,8 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single payment capture by its ID and the ID of its parent<br/>
-        /// payment.
+        /// payment.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetCaptureRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -102,7 +105,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetCaptureResponse> GetAsync(
             GetCaptureRequest request,
@@ -135,7 +138,8 @@ namespace Mollie
         /// <br/>
         /// By default, Mollie captures payments automatically. If however you<br/>
         /// configured your payment with `captureMode: manual`, you can capture the payment using this endpoint after<br/>
-        /// having collected the customer's authorization.
+        /// having collected the customer's authorization.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="paymentId">Provide the ID of the related payment.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -147,7 +151,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateCaptureResponse> CreateAsync(
             string paymentId,
@@ -186,7 +190,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-capture", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -216,6 +220,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -287,7 +292,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -332,7 +337,8 @@ namespace Mollie
         /// <remarks>
         /// Retrieve a list of all captures created for a specific payment.<br/>
         /// <br/>
-        /// The results are paginated.
+        /// The results are paginated.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -343,7 +349,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListCapturesResponse> ListAsync(
             ListCapturesRequest request,
@@ -373,7 +379,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-captures", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -403,6 +409,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -512,7 +519,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -556,7 +563,8 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single payment capture by its ID and the ID of its parent<br/>
-        /// payment.
+        /// payment.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetCaptureRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -566,7 +574,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetCaptureResponse> GetAsync(
             GetCaptureRequest request,
@@ -591,7 +599,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-capture", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -621,6 +629,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -692,7 +701,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

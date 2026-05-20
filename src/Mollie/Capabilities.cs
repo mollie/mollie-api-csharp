@@ -46,7 +46,7 @@ namespace Mollie
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
         /// the payments capability is enabled, communicating that the organization can indeed receive payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -55,6 +55,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListCapabilitiesResponse> ListAsync(
             string? idempotencyKey = null,
@@ -96,7 +97,7 @@ namespace Mollie
         /// For payments, regardless them being at the profile level, the capability is listed at the organization level.<br/>
         /// This means that if at least one of the clients's profiles can receive payments,<br/>
         /// the payments capability is enabled, communicating that the organization can indeed receive payments.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -105,6 +106,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListCapabilitiesResponse> ListAsync(
             string? idempotencyKey = null,
@@ -161,6 +163,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -228,6 +231,32 @@ namespace Mollie
                     };
                     response.Object = obj;
                     return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());

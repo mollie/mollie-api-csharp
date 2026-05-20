@@ -84,7 +84,7 @@ paths:
       - url: https://api.mollie.com/oauth2
     post:
       security:
-        - oAuth: []
+        - basicAuth: []
       summary: Generate tokens
       x-speakeasy-name-override: generate
       tags:
@@ -194,6 +194,8 @@ paths:
                     expires_in: 3600
                     token_type: bearer
                     scope: payments.read organizations.read
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -221,7 +223,7 @@ paths:
       x-speakeasy-group: oauth
     delete:
       security:
-        - oAuth: []
+        - basicAuth: []
       summary: Revoke tokens
       x-speakeasy-name-override: revoke
       tags:
@@ -272,6 +274,8 @@ paths:
       responses:
         '204':
           description: An empty response.
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -467,6 +471,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -615,6 +621,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -710,6 +718,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -1540,6 +1550,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -2341,19 +2353,7 @@ paths:
         '404':
           $ref: '#/components/responses/404-invalid-id'
         '429':
-          description: Rate Limit has been reached.
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              example:
-                status: 492
-                title: Too Many Requests
-                detail: Too Many Requests in a brief period. Please wait X seconds before retrying
-                _links:
-                  documentation:
-                    href: '...'
-                    type: text/html
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -2525,6 +2525,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -2704,6 +2706,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -2875,6 +2879,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -3045,6 +3051,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -3192,6 +3200,8 @@ paths:
                         type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -3352,6 +3362,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -3513,6 +3525,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -3761,6 +3775,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -4791,6 +4807,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -4897,6 +4915,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5219,6 +5239,8 @@ paths:
                         type: application/hal+json
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5312,6 +5334,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5408,6 +5432,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5518,6 +5544,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5688,6 +5716,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5821,6 +5851,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -5981,6 +6013,8 @@ paths:
                         type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -6070,6 +6104,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6317,6 +6353,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6409,6 +6447,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6513,6 +6553,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6597,6 +6639,8 @@ paths:
                       documentation:
                         href: '...'
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6719,6 +6763,8 @@ paths:
       responses:
         '204':
           description: An empty response.
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -6906,6 +6952,8 @@ paths:
                       documentation:
                         href: https://docs.mollie.com/reference/list-capabilities
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7040,6 +7088,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -7252,6 +7302,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7356,6 +7408,8 @@ paths:
           $ref: '#/components/responses/404-invalid-id'
         '422':
           $ref: '#/components/responses/422-mandatory-owner'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7506,6 +7560,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7650,6 +7706,8 @@ paths:
                         type: application/hal+json
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -7763,6 +7821,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7876,6 +7936,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -7938,6 +8000,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -8005,6 +8069,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -8107,6 +8173,8 @@ paths:
                         type: application/hal+json
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -8205,6 +8273,8 @@ paths:
                       documentation:
                         href: https://docs.mollie.com/reference/create-balance-transfer
                         type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -8344,6 +8414,8 @@ paths:
                         type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -8418,6 +8490,8 @@ paths:
                     mode: live
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -9023,6 +9097,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -11248,6 +11324,8 @@ paths:
                         type: application/hal+json
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -11463,6 +11541,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -11701,6 +11781,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -11834,6 +11916,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -11934,6 +12018,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12079,6 +12165,8 @@ paths:
                       next: null
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -12126,6 +12214,8 @@ paths:
                   $ref: '#/components/examples/get-unmatched-credit-transfer'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12192,6 +12282,8 @@ paths:
                   documentation:
                     href: https://docs.mollie.com/errors
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12239,6 +12331,8 @@ paths:
                   $ref: '#/components/examples/return-unmatched-credit-transfer'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12300,6 +12394,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12414,6 +12510,8 @@ paths:
               examples:
                 get-session-200-1:
                   $ref: '#/components/examples/get-session'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -12945,6 +13043,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14142,6 +14242,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14272,6 +14374,8 @@ paths:
                     type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14423,6 +14527,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14497,6 +14603,8 @@ paths:
           description: An empty response.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14616,6 +14724,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14686,6 +14796,8 @@ paths:
           description: An empty response.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -14831,6 +14943,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -15018,6 +15132,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -15111,6 +15227,8 @@ paths:
         '404':
           $ref: '#/components/responses/404-invalid-id'
           description: No item with this ID exists, or the refund was canceled.
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -15187,6 +15305,8 @@ paths:
           description: An empty response if the refund was successfully canceled.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -15346,6 +15466,8 @@ paths:
                         type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -15591,6 +15713,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -15730,6 +15854,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -16092,6 +16218,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -16224,6 +16352,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -16424,6 +16554,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -16546,6 +16678,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -16701,6 +16835,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -17080,6 +17216,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -17357,6 +17495,8 @@ paths:
                       next: null
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -17428,6 +17568,8 @@ paths:
                   $ref: '#/components/examples/get-payment-link'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -17591,6 +17733,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -17673,6 +17817,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -17802,6 +17948,8 @@ paths:
                         type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -17984,6 +18132,8 @@ paths:
                       next: null
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -18067,6 +18217,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18152,6 +18304,8 @@ paths:
                         type: application/hal+json
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18318,6 +18472,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18394,6 +18550,8 @@ paths:
                         type: application/hal+json
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18446,6 +18604,8 @@ paths:
                   $ref: '#/components/examples/get-customer'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18593,6 +18753,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -18686,6 +18848,8 @@ paths:
                   $ref: '#/components/examples/get-customer'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18809,6 +18973,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -18893,6 +19059,8 @@ paths:
           description: An empty response.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -19511,6 +19679,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -21738,6 +21908,8 @@ paths:
                         type: application/hal+json
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -21850,6 +22022,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22036,6 +22210,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -22118,6 +22294,8 @@ paths:
                   $ref: '#/components/examples/get-mandate'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22192,6 +22370,8 @@ paths:
           description: An empty response.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22296,6 +22476,8 @@ paths:
                   $ref: '#/components/examples/get-subscription'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22491,6 +22673,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -22572,6 +22756,8 @@ paths:
                   $ref: '#/components/examples/get-subscription'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22790,6 +22976,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -22932,6 +23120,8 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -23101,6 +23291,8 @@ paths:
           $ref: '#/components/responses/400-invalid-list-request'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -25288,6 +25480,8 @@ paths:
                         type: application/hal+json
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -25435,6 +25629,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -25642,6 +25838,8 @@ paths:
                   previous: null
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -25774,6 +25972,8 @@ paths:
                     type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -25927,6 +26127,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26026,6 +26228,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26150,6 +26354,8 @@ paths:
                           createdAt: '2024-03-20T09:13:37+00:00'
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -26221,6 +26427,8 @@ paths:
                   $ref: '#/components/examples/get-business-account'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26354,6 +26562,8 @@ paths:
                           createdAt: '2025-02-26T10:30:00+00:00'
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -26456,6 +26666,8 @@ paths:
                     createdAt: '2025-02-26T10:30:00+00:00'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26594,6 +26806,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26790,6 +27004,8 @@ paths:
                     createdAt: '2025-01-01T12:00:00+00:00'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -26917,20 +27133,6 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
-        '429':
-          description: Rate Limit has been reached.
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/error-response'
-              example:
-                status: 492
-                title: Too Many Requests
-                detail: Too Many Requests in a brief period. Please wait X seconds before retrying
-                _links:
-                  documentation:
-                    href: '...'
-                    type: text/html
         '503':
           description: |-
             An unexpected error occurred on our end. This is not related to your request.
@@ -26947,6 +27149,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27099,6 +27303,8 @@ paths:
                   documentation:
                     href: https://docs.mollie.com/errors
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27240,6 +27446,8 @@ paths:
                   $ref: '#/components/examples/list-payouts-200'
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-speakeasy-pagination:
         type: url
         outputs:
@@ -27316,6 +27524,8 @@ paths:
                   $ref: '#/components/examples/payout-failed'
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27401,6 +27611,8 @@ paths:
                   documentation:
                     href: https://docs.mollie.com/errors
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27471,6 +27683,71 @@ components:
           authorizationUrl: https://my.mollie.com/oauth2/authorize
           tokenUrl: https://api.mollie.com/oauth2/tokens
           scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic
+      description: |-
+        Authenticates requests using HTTP Basic Authentication. Encode the credentials as
+        `"Basic " + toBase64(username + ":" + password)` and pass the result in the `Authorization` header.
+  responses:
+    429-rate-limit:
+      description: Rate Limit has been reached.
+      content:
+        application/hal+json:
+          schema:
+            $ref: '#/components/schemas/error-response'
+          example:
+            status: 429
+            title: Too Many Requests
+            detail: You have exceeded the rate limit. Please slow down your requests.
+            _links:
+              documentation:
+                href: https://docs.mollie.com/overview/handling-errors
+                type: text/html
+    400-invalid-list-request:
+      description: The request contains issues. For example, if the specified `from` value is not a valid ID.
+      content:
+        application/hal+json:
+          schema:
+            $ref: '#/components/schemas/error-response'
+          example:
+            status: 400
+            title: Bad Request
+            detail: Invalid cursor value
+            field: from
+            _links:
+              documentation:
+                href: '...'
+                type: text/html
+    404-invalid-id:
+      description: No entity with this ID exists.
+      content:
+        application/hal+json:
+          schema:
+            $ref: '#/components/schemas/error-response'
+          example:
+            status: 404
+            title: Not Found
+            detail: No entity exists with token 'uct_abcDEFghij123456789'
+            _links:
+              documentation:
+                href: '...'
+                type: text/html
+    422-mandatory-owner:
+      description: The request contains issues. For example, if the `owner` field is missing.
+      content:
+        application/hal+json:
+          schema:
+            $ref: '#/components/schemas/error-response'
+          example:
+            status: 422
+            title: Unprocessable Entity
+            detail: The 'owner' field is missing
+            field: owner
+            _links:
+              documentation:
+                href: '...'
+                type: text/html
   schemas:
     oauth-grant-type:
       type: string
@@ -43373,51 +43650,6 @@ components:
       schema:
         type: string
         example: 123e4567-e89b-12d3-a456-426
-  responses:
-    400-invalid-list-request:
-      description: The request contains issues. For example, if the specified `from` value is not a valid ID.
-      content:
-        application/hal+json:
-          schema:
-            $ref: '#/components/schemas/error-response'
-          example:
-            status: 400
-            title: Bad Request
-            detail: Invalid cursor value
-            field: from
-            _links:
-              documentation:
-                href: '...'
-                type: text/html
-    404-invalid-id:
-      description: No entity with this ID exists.
-      content:
-        application/hal+json:
-          schema:
-            $ref: '#/components/schemas/error-response'
-          example:
-            status: 404
-            title: Not Found
-            detail: No entity exists with token 'uct_abcDEFghij123456789'
-            _links:
-              documentation:
-                href: '...'
-                type: text/html
-    422-mandatory-owner:
-      description: The request contains issues. For example, if the `owner` field is missing.
-      content:
-        application/hal+json:
-          schema:
-            $ref: '#/components/schemas/error-response'
-          example:
-            status: 422
-            title: Unprocessable Entity
-            detail: The 'owner' field is missing
-            field: owner
-            _links:
-              documentation:
-                href: '...'
-                type: text/html
   examples:
     list-chargebacks:
       summary: List of chargeback objects
@@ -44112,5 +44344,6 @@ x-speakeasy-retries:
     maxElapsedTime: 7500
     exponent: 2
   statusCodes:
+    - '429'
     - 5xx
   retryConnectionErrors: true

@@ -150,7 +150,7 @@ var res = await sdk.Methods.ListAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## All
@@ -302,7 +302,7 @@ var res = await sdk.Methods.AllAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Get
@@ -364,5 +364,5 @@ var res = await sdk.Methods.GetAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 400, 404                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 400, 404, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

@@ -48,5 +48,5 @@ var res = await sdk.WebhookEvents.GetAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

@@ -91,7 +91,7 @@ var res = await sdk.Transfers.CreateAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 422                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 422, 429                           | application/hal+json               |
 | Mollie.Models.Errors.ErrorResponse | 503                                | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
@@ -163,5 +163,5 @@ var res = await sdk.Transfers.GetAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404                                | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

@@ -35,7 +35,7 @@ namespace Mollie
         /// Retrieve a list of all your settlements.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -45,7 +45,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSettlementsResponse> ListAsync(
             ListSettlementsRequest? request = null,
@@ -70,7 +70,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="settlementId">Provide the ID of the related settlement.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -81,7 +81,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetSettlementResponse> GetAsync(
             string settlementId,
@@ -102,7 +102,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -111,6 +111,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetOpenSettlementResponse> GetOpenAsync(
             string? idempotencyKey = null,
@@ -129,7 +130,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -138,6 +139,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetNextSettlementResponse> GetNextAsync(
             string? idempotencyKey = null,
@@ -155,7 +157,7 @@ namespace Mollie
         /// <br/>
         /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the<br/>
         /// <a href="list-captures">List captures endpoint</a> endpoint instead.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -166,7 +168,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSettlementPaymentsResponse> ListPaymentsAsync(
             ListSettlementPaymentsRequest request,
@@ -182,7 +184,7 @@ namespace Mollie
         /// Retrieve all captures included in the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -193,7 +195,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSettlementCapturesResponse> ListCapturesAsync(
             ListSettlementCapturesRequest request,
@@ -209,7 +211,7 @@ namespace Mollie
         /// Retrieve all refunds 'deducted' from the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -220,7 +222,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSettlementRefundsResponse> ListRefundsAsync(
             ListSettlementRefundsRequest request,
@@ -236,7 +238,7 @@ namespace Mollie
         /// Retrieve all chargebacks 'deducted' from the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -247,7 +249,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListSettlementChargebacksResponse> ListChargebacksAsync(
             ListSettlementChargebacksRequest request,
@@ -277,7 +279,7 @@ namespace Mollie
         /// Retrieve a list of all your settlements.<br/>
         /// <br/>
         /// The results are paginated.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -287,7 +289,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSettlementsResponse> ListAsync(
             ListSettlementsRequest? request = null,
@@ -344,6 +346,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -454,7 +457,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -509,7 +512,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="settlementId">Provide the ID of the related settlement.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -520,7 +523,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetSettlementResponse> GetAsync(
             string settlementId,
@@ -581,6 +584,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -652,7 +656,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404)
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -703,7 +707,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -712,6 +716,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetOpenSettlementResponse> GetOpenAsync(
             string? idempotencyKey = null,
@@ -768,6 +773,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -839,6 +845,32 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -863,7 +895,7 @@ namespace Mollie
         /// <br/>
         /// For more accurate bookkeeping, refer to the <a href="get-balance-report">balance report</a> endpoint or the<br/>
         /// <a href="list-balance-transactions">balance transactions</a> endpoint.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -872,6 +904,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">Rate Limit has been reached. Thrown when the API returns a 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetNextSettlementResponse> GetNextAsync(
             string? idempotencyKey = null,
@@ -928,6 +961,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -999,6 +1033,32 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
+            else if(responseStatusCode == 429)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -1022,7 +1082,7 @@ namespace Mollie
         /// <br/>
         /// For capture-based payment methods such as Klarna, the payments are not listed here. Refer to the<br/>
         /// <a href="list-captures">List captures endpoint</a> endpoint instead.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementPaymentsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1033,7 +1093,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSettlementPaymentsResponse> ListPaymentsAsync(
             ListSettlementPaymentsRequest request,
@@ -1093,6 +1153,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1202,7 +1263,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1248,7 +1309,7 @@ namespace Mollie
         /// Retrieve all captures included in the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-captures">List captures endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementCapturesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1259,7 +1320,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSettlementCapturesResponse> ListCapturesAsync(
             ListSettlementCapturesRequest request,
@@ -1318,6 +1379,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1426,7 +1488,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1472,7 +1534,7 @@ namespace Mollie
         /// Retrieve all refunds 'deducted' from the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-refunds">List refunds endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementRefundsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1483,7 +1545,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSettlementRefundsResponse> ListRefundsAsync(
             ListSettlementRefundsRequest request,
@@ -1542,6 +1604,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1650,7 +1713,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -1696,7 +1759,7 @@ namespace Mollie
         /// Retrieve all chargebacks 'deducted' from the given settlement.<br/>
         /// <br/>
         /// The response is in the same format as the response of the <a href="list-chargebacks">List chargebacks endpoint</a>.<br/>
-        /// <para>This operation requires either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListSettlementChargebacksRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -1707,7 +1770,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListSettlementChargebacksResponse> ListChargebacksAsync(
             ListSettlementChargebacksRequest request,
@@ -1767,6 +1830,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -1876,7 +1940,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

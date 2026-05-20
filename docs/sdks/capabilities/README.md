@@ -53,6 +53,7 @@ var res = await sdk.Capabilities.ListAsync(idempotencyKey: "123e4567-e89b-12d3-a
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| Mollie.Models.Errors.APIException | 4XX, 5XX                          | \*/\*                             |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 429                                | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
