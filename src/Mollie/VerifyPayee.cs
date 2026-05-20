@@ -52,7 +52,7 @@ namespace Mollie
         /// | `John No Match`                        | Name does not match the bank records           | `no-match`          | —              |<br/>
         /// | `John Unavailable`                     | Verification is not available                  | `not-available`     | —              |<br/>
         /// | Any other name                         | Default: name matches the bank records         | `match`             | —              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="verificationOfPayeeRequest">A <see cref="VerificationOfPayeeRequest"/> parameter.</param>
@@ -114,7 +114,7 @@ namespace Mollie
         /// | `John No Match`                        | Name does not match the bank records           | `no-match`          | —              |<br/>
         /// | `John Unavailable`                     | Verification is not available                  | `not-available`     | —              |<br/>
         /// | Any other name                         | Default: name matches the bank records         | `match`             | —              |<br/>
-        /// <para>This operation requires <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> to be set in the security parameter when initializing the SDK.</para>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="verificationOfPayeeRequest">A <see cref="VerificationOfPayeeRequest"/> parameter.</param>
@@ -192,6 +192,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 

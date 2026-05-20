@@ -331,7 +331,6 @@ namespace Mollie
         /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
         /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
         /// <exception cref="ArgumentOutOfRangeException">Invalid value provided for <paramref name="serverIndex"/>: must be between 0 (inclusive) and 1 (exclusive).</exception>
-        /// <exception cref="ArgumentException">None of <paramref name="security"/> and <paramref name="securitySource"/> were provided.</exception>
         public Client(
             Mollie.Models.Components.Security? security = null,
             Func<Mollie.Models.Components.Security>? securitySource = null,
@@ -369,10 +368,6 @@ namespace Mollie
             else if(security != null)
             {
                 _securitySource = () => security;
-            }
-            else
-            {
-                throw new ArgumentException("security and securitySource cannot both be null");
             }
 
             SDKConfiguration = new SDKConfig(client)
@@ -560,9 +555,6 @@ namespace Mollie
             /// </summary>
             public Client Build()
             {
-              if (_sdkConfig.SecuritySource == null) {
-                  throw new ArgumentException("securitySource cannot be null. One of `Security` or `securitySource` needs to be defined.");
-              }
               return new Client(_sdkConfig);
             }
 

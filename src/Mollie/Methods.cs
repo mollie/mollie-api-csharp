@@ -48,7 +48,8 @@ namespace Mollie
         /// `amount` parameters.<br/>
         /// <br/>
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
-        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListMethodsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -59,7 +60,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
-        /// `sequenceType` value is invalid. Thrown when the API returns a 400 response.
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListMethodsResponse> ListAsync(
@@ -78,7 +79,8 @@ namespace Mollie
         /// The list can optionally be filtered using a number of parameters described below.<br/>
         /// <br/>
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
-        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListAllMethodsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -89,7 +91,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified `locale`&lt;br/&gt;<br/>
-        /// value is invalid. Thrown when the API returns a 400 response.
+        /// value is invalid. Thrown when the API returns a 400 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListAllMethodsResponse> AllAsync(
@@ -113,7 +115,8 @@ namespace Mollie
         /// endpoint</a> to retrieve all payment methods that are available.<br/>
         /// <br/>
         /// Additionally, it is possible to check if wallet methods such as Apple Pay<br/>
-        /// are enabled by passing the wallet ID (`applepay`) as the method ID.
+        /// are enabled by passing the wallet ID (`applepay`) as the method ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetMethodRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -125,7 +128,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
-        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 404 response.
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400, 404 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetMethodResponse> GetAsync(
@@ -170,7 +173,8 @@ namespace Mollie
         /// `amount` parameters.<br/>
         /// <br/>
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
-        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListMethodsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -181,7 +185,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
-        /// `sequenceType` value is invalid. Thrown when the API returns a 400 response.
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListMethodsResponse> ListAsync(
@@ -211,7 +215,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-methods", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -241,6 +245,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -312,7 +317,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -361,7 +366,8 @@ namespace Mollie
         /// The list can optionally be filtered using a number of parameters described below.<br/>
         /// <br/>
         /// ℹ️ **Note:** This endpoint only returns **online** payment methods. If you wish to retrieve the information about<br/>
-        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.
+        /// a non-online payment method, you can use the <a href="get-method">Get payment method endpoint</a>.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListAllMethodsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -372,7 +378,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified `locale`&lt;br/&gt;<br/>
-        /// value is invalid. Thrown when the API returns a 400 response.
+        /// value is invalid. Thrown when the API returns a 400 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListAllMethodsResponse> AllAsync(
@@ -402,7 +408,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-all-methods", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -432,6 +438,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -503,7 +510,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400)
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -557,7 +564,8 @@ namespace Mollie
         /// endpoint</a> to retrieve all payment methods that are available.<br/>
         /// <br/>
         /// Additionally, it is possible to check if wallet methods such as Apple Pay<br/>
-        /// are enabled by passing the wallet ID (`applepay`) as the method ID.
+        /// are enabled by passing the wallet ID (`applepay`) as the method ID.<br/>
+        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetMethodRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -569,7 +577,7 @@ namespace Mollie
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">
         /// The request contains issues. For example, if the specified&lt;br/&gt;<br/>
-        /// `sequenceType` value is invalid. Thrown when the API returns a 400 or 404 response.
+        /// `sequenceType` value is invalid. Thrown when the API returns a 400, 404 or 429 response.
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetMethodResponse> GetAsync(
@@ -596,7 +604,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-method", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -626,6 +634,7 @@ namespace Mollie
 
             List<string> statusCodes = new List<string>
             {
+                "429",
                 "5xx",
             };
 
@@ -697,7 +706,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
