@@ -6,6 +6,10 @@
 
 * [List](#list) - List terminals
 * [Get](#get) - Get terminal
+* [TerminalsRequestPairingCode](#terminalsrequestpairingcode) - Request terminal pairing code
+* [TerminalsListPairingCodes](#terminalslistpairingcodes) - List terminal pairing codes
+* [TerminalsGetPairingCode](#terminalsgetpairingcode) - Get terminal pairing code
+* [TerminalsRevokePairingCode](#terminalsrevokepairingcode) - Revoke terminal pairing code
 
 ## List
 
@@ -136,4 +140,205 @@ var res = await sdk.Terminals.GetAsync(
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
 | Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
+
+## TerminalsRequestPairingCode
+
+> ℹ️ **Test mode**
+>
+> This endpoint currently does not support test mode yet.
+
+Request a pairing code to onboard a point-of-sale terminal.
+
+The response includes a human-readable `code` for manual entry on the terminal, and a QR Code as a
+base64 encoded SVG data URI for scanning if you specify the query parameter `include` with value `details.qrCode`.
+
+Pairing codes expire after 90 days (see `expiresAt`) and can be used multiple times.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="terminals-request-pairing-code" method="post" path="/v2/terminals/pairing-codes" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Terminals.TerminalsRequestPairingCodeAsync(
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new TerminalsRequestPairingCodeRequestBody() {
+        ProfileId = "pfl_jA9bC4DkFj3G",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Include`                                                                                                 | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | Include additional information in the response.                                                           |                                                                                                           |
+| `IdempotencyKey`                                                                                          | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                          | 123e4567-e89b-12d3-a456-426                                                                               |
+| `RequestBody`                                                                                             | [TerminalsRequestPairingCodeRequestBody](../../Models/Requests/TerminalsRequestPairingCodeRequestBody.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |                                                                                                           |
+
+### Response
+
+**[TerminalsRequestPairingCodeResponse](../../Models/Requests/TerminalsRequestPairingCodeResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 422, 429                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
+
+## TerminalsListPairingCodes
+
+> ℹ️ **Test mode**
+>
+> This endpoint currently does not support test mode yet.
+
+Returns all pairing codes: `active`, `expired`, and `revoked`. Results are paginated.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="terminals-list-pairing-codes" method="get" path="/v2/terminals/pairing-codes" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(
+    profileId: "<id>",
+    security: new Security() {
+        ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+    }
+);
+
+TerminalsListPairingCodesRequest req = new TerminalsListPairingCodesRequest() {
+    Limit = 50,
+    Sort = Sorting.Desc,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.Terminals.TerminalsListPairingCodesAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `request`                                                                                     | [TerminalsListPairingCodesRequest](../../Models/Requests/TerminalsListPairingCodesRequest.md) | :heavy_check_mark:                                                                            | The request object to use for the request.                                                    |
+
+### Response
+
+**[TerminalsListPairingCodesResponse](../../Models/Requests/TerminalsListPairingCodesResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 400, 429                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
+
+## TerminalsGetPairingCode
+
+> ℹ️ **Test mode**
+>
+> This endpoint currently does not support test mode yet.
+
+Get a pairing code to onboard a point-of-sale terminal.
+
+The response includes a human-readable `code` for manual entry on the terminal and, optionally, a QR Code as a
+base64 encoded SVG data URI when you use the `include` query parameter with value `details.qrCode`.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="terminals-get-pairing-code" method="get" path="/v2/terminals/pairing-codes/{pairingCodeId}" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Terminals.TerminalsGetPairingCodeAsync(
+    pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `PairingCodeId`                                                                  | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the terminal pairing code.                                     | termpc_R7gX5Ea9bC4DkFj3G                                                         |
+| `Include`                                                                        | *string*                                                                         | :heavy_minus_sign:                                                               | Include additional information in the response.                                  |                                                                                  |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+
+### Response
+
+**[TerminalsGetPairingCodeResponse](../../Models/Requests/TerminalsGetPairingCodeResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
+| Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
+
+## TerminalsRevokePairingCode
+
+> ℹ️ **Test mode**
+>
+> This endpoint currently does not support test mode yet.
+
+Revoke a pairing code, preventing the onboarding of new point-of-sale terminals.
+
+Terminals that have already paired with this code are not affected.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="terminals-revoke-pairing-code" method="delete" path="/v2/terminals/pairing-codes/{pairingCodeId}" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Terminals.TerminalsRevokePairingCodeAsync(
+    pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `PairingCodeId`                                                                  | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the terminal pairing code.                                     | termpc_R7gX5Ea9bC4DkFj3G                                                         |
+| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+
+### Response
+
+**[TerminalsRevokePairingCodeResponse](../../Models/Requests/TerminalsRevokePairingCodeResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |

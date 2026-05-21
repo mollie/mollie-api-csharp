@@ -428,6 +428,10 @@ var sdk = new Mollie.Client(
 
 * [List](docs/sdks/terminals/README.md#list) - List terminals
 * [Get](docs/sdks/terminals/README.md#get) - Get terminal
+* [TerminalsRequestPairingCode](docs/sdks/terminals/README.md#terminalsrequestpairingcode) - Request terminal pairing code
+* [TerminalsListPairingCodes](docs/sdks/terminals/README.md#terminalslistpairingcodes) - List terminal pairing codes
+* [TerminalsGetPairingCode](docs/sdks/terminals/README.md#terminalsgetpairingcode) - Get terminal pairing code
+* [TerminalsRevokePairingCode](docs/sdks/terminals/README.md#terminalsrevokepairingcode) - Revoke terminal pairing code
 
 ### [Transfers](docs/sdks/transfers/README.md)
 

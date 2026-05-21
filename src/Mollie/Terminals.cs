@@ -86,6 +86,132 @@ namespace Mollie
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
+
+        /// <summary>
+        /// Request terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Request a pairing code to onboard a point-of-sale terminal.<br/>
+        /// <br/>
+        /// The response includes a human-readable `code` for manual entry on the terminal, and a QR Code as a<br/>
+        /// base64 encoded SVG data URI for scanning if you specify the query parameter `include` with value `details.qrCode`.<br/>
+        /// <br/>
+        /// Pairing codes expire after 90 days (see `expiresAt`) and can be used multiple times.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="include">Include additional information in the response.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="TerminalsRequestPairingCodeRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsRequestPairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the `profileId` field is missing or invalid. Thrown when the API returns a 422 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
+            string? include = null,
+            string? idempotencyKey = null,
+            TerminalsRequestPairingCodeRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// List terminal pairing codes.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Returns all pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="request">A <see cref="TerminalsListPairingCodesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsListPairingCodesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<TerminalsListPairingCodesResponse> TerminalsListPairingCodesAsync(
+            TerminalsListPairingCodesRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Get terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Get a pairing code to onboard a point-of-sale terminal.<br/>
+        /// <br/>
+        /// The response includes a human-readable `code` for manual entry on the terminal and, optionally, a QR Code as a<br/>
+        /// base64 encoded SVG data URI when you use the `include` query parameter with value `details.qrCode`.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
+        /// <param name="include">Include additional information in the response.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsGetPairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<TerminalsGetPairingCodeResponse> TerminalsGetPairingCodeAsync(
+            string pairingCodeId,
+            string? include = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
+        /// Revoke terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Revoke a pairing code, preventing the onboarding of new point-of-sale terminals.<br/>
+        /// <br/>
+        /// Terminals that have already paired with this code are not affected.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsRevokePairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<TerminalsRevokePairingCodeResponse> TerminalsRevokePairingCodeAsync(
+            string pairingCodeId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
     }
 
     public class Terminals: ITerminals
@@ -489,6 +615,788 @@ namespace Mollie
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(new List<int>{404, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Request terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Request a pairing code to onboard a point-of-sale terminal.<br/>
+        /// <br/>
+        /// The response includes a human-readable `code` for manual entry on the terminal, and a QR Code as a<br/>
+        /// base64 encoded SVG data URI for scanning if you specify the query parameter `include` with value `details.qrCode`.<br/>
+        /// <br/>
+        /// Pairing codes expire after 90 days (see `expiresAt`) and can be used multiple times.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="include">Include additional information in the response.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="requestBody">A <see cref="TerminalsRequestPairingCodeRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsRequestPairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the `profileId` field is missing or invalid. Thrown when the API returns a 422 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
+            string? include = null,
+            string? idempotencyKey = null,
+            TerminalsRequestPairingCodeRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            var request = new TerminalsRequestPairingCodeRequest()
+            {
+                Include = include,
+                IdempotencyKey = idempotencyKey,
+                RequestBody = requestBody,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "OAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "terminals-request-pairing-code", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "429",
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 201)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    EntityPairingCode obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityPairingCode>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityPairingCode.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new TerminalsRequestPairingCodeResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.EntityPairingCode = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{422, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// List terminal pairing codes.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Returns all pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="request">A <see cref="TerminalsListPairingCodesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsListPairingCodesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<TerminalsListPairingCodesResponse> TerminalsListPairingCodesAsync(
+            TerminalsListPairingCodesRequest? request = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (request == null)
+            {
+                request = new TerminalsListPairingCodesRequest();
+            }
+            request.ProfileId ??= SDKConfiguration.ProfileId;
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "OAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "terminals-list-pairing-codes", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "429",
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    TerminalsListPairingCodesResponseBody obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<TerminalsListPairingCodesResponseBody>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into TerminalsListPairingCodesResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new TerminalsListPairingCodesResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Object = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Get terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Get a pairing code to onboard a point-of-sale terminal.<br/>
+        /// <br/>
+        /// The response includes a human-readable `code` for manual entry on the terminal and, optionally, a QR Code as a<br/>
+        /// base64 encoded SVG data URI when you use the `include` query parameter with value `details.qrCode`.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
+        /// <param name="include">Include additional information in the response.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsGetPairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<TerminalsGetPairingCodeResponse> TerminalsGetPairingCodeAsync(
+            string pairingCodeId,
+            string? include = null,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (pairingCodeId == null) throw new ArgumentNullException(nameof(pairingCodeId));
+
+            var request = new TerminalsGetPairingCodeRequest()
+            {
+                PairingCodeId = pairingCodeId,
+                Include = include,
+                IdempotencyKey = idempotencyKey,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes/{pairingCodeId}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "OAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "terminals-get-pairing-code", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "429",
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    EntityPairingCode obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityPairingCode>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityPairingCode.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new TerminalsGetPairingCodeResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.EntityPairingCode = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{404, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Revoke terminal pairing code.
+        /// </summary>
+        /// <remarks>
+        /// &gt; ℹ️ **Test mode**<br/>
+        /// &gt;<br/>
+        /// &gt; This endpoint currently does not support test mode yet.<br/>
+        /// <br/>
+        /// Revoke a pairing code, preventing the onboarding of new point-of-sale terminals.<br/>
+        /// <br/>
+        /// Terminals that have already paired with this code are not affected.<br/>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
+        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="TerminalsRevokePairingCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<TerminalsRevokePairingCodeResponse> TerminalsRevokePairingCodeAsync(
+            string pairingCodeId,
+            string? idempotencyKey = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            if (pairingCodeId == null) throw new ArgumentNullException(nameof(pairingCodeId));
+
+            var request = new TerminalsRevokePairingCodeRequest()
+            {
+                PairingCodeId = pairingCodeId,
+                IdempotencyKey = idempotencyKey,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes/{pairingCodeId}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "OAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "terminals-revoke-pairing-code", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "429",
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    EntityPairingCode obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityPairingCode>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into EntityPairingCode.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new TerminalsRevokePairingCodeResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.EntityPairingCode = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

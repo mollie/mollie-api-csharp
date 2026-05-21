@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 7876e3d969e5a317244675d51a9d3cdf
+  docChecksum: 26bd07700e5294b46eed6bf6086bfc37
   docVersion: 1.0.0
-  speakeasyVersion: 1.763.3
-  generationVersion: 2.884.7
-  releaseVersion: 1.2.0
-  configChecksum: 7614b98d871c8e0160857d4e23c1359f
+  speakeasyVersion: 1.763.4
+  generationVersion: 2.884.11
+  releaseVersion: 1.2.1
+  configChecksum: 5c00c4e2d140b51c43db54f40d41ac66
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 10e6811a-4adb-4b26-8f83-3f8f84f37c50
-  pristine_commit_hash: 69af077afbd525320a67e8363375905f200ce45c
-  pristine_tree_hash: ee239cb5e618f86b0411a5dbd285898b62100cd4
+  generation_id: b7b696d4-4efe-43e8-bf8e-cf240ee25907
+  pristine_commit_hash: 1875431acd12a9b608abda6538e8ede28caa6fc8
+  pristine_tree_hash: 657a242f756b2a19db1597cac3abfc1fa222028b
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -531,6 +531,26 @@ trackedFiles:
     id: 30eab591bb93
     last_write_checksum: sha1:72febe2a5e4994a48c857ab4cfd602c9b9e58f73
     pristine_git_object: d8d411098dc819bd248dc7428676198c07d817c8
+  docs/Models/Components/EntityPairingCode.md:
+    id: 90491bc449a5
+    last_write_checksum: sha1:267cb769fbcca3c09f8723fc9fd0abad6f67b5b5
+    pristine_git_object: fb0dc08bda633cfd802d66468d0088f1b66dfc93
+  docs/Models/Components/EntityPairingCodeDetails.md:
+    id: de7cde11e595
+    last_write_checksum: sha1:d992b2ef2c166dbf82532aa2358691b1b176ed20
+    pristine_git_object: 1ac5b386555792a215df7477f276752a4f4e037b
+  docs/Models/Components/EntityPairingCodeLinks.md:
+    id: 5b2ed06c55ae
+    last_write_checksum: sha1:a4a638cc4e2ade1afe9912f22f3f95ff1709831f
+    pristine_git_object: ad4ffc62ed692c07812825b04639fd276ed1f43e
+  docs/Models/Components/EntityPairingCodeQrCode.md:
+    id: ebedc2698458
+    last_write_checksum: sha1:dc95f06ab9a1b787e0a933bf690273688ff5fa6f
+    pristine_git_object: 51da23c74594b0b1e3f04cbf42d57d65c278f523
+  docs/Models/Components/EntityPairingCodeStatus.md:
+    id: 2db11f2c0c8e
+    last_write_checksum: sha1:c2ff3df96ece85066a1f748b076013dc112289d0
+    pristine_git_object: 54496f0a8788da3fc6e2871aaad95bd0a022de2c
   docs/Models/Components/EntityPaymentRoute.md:
     id: 56713f2d85ee
     last_write_checksum: sha1:7e7432859e343b35d3d7a1329916ec496470168b
@@ -3447,6 +3467,54 @@ trackedFiles:
     id: d867e155bda7
     last_write_checksum: sha1:17c537cdbb067181e28fe13f52a5142959878a56
     pristine_git_object: 7bd76aeb70ac80674881b46ac9c60d65ed5c35c0
+  docs/Models/Requests/TerminalPairingCode.md:
+    id: d92dd4c3df1b
+    last_write_checksum: sha1:2a553ec0098916cc3df9765a810a8919f5352307
+    pristine_git_object: 33feeaec0a841cae876fbb2193eb28ad17da65b1
+  docs/Models/Requests/TerminalsGetPairingCodeRequest.md:
+    id: e87e040d05e8
+    last_write_checksum: sha1:17225fdf233d6877c589c1e84568c96229ba46cf
+    pristine_git_object: 64c31bcd578b04df344d74f1cc3f7bb71bbb27ed
+  docs/Models/Requests/TerminalsGetPairingCodeResponse.md:
+    id: f409865a81a7
+    last_write_checksum: sha1:a23cd6bbbee39c9620cdaa56fbfe732c60645ed5
+    pristine_git_object: f8e0593b823fdb624eb66e291d77a4911df2cb74
+  docs/Models/Requests/TerminalsListPairingCodesEmbedded.md:
+    id: 2f024a75bc20
+    last_write_checksum: sha1:de36bac25603650ed5f35dfee0dca56191be7b66
+    pristine_git_object: 8c5fefeb8d50400b70e58d630353b2511eec6f3f
+  docs/Models/Requests/TerminalsListPairingCodesRequest.md:
+    id: 93300ff7af63
+    last_write_checksum: sha1:5d36eae856f30fe6907251275c827290e4091a5e
+    pristine_git_object: 76ecf5470a44a0be7dfb73687b2431228bc30802
+  docs/Models/Requests/TerminalsListPairingCodesResponse.md:
+    id: 9db37e7693b0
+    last_write_checksum: sha1:031c71fc9b1098f34f5620c74d4b677af9c1a092
+    pristine_git_object: b4329dee8c638b09d1a271a7ba177a02fac8fc8e
+  docs/Models/Requests/TerminalsListPairingCodesResponseBody.md:
+    id: 2230068ce0fe
+    last_write_checksum: sha1:77504a29800887a0555034d17c243feb320077b3
+    pristine_git_object: 65b74b9a38228e9c99180a28e09b0f42ef3974a4
+  docs/Models/Requests/TerminalsRequestPairingCodeRequest.md:
+    id: aab85374424e
+    last_write_checksum: sha1:b33aa34348ea8a4157cf45a4f2a14317510fe7c8
+    pristine_git_object: d8e1fc923a489356ab4d7914fbe8cf46309a14c6
+  docs/Models/Requests/TerminalsRequestPairingCodeRequestBody.md:
+    id: 9ad1d2d21f4c
+    last_write_checksum: sha1:9708471a6fd62a95938506bfd1620d55c21d4eeb
+    pristine_git_object: 99781eabb37c957b549d8b37ffc64d0ca9e69ab3
+  docs/Models/Requests/TerminalsRequestPairingCodeResponse.md:
+    id: 54166b386ccb
+    last_write_checksum: sha1:9220606917b7a7dfc609ba48d6c0bca0850407f4
+    pristine_git_object: c1abb0495895c239239029051c9818bcbcb819fb
+  docs/Models/Requests/TerminalsRevokePairingCodeRequest.md:
+    id: 15107a93dd6c
+    last_write_checksum: sha1:e4a248438168d4496fa5a93a6374d3358bd13830
+    pristine_git_object: 1d38cd1110fad0bdeaf0242c3b1a0ec29b10c257
+  docs/Models/Requests/TerminalsRevokePairingCodeResponse.md:
+    id: e74b4f85cd5c
+    last_write_checksum: sha1:7e280d16edbb89258cb8ac003c663170101c4778
+    pristine_git_object: 0039e140f2eb239e9fa020875389386898a03967
   docs/Models/Requests/TestWebhookRequest.md:
     id: 5b6033e05e9b
     last_write_checksum: sha1:cee39db00a1dd5bc2866218fa71786d18dc8457b
@@ -3661,8 +3729,8 @@ trackedFiles:
     pristine_git_object: 3fc29f4aef56934641c3efe25bc1174ca813bd7d
   docs/sdks/terminals/README.md:
     id: 4b9f7986e224
-    last_write_checksum: sha1:cd0aab3853c2f534b397ec328e6ecbea9ee75d27
-    pristine_git_object: 48556a154b6f8b2f599641ebf680d1d72e34c7d6
+    last_write_checksum: sha1:3eaa7ce29e8978f6237ab511a4d247c5a51937fa
+    pristine_git_object: 7fce2dc3aa2b46fbcffa9cbf8bb9117fba75993c
   docs/sdks/transfers/README.md:
     id: f56918861798
     last_write_checksum: sha1:88c925119efee9b6610ebe5cae72823040d851d4
@@ -4231,6 +4299,26 @@ trackedFiles:
     id: 8d3b645674fb
     last_write_checksum: sha1:073e4f80650397480af096a21fe5b58373b4fea6
     pristine_git_object: 8436956f4d4df3bc66405b34f576e25a5bf6d0c4
+  src/Mollie/Models/Components/EntityPairingCode.cs:
+    id: a6f11f46f7dc
+    last_write_checksum: sha1:35c8fda485d79cddefc4da8461f811cd45554682
+    pristine_git_object: 9db66255fc41a2ddee6950a6e75cdebcfd2c8bc7
+  src/Mollie/Models/Components/EntityPairingCodeDetails.cs:
+    id: b958268f1924
+    last_write_checksum: sha1:daf3ca0e474a9a850fee6b171ebf4d7c0e1ef3e5
+    pristine_git_object: 31a675e65f0ab9dccfe930cf1353475544f49771
+  src/Mollie/Models/Components/EntityPairingCodeLinks.cs:
+    id: 399cd25d6beb
+    last_write_checksum: sha1:a11f12ed9f4ef5eebc2d4c3102a49f5b1b16cb3b
+    pristine_git_object: 812fc72e73162b644c6c342b03d12a7f172288a6
+  src/Mollie/Models/Components/EntityPairingCodeQrCode.cs:
+    id: 076d40bdf8c1
+    last_write_checksum: sha1:e379da8760358db73681e53867d7e2c0f928185c
+    pristine_git_object: 42e3ad016d68de22af5e89ae0960ac3a4dd2d4d4
+  src/Mollie/Models/Components/EntityPairingCodeStatus.cs:
+    id: c7d0c974b1ef
+    last_write_checksum: sha1:838d7b9c28e44b64471c4293c86fe073e5f3eb65
+    pristine_git_object: f067670676fa2f916ff044e28fbdaa90a50619ca
   src/Mollie/Models/Components/EntityPaymentRoute.cs:
     id: 2487665bca8c
     last_write_checksum: sha1:04c715d2310ee60991d64f88a794510ee4807445
@@ -7159,6 +7247,54 @@ trackedFiles:
     id: "266349989769"
     last_write_checksum: sha1:57e61bc46e4f26134c2fb90c30d2637e54cf59aa
     pristine_git_object: 4794c1792d82349817f5221a4f9deef415ed51b9
+  src/Mollie/Models/Requests/TerminalPairingCode.cs:
+    id: ae1fd95dcb5d
+    last_write_checksum: sha1:9ad27e48e34d659b98acc03d779dac633deb59cd
+    pristine_git_object: 0f1136905d3a51d1f343a8f860a379dc034eb76d
+  src/Mollie/Models/Requests/TerminalsGetPairingCodeRequest.cs:
+    id: 85d914e2303d
+    last_write_checksum: sha1:c94296e4bf9d188f8c03d2879d6c2f3369858aec
+    pristine_git_object: fd7e8f8727722c4ac0e1ea8ed6cbcb8f9b812501
+  src/Mollie/Models/Requests/TerminalsGetPairingCodeResponse.cs:
+    id: 474776de9bd5
+    last_write_checksum: sha1:fc445c051bfa47adddbed62d8bba92ae6cb6772d
+    pristine_git_object: 8fbcc09710813287290b3964366aa4f33fa6b18c
+  src/Mollie/Models/Requests/TerminalsListPairingCodesEmbedded.cs:
+    id: 8f25dec6e031
+    last_write_checksum: sha1:0d04ffe4a4dd3a5b7ec8645f7a43cb9a7f772d4c
+    pristine_git_object: 5f10c82cfb28f85dbc12dd56bc85f5e298fdaf02
+  src/Mollie/Models/Requests/TerminalsListPairingCodesRequest.cs:
+    id: ad4c133ded63
+    last_write_checksum: sha1:e30dc5d906a9d94c8a31d91149687e24dc08a015
+    pristine_git_object: 842f91b38f2799aa280afa8c173b18959920040a
+  src/Mollie/Models/Requests/TerminalsListPairingCodesResponse.cs:
+    id: 6d432fedb3a1
+    last_write_checksum: sha1:92e225d8697b794ef3ff0bb2e6e3e2a53c578436
+    pristine_git_object: 8c005df1e377d4bc772b05f72651773e20e368c8
+  src/Mollie/Models/Requests/TerminalsListPairingCodesResponseBody.cs:
+    id: 8078e43e7d8c
+    last_write_checksum: sha1:4b50b8e679118e9043db04f0149bd247b3d064d2
+    pristine_git_object: 76c27cc80d61d9aa61ffbd44b49af96f9d3e58c8
+  src/Mollie/Models/Requests/TerminalsRequestPairingCodeRequest.cs:
+    id: 66e54475a7a2
+    last_write_checksum: sha1:442bdc41f5326e82c9b058e5010a1f81098e7158
+    pristine_git_object: 8d1d3f4055c295bd67e8e267f8f09f85282dadc3
+  src/Mollie/Models/Requests/TerminalsRequestPairingCodeRequestBody.cs:
+    id: 8c460a3a28a7
+    last_write_checksum: sha1:bbe003109beabc9fbb5e1ba1760e07136b305c2b
+    pristine_git_object: 01c5bac1174ec3419112b0687daa804ba3dd4656
+  src/Mollie/Models/Requests/TerminalsRequestPairingCodeResponse.cs:
+    id: dd5dc11de9a3
+    last_write_checksum: sha1:1a8f737027d5ce46c52645260551111a7ec8e68f
+    pristine_git_object: c90d2b217f2bb0fb00db53738157c9b35a91fa5a
+  src/Mollie/Models/Requests/TerminalsRevokePairingCodeRequest.cs:
+    id: e06c83188916
+    last_write_checksum: sha1:3a6005d82f57c6f8a0cb4ab5ed452a0fb76c2c61
+    pristine_git_object: 2165c1a0dcc06067d854c141c6dd51448f5c4930
+  src/Mollie/Models/Requests/TerminalsRevokePairingCodeResponse.cs:
+    id: 2b0d571c7f32
+    last_write_checksum: sha1:ceb3605d08938716440f7e1f69bccdc1e890e0ed
+    pristine_git_object: 32946be1bf63d38546c776a1e84ef5a92d6dcd02
   src/Mollie/Models/Requests/TestWebhookRequest.cs:
     id: dd8dd674a0c3
     last_write_checksum: sha1:730863a08b852155088d87323cb5a9893f68d88b
@@ -7269,8 +7405,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:fc409e1e392d9143abd3c155f833912232cf0624
-    pristine_git_object: ec9bc022388b5693edad86cf554838e8db308cdc
+    last_write_checksum: sha1:0a65879321900c85c7b9dc26cf1c66f3491f41a5
+    pristine_git_object: 2eda9f656c366c7d9ba11fec309270b6aca42b2e
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:790cfd84dd5f491e6ac09010e2063a8bf074e82b
@@ -7309,8 +7445,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:009a26423addaa14a37deba49b9708df272129b7
-    pristine_git_object: ea922d310984199f470edef2c496b3330840f9f9
+    last_write_checksum: sha1:d188a5e6fa81dcf10e0c4c38fdf68705d9ac5315
+    pristine_git_object: 34310f63cbc87f8e959c8244c40b475aec51b91e
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7329,8 +7465,8 @@ trackedFiles:
     pristine_git_object: 5c9045614b28df108c5b0c0949665254dd55df8d
   src/Mollie/Terminals.cs:
     id: 33267a551bb0
-    last_write_checksum: sha1:036da2f9daf433356d0647d26679f1e15c154d59
-    pristine_git_object: d8f78f2de35b7afadca4ef794ac7cf11395a2e9c
+    last_write_checksum: sha1:547b23ba34e13a848df954fdf69003686c8cb997
+    pristine_git_object: f40fa5ca07e664a0988b69f6c274a616bbf04b91
   src/Mollie/Transfers.cs:
     id: 4a50c876e8cd
     last_write_checksum: sha1:b2d34d8e02816fe311fa248cb2dbf96e73bb7281
@@ -7349,8 +7485,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:5f9042b4655c583c7473f0c1361bea054721e9d8
-    pristine_git_object: b0a952e767f1c2d2668ad9d7d1cc9b89d588cc21
+    last_write_checksum: sha1:b03e6a5525a50a3c8b08217de6cfc92fcb2e451e
+    pristine_git_object: a6d647a0312e1611e35a69fa85137d76bdb57452
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11418,8 +11554,62 @@ examples:
           application/hal+json: {"resource": "payout", "id": "payout_j8NvRAM2WNZtsykpLEX8J", "balanceId": "bal_gVMhHKqSSRYJyPsuoPNFH", "amount": {"currency": "EUR", "value": "10.00"}, "description": "My payout description", "status": "requested", "statusReason": {"code": "requested", "message": "The payout has been requested."}, "createdAt": "2024-03-20T09:13:37+00:00", "initiatedAt": "2024-03-20T09:13:40+00:00", "completedAt": "2024-03-20T14:00:00+00:00", "canceledAt": null, "mode": "live", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  terminals-request-pairing-code:
+    speakeasy-default-terminals-request-pairing-code:
+      parameters:
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      requestBody:
+        application/json: {"profileId": "pfl_jA9bC4DkFj3G"}
+      responses:
+        "201":
+          application/hal+json: {"resource": "terminal-pairing-code", "id": "termpc_R7gX5Ea9bC4DkFj3G", "mode": "live", "code": "20eb5ca1f78b48ae9e2b", "profileId": "pfl_jA9bC4DkFj3G", "status": "active", "details": {"qrCode": {"height": 256, "width": 256, "src": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4w..."}}, "expiresAt": "2025-12-10T10:15:00+00:00", "revokedAt": "2025-12-10T10:03:23+00:00", "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "422":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  terminals-list-pairing-codes:
+    speakeasy-default-terminals-list-pairing-codes:
+      parameters:
+        query:
+          limit: 50
+          sort: "desc"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"count": 5, "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "previous": {"href": "https://...", "type": "application/hal+json"}, "next": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "400":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  terminals-get-pairing-code:
+    speakeasy-default-terminals-get-pairing-code:
+      parameters:
+        path:
+          pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "terminal-pairing-code", "id": "termpc_R7gX5Ea9bC4DkFj3G", "mode": "live", "code": "20eb5ca1f78b48ae9e2b", "profileId": "pfl_jA9bC4DkFj3G", "status": "active", "details": {"qrCode": null}, "expiresAt": "2025-12-10T10:15:00+00:00", "revokedAt": "2025-12-10T10:03:23+00:00", "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+  terminals-revoke-pairing-code:
+    speakeasy-default-terminals-revoke-pairing-code:
+      parameters:
+        path:
+          pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G"
+        header:
+          idempotency-key: "123e4567-e89b-12d3-a456-426"
+      responses:
+        "200":
+          application/hal+json: {"resource": "terminal-pairing-code", "id": "termpc_R7gX5Ea9bC4DkFj3G", "mode": "live", "code": "20eb5ca1f78b48ae9e2b", "profileId": "pfl_jA9bC4DkFj3G", "status": "active", "details": {"qrCode": {"height": 256, "width": 256, "src": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4w..."}}, "expiresAt": "2025-12-10T10:15:00+00:00", "revokedAt": "2025-12-10T10:03:23+00:00", "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "profile": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+        "404":
+          application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Oauth.Generate()`: \n  *  `request.security` **Added** (Breaking ⚠️)\n  *  `error.status[429]` **Added**\n* `Client.Oauth.Revoke()`: \n  *  `request.security` **Added** (Breaking ⚠️)\n  *  `error.status[429]` **Added**\n* `Client.Balances.List()`:  `error.status[429]` **Added**\n* `Client.Balances.Get()`:  `error.status[429]` **Added**\n* `Client.Balances.GetPrimary()`:  `error.status[429]` **Added**\n* `Client.Balances.GetReport()`:  `error.status[429]` **Added**\n* `Client.Settlements.List()`:  `error.status[429]` **Added**\n* `Client.Settlements.Get()`:  `error.status[429]` **Added**\n* `Client.Settlements.GetOpen()`:  `error.status[429]` **Added**\n* `Client.Settlements.GetNext()`:  `error.status[429]` **Added**\n* `Client.Settlements.ListPayments()`:  `error.status[429]` **Added**\n* `Client.Settlements.ListCaptures()`:  `error.status[429]` **Added**\n* `Client.Settlements.ListRefunds()`:  `error.status[429]` **Added**\n* `Client.Settlements.ListChargebacks()`:  `error.status[429]` **Added**\n* `Client.Invoices.List()`:  `error.status[429]` **Added**\n* `Client.Invoices.Get()`:  `error.status[429]` **Added**\n* `Client.Permissions.List()`:  `error.status[429]` **Added**\n* `Client.Permissions.Get()`:  `error.status[429]` **Added**\n* `Client.Organizations.Get()`:  `error.status[429]` **Added**\n* `Client.Organizations.GetCurrent()`:  `error.status[429]` **Added**\n* `Client.Organizations.GetPartner()`:  `error.status[429]` **Added**\n* `Client.Profiles.Create()`:  `error.status[429]` **Added**\n* `Client.Profiles.List()`:  `error.status[429]` **Added**\n* `Client.Profiles.Get()`:  `error.status[429]` **Added**\n* `Client.Profiles.Update()`:  `error.status[429]` **Added**\n* `Client.Profiles.Delete()`:  `error.status[429]` **Added**\n* `Client.Profiles.GetCurrent()`:  `error.status[429]` **Added**\n* `Client.Onboarding.Get()`:  `error.status[429]` **Added**\n* `Client.Onboarding.Submit()`:  `error.status[429]` **Added**\n* `Client.Capabilities.List()`:  `error.status[429]` **Added**\n* `Client.Clients.List()`:  `error.status[429]` **Added**\n* `Client.Clients.Get()`:  `error.status[429]` **Added**\n* `Client.ClientLinks.Create()`:  `error.status[429]` **Added**\n* `Client.Webhooks.Create()`:  `error.status[429]` **Added**\n* `Client.Webhooks.List()`:  `error.status[429]` **Added**\n* `Client.Webhooks.Update()`:  `error.status[429]` **Added**\n* `Client.Webhooks.Get()`:  `error.status[429]` **Added**\n* `Client.Webhooks.Delete()`:  `error.status[429]` **Added**\n* `Client.Webhooks.Test()`:  `error.status[429]` **Added**\n* `Client.WebhookEvents.Get()`:  `error.status[429]` **Added**\n* `Client.BalanceTransfers.Create()`:  `error.status[429]` **Added**\n* `Client.BalanceTransfers.List()`:  `error.status[429]` **Added**\n* `Client.BalanceTransfers.Get()`:  `error.status[429]` **Added**\n* `Client.Payments.Create()`:  `error.status[429]` **Added**\n* `Client.Payments.List()`:  `error.status[429]` **Added**\n* `Client.Payments.Get()`:  `error.status[429]` **Added**\n* `Client.Payments.Update()`:  `error.status[429]` **Added**\n* `Client.Payments.Cancel()`:  `error.status[429]` **Added**\n* `Client.Payments.ReleaseAuthorization()`:  `error.status[429]` **Added**\n* `Client.UnmatchedCreditTransfers.List()`:  `error.status[429]` **Added**\n* `Client.UnmatchedCreditTransfers.Get()`:  `error.status[429]` **Added**\n* `Client.UnmatchedCreditTransfers.Match()`:  `error.status[429]` **Added**\n* `Client.UnmatchedCreditTransfers.Return()`:  `error.status[429]` **Added**\n* `Client.Sessions.Create()`:  `error.status[429]` **Added**\n* `Client.Sessions.Get()`:  `error.status[429]` **Added**\n* `Client.Methods.List()`:  `error.status[429]` **Added**\n* `Client.Methods.All()`:  `error.status[429]` **Added**\n* `Client.Methods.Get()`:  `error.status[429]` **Added**\n* `Client.Refunds.Create()`:  `error.status[429]` **Added**\n* `Client.Refunds.List()`:  `error.status[429]` **Added**\n* `Client.Refunds.Get()`:  `error.status[429]` **Added**\n* `Client.Refunds.Cancel()`:  `error.status[429]` **Added**\n* `Client.Refunds.All()`:  `error.status[429]` **Added**\n* `Client.Chargebacks.List()`:  `error.status[429]` **Added**\n* `Client.Chargebacks.Get()`:  `error.status[429]` **Added**\n* `Client.Chargebacks.All()`:  `error.status[429]` **Added**\n* `Client.Captures.Create()`:  `error.status[429]` **Added**\n* `Client.Captures.List()`:  `error.status[429]` **Added**\n* `Client.Captures.Get()`:  `error.status[429]` **Added**\n* `Client.Wallets.RequestApplePaySession()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.Create()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.List()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.Get()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.Update()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.Delete()`:  `error.status[429]` **Added**\n* `Client.PaymentLinks.ListPayments()`:  `error.status[429]` **Added**\n* `Client.Terminals.List()`:  `error.status[429]` **Added**\n* `Client.Terminals.Get()`:  `error.status[429]` **Added**\n* `Client.DelayedRouting.Create()`:  `error.status[429]` **Added**\n* `Client.DelayedRouting.List()`:  `error.status[429]` **Added**\n* `Client.DelayedRouting.Get()`:  `error.status[429]` **Added**\n* `Client.Customers.Create()`:  `error.status[429]` **Added**\n* `Client.Customers.List()`:  `error.status[429]` **Added**\n* `Client.Customers.Get()`:  `error.status[429]` **Added**\n* `Client.Customers.Update()`:  `error.status[429]` **Added**\n* `Client.Customers.Delete()`:  `error.status[429]` **Added**\n* `Client.Customers.CreatePayment()`:  `error.status[429]` **Added**\n* `Client.Customers.ListPayments()`:  `error.status[429]` **Added**\n* `Client.Mandates.Create()`:  `error.status[429]` **Added**\n* `Client.Mandates.List()`:  `error.status[429]` **Added**\n* `Client.Mandates.Get()`:  `error.status[429]` **Added**\n* `Client.Mandates.Revoke()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.Create()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.List()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.Get()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.Update()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.Cancel()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.All()`:  `error.status[429]` **Added**\n* `Client.Subscriptions.ListPayments()`:  `error.status[429]` **Added**\n* `Client.SalesInvoices.Create()`:  `error.status[429]` **Added**\n* `Client.SalesInvoices.List()`:  `error.status[429]` **Added**\n* `Client.SalesInvoices.Get()`:  `error.status[429]` **Added**\n* `Client.SalesInvoices.Update()`:  `error.status[429]` **Added**\n* `Client.SalesInvoices.Delete()`:  `error.status[429]` **Added**\n* `Client.Accounts.ListAccounts()`:  `error.status[429]` **Added**\n* `Client.Accounts.GetAccount()`:  `error.status[429]` **Added**\n* `Client.Accounts.List()`:  `error.status[429]` **Added**\n* `Client.Accounts.Get()`:  `error.status[429]` **Added**\n* `Client.Transfers.Create()`:  `error.status[429]` **Added**\n* `Client.Transfers.Get()`:  `error.status[429]` **Added**\n* `Client.Payouts.Create()`:  `error.status[429]` **Added**\n* `Client.Payouts.List()`:  `error.status[429]` **Added**\n* `Client.Payouts.Get()`:  `error.status[429]` **Added**\n* `Client.Payouts.Cancel()`:  `error.status[429]` **Added**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Client.Terminals.TerminalsRequestPairingCode()`: **Added**
+  * `Client.Terminals.TerminalsListPairingCodes()`: **Added**
+  * `Client.Terminals.TerminalsGetPairingCode()`: **Added**
+  * `Client.Terminals.TerminalsRevokePairingCode()`: **Added**
 generatedFiles:
   - .gitattributes
   - Mollie.sln
