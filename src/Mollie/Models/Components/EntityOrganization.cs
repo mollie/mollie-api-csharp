@@ -51,13 +51,13 @@ namespace Mollie.Models.Components
         public EntityOrganizationLocale? Locale { get; set; }
 
         [JsonProperty("address")]
-        public Address Address { get; set; } = default!;
+        public Address? Address { get; set; }
 
         /// <summary>
         /// The registration number of the organization at their local chamber of commerce.
         /// </summary>
         [JsonProperty("registrationNumber")]
-        public string RegistrationNumber { get; set; } = default!;
+        public string? RegistrationNumber { get; set; }
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are<br/>

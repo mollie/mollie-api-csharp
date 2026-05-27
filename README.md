@@ -792,47 +792,13 @@ using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
 
-var sdk = new Client(
-    serverUrl: "https://api.mollie.com",
-    testmode: false,
-    security: new Security() {
-        AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
-    }
-);
-
-ListBalancesRequest req = new ListBalancesRequest() {
-    Currency = "EUR",
-    From = "bal_gVMhHKqSSRYJyPsuoPNFH",
-    Limit = 50,
-    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
-};
-
-ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
-
-while(res != null)
-{
-    // handle items
-
-    res = await res.Next!();
-}
-```
-
-### Override Server URL Per-Operation
-
-The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
-```csharp
-using Mollie;
-using Mollie.Models.Components;
-using Mollie.Models.Requests;
-
-var sdk = new Client();
+var sdk = new Client(serverUrl: "https://api.mollie.com");
 
 var res = await sdk.Oauth.GenerateAsync(
     security: new OauthGenerateTokensSecurity() {
         Username = "",
         Password = "",
     },
-    serverUrl: "https://api.mollie.com/oauth2",
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
     requestBody: new OauthGenerateTokensRequestBody() {
         GrantType = OauthGrantType.AuthorizationCode,

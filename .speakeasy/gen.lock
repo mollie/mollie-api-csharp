@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 26bd07700e5294b46eed6bf6086bfc37
+  docChecksum: f2b5ac226b4f8a9ae003f574f544989e
   docVersion: 1.0.0
-  speakeasyVersion: 1.763.4
-  generationVersion: 2.884.11
-  releaseVersion: 1.2.1
-  configChecksum: 5c00c4e2d140b51c43db54f40d41ac66
+  speakeasyVersion: 1.767.0
+  generationVersion: 2.888.0
+  releaseVersion: 1.3.0
+  configChecksum: 40648745550af5cf3051029e8659aa1a
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: b7b696d4-4efe-43e8-bf8e-cf240ee25907
-  pristine_commit_hash: 1875431acd12a9b608abda6538e8ede28caa6fc8
-  pristine_tree_hash: 657a242f756b2a19db1597cac3abfc1fa222028b
+  generation_id: ae410031-5691-454e-8226-6fb9a93cd548
+  pristine_commit_hash: d42da9abfea5bee45f934a58238c9bbbeb994fe2
+  pristine_tree_hash: e79ffec38bcd8c49ca59a205e867202e767ab679
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.15.21
+    core: 3.15.22
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.11
@@ -29,7 +29,6 @@ features:
     intellisenseMarkdownSupport: 0.1.0
     methodArguments: 0.2.1
     methodSecurity: 2.82.5
-    methodServerURLs: 2.82.2
     nameOverrides: 2.81.4
     nullables: 0.1.1
     openEnums: 0.1.1
@@ -49,8 +48,8 @@ trackedFiles:
     pristine_git_object: 54077ab88a87820b5a6b267dbe904c1f0e9c8a89
   NUGET.md:
     id: f4c8a442a6e5
-    last_write_checksum: sha1:9ce32448144aae3021bdd5e1f50fc9b8b35353fb
-    pristine_git_object: c2c161c175c84b97b2984be374794b24ca143aeb
+    last_write_checksum: sha1:2e154e15216b4812df12d251bb5ad8b0805f093d
+    pristine_git_object: 73507ce2ae32dc18846ce0f0a46e606e2686e48a
   USAGE.md:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:441533aeaed99c66a8aee05c11c3b8e95c54071b
@@ -521,8 +520,8 @@ trackedFiles:
     pristine_git_object: 24a5b7e70102e41c4aca41bd9d9c3f1e95cd0735
   docs/Models/Components/EntityOrganization.md:
     id: dd578b326fe8
-    last_write_checksum: sha1:e914906c3fae3aa3227e49a8412e52bf6e847d8c
-    pristine_git_object: c9cd397e9d05b90fef0744e4d875d75cd1857cca
+    last_write_checksum: sha1:395bda69a296b8c203217757439265830db032e8
+    pristine_git_object: 4f6156161e9758ccb601f0f8f6a98fb10e521253
   docs/Models/Components/EntityOrganizationLinks.md:
     id: 096400b20f3b
     last_write_checksum: sha1:46fcb275120abc6c8243ee28336d9d9be1fde17d
@@ -3677,8 +3676,8 @@ trackedFiles:
     pristine_git_object: 7453aea699005f3f99bbf88d234ecdf717182b5d
   docs/sdks/oauth/README.md:
     id: 80ad2c1a7b62
-    last_write_checksum: sha1:9e9e2d6991ad5cd8f35b19ba1f99cacb59ed8be6
-    pristine_git_object: 0c066b492fe37bd5f0d72e266ca8a14370bddeea
+    last_write_checksum: sha1:864f0cdc349e1681f889bbb86b89bf51c1dabf2e
+    pristine_git_object: ac3d8b1d7679207c4eb90258a0809d566c9adb4b
   docs/sdks/onboarding/README.md:
     id: 395b30e93e5f
     last_write_checksum: sha1:579573dae75a87e06e1827367b5aae463156348b
@@ -4289,8 +4288,8 @@ trackedFiles:
     pristine_git_object: 0b689d66cf5a506dd6158f66b0548c3b7e627214
   src/Mollie/Models/Components/EntityOrganization.cs:
     id: f29b82621b84
-    last_write_checksum: sha1:c96166865f7736aad048ef7e30c135ec0cf00979
-    pristine_git_object: 61af91914be3cd83b70cc31a18057881912ba5f4
+    last_write_checksum: sha1:8af767fc7092dcf63a380e22bc41fe9f0931ce90
+    pristine_git_object: 1150a7d750c9274229ec3164323926ec1dde61fe
   src/Mollie/Models/Components/EntityOrganizationLinks.cs:
     id: 64f7bf032a4d
     last_write_checksum: sha1:3b6facf83be51d23099879c715aabfb307e7688f
@@ -7405,12 +7404,12 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:0a65879321900c85c7b9dc26cf1c66f3491f41a5
-    pristine_git_object: 2eda9f656c366c7d9ba11fec309270b6aca42b2e
+    last_write_checksum: sha1:2c964b4522581aa4682665eddb9a917139123aa6
+    pristine_git_object: 33e03a1550909e5596ed2318102c75b9353a38b1
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
-    last_write_checksum: sha1:790cfd84dd5f491e6ac09010e2063a8bf074e82b
-    pristine_git_object: a3c97d995dec2d58a13c34dd563fa7f0e41bff07
+    last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
+    pristine_git_object: c01cfe0f469263c9273484a937269cb28b87d8d2
   src/Mollie/Onboarding.cs:
     id: 261beb0d2ecb
     last_write_checksum: sha1:00f10a4c5a248879e32d281fff44e7f4769c7e86
@@ -7445,8 +7444,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:d188a5e6fa81dcf10e0c4c38fdf68705d9ac5315
-    pristine_git_object: 34310f63cbc87f8e959c8244c40b475aec51b91e
+    last_write_checksum: sha1:0be78f5197b912c9e52ee965a0600ddf1a369940
+    pristine_git_object: 518de2d5649a61849ff33a73abe2cc7785c3f45c
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7485,8 +7484,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:b03e6a5525a50a3c8b08217de6cfc92fcb2e451e
-    pristine_git_object: a6d647a0312e1611e35a69fa85137d76bdb57452
+    last_write_checksum: sha1:6201d69512ec9c501ec41d6489d2ddf4f10940fd
+    pristine_git_object: b00e4318f58e81d2c8a5908ded3bdf26e79bd5d2
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11606,10 +11605,10 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Csharp SDK Changes:
-  * `Client.Terminals.TerminalsRequestPairingCode()`: **Added**
-  * `Client.Terminals.TerminalsListPairingCodes()`: **Added**
-  * `Client.Terminals.TerminalsGetPairingCode()`: **Added**
-  * `Client.Terminals.TerminalsRevokePairingCode()`: **Added**
+  * `Client.Organizations.Get()`:  `response` **Changed**
+  * `Client.Organizations.GetCurrent()`:  `response` **Changed**
+  * `Client.Clients.List()`:  `response.Embedded.Clients[].Embedded.Organization` **Changed**
+  * `Client.Clients.Get()`:  `response.Embedded.Organization` **Changed**
 generatedFiles:
   - .gitattributes
   - Mollie.sln

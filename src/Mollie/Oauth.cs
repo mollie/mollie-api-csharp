@@ -38,7 +38,6 @@ namespace Mollie
         /// <param name="security">A <see cref="OauthGenerateTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthGenerateTokensRequestBody"/> parameter.</param>
-        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthGenerateTokensResponse"/> response envelope when completed.</returns>
@@ -52,7 +51,6 @@ namespace Mollie
             OauthGenerateTokensSecurity security,
             string? idempotencyKey = null,
             OauthGenerateTokensRequestBody? requestBody = null,
-            string? serverUrl = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -70,7 +68,6 @@ namespace Mollie
         /// <param name="security">A <see cref="OauthRevokeTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthRevokeTokensRequestBody"/> parameter.</param>
-        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthRevokeTokensResponse"/> response envelope when completed.</returns>
@@ -84,7 +81,6 @@ namespace Mollie
             OauthRevokeTokensSecurity security,
             string? idempotencyKey = null,
             OauthRevokeTokensRequestBody? requestBody = null,
-            string? serverUrl = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -92,20 +88,6 @@ namespace Mollie
 
     public class Oauth: IOauth
     {
-        /// <summary>
-        /// List of server URLs available for the oauth-generate-tokens operation.
-        /// </summary>
-        public static readonly string[] OauthGenerateTokensServerList = {
-            "https://api.mollie.com/oauth2",
-        };
-
-        /// <summary>
-        /// List of server URLs available for the oauth-revoke-tokens operation.
-        /// </summary>
-        public static readonly string[] OauthRevokeTokensServerList = {
-            "https://api.mollie.com/oauth2",
-        };
-
         /// <summary>
         /// SDK Configuration.
         /// <see cref="SDKConfig"/>
@@ -129,7 +111,6 @@ namespace Mollie
         /// <param name="security">A <see cref="OauthGenerateTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthGenerateTokensRequestBody"/> parameter.</param>
-        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthGenerateTokensResponse"/> response envelope when completed.</returns>
@@ -143,7 +124,6 @@ namespace Mollie
             OauthGenerateTokensSecurity security,
             string? idempotencyKey = null,
             OauthGenerateTokensRequestBody? requestBody = null,
-            string? serverUrl = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -156,12 +136,7 @@ namespace Mollie
                 RequestBody = requestBody,
             };
 
-            string baseUrl = Utilities.TemplateUrl(OauthGenerateTokensServerList[0], new Dictionary<string, string>(){
-            });
-            if (serverUrl != null)
-            {
-                baseUrl = serverUrl;
-            }
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/oauth2/tokens";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -336,7 +311,6 @@ namespace Mollie
         /// <param name="security">A <see cref="OauthRevokeTokensSecurity"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
         /// <param name="requestBody">A <see cref="OauthRevokeTokensRequestBody"/> parameter.</param>
-        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="OauthRevokeTokensResponse"/> response envelope when completed.</returns>
@@ -350,7 +324,6 @@ namespace Mollie
             OauthRevokeTokensSecurity security,
             string? idempotencyKey = null,
             OauthRevokeTokensRequestBody? requestBody = null,
-            string? serverUrl = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -363,12 +336,7 @@ namespace Mollie
                 RequestBody = requestBody,
             };
 
-            string baseUrl = Utilities.TemplateUrl(OauthRevokeTokensServerList[0], new Dictionary<string, string>(){
-            });
-            if (serverUrl != null)
-            {
-                baseUrl = serverUrl;
-            }
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/oauth2/tokens";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
