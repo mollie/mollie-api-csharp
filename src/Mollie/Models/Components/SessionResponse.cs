@@ -121,6 +121,20 @@ namespace Mollie.Models.Components
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
+        /// The date and time the session expired, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.<br/>
+        /// Omitted if the session has not expired.
+        /// </summary>
+        [JsonProperty("expiredAt")]
+        public string? ExpiredAt { get; set; } = null;
+
+        /// <summary>
+        /// The date and time the session was completed, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.<br/>
+        /// Omitted if the session has not been completed.
+        /// </summary>
+        [JsonProperty("completedAt")]
+        public string? CompletedAt { get; set; } = null;
+
+        /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
         /// </summary>
         [JsonProperty("_links")]
