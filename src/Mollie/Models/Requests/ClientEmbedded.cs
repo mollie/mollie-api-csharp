@@ -13,6 +13,7 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class ClientEmbedded
     {
@@ -23,6 +24,6 @@ namespace Mollie.Models.Requests
         public EntityOnboardingStatus? Onboarding { get; set; }
 
         [JsonProperty("capabilities")]
-        public EntityCapability? Capabilities { get; set; }
+        public List<EntityCapability>? Capabilities { get; set; }
     }
 }
