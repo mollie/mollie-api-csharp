@@ -16,6 +16,7 @@ var custom = PaymentDetailsWalletResponse.Of("custom_value");
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Applepay` | applepay   |
+| Name        | Value       |
+| ----------- | ----------- |
+| `Applepay`  | applepay    |
+| `Googlepay` | googlepay   |

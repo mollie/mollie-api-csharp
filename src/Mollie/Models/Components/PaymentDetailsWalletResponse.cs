@@ -24,11 +24,13 @@ namespace Mollie.Models.Components
     public class PaymentDetailsWalletResponse : IEquatable<PaymentDetailsWalletResponse>
     {
         public static readonly PaymentDetailsWalletResponse Applepay = new PaymentDetailsWalletResponse("applepay");
+        public static readonly PaymentDetailsWalletResponse Googlepay = new PaymentDetailsWalletResponse("googlepay");
 
         private static readonly Dictionary <string, PaymentDetailsWalletResponse> _knownValues =
             new Dictionary <string, PaymentDetailsWalletResponse> ()
             {
-                ["applepay"] = Applepay
+                ["applepay"] = Applepay,
+                ["googlepay"] = Googlepay
             };
 
         private static readonly ConcurrentDictionary<string, PaymentDetailsWalletResponse> _values =
