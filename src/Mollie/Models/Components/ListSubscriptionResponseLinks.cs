@@ -28,8 +28,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
-        [JsonProperty("customer", NullValueHandling = NullValueHandling.Include)]
-        public UrlNullable? Customer { get; set; }
+        [JsonProperty("customer")]
+        public Url Customer { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
@@ -40,8 +40,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
         /// </summary>
-        [JsonProperty("profile", NullValueHandling = NullValueHandling.Include)]
-        public UrlNullable? Profile { get; set; }
+        [JsonProperty("profile")]
+        public Url Profile { get; set; } = default!;
 
         /// <summary>
         /// In v2 endpoints, URLs are commonly represented as objects with an `href` and `type` field.
