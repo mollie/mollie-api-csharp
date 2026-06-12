@@ -360,5 +360,11 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("multibancoEntity")]
         public string? MultibancoEntity { get; set; } = null;
+
+        /// <summary>
+        /// Bizum payment reference of the transaction.
+        /// </summary>
+        [JsonProperty("bizumReference")]
+        public string? BizumReference { get; set; } = null;
     }
 }
