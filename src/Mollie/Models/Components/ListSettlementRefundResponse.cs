@@ -72,7 +72,7 @@ namespace Mollie.Models.Components
         /// The full payment object can be retrieved via the payment URL in the `_links` object.
         /// </summary>
         [JsonProperty("paymentId")]
-        public string? PaymentId { get; set; }
+        public string PaymentId { get; set; } = default!;
 
         /// <summary>
         /// The identifier referring to the settlement this refund was settled with. This field is omitted if the refund is not settled (yet).

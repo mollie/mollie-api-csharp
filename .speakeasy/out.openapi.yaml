@@ -31707,6 +31707,7 @@ components:
         - createdAt
         - description
         - metadata
+        - paymentId
         - _links
       properties:
         resource:
@@ -38588,6 +38589,7 @@ components:
         - createdAt
         - description
         - metadata
+        - paymentId
         - _links
       properties:
         resource:
@@ -42018,6 +42020,7 @@ components:
         - createdAt
         - description
         - metadata
+        - paymentId
         - _links
       properties:
         resource:

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: e4bf8382913b4b8c327275365e4b4a3f
+  docChecksum: 8b9f71e08b604f475eca5934353067e5
   docVersion: 1.0.0
-  speakeasyVersion: 1.777.2
-  generationVersion: 2.903.5
-  releaseVersion: 1.3.5
-  configChecksum: 4a4387bac4d200515292e2c09adf77ab
+  speakeasyVersion: 1.778.0
+  generationVersion: 2.904.2
+  releaseVersion: 1.3.6
+  configChecksum: e595ba22408d952bad5b3b6cad15a190
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 35319d9c-bbaf-40bc-b00a-8114bd436667
-  pristine_commit_hash: 6b46191a209f2e42834c3c16f5d975c391efac6e
-  pristine_tree_hash: e6a8521bf63c8bdf52cafe18077fb6193e6817c7
+  generation_id: 69ca4def-bb3d-4771-b7c0-27ed02cc07c3
+  pristine_commit_hash: b62be3f4a3db24c1c8d60ae81c56b27aaa84e7a4
+  pristine_tree_hash: b69ba986e9cd975c5a25f4e65beea2917c2cbab6
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -588,8 +588,8 @@ trackedFiles:
     pristine_git_object: 45b7ea63f8b85d649066efe63499fc3df03a6f76
   docs/Models/Components/EntityRefundResponse.md:
     id: f5732d4cdbdb
-    last_write_checksum: sha1:307c56f4c9ceae8e90e62722fc7004e2904f51e9
-    pristine_git_object: 724e6bc95bdd36e6d5e8f545dd591c04eff337d5
+    last_write_checksum: sha1:4fc7cf84399bd81c1687fac7712df0d1a2062a39
+    pristine_git_object: cc496910614c3e9162b71218949b79ce8eaa8693
   docs/Models/Components/EntityRefundResponseExternalReference.md:
     id: 884c4423b913
     last_write_checksum: sha1:b7cc6304cd9c35ccf354f0f85ddf3e4e00d62a34
@@ -928,8 +928,8 @@ trackedFiles:
     pristine_git_object: e28a4aedb90f9739aca1d0a036a21e9e04786089
   docs/Models/Components/ListEntityRefund.md:
     id: 3e90e8dbdc7a
-    last_write_checksum: sha1:a413fbee829ef1d5b0223279b975a037c67dfe2d
-    pristine_git_object: 4d6c4717f130d9d53a7e7be1732974f985cda519
+    last_write_checksum: sha1:367f893c481a60ddaa98c29fa85184852688e8c0
+    pristine_git_object: e8c651ccfaa2e1f5dd83abdab502734697d35485
   docs/Models/Components/ListEntityRefundExternalReference.md:
     id: 8b99986180bc
     last_write_checksum: sha1:4858fa13ff6dd6aea5fe6f344fa5eebb4419595b
@@ -1248,8 +1248,8 @@ trackedFiles:
     pristine_git_object: 03e9e314eadbbb8ecaef27c96937e367f4651751
   docs/Models/Components/ListSettlementRefundResponse.md:
     id: d21e22624fee
-    last_write_checksum: sha1:6c0c358a4435b6ebbaf20d6c6b3d1ab839b23498
-    pristine_git_object: f2ad7833fddd0457903520155c874defa238e694
+    last_write_checksum: sha1:c21b830a5ac54897b7dad750aabc35e9de875866
+    pristine_git_object: 1d3932900926f5957c1ce51e769eb17c3deaac3c
   docs/Models/Components/ListSettlementRefundResponseExternalReference.md:
     id: 53fd4b94010d
     last_write_checksum: sha1:19feddebf4ccce570080d09c943c206a983b9ddb
@@ -4356,8 +4356,8 @@ trackedFiles:
     pristine_git_object: fcd3fb235d14920f275c23dcabd49a9cad79e5c0
   src/Mollie/Models/Components/EntityRefundResponse.cs:
     id: 3d904a2d4f4e
-    last_write_checksum: sha1:5a01a7b9f877e463de27359346e4289aab7909b9
-    pristine_git_object: dde156db5438e9769c8f74b04ec8898959d45a24
+    last_write_checksum: sha1:8bfbe15ca9b3f550b6f2a532a34daebf53816ffb
+    pristine_git_object: daff9fa74c7630a929b132862e49ad7a4f59f928
   src/Mollie/Models/Components/EntityRefundResponseExternalReference.cs:
     id: d344ca2ebd53
     last_write_checksum: sha1:b0018a18c601c25763305e8fee3baab599c1bcd4
@@ -4696,8 +4696,8 @@ trackedFiles:
     pristine_git_object: 593aa39c014eff8c30b2cb0ef52210b85a9c6996
   src/Mollie/Models/Components/ListEntityRefund.cs:
     id: 7fdfae586784
-    last_write_checksum: sha1:d70c78c033225c5e87dac754d6476e0d1d128cec
-    pristine_git_object: 16039fc6d57a4244e7f7891026516e848543ed66
+    last_write_checksum: sha1:1e56476813af1b0f224c1bea6db4b71667cb470c
+    pristine_git_object: 44dcd5967e117e93332ebe8b8a9d254bfc454f9a
   src/Mollie/Models/Components/ListEntityRefundExternalReference.cs:
     id: 3ae1332ed1b3
     last_write_checksum: sha1:92fe7af15dfa6fff71a069af239399b8b2f5c8f0
@@ -5016,8 +5016,8 @@ trackedFiles:
     pristine_git_object: 9f5c517b25a267a18085fe32a068f714038207cd
   src/Mollie/Models/Components/ListSettlementRefundResponse.cs:
     id: 4bff189b9b70
-    last_write_checksum: sha1:4f5bcac3835f6fe92d192e905b16167af3748707
-    pristine_git_object: bc0d2d6898f8910c147a505a4b4a23871f26aa3a
+    last_write_checksum: sha1:cf27a5fc483122c01decbb28d061a84affc8b86c
+    pristine_git_object: c3021899ca036b9084a685d9e220346e72ac0459
   src/Mollie/Models/Components/ListSettlementRefundResponseExternalReference.cs:
     id: 5f2b770ef796
     last_write_checksum: sha1:4baca8b81b1524f95740ac74c3715fde29b11d9d
@@ -7404,8 +7404,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:3ec0dceecfd71269c3d90e3016ea6878023963fe
-    pristine_git_object: 42b2b745d03dde227f10232a24b9a2e89ae08ec6
+    last_write_checksum: sha1:8c367782ec7b97b3961bbf449b93eaa3326195c7
+    pristine_git_object: 3b959edbce9e68e3ae3a8128160bda107a688834
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7444,8 +7444,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:92cba7a34f739deb4d725b9e7783d914d5b7a460
-    pristine_git_object: b4121b94eebec10c5484133ad2c3a4ab949e0edf
+    last_write_checksum: sha1:518f420e1017794ec5c8878bc653385e82626127
+    pristine_git_object: c32ad21325f526ce5a8c81375990ebd9b7c5c82b
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7484,8 +7484,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:f02ed297f80bf6072a203985da860334dae363b4
-    pristine_git_object: 4960b1923dc53887ceb24b2e6ad7a06165c0d075
+    last_write_checksum: sha1:e3052d8479b33d2b66e57cfe2925fa759938600c
+    pristine_git_object: 7dcc4f183fc75f5822aafb71cdf569e08af247b1
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11605,16 +11605,11 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Csharp SDK Changes:
-  * `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Details.BizumReference` **Added**
-  * `Client.Payments.Create()`:  `response.details.BizumReference` **Added**
-  * `Client.Payments.List()`:  `response.Embedded.Payments[].Details.BizumReference` **Added**
-  * `Client.Payments.Get()`:  `response.details.BizumReference` **Added**
-  * `Client.Payments.Update()`:  `response.details.BizumReference` **Added**
-  * `Client.Payments.Cancel()`:  `response.details.BizumReference` **Added**
-  * `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Details.BizumReference` **Added**
-  * `Client.Customers.CreatePayment()`:  `response.details.BizumReference` **Added**
-  * `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Details.BizumReference` **Added**
-  * `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Details.BizumReference` **Added**
+  * `Client.Settlements.ListRefunds()`:  `response.Embedded.Refunds[].PaymentId` **Changed**
+  * `Client.Refunds.Create()`:  `response.paymentId` **Changed**
+  * `Client.Refunds.List()`:  `response.Embedded.Refunds[].PaymentId` **Changed**
+  * `Client.Refunds.Get()`:  `response.paymentId` **Changed**
+  * `Client.Refunds.All()`:  `response.Embedded.Refunds[].PaymentId` **Changed**
 generatedFiles:
   - .gitattributes
   - Mollie.sln
