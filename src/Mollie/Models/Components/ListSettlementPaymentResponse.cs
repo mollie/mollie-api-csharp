@@ -87,15 +87,6 @@ namespace Mollie.Models.Components
         public ListSettlementPaymentResponseAmountChargedBack? AmountChargedBack { get; set; }
 
         /// <summary>
-        /// The amount settled to your account for this payment, converted to the currency your account is settled in.<br/>
-        /// <br/>
-        /// Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by<br/>
-        /// Mollie, this field is omitted from the response.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public ListSettlementPaymentResponseSettlementAmount? SettlementAmount { get; set; }
-
-        /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
         /// <br/>
         /// It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the<br/>
@@ -343,7 +334,7 @@ namespace Mollie.Models.Components
         /// <a href="extra-payment-parameters">method-specific parameters</a> guide.
         /// </summary>
         [JsonProperty("details")]
-        public ListSettlementPaymentResponseDetails? Details { get; set; } = null;
+        public PaymentDetails? Details { get; set; } = null;
 
         /// <summary>
         /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -398,5 +389,14 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("_links")]
         public ListSettlementPaymentResponseLinks Links { get; set; } = default!;
+
+        /// <summary>
+        /// The amount settled to your account for this payment, converted to the currency your account is settled in.<br/>
+        /// <br/>
+        /// Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by<br/>
+        /// Mollie, this field is omitted from the response.
+        /// </summary>
+        [JsonProperty("settlementAmount")]
+        public ListSettlementPaymentResponseSettlementAmount? SettlementAmount { get; set; }
     }
 }

@@ -130,6 +130,15 @@ namespace Mollie.Utils.Retries
 
         private static long RetryAfterMs(HttpResponseMessage response)
         {
+            if (response.Headers.TryGetValues("retry-after-ms", out var retryAfterMillisecondsValues))
+            {
+                var retryAfterMilliseconds = System.Linq.Enumerable.FirstOrDefault(retryAfterMillisecondsValues);
+                if (!string.IsNullOrEmpty(retryAfterMilliseconds) && long.TryParse(retryAfterMilliseconds, out var milliseconds) && milliseconds >= 0)
+                {
+                    return Math.Min(milliseconds, int.MaxValue);
+                }
+            }
+
             if (response.Headers.TryGetValues("Retry-After", out var values))
             {
                 var retryAfter = System.Linq.Enumerable.FirstOrDefault(values);

@@ -50,17 +50,6 @@ namespace Mollie.Models.Components
         [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
         public AmountNullable? Amount { get; set; }
 
-        /// <summary>
-        /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
-        /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
-        /// <br/>
-        /// The amount that will be settled to your account for this capture, converted to the currency your account is<br/>
-        /// settled in. Only available once the capture is finalized and the final settlement amount has been determined.
-        /// </summary>
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
-        [JsonProperty("settlementAmount")]
-        public ListCaptureResponseSettlementAmount? SettlementAmount { get; set; } = null;
-
         [JsonProperty("status")]
         public ListCaptureResponseStatus Status { get; set; } = default!;
 

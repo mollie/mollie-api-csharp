@@ -51,12 +51,6 @@ namespace Mollie.Models.Components
         public AmountNullable? Amount { get; set; }
 
         /// <summary>
-        /// The amount settled to your account for this capture, converted to the currency your account is settled in.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public ListSettlementCaptureResponseSettlementAmount? SettlementAmount { get; set; } = null;
-
-        /// <summary>
         /// The capture's status. Settlement captures always have a status of `succeeded`.
         /// </summary>
         [JsonProperty("status")]
@@ -101,5 +95,11 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("_links")]
         public ListSettlementCaptureResponseLinks Links { get; set; } = default!;
+
+        /// <summary>
+        /// The amount settled to your account for this capture, converted to the currency your account is settled in.
+        /// </summary>
+        [JsonProperty("settlementAmount")]
+        public ListSettlementCaptureResponseSettlementAmount? SettlementAmount { get; set; } = null;
     }
 }

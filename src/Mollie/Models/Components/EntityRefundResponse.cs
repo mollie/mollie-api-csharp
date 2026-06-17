@@ -52,20 +52,6 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
-        /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
-        /// <br/>
-        /// The amount deducted from your account balance for this refund, converted to the currency your account is settled<br/>
-        /// in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has<br/>
-        /// been determined.<br/>
-        /// <br/>
-        /// For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
-        /// </summary>
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
-        [JsonProperty("settlementAmount")]
-        public EntityRefundResponseSettlementAmount? SettlementAmount { get; set; } = null;
-
-        /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </summary>

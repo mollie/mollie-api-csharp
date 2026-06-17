@@ -52,15 +52,6 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// The amount deducted from your account balance for this refund, converted to the currency your account is<br/>
-        /// settled in. Always a **negative** amount.<br/>
-        /// <br/>
-        /// For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public ListSettlementRefundResponseSettlementAmount? SettlementAmount { get; set; } = null;
-
-        /// <summary>
         /// Provide any data you like, for example a string or a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </summary>
@@ -113,5 +104,14 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("_links")]
         public ListSettlementRefundResponseLinks Links { get; set; } = default!;
+
+        /// <summary>
+        /// The amount deducted from your account balance for this refund, converted to the currency your account is<br/>
+        /// settled in. Always a **negative** amount.<br/>
+        /// <br/>
+        /// For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
+        /// </summary>
+        [JsonProperty("settlementAmount")]
+        public ListSettlementRefundResponseSettlementAmount? SettlementAmount { get; set; } = null;
     }
 }
