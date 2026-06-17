@@ -237,7 +237,17 @@ namespace Mollie.Models.Components
         public string? ProfileId { get; set; }
 
         /// <summary>
-        /// The date by which the payment should be completed in `YYYY-MM-DD` format.
+        /// The date the bank transfer payment should expire, in `YYYY-MM-DD` format. The minimum date is tomorrow, and the<br/>
+        /// maximum date is 100 days after tomorrow.<br/>
+        /// <br/>
+        /// After you created the payment, you can still update the `dueDate` via <a href="update-payment">Update payment</a>.<br/>
+        /// <br/>
+        /// &lt;Callout icon="📘" theme="info"&gt;<br/>
+        ///   If `dueDate` falls out of business days, it will be set to the **next business day** and the payment will<br/>
+        ///   expire at 00:00 (on the following business day).<br/>
+        ///   Example: `dueDate` is `2025-12-06` (Saturday) -&gt; `dueDate` will be set for `2025-12-08`, `expiresAt`<br/>
+        ///   `2025-12-09 00:00`<br/>
+        /// &lt;/Callout&gt;
         /// </summary>
         [JsonProperty("dueDate")]
         public string? DueDate { get; set; }
@@ -260,34 +270,41 @@ namespace Mollie.Models.Components
         public bool? Testmode { get; set; } = null;
 
         /// <summary>
-        /// The Apple Pay Payment token object (encoded as JSON) that is part of the result of authorizing a payment request.<br/>
-        /// The token contains the payment information needed to authorize the payment.<br/>
+        /// The <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment">Apple Pay Payment</a> token<br/>
+        /// object (encoded as JSON) that is part of the result of authorizing a payment request. The token contains the<br/>
+        /// payment information needed to authorize the payment.<br/>
         /// <br/>
-        /// The object should be passed encoded in a JSON string.
+        /// The object should be passed encoded in a JSON string. For example:<br/>
+        /// `{"paymentData": {"version": "EC_v1", "data": "vK3BbrCbI/...."}}`
         /// </summary>
         [JsonProperty("applePayPaymentToken")]
         public string? ApplePayPaymentToken { get; set; }
 
         /// <summary>
-        /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the organization<br/>
-        /// that is completing the payment. It is recommended to include these parameters up front for a seamless flow.<br/>
-        /// Otherwise, Billie will ask the customer to complete the missing fields during checkout.
+        /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the<br/>
+        /// organization that is completing the payment. It is recommended to include these parameters up front for a<br/>
+        /// seamless flow. Otherwise, Billie will ask the customer to complete the missing fields during checkout.<br/>
+        /// <br/>
+        /// * `billingAddress.organizationName`: The organization's name.<br/>
+        /// * `registrationNumber` _string_: The organization's registration number.<br/>
+        /// * `vatNumber` _string_: The organization's VAT number.<br/>
+        /// * `entityType` _string_: The organization's entity type.
         /// </summary>
         [JsonProperty("company")]
         public Company? Company { get; set; }
 
         /// <summary>
-        /// When creating credit card payments using Mollie Components, you need to provide the card token you received from<br/>
-        /// the card component in this field. The token represents the customer's card information needed to complete the<br/>
-        /// payment. Note: field only valid for oneoff and first payments. For recurring payments, the customerId alone is<br/>
-        /// enough.
+        /// When creating credit card payments using Mollie Components, you need to provide the card token you received<br/>
+        /// from the card component in this field. The token represents the customer's card information needed to complete<br/>
+        /// the payment. **Note:** field only valid for `oneoff` and `first` payments. For recurring payments, the<br/>
+        /// `customerId` alone is enough.
         /// </summary>
         [JsonProperty("cardToken")]
         public string? CardToken { get; set; }
 
         /// <summary>
-        /// The Google Pay payment token object (encoded as JSON) returned by the Google Pay SDK after the customer authorizes<br/>
-        /// the payment. The token contains the payment information needed to complete the payment.<br/>
+        /// The Google Pay payment token object (encoded as JSON) returned by the Google Pay SDK after the customer<br/>
+        /// authorizes the payment. The token contains the payment information needed to complete the payment.<br/>
         /// <br/>
         /// The object should be passed encoded in a JSON string.
         /// </summary>
@@ -295,8 +312,8 @@ namespace Mollie.Models.Components
         public string? GooglePayPaymentToken { get; set; }
 
         /// <summary>
-        /// The card token you received from the card component of Mollie Components. The token represents the customer's card<br/>
-        /// information needed to complete the payment.
+        /// The card token you received from the card component of Mollie Components. The token represents the customer's<br/>
+        /// card information needed to complete the payment.
         /// </summary>
         [JsonProperty("voucherNumber")]
         public string? VoucherNumber { get; set; }
@@ -308,8 +325,8 @@ namespace Mollie.Models.Components
         public string? VoucherPin { get; set; }
 
         /// <summary>
-        /// The customer's date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it during<br/>
-        /// the payment process.
+        /// The customer's date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it<br/>
+        /// during the payment process.
         /// </summary>
         [JsonProperty("consumerDateOfBirth")]
         public LocalDate? ConsumerDateOfBirth { get; set; }
@@ -317,7 +334,11 @@ namespace Mollie.Models.Components
         /// <summary>
         /// For some industries, additional purchase information can be sent to Klarna to increase the authorization rate.<br/>
         /// You can submit your extra data in this field if you have agreed upon this with Klarna. This field should be an<br/>
-        /// object containing any of the allowed keys and sub-objects described at the Klarna Developer Documentation.
+        /// object containing any of the allowed keys and sub-objects described at the<br/>
+        /// &lt;Anchor label="Klarna Developer Documentation" target="_blank" href="https://docs.klarna.com/acquirer/mollie/api/extra-merchant-data/"&gt;Klarna Developer Documentation&lt;/Anchor&gt;.<br/>
+        /// <br/>
+        /// Reach out to your account manager at Mollie to enable this feature with Klarna, and to agree on which fields<br/>
+        /// you can send.
         /// </summary>
         [JsonProperty("extraMerchantData")]
         public Dictionary<string, object>? ExtraMerchantData { get; set; }
@@ -330,21 +351,26 @@ namespace Mollie.Models.Components
         public string? SessionId { get; set; }
 
         /// <summary>
-        /// Indicate if you are about to deliver digital goods, such as for example a software license. Setting this parameter<br/>
-        /// can have consequences for your PayPal Seller Protection. Refer to PayPal's documentation for more information.
+        /// Indicate if you are about to deliver digital goods, such as for example a software license. Setting this<br/>
+        /// parameter can have consequences for your PayPal Seller Protection. Refer to<br/>
+        /// <a href="https://www.paypal.com/us/webapps/mpp/ua/seller-protection">PayPal's documentation</a> for more information.
         /// </summary>
         [JsonProperty("digitalGoods")]
         public bool? DigitalGoods { get; set; }
 
         /// <summary>
-        /// Used by paysafecard for customer identification across payments. When you generate a customer reference yourself,<br/>
-        /// make sure not to put personal identifiable information or IP addresses in the customer reference directly.
+        /// Used by paysafecard for customer identification across payments. When you generate a customer reference<br/>
+        /// yourself, make sure not to put personal identifiable information or IP addresses in the customer reference<br/>
+        /// directly.<br/>
+        /// <br/>
+        /// If not provided, Mollie will use a hashed version of the customer's IP address.
         /// </summary>
         [JsonProperty("customerReference")]
         public string? CustomerReference { get; set; }
 
         /// <summary>
-        /// The ID of the terminal device where you want to initiate the payment on.
+        /// The ID of the terminal device where you want to initiate the payment on. See also the<br/>
+        /// <a href="ref:terminals-api">Terminals API</a>.
         /// </summary>
         [JsonProperty("terminalId")]
         public string? TerminalId { get; set; }

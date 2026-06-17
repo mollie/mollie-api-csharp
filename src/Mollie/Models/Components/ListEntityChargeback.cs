@@ -13,7 +13,6 @@ namespace Mollie.Models.Components
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
 
     public class ListEntityChargeback
     {
@@ -35,18 +34,6 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("amount")]
         public Amount Amount { get; set; } = default!;
-
-        /// <summary>
-        /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
-        /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
-        /// <br/>
-        /// The amount deducted from your account balance for this chargeback, converted to the currency your account is<br/>
-        /// settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement<br/>
-        /// amount has been determined.
-        /// </summary>
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
-        [JsonProperty("settlementAmount")]
-        public ListEntityChargebackSettlementAmount? SettlementAmount { get; set; } = null;
 
         /// <summary>
         /// Reason for the chargeback as given by the bank. Only available for chargebacks of SEPA Direct Debit payments.

@@ -40,13 +40,6 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// The amount deducted from your account balance for this chargeback, converted to the currency your account is<br/>
-        /// settled in. Always a **negative** amount.
-        /// </summary>
-        [JsonProperty("settlementAmount")]
-        public ListSettlementChargebackResponseSettlementAmount? SettlementAmount { get; set; } = null;
-
-        /// <summary>
         /// Reason for the chargeback as given by the bank. Only available for chargebacks of SEPA Direct Debit payments.
         /// </summary>
         [JsonProperty("reason")]
@@ -90,5 +83,12 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("mode")]
         public SettlementMode? Mode { get; set; }
+
+        /// <summary>
+        /// The amount deducted from your account balance for this chargeback, converted to the currency your account is<br/>
+        /// settled in. Always a **negative** amount.
+        /// </summary>
+        [JsonProperty("settlementAmount")]
+        public ListSettlementChargebackResponseSettlementAmount? SettlementAmount { get; set; } = null;
     }
 }

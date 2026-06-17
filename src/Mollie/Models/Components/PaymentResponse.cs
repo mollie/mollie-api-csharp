@@ -87,20 +87,6 @@ namespace Mollie.Models.Components
         public PaymentResponseAmountChargedBack? AmountChargedBack { get; set; }
 
         /// <summary>
-        /// **Deprecated.** This field will be removed on January 1st, 2027. Use the <a href="list-settlements">Settlements API</a> or<br/>
-        /// the <a href="list-balance-transactions">List balance transactions endpoint</a> for settlement data.<br/>
-        /// <br/>
-        /// The amount that will be settled to your account, converted to the currency your account is settled in. Only<br/>
-        /// available once the payment is finalized and the final settlement amount has been determined.<br/>
-        /// <br/>
-        /// Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by<br/>
-        /// Mollie, this field is omitted from the response.
-        /// </summary>
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
-        [JsonProperty("settlementAmount")]
-        public PaymentResponseSettlementAmount? SettlementAmount { get; set; }
-
-        /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>
         /// <br/>
         /// It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the<br/>
@@ -345,7 +331,7 @@ namespace Mollie.Models.Components
         /// <a href="extra-payment-parameters">method-specific parameters</a> guide.
         /// </summary>
         [JsonProperty("details")]
-        public PaymentResponseDetails? Details { get; set; } = null;
+        public PaymentDetails? Details { get; set; } = null;
 
         /// <summary>
         /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.

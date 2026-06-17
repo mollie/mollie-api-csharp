@@ -9086,6 +9086,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
         '503':
           description: |-
             The payment method supplier is currently unavailable. For example, if
@@ -9102,8 +9104,6 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
-        '429':
-          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -20095,6 +20095,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
         '503':
           description: |-
             The payment method supplier is currently unavailable. For example, if
@@ -20111,8 +20113,6 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
-        '429':
-          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27222,6 +27222,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
         '503':
           description: |-
             An unexpected error occurred on our end. This is not related to your request.
@@ -27238,8 +27240,6 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
-        '429':
-          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -27565,6 +27565,8 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
         '503':
           description: |-
             An unexpected error occurred on our end. This is not related to your request.
@@ -27581,8 +27583,6 @@ paths:
                   documentation:
                     href: '...'
                     type: text/html
-        '429':
-          $ref: '#/components/responses/429-rate-limit'
       x-readme:
         code-samples:
           - language: shell
@@ -30233,6 +30233,290 @@ components:
       readOnly: true
       example: open
       x-speakeasy-unknown-values: allow
+    status-reason-card-scheme:
+      type: string
+      enum:
+        - approved_or_completed_successfully
+        - refer_to_card_issuer
+        - invalid_merchant
+        - capture_card
+        - do_not_honor
+        - error
+        - partial_approval
+        - invalid_transaction
+        - invalid_amount
+        - invalid_issuer
+        - lost_card
+        - stolen_card
+        - insufficient_funds
+        - expired_card
+        - invalid_pin
+        - transaction_not_permitted_to_cardholder
+        - transaction_not_allowed_at_terminal
+        - exceeds_withdrawal_amount_limit
+        - restricted_card
+        - security_violation
+        - exceeds_withdrawal_count_limit
+        - allowable_number_of_pin_tries_exceeded
+        - no_reason_to_decline
+        - cannot_verify_pin
+        - issuer_unavailable
+        - unable_to_route_transaction
+        - duplicate_transaction
+        - system_malfunction
+        - honor_with_id
+        - invalid_card_number
+        - format_error
+        - contact_card_issuer
+        - pin_not_changed
+        - invalid_nonexistent_to_account_specified
+        - invalid_nonexistent_from_account_specified
+        - invalid_nonexistent_account_specified
+        - lifecycle_related
+        - domestic_debit_transaction_not_allowed
+        - policy_related
+        - fraud_security_related
+        - invalid_authorization_life_cycle
+        - purchase_amount_only_no_cash_back_allowed
+        - cryptographic_failure
+        - unacceptable_pin
+        - refer_to_card_issuer_special_condition
+        - pick_up_card_special_condition
+        - vip_approval
+        - invalid_account_number
+        - re_enter_transaction
+        - no_action_taken
+        - unable_to_locate_record
+        - file_temporarily_unavailable
+        - no_credit_account
+        - closed_account
+        - no_checking_account
+        - no_savings_account
+        - suspected_fraud
+        - transaction_does_not_fulfill_aml_requirement
+        - pin_data_required
+        - unable_to_locate_previous_message
+        - previous_message_located_inconsistent_data
+        - blocked_first_used
+        - transaction_reversed
+        - credit_issuer_unavailable
+        - pin_cryptographic_error_found
+        - negative_online_cam_result
+        - violation_of_law
+        - force_stip
+        - cash_service_not_available
+        - cashback_request_exceeds_issuer_limit
+        - decline_for_cvv2_failure
+        - transaction_amount_exceeds_pre_authorized_amount
+        - invalid_biller_information
+        - pin_change_unblock_request_declined
+        - unsafe_pin
+        - card_authentication_failed
+        - stop_payment_order
+        - revocation_of_authorization
+        - revocation_of_all_authorizations
+        - forward_to_issuer_xa
+        - forward_to_issuer_xd
+        - unable_to_go_online
+        - additional_customer_authentication_required
+      x-enumDescriptions:
+        approved_or_completed_successfully: The transaction was approved.
+        refer_to_card_issuer: |-
+          The transaction was cancelled after being initially approved by the issuer. This can be due to various reasons,
+          for example, if the shopper returns goods after purchase.
+        invalid_merchant: |-
+          The transaction was refused by the card issuer. The shopper should contact their bank for clarification. The
+          shopper can try again after resolving the issue with their bank, or use another payment method.
+        capture_card: |-
+          The card issuer requests to retain the card. This can be due to a suspected counterfeit or stolen card. This
+          reason is used in an E-Commerce environment although it originates from an in-person payments environment.
+        do_not_honor: |-
+          This is a generic refusal that has several possible causes. The shopper should contact their issuing bank for
+          clarification.
+        error: Payment could not be authorised and resulted in an error. The shopper can try again or use another payment method.
+        partial_approval: A partial approval was made but the transaction was not finalised. The shopper should retry the transaction.
+        invalid_transaction: |-
+          The transaction type is not supported by the card issuer. The shopper should contact their bank for clarification
+          or try another payment method.
+        invalid_amount: The transaction amount is incorrect. The shopper should try again with the correct amount.
+        invalid_issuer: The card issuer is not valid. The shopper should try another card or payment method.
+        lost_card: The card has been reported as lost. The shopper should contact their bank for a replacement card.
+        stolen_card: The card has been reported as stolen. The shopper should contact their bank for a replacement card.
+        insufficient_funds: |-
+          The account associated with the card has insufficient funds. The shopper should use another payment method or
+          contact their bank.
+        expired_card: The card has expired. The shopper should use another card or contact their bank for a replacement.
+        invalid_pin: The PIN entered is incorrect. The shopper should try again with the correct PIN.
+        transaction_not_permitted_to_cardholder: The transaction is not permitted for the cardholder. The shopper should contact their bank for more information.
+        transaction_not_allowed_at_terminal: The transaction is not permitted at the acquirer terminal. The shopper should try another payment method.
+        exceeds_withdrawal_amount_limit: |-
+          The transaction exceeds the withdrawal amount limit. The shopper should try again with a lower amount or contact
+          their bank.
+        restricted_card: The card is restricted. The shopper should contact their bank for more information.
+        security_violation: There is a security violation. The shopper should contact their bank for more information.
+        exceeds_withdrawal_count_limit: The transaction exceeds the withdrawal count limit. The shopper should try again later or contact their bank.
+        allowable_number_of_pin_tries_exceeded: The allowable number of PIN tries has been exceeded. The shopper should contact their bank.
+        no_reason_to_decline: There is no specific reason to decline the request. The shopper should contact their bank for more information.
+        cannot_verify_pin: The PIN cannot be verified. The shopper should try again with the correct PIN.
+        issuer_unavailable: The issuer is not available. The shopper should try again later.
+        unable_to_route_transaction: The transaction cannot be routed. The shopper should try another payment method.
+        duplicate_transaction: Duplicate transaction detected.
+        system_malfunction: There is a system malfunction. The shopper should try again later.
+        honor_with_id: Honor with ID.
+        invalid_card_number: The card number is incorrect. The shopper should verify and try again with the correct card number.
+        format_error: There was a format error in the transaction. The shopper should try again or contact their bank.
+        contact_card_issuer: The card issuer needs to be contacted. The shopper should contact their bank for more information.
+        pin_not_changed: PIN not changed.
+        invalid_nonexistent_to_account_specified: Invalid/nonexistent 'To Account' specified.
+        invalid_nonexistent_from_account_specified: Invalid/nonexistent 'From Account' specified.
+        invalid_nonexistent_account_specified: An invalid or nonexistent account was specified. The shopper should verify the account information and try again.
+        lifecycle_related: The transaction was declined due to life cycle issues. The shopper should contact their bank for more information.
+        domestic_debit_transaction_not_allowed: Domestic debit transaction not allowed.
+        policy_related: The transaction was declined due to policy reasons. The shopper should contact their bank for more information.
+        fraud_security_related: |-
+          The transaction was declined due to fraud or security concerns. The shopper should contact their bank for more
+          information.
+        invalid_authorization_life_cycle: Invalid authorization life cycle.
+        purchase_amount_only_no_cash_back_allowed: Purchase amount only, no cash back allowed.
+        cryptographic_failure: There is a cryptographic failure.
+        unacceptable_pin: Unacceptable PIN.
+        refer_to_card_issuer_special_condition: Refer to card issuer, special condition.
+        pick_up_card_special_condition: The card issuer requests to retain the card. This can be due to a suspected counterfeit or stolen card.
+        vip_approval: V.I.P Approval.
+        invalid_account_number: The account number is incorrect.
+        re_enter_transaction: The transaction should be re-entered. The shopper should try the transaction again.
+        no_action_taken: No action taken (unable to back out prior transaction).
+        unable_to_locate_record: Unable to locate record in file, or account number is missing from the inquiry.
+        file_temporarily_unavailable: File is temporarily unavailable.
+        no_credit_account: No credit account.
+        closed_account: The account associated with the card is closed. The shopper should contact their bank.
+        no_checking_account: No checking account.
+        no_savings_account: No savings account.
+        suspected_fraud: The transaction is suspected of fraud. The shopper should contact their bank for more information.
+        transaction_does_not_fulfill_aml_requirement: Transaction does not fulfill AML requirement.
+        pin_data_required: PIN data is required. The shopper should enter the PIN and try again.
+        unable_to_locate_previous_message: Unable to locate previous message (no match on transaction ID).
+        previous_message_located_inconsistent_data: Previous message located, but the reversal data are inconsistent with original message.
+        blocked_first_used: Transaction from new cardholder, and card not properly unblocked.
+        transaction_reversed: Transaction reversed.
+        credit_issuer_unavailable: The credit issuer is unavailable. The shopper should try again later.
+        pin_cryptographic_error_found: PIN cryptographic error found (error found by VIC security module during PIN decryption).
+        negative_online_cam_result: |-
+          The transaction was declined due to negative online CAM results. The shopper should contact their bank for more
+          information.
+        violation_of_law: |-
+          The transaction cannot be completed due to a violation of law. The shopper should contact their bank for more
+          information.
+        force_stip: Force STIP.
+        cash_service_not_available: The cash service is not available. The shopper should try again later or use another payment method.
+        cashback_request_exceeds_issuer_limit: |-
+          The cashback request exceeds the issuer limit. The shopper should try again with a lower amount or contact their
+          bank.
+        decline_for_cvv2_failure: The transaction was declined due to CVV2 failure. The shopper should try again with the correct CVV2.
+        transaction_amount_exceeds_pre_authorized_amount: Transaction amount exceeds pre-authorized approval amount.
+        invalid_biller_information: Invalid biller information.
+        pin_change_unblock_request_declined: PIN change/unblock request declined.
+        unsafe_pin: Unsafe PIN.
+        card_authentication_failed: Card authentication failed. Or offline PIN authentication interrupted.
+        stop_payment_order: There is a stop payment order. The shopper should contact their bank for more information.
+        revocation_of_authorization: Revocation of authorisation order.
+        revocation_of_all_authorizations: Revocation of all authorisation orders.
+        forward_to_issuer_xa: Forward to issuer.
+        forward_to_issuer_xd: Forward to issuer.
+        unable_to_go_online: The transaction was declined offline. The shopper should try again or use another payment method.
+        additional_customer_authentication_required: Additional customer authentication required.
+    status-reason-merchant:
+      type: string
+      enum:
+        - merchant_id_not_found
+        - merchant_account_closed
+        - terminal_id_not_found
+        - terminal_closed
+        - invalid_category_code
+        - invalid_currency
+        - missing_cvv2_cvc2
+        - cvv2_not_allowed
+        - merchant_not_registered_vbv
+        - merchant_not_registered_for_amex
+        - transaction_not_permitted_at_terminal
+        - agreement_terminal_not_related
+        - invalid_processor_id
+        - invalid_merchant_data
+        - sub_merchant_account_closed
+      x-enumDescriptions:
+        merchant_id_not_found: Merchant ID not found.
+        merchant_account_closed: Merchant account closed.
+        terminal_id_not_found: Terminal ID not found.
+        terminal_closed: Terminal closed.
+        invalid_category_code: Invalid category code.
+        invalid_currency: Invalid currency.
+        missing_cvv2_cvc2: Missing CVV2/CVC2.
+        cvv2_not_allowed: CVV2 not allowed.
+        merchant_not_registered_vbv: Merchant not registered for Verified by Visa/Secure Code.
+        merchant_not_registered_for_amex: Merchant not registered for Amex.
+        transaction_not_permitted_at_terminal: Transaction not permitted at terminal.
+        agreement_terminal_not_related: Agreement and terminal are not related.
+        invalid_processor_id: Invalid processor ID.
+        invalid_merchant_data: Invalid merchant data (Name, City or Postal Code).
+        sub_merchant_account_closed: Sub-merchant account closed.
+    status-reason-terminal:
+      type: string
+      enum:
+        - terminal_busy
+        - terminal_unreachable
+      x-enumDescriptions:
+        terminal_busy: Another transaction was already ongoing on the terminal. Therefore, it could not accept this transaction.
+        terminal_unreachable: |-
+          The transaction did not reach the terminal within 30 seconds. This is generally caused by issues with, or
+          instability of the internet connection of the terminal.
+    status-reason-voucher:
+      type: string
+      enum:
+        - service_failed
+        - invalid_operation
+        - authorization_error
+        - login_failed_without_reason
+        - invalid_retailer
+        - refer_to_card_issuer
+        - card_does_not_exist
+        - expired_card
+        - card_is_blocked
+        - insufficient_funds
+        - invalid_card_id
+        - card_is_transferred
+        - card_is_not_active
+        - incorrect_purchase_value
+        - card_not_available
+        - wrong_currency
+        - login_failed_unknown_user
+        - login_failed_invalid_password
+        - invalid_pin
+        - invalid_ean_code
+      x-enumDescriptions:
+        service_failed: Service failed.
+        invalid_operation: Invalid operation.
+        authorization_error: Authorization failed, not logged in.
+        login_failed_without_reason: Login failed (Reason not specified).
+        invalid_retailer: Invalid/unknown Retailer.
+        refer_to_card_issuer: |-
+          The transaction was cancelled after being initially approved by the issuer. This can be due to various reasons,
+          for example, if the shopper returns goods after purchase.
+        card_does_not_exist: Card or Customer does not exist.
+        expired_card: The card has expired. The shopper should use another card or contact their bank for a replacement.
+        card_is_blocked: Card is blocked.
+        insufficient_funds: |-
+          The account associated with the card has insufficient funds. The shopper should use another payment method or
+          contact their bank.
+        invalid_card_id: Invalid CardId.
+        card_is_transferred: Card is transferred.
+        card_is_not_active: Card is not active.
+        incorrect_purchase_value: Incorrect activation or purchase value.
+        card_not_available: Card not available.
+        wrong_currency: Wrong currency.
+        login_failed_unknown_user: 'Login failed: Unknown user.'
+        login_failed_invalid_password: 'Login failed: Invalid password.'
+        invalid_pin: Invalid PIN.
+        invalid_ean_code: Invalid EAN code.
     status-reason:
       type:
         - object
@@ -30253,128 +30537,12 @@ components:
             - type: string
               description: A machine-readable code that indicates the reason for the payment's status.
               example: insufficient_funds
-            - type: string
-              enum:
-                - approved_or_completed_successfully
-                - refer_to_card_issuer
-                - invalid_merchant
-                - capture_card
-                - do_not_honor
-                - error
-                - partial_approval
-                - invalid_transaction
-                - invalid_amount
-                - invalid_issuer
-                - lost_card
-                - stolen_card
-                - insufficient_funds
-                - expired_card
-                - invalid_pin
-                - transaction_not_permitted_to_cardholder
-                - transaction_not_allowed_at_terminal
-                - exceeds_withdrawal_amount_limit
-                - restricted_card
-                - security_violation
-                - exceeds_withdrawal_count_limit
-                - allowable_number_of_pin_tries_exceeded
-                - no_reason_to_decline
-                - cannot_verify_pin
-                - issuer_unavailable
-                - unable_to_route_transaction
-                - duplicate_transaction
-                - system_malfunction
-                - honor_with_id
-                - invalid_card_number
-                - format_error
-                - contact_card_issuer
-                - pin_not_changed
-                - invalid_nonexistent_to_account_specified
-                - invalid_nonexistent_from_account_specified
-                - invalid_nonexistent_account_specified
-                - lifecycle_related
-                - domestic_debit_transaction_not_allowed
-                - policy_related
-                - fraud_security_related
-                - invalid_authorization_life_cycle
-                - purchase_amount_only_no_cash_back_allowed
-                - cryptographic_failure
-                - unacceptable_pin
-                - refer_to_card_issuer_special_condition
-                - pick_up_card_special_condition
-                - vip_approval
-                - invalid_account_number
-                - re_enter_transaction
-                - no_action_taken
-                - unable_to_locate_record
-                - file_temporarily_unavailable
-                - no_credit_account
-                - closed_account
-                - no_checking_account
-                - no_savings_account
-                - suspected_fraud
-                - transaction_does_not_fulfill_aml_requirement
-                - pin_data_required
-                - unable_to_locate_previous_message
-                - previous_message_located_inconsistent_data
-                - blocked_first_used
-                - transaction_reversed
-                - credit_issuer_unavailable
-                - pin_cryptographic_error_found
-                - negative_online_cam_result
-                - violation_of_law
-                - force_stip
-                - cash_service_not_available
-                - cashback_request_exceeds_issuer_limit
-                - decline_for_cvv2_failure
-                - transaction_amount_exceeds_pre_authorized_amount
-                - invalid_biller_information
-                - pin_change_unblock_request_declined
-                - unsafe_pin
-                - card_authentication_failed
-                - stop_payment_order
-                - revocation_of_authorization
-                - revocation_of_all_authorizations
-                - forward_to_issuer_xa
-                - forward_to_issuer_xd
-                - unable_to_go_online
-                - additional_customer_authentication_required
-                - merchant_id_not_found
-                - merchant_account_closed
-                - terminal_id_not_found
-                - terminal_closed
-                - invalid_category_code
-                - invalid_currency
-                - missing_cvv2_cvc2
-                - cvv2_not_allowed
-                - merchant_not_registered_vbv
-                - merchant_not_registered_for_amex
-                - transaction_not_permitted_at_terminal
-                - agreement_terminal_not_related
-                - invalid_processor_id
-                - invalid_merchant_data
-                - sub_merchant_account_closed
-                - terminal_busy
-                - terminal_unreachable
-                - service_failed
-                - invalid_operation
-                - authorization_error
-                - login_failed_without_reason
-                - invalid_retailer
-                - card_does_not_exist
-                - card_is_blocked
-                - invalid_card_id
-                - card_is_transferred
-                - card_is_not_active
-                - incorrect_purchase_value
-                - card_not_available
-                - wrong_currency
-                - login_failed_unknown_user
-                - login_failed_invalid_password
-                - invalid_ean_code
-                - card_error
-                - terminal_configuration_issue
+            - anyOf:
+                - $ref: '#/components/schemas/status-reason-card-scheme-response'
+                - $ref: '#/components/schemas/status-reason-merchant-response'
+                - $ref: '#/components/schemas/status-reason-terminal-response'
+                - $ref: '#/components/schemas/status-reason-voucher-response'
               x-methodSpecific: true
-              x-speakeasy-unknown-values: allow
         message:
           type: string
           description: A description of the status reason, localized according to the payment `locale`.
@@ -30522,6 +30690,538 @@ components:
         - none
         - failed
       example: no-cvm-required
+    payment-details:
+      type:
+        - object
+        - 'null'
+      description: |-
+        An object containing payment details collected during the payment process. For example, details may include the
+        customer's card or bank details and a payment reference. For the full list of details, please refer to the
+        [method-specific parameters](extra-payment-parameters) guide.
+      readOnly: true
+      properties:
+        consumerName:
+          type:
+            - string
+            - 'null'
+          description: The customer's name, if made available by the payment method. For card payments, refer to `details.cardHolder`.
+          example: John Doe
+          x-methodSpecific: true
+          x-method: customer-details
+        consumerAccount:
+          type:
+            - string
+            - 'null'
+          description: |-
+            The customer's account reference.
+
+            For banking-based payment methods — such as iDEAL — this is normally either an IBAN or a domestic bank
+            account number.
+
+            For PayPal, the account reference is an email address.
+
+            For card and Bancontact payments, refer to `details.cardNumber`.
+          example: NL91ABNA0417164300
+          x-methodSpecific: true
+          x-method: customer-details
+        consumerBic:
+          type:
+            - string
+            - 'null'
+          description: The BIC of the customer's bank account, if applicable.
+          example: ABNANL2A
+          x-methodSpecific: true
+          x-method: customer-details
+        shippingAddress:
+          type:
+            - object
+            - 'null'
+          description: |-
+            For wallet payment methods — such as Apple Pay and PayPal — the shipping address is often already known by
+            the wallet provider. In these cases the shipping address may be available as a payment detail.
+          properties: {}
+          additionalProperties: true
+          x-methodSpecific: true
+          x-method: customer-details
+        cardNumber:
+          type:
+            - string
+            - 'null'
+          description: The customer's masked card number.
+          example: '************1234'
+          x-methodSpecific: true
+          x-method:
+            - bancontact
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            bancontact: The customer's masked card number.
+            cards: The last4-digit of the PAN.
+            point-of-sale: The last 4 digits of the customer's masked card number.
+        bankName:
+          type: string
+          description: The name of the bank that the customer will need to make the bank transfer payment towards.
+          example: Mollie Bank
+          x-methodSpecific: true
+          x-method: bank-transfer
+        bankAccount:
+          type: string
+          description: The bank account number the customer will need to make the bank transfer payment towards.
+          example: NL91ABNA0417164300
+          x-methodSpecific: true
+          x-method: bank-transfer
+        bankBic:
+          type: string
+          description: The BIC of the bank the customer will need to make the bank transfer payment towards.
+          example: ABNANL2A
+          x-methodSpecific: true
+          x-method: bank-transfer
+        transferReference:
+          type:
+            - string
+            - 'null'
+          description: |-
+            The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any
+            formatting here; show it to the customer as-is.
+          example: '...'
+          x-methodSpecific: true
+          x-method:
+            - bank-transfer
+            - sepa-direct-debit
+          x-method-descriptions:
+            bank-transfer: |-
+              The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any
+              formatting here; show it to the customer as-is.
+            sepa-direct-debit: The reference generated by Mollie to uniquely identify the payment.
+        bizumReference:
+          type:
+            - string
+            - 'null'
+          description: Bizum payment reference of the transaction.
+          example: 2901tq2ure1d
+          x-methodSpecific: true
+          x-method: bizum
+        cardFingerprint:
+          type:
+            - string
+            - 'null'
+          description: A unique fingerprint for this specific card. Can be used to identify returning customers.
+          example: '...'
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            cards: A unique fingerprint for this specific card. Can be used to identify returning customers.
+            point-of-sale: |-
+              A unique identifier assigned to a cardholder's payment account, linking multiple transactions from wallets
+              and physical card to a single account, also across payment methods or when the card is reissued.
+        cardHolder:
+          type:
+            - string
+            - 'null'
+          description: The customer's name as shown on their card.
+          example: John Doe
+          x-methodSpecific: true
+          x-method: cards
+        cardAudience:
+          $ref: '#/components/schemas/payment-details-card-audition-response'
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            cards: |-
+              The card's target audience, if known.
+
+              Possible values: `consumer` `business`
+            point-of-sale: 'The card''s target audience, if known. Possible values: `consumer` `business`'
+        cardLabel:
+          $ref: '#/components/schemas/payment-details-card-label-response'
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            cards: |-
+              The card's label, if known.
+
+              Possible values: `American Express` `Carta Si` `Carte Bleue` `Dankort` `Diners Club` `Discover` `JCB`
+              `Laser` `Maestro` `Mastercard` `Unionpay` `Visa`
+            point-of-sale: 'The card''s label, if known. Possible values: `Mastercard` `Visa` `Maestro` `Vpay`'
+        cardCountryCode:
+          type:
+            - string
+            - 'null'
+          description: The ISO 3166-1 alpha-2 country code of the country the card was issued in.
+          example: NL
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+        cardExpiryDate:
+          type:
+            - string
+            - 'null'
+          description: The expiry date (`MM/YY`) of the card as displayed on the card.
+          example: 12/25
+          x-methodSpecific: true
+          x-method: cards
+        cardFunding:
+          $ref: '#/components/schemas/payment-details-card-funding-response'
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            cards: |-
+              The card type.
+
+              Possible values: `debit`, `credit`, `prepaid`, `deferred-debit`
+            point-of-sale: 'The card funding type, if known. Possible values: `credit` `debit`'
+        cardSecurity:
+          type:
+            - string
+            - 'null'
+          $ref: '#/components/schemas/payment-details-card-security-response'
+          description: |-
+            The level of security applied during card processing.
+
+            Possible values: `normal` `3dsecure`
+          x-methodSpecific: true
+          x-method: cards
+        feeRegion:
+          $ref: '#/components/schemas/payment-details-fee-region-response'
+          x-methodSpecific: true
+          x-method:
+            - cards
+            - point-of-sale
+          x-method-descriptions:
+            cards: |-
+              The applicable card fee region.
+
+              For example, `intra-eu` applies to consumer cards from the European Economic Area (EEA).
+
+              Possible values: `american-express` `amex-intra_eea` `carte-bancaire` `intra-eu` `intra-eu-corporate`
+              `domestic` `maestro` `other`
+            point-of-sale: |-
+              The applicable card fee region. For example, `intra_eea` applies to consumer cards from the European
+              Economic Area (EEA). Possible values: `domestic` `inter` `intra_eea`
+        cardMaskedNumber:
+          type:
+            - string
+            - 'null'
+          description: The first6 and last4 digits of the card number.
+          example: '...'
+          x-methodSpecific: true
+          x-method: cards
+        card3dsEci:
+          type:
+            - string
+            - 'null'
+          description: The outcome of authentication attempted on transactions enforced by 3DS (ie valid only for `oneoff` and `first`).
+          example: '...'
+          x-methodSpecific: true
+          x-method: cards
+        cardBin:
+          type:
+            - string
+            - 'null'
+          description: The first6 digit of the card bank identification number.
+          example: '...'
+          x-methodSpecific: true
+          x-method: cards
+        cardIssuer:
+          type:
+            - string
+            - 'null'
+          description: The issuer of the Card.
+          example: '...'
+          x-methodSpecific: true
+          x-method: cards
+        failureReason:
+          $ref: '#/components/schemas/payment-details-failure-reason-response'
+          description: A failure code to help understand why the payment failed.
+          x-methodSpecific: true
+          x-method: cards
+        failureMessage:
+          type:
+            - string
+            - 'null'
+          description: |-
+            A human-friendly failure message that can be shown to the customer. The message is translated in accordance
+            with the payment's locale setting.
+          example: Your card was declined.
+          x-methodSpecific: true
+          x-method: cards
+        wallet:
+          $ref: '#/components/schemas/payment-details-wallet-response'
+          description: The wallet used when creating the payment.
+          x-methodSpecific: true
+          x-method: cards
+        multibancoReference:
+          type:
+            - string
+            - 'null'
+          description: Multibanco payment reference of the transaction.
+          example: 123456789
+          x-methodSpecific: true
+          x-method: multibanco
+        multibancoEntity:
+          type:
+            - string
+            - 'null'
+          description: Multibanco entity reference of the transaction.
+          example: 98765
+          x-methodSpecific: true
+          x-method: multibanco
+        paypalReference:
+          type:
+            - string
+            - 'null'
+          description: PayPal's reference for the payment.
+          example: '...'
+          x-methodSpecific: true
+          x-method: paypal
+        paypalPayerId:
+          type:
+            - string
+            - 'null'
+          description: ID of the customer's PayPal account.
+          example: '...'
+          x-methodSpecific: true
+          x-method: paypal
+        sellerProtection:
+          $ref: '#/components/schemas/payment-details-seller-protection-response'
+          description: |-
+            Indicates to what extent the payment is eligible for PayPal's Seller Protection. Only available for PayPal
+            payments, if the information is made available by PayPal.
+
+            Classic values: `Eligible` `Ineligible` `Partially Eligible - INR Only`
+            `Partially Eligible - Unauth Only` `PartiallyEligible` `None` `Active`
+            `Fraud Control - Unauth Premium Eligible`
+
+            Current values: `ELIGIBLE` `PARTIALLY_ELIGIBLE` `NOT_ELIGIBLE`
+
+            _Note:_ Classic values are legacy and may still appear in older payments.
+          x-methodSpecific: true
+          x-method: paypal
+        paypalFee:
+          $ref: '#/components/schemas/amount-nullable'
+          description: |-
+            An amount object containing the fee PayPal will charge for this transaction. The field may be omitted if
+            PayPal will not charge a fee for this transaction.
+          x-methodSpecific: true
+          x-method: paypal
+        customerReference:
+          type: string
+          description: The paysafecard customer reference either provided via the API or otherwise auto-generated by Mollie.
+          example: '...'
+          x-methodSpecific: true
+          x-method: paysafecard
+        terminalId:
+          type: string
+          description: The ID of the terminal device where the payment took place on.
+          example: term_12345
+          x-methodSpecific: true
+          x-method: point-of-sale
+        maskedNumber:
+          type:
+            - string
+            - 'null'
+          description: The first 6 digits & last 4 digits of the customer's masked card number.
+          example: '...'
+          x-methodSpecific: true
+          x-method: point-of-sale
+        receipt:
+          type: object
+          x-heading-suffix: (⚠️ Beta feature, reach out to [Support](https://www.mollie.com/contact/merchants))
+          description: |-
+            The Point of sale receipt object.
+
+            * `authorizationCode` _string|null_ - a unique code provided by the cardholder's bank to confirm that the
+              transaction was successfully approved.
+            * `applicationIdentifier` _string|null_ - the unique number that identifies a specific payment application
+              on a chip card.
+            * `cardReadMethod` _string|null_ - the method by which the card was read by the terminal. Possible values:
+              `chip` | `magnetic-stripe` | `near-field-communication` | `contactless` | `moto`.
+            * `cardVerificationMethod` _string|null_ - the method used to verify the cardholder's identity. Possible
+              values: `no-cvm-required` | `online-pin` | `offline-pin` | `consumer-device` | `signature` |
+              `signature-and-online-pin` | `online-pin-and-signature` | `none` | `failed`.
+          properties:
+            authorizationCode:
+              type:
+                - string
+                - 'null'
+              description: A unique code provided by the cardholder's bank to confirm that the transaction was successfully approved.
+              example: '...'
+            applicationIdentifier:
+              type:
+                - string
+                - 'null'
+              description: The unique number that identifies a specific payment application on a chip card.
+              example: '...'
+            cardReadMethod:
+              $ref: '#/components/schemas/payment-details-receipt-card-read-method-response'
+            cardVerificationMethod:
+              $ref: '#/components/schemas/payment-details-receipt-card-verification-method-response'
+          x-methodSpecific: true
+          x-method: point-of-sale
+        creditorIdentifier:
+          type:
+            - string
+            - 'null'
+          description: |-
+            The creditor identifier indicates who is authorized to execute the payment. In this case, it is a reference
+            to Mollie.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        dueDate:
+          type:
+            - string
+            - 'null'
+          format: date
+          description: Estimated date the payment is debited from the customer's bank account, in `YYYY-MM-DD` format.
+          example: '2025-01-01'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        signatureDate:
+          type:
+            - string
+            - 'null'
+          format: date
+          description: |-
+            Date the payment has been signed by the customer, in `YYYY-MM-DD` format. Only available if the payment has
+            been signed.
+          example: '2024-03-20'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        bankReasonCode:
+          type:
+            - string
+            - 'null'
+          description: |-
+            The official reason why this payment has failed. A detailed description of each reason is available on the
+            website of the European Payments Council.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        bankReason:
+          type:
+            - string
+            - 'null'
+          description: A human-friendly description of the failure reason.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        endToEndIdentifier:
+          type:
+            - string
+            - 'null'
+          description: The end-to-end identifier you provided in the batch file.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        mandateReference:
+          type:
+            - string
+            - 'null'
+          description: The mandate reference you provided in the batch file.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        batchReference:
+          type:
+            - string
+            - 'null'
+          description: The batch reference you provided in the batch file.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        fileReference:
+          type:
+            - string
+            - 'null'
+          description: The file reference you provided in the batch file.
+          example: '...'
+          x-methodSpecific: true
+          x-method: sepa-direct-debit
+        qrCode:
+          type: object
+          description: |-
+            **Optional include.** If a QR code was requested during payment creation for a QR-compatible payment method,
+            the QR code details will be available in this object.
+
+            The QR code can be scanned by the customer to complete the payment on their mobile device. For example,
+            Bancontact QR payments can be completed by the customer using the Bancontact app.
+
+            * `height` _integer_
+            * `width` _integer_
+            * `src` _string_
+          properties:
+            height:
+              type: integer
+              description: The height of the QR code image in pixels.
+              example: 300
+            width:
+              type: integer
+              description: The width of the QR code image in pixels.
+              example: 300
+            src:
+              type: string
+              description: The URL to the QR code image.
+              example: https://www.mollie.com/images/qr-code.png
+          x-methodSpecific: true
+          x-method: qr-enabled
+        voucherNumber:
+          type: string
+          description: 'For payments with gift cards: the masked gift card number of the first gift card applied to the payment.'
+          example: '...'
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        giftcards:
+          type: array
+          description: An array of detail objects for each gift card that was used on this payment, if any.
+          items:
+            type: object
+            properties: {}
+            additionalProperties: true
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        issuer:
+          type: string
+          description: 'For payments with vouchers: the brand name of the first voucher applied.'
+          example: '...'
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        vouchers:
+          type: array
+          description: An array of detail objects for each voucher that was used on this payment, if any.
+          items:
+            type: object
+            properties: {}
+            additionalProperties: true
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        remainderAmount:
+          $ref: '#/components/schemas/amount'
+          description: An amount object for the amount that remained after all gift cards or vouchers were applied.
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        remainderMethod:
+          type: string
+          description: The payment method used to pay the remainder amount, after all gift cards or vouchers were applied.
+          example: creditcard
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
+        remainderDetails:
+          type: object
+          description: '**Optional include.** The full payment method details of the remainder payment.'
+          properties: {}
+          additionalProperties: true
+          x-methodSpecific: true
+          x-method: gift-cards-vouchers
     testmode-create:
       type:
         - boolean
@@ -30599,20 +31299,6 @@ components:
           description: |-
             The total amount that was charged back for this payment. Only available when the total charged back amount is not
             zero.
-          readOnly: true
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account, converted to the currency your account is settled in. Only
-            available once the payment is finalized and the final settlement amount has been determined.
-
-            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
-            Mollie, this field is omitted from the response.
           readOnly: true
         redirectUrl:
           type:
@@ -30937,396 +31623,7 @@ components:
           readOnly: true
           example: true
         details:
-          type:
-            - object
-            - 'null'
-          description: |-
-            An object containing payment details collected during the payment process. For example, details may include the
-            customer's card or bank details and a payment reference. For the full list of details, please refer to the
-            [method-specific parameters](extra-payment-parameters) guide.
-          readOnly: true
-          properties:
-            consumerName:
-              type:
-                - string
-                - 'null'
-              description: The customer's name, if made available by the payment method. For card payments, refer to details.cardHolder.
-              example: John Doe
-              x-methodSpecific: true
-            consumerAccount:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The customer's account reference.
-
-                For banking-based payment methods — such as iDEAL — this is normally either an IBAN or a domestic bank account
-                number.
-
-                For PayPal, the account reference is an email address.
-
-                For card and Bancontact payments, refer to details.cardNumber.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            consumerBic:
-              type:
-                - string
-                - 'null'
-              description: The BIC of the customer's bank account, if applicable.
-              example: ABNANL2A
-              x-methodSpecific: true
-            shippingAddress:
-              type:
-                - object
-                - 'null'
-              description: |-
-                For wallet payment methods — such as Apple Pay and PayPal — the shipping address is often already known by the
-                wallet provider. In these cases the shipping address may be available as a payment detail.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            cardNumber:
-              type:
-                - string
-                - 'null'
-              description: |-
-                For bancontact, it will be the customer's masked card number. For cards, it will be the last 4-digit of the
-                PAN. For Point-of-sale, it will be the the last 4 digits of the customer's masked card number.
-              example: '************1234'
-              x-methodSpecific: true
-            bankName:
-              type: string
-              description: The name of the bank that the customer will need to make the bank transfer payment towards.
-              example: Mollie Bank
-              x-methodSpecific: true
-            bankAccount:
-              type: string
-              description: The bank account number the customer will need to make the bank transfer payment towards.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            bankBic:
-              type: string
-              description: The BIC of the bank the customer will need to make the bank transfer payment towards.
-              example: ABNANL2A
-              x-methodSpecific: true
-            transferReference:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any
-                formatting here; show it to the customer as-is.
-              example: '...'
-              x-methodSpecific: true
-            cardFingerprint:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A unique fingerprint for a specific card. Can be used to identify returning customers.
-
-                In the case of Point-of-sale payments, it's a unique identifier assigned to a cardholder's payment account,
-                linking multiple transactions from wallets and physical card to a single account, also across payment methods
-                or when the card is reissued.
-              example: '...'
-              x-methodSpecific: true
-            cardHolder:
-              type:
-                - string
-                - 'null'
-              description: The customer's name as shown on their card.
-              example: John Doe
-              x-methodSpecific: true
-            cardAudition:
-              $ref: '#/components/schemas/payment-details-card-audition'
-              x-methodSpecific: true
-            cardLabel:
-              $ref: '#/components/schemas/payment-details-card-label'
-              x-methodSpecific: true
-            cardCountryCode:
-              type:
-                - string
-                - 'null'
-              description: The ISO 3166-1 alpha-2 country code of the country the card was issued in.
-              example: NL
-              x-methodSpecific: true
-            cardExpiryDate:
-              type:
-                - string
-                - 'null'
-              description: The expiry date (MM/YY) of the card as displayed on the card.
-              example: 12/25
-              x-methodSpecific: true
-            cardFunding:
-              $ref: '#/components/schemas/payment-details-card-funding'
-              x-methodSpecific: true
-            cardSecurity:
-              $ref: '#/components/schemas/payment-details-card-security'
-              x-methodSpecific: true
-            feeRegion:
-              $ref: '#/components/schemas/payment-details-fee-region'
-              x-methodSpecific: true
-            cardMaskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 and last 4 digits of the card number.
-              example: '...'
-              x-methodSpecific: true
-            card3dsEci:
-              type:
-                - string
-                - 'null'
-              description: The outcome of authentication attempted on transactions enforced by 3DS (ie valid only for oneoff and first).
-              example: '...'
-              x-methodSpecific: true
-            cardBin:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digit of the card bank identification number.
-              example: '...'
-              x-methodSpecific: true
-            cardIssuer:
-              type:
-                - string
-                - 'null'
-              description: The issuer of the Card.
-              example: '...'
-              x-methodSpecific: true
-            failureReason:
-              $ref: '#/components/schemas/payment-details-failure-reason'
-              x-methodSpecific: true
-            failureMessage:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A human-friendly failure message that can be shown to the customer. The message is translated in accordance
-                with the payment's locale setting.
-              example: Your card was declined.
-              x-methodSpecific: true
-            wallet:
-              $ref: '#/components/schemas/payment-details-wallet'
-              x-methodSpecific: true
-            paypalReference:
-              type:
-                - string
-                - 'null'
-              description: PayPal's reference for the payment.
-              example: '...'
-              x-methodSpecific: true
-            paypalPayerId:
-              type:
-                - string
-                - 'null'
-              description: ID of the customer's PayPal account.
-              example: '...'
-              x-methodSpecific: true
-            sellerProtection:
-              $ref: '#/components/schemas/payment-details-seller-protection'
-              x-methodSpecific: true
-            paypalFee:
-              $ref: '#/components/schemas/amount-nullable'
-              description: |-
-                An amount object containing the fee PayPal will charge for this transaction. The field may be omitted if
-                PayPal will not charge a fee for this transaction.
-              x-methodSpecific: true
-            customerReference:
-              type: string
-              description: The paysafecard customer reference either provided via the API or otherwise auto-generated by Mollie.
-              example: '...'
-              x-methodSpecific: true
-            terminalId:
-              type: string
-              description: The ID of the terminal device where the payment took place on.
-              example: term_12345
-              x-methodSpecific: true
-            maskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digits & last 4 digits of the customer's masked card number.
-              example: '...'
-              x-methodSpecific: true
-            receipt:
-              type: object
-              description: The Point of sale receipt object.
-              properties:
-                authorizationCode:
-                  type:
-                    - string
-                    - 'null'
-                  description: A unique code provided by the cardholder’s bank to confirm that the transaction was successfully approved.
-                  example: '...'
-                applicationIdentifier:
-                  type:
-                    - string
-                    - 'null'
-                  description: The unique number that identifies a specific payment application on a chip card.
-                  example: '...'
-                cardReadMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-read-method'
-                cardVerificationMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-verification-method'
-              x-methodSpecific: true
-            creditorIdentifier:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The creditor identifier indicates who is authorized to execute the payment. In this case, it is a
-                reference to Mollie.
-              example: '...'
-              x-methodSpecific: true
-            dueDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: Estimated date the payment is debited from the customer's bank account, in YYYY-MM-DD format.
-              example: '2025-01-01'
-              x-methodSpecific: true
-            signatureDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: |-
-                Date the payment has been signed by the customer, in YYYY-MM-DD format. Only available if the payment
-                has been signed.
-              example: '2024-03-20'
-              x-methodSpecific: true
-            bankReasonCode:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The official reason why this payment has failed. A detailed description of each reason is available on the
-                website of the European Payments Council.
-              example: '...'
-              x-methodSpecific: true
-            bankReason:
-              type:
-                - string
-                - 'null'
-              description: A human-friendly description of the failure reason.
-              example: '...'
-              x-methodSpecific: true
-            endToEndIdentifier:
-              type:
-                - string
-                - 'null'
-              description: The end-to-end identifier you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            mandateReference:
-              type:
-                - string
-                - 'null'
-              description: The mandate reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            batchReference:
-              type:
-                - string
-                - 'null'
-              description: The batch reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            fileReference:
-              type:
-                - string
-                - 'null'
-              description: The file reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            qrCode:
-              type: object
-              description: |-
-                Optional include. If a QR code was requested during payment creation for a QR-compatible payment method,
-                the QR code details will be available in this object.
-
-                The QR code can be scanned by the customer to complete the payment on their mobile device. For example,
-                Bancontact QR payments can be completed by the customer using the Bancontact app.
-              properties:
-                height:
-                  type: integer
-                  description: The height of the QR code image in pixels.
-                  example: 300
-                width:
-                  type: integer
-                  description: The width of the QR code image in pixels.
-                  example: 300
-                src:
-                  type: string
-                  description: |-
-                    The URL to the QR code image. The image is a PNG file, and can be displayed directly in the browser or
-                    downloaded.
-                  example: https://www.mollie.com/images/qr-code.png
-              x-methodSpecific: true
-            voucherNumber:
-              type: string
-              description: 'For payments with gift cards: the masked gift card number of the first gift card applied to the payment.'
-              example: '...'
-              x-methodSpecific: true
-            giftcards:
-              type: array
-              description: An array of detail objects for each gift card that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            issuer:
-              type: string
-              description: 'For payments with vouchers: the brand name of the first voucher applied.'
-              example: '...'
-              x-methodSpecific: true
-            vouchers:
-              type: array
-              description: An array of detail objects for each voucher that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            remainderAmount:
-              $ref: '#/components/schemas/amount'
-              description: An amount object for the amount that remained after all gift cards or vouchers were applied.
-              x-methodSpecific: true
-            remainderMethod:
-              type: string
-              description: The payment method used to pay the remainder amount, after all gift cards or vouchers were applied.
-              example: creditcard
-              x-methodSpecific: true
-            remainderDetails:
-              type: object
-              description: Optional include. The full payment method details of the remainder payment.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            multibancoReference:
-              type:
-                - string
-                - 'null'
-              description: Multibanco payment reference of the transaction
-              example: 123456789
-              x-methodSpecific: true
-            multibancoEntity:
-              type:
-                - string
-                - 'null'
-              description: Multibanco entity reference of the transaction
-              example: 98765
-              x-methodSpecific: true
-            bizumReference:
-              type:
-                - string
-                - 'null'
-              description: Bizum payment reference of the transaction
-              example: 2901tq2ure1d
-              x-methodSpecific: true
+          $ref: '#/components/schemas/payment-details'
         createdAt:
           $ref: '#/components/schemas/created-at'
         authorizedAt:
@@ -31412,6 +31709,7 @@ components:
               $ref: '#/components/schemas/url'
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
+              x-method: bancontact
             changePaymentState:
               $ref: '#/components/schemas/url-nullable'
               description: |-
@@ -31461,6 +31759,8 @@ components:
               description: |-
                 The API resource URL of the [terminal](get-terminal) this payment was created for. Only present for
                 point-of-sale payments.
+              x-methodSpecific: true
+              x-method: point-of-sale
             documentation:
               $ref: '#/components/schemas/url'
             status:
@@ -31469,12 +31769,14 @@ components:
                 Link to customer-facing page showing the status of the bank transfer (to verify if the transaction was
                 successful).
               x-methodSpecific: true
+              x-method: bank-transfer
             payOnline:
               $ref: '#/components/schemas/url'
               description: |-
                 Link to Mollie Checkout page allowing customers to select a different payment method instead of legacy
                 bank transfer.
               x-methodSpecific: true
+              x-method: bank-transfer
           readOnly: true
     payment-response:
       allOf:
@@ -31567,17 +31869,6 @@ components:
         amount:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account for this capture, converted to the currency your account is
-            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
-          readOnly: true
         status:
           allOf:
             - $ref: '#/components/schemas/capture-status'
@@ -31734,20 +32025,6 @@ components:
           description: |-
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount deducted from your account balance for this refund, converted to the currency your account is settled
-            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
-            been determined.
-
-            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
-          readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
         paymentId:
@@ -31904,18 +32181,6 @@ components:
         amount:
           $ref: '#/components/schemas/amount'
           description: The amount charged back by the customer.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount deducted from your account balance for this chargeback, converted to the currency your account is
-            settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement
-            amount has been determined.
-          readOnly: true
         reason:
           type:
             - object
@@ -34482,19 +34747,34 @@ components:
         applePayPaymentToken:
           type: string
           description: |-
-            The Apple Pay Payment token object (encoded as JSON) that is part of the result of authorizing a payment request.
-            The token contains the payment information needed to authorize the payment.
+            The [Apple Pay Payment](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) token
+            object (encoded as JSON) that is part of the result of authorizing a payment request. The token contains the
+            payment information needed to authorize the payment.
 
-            The object should be passed encoded in a JSON string.
+            The object should be passed encoded in a JSON string. For example:
+            `{"paymentData": {"version": "EC_v1", "data": "vK3BbrCbI/...."}}`
           example: '{"paymentData": {"version": "EC_v1", "data": "vK3BbrCbI/...."}}'
           writeOnly: true
           x-methodSpecific: true
+          x-method: apple-pay
+        dueDate:
+          type: string
+          description: "The date the bank transfer payment should expire, in `YYYY-MM-DD` format. The minimum date is tomorrow, and the\nmaximum date is 100 days after tomorrow.\n\nAfter you created the payment, you can still update the `dueDate` via [Update payment](update-payment).\n\n<Callout icon=\"\U0001F4D8\" theme=\"info\">\n  If `dueDate` falls out of business days, it will be set to the **next business day** and the payment will\n  expire at 00:00 (on the following business day).\n  Example: `dueDate` is `2025-12-06` (Saturday) -> `dueDate` will be set for `2025-12-08`, `expiresAt`\n  `2025-12-09 00:00`\n</Callout>"
+          example: '2025-12-08'
+          writeOnly: true
+          x-methodSpecific: true
+          x-method: bank-transfer
         company:
           type: object
           description: |-
-            Billie is a business-to-business (B2B) payment method. It requires extra information to identify the organization
-            that is completing the payment. It is recommended to include these parameters up front for a seamless flow.
-            Otherwise, Billie will ask the customer to complete the missing fields during checkout.
+            Billie is a business-to-business (B2B) payment method. It requires extra information to identify the
+            organization that is completing the payment. It is recommended to include these parameters up front for a
+            seamless flow. Otherwise, Billie will ask the customer to complete the missing fields during checkout.
+
+            * `billingAddress.organizationName`: The organization's name.
+            * `registrationNumber` _string_: The organization's registration number.
+            * `vatNumber` _string_: The organization's VAT number.
+            * `entityType` _string_: The organization's entity type.
           properties:
             registrationNumber:
               type: string
@@ -34507,62 +34787,73 @@ components:
             entityType:
               type: string
               description: The organization's entity type.
-              example: '...'
+              example: LLC
           writeOnly: true
           x-methodSpecific: true
+          x-method: billie
         cardToken:
           type: string
           description: |-
-            When creating credit card payments using Mollie Components, you need to provide the card token you received from
-            the card component in this field. The token represents the customer's card information needed to complete the
-            payment. Note: field only valid for oneoff and first payments. For recurring payments, the customerId alone is
-            enough.
+            When creating credit card payments using Mollie Components, you need to provide the card token you received
+            from the card component in this field. The token represents the customer's card information needed to complete
+            the payment. **Note:** field only valid for `oneoff` and `first` payments. For recurring payments, the
+            `customerId` alone is enough.
           example: tkn_12345
           writeOnly: true
           x-methodSpecific: true
+          x-method: credit-card
         googlePayPaymentToken:
           type: string
           description: |-
-            The Google Pay payment token object (encoded as JSON) returned by the Google Pay SDK after the customer authorizes
-            the payment. The token contains the payment information needed to complete the payment.
+            The Google Pay payment token object (encoded as JSON) returned by the Google Pay SDK after the customer
+            authorizes the payment. The token contains the payment information needed to complete the payment.
 
             The object should be passed encoded in a JSON string.
           example: '{"signature": "MEYCIQCv...", "protocolVersion": "ECv2", "signedMessage": "{\"encryptedMessage\":\"...\",\"ephemeralPublicKey\":\"...\",\"tag\":\"...\"}"}'
           writeOnly: true
           x-methodSpecific: true
+          x-method: credit-card
         voucherNumber:
           type: string
           description: |-
-            The card token you received from the card component of Mollie Components. The token represents the customer's card
-            information needed to complete the payment.
+            The card token you received from the card component of Mollie Components. The token represents the customer's
+            card information needed to complete the payment.
           example: '1234567890'
           writeOnly: true
           x-methodSpecific: true
+          x-method: gift-card
         voucherPin:
           type: string
           description: The PIN on the gift card. You can supply this to prefill the PIN, if the card has any.
           example: '1234'
           writeOnly: true
           x-methodSpecific: true
+          x-method: gift-card
         consumerDateOfBirth:
           type: string
           format: date
           description: |-
-            The customer's date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it during
-            the payment process.
+            The customer's date of birth. If not provided via the API, iDeal in3 will ask the customer to provide it
+            during the payment process.
           example: '2000-01-01'
           writeOnly: true
           x-methodSpecific: true
+          x-method: ideal-in3
         extraMerchantData:
           type: object
           description: |-
             For some industries, additional purchase information can be sent to Klarna to increase the authorization rate.
             You can submit your extra data in this field if you have agreed upon this with Klarna. This field should be an
-            object containing any of the allowed keys and sub-objects described at the Klarna Developer Documentation.
+            object containing any of the allowed keys and sub-objects described at the
+            <Anchor label="Klarna Developer Documentation" target="_blank" href="https://docs.klarna.com/acquirer/mollie/api/extra-merchant-data/">Klarna Developer Documentation</Anchor>.
+
+            Reach out to your account manager at Mollie to enable this feature with Klarna, and to agree on which fields
+            you can send.
           properties: {}
           additionalProperties: true
           writeOnly: true
           x-methodSpecific: true
+          x-method: klarna
         sessionId:
           type: string
           description: |-
@@ -34571,28 +34862,38 @@ components:
           example: '...'
           writeOnly: true
           x-methodSpecific: true
+          x-method: paypal
         digitalGoods:
           type: boolean
           description: |-
-            Indicate if you are about to deliver digital goods, such as for example a software license. Setting this parameter
-            can have consequences for your PayPal Seller Protection. Refer to PayPal's documentation for more information.
+            Indicate if you are about to deliver digital goods, such as for example a software license. Setting this
+            parameter can have consequences for your PayPal Seller Protection. Refer to
+            [PayPal's documentation](https://www.paypal.com/us/webapps/mpp/ua/seller-protection) for more information.
           example: true
           writeOnly: true
           x-methodSpecific: true
+          x-method: paypal
         customerReference:
           type: string
           description: |-
-            Used by paysafecard for customer identification across payments. When you generate a customer reference yourself,
-            make sure not to put personal identifiable information or IP addresses in the customer reference directly.
+            Used by paysafecard for customer identification across payments. When you generate a customer reference
+            yourself, make sure not to put personal identifiable information or IP addresses in the customer reference
+            directly.
+
+            If not provided, Mollie will use a hashed version of the customer's IP address.
           example: '1234567890'
           writeOnly: true
           x-methodSpecific: true
+          x-method: paysafecard
         terminalId:
           type: string
-          description: The ID of the terminal device where you want to initiate the payment on.
+          description: |-
+            The ID of the terminal device where you want to initiate the payment on. See also the
+            [Terminals API](ref:terminals-api).
           example: term_1234567890
           writeOnly: true
           x-methodSpecific: true
+          x-method: point-of-sale
     payment-request:
       allOf:
         - $ref: '#/components/schemas/entity-payment'
@@ -37556,20 +37857,6 @@ components:
             The total amount that was charged back for this payment. Only available when the total charged back amount is not
             zero.
           readOnly: true
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account, converted to the currency your account is settled in. Only
-            available once the payment is finalized and the final settlement amount has been determined.
-
-            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
-            Mollie, this field is omitted from the response.
-          readOnly: true
         redirectUrl:
           type:
             - string
@@ -37893,396 +38180,7 @@ components:
           readOnly: true
           example: true
         details:
-          type:
-            - object
-            - 'null'
-          description: |-
-            An object containing payment details collected during the payment process. For example, details may include the
-            customer's card or bank details and a payment reference. For the full list of details, please refer to the
-            [method-specific parameters](extra-payment-parameters) guide.
-          readOnly: true
-          properties:
-            consumerName:
-              type:
-                - string
-                - 'null'
-              description: The customer's name, if made available by the payment method. For card payments, refer to details.cardHolder.
-              example: John Doe
-              x-methodSpecific: true
-            consumerAccount:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The customer's account reference.
-
-                For banking-based payment methods — such as iDEAL — this is normally either an IBAN or a domestic bank account
-                number.
-
-                For PayPal, the account reference is an email address.
-
-                For card and Bancontact payments, refer to details.cardNumber.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            consumerBic:
-              type:
-                - string
-                - 'null'
-              description: The BIC of the customer's bank account, if applicable.
-              example: ABNANL2A
-              x-methodSpecific: true
-            shippingAddress:
-              type:
-                - object
-                - 'null'
-              description: |-
-                For wallet payment methods — such as Apple Pay and PayPal — the shipping address is often already known by the
-                wallet provider. In these cases the shipping address may be available as a payment detail.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            cardNumber:
-              type:
-                - string
-                - 'null'
-              description: |-
-                For bancontact, it will be the customer's masked card number. For cards, it will be the last 4-digit of the
-                PAN. For Point-of-sale, it will be the the last 4 digits of the customer's masked card number.
-              example: '************1234'
-              x-methodSpecific: true
-            bankName:
-              type: string
-              description: The name of the bank that the customer will need to make the bank transfer payment towards.
-              example: Mollie Bank
-              x-methodSpecific: true
-            bankAccount:
-              type: string
-              description: The bank account number the customer will need to make the bank transfer payment towards.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            bankBic:
-              type: string
-              description: The BIC of the bank the customer will need to make the bank transfer payment towards.
-              example: ABNANL2A
-              x-methodSpecific: true
-            transferReference:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any
-                formatting here; show it to the customer as-is.
-              example: '...'
-              x-methodSpecific: true
-            cardFingerprint:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A unique fingerprint for a specific card. Can be used to identify returning customers.
-
-                In the case of Point-of-sale payments, it's a unique identifier assigned to a cardholder's payment account,
-                linking multiple transactions from wallets and physical card to a single account, also across payment methods
-                or when the card is reissued.
-              example: '...'
-              x-methodSpecific: true
-            cardHolder:
-              type:
-                - string
-                - 'null'
-              description: The customer's name as shown on their card.
-              example: John Doe
-              x-methodSpecific: true
-            cardAudition:
-              $ref: '#/components/schemas/payment-details-card-audition-response'
-              x-methodSpecific: true
-            cardLabel:
-              $ref: '#/components/schemas/payment-details-card-label-response'
-              x-methodSpecific: true
-            cardCountryCode:
-              type:
-                - string
-                - 'null'
-              description: The ISO 3166-1 alpha-2 country code of the country the card was issued in.
-              example: NL
-              x-methodSpecific: true
-            cardExpiryDate:
-              type:
-                - string
-                - 'null'
-              description: The expiry date (MM/YY) of the card as displayed on the card.
-              example: 12/25
-              x-methodSpecific: true
-            cardFunding:
-              $ref: '#/components/schemas/payment-details-card-funding-response'
-              x-methodSpecific: true
-            cardSecurity:
-              $ref: '#/components/schemas/payment-details-card-security-response'
-              x-methodSpecific: true
-            feeRegion:
-              $ref: '#/components/schemas/payment-details-fee-region-response'
-              x-methodSpecific: true
-            cardMaskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 and last 4 digits of the card number.
-              example: '...'
-              x-methodSpecific: true
-            card3dsEci:
-              type:
-                - string
-                - 'null'
-              description: The outcome of authentication attempted on transactions enforced by 3DS (ie valid only for oneoff and first).
-              example: '...'
-              x-methodSpecific: true
-            cardBin:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digit of the card bank identification number.
-              example: '...'
-              x-methodSpecific: true
-            cardIssuer:
-              type:
-                - string
-                - 'null'
-              description: The issuer of the Card.
-              example: '...'
-              x-methodSpecific: true
-            failureReason:
-              $ref: '#/components/schemas/payment-details-failure-reason-response'
-              x-methodSpecific: true
-            failureMessage:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A human-friendly failure message that can be shown to the customer. The message is translated in accordance
-                with the payment's locale setting.
-              example: Your card was declined.
-              x-methodSpecific: true
-            wallet:
-              $ref: '#/components/schemas/payment-details-wallet-response'
-              x-methodSpecific: true
-            paypalReference:
-              type:
-                - string
-                - 'null'
-              description: PayPal's reference for the payment.
-              example: '...'
-              x-methodSpecific: true
-            paypalPayerId:
-              type:
-                - string
-                - 'null'
-              description: ID of the customer's PayPal account.
-              example: '...'
-              x-methodSpecific: true
-            sellerProtection:
-              $ref: '#/components/schemas/payment-details-seller-protection-response'
-              x-methodSpecific: true
-            paypalFee:
-              $ref: '#/components/schemas/amount-nullable'
-              description: |-
-                An amount object containing the fee PayPal will charge for this transaction. The field may be omitted if
-                PayPal will not charge a fee for this transaction.
-              x-methodSpecific: true
-            customerReference:
-              type: string
-              description: The paysafecard customer reference either provided via the API or otherwise auto-generated by Mollie.
-              example: '...'
-              x-methodSpecific: true
-            terminalId:
-              type: string
-              description: The ID of the terminal device where the payment took place on.
-              example: term_12345
-              x-methodSpecific: true
-            maskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digits & last 4 digits of the customer's masked card number.
-              example: '...'
-              x-methodSpecific: true
-            receipt:
-              type: object
-              description: The Point of sale receipt object.
-              properties:
-                authorizationCode:
-                  type:
-                    - string
-                    - 'null'
-                  description: A unique code provided by the cardholder’s bank to confirm that the transaction was successfully approved.
-                  example: '...'
-                applicationIdentifier:
-                  type:
-                    - string
-                    - 'null'
-                  description: The unique number that identifies a specific payment application on a chip card.
-                  example: '...'
-                cardReadMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-read-method-response'
-                cardVerificationMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-verification-method-response'
-              x-methodSpecific: true
-            creditorIdentifier:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The creditor identifier indicates who is authorized to execute the payment. In this case, it is a
-                reference to Mollie.
-              example: '...'
-              x-methodSpecific: true
-            dueDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: Estimated date the payment is debited from the customer's bank account, in YYYY-MM-DD format.
-              example: '2025-01-01'
-              x-methodSpecific: true
-            signatureDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: |-
-                Date the payment has been signed by the customer, in YYYY-MM-DD format. Only available if the payment
-                has been signed.
-              example: '2024-03-20'
-              x-methodSpecific: true
-            bankReasonCode:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The official reason why this payment has failed. A detailed description of each reason is available on the
-                website of the European Payments Council.
-              example: '...'
-              x-methodSpecific: true
-            bankReason:
-              type:
-                - string
-                - 'null'
-              description: A human-friendly description of the failure reason.
-              example: '...'
-              x-methodSpecific: true
-            endToEndIdentifier:
-              type:
-                - string
-                - 'null'
-              description: The end-to-end identifier you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            mandateReference:
-              type:
-                - string
-                - 'null'
-              description: The mandate reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            batchReference:
-              type:
-                - string
-                - 'null'
-              description: The batch reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            fileReference:
-              type:
-                - string
-                - 'null'
-              description: The file reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            qrCode:
-              type: object
-              description: |-
-                Optional include. If a QR code was requested during payment creation for a QR-compatible payment method,
-                the QR code details will be available in this object.
-
-                The QR code can be scanned by the customer to complete the payment on their mobile device. For example,
-                Bancontact QR payments can be completed by the customer using the Bancontact app.
-              properties:
-                height:
-                  type: integer
-                  description: The height of the QR code image in pixels.
-                  example: 300
-                width:
-                  type: integer
-                  description: The width of the QR code image in pixels.
-                  example: 300
-                src:
-                  type: string
-                  description: |-
-                    The URL to the QR code image. The image is a PNG file, and can be displayed directly in the browser or
-                    downloaded.
-                  example: https://www.mollie.com/images/qr-code.png
-              x-methodSpecific: true
-            voucherNumber:
-              type: string
-              description: 'For payments with gift cards: the masked gift card number of the first gift card applied to the payment.'
-              example: '...'
-              x-methodSpecific: true
-            giftcards:
-              type: array
-              description: An array of detail objects for each gift card that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            issuer:
-              type: string
-              description: 'For payments with vouchers: the brand name of the first voucher applied.'
-              example: '...'
-              x-methodSpecific: true
-            vouchers:
-              type: array
-              description: An array of detail objects for each voucher that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            remainderAmount:
-              $ref: '#/components/schemas/amount'
-              description: An amount object for the amount that remained after all gift cards or vouchers were applied.
-              x-methodSpecific: true
-            remainderMethod:
-              type: string
-              description: The payment method used to pay the remainder amount, after all gift cards or vouchers were applied.
-              example: creditcard
-              x-methodSpecific: true
-            remainderDetails:
-              type: object
-              description: Optional include. The full payment method details of the remainder payment.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            multibancoReference:
-              type:
-                - string
-                - 'null'
-              description: Multibanco payment reference of the transaction
-              example: 123456789
-              x-methodSpecific: true
-            multibancoEntity:
-              type:
-                - string
-                - 'null'
-              description: Multibanco entity reference of the transaction
-              example: 98765
-              x-methodSpecific: true
-            bizumReference:
-              type:
-                - string
-                - 'null'
-              description: Bizum payment reference of the transaction
-              example: 2901tq2ure1d
-              x-methodSpecific: true
+          $ref: '#/components/schemas/payment-details'
         createdAt:
           $ref: '#/components/schemas/created-at'
         authorizedAt:
@@ -38368,6 +38266,7 @@ components:
               $ref: '#/components/schemas/url'
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
+              x-method: bancontact
             changePaymentState:
               $ref: '#/components/schemas/url-nullable'
               description: |-
@@ -38417,18 +38316,22 @@ components:
               description: |-
                 The API resource URL of the [terminal](get-terminal) this payment was created for. Only present for
                 point-of-sale payments.
+              x-methodSpecific: true
+              x-method: point-of-sale
             status:
               $ref: '#/components/schemas/url'
               description: |-
                 Link to customer-facing page showing the status of the bank transfer (to verify if the transaction was
                 successful).
               x-methodSpecific: true
+              x-method: bank-transfer
             payOnline:
               $ref: '#/components/schemas/url'
               description: |-
                 Link to Mollie Checkout page allowing customers to select a different payment method instead of legacy
                 bank transfer.
               x-methodSpecific: true
+              x-method: bank-transfer
           readOnly: true
     list-payment-response:
       allOf:
@@ -38493,17 +38396,6 @@ components:
         amount:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account for this capture, converted to the currency your account is
-            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
-          readOnly: true
         status:
           allOf:
             - $ref: '#/components/schemas/capture-status-response'
@@ -38627,20 +38519,6 @@ components:
           description: |-
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount deducted from your account balance for this refund, converted to the currency your account is settled
-            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
-            been determined.
-
-            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
-          readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
         paymentId:
@@ -38786,18 +38664,6 @@ components:
         amount:
           $ref: '#/components/schemas/amount'
           description: The amount charged back by the customer.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount deducted from your account balance for this chargeback, converted to the currency your account is
-            settled in. Always a **negative** amount. Only available once the chargeback is finalized and the final settlement
-            amount has been determined.
-          readOnly: true
         reason:
           type:
             - object
@@ -40584,20 +40450,6 @@ components:
             The total amount that was charged back for this payment. Only available when the total charged back amount is not
             zero.
           readOnly: true
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account, converted to the currency your account is settled in. Only
-            available once the payment is finalized and the final settlement amount has been determined.
-
-            Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by
-            Mollie, this field is omitted from the response.
-          readOnly: true
         redirectUrl:
           type:
             - string
@@ -40921,396 +40773,7 @@ components:
           readOnly: true
           example: true
         details:
-          type:
-            - object
-            - 'null'
-          description: |-
-            An object containing payment details collected during the payment process. For example, details may include the
-            customer's card or bank details and a payment reference. For the full list of details, please refer to the
-            [method-specific parameters](extra-payment-parameters) guide.
-          readOnly: true
-          properties:
-            consumerName:
-              type:
-                - string
-                - 'null'
-              description: The customer's name, if made available by the payment method. For card payments, refer to details.cardHolder.
-              example: John Doe
-              x-methodSpecific: true
-            consumerAccount:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The customer's account reference.
-
-                For banking-based payment methods — such as iDEAL — this is normally either an IBAN or a domestic bank account
-                number.
-
-                For PayPal, the account reference is an email address.
-
-                For card and Bancontact payments, refer to details.cardNumber.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            consumerBic:
-              type:
-                - string
-                - 'null'
-              description: The BIC of the customer's bank account, if applicable.
-              example: ABNANL2A
-              x-methodSpecific: true
-            shippingAddress:
-              type:
-                - object
-                - 'null'
-              description: |-
-                For wallet payment methods — such as Apple Pay and PayPal — the shipping address is often already known by the
-                wallet provider. In these cases the shipping address may be available as a payment detail.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            cardNumber:
-              type:
-                - string
-                - 'null'
-              description: |-
-                For bancontact, it will be the customer's masked card number. For cards, it will be the last 4-digit of the
-                PAN. For Point-of-sale, it will be the the last 4 digits of the customer's masked card number.
-              example: '************1234'
-              x-methodSpecific: true
-            bankName:
-              type: string
-              description: The name of the bank that the customer will need to make the bank transfer payment towards.
-              example: Mollie Bank
-              x-methodSpecific: true
-            bankAccount:
-              type: string
-              description: The bank account number the customer will need to make the bank transfer payment towards.
-              example: NL91ABNA0417164300
-              x-methodSpecific: true
-            bankBic:
-              type: string
-              description: The BIC of the bank the customer will need to make the bank transfer payment towards.
-              example: ABNANL2A
-              x-methodSpecific: true
-            transferReference:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The Mollie-generated reference the customer needs to use when transfering the amount. Do not apply any
-                formatting here; show it to the customer as-is.
-              example: '...'
-              x-methodSpecific: true
-            cardFingerprint:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A unique fingerprint for a specific card. Can be used to identify returning customers.
-
-                In the case of Point-of-sale payments, it's a unique identifier assigned to a cardholder's payment account,
-                linking multiple transactions from wallets and physical card to a single account, also across payment methods
-                or when the card is reissued.
-              example: '...'
-              x-methodSpecific: true
-            cardHolder:
-              type:
-                - string
-                - 'null'
-              description: The customer's name as shown on their card.
-              example: John Doe
-              x-methodSpecific: true
-            cardAudition:
-              $ref: '#/components/schemas/payment-details-card-audition-response'
-              x-methodSpecific: true
-            cardLabel:
-              $ref: '#/components/schemas/payment-details-card-label-response'
-              x-methodSpecific: true
-            cardCountryCode:
-              type:
-                - string
-                - 'null'
-              description: The ISO 3166-1 alpha-2 country code of the country the card was issued in.
-              example: NL
-              x-methodSpecific: true
-            cardExpiryDate:
-              type:
-                - string
-                - 'null'
-              description: The expiry date (MM/YY) of the card as displayed on the card.
-              example: 12/25
-              x-methodSpecific: true
-            cardFunding:
-              $ref: '#/components/schemas/payment-details-card-funding-response'
-              x-methodSpecific: true
-            cardSecurity:
-              $ref: '#/components/schemas/payment-details-card-security-response'
-              x-methodSpecific: true
-            feeRegion:
-              $ref: '#/components/schemas/payment-details-fee-region-response'
-              x-methodSpecific: true
-            cardMaskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 and last 4 digits of the card number.
-              example: '...'
-              x-methodSpecific: true
-            card3dsEci:
-              type:
-                - string
-                - 'null'
-              description: The outcome of authentication attempted on transactions enforced by 3DS (ie valid only for oneoff and first).
-              example: '...'
-              x-methodSpecific: true
-            cardBin:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digit of the card bank identification number.
-              example: '...'
-              x-methodSpecific: true
-            cardIssuer:
-              type:
-                - string
-                - 'null'
-              description: The issuer of the Card.
-              example: '...'
-              x-methodSpecific: true
-            failureReason:
-              $ref: '#/components/schemas/payment-details-failure-reason-response'
-              x-methodSpecific: true
-            failureMessage:
-              type:
-                - string
-                - 'null'
-              description: |-
-                A human-friendly failure message that can be shown to the customer. The message is translated in accordance
-                with the payment's locale setting.
-              example: Your card was declined.
-              x-methodSpecific: true
-            wallet:
-              $ref: '#/components/schemas/payment-details-wallet-response'
-              x-methodSpecific: true
-            paypalReference:
-              type:
-                - string
-                - 'null'
-              description: PayPal's reference for the payment.
-              example: '...'
-              x-methodSpecific: true
-            paypalPayerId:
-              type:
-                - string
-                - 'null'
-              description: ID of the customer's PayPal account.
-              example: '...'
-              x-methodSpecific: true
-            sellerProtection:
-              $ref: '#/components/schemas/payment-details-seller-protection-response'
-              x-methodSpecific: true
-            paypalFee:
-              $ref: '#/components/schemas/amount-nullable'
-              description: |-
-                An amount object containing the fee PayPal will charge for this transaction. The field may be omitted if
-                PayPal will not charge a fee for this transaction.
-              x-methodSpecific: true
-            customerReference:
-              type: string
-              description: The paysafecard customer reference either provided via the API or otherwise auto-generated by Mollie.
-              example: '...'
-              x-methodSpecific: true
-            terminalId:
-              type: string
-              description: The ID of the terminal device where the payment took place on.
-              example: term_12345
-              x-methodSpecific: true
-            maskedNumber:
-              type:
-                - string
-                - 'null'
-              description: The first 6 digits & last 4 digits of the customer's masked card number.
-              example: '...'
-              x-methodSpecific: true
-            receipt:
-              type: object
-              description: The Point of sale receipt object.
-              properties:
-                authorizationCode:
-                  type:
-                    - string
-                    - 'null'
-                  description: A unique code provided by the cardholder’s bank to confirm that the transaction was successfully approved.
-                  example: '...'
-                applicationIdentifier:
-                  type:
-                    - string
-                    - 'null'
-                  description: The unique number that identifies a specific payment application on a chip card.
-                  example: '...'
-                cardReadMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-read-method-response'
-                cardVerificationMethod:
-                  $ref: '#/components/schemas/payment-details-receipt-card-verification-method-response'
-              x-methodSpecific: true
-            creditorIdentifier:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The creditor identifier indicates who is authorized to execute the payment. In this case, it is a
-                reference to Mollie.
-              example: '...'
-              x-methodSpecific: true
-            dueDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: Estimated date the payment is debited from the customer's bank account, in YYYY-MM-DD format.
-              example: '2025-01-01'
-              x-methodSpecific: true
-            signatureDate:
-              type:
-                - string
-                - 'null'
-              format: date
-              description: |-
-                Date the payment has been signed by the customer, in YYYY-MM-DD format. Only available if the payment
-                has been signed.
-              example: '2024-03-20'
-              x-methodSpecific: true
-            bankReasonCode:
-              type:
-                - string
-                - 'null'
-              description: |-
-                The official reason why this payment has failed. A detailed description of each reason is available on the
-                website of the European Payments Council.
-              example: '...'
-              x-methodSpecific: true
-            bankReason:
-              type:
-                - string
-                - 'null'
-              description: A human-friendly description of the failure reason.
-              example: '...'
-              x-methodSpecific: true
-            endToEndIdentifier:
-              type:
-                - string
-                - 'null'
-              description: The end-to-end identifier you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            mandateReference:
-              type:
-                - string
-                - 'null'
-              description: The mandate reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            batchReference:
-              type:
-                - string
-                - 'null'
-              description: The batch reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            fileReference:
-              type:
-                - string
-                - 'null'
-              description: The file reference you provided in the batch file.
-              example: '...'
-              x-methodSpecific: true
-            qrCode:
-              type: object
-              description: |-
-                Optional include. If a QR code was requested during payment creation for a QR-compatible payment method,
-                the QR code details will be available in this object.
-
-                The QR code can be scanned by the customer to complete the payment on their mobile device. For example,
-                Bancontact QR payments can be completed by the customer using the Bancontact app.
-              properties:
-                height:
-                  type: integer
-                  description: The height of the QR code image in pixels.
-                  example: 300
-                width:
-                  type: integer
-                  description: The width of the QR code image in pixels.
-                  example: 300
-                src:
-                  type: string
-                  description: |-
-                    The URL to the QR code image. The image is a PNG file, and can be displayed directly in the browser or
-                    downloaded.
-                  example: https://www.mollie.com/images/qr-code.png
-              x-methodSpecific: true
-            voucherNumber:
-              type: string
-              description: 'For payments with gift cards: the masked gift card number of the first gift card applied to the payment.'
-              example: '...'
-              x-methodSpecific: true
-            giftcards:
-              type: array
-              description: An array of detail objects for each gift card that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            issuer:
-              type: string
-              description: 'For payments with vouchers: the brand name of the first voucher applied.'
-              example: '...'
-              x-methodSpecific: true
-            vouchers:
-              type: array
-              description: An array of detail objects for each voucher that was used on this payment, if any.
-              items:
-                type: object
-                properties: {}
-                additionalProperties: true
-              x-methodSpecific: true
-            remainderAmount:
-              $ref: '#/components/schemas/amount'
-              description: An amount object for the amount that remained after all gift cards or vouchers were applied.
-              x-methodSpecific: true
-            remainderMethod:
-              type: string
-              description: The payment method used to pay the remainder amount, after all gift cards or vouchers were applied.
-              example: creditcard
-              x-methodSpecific: true
-            remainderDetails:
-              type: object
-              description: Optional include. The full payment method details of the remainder payment.
-              properties: {}
-              additionalProperties: true
-              x-methodSpecific: true
-            multibancoReference:
-              type:
-                - string
-                - 'null'
-              description: Multibanco payment reference of the transaction
-              example: 123456789
-              x-methodSpecific: true
-            multibancoEntity:
-              type:
-                - string
-                - 'null'
-              description: Multibanco entity reference of the transaction
-              example: 98765
-              x-methodSpecific: true
-            bizumReference:
-              type:
-                - string
-                - 'null'
-              description: Bizum payment reference of the transaction
-              example: 2901tq2ure1d
-              x-methodSpecific: true
+          $ref: '#/components/schemas/payment-details'
         createdAt:
           $ref: '#/components/schemas/created-at'
         authorizedAt:
@@ -41396,6 +40859,7 @@ components:
               $ref: '#/components/schemas/url'
               description: The deeplink URL to the app of the payment method. Currently only available for `bancontact`.
               x-methodSpecific: true
+              x-method: bancontact
             changePaymentState:
               $ref: '#/components/schemas/url-nullable'
               description: |-
@@ -41445,6 +40909,8 @@ components:
               description: |-
                 The API resource URL of the [terminal](get-terminal) this payment was created for. Only present for
                 point-of-sale payments.
+              x-methodSpecific: true
+              x-method: point-of-sale
             documentation:
               $ref: '#/components/schemas/url'
             status:
@@ -41453,12 +40919,14 @@ components:
                 Link to customer-facing page showing the status of the bank transfer (to verify if the transaction was
                 successful).
               x-methodSpecific: true
+              x-method: bank-transfer
             payOnline:
               $ref: '#/components/schemas/url'
               description: |-
                 Link to Mollie Checkout page allowing customers to select a different payment method instead of legacy
                 bank transfer.
               x-methodSpecific: true
+              x-method: bank-transfer
           readOnly: true
     payment-line-item-response:
       type: object
@@ -41759,6 +41227,294 @@ components:
         - recurring
       example: oneoff
       x-speakeasy-unknown-values: allow
+    status-reason-card-scheme-response:
+      type: string
+      enum:
+        - approved_or_completed_successfully
+        - refer_to_card_issuer
+        - invalid_merchant
+        - capture_card
+        - do_not_honor
+        - error
+        - partial_approval
+        - invalid_transaction
+        - invalid_amount
+        - invalid_issuer
+        - lost_card
+        - stolen_card
+        - insufficient_funds
+        - expired_card
+        - invalid_pin
+        - transaction_not_permitted_to_cardholder
+        - transaction_not_allowed_at_terminal
+        - exceeds_withdrawal_amount_limit
+        - restricted_card
+        - security_violation
+        - exceeds_withdrawal_count_limit
+        - allowable_number_of_pin_tries_exceeded
+        - no_reason_to_decline
+        - cannot_verify_pin
+        - issuer_unavailable
+        - unable_to_route_transaction
+        - duplicate_transaction
+        - system_malfunction
+        - honor_with_id
+        - invalid_card_number
+        - format_error
+        - contact_card_issuer
+        - pin_not_changed
+        - invalid_nonexistent_to_account_specified
+        - invalid_nonexistent_from_account_specified
+        - invalid_nonexistent_account_specified
+        - lifecycle_related
+        - domestic_debit_transaction_not_allowed
+        - policy_related
+        - fraud_security_related
+        - invalid_authorization_life_cycle
+        - purchase_amount_only_no_cash_back_allowed
+        - cryptographic_failure
+        - unacceptable_pin
+        - refer_to_card_issuer_special_condition
+        - pick_up_card_special_condition
+        - vip_approval
+        - invalid_account_number
+        - re_enter_transaction
+        - no_action_taken
+        - unable_to_locate_record
+        - file_temporarily_unavailable
+        - no_credit_account
+        - closed_account
+        - no_checking_account
+        - no_savings_account
+        - suspected_fraud
+        - transaction_does_not_fulfill_aml_requirement
+        - pin_data_required
+        - unable_to_locate_previous_message
+        - previous_message_located_inconsistent_data
+        - blocked_first_used
+        - transaction_reversed
+        - credit_issuer_unavailable
+        - pin_cryptographic_error_found
+        - negative_online_cam_result
+        - violation_of_law
+        - force_stip
+        - cash_service_not_available
+        - cashback_request_exceeds_issuer_limit
+        - decline_for_cvv2_failure
+        - transaction_amount_exceeds_pre_authorized_amount
+        - invalid_biller_information
+        - pin_change_unblock_request_declined
+        - unsafe_pin
+        - card_authentication_failed
+        - stop_payment_order
+        - revocation_of_authorization
+        - revocation_of_all_authorizations
+        - forward_to_issuer_xa
+        - forward_to_issuer_xd
+        - unable_to_go_online
+        - additional_customer_authentication_required
+      x-enumDescriptions:
+        approved_or_completed_successfully: The transaction was approved.
+        refer_to_card_issuer: |-
+          The transaction was cancelled after being initially approved by the issuer. This can be due to various reasons,
+          for example, if the shopper returns goods after purchase.
+        invalid_merchant: |-
+          The transaction was refused by the card issuer. The shopper should contact their bank for clarification. The
+          shopper can try again after resolving the issue with their bank, or use another payment method.
+        capture_card: |-
+          The card issuer requests to retain the card. This can be due to a suspected counterfeit or stolen card. This
+          reason is used in an E-Commerce environment although it originates from an in-person payments environment.
+        do_not_honor: |-
+          This is a generic refusal that has several possible causes. The shopper should contact their issuing bank for
+          clarification.
+        error: Payment could not be authorised and resulted in an error. The shopper can try again or use another payment method.
+        partial_approval: A partial approval was made but the transaction was not finalised. The shopper should retry the transaction.
+        invalid_transaction: |-
+          The transaction type is not supported by the card issuer. The shopper should contact their bank for clarification
+          or try another payment method.
+        invalid_amount: The transaction amount is incorrect. The shopper should try again with the correct amount.
+        invalid_issuer: The card issuer is not valid. The shopper should try another card or payment method.
+        lost_card: The card has been reported as lost. The shopper should contact their bank for a replacement card.
+        stolen_card: The card has been reported as stolen. The shopper should contact their bank for a replacement card.
+        insufficient_funds: |-
+          The account associated with the card has insufficient funds. The shopper should use another payment method or
+          contact their bank.
+        expired_card: The card has expired. The shopper should use another card or contact their bank for a replacement.
+        invalid_pin: The PIN entered is incorrect. The shopper should try again with the correct PIN.
+        transaction_not_permitted_to_cardholder: The transaction is not permitted for the cardholder. The shopper should contact their bank for more information.
+        transaction_not_allowed_at_terminal: The transaction is not permitted at the acquirer terminal. The shopper should try another payment method.
+        exceeds_withdrawal_amount_limit: |-
+          The transaction exceeds the withdrawal amount limit. The shopper should try again with a lower amount or contact
+          their bank.
+        restricted_card: The card is restricted. The shopper should contact their bank for more information.
+        security_violation: There is a security violation. The shopper should contact their bank for more information.
+        exceeds_withdrawal_count_limit: The transaction exceeds the withdrawal count limit. The shopper should try again later or contact their bank.
+        allowable_number_of_pin_tries_exceeded: The allowable number of PIN tries has been exceeded. The shopper should contact their bank.
+        no_reason_to_decline: There is no specific reason to decline the request. The shopper should contact their bank for more information.
+        cannot_verify_pin: The PIN cannot be verified. The shopper should try again with the correct PIN.
+        issuer_unavailable: The issuer is not available. The shopper should try again later.
+        unable_to_route_transaction: The transaction cannot be routed. The shopper should try another payment method.
+        duplicate_transaction: Duplicate transaction detected.
+        system_malfunction: There is a system malfunction. The shopper should try again later.
+        honor_with_id: Honor with ID.
+        invalid_card_number: The card number is incorrect. The shopper should verify and try again with the correct card number.
+        format_error: There was a format error in the transaction. The shopper should try again or contact their bank.
+        contact_card_issuer: The card issuer needs to be contacted. The shopper should contact their bank for more information.
+        pin_not_changed: PIN not changed.
+        invalid_nonexistent_to_account_specified: Invalid/nonexistent 'To Account' specified.
+        invalid_nonexistent_from_account_specified: Invalid/nonexistent 'From Account' specified.
+        invalid_nonexistent_account_specified: An invalid or nonexistent account was specified. The shopper should verify the account information and try again.
+        lifecycle_related: The transaction was declined due to life cycle issues. The shopper should contact their bank for more information.
+        domestic_debit_transaction_not_allowed: Domestic debit transaction not allowed.
+        policy_related: The transaction was declined due to policy reasons. The shopper should contact their bank for more information.
+        fraud_security_related: |-
+          The transaction was declined due to fraud or security concerns. The shopper should contact their bank for more
+          information.
+        invalid_authorization_life_cycle: Invalid authorization life cycle.
+        purchase_amount_only_no_cash_back_allowed: Purchase amount only, no cash back allowed.
+        cryptographic_failure: There is a cryptographic failure.
+        unacceptable_pin: Unacceptable PIN.
+        refer_to_card_issuer_special_condition: Refer to card issuer, special condition.
+        pick_up_card_special_condition: The card issuer requests to retain the card. This can be due to a suspected counterfeit or stolen card.
+        vip_approval: V.I.P Approval.
+        invalid_account_number: The account number is incorrect.
+        re_enter_transaction: The transaction should be re-entered. The shopper should try the transaction again.
+        no_action_taken: No action taken (unable to back out prior transaction).
+        unable_to_locate_record: Unable to locate record in file, or account number is missing from the inquiry.
+        file_temporarily_unavailable: File is temporarily unavailable.
+        no_credit_account: No credit account.
+        closed_account: The account associated with the card is closed. The shopper should contact their bank.
+        no_checking_account: No checking account.
+        no_savings_account: No savings account.
+        suspected_fraud: The transaction is suspected of fraud. The shopper should contact their bank for more information.
+        transaction_does_not_fulfill_aml_requirement: Transaction does not fulfill AML requirement.
+        pin_data_required: PIN data is required. The shopper should enter the PIN and try again.
+        unable_to_locate_previous_message: Unable to locate previous message (no match on transaction ID).
+        previous_message_located_inconsistent_data: Previous message located, but the reversal data are inconsistent with original message.
+        blocked_first_used: Transaction from new cardholder, and card not properly unblocked.
+        transaction_reversed: Transaction reversed.
+        credit_issuer_unavailable: The credit issuer is unavailable. The shopper should try again later.
+        pin_cryptographic_error_found: PIN cryptographic error found (error found by VIC security module during PIN decryption).
+        negative_online_cam_result: |-
+          The transaction was declined due to negative online CAM results. The shopper should contact their bank for more
+          information.
+        violation_of_law: |-
+          The transaction cannot be completed due to a violation of law. The shopper should contact their bank for more
+          information.
+        force_stip: Force STIP.
+        cash_service_not_available: The cash service is not available. The shopper should try again later or use another payment method.
+        cashback_request_exceeds_issuer_limit: |-
+          The cashback request exceeds the issuer limit. The shopper should try again with a lower amount or contact their
+          bank.
+        decline_for_cvv2_failure: The transaction was declined due to CVV2 failure. The shopper should try again with the correct CVV2.
+        transaction_amount_exceeds_pre_authorized_amount: Transaction amount exceeds pre-authorized approval amount.
+        invalid_biller_information: Invalid biller information.
+        pin_change_unblock_request_declined: PIN change/unblock request declined.
+        unsafe_pin: Unsafe PIN.
+        card_authentication_failed: Card authentication failed. Or offline PIN authentication interrupted.
+        stop_payment_order: There is a stop payment order. The shopper should contact their bank for more information.
+        revocation_of_authorization: Revocation of authorisation order.
+        revocation_of_all_authorizations: Revocation of all authorisation orders.
+        forward_to_issuer_xa: Forward to issuer.
+        forward_to_issuer_xd: Forward to issuer.
+        unable_to_go_online: The transaction was declined offline. The shopper should try again or use another payment method.
+        additional_customer_authentication_required: Additional customer authentication required.
+      x-speakeasy-unknown-values: allow
+    status-reason-merchant-response:
+      type: string
+      enum:
+        - merchant_id_not_found
+        - merchant_account_closed
+        - terminal_id_not_found
+        - terminal_closed
+        - invalid_category_code
+        - invalid_currency
+        - missing_cvv2_cvc2
+        - cvv2_not_allowed
+        - merchant_not_registered_vbv
+        - merchant_not_registered_for_amex
+        - transaction_not_permitted_at_terminal
+        - agreement_terminal_not_related
+        - invalid_processor_id
+        - invalid_merchant_data
+        - sub_merchant_account_closed
+      x-enumDescriptions:
+        merchant_id_not_found: Merchant ID not found.
+        merchant_account_closed: Merchant account closed.
+        terminal_id_not_found: Terminal ID not found.
+        terminal_closed: Terminal closed.
+        invalid_category_code: Invalid category code.
+        invalid_currency: Invalid currency.
+        missing_cvv2_cvc2: Missing CVV2/CVC2.
+        cvv2_not_allowed: CVV2 not allowed.
+        merchant_not_registered_vbv: Merchant not registered for Verified by Visa/Secure Code.
+        merchant_not_registered_for_amex: Merchant not registered for Amex.
+        transaction_not_permitted_at_terminal: Transaction not permitted at terminal.
+        agreement_terminal_not_related: Agreement and terminal are not related.
+        invalid_processor_id: Invalid processor ID.
+        invalid_merchant_data: Invalid merchant data (Name, City or Postal Code).
+        sub_merchant_account_closed: Sub-merchant account closed.
+      x-speakeasy-unknown-values: allow
+    status-reason-terminal-response:
+      type: string
+      enum:
+        - terminal_busy
+        - terminal_unreachable
+      x-enumDescriptions:
+        terminal_busy: Another transaction was already ongoing on the terminal. Therefore, it could not accept this transaction.
+        terminal_unreachable: |-
+          The transaction did not reach the terminal within 30 seconds. This is generally caused by issues with, or
+          instability of the internet connection of the terminal.
+      x-speakeasy-unknown-values: allow
+    status-reason-voucher-response:
+      type: string
+      enum:
+        - service_failed
+        - invalid_operation
+        - authorization_error
+        - login_failed_without_reason
+        - invalid_retailer
+        - refer_to_card_issuer
+        - card_does_not_exist
+        - expired_card
+        - card_is_blocked
+        - insufficient_funds
+        - invalid_card_id
+        - card_is_transferred
+        - card_is_not_active
+        - incorrect_purchase_value
+        - card_not_available
+        - wrong_currency
+        - login_failed_unknown_user
+        - login_failed_invalid_password
+        - invalid_pin
+        - invalid_ean_code
+      x-enumDescriptions:
+        service_failed: Service failed.
+        invalid_operation: Invalid operation.
+        authorization_error: Authorization failed, not logged in.
+        login_failed_without_reason: Login failed (Reason not specified).
+        invalid_retailer: Invalid/unknown Retailer.
+        refer_to_card_issuer: |-
+          The transaction was cancelled after being initially approved by the issuer. This can be due to various reasons,
+          for example, if the shopper returns goods after purchase.
+        card_does_not_exist: Card or Customer does not exist.
+        expired_card: The card has expired. The shopper should use another card or contact their bank for a replacement.
+        card_is_blocked: Card is blocked.
+        insufficient_funds: |-
+          The account associated with the card has insufficient funds. The shopper should use another payment method or
+          contact their bank.
+        invalid_card_id: Invalid CardId.
+        card_is_transferred: Card is transferred.
+        card_is_not_active: Card is not active.
+        incorrect_purchase_value: Incorrect activation or purchase value.
+        card_not_available: Card not available.
+        wrong_currency: Wrong currency.
+        login_failed_unknown_user: 'Login failed: Unknown user.'
+        login_failed_invalid_password: 'Login failed: Invalid password.'
+        invalid_pin: Invalid PIN.
+        invalid_ean_code: Invalid EAN code.
+      x-speakeasy-unknown-values: allow
     payment-details-card-audition-response:
       type:
         - string
@@ -41950,17 +41706,6 @@ components:
         amount:
           $ref: '#/components/schemas/amount-nullable'
           description: The amount captured. If no amount is provided, the full authorized amount is captured.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount that will be settled to your account for this capture, converted to the currency your account is
-            settled in. Only available once the capture is finalized and the final settlement amount has been determined.
-          readOnly: true
         status:
           allOf:
             - $ref: '#/components/schemas/capture-status-response'
@@ -42069,20 +41814,6 @@ components:
           description: |-
             The amount refunded to your customer with this refund. The amount is allowed to be lower than the original payment
             amount.
-        settlementAmount:
-          deprecated: true
-          allOf:
-            - $ref: '#/components/schemas/amount-nullable'
-          description: |-
-            **Deprecated.** This field will be removed on January 1st, 2027. Use the [Settlements API](list-settlements) or
-            the [List balance transactions endpoint](list-balance-transactions) for settlement data.
-
-            The amount deducted from your account balance for this refund, converted to the currency your account is settled
-            in. Always a **negative** amount. Only available once the refund is finalized and the final settlement amount has
-            been determined.
-
-            For refunds not directly processed by Mollie (e.g. PayPal), the settlement amount is zero.
-          readOnly: true
         metadata:
           $ref: '#/components/schemas/metadata'
         paymentId:

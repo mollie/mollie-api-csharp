@@ -14,9 +14,14 @@ namespace Mollie.Models.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the organization<br/>
-    /// that is completing the payment. It is recommended to include these parameters up front for a seamless flow.<br/>
-    /// Otherwise, Billie will ask the customer to complete the missing fields during checkout.
+    /// Billie is a business-to-business (B2B) payment method. It requires extra information to identify the<br/>
+    /// organization that is completing the payment. It is recommended to include these parameters up front for a<br/>
+    /// seamless flow. Otherwise, Billie will ask the customer to complete the missing fields during checkout.<br/>
+    /// <br/>
+    /// * `billingAddress.organizationName`: The organization's name.<br/>
+    /// * `registrationNumber` _string_: The organization's registration number.<br/>
+    /// * `vatNumber` _string_: The organization's VAT number.<br/>
+    /// * `entityType` _string_: The organization's entity type.
     /// </summary>
     public class Company
     {
