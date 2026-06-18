@@ -57,9 +57,6 @@ namespace Mollie.Models.Components
         [JsonProperty("status")]
         public ListEntitySettlementStatus Status { get; set; } = default!;
 
-        /// <summary>
-        /// The total amount of the settlement.
-        /// </summary>
         [JsonProperty("amount")]
         public ListEntitySettlementAmount Amount { get; set; } = default!;
 

@@ -59,30 +59,15 @@ namespace Mollie.Models.Components
         [JsonProperty("amount")]
         public Amount Amount { get; set; } = default!;
 
-        /// <summary>
-        /// The total amount that is already refunded. Only available when refunds are available for this payment. For some<br/>
-        /// payment methods, this amount may be higher than the payment amount, for example to allow reimbursement of the<br/>
-        /// costs for a return shipment to the customer.
-        /// </summary>
         [JsonProperty("amountRefunded")]
         public ListSettlementPaymentResponseAmountRefunded? AmountRefunded { get; set; }
 
-        /// <summary>
-        /// The remaining amount that can be refunded. Only available when refunds are available for this payment.
-        /// </summary>
         [JsonProperty("amountRemaining")]
         public ListSettlementPaymentResponseAmountRemaining? AmountRemaining { get; set; }
 
-        /// <summary>
-        /// The total amount that is already captured for this payment. Only available when this payment supports captures.
-        /// </summary>
         [JsonProperty("amountCaptured")]
         public ListSettlementPaymentResponseAmountCaptured? AmountCaptured { get; set; }
 
-        /// <summary>
-        /// The total amount that was charged back for this payment. Only available when the total charged back amount is not<br/>
-        /// zero.
-        /// </summary>
         [JsonProperty("amountChargedBack")]
         public ListSettlementPaymentResponseAmountChargedBack? AmountChargedBack { get; set; }
 
@@ -390,12 +375,6 @@ namespace Mollie.Models.Components
         [JsonProperty("_links")]
         public ListSettlementPaymentResponseLinks Links { get; set; } = default!;
 
-        /// <summary>
-        /// The amount settled to your account for this payment, converted to the currency your account is settled in.<br/>
-        /// <br/>
-        /// Amounts not settled by Mollie are not reflected here (e.g. PayPal or gift cards). If no amount is settled by<br/>
-        /// Mollie, this field is omitted from the response.
-        /// </summary>
         [JsonProperty("settlementAmount")]
         public ListSettlementPaymentResponseSettlementAmount? SettlementAmount { get; set; }
     }

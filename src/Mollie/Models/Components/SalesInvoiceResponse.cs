@@ -160,33 +160,18 @@ namespace Mollie.Models.Components
         [JsonProperty("isEInvoice")]
         public bool? IsEInvoice { get; set; }
 
-        /// <summary>
-        /// The amount that is left to be paid.
-        /// </summary>
         [JsonProperty("amountDue")]
         public SalesInvoiceResponseAmountDue? AmountDue { get; set; }
 
-        /// <summary>
-        /// The total amount without VAT before discounts.
-        /// </summary>
         [JsonProperty("subtotalAmount")]
         public SalesInvoiceResponseSubtotalAmount? SubtotalAmount { get; set; }
 
-        /// <summary>
-        /// The total amount with VAT.
-        /// </summary>
         [JsonProperty("totalAmount")]
         public SalesInvoiceResponseTotalAmount? TotalAmount { get; set; }
 
-        /// <summary>
-        /// The total VAT amount.
-        /// </summary>
         [JsonProperty("totalVatAmount")]
         public SalesInvoiceResponseTotalVatAmount? TotalVatAmount { get; set; }
 
-        /// <summary>
-        /// The total amount without VAT after discounts.
-        /// </summary>
         [JsonProperty("discountedSubtotalAmount")]
         public SalesInvoiceResponseDiscountedSubtotalAmount? DiscountedSubtotalAmount { get; set; }
 

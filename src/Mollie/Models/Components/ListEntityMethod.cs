@@ -42,9 +42,6 @@ namespace Mollie.Models.Components
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
-        /// <summary>
-        /// The minimum payment amount required to use this payment method.
-        /// </summary>
         [JsonProperty("minimumAmount")]
         public ListEntityMethodMinimumAmount MinimumAmount { get; set; } = default!;
 

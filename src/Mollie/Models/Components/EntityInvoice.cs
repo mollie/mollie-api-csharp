@@ -45,23 +45,12 @@ namespace Mollie.Models.Components
         [JsonProperty("status")]
         public EntityInvoiceStatus Status { get; set; } = default!;
 
-        /// <summary>
-        /// Total amount of the invoice, excluding VAT.
-        /// </summary>
         [JsonProperty("netAmount")]
         public EntityInvoiceNetAmount NetAmount { get; set; } = default!;
 
-        /// <summary>
-        /// VAT amount of the invoice. Only applicable to merchants registered in the Netherlands. For EU merchants, VAT will<br/>
-        /// be shifted to the recipient (as per article 44 and 196 in the EU VAT Directive 2006/112). For merchants outside<br/>
-        /// the EU, no VAT will be charged.
-        /// </summary>
         [JsonProperty("vatAmount")]
         public EntityInvoiceVatAmount VatAmount { get; set; } = default!;
 
-        /// <summary>
-        /// Total amount of the invoice, including VAT.
-        /// </summary>
         [JsonProperty("grossAmount")]
         public EntityInvoiceGrossAmount GrossAmount { get; set; } = default!;
 
