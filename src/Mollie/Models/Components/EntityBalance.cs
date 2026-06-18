@@ -62,11 +62,6 @@ namespace Mollie.Models.Components
         [JsonProperty("transferFrequency")]
         public EntityBalanceTransferFrequency? TransferFrequency { get; set; }
 
-        /// <summary>
-        /// The minimum amount configured for scheduled automatic settlements. As soon as the amount on the balance exceeds<br/>
-        /// this threshold, the complete balance will be paid out to the transfer destination according to the configured<br/>
-        /// frequency.
-        /// </summary>
         [JsonProperty("transferThreshold")]
         public EntityBalanceTransferThreshold? TransferThreshold { get; set; }
 
@@ -83,16 +78,9 @@ namespace Mollie.Models.Components
         [JsonProperty("transferDestination")]
         public EntityBalanceTransferDestination? TransferDestination { get; set; } = null;
 
-        /// <summary>
-        /// The amount directly available on the balance, e.g. `{"currency":"EUR", "value":"100.00"}`.
-        /// </summary>
         [JsonProperty("availableAmount")]
         public EntityBalanceAvailableAmount AvailableAmount { get; set; } = default!;
 
-        /// <summary>
-        /// The total amount that is queued to be transferred to your balance. For example, a credit card payment can take a<br/>
-        /// few days to clear.
-        /// </summary>
         [JsonProperty("pendingAmount")]
         public EntityBalancePendingAmount PendingAmount { get; set; } = default!;
 
