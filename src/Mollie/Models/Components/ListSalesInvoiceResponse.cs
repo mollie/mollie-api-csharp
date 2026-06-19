@@ -71,6 +71,12 @@ namespace Mollie.Models.Components
         public SalesInvoiceStatusResponse? Status { get; set; }
 
         /// <summary>
+        /// The e-invoice submission status for the invoice, if it was configured to be an e-invoice.
+        /// </summary>
+        [JsonProperty("eInvoiceStatus")]
+        public SalesInvoiceEInvoiceStatus? EInvoiceStatus { get; set; }
+
+        /// <summary>
         /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
         /// </summary>
         [JsonProperty("vatScheme")]

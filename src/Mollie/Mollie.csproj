@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Mollie</PackageId>
-    <Version>1.3.9</Version>
+    <Version>1.3.10</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Speakeasy</Authors>
     <Copyright>Copyright (c) Speakeasy 2026</Copyright>
