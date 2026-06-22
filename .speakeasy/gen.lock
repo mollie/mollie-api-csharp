@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 79707530179241d8e0e6e3ed5649111a
+  docChecksum: 42c4edfb52f63997c3c14d2b5d33d798
   docVersion: 1.0.0
   speakeasyVersion: 1.784.0
   generationVersion: 2.911.0
-  releaseVersion: 1.3.10
-  configChecksum: 1665d9a72cb8aa2d1cbeca2d6deba052
+  releaseVersion: 1.3.11
+  configChecksum: 7e6cefe46d885af5c489d07b2203a8b5
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: f85c5419-b6d4-45b2-9748-0838a13a56f2
-  pristine_commit_hash: 3b80160f4da2b9775f55d0234b0ab0568d0c6e55
-  pristine_tree_hash: fccf26b03966f18bb2878c7f4611c6e2be94eab1
+  generation_id: 0e2d9081-11e3-4ccd-b93c-edd94f19239f
+  pristine_commit_hash: db815aad71fca4d55ed81a73c32641b459fc5ffb
+  pristine_tree_hash: 69ba78ccccdae7ba494cf186b1a0f975ad11a9b0
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -688,8 +688,8 @@ trackedFiles:
     pristine_git_object: ddf2725ab97df46ec7c9199fa7601bad4932355b
   docs/Models/Components/EntityWebhookEventWebhookEventTypes.md:
     id: 950aac5c5608
-    last_write_checksum: sha1:ec86f126cce4bdcdb0cc6785c041016db5b17370
-    pristine_git_object: d527fb388fb549291bd4e60a7bf0c6275e5d9b5c
+    last_write_checksum: sha1:ece08a24a890af137058f73d5647fe05319257cc
+    pristine_git_object: 40794afc2089222dce0ba83c66c166bb51de2a94
   docs/Models/Components/EntityWebhookLinks.md:
     id: 4d7dd6f75bd5
     last_write_checksum: sha1:08c288986f76cc19cec5431806582c5af5a89da0
@@ -2112,8 +2112,8 @@ trackedFiles:
     pristine_git_object: 7ca6bf161cb096b7e0a0f24e9702e13ca8f88963
   docs/Models/Components/WebhookEventTypes.md:
     id: 8f114a99ea2d
-    last_write_checksum: sha1:950ee0357538a1b675a64e12247f3124c4e806b3
-    pristine_git_object: a81ee29a8c246fc011d980efe3e3a6c7f6022bbe
+    last_write_checksum: sha1:1c9db3a268786fcd7d0b37d3103b97765f8988a0
+    pristine_git_object: 19f9a6a38e21ec18df07327e93b885452234340b
   docs/Models/Components/WebhookStatus.md:
     id: 2af02c3db301
     last_write_checksum: sha1:844fc9505307dd7389b3b16918c4a931f598aad9
@@ -4420,8 +4420,8 @@ trackedFiles:
     pristine_git_object: 80759dfbe90d068a75a2a5cb8f07155d7804270b
   src/Mollie/Models/Components/EntityWebhookEventWebhookEventTypes.cs:
     id: 90f46a8b2d27
-    last_write_checksum: sha1:16a059d27458472022074cac106b0870cb1e08e4
-    pristine_git_object: 7860df96037e50aed7cd63f9b8aab4123476d2d3
+    last_write_checksum: sha1:39ea898a05e111855aaec43e4a0d7d450afae1f9
+    pristine_git_object: 32431120e8d6a9e17464ba608acdf67dad0e74a2
   src/Mollie/Models/Components/EntityWebhookLinks.cs:
     id: e7b8b3c12ba5
     last_write_checksum: sha1:36d2130cc85fa574dc82a2a7befe5261ea79f5f6
@@ -5844,8 +5844,8 @@ trackedFiles:
     pristine_git_object: e0a4b98f0127abae5b74cd3275e23a91af7001b7
   src/Mollie/Models/Components/WebhookEventTypes.cs:
     id: ee490627bb01
-    last_write_checksum: sha1:63fe03f44cb122f9b3e5a524e734714e75460d82
-    pristine_git_object: 3dff823cf60e192b72bd1300bc32bf377cd07f5c
+    last_write_checksum: sha1:c1d80cb370f6494b9bd514f46b38faee9fd2d505
+    pristine_git_object: dcdf3de9380525b62ce76e82bb9587411c16cc7e
   src/Mollie/Models/Components/WebhookStatus.cs:
     id: 786ae58626ff
     last_write_checksum: sha1:921bf8f181207efc0c39cdde62a79775db7931a6
@@ -7332,8 +7332,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:40b8ff7991d2c9af6a555754b0162febdfb9fc11
-    pristine_git_object: 1e0d15526ba1a6a3e083b6a65aaea670538f435b
+    last_write_checksum: sha1:e01e0d316acb7ca8c48bc9e5225a4b3687bb0e40
+    pristine_git_object: 86b2643b6013e933ce610fd1b71d63b5d7760f4d
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7372,8 +7372,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:5b9f24f09c6b30477f0d7e8cb244d5e689aef144
-    pristine_git_object: a441c96e4db11d07edb1f476f9c409ae56db6615
+    last_write_checksum: sha1:b080d8f7562c0eff0f9365097fefc4dad925fe48
+    pristine_git_object: d3e163cdf6b55778df44a2e93e5273984e35ca43
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7412,8 +7412,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:36b046e8a9e7d7f6cac4498451ca84b38bd3dbc9
-    pristine_git_object: a67bc294b5f93e15c136e68a279eeef85c1f1b0e
+    last_write_checksum: sha1:399a6c3824551d7c41a546688e66c0eb364566b2
+    pristine_git_object: 15c70ad1addc4f12d14e00b57cb743568b02533a
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11531,13 +11531,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(sales-invoice-response).EInvoiceStatus` **Added**
-  * `Client.SalesInvoices.Create()`:  `response.eInvoiceStatus` **Added**
-  * `Client.SalesInvoices.List()`:  `response.Embedded.SalesInvoices[].EInvoiceStatus` **Added**
-  * `Client.SalesInvoices.Get()`:  `response.eInvoiceStatus` **Added**
-  * `Client.SalesInvoices.Update()`:  `response.eInvoiceStatus` **Added**
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.Create()`: \n  *  `requestBody.EventTypesList.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response.Embedded.Webhooks[].EventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Update()`: \n  *  `requestBody.EventTypes.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Get()`:  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.WebhookEvents.Get()`:  `response.webhookEventTypes` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

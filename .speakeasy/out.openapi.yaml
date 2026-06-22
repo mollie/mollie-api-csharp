@@ -2481,7 +2481,7 @@ paths:
                           id: stl_jDk30akdN
                           reference: 1234567.2404.03
                           status: paidout
-                          createdAt: '2024-04-31T12:50:14+00:00'
+                          createdAt: 2024-04-31T12:50:14+00:00
                           amount:
                             currency: EUR
                             value: '39.75'
@@ -33141,6 +33141,8 @@ components:
         - sales-invoice.issued
         - sales-invoice.canceled
         - sales-invoice.paid
+        - sales-invoice.e-invoice-failed
+        - sales-invoice.e-invoice-issued
         - business-account-transfer.requested
         - business-account-transfer.initiated
         - business-account-transfer.pending-review
@@ -33163,6 +33165,8 @@ components:
         sales-invoice.issued: Occurs when a sales invoice has been issued.
         sales-invoice.canceled: Occurs when a sales invoice has been canceled.
         sales-invoice.paid: Occurs when a sales invoice has been paid.
+        sales-invoice.e-invoice-failed: Occurs when a sales invoice failed to be sent as an e-invoice.
+        sales-invoice.e-invoice-issued: Occurs when a sales invoice has been successfully sent as an e-invoice.
         business-account-transfer.requested: The transfer is requested and waiting for SCA (exempt for Transfers API). SEPA transfer input checks passed.
         business-account-transfer.initiated: The transfer is SCA-authorized for execution. Funds are reserved.
         business-account-transfer.pending-review: The transfer is pending manual review.
@@ -42268,6 +42272,8 @@ components:
         - sales-invoice.issued
         - sales-invoice.canceled
         - sales-invoice.paid
+        - sales-invoice.e-invoice-failed
+        - sales-invoice.e-invoice-issued
         - business-account-transfer.requested
         - business-account-transfer.initiated
         - business-account-transfer.pending-review
@@ -42290,6 +42296,8 @@ components:
         sales-invoice.issued: Occurs when a sales invoice has been issued.
         sales-invoice.canceled: Occurs when a sales invoice has been canceled.
         sales-invoice.paid: Occurs when a sales invoice has been paid.
+        sales-invoice.e-invoice-failed: Occurs when a sales invoice failed to be sent as an e-invoice.
+        sales-invoice.e-invoice-issued: Occurs when a sales invoice has been successfully sent as an e-invoice.
         business-account-transfer.requested: The transfer is requested and waiting for SCA (exempt for Transfers API). SEPA transfer input checks passed.
         business-account-transfer.initiated: The transfer is SCA-authorized for execution. Funds are reserved.
         business-account-transfer.pending-review: The transfer is pending manual review.
