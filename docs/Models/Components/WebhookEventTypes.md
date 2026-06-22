@@ -27,6 +27,8 @@ var value = WebhookEventTypes.PaymentLinkPaid;
 | `SalesInvoiceIssued`                     | sales-invoice.issued                     |
 | `SalesInvoiceCanceled`                   | sales-invoice.canceled                   |
 | `SalesInvoicePaid`                       | sales-invoice.paid                       |
+| `SalesInvoiceEInvoiceFailed`             | sales-invoice.e-invoice-failed           |
+| `SalesInvoiceEInvoiceIssued`             | sales-invoice.e-invoice-issued           |
 | `BusinessAccountTransferRequested`       | business-account-transfer.requested      |
 | `BusinessAccountTransferInitiated`       | business-account-transfer.initiated      |
 | `BusinessAccountTransferPendingReview`   | business-account-transfer.pending-review |

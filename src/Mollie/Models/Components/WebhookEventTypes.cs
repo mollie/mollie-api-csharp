@@ -42,6 +42,10 @@ namespace Mollie.Models.Components
         SalesInvoiceCanceled,
         [JsonProperty("sales-invoice.paid")]
         SalesInvoicePaid,
+        [JsonProperty("sales-invoice.e-invoice-failed")]
+        SalesInvoiceEInvoiceFailed,
+        [JsonProperty("sales-invoice.e-invoice-issued")]
+        SalesInvoiceEInvoiceIssued,
         [JsonProperty("business-account-transfer.requested")]
         BusinessAccountTransferRequested,
         [JsonProperty("business-account-transfer.initiated")]

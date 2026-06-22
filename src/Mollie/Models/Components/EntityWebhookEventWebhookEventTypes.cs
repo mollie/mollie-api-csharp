@@ -35,6 +35,8 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceIssued = new EntityWebhookEventWebhookEventTypes("sales-invoice.issued");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceCanceled = new EntityWebhookEventWebhookEventTypes("sales-invoice.canceled");
         public static readonly EntityWebhookEventWebhookEventTypes SalesInvoicePaid = new EntityWebhookEventWebhookEventTypes("sales-invoice.paid");
+        public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceEInvoiceFailed = new EntityWebhookEventWebhookEventTypes("sales-invoice.e-invoice-failed");
+        public static readonly EntityWebhookEventWebhookEventTypes SalesInvoiceEInvoiceIssued = new EntityWebhookEventWebhookEventTypes("sales-invoice.e-invoice-issued");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferRequested = new EntityWebhookEventWebhookEventTypes("business-account-transfer.requested");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferInitiated = new EntityWebhookEventWebhookEventTypes("business-account-transfer.initiated");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferPendingReview = new EntityWebhookEventWebhookEventTypes("business-account-transfer.pending-review");
@@ -58,6 +60,8 @@ namespace Mollie.Models.Components
                 ["sales-invoice.issued"] = SalesInvoiceIssued,
                 ["sales-invoice.canceled"] = SalesInvoiceCanceled,
                 ["sales-invoice.paid"] = SalesInvoicePaid,
+                ["sales-invoice.e-invoice-failed"] = SalesInvoiceEInvoiceFailed,
+                ["sales-invoice.e-invoice-issued"] = SalesInvoiceEInvoiceIssued,
                 ["business-account-transfer.requested"] = BusinessAccountTransferRequested,
                 ["business-account-transfer.initiated"] = BusinessAccountTransferInitiated,
                 ["business-account-transfer.pending-review"] = BusinessAccountTransferPendingReview,
