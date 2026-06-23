@@ -2203,7 +2203,9 @@ var res = await sdk.Payments.UpdateAsync(
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Method = MethodEnum.Ideal,
+        Method = MethodRequest.CreateMethodEnum(
+            MethodEnum.Ideal
+        ),
         Locale = Locale.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
@@ -2262,7 +2264,9 @@ var res = await sdk.Payments.UpdateAsync(
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Method = MethodEnum.Ideal,
+        Method = MethodRequest.CreateMethodEnum(
+            MethodEnum.Ideal
+        ),
         Locale = Locale.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
@@ -2321,7 +2325,9 @@ var res = await sdk.Payments.UpdateAsync(
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
         WebhookUrl = "https://example.org/webhooks",
-        Method = MethodEnum.Ideal,
+        Method = MethodRequest.CreateMethodEnum(
+            MethodEnum.Ideal
+        ),
         Locale = Locale.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",

@@ -81,8 +81,8 @@ namespace Mollie.Models.Requests
         /// but will only show the methods specified in the array. For example, you can use this functionality to only show<br/>
         /// payment methods from a specific country to your customer `['bancontact', 'belfius']`.
         /// </summary>
-        [JsonProperty("method")]
-        public MethodEnum? Method { get; set; } = null;
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
+        public MethodRequest? Method { get; set; } = null;
 
         /// <summary>
         /// Sets the language for customer-facing content and communications.
