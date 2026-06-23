@@ -68,7 +68,7 @@ namespace Mollie
         /// - The balance has queued refunds.<br/>
         /// - One of the organization's balances is below the negative balance threshold.<br/>
         /// - The payout destination (bank account) is invalid or not configured.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -99,7 +99,7 @@ namespace Mollie
         /// <br/>
         /// The results are paginated. Use the `from` query parameter together with `_links.next` to iterate through<br/>
         /// the full result set.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListPayoutsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -123,7 +123,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single payout by its ID.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutId">Provide the ID of the payout.</param>
         /// <param name="testmode">
@@ -159,7 +159,7 @@ namespace Mollie
         /// to `initiated`, it is too late to cancel.<br/>
         /// <br/>
         /// The canceled payout object is returned with the status set to `canceled`.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutId">Provide the ID of the payout.</param>
         /// <param name="testmode">
@@ -241,7 +241,7 @@ namespace Mollie
         /// - The balance has queued refunds.<br/>
         /// - One of the organization's balances is below the negative balance threshold.<br/>
         /// - The payout destination (bank account) is invalid or not configured.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
@@ -289,7 +289,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-payout", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -441,7 +441,7 @@ namespace Mollie
         /// <br/>
         /// The results are paginated. Use the `from` query parameter together with `_links.next` to iterate through<br/>
         /// the full result set.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListPayoutsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -484,7 +484,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "list-payouts", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -668,7 +668,7 @@ namespace Mollie
         /// </summary>
         /// <remarks>
         /// Retrieve a single payout by its ID.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutId">Provide the ID of the payout.</param>
         /// <param name="testmode">
@@ -720,7 +720,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "get-payout", null, SDKConfiguration.SecuritySource, cancellationToken);
@@ -869,7 +869,7 @@ namespace Mollie
         /// to `initiated`, it is too late to cancel.<br/>
         /// <br/>
         /// The canceled payout object is returned with the status set to `canceled`.<br/>
-        /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="payoutId">Provide the ID of the payout.</param>
         /// <param name="testmode">
@@ -921,7 +921,7 @@ namespace Mollie
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken", "OAuth" }).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "ApiKey", "AdvancedAccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancel-payout", null, SDKConfiguration.SecuritySource, cancellationToken);
