@@ -3,6 +3,18 @@
 
 ## Supported Types
 
+### PaymentResponse
+
+```csharp
+Entity.CreatePaymentResponse(/* values here */);
+```
+
+### EntityRefundResponse
+
+```csharp
+Entity.CreateEntityRefundResponse(/* values here */);
+```
+
 ### PaymentLinkResponse
 
 ```csharp

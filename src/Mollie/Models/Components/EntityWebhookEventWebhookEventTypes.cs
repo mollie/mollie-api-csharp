@@ -24,6 +24,18 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityWebhookEventWebhookEventTypes : IEquatable<EntityWebhookEventWebhookEventTypes>
     {
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentPaid = new EntityWebhookEventWebhookEventTypes("payment.paid");
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentAuthorized = new EntityWebhookEventWebhookEventTypes("payment.authorized");
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentFailed = new EntityWebhookEventWebhookEventTypes("payment.failed");
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentCanceled = new EntityWebhookEventWebhookEventTypes("payment.canceled");
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentExpired = new EntityWebhookEventWebhookEventTypes("payment.expired");
+        public static readonly EntityWebhookEventWebhookEventTypes PaymentPending = new EntityWebhookEventWebhookEventTypes("payment.pending");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundQueued = new EntityWebhookEventWebhookEventTypes("refund.queued");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundPending = new EntityWebhookEventWebhookEventTypes("refund.pending");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundProcessing = new EntityWebhookEventWebhookEventTypes("refund.processing");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundRefunded = new EntityWebhookEventWebhookEventTypes("refund.refunded");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundFailed = new EntityWebhookEventWebhookEventTypes("refund.failed");
+        public static readonly EntityWebhookEventWebhookEventTypes RefundCanceled = new EntityWebhookEventWebhookEventTypes("refund.canceled");
         public static readonly EntityWebhookEventWebhookEventTypes PaymentLinkPaid = new EntityWebhookEventWebhookEventTypes("payment-link.paid");
         public static readonly EntityWebhookEventWebhookEventTypes BalanceTransactionCreated = new EntityWebhookEventWebhookEventTypes("balance-transaction.created");
         public static readonly EntityWebhookEventWebhookEventTypes PayoutInitiated = new EntityWebhookEventWebhookEventTypes("payout.initiated");
@@ -49,6 +61,18 @@ namespace Mollie.Models.Components
         private static readonly Dictionary <string, EntityWebhookEventWebhookEventTypes> _knownValues =
             new Dictionary <string, EntityWebhookEventWebhookEventTypes> ()
             {
+                ["payment.paid"] = PaymentPaid,
+                ["payment.authorized"] = PaymentAuthorized,
+                ["payment.failed"] = PaymentFailed,
+                ["payment.canceled"] = PaymentCanceled,
+                ["payment.expired"] = PaymentExpired,
+                ["payment.pending"] = PaymentPending,
+                ["refund.queued"] = RefundQueued,
+                ["refund.pending"] = RefundPending,
+                ["refund.processing"] = RefundProcessing,
+                ["refund.refunded"] = RefundRefunded,
+                ["refund.failed"] = RefundFailed,
+                ["refund.canceled"] = RefundCanceled,
                 ["payment-link.paid"] = PaymentLinkPaid,
                 ["balance-transaction.created"] = BalanceTransactionCreated,
                 ["payout.initiated"] = PayoutInitiated,
