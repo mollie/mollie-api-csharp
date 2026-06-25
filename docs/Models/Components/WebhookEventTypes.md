@@ -8,7 +8,7 @@ that require explicit selection.
 ```csharp
 using Mollie.Models.Components;
 
-var value = WebhookEventTypes.PaymentLinkPaid;
+var value = WebhookEventTypes.PaymentPaid;
 ```
 
 
@@ -16,6 +16,18 @@ var value = WebhookEventTypes.PaymentLinkPaid;
 
 | Name                                     | Value                                    |
 | ---------------------------------------- | ---------------------------------------- |
+| `PaymentPaid`                            | payment.paid                             |
+| `PaymentAuthorized`                      | payment.authorized                       |
+| `PaymentFailed`                          | payment.failed                           |
+| `PaymentCanceled`                        | payment.canceled                         |
+| `PaymentExpired`                         | payment.expired                          |
+| `PaymentPending`                         | payment.pending                          |
+| `RefundQueued`                           | refund.queued                            |
+| `RefundPending`                          | refund.pending                           |
+| `RefundProcessing`                       | refund.processing                        |
+| `RefundRefunded`                         | refund.refunded                          |
+| `RefundFailed`                           | refund.failed                            |
+| `RefundCanceled`                         | refund.canceled                          |
 | `PaymentLinkPaid`                        | payment-link.paid                        |
 | `BalanceTransactionCreated`              | balance-transaction.created              |
 | `PayoutInitiated`                        | payout.initiated                         |

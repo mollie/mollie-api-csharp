@@ -20,6 +20,30 @@ namespace Mollie.Models.Components
     /// </summary>
     public enum WebhookEventTypes
     {
+        [JsonProperty("payment.paid")]
+        PaymentPaid,
+        [JsonProperty("payment.authorized")]
+        PaymentAuthorized,
+        [JsonProperty("payment.failed")]
+        PaymentFailed,
+        [JsonProperty("payment.canceled")]
+        PaymentCanceled,
+        [JsonProperty("payment.expired")]
+        PaymentExpired,
+        [JsonProperty("payment.pending")]
+        PaymentPending,
+        [JsonProperty("refund.queued")]
+        RefundQueued,
+        [JsonProperty("refund.pending")]
+        RefundPending,
+        [JsonProperty("refund.processing")]
+        RefundProcessing,
+        [JsonProperty("refund.refunded")]
+        RefundRefunded,
+        [JsonProperty("refund.failed")]
+        RefundFailed,
+        [JsonProperty("refund.canceled")]
+        RefundCanceled,
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
         [JsonProperty("balance-transaction.created")]

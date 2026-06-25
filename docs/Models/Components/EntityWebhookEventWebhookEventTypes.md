@@ -8,7 +8,7 @@ that require explicit selection.
 ```csharp
 using Mollie.Models.Components;
 
-var value = EntityWebhookEventWebhookEventTypes.PaymentLinkPaid;
+var value = EntityWebhookEventWebhookEventTypes.PaymentPaid;
 
 // Open enum: use .Of() to create instances from custom string values
 var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
@@ -19,6 +19,18 @@ var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
 
 | Name                                     | Value                                    |
 | ---------------------------------------- | ---------------------------------------- |
+| `PaymentPaid`                            | payment.paid                             |
+| `PaymentAuthorized`                      | payment.authorized                       |
+| `PaymentFailed`                          | payment.failed                           |
+| `PaymentCanceled`                        | payment.canceled                         |
+| `PaymentExpired`                         | payment.expired                          |
+| `PaymentPending`                         | payment.pending                          |
+| `RefundQueued`                           | refund.queued                            |
+| `RefundPending`                          | refund.pending                           |
+| `RefundProcessing`                       | refund.processing                        |
+| `RefundRefunded`                         | refund.refunded                          |
+| `RefundFailed`                           | refund.failed                            |
+| `RefundCanceled`                         | refund.canceled                          |
 | `PaymentLinkPaid`                        | payment-link.paid                        |
 | `BalanceTransactionCreated`              | balance-transaction.created              |
 | `PayoutInitiated`                        | payout.initiated                         |
