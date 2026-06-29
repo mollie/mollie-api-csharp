@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: f73d060cb31edda70719ee260dfa2b8e
+  docChecksum: d8b1d3868a52508147b20fc870338859
   docVersion: 1.0.0
-  speakeasyVersion: 1.785.0
-  generationVersion: 2.912.1
-  releaseVersion: 1.3.13
-  configChecksum: aecc01e82c1076ad32910f1f7323b997
+  speakeasyVersion: 1.786.1
+  generationVersion: 2.913.3
+  releaseVersion: 1.3.14
+  configChecksum: d3b9e96ae232fab2adb8361acf179d84
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: cc5a0fd8-0b2a-49f6-b071-6f5ccc8339ef
-  pristine_commit_hash: d75cf2e52e7a0e88e556cb28838893ae1e7fe35d
-  pristine_tree_hash: bd0ca61ec842c60b7d3855c2bfaff0379bc45140
+  generation_id: 31853be2-156c-4138-9bda-0942a51fc6ae
+  pristine_commit_hash: 258a01a988d779cfc8d2b5baec255642e10abd97
+  pristine_tree_hash: aebee11a64a29859607c0d903c717f51d9f824ce
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -430,14 +430,6 @@ trackedFiles:
     id: 4fbed546117f
     last_write_checksum: sha1:6552c4c88edd1761fe165197150e98a4642d7d9a
     pristine_git_object: de0a00cbf4488563f1b886f194f4b41896acc65e
-  docs/Models/Components/EntityEvent.md:
-    id: 872405e9e7fe
-    last_write_checksum: sha1:8ea344173312db4a025523567f152db18e4d7985
-    pristine_git_object: 3df2f3b9ea0e5ebbee497f0b83c0b5077dc769d6
-  docs/Models/Components/EntityEventLinks.md:
-    id: 53ac6b6f7104
-    last_write_checksum: sha1:315fc919ed87efd57f45a2fb1a2f3b79491d1678
-    pristine_git_object: ab42218621f755dac1b281624c0ad5117d73b749
   docs/Models/Components/EntityInvoice.md:
     id: 17422d02913e
     last_write_checksum: sha1:42c6615d67c11be7c500f5848b3fa9083cb3a084
@@ -2470,22 +2462,14 @@ trackedFiles:
     id: cade32447b4c
     last_write_checksum: sha1:6ccbde73861ff42ccfb3e20f42436e0e755bf4b3
     pristine_git_object: c5101aa391268f110d9a49398cf7e95abe03fed5
-  docs/Models/Requests/GetCustomerLinks.md:
-    id: b002e57693de
-    last_write_checksum: sha1:f169d6234a68be1cfdc25c83ad20a0eeeae96c21
-    pristine_git_object: 936006eaaf2f2791bd5a0693e4286e7ea703e54c
   docs/Models/Requests/GetCustomerRequest.md:
     id: aa903ae6e5b8
-    last_write_checksum: sha1:32a13310b6ae604173d689d55120dc2a68516bc0
-    pristine_git_object: 75427a0ca2743637fba024f1888d5478e23a9cf0
+    last_write_checksum: sha1:2646718bf6a5de5625408bc1481bba0c707f1c0d
+    pristine_git_object: 2e417546a7d39c218cb9cdfa311a95fb35d8947d
   docs/Models/Requests/GetCustomerResponse.md:
     id: 7bd222cac70a
-    last_write_checksum: sha1:6e3bf14f5ee31573df36de2e456a3915ad8a6bab
-    pristine_git_object: 5baf8f237a171b873183e2d7a63881db557df67e
-  docs/Models/Requests/GetCustomerResponseBody.md:
-    id: 7c1734d0891a
-    last_write_checksum: sha1:7e66d3ddb9dc96edb217ae2a4618449feb85281a
-    pristine_git_object: d0ddedde50fcb42da419b28f2eba9ea12e8fea6f
+    last_write_checksum: sha1:208c1ff38ef854ae8080cfaa0f922b3646ed7399
+    pristine_git_object: f1271af67ca64e445e23250f91d9ba7f6906aa87
   docs/Models/Requests/GetInvoiceRequest.md:
     id: b3df6b2cbc12
     last_write_checksum: sha1:0b6254f4c0cd02bbdd839d23b843ee6fe5eaf8ec
@@ -3624,8 +3608,8 @@ trackedFiles:
     pristine_git_object: ec2f5490ceb104034f7d9155047fe699c17b8f83
   docs/sdks/customers/README.md:
     id: 9332759cffc2
-    last_write_checksum: sha1:d70399b6fc9bbc7198b86b648828f491bb59565a
-    pristine_git_object: e8d200ced163c1892486a6c1ba9206e4944bcbcf
+    last_write_checksum: sha1:5729c0845a95591abc108ff3b45ade34c712b37e
+    pristine_git_object: b62f78ff09a9a37f9ceed8ac4ba49500f196b9d6
   docs/sdks/delayedrouting/README.md:
     id: a720b5755911
     last_write_checksum: sha1:610a5052d5ecd825d5c684fb89acf97e75e657be
@@ -3764,8 +3748,8 @@ trackedFiles:
     pristine_git_object: 02faa41bead06c2aa08b8e8397728a3afc786bc8
   src/Mollie/Customers.cs:
     id: 2d3900f51e08
-    last_write_checksum: sha1:04febc7afe188b5a3d2ea0a21ea7ad7fa4610c9a
-    pristine_git_object: 76b63acf1a0d771d228db3f963fa2a4d9280722b
+    last_write_checksum: sha1:99b0139b6268e8f076544bad76cb40013e26fd8a
+    pristine_git_object: c87fcdd9aa382e570c5560e6028e66bfe9a8e56a
   src/Mollie/DelayedRouting.cs:
     id: 5226324e7be2
     last_write_checksum: sha1:9b894eff0c180ad62e9e3ca6849226615e92895a
@@ -4166,14 +4150,6 @@ trackedFiles:
     id: 5122ac90adfd
     last_write_checksum: sha1:cb26b11e62ca21a5de0746eabb5f069dd6f3f004
     pristine_git_object: f11e25d33cc4211f5095928d9a563242f0df7be5
-  src/Mollie/Models/Components/EntityEvent.cs:
-    id: 39d86b52ae85
-    last_write_checksum: sha1:621bbe2ace392c6d5910d5ea99c8fae7af6db260
-    pristine_git_object: c9d7a01aa78c546c4209a3a901ea70ac1af282d5
-  src/Mollie/Models/Components/EntityEventLinks.cs:
-    id: c0c95c4a6248
-    last_write_checksum: sha1:70b000ec0afd61c2fff9d58fa15c4d92a3f4319f
-    pristine_git_object: 15d2a8c9ab681cf4a15bb1e54cd1fbc0dbf0fc16
   src/Mollie/Models/Components/EntityInvoice.cs:
     id: 1c58f9e00cf0
     last_write_checksum: sha1:971d42bc734470928138c6dc70ad788c3e2b8dfa
@@ -6218,22 +6194,14 @@ trackedFiles:
     id: 67c2be6eb3f6
     last_write_checksum: sha1:a2060aea480e9d28fff3bfe5b703312b3ff19150
     pristine_git_object: 512f589760de90d082080f6970bf54fdad45496d
-  src/Mollie/Models/Requests/GetCustomerLinks.cs:
-    id: a162e084fa1b
-    last_write_checksum: sha1:03ad6029c1ad40255b2374c93c141fbbcd259ec5
-    pristine_git_object: d17f6128f03666edc36477f9a1107ef1f3bb89cd
   src/Mollie/Models/Requests/GetCustomerRequest.cs:
     id: 9f1bd82910cc
-    last_write_checksum: sha1:9e4c1a99886020d2f8055255049e375bb781b87d
-    pristine_git_object: f594d126426831f8680a35be4c6c13f8cb563002
+    last_write_checksum: sha1:6bc579b9a33cae4e99cff25e77fa1c0d16ebd4be
+    pristine_git_object: c9eb8526512696aec537d79e0917f4c18ac4dd8a
   src/Mollie/Models/Requests/GetCustomerResponse.cs:
     id: a8f76d96c939
-    last_write_checksum: sha1:d352afc09ce7588775f349c131ef51560a33b88b
-    pristine_git_object: a8ce338fe902caa6890b49c25c5ed73a5820b1b6
-  src/Mollie/Models/Requests/GetCustomerResponseBody.cs:
-    id: c49d8e25cf4a
-    last_write_checksum: sha1:09eeb808671fd10789c8ce190e1c08d42c08ce15
-    pristine_git_object: d941046aa17b340fb84611969dcffb4670253fc3
+    last_write_checksum: sha1:072398d57cd49bf743b44d38d9894805495cd032
+    pristine_git_object: c086f81df6b8700dccc4adb404a30e5b080637f4
   src/Mollie/Models/Requests/GetInvoiceRequest.cs:
     id: 3f19d91f15af
     last_write_checksum: sha1:23bd76e80736d8e08268242342d61bd805e85329
@@ -7340,8 +7308,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:e043e6d0a737d310335d86803cceff7d0fa233d2
-    pristine_git_object: 9da2bd9b3af13deed778c86c81dd1fb8509401cf
+    last_write_checksum: sha1:82fb419f19a442c954b7aabf5d6a9392d293bca3
+    pristine_git_object: 9132cd11259b1e7c2af03f8def23d92b059f7b3e
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7380,8 +7348,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:e2ff71c654d64877671c983345dd2cd45b532414
-    pristine_git_object: d9dd1359ee40b33dc7c2d56d03bf82bf2c8e31cd
+    last_write_checksum: sha1:dfd5da923630c12a7d14743b36ad8bb1538eb9a4
+    pristine_git_object: 59567acebc02c0c61cc87d830b56511bc204dde3
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7420,8 +7388,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:44c2ffc84c2eadec2094a200f53cc2ecbc823dc4
-    pristine_git_object: 9a68ef047449d21ec309bce95a3836113ec1e9b4
+    last_write_checksum: sha1:fd482eb7ab6fb814520bea6df04a3b7da907e525
+    pristine_git_object: e86d0ef5559e8c81b0cb46c8b556486c0edae231
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -8886,7 +8854,7 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": {"0": "<value 1>", "1": "<value 2>", "2": "<value 3>"}, "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}, "events": [{"resource": "event", "type": 200, "createdAt": "2024-03-20T09:13:37.0Z", "message": "Customer created", "_links": {"url": {"href": "https://...", "type": "application/hal+json"}}}]}
+          application/hal+json: {"resource": "customer", "id": "cst_5B8cwPMGnU", "mode": "live", "name": "John Doe", "email": "example@email.com", "locale": "en_US", "metadata": {"0": "<value 1>", "1": "<value 2>", "2": "<value 3>"}, "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "dashboard": {"href": "https://...", "type": "application/hal+json"}, "payments": {"href": "https://...", "type": "application/hal+json"}, "mandates": {"href": "https://...", "type": "application/hal+json"}, "subscriptions": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
   update-customer:
@@ -11539,7 +11507,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Webhooks.Create()`: \n  *  `requestBody.EventTypesList.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.List()`: \n  *  `request.EventTypes` **Changed**\n  *  `response.Embedded.Webhooks[].EventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Update()`: \n  *  `requestBody.EventTypes.union(Array<webhook-event-types>)[]` **Changed**\n  *  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.Webhooks.Get()`:  `response.eventTypes[]` **Changed** (Breaking ⚠️)\n* `Client.WebhookEvents.Get()`:  `response` **Changed** (Breaking ⚠️)\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Customers.Get()`: \n  *  `request.include` **Removed** (Breaking ⚠️)\n  *  `response.events` **Removed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln
