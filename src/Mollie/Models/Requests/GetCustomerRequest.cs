@@ -21,12 +21,6 @@ namespace Mollie.Models.Requests
         public string CustomerId { get; set; } = default!;
 
         /// <summary>
-        /// This endpoint allows you to include additional information via the `include` query string parameter.
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")]
-        public string? Include { get; set; } = null;
-
-        /// <summary>
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
         /// setting the `testmode` query parameter to `true`.<br/>

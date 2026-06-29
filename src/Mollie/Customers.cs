@@ -89,7 +89,6 @@ namespace Mollie
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="include">This endpoint allows you to include additional information via the `include` query string parameter.</param>
         /// <param name="testmode">
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
@@ -109,7 +108,6 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetCustomerResponse> GetAsync(
             string customerId,
-            string? include = null,
             bool? testmode = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
@@ -681,7 +679,6 @@ namespace Mollie
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="include">This endpoint allows you to include additional information via the `include` query string parameter.</param>
         /// <param name="testmode">
         /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
         /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
@@ -701,7 +698,6 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetCustomerResponse> GetAsync(
             string customerId,
-            string? include = null,
             bool? testmode = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
@@ -713,7 +709,6 @@ namespace Mollie
             var request = new GetCustomerRequest()
             {
                 CustomerId = customerId,
-                Include = include,
                 Testmode = testmode,
                 IdempotencyKey = idempotencyKey,
             };
@@ -811,14 +806,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    GetCustomerResponseBody obj;
+                    CustomerResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetCustomerResponseBody>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CustomerResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into GetCustomerResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CustomerResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetCustomerResponse()
@@ -829,7 +824,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.Object = obj;
+                    response.CustomerResponse = obj;
                     return response;
                 }
 
