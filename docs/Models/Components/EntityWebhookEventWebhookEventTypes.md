@@ -31,6 +31,10 @@ var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
 | `RefundRefunded`                         | refund.refunded                          |
 | `RefundFailed`                           | refund.failed                            |
 | `RefundCanceled`                         | refund.canceled                          |
+| `ChargebackReceived`                     | chargeback.received                      |
+| `ChargebackReversed`                     | chargeback.reversed                      |
+| `CaptureSucceeded`                       | capture.succeeded                        |
+| `CaptureFailed`                          | capture.failed                           |
 | `PaymentLinkPaid`                        | payment-link.paid                        |
 | `BalanceTransactionCreated`              | balance-transaction.created              |
 | `PayoutInitiated`                        | payout.initiated                         |

@@ -44,6 +44,14 @@ namespace Mollie.Models.Components
         RefundFailed,
         [JsonProperty("refund.canceled")]
         RefundCanceled,
+        [JsonProperty("chargeback.received")]
+        ChargebackReceived,
+        [JsonProperty("chargeback.reversed")]
+        ChargebackReversed,
+        [JsonProperty("capture.succeeded")]
+        CaptureSucceeded,
+        [JsonProperty("capture.failed")]
+        CaptureFailed,
         [JsonProperty("payment-link.paid")]
         PaymentLinkPaid,
         [JsonProperty("balance-transaction.created")]

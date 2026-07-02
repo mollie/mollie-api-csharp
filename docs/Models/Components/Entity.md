@@ -15,6 +15,18 @@ Entity.CreatePaymentResponse(/* values here */);
 Entity.CreateEntityRefundResponse(/* values here */);
 ```
 
+### EntityChargeback
+
+```csharp
+Entity.CreateEntityChargeback(/* values here */);
+```
+
+### CaptureResponse
+
+```csharp
+Entity.CreateCaptureResponse(/* values here */);
+```
+
 ### PaymentLinkResponse
 
 ```csharp
