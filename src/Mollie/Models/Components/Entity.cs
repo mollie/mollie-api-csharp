@@ -29,6 +29,10 @@ namespace Mollie.Models.Components
 
         public static EntityType EntityRefundResponse { get { return new EntityType("entity-refund-response"); } }
 
+        public static EntityType EntityChargeback { get { return new EntityType("entity-chargeback"); } }
+
+        public static EntityType CaptureResponse { get { return new EntityType("capture-response"); } }
+
         public static EntityType PaymentLinkResponse { get { return new EntityType("payment-link-response"); } }
 
         public static EntityType EntityPayoutResponse { get { return new EntityType("entity-payout-response"); } }
@@ -43,6 +47,8 @@ namespace Mollie.Models.Components
             switch(v) {
                 case "payment-response": return PaymentResponse;
                 case "entity-refund-response": return EntityRefundResponse;
+                case "entity-chargeback": return EntityChargeback;
+                case "capture-response": return CaptureResponse;
                 case "payment-link-response": return PaymentLinkResponse;
                 case "entity-payout-response": return EntityPayoutResponse;
                 case "sales-invoice-response": return SalesInvoiceResponse;
@@ -80,6 +86,12 @@ namespace Mollie.Models.Components
         public EntityRefundResponse? EntityRefundResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
+        public EntityChargeback? EntityChargeback { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public CaptureResponse? CaptureResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
         public PaymentLinkResponse? PaymentLinkResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
@@ -106,6 +118,22 @@ namespace Mollie.Models.Components
 
             Entity res = new Entity(typ);
             res.EntityRefundResponse = entityRefundResponse;
+            return res;
+        }
+        public static Entity CreateEntityChargeback(EntityChargeback entityChargeback)
+        {
+            EntityType typ = EntityType.EntityChargeback;
+
+            Entity res = new Entity(typ);
+            res.EntityChargeback = entityChargeback;
+            return res;
+        }
+        public static Entity CreateCaptureResponse(CaptureResponse captureResponse)
+        {
+            EntityType typ = EntityType.CaptureResponse;
+
+            Entity res = new Entity(typ);
+            res.CaptureResponse = captureResponse;
             return res;
         }
         public static Entity CreatePaymentLinkResponse(PaymentLinkResponse paymentLinkResponse)
@@ -156,6 +184,46 @@ namespace Mollie.Models.Components
 
                 var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new Entity(EntityType.EntityChargeback)
+                    {
+                        EntityChargeback = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EntityChargeback>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(EntityChargeback), new Entity(EntityType.EntityChargeback), "EntityChargeback"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Entity(EntityType.CaptureResponse)
+                    {
+                        CaptureResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<CaptureResponse>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(CaptureResponse), new Entity(EntityType.CaptureResponse), "CaptureResponse"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
                 try
                 {
@@ -318,6 +386,18 @@ namespace Mollie.Models.Components
                 if (res.EntityRefundResponse != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.EntityRefundResponse));
+                    return;
+                }
+
+                if (res.EntityChargeback != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.EntityChargeback));
+                    return;
+                }
+
+                if (res.CaptureResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.CaptureResponse));
                     return;
                 }
 

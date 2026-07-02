@@ -36,6 +36,10 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes RefundRefunded = new EntityWebhookEventWebhookEventTypes("refund.refunded");
         public static readonly EntityWebhookEventWebhookEventTypes RefundFailed = new EntityWebhookEventWebhookEventTypes("refund.failed");
         public static readonly EntityWebhookEventWebhookEventTypes RefundCanceled = new EntityWebhookEventWebhookEventTypes("refund.canceled");
+        public static readonly EntityWebhookEventWebhookEventTypes ChargebackReceived = new EntityWebhookEventWebhookEventTypes("chargeback.received");
+        public static readonly EntityWebhookEventWebhookEventTypes ChargebackReversed = new EntityWebhookEventWebhookEventTypes("chargeback.reversed");
+        public static readonly EntityWebhookEventWebhookEventTypes CaptureSucceeded = new EntityWebhookEventWebhookEventTypes("capture.succeeded");
+        public static readonly EntityWebhookEventWebhookEventTypes CaptureFailed = new EntityWebhookEventWebhookEventTypes("capture.failed");
         public static readonly EntityWebhookEventWebhookEventTypes PaymentLinkPaid = new EntityWebhookEventWebhookEventTypes("payment-link.paid");
         public static readonly EntityWebhookEventWebhookEventTypes BalanceTransactionCreated = new EntityWebhookEventWebhookEventTypes("balance-transaction.created");
         public static readonly EntityWebhookEventWebhookEventTypes PayoutInitiated = new EntityWebhookEventWebhookEventTypes("payout.initiated");
@@ -73,6 +77,10 @@ namespace Mollie.Models.Components
                 ["refund.refunded"] = RefundRefunded,
                 ["refund.failed"] = RefundFailed,
                 ["refund.canceled"] = RefundCanceled,
+                ["chargeback.received"] = ChargebackReceived,
+                ["chargeback.reversed"] = ChargebackReversed,
+                ["capture.succeeded"] = CaptureSucceeded,
+                ["capture.failed"] = CaptureFailed,
                 ["payment-link.paid"] = PaymentLinkPaid,
                 ["balance-transaction.created"] = BalanceTransactionCreated,
                 ["payout.initiated"] = PayoutInitiated,
