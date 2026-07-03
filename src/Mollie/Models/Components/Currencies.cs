@@ -32,6 +32,7 @@ namespace Mollie.Models.Components
         public static readonly Currencies Huf = new Currencies("HUF");
         public static readonly Currencies Aud = new Currencies("AUD");
         public static readonly Currencies Cad = new Currencies("CAD");
+        public static readonly Currencies Ron = new Currencies("RON");
 
         private static readonly Dictionary <string, Currencies> _knownValues =
             new Dictionary <string, Currencies> ()
@@ -47,7 +48,8 @@ namespace Mollie.Models.Components
                 ["CZK"] = Czk,
                 ["HUF"] = Huf,
                 ["AUD"] = Aud,
-                ["CAD"] = Cad
+                ["CAD"] = Cad,
+                ["RON"] = Ron
             };
 
         private static readonly ConcurrentDictionary<string, Currencies> _values =

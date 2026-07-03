@@ -30,9 +30,22 @@ namespace Mollie.Models.Components
         public static readonly PaymentDetailsFeeRegionResponse IntraEuCorporate = new PaymentDetailsFeeRegionResponse("intra-eu-corporate");
         public static readonly PaymentDetailsFeeRegionResponse Domestic = new PaymentDetailsFeeRegionResponse("domestic");
         public static readonly PaymentDetailsFeeRegionResponse Maestro = new PaymentDetailsFeeRegionResponse("maestro");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardCreditBusinessDomestic = new PaymentDetailsFeeRegionResponse("mastercard-credit-business-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardCreditConsumerDomestic = new PaymentDetailsFeeRegionResponse("mastercard-credit-consumer-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardCreditConsumerIntraEea = new PaymentDetailsFeeRegionResponse("mastercard-credit-consumer-intra-eea");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardDebitBusinessDomestic = new PaymentDetailsFeeRegionResponse("mastercard-debit-business-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardDebitBusinessIntraEea = new PaymentDetailsFeeRegionResponse("mastercard-debit-business-intra-eea");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardDebitConsumerDomestic = new PaymentDetailsFeeRegionResponse("mastercard-debit-consumer-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardDebitConsumerIntraEea = new PaymentDetailsFeeRegionResponse("mastercard-debit-consumer-intra-eea");
         public static readonly PaymentDetailsFeeRegionResponse Other = new PaymentDetailsFeeRegionResponse("other");
         public static readonly PaymentDetailsFeeRegionResponse Inter = new PaymentDetailsFeeRegionResponse("inter");
         public static readonly PaymentDetailsFeeRegionResponse IntraEea = new PaymentDetailsFeeRegionResponse("intra_eea");
+        public static readonly PaymentDetailsFeeRegionResponse VisaCreditBusinessDomestic = new PaymentDetailsFeeRegionResponse("visa-credit-business-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse VisaCreditConsumerDomestic = new PaymentDetailsFeeRegionResponse("visa-credit-consumer-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse VisaCreditConsumerIntraEea = new PaymentDetailsFeeRegionResponse("visa-credit-consumer-intra-eea");
+        public static readonly PaymentDetailsFeeRegionResponse VisaDebitBusinessDomestic = new PaymentDetailsFeeRegionResponse("visa-debit-business-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse VisaDebitBusinessIntraEea = new PaymentDetailsFeeRegionResponse("visa-debit-business-intra-eea");
+        public static readonly PaymentDetailsFeeRegionResponse VisaDebitConsumerDomestic = new PaymentDetailsFeeRegionResponse("visa-debit-consumer-domestic");
 
         private static readonly Dictionary <string, PaymentDetailsFeeRegionResponse> _knownValues =
             new Dictionary <string, PaymentDetailsFeeRegionResponse> ()
@@ -44,9 +57,22 @@ namespace Mollie.Models.Components
                 ["intra-eu-corporate"] = IntraEuCorporate,
                 ["domestic"] = Domestic,
                 ["maestro"] = Maestro,
+                ["mastercard-credit-business-domestic"] = MastercardCreditBusinessDomestic,
+                ["mastercard-credit-consumer-domestic"] = MastercardCreditConsumerDomestic,
+                ["mastercard-credit-consumer-intra-eea"] = MastercardCreditConsumerIntraEea,
+                ["mastercard-debit-business-domestic"] = MastercardDebitBusinessDomestic,
+                ["mastercard-debit-business-intra-eea"] = MastercardDebitBusinessIntraEea,
+                ["mastercard-debit-consumer-domestic"] = MastercardDebitConsumerDomestic,
+                ["mastercard-debit-consumer-intra-eea"] = MastercardDebitConsumerIntraEea,
                 ["other"] = Other,
                 ["inter"] = Inter,
-                ["intra_eea"] = IntraEea
+                ["intra_eea"] = IntraEea,
+                ["visa-credit-business-domestic"] = VisaCreditBusinessDomestic,
+                ["visa-credit-consumer-domestic"] = VisaCreditConsumerDomestic,
+                ["visa-credit-consumer-intra-eea"] = VisaCreditConsumerIntraEea,
+                ["visa-debit-business-domestic"] = VisaDebitBusinessDomestic,
+                ["visa-debit-business-intra-eea"] = VisaDebitBusinessIntraEea,
+                ["visa-debit-consumer-domestic"] = VisaDebitConsumerDomestic
             };
 
         private static readonly ConcurrentDictionary<string, PaymentDetailsFeeRegionResponse> _values =

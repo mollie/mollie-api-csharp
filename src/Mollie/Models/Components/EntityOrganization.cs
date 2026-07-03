@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
         /// The registration number of the organization at their local chamber of commerce.
         /// </summary>
         [JsonProperty("registrationNumber")]
-        public string? RegistrationNumber { get; set; }
+        public string? RegistrationNumber { get; set; } = null;
 
         /// <summary>
         /// The VAT number of the organization, if based in the European Union or in The United Kingdom. VAT numbers are<br/>

@@ -83,8 +83,8 @@ namespace Mollie.Models.Components
         /// The industry associated with the profile's trade name or brand. Please refer to the<br/>
         /// <a href="common-data-types#business-category">business category list</a> for all possible options.
         /// </summary>
-        [JsonProperty("businessCategory")]
-        public string BusinessCategory { get; set; } = default!;
+        [JsonProperty("businessCategory", NullValueHandling = NullValueHandling.Include)]
+        public string? BusinessCategory { get; set; }
 
         [JsonProperty("status")]
         public ListProfileResponseStatus Status { get; set; } = default!;

@@ -30,3 +30,4 @@ var custom = ListEntityBalanceCurrency.Of("custom_value");
 | `Huf` | HUF   |
 | `Aud` | AUD   |
 | `Cad` | CAD   |
+| `Ron` | RON   |

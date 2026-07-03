@@ -59,6 +59,9 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransactionType ToBeReleasedRollingReserve = new BalanceTransactionType("to-be-released-rolling-reserve");
         public static readonly BalanceTransactionType HeldRollingReserve = new BalanceTransactionType("held-rolling-reserve");
         public static readonly BalanceTransactionType ReleasedRollingReserve = new BalanceTransactionType("released-rolling-reserve");
+        public static readonly BalanceTransactionType Movement = new BalanceTransactionType("movement");
+        public static readonly BalanceTransactionType InvoiceCompensation = new BalanceTransactionType("invoice-compensation");
+        public static readonly BalanceTransactionType Topup = new BalanceTransactionType("topup");
 
         private static readonly Dictionary <string, BalanceTransactionType> _knownValues =
             new Dictionary <string, BalanceTransactionType> ()
@@ -101,7 +104,10 @@ namespace Mollie.Models.Components
                 ["pending-rolling-reserve"] = PendingRollingReserve,
                 ["to-be-released-rolling-reserve"] = ToBeReleasedRollingReserve,
                 ["held-rolling-reserve"] = HeldRollingReserve,
-                ["released-rolling-reserve"] = ReleasedRollingReserve
+                ["released-rolling-reserve"] = ReleasedRollingReserve,
+                ["movement"] = Movement,
+                ["invoice-compensation"] = InvoiceCompensation,
+                ["topup"] = Topup
             };
 
         private static readonly ConcurrentDictionary<string, BalanceTransactionType> _values =

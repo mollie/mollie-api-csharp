@@ -62,6 +62,6 @@ namespace Mollie.Models.Components
         /// <a href="common-data-types#business-category">business category list</a> for all possible options.
         /// </summary>
         [JsonProperty("businessCategory")]
-        public string? BusinessCategory { get; set; }
+        public string? BusinessCategory { get; set; } = null;
     }
 }
