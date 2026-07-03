@@ -35,6 +35,7 @@ namespace Mollie.Models.Components
         public static readonly EntityBalanceCurrency Huf = new EntityBalanceCurrency("HUF");
         public static readonly EntityBalanceCurrency Aud = new EntityBalanceCurrency("AUD");
         public static readonly EntityBalanceCurrency Cad = new EntityBalanceCurrency("CAD");
+        public static readonly EntityBalanceCurrency Ron = new EntityBalanceCurrency("RON");
 
         private static readonly Dictionary <string, EntityBalanceCurrency> _knownValues =
             new Dictionary <string, EntityBalanceCurrency> ()
@@ -50,7 +51,8 @@ namespace Mollie.Models.Components
                 ["CZK"] = Czk,
                 ["HUF"] = Huf,
                 ["AUD"] = Aud,
-                ["CAD"] = Cad
+                ["CAD"] = Cad,
+                ["RON"] = Ron
             };
 
         private static readonly ConcurrentDictionary<string, EntityBalanceCurrency> _values =

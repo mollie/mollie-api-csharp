@@ -55,3 +55,6 @@ var custom = BalanceTransactionType.Of("custom_value");
 | `ToBeReleasedRollingReserve`         | to-be-released-rolling-reserve       |
 | `HeldRollingReserve`                 | held-rolling-reserve                 |
 | `ReleasedRollingReserve`             | released-rolling-reserve             |
+| `Movement`                           | movement                             |
+| `InvoiceCompensation`                | invoice-compensation                 |
+| `Topup`                              | topup                                |

@@ -28,3 +28,4 @@ var custom = Currencies.Of("custom_value");
 | `Huf` | HUF   |
 | `Aud` | AUD   |
 | `Cad` | CAD   |
+| `Ron` | RON   |

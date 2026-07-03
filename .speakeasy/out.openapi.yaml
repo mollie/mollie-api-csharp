@@ -28214,6 +28214,7 @@ components:
         - HUF
         - AUD
         - CAD
+        - RON
       x-enumDescriptions:
         EUR: Euro
         GBP: British Pound
@@ -28227,6 +28228,7 @@ components:
         HUF: Hungarian Forint
         AUD: Australian Dollar
         CAD: Canadian Dollar
+        RON: Romanian Leu
       example: EUR
       x-speakeasy-unknown-values: allow
     balance-status:
@@ -28506,6 +28508,7 @@ components:
         - 'null'
       description: The payment method, if applicable
       enum:
+        - null
         - alma
         - bacs
         - applepay
@@ -28664,6 +28667,9 @@ components:
         - to-be-released-rolling-reserve
         - held-rolling-reserve
         - released-rolling-reserve
+        - movement
+        - invoice-compensation
+        - topup
       example: payment
       x-speakeasy-unknown-values: allow
     sub-totals:
@@ -30537,9 +30543,22 @@ components:
         - intra-eu-corporate
         - domestic
         - maestro
+        - mastercard-credit-business-domestic
+        - mastercard-credit-consumer-domestic
+        - mastercard-credit-consumer-intra-eea
+        - mastercard-debit-business-domestic
+        - mastercard-debit-business-intra-eea
+        - mastercard-debit-consumer-domestic
+        - mastercard-debit-consumer-intra-eea
         - other
         - inter
         - intra_eea
+        - visa-credit-business-domestic
+        - visa-credit-consumer-domestic
+        - visa-credit-consumer-intra-eea
+        - visa-debit-business-domestic
+        - visa-debit-business-intra-eea
+        - visa-debit-consumer-domestic
       example: maestro
     payment-details-failure-reason:
       type:
@@ -32493,7 +32512,9 @@ components:
           $ref: '#/components/schemas/address'
           description: The address of the organization.
         registrationNumber:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The registration number of the organization at their local chamber of commerce.
           example: '12345678'
         vatNumber:
@@ -32596,7 +32617,9 @@ components:
             - NL
             - GB
         businessCategory:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             The industry associated with the profile's trade name or brand. Please refer to the
             [business category list](common-data-types#business-category) for all possible options.
@@ -32673,7 +32696,9 @@ components:
               href: '...'
               type: text/html
     businessCategory:
-      type: string
+      type:
+        - string
+        - 'null'
       description: |-
         The industry associated with the profile's trade name or brand. Please refer to the
         [business category list](common-data-types#business-category) for all possible options.
@@ -38975,7 +39000,9 @@ components:
             - NL
             - GB
         businessCategory:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             The industry associated with the profile's trade name or brand. Please refer to the
             [business category list](common-data-types#business-category) for all possible options.
@@ -41539,9 +41566,22 @@ components:
         - intra-eu-corporate
         - domestic
         - maestro
+        - mastercard-credit-business-domestic
+        - mastercard-credit-consumer-domestic
+        - mastercard-credit-consumer-intra-eea
+        - mastercard-debit-business-domestic
+        - mastercard-debit-business-intra-eea
+        - mastercard-debit-consumer-domestic
+        - mastercard-debit-consumer-intra-eea
         - other
         - inter
         - intra_eea
+        - visa-credit-business-domestic
+        - visa-credit-consumer-domestic
+        - visa-credit-consumer-intra-eea
+        - visa-debit-business-domestic
+        - visa-debit-business-intra-eea
+        - visa-debit-consumer-domestic
       example: maestro
       x-speakeasy-unknown-values: allow
     payment-details-failure-reason-response:
@@ -42008,7 +42048,9 @@ components:
             - NL
             - GB
         businessCategory:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             The industry associated with the profile's trade name or brand. Please refer to the
             [business category list](common-data-types#business-category) for all possible options.
