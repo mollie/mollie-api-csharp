@@ -7,7 +7,7 @@ Sets the language for customer-facing content and communications.
 ```csharp
 using Mollie.Models.Components;
 
-var value = Locale.EnUS;
+var value = Locale.CaES;
 ```
 
 
@@ -15,28 +15,30 @@ var value = Locale.EnUS;
 
 | Name   | Value  |
 | ------ | ------ |
-| `EnUS` | en_US  |
-| `EnGB` | en_GB  |
-| `Nlnl` | nl_NL  |
-| `NlBE` | nl_BE  |
-| `Dede` | de_DE  |
+| `CaES` | ca_ES  |
+| `CsCZ` | cs_CZ  |
+| `DaDK` | da_DK  |
 | `DeAT` | de_AT  |
 | `DeCH` | de_CH  |
+| `Dede` | de_DE  |
 | `DeLU` | de_LU  |
-| `Frfr` | fr_FR  |
-| `FrBE` | fr_BE  |
-| `FrLU` | fr_LU  |
+| `EnGB` | en_GB  |
+| `EnUS` | en_US  |
 | `Eses` | es_ES  |
-| `CaES` | ca_ES  |
-| `Ptpt` | pt_PT  |
-| `Itit` | it_IT  |
-| `NbNO` | nb_NO  |
-| `SvSE` | sv_SE  |
 | `Fifi` | fi_FI  |
-| `DaDK` | da_DK  |
-| `Isis` | is_IS  |
+| `FrBE` | fr_BE  |
+| `Frfr` | fr_FR  |
+| `FrLU` | fr_LU  |
 | `Huhu` | hu_HU  |
-| `Plpl` | pl_PL  |
-| `Lvlv` | lv_LV  |
+| `Isis` | is_IS  |
+| `Itit` | it_IT  |
 | `Ltlt` | lt_LT  |
+| `Lvlv` | lv_LV  |
+| `NbNO` | nb_NO  |
+| `NlBE` | nl_BE  |
+| `Nlnl` | nl_NL  |
+| `Plpl` | pl_PL  |
+| `Ptpt` | pt_PT  |
+| `Sksk` | sk_SK  |
+| `SvSE` | sv_SE  |
 | `Null` | null   |

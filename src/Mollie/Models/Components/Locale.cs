@@ -19,54 +19,58 @@ namespace Mollie.Models.Components
     /// </summary>
     public enum Locale
     {
-        [JsonProperty("en_US")]
-        EnUS,
-        [JsonProperty("en_GB")]
-        EnGB,
-        [JsonProperty("nl_NL")]
-        Nlnl,
-        [JsonProperty("nl_BE")]
-        NlBE,
-        [JsonProperty("de_DE")]
-        Dede,
+        [JsonProperty("ca_ES")]
+        CaES,
+        [JsonProperty("cs_CZ")]
+        CsCZ,
+        [JsonProperty("da_DK")]
+        DaDK,
         [JsonProperty("de_AT")]
         DeAT,
         [JsonProperty("de_CH")]
         DeCH,
+        [JsonProperty("de_DE")]
+        Dede,
         [JsonProperty("de_LU")]
         DeLU,
-        [JsonProperty("fr_FR")]
-        Frfr,
-        [JsonProperty("fr_BE")]
-        FrBE,
-        [JsonProperty("fr_LU")]
-        FrLU,
+        [JsonProperty("en_GB")]
+        EnGB,
+        [JsonProperty("en_US")]
+        EnUS,
         [JsonProperty("es_ES")]
         Eses,
-        [JsonProperty("ca_ES")]
-        CaES,
-        [JsonProperty("pt_PT")]
-        Ptpt,
-        [JsonProperty("it_IT")]
-        Itit,
-        [JsonProperty("nb_NO")]
-        NbNO,
-        [JsonProperty("sv_SE")]
-        SvSE,
         [JsonProperty("fi_FI")]
         Fifi,
-        [JsonProperty("da_DK")]
-        DaDK,
-        [JsonProperty("is_IS")]
-        Isis,
+        [JsonProperty("fr_BE")]
+        FrBE,
+        [JsonProperty("fr_FR")]
+        Frfr,
+        [JsonProperty("fr_LU")]
+        FrLU,
         [JsonProperty("hu_HU")]
         Huhu,
-        [JsonProperty("pl_PL")]
-        Plpl,
-        [JsonProperty("lv_LV")]
-        Lvlv,
+        [JsonProperty("is_IS")]
+        Isis,
+        [JsonProperty("it_IT")]
+        Itit,
         [JsonProperty("lt_LT")]
         Ltlt,
+        [JsonProperty("lv_LV")]
+        Lvlv,
+        [JsonProperty("nb_NO")]
+        NbNO,
+        [JsonProperty("nl_BE")]
+        NlBE,
+        [JsonProperty("nl_NL")]
+        Nlnl,
+        [JsonProperty("pl_PL")]
+        Plpl,
+        [JsonProperty("pt_PT")]
+        Ptpt,
+        [JsonProperty("sk_SK")]
+        Sksk,
+        [JsonProperty("sv_SE")]
+        SvSE,
         [JsonProperty("null")]
         Null,
     }

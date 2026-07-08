@@ -23,59 +23,63 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class LocaleResponse : IEquatable<LocaleResponse>
     {
-        public static readonly LocaleResponse EnUS = new LocaleResponse("en_US");
-        public static readonly LocaleResponse EnGB = new LocaleResponse("en_GB");
-        public static readonly LocaleResponse Nlnl = new LocaleResponse("nl_NL");
-        public static readonly LocaleResponse NlBE = new LocaleResponse("nl_BE");
-        public static readonly LocaleResponse Dede = new LocaleResponse("de_DE");
+        public static readonly LocaleResponse CaES = new LocaleResponse("ca_ES");
+        public static readonly LocaleResponse CsCZ = new LocaleResponse("cs_CZ");
+        public static readonly LocaleResponse DaDK = new LocaleResponse("da_DK");
         public static readonly LocaleResponse DeAT = new LocaleResponse("de_AT");
         public static readonly LocaleResponse DeCH = new LocaleResponse("de_CH");
+        public static readonly LocaleResponse Dede = new LocaleResponse("de_DE");
         public static readonly LocaleResponse DeLU = new LocaleResponse("de_LU");
-        public static readonly LocaleResponse Frfr = new LocaleResponse("fr_FR");
-        public static readonly LocaleResponse FrBE = new LocaleResponse("fr_BE");
-        public static readonly LocaleResponse FrLU = new LocaleResponse("fr_LU");
+        public static readonly LocaleResponse EnGB = new LocaleResponse("en_GB");
+        public static readonly LocaleResponse EnUS = new LocaleResponse("en_US");
         public static readonly LocaleResponse Eses = new LocaleResponse("es_ES");
-        public static readonly LocaleResponse CaES = new LocaleResponse("ca_ES");
-        public static readonly LocaleResponse Ptpt = new LocaleResponse("pt_PT");
-        public static readonly LocaleResponse Itit = new LocaleResponse("it_IT");
-        public static readonly LocaleResponse NbNO = new LocaleResponse("nb_NO");
-        public static readonly LocaleResponse SvSE = new LocaleResponse("sv_SE");
         public static readonly LocaleResponse Fifi = new LocaleResponse("fi_FI");
-        public static readonly LocaleResponse DaDK = new LocaleResponse("da_DK");
-        public static readonly LocaleResponse Isis = new LocaleResponse("is_IS");
+        public static readonly LocaleResponse FrBE = new LocaleResponse("fr_BE");
+        public static readonly LocaleResponse Frfr = new LocaleResponse("fr_FR");
+        public static readonly LocaleResponse FrLU = new LocaleResponse("fr_LU");
         public static readonly LocaleResponse Huhu = new LocaleResponse("hu_HU");
-        public static readonly LocaleResponse Plpl = new LocaleResponse("pl_PL");
-        public static readonly LocaleResponse Lvlv = new LocaleResponse("lv_LV");
+        public static readonly LocaleResponse Isis = new LocaleResponse("is_IS");
+        public static readonly LocaleResponse Itit = new LocaleResponse("it_IT");
         public static readonly LocaleResponse Ltlt = new LocaleResponse("lt_LT");
+        public static readonly LocaleResponse Lvlv = new LocaleResponse("lv_LV");
+        public static readonly LocaleResponse NbNO = new LocaleResponse("nb_NO");
+        public static readonly LocaleResponse NlBE = new LocaleResponse("nl_BE");
+        public static readonly LocaleResponse Nlnl = new LocaleResponse("nl_NL");
+        public static readonly LocaleResponse Plpl = new LocaleResponse("pl_PL");
+        public static readonly LocaleResponse Ptpt = new LocaleResponse("pt_PT");
+        public static readonly LocaleResponse Sksk = new LocaleResponse("sk_SK");
+        public static readonly LocaleResponse SvSE = new LocaleResponse("sv_SE");
         public static readonly LocaleResponse Null = new LocaleResponse("null");
 
         private static readonly Dictionary <string, LocaleResponse> _knownValues =
             new Dictionary <string, LocaleResponse> ()
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
+                ["ca_ES"] = CaES,
+                ["cs_CZ"] = CsCZ,
+                ["da_DK"] = DaDK,
                 ["de_AT"] = DeAT,
                 ["de_CH"] = DeCH,
+                ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["fr_LU"] = FrLU,
+                ["en_GB"] = EnGB,
+                ["en_US"] = EnUS,
                 ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
                 ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
+                ["fr_BE"] = FrBE,
+                ["fr_FR"] = Frfr,
+                ["fr_LU"] = FrLU,
                 ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
+                ["is_IS"] = Isis,
+                ["it_IT"] = Itit,
                 ["lt_LT"] = Ltlt,
+                ["lv_LV"] = Lvlv,
+                ["nb_NO"] = NbNO,
+                ["nl_BE"] = NlBE,
+                ["nl_NL"] = Nlnl,
+                ["pl_PL"] = Plpl,
+                ["pt_PT"] = Ptpt,
+                ["sk_SK"] = Sksk,
+                ["sv_SE"] = SvSE,
                 ["null"] = Null
             };
 

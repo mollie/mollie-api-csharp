@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 620909411ddc0ed9ddeebec5d8bb0880
+  docChecksum: 30713d9f9e2f48a24d141cac3be6a676
   docVersion: 1.0.0
-  speakeasyVersion: 1.788.0
-  generationVersion: 2.915.0
-  releaseVersion: 1.3.16
-  configChecksum: 2a2a913d8381b61c343fab03b47286bf
+  speakeasyVersion: 1.789.0
+  generationVersion: 2.916.2
+  releaseVersion: 1.3.17
+  configChecksum: e1fdd017b1632d8b75d0bdef75634b42
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: f8824a36-2ed4-4614-a39e-776063299b8a
-  pristine_commit_hash: 60d02dba3b3d6b508770a81337d785da533f63db
-  pristine_tree_hash: 96173beb6efdd13bebd8cb03b5f0fc45e915d5b5
+  generation_id: f97f46ff-03cb-493d-9066-55243ebd6d39
+  pristine_commit_hash: b213d933b547f5efc495ba73d7e5bd2721abdd05
+  pristine_tree_hash: 5dca653b04f49d3ba01ce0637c11a3dfcfe7996c
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -512,8 +512,8 @@ trackedFiles:
     pristine_git_object: af93ae53df7e2579e83f9443dfab6fc029a1ded1
   docs/Models/Components/EntityOrganizationLocale.md:
     id: 30eab591bb93
-    last_write_checksum: sha1:72febe2a5e4994a48c857ab4cfd602c9b9e58f73
-    pristine_git_object: d8d411098dc819bd248dc7428676198c07d817c8
+    last_write_checksum: sha1:dc1c1efc0f147cc17591c2d4fb0a160267b1782b
+    pristine_git_object: 61859bf37b86f895349ace0a6e25263dea5ab2e3
   docs/Models/Components/EntityPairingCode.md:
     id: 90491bc449a5
     last_write_checksum: sha1:267cb769fbcca3c09f8723fc9fd0abad6f67b5b5
@@ -1228,12 +1228,12 @@ trackedFiles:
     pristine_git_object: 87c3e080fa30d0225b8b13ac99d1532f3af20ec6
   docs/Models/Components/Locale.md:
     id: b3c7bda6691d
-    last_write_checksum: sha1:c6ffd40691d83028660326968348b49b33ebd9f5
-    pristine_git_object: fe38e8b0367438960ed204644ae0014864f6dcc4
+    last_write_checksum: sha1:4c9148723f53b6ade71f475350e2b04d7ce87083
+    pristine_git_object: 207bed430e6cf789025fca1ddd744892dc496a78
   docs/Models/Components/LocaleResponse.md:
     id: d1e28e17e24a
-    last_write_checksum: sha1:ada639c2180c59e260c2bbaef536867c7412fbbb
-    pristine_git_object: adff3db7a262b2de6ecc702b62ad3bbcecc6094a
+    last_write_checksum: sha1:2fb9eea869c7ac93a95d3937424608ab4495ddf7
+    pristine_git_object: c45fd56294b91167a703815162ad9d2cfb626753
   docs/Models/Components/ManagedFee.md:
     id: f91cb827943c
     last_write_checksum: sha1:0359e9d61ad1fe4c1ebf609ad669932fea3468c8
@@ -4232,8 +4232,8 @@ trackedFiles:
     pristine_git_object: e975ef18f3d37cce3e88a0ec35a61f2f6ef9345f
   src/Mollie/Models/Components/EntityOrganizationLocale.cs:
     id: 8d3b645674fb
-    last_write_checksum: sha1:073e4f80650397480af096a21fe5b58373b4fea6
-    pristine_git_object: 8436956f4d4df3bc66405b34f576e25a5bf6d0c4
+    last_write_checksum: sha1:1f283c95b1a9838bca5c3811239a1dc95e7da5ba
+    pristine_git_object: 723e624ba2cb72e956c4dcb29a1fbdce2853fed1
   src/Mollie/Models/Components/EntityPairingCode.cs:
     id: a6f11f46f7dc
     last_write_checksum: sha1:35c8fda485d79cddefc4da8461f811cd45554682
@@ -4948,12 +4948,12 @@ trackedFiles:
     pristine_git_object: 4098cca9abe577559a6129ea8e0e90a938051d94
   src/Mollie/Models/Components/Locale.cs:
     id: b8b786869991
-    last_write_checksum: sha1:7d4e73aaef3d810c2cf8aa8b82c8439a1fd66ba2
-    pristine_git_object: 997c0f02a8ef48ec04efe0ec2468c528d9c8df02
+    last_write_checksum: sha1:3f314f3f1ba1e589c89ba5440b77363e41e85b58
+    pristine_git_object: 9b02017d87feedf22c6d77375f99b09f29cbfa7b
   src/Mollie/Models/Components/LocaleResponse.cs:
     id: 2b83d9c7758d
-    last_write_checksum: sha1:1c5614fef9617bebb65de66f3c810cb4bbff0c75
-    pristine_git_object: 71c7214a8211f78983fb69bcd3d50dacc1dff6fc
+    last_write_checksum: sha1:0169056cbcd933420b417938f36303e3ff4fbca5
+    pristine_git_object: d9481bc8409509b57aa10b1d1c1dc77876f21d6e
   src/Mollie/Models/Components/ManagedFee.cs:
     id: 860a36af59e3
     last_write_checksum: sha1:f37ffdfb9cc4cf83399d7a901f32de3bdea84798
@@ -7308,8 +7308,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:faf146e06035292afac370a7b200cbc6facae645
-    pristine_git_object: 08156e426ee682d7012b82d42fda6bdbdd45d325
+    last_write_checksum: sha1:fe0fef3b94d8ac23cb62960ea7d0b01dfc5c8809
+    pristine_git_object: b4c8125f9a1c7878d80a789de1c5aec51d6b70e3
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7348,8 +7348,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:87f7de724a9dea89ea4c3354b02e363321c506e5
-    pristine_git_object: ad29edc3361e58425406ea4534ed7ffec387ea61
+    last_write_checksum: sha1:d4a552946a7557e7b3165a3cb58c6f403d905ecd
+    pristine_git_object: 2e60795113c7d51fd32f0cf14aa7ab5b5f1f18d5
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
@@ -7388,8 +7388,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:4e6aae63bdcf859dc0f3e185b310727750621560
-    pristine_git_object: 9604fbf77940ad9e61655d511eb1c81241769fc8
+    last_write_checksum: sha1:7d33c5335e52be77829a19b5a8d080dacb696c2d
+    pristine_git_object: 2bd721214f031f581c99bdaad6db0f277c7fc679
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11507,7 +11507,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Profiles.Create()`: \n  *  `request.profileRequest.BusinessCategory` **Changed**\n  *  `response.businessCategory` **Changed** (Breaking ⚠️)\n* `Client.Clients.Get()`:  `response.Embedded.Organization.RegistrationNumber` **Changed** (Breaking ⚠️)\n* `Client.Clients.List()`:  `response.Embedded.Clients[].Embedded.Organization.RegistrationNumber` **Changed** (Breaking ⚠️)\n* `Client.Profiles.GetCurrent()`:  `response.businessCategory` **Changed** (Breaking ⚠️)\n* `Client.Profiles.Update()`:  `response.businessCategory` **Changed** (Breaking ⚠️)\n* `Client.Profiles.Get()`:  `response.businessCategory` **Changed** (Breaking ⚠️)\n* `Client.Profiles.List()`:  `response.Embedded.Profiles[].BusinessCategory` **Changed** (Breaking ⚠️)\n* `Client.Organizations.Get()`:  `response.registrationNumber` **Changed** (Breaking ⚠️)\n* `Client.Organizations.GetCurrent()`:  `response.registrationNumber` **Changed** (Breaking ⚠️)\n* `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Details.FeeRegion` **Changed**\n* `Client.Payments.List()`:  `response.Embedded.Payments[].Details.FeeRegion` **Changed**\n* `Client.Settlements.List()`: \n  *  `request.Currencies` **Changed**\n* `Client.Balances.ListTransactions()`:  `response.Embedded.BalanceTransactions[].Type` **Changed**\n* `Client.Balances.GetReport()`:  `response.totals.PendingBalance.Open.Subtotals[].SubTotals[].TransactionType` **Changed**\n* `Client.Balances.GetPrimary()`:  `response.currency.Enum(ron)` **Added**\n* `Client.Balances.Get()`:  `response.currency.Enum(ron)` **Added**\n* `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(payment-response).Details.FeeRegion` **Changed**\n* `Client.Payments.Create()`:  `response.details.FeeRegion` **Changed**\n* `Client.Balances.List()`:  `response.Embedded.Balances[].Currency.Enum(ron)` **Added**\n* `Client.Payments.Get()`:  `response.details.FeeRegion` **Changed**\n* `Client.Payments.Update()`:  `response.details.FeeRegion` **Changed**\n* `Client.Payments.Cancel()`:  `response.details.FeeRegion` **Changed**\n* `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Details.FeeRegion` **Changed**\n* `Client.Customers.CreatePayment()`:  `response.details.FeeRegion` **Changed**\n* `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Details.FeeRegion` **Changed**\n* `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Details.FeeRegion` **Changed**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Organizations.Get()`:  `response.locale` **Changed**\n* `Client.Organizations.GetCurrent()`:  `response.locale` **Changed**\n* `Client.Clients.List()`:  `response.Embedded.Clients[].Embedded.Organization.Locale` **Changed**\n* `Client.Clients.Get()`:  `response.Embedded.Organization.Locale` **Changed**\n* `Client.ClientLinks.Create()`: \n  *  `request.clientLinkRequest.Owner.Locale` **Changed**\n* `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(payment-response).Locale` **Changed**\n* `Client.Payments.Create()`: \n  *  `request.paymentRequest.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Payments.List()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Payments.Get()`:  `response.locale` **Changed**\n* `Client.Payments.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Payments.Cancel()`:  `response.locale` **Changed**\n* `Client.Methods.List()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.All()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.Get()`: \n  *  `request.Locale` **Changed**\n* `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Customers.Create()`: \n  *  `request.entityCustomer.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.List()`:  `response.Embedded.Customers[].Locale` **Changed**\n* `Client.Customers.Get()`:  `response.locale` **Changed**\n* `Client.Customers.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.CreatePayment()`: \n  *  `request.paymentRequest.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln
