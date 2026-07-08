@@ -23,59 +23,63 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class EntityOrganizationLocale : IEquatable<EntityOrganizationLocale>
     {
-        public static readonly EntityOrganizationLocale EnUS = new EntityOrganizationLocale("en_US");
-        public static readonly EntityOrganizationLocale EnGB = new EntityOrganizationLocale("en_GB");
-        public static readonly EntityOrganizationLocale Nlnl = new EntityOrganizationLocale("nl_NL");
-        public static readonly EntityOrganizationLocale NlBE = new EntityOrganizationLocale("nl_BE");
-        public static readonly EntityOrganizationLocale Dede = new EntityOrganizationLocale("de_DE");
+        public static readonly EntityOrganizationLocale CaES = new EntityOrganizationLocale("ca_ES");
+        public static readonly EntityOrganizationLocale CsCZ = new EntityOrganizationLocale("cs_CZ");
+        public static readonly EntityOrganizationLocale DaDK = new EntityOrganizationLocale("da_DK");
         public static readonly EntityOrganizationLocale DeAT = new EntityOrganizationLocale("de_AT");
         public static readonly EntityOrganizationLocale DeCH = new EntityOrganizationLocale("de_CH");
+        public static readonly EntityOrganizationLocale Dede = new EntityOrganizationLocale("de_DE");
         public static readonly EntityOrganizationLocale DeLU = new EntityOrganizationLocale("de_LU");
-        public static readonly EntityOrganizationLocale Frfr = new EntityOrganizationLocale("fr_FR");
-        public static readonly EntityOrganizationLocale FrBE = new EntityOrganizationLocale("fr_BE");
-        public static readonly EntityOrganizationLocale FrLU = new EntityOrganizationLocale("fr_LU");
+        public static readonly EntityOrganizationLocale EnGB = new EntityOrganizationLocale("en_GB");
+        public static readonly EntityOrganizationLocale EnUS = new EntityOrganizationLocale("en_US");
         public static readonly EntityOrganizationLocale Eses = new EntityOrganizationLocale("es_ES");
-        public static readonly EntityOrganizationLocale CaES = new EntityOrganizationLocale("ca_ES");
-        public static readonly EntityOrganizationLocale Ptpt = new EntityOrganizationLocale("pt_PT");
-        public static readonly EntityOrganizationLocale Itit = new EntityOrganizationLocale("it_IT");
-        public static readonly EntityOrganizationLocale NbNO = new EntityOrganizationLocale("nb_NO");
-        public static readonly EntityOrganizationLocale SvSE = new EntityOrganizationLocale("sv_SE");
         public static readonly EntityOrganizationLocale Fifi = new EntityOrganizationLocale("fi_FI");
-        public static readonly EntityOrganizationLocale DaDK = new EntityOrganizationLocale("da_DK");
-        public static readonly EntityOrganizationLocale Isis = new EntityOrganizationLocale("is_IS");
+        public static readonly EntityOrganizationLocale FrBE = new EntityOrganizationLocale("fr_BE");
+        public static readonly EntityOrganizationLocale Frfr = new EntityOrganizationLocale("fr_FR");
+        public static readonly EntityOrganizationLocale FrLU = new EntityOrganizationLocale("fr_LU");
         public static readonly EntityOrganizationLocale Huhu = new EntityOrganizationLocale("hu_HU");
-        public static readonly EntityOrganizationLocale Plpl = new EntityOrganizationLocale("pl_PL");
-        public static readonly EntityOrganizationLocale Lvlv = new EntityOrganizationLocale("lv_LV");
+        public static readonly EntityOrganizationLocale Isis = new EntityOrganizationLocale("is_IS");
+        public static readonly EntityOrganizationLocale Itit = new EntityOrganizationLocale("it_IT");
         public static readonly EntityOrganizationLocale Ltlt = new EntityOrganizationLocale("lt_LT");
+        public static readonly EntityOrganizationLocale Lvlv = new EntityOrganizationLocale("lv_LV");
+        public static readonly EntityOrganizationLocale NbNO = new EntityOrganizationLocale("nb_NO");
+        public static readonly EntityOrganizationLocale NlBE = new EntityOrganizationLocale("nl_BE");
+        public static readonly EntityOrganizationLocale Nlnl = new EntityOrganizationLocale("nl_NL");
+        public static readonly EntityOrganizationLocale Plpl = new EntityOrganizationLocale("pl_PL");
+        public static readonly EntityOrganizationLocale Ptpt = new EntityOrganizationLocale("pt_PT");
+        public static readonly EntityOrganizationLocale Sksk = new EntityOrganizationLocale("sk_SK");
+        public static readonly EntityOrganizationLocale SvSE = new EntityOrganizationLocale("sv_SE");
         public static readonly EntityOrganizationLocale Null = new EntityOrganizationLocale("null");
 
         private static readonly Dictionary <string, EntityOrganizationLocale> _knownValues =
             new Dictionary <string, EntityOrganizationLocale> ()
             {
-                ["en_US"] = EnUS,
-                ["en_GB"] = EnGB,
-                ["nl_NL"] = Nlnl,
-                ["nl_BE"] = NlBE,
-                ["de_DE"] = Dede,
+                ["ca_ES"] = CaES,
+                ["cs_CZ"] = CsCZ,
+                ["da_DK"] = DaDK,
                 ["de_AT"] = DeAT,
                 ["de_CH"] = DeCH,
+                ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
-                ["fr_FR"] = Frfr,
-                ["fr_BE"] = FrBE,
-                ["fr_LU"] = FrLU,
+                ["en_GB"] = EnGB,
+                ["en_US"] = EnUS,
                 ["es_ES"] = Eses,
-                ["ca_ES"] = CaES,
-                ["pt_PT"] = Ptpt,
-                ["it_IT"] = Itit,
-                ["nb_NO"] = NbNO,
-                ["sv_SE"] = SvSE,
                 ["fi_FI"] = Fifi,
-                ["da_DK"] = DaDK,
-                ["is_IS"] = Isis,
+                ["fr_BE"] = FrBE,
+                ["fr_FR"] = Frfr,
+                ["fr_LU"] = FrLU,
                 ["hu_HU"] = Huhu,
-                ["pl_PL"] = Plpl,
-                ["lv_LV"] = Lvlv,
+                ["is_IS"] = Isis,
+                ["it_IT"] = Itit,
                 ["lt_LT"] = Ltlt,
+                ["lv_LV"] = Lvlv,
+                ["nb_NO"] = NbNO,
+                ["nl_BE"] = NlBE,
+                ["nl_NL"] = Nlnl,
+                ["pl_PL"] = Plpl,
+                ["pt_PT"] = Ptpt,
+                ["sk_SK"] = Sksk,
+                ["sv_SE"] = SvSE,
                 ["null"] = Null
             };
 
