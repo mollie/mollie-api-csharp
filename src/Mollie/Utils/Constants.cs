@@ -23,12 +23,12 @@ namespace Mollie.Utils
         /// <summary>
         /// The version of the SDK.
         /// </summary>
-        public const string SdkVersion = "1.3.17";
+        public const string SdkVersion = "1.3.18";
 
         /// <summary>
         /// The version of the SDK generator used to create this SDK.
         /// </summary>
-        public const string SdkGenVersion = "2.916.2";
+        public const string SdkGenVersion = "2.918.3";
 
         /// <summary>
         /// The version of the OpenAPI document used to generate this SDK.

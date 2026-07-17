@@ -12,10 +12,6 @@
 
 ## Create
 
-> 🚧 Beta feature
->
-> This feature is currently in beta testing, and the final specification may still change.
-
 With the Sales Invoice API you can generate sales invoices to send to your customers.
 
 ### Example Usage
@@ -101,10 +97,6 @@ var res = await sdk.SalesInvoices.CreateAsync(
 
 ## List
 
-> 🚧 Beta feature
->
-> This feature is currently in beta testing, and the final specification may still change.
-
 Retrieve a list of all sales invoices created through the API.
 
 The results are paginated.
@@ -160,10 +152,6 @@ while(res != null)
 
 ## Get
 
-> 🚧 Beta feature
->
-> This feature is currently in beta testing, and the final specification may still change.
-
 Retrieve a single sales invoice by its ID.
 
 ### Example Usage
@@ -208,10 +196,6 @@ var res = await sdk.SalesInvoices.GetAsync(
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Update
-
-> 🚧 Beta feature
->
-> This feature is currently in beta testing, and the final specification may still change.
 
 Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for
 statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,
@@ -311,10 +295,6 @@ var res = await sdk.SalesInvoices.UpdateAsync(
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Delete
-
-> 🚧 Beta feature
->
-> This feature is currently in beta testing, and the final specification may still change.
 
 Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the
 [Update sales invoice](update-sales-invoice) endpoint instead.
