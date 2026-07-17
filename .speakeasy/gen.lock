@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 30713d9f9e2f48a24d141cac3be6a676
+  docChecksum: 1985ab5be4566414b3f702902c559f00
   docVersion: 1.0.0
-  speakeasyVersion: 1.789.0
-  generationVersion: 2.916.2
-  releaseVersion: 1.3.17
-  configChecksum: e1fdd017b1632d8b75d0bdef75634b42
+  speakeasyVersion: 1.790.2
+  generationVersion: 2.918.3
+  releaseVersion: 1.3.18
+  configChecksum: ed0e08383c61573d577378258cd518e3
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: f97f46ff-03cb-493d-9066-55243ebd6d39
-  pristine_commit_hash: b213d933b547f5efc495ba73d7e5bd2721abdd05
-  pristine_tree_hash: 5dca653b04f49d3ba01ce0637c11a3dfcfe7996c
+  generation_id: f07853b7-0f47-4588-bb82-e7faaa6c030e
+  pristine_commit_hash: 6c6383bb9dbe913b84d9fe6b28e634bc141abd15
+  pristine_tree_hash: 9b5661c29302ba4860ab8d9deac2eabbc1e0dc9f
 features:
   csharp:
     additionalDependencies: 0.1.0
-    core: 3.15.24
+    core: 3.15.25
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.11
@@ -31,12 +31,12 @@ features:
     methodSecurity: 2.82.5
     nameOverrides: 2.81.4
     nullables: 0.1.1
-    openEnums: 0.1.1
-    pagination: 0.2.11
+    openEnums: 0.1.2
+    pagination: 0.2.12
     responseFormat: 0.0.4
     retries: 0.0.3
     sdkHooks: 0.3.0
-    unions: 1.1.3
+    unions: 1.1.4
 trackedFiles:
   .gitattributes:
     id: 24139dae6567
@@ -3664,8 +3664,8 @@ trackedFiles:
     pristine_git_object: 10415a5404a94fb690439550def66596693bbf9f
   docs/sdks/salesinvoices/README.md:
     id: 7b2a80290a07
-    last_write_checksum: sha1:825f728dc6e5efe47440dd1824e4a032cd05fd14
-    pristine_git_object: 7c531a24e1e12adf2ed4a5f22f3a2f3b58c06701
+    last_write_checksum: sha1:11cbdbc0985823a5f38cd5b8086a298a627906ad
+    pristine_git_object: 288122d78c84ade27f5fb9f6eea223bb831c059b
   docs/sdks/sessions/README.md:
     id: 57ad62844f79
     last_write_checksum: sha1:4cc1d6398ae937a4de49438aaa09d50421b10f1c
@@ -7308,8 +7308,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:fe0fef3b94d8ac23cb62960ea7d0b01dfc5c8809
-    pristine_git_object: b4c8125f9a1c7878d80a789de1c5aec51d6b70e3
+    last_write_checksum: sha1:9e6555b671c1813f66dfc098f9e68014d485d7da
+    pristine_git_object: b45ba07f2cc9e11efbab7048eb596810d7ec6d56
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7348,12 +7348,12 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:d4a552946a7557e7b3165a3cb58c6f403d905ecd
-    pristine_git_object: 2e60795113c7d51fd32f0cf14aa7ab5b5f1f18d5
+    last_write_checksum: sha1:f76fe40a8dd581a423637b470e2de97109587d0f
+    pristine_git_object: 401ef851ea8a9f7c41b577ee7f3a681c79cd4fdb
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
-    last_write_checksum: sha1:bd1181b748845fef0f0685b1600d96cf65e4cf0c
-    pristine_git_object: 3e32b0e10e7d0f8e75c59165f63ca67a3e7d072d
+    last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
+    pristine_git_object: eda705658e4e041a029efe2da7b836cf6d35dca1
   src/Mollie/Sessions.cs:
     id: 1a8cdaf0050f
     last_write_checksum: sha1:5118f9c5cb69dcf562d87fe5bdb5bc24a2557542
@@ -7388,8 +7388,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:7d33c5335e52be77829a19b5a8d080dacb696c2d
-    pristine_git_object: 2bd721214f031f581c99bdaad6db0f277c7fc679
+    last_write_checksum: sha1:8a3db435070b022740b2ab5cc9cfd976bba8032d
+    pristine_git_object: 6a83123e860ebe051caa01c9840c22dc4e626db4
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -11507,7 +11507,6 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Organizations.Get()`:  `response.locale` **Changed**\n* `Client.Organizations.GetCurrent()`:  `response.locale` **Changed**\n* `Client.Clients.List()`:  `response.Embedded.Clients[].Embedded.Organization.Locale` **Changed**\n* `Client.Clients.Get()`:  `response.Embedded.Organization.Locale` **Changed**\n* `Client.ClientLinks.Create()`: \n  *  `request.clientLinkRequest.Owner.Locale` **Changed**\n* `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(payment-response).Locale` **Changed**\n* `Client.Payments.Create()`: \n  *  `request.paymentRequest.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Payments.List()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Payments.Get()`:  `response.locale` **Changed**\n* `Client.Payments.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Payments.Cancel()`:  `response.locale` **Changed**\n* `Client.Methods.List()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.All()`: \n  *  `request.Locale` **Changed**\n* `Client.Methods.Get()`: \n  *  `request.Locale` **Changed**\n* `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Customers.Create()`: \n  *  `request.entityCustomer.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.List()`:  `response.Embedded.Customers[].Locale` **Changed**\n* `Client.Customers.Get()`:  `response.locale` **Changed**\n* `Client.Customers.Update()`: \n  *  `requestBody.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.CreatePayment()`: \n  *  `request.paymentRequest.Locale` **Changed**\n  *  `response.locale` **Changed**\n* `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n* `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Locale` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

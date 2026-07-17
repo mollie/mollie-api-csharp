@@ -32,10 +32,6 @@ namespace Mollie
         /// Create sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// With the Sales Invoice API you can generate sales invoices to send to your customers.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
@@ -60,10 +56,6 @@ namespace Mollie
         /// List sales invoices.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Retrieve a list of all sales invoices created through the API.<br/>
         /// <br/>
         /// The results are paginated.<br/>
@@ -105,10 +97,6 @@ namespace Mollie
         /// Get sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Retrieve a single sales invoice by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
@@ -142,10 +130,6 @@ namespace Mollie
         /// Update sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for<br/>
         /// statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,<br/>
         /// respectively).<br/>
@@ -175,10 +159,6 @@ namespace Mollie
         /// Delete sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the<br/>
         /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
@@ -221,10 +201,6 @@ namespace Mollie
         /// Create sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// With the Sales Invoice API you can generate sales invoices to send to your customers.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
@@ -416,10 +392,6 @@ namespace Mollie
         /// List sales invoices.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Retrieve a list of all sales invoices created through the API.<br/>
         /// <br/>
         /// The results are paginated.<br/>
@@ -660,10 +632,6 @@ namespace Mollie
         /// Get sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Retrieve a single sales invoice by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
@@ -862,10 +830,6 @@ namespace Mollie
         /// Update sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for<br/>
         /// statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,<br/>
         /// respectively).<br/>
@@ -1065,10 +1029,6 @@ namespace Mollie
         /// Delete sales invoice.
         /// </summary>
         /// <remarks>
-        /// &gt; 🚧 Beta feature<br/>
-        /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
-        /// <br/>
         /// Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the<br/>
         /// <a href="update-sales-invoice">Update sales invoice</a> endpoint instead.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>

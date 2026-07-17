@@ -31,7 +31,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 1.3.17
+  version: 1.3.18
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -62,8 +62,10 @@ csharp:
   outputModelSuffix: output
   packageName: Mollie
   packageTags: sdk api client
+  presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sourceDirectory: src
   targetFramework: dotnetVersion
+  unionStrategy: left-to-right
   useNodatime: true

@@ -25955,7 +25955,7 @@ paths:
             - sales-invoices.write
         - oAuth:
             - sales-invoices.write
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\nWith the Sales Invoice API you can generate sales invoices to send to your customers."
+      description: With the Sales Invoice API you can generate sales invoices to send to your customers.
       requestBody:
         content:
           application/json:
@@ -26167,7 +26167,10 @@ paths:
             - sales-invoices.read
         - oAuth:
             - sales-invoices.read
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\nRetrieve a list of all sales invoices created through the API.\n\nThe results are paginated."
+      description: |-
+        Retrieve a list of all sales invoices created through the API.
+
+        The results are paginated.
       parameters:
         - $ref: '#/components/parameters/list-from'
           schema:
@@ -26320,7 +26323,7 @@ paths:
             - sales-invoices.read
         - oAuth:
             - sales-invoices.read
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\nRetrieve a single sales invoice by its ID."
+      description: Retrieve a single sales invoice by its ID.
       responses:
         '200':
           description: The Sales Invoice object.
@@ -26450,7 +26453,10 @@ paths:
             - sales-invoices.write
         - oAuth:
             - sales-invoices.write
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\nCertain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for\nstatuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,\nrespectively)."
+      description: |-
+        Certain details of an existing sales invoice can be updated. For `draft` it is all values listed below, but for
+        statuses `paid` and `issued` there are certain additional requirements (`paymentDetails` and `emailDetails`,
+        respectively).
       requestBody:
         content:
           application/json:
@@ -26617,7 +26623,9 @@ paths:
             - sales-invoices.write
         - oAuth:
             - sales-invoices.write
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\nSales invoices which are in status `draft` can be deleted. For all other statuses, please use the\n[Update sales invoice](update-sales-invoice) endpoint instead."
+      description: |-
+        Sales invoices which are in status `draft` can be deleted. For all other statuses, please use the
+        [Update sales invoice](update-sales-invoice) endpoint instead.
       requestBody:
         content:
           application/json:
@@ -34320,13 +34328,12 @@ components:
             A reference to the payment the sales invoice is paid by. Required for `source` values `payment-link` and
             `payment`.
     sales-invoice-response:
+      required:
+        - resource
+        - id
+        - mode
       allOf:
         - $ref: '#/components/schemas/entity-sales-invoice-response'
-        - type: object
-          required:
-            - resource
-            - id
-            - mode
         - type: object
           properties:
             status:
@@ -40323,13 +40330,12 @@ components:
           readOnly: true
           writeOnly: false
     list-sales-invoice-response:
+      required:
+        - resource
+        - id
+        - mode
       allOf:
         - $ref: '#/components/schemas/list-entity-sales-invoice'
-        - type: object
-          required:
-            - resource
-            - id
-            - mode
         - type: object
           properties:
             status:
