@@ -308,6 +308,13 @@ var sdk = new Mollie.Client(
 * [List](docs/sdks/delayedrouting/README.md#list) - List payment routes
 * [Get](docs/sdks/delayedrouting/README.md#get) - Get a delayed route
 
+### [DraftTransfers](docs/sdks/drafttransfers/README.md)
+
+* [Create](docs/sdks/drafttransfers/README.md#create) - Create draft transfer
+* [List](docs/sdks/drafttransfers/README.md#list) - List draft transfers
+* [Get](docs/sdks/drafttransfers/README.md#get) - Get draft transfer
+* [Cancel](docs/sdks/drafttransfers/README.md#cancel) - Cancel draft transfer
+
 ### [Invoices](docs/sdks/invoices/README.md)
 
 * [List](docs/sdks/invoices/README.md#list) - List invoices
