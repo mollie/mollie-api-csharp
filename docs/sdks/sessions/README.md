@@ -37,6 +37,9 @@ var res = await sdk.Sessions.CreateAsync(
         Description = "Order #12345",
         Lines = new List<SessionLineItem>() {},
         RedirectUrl = "https://example.org/redirect",
+        RequiredCustomerDetails = new List<SessionRequiredCustomerDetails>() {
+            SessionRequiredCustomerDetails.BillingAddress,
+        },
         BillingAddress = new PaymentAddress() {
             Title = "Mr.",
             GivenName = "Piet",
