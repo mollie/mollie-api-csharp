@@ -80,6 +80,17 @@ namespace Mollie.Models.Components
         [JsonProperty("redirectUrl")]
         public string RedirectUrl { get; set; } = default!;
 
+        /// <summary>
+        /// &gt; 🚧 Private beta<br/>
+        /// &gt;<br/>
+        /// &gt; This property is currently in private beta, and the final specification may still change.<br/>
+        /// <br/>
+        /// Declare which customer details should be collected during checkout. Mollie can collect these details for you<br/>
+        /// with the Express Component and returns them on the session's and payment's `billingAddress` and `shippingAddress`.
+        /// </summary>
+        [JsonProperty("requiredCustomerDetails")]
+        public List<SessionRequiredCustomerDetailsResponse>? RequiredCustomerDetails { get; set; }
+
         [JsonProperty("billingAddress")]
         public PaymentAddress? BillingAddress { get; set; }
 
