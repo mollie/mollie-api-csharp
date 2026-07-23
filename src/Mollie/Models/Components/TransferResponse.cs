@@ -43,7 +43,7 @@ namespace Mollie.Models.Components
         /// The debtor (sender) of the transfer, including their name and account details.
         /// </summary>
         [JsonProperty("debtor")]
-        public TransferResponseDebtor Debtor { get; set; } = default!;
+        public Debtor Debtor { get; set; } = default!;
 
         /// <summary>
         /// A party involved in the transfer, representing either the debtor (sender) or creditor (recipient).<br/>
