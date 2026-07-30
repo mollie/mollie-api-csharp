@@ -146,7 +146,7 @@ namespace Mollie.Models.Requests
         /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
         /// `country`.<br/>
         /// <br/>
-        /// Required for payment method `alma`, `in3`, `klarna`, `billie` and `riverty`.
+        /// Required for payment method `alma`, `in3`, `klarna`, `billie`, `billink` and `riverty`.
         /// </summary>
         [JsonProperty("billingAddress")]
         public BillingAddress? BillingAddress { get; set; }

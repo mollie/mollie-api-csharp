@@ -21,6 +21,7 @@ var value = MethodEnum.Alma;
 | `Banktransfer` | banktransfer   |
 | `Belfius`      | belfius        |
 | `Billie`       | billie         |
+| `Billink`      | billink        |
 | `Bizum`        | bizum          |
 | `Blik`         | blik           |
 | `Creditcard`   | creditcard     |
