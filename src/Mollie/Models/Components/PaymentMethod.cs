@@ -31,6 +31,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentMethod Banktransfer = new PaymentMethod("banktransfer");
         public static readonly PaymentMethod Belfius = new PaymentMethod("belfius");
         public static readonly PaymentMethod Billie = new PaymentMethod("billie");
+        public static readonly PaymentMethod Billink = new PaymentMethod("billink");
         public static readonly PaymentMethod Bizum = new PaymentMethod("bizum");
         public static readonly PaymentMethod Bitcoin = new PaymentMethod("bitcoin");
         public static readonly PaymentMethod Blik = new PaymentMethod("blik");
@@ -78,6 +79,7 @@ namespace Mollie.Models.Components
                 ["banktransfer"] = Banktransfer,
                 ["belfius"] = Belfius,
                 ["billie"] = Billie,
+                ["billink"] = Billink,
                 ["bizum"] = Bizum,
                 ["bitcoin"] = Bitcoin,
                 ["blik"] = Blik,

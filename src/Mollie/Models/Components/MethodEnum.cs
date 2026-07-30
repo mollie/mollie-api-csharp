@@ -32,6 +32,8 @@ namespace Mollie.Models.Components
         Belfius,
         [JsonProperty("billie")]
         Billie,
+        [JsonProperty("billink")]
+        Billink,
         [JsonProperty("bizum")]
         Bizum,
         [JsonProperty("blik")]

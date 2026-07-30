@@ -32,6 +32,7 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Banktransfer = new ListEntityMethodId("banktransfer");
         public static readonly ListEntityMethodId Belfius = new ListEntityMethodId("belfius");
         public static readonly ListEntityMethodId Billie = new ListEntityMethodId("billie");
+        public static readonly ListEntityMethodId Billink = new ListEntityMethodId("billink");
         public static readonly ListEntityMethodId Bizum = new ListEntityMethodId("bizum");
         public static readonly ListEntityMethodId Blik = new ListEntityMethodId("blik");
         public static readonly ListEntityMethodId Creditcard = new ListEntityMethodId("creditcard");
@@ -70,6 +71,7 @@ namespace Mollie.Models.Components
                 ["banktransfer"] = Banktransfer,
                 ["belfius"] = Belfius,
                 ["billie"] = Billie,
+                ["billink"] = Billink,
                 ["bizum"] = Bizum,
                 ["blik"] = Blik,
                 ["creditcard"] = Creditcard,

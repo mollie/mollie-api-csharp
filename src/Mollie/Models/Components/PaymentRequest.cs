@@ -79,7 +79,7 @@ namespace Mollie.Models.Components
         /// <br/>
         /// All lines must have the same currency as the payment.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna`, `riverty` and `voucher`.
+        /// Required for payment methods `billie`, `billink`, `in3`, `klarna`, `riverty` and `voucher`.
         /// </summary>
         [JsonProperty("lines")]
         public List<PaymentRequestLine>? Lines { get; set; } = null;
@@ -91,7 +91,7 @@ namespace Mollie.Models.Components
         /// Should include `email` or a valid postal address consisting of `streetAndNumber`, `postalCode`, `city` and<br/>
         /// `country`.<br/>
         /// <br/>
-        /// Required for payment method `alma`, `in3`, `klarna`, `billie` and `riverty`.
+        /// Required for payment method `alma`, `in3`, `klarna`, `billie`, `billink` and `riverty`.
         /// </summary>
         [JsonProperty("billingAddress")]
         public PaymentRequestBillingAddress? BillingAddress { get; set; }

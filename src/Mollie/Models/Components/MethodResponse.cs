@@ -28,6 +28,7 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Banktransfer = new MethodResponse("banktransfer");
         public static readonly MethodResponse Belfius = new MethodResponse("belfius");
         public static readonly MethodResponse Billie = new MethodResponse("billie");
+        public static readonly MethodResponse Billink = new MethodResponse("billink");
         public static readonly MethodResponse Bizum = new MethodResponse("bizum");
         public static readonly MethodResponse Blik = new MethodResponse("blik");
         public static readonly MethodResponse Creditcard = new MethodResponse("creditcard");
@@ -70,6 +71,7 @@ namespace Mollie.Models.Components
                 ["banktransfer"] = Banktransfer,
                 ["belfius"] = Belfius,
                 ["billie"] = Billie,
+                ["billink"] = Billink,
                 ["bizum"] = Bizum,
                 ["blik"] = Blik,
                 ["creditcard"] = Creditcard,
