@@ -91,10 +91,11 @@ namespace Mollie.Models.Requests
         public Locale? Locale { get; set; } = null;
 
         /// <summary>
-        /// The date by which the payment should be completed in `YYYY-MM-DD` format.
+        /// The date by which the payment should be completed in `YYYY-MM-DD` format. Sending `null` has the same effect<br/>
+        /// as omitting the field.
         /// </summary>
         [JsonProperty("dueDate")]
-        public string? DueDate { get; set; }
+        public string? DueDate { get; set; } = null;
 
         /// <summary>
         /// For digital goods in most jurisdictions, you must apply the VAT rate from your customer's country. Choose the VAT<br/>
