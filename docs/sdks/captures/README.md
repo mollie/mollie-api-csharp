@@ -39,6 +39,7 @@ var res = await sdk.Captures.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
+        Testmode = false,
     }
 );
 
@@ -64,6 +65,7 @@ var res = await sdk.Captures.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
+        Testmode = false,
     }
 );
 

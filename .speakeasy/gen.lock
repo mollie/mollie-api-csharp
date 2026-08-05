@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 2ab470f024d0a7815c0c381ff2b5136e
+  docChecksum: c98a4c518209437648b1a23a29e4caeb
   docVersion: 1.0.0
-  speakeasyVersion: 1.791.0
-  generationVersion: 2.924.0
-  releaseVersion: 1.3.22
-  configChecksum: 0b35c8d30ab05c72f7f5af1f7cd5e124
+  speakeasyVersion: 1.791.3
+  generationVersion: 2.926.2
+  releaseVersion: 1.3.23
+  configChecksum: ed3093324e76d769718023dac2aec428
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: c611146d-9714-41a5-a014-41e1f80e06f2
-  pristine_commit_hash: 521c177d6da503b620a0bfbde332c3cd82a8dc0a
-  pristine_tree_hash: c6533f6adc6499a723fa733411097cbfbf33b519
+  generation_id: 430e6975-b1ba-4c42-9e6f-3352646d8c59
+  pristine_commit_hash: 66525e4082e55bb4473a75405186d1b2b4efa862
+  pristine_tree_hash: 786594422183cd73a2788f9c797edb4299690446
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -124,8 +124,8 @@ trackedFiles:
     pristine_git_object: 8d1c7e35e19dca99902eb724ca51e07b7d606be2
   docs/Models/Components/BalanceTransactionType.md:
     id: 625538c3d323
-    last_write_checksum: sha1:be2e5f285744294f89e480005c0526f3aab3cd86
-    pristine_git_object: 1b898d714298743ca19a3e5e2e9a03229fe16141
+    last_write_checksum: sha1:735d7bb1fd9317cb4659927d9ec02a335da8fcc0
+    pristine_git_object: 963ad2f902577aefa17135d33f9bee8a81b07c8f
   docs/Models/Components/BalanceTransferCategory.md:
     id: 240f8f680dc8
     last_write_checksum: sha1:981c232828224b3b66c4e72d69838c1e5f2c7a5a
@@ -412,8 +412,8 @@ trackedFiles:
     pristine_git_object: c48395c5392b5d42b9d4d0c269f05ddcaf3e35c9
   docs/Models/Components/EntityCapture.md:
     id: 0e55e5d79cf5
-    last_write_checksum: sha1:5957a8b095d218f99bb1c2d2149441b8dd1139e4
-    pristine_git_object: 2a45e2b4addc45ee1211a60efcf944c516aebc36
+    last_write_checksum: sha1:b936015fce6524c5564a37ece422132af43e62ce
+    pristine_git_object: bb9f11775ab3dc20edd5aa797a1d456758776c72
   docs/Models/Components/EntityChargeback.md:
     id: f6a7efd5358b
     last_write_checksum: sha1:eff2db0cc802dd6992ec863e01dc685d1232807e
@@ -3600,8 +3600,8 @@ trackedFiles:
     pristine_git_object: 8f56ecbd81ebc926fe5e35eef18ecdb168b40e3c
   docs/sdks/captures/README.md:
     id: 7598191d8c6a
-    last_write_checksum: sha1:13eb4fd628d45a2d3737fb38ebd20b10bc89320d
-    pristine_git_object: 31f6be01f4266df9ce078862b2193520b11d8442
+    last_write_checksum: sha1:6687d6d5ae2345da4160fa00a7fb462f08cd911a
+    pristine_git_object: 6e4fe1f5a2e4b0688ade4bfcc67097c5f72d85b5
   docs/sdks/chargebacks/README.md:
     id: 651e1876c61b
     last_write_checksum: sha1:33a30022bbf095bc819ced1d7a45ec034f54c218
@@ -3852,8 +3852,8 @@ trackedFiles:
     pristine_git_object: 8ed12703e0bfc02e135ef304c2a7bb7934b34d86
   src/Mollie/Models/Components/BalanceTransactionType.cs:
     id: 1ed8dea8b979
-    last_write_checksum: sha1:c96ec45d90b6b7a96c2b4a2418ea19d29cf60c3a
-    pristine_git_object: 63ec842e9693bbdee90330370a407d7aa3bf5571
+    last_write_checksum: sha1:cbdb8c78a5542d64596b35039c54709bf356a2b5
+    pristine_git_object: 58bad6fc1644f0645d772d9920220910c79a6ffe
   src/Mollie/Models/Components/BalanceTransferCategory.cs:
     id: 3a0cd7a738f5
     last_write_checksum: sha1:24eb1d59d1b5fffe0ef295b6f939ac01f6fe5b05
@@ -4140,8 +4140,8 @@ trackedFiles:
     pristine_git_object: 469960ff20aae568123afd342d36bc64d8ddfb65
   src/Mollie/Models/Components/EntityCapture.cs:
     id: 2fde9541127c
-    last_write_checksum: sha1:d626d71b789c35bfbb107e073511b4be8f461179
-    pristine_git_object: ba81f388d8e8a400e4d25672ab3d1e1ade3e8f57
+    last_write_checksum: sha1:f6d9ffb9863456e5e70f70f6df469d8edcc986ad
+    pristine_git_object: b6fad96b0de6f973db7fcb357354ef82099aa26d
   src/Mollie/Models/Components/EntityChargeback.cs:
     id: "373761410772"
     last_write_checksum: sha1:67d7cd51d947c2eea483356e979cb05e3e174a0f
@@ -7324,8 +7324,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:5063fd409d72d9ec90653d4012025536eda543be
-    pristine_git_object: 0ffb2428cf5c3697de6e209a152867a14b962b9c
+    last_write_checksum: sha1:582f4b55968aa699249fa2da6cb3d4686bfcc917
+    pristine_git_object: e5ff9088cee87fe7a9a5d245f7a4863ef32fb8f8
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7364,8 +7364,8 @@ trackedFiles:
     pristine_git_object: bc24f7c1b9dd2b837519442db63b8c0db1e69fad
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:2fed424d9f4624650cc58439f53c7fad2f3cec83
-    pristine_git_object: 055f2d698891d1448594a92716025c33a6d8f6e0
+    last_write_checksum: sha1:a348e9c26a973c4831f0ef10c3e6778333d56530
+    pristine_git_object: 4daaca978ea172fbfe878eeec0872e4d3969e966
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7404,8 +7404,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:ba727dfc41a6c9ed86cb88bc06c519ffcfb3afb5
-    pristine_git_object: 2ee1c6b3c59750799866b8ddb8446295afc57bdc
+    last_write_checksum: sha1:375aaa0fc3ed1be521400449c5c6e7618e748ee6
+    pristine_git_object: 8b232748ae687e5e37e31bb72c23e1d2c88a3807
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -8357,7 +8357,7 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}}
+        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "live", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "35.95"}, "status": "pending", "metadata": "{\"bookkeeping_id\":12345}", "paymentId": "tr_5B8cwPMGnU6qLbRvo7qEZo", "createdAt": "2023-08-02T09:29:56+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_5B8cwPMGnU6qLbRvo7qEZo", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -8368,7 +8368,7 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}}
+        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "test", "amount": {"currency": "EUR", "value": "467.92"}, "status": "pending", "paymentId": "tr_V9kqkGtyUH", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "createdAt": "2021-06-03T11:50:58+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://api.mollie.com/v2/payments/tr_V9kqkGtyUH", "type": "application/hal+json"}, "shipment": {"href": "https://api.mollie.com/v2/orders/ord_uvpptr/shipments/shp_5x4xQJDWGNcY3tKGL7X5J", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
@@ -8379,7 +8379,7 @@ examples:
         header:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       requestBody:
-        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}}
+        application/json: {"description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "testmode": false}
       responses:
         "201":
           application/hal+json: {"resource": "capture", "id": "cpt_vytxeTZskVKR7C7WgdSP3d", "mode": "live", "description": "Capture for cart #12345", "amount": {"currency": "EUR", "value": "10.00"}, "status": "succeeded", "paymentId": "tr_5B8cwPMGnU", "shipmentId": "shp_5x4xQJDWGNcY3tKGL7X5J", "settlementId": "stl_5B8cwPMGnU", "createdAt": "2024-03-20T09:13:37+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "payment": {"href": "https://...", "type": "application/hal+json"}, "settlement": {"href": "https://...", "type": "application/hal+json"}, "shipment": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
@@ -11620,7 +11620,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Balances.GetReport()`:  `response.totals.PendingBalance.Open.Subtotals[].SubTotals[].Method.Enum(billink)` **Added**\n* `Client.Settlements.List()`:  `response.Embedded.Settlements[].Periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(billink)` **Added**\n* `Client.Settlements.Get()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(billink)` **Added**\n* `Client.Settlements.GetOpen()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(billink)` **Added**\n* `Client.Settlements.GetNext()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(billink)` **Added**\n* `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(billink)` **Added**\n* `Client.WebhookEvents.Get()`:  `response.Embedded.Entity.union(payment-response).Method.Enum(billink)` **Added**\n* `Client.Payments.Create()`: \n  *  `request.paymentRequest.Method.union(method).Enum(billink)` **Added**\n  *  `response.method.Enum(billink)` **Added**\n* `Client.Payments.List()`:  `response.Embedded.Payments[].Method.Enum(billink)` **Added**\n* `Client.Payments.Get()`:  `response.method.Enum(billink)` **Added**\n* `Client.Payments.Update()`: \n  *  `requestBody.Method.union(method).Enum(billink)` **Added**\n  *  `response.method.Enum(billink)` **Added**\n* `Client.Payments.Cancel()`:  `response.method.Enum(billink)` **Added**\n* `Client.Methods.List()`:  `response.Embedded.Methods[].Id.Enum(billink)` **Added**\n* `Client.Methods.All()`:  `response.Embedded.Methods[].Id.Enum(billink)` **Added**\n* `Client.Methods.Get()`: \n  *  `request.MethodId` **Changed**\n  *  `response.id.Enum(billink)` **Added**\n* `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(billink)` **Added**\n* `Client.Customers.CreatePayment()`: \n  *  `request.paymentRequest.Method.union(method).Enum(billink)` **Added**\n  *  `response.method.Enum(billink)` **Added**\n* `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(billink)` **Added**\n* `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(billink)` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Balances.GetReport()`:  `response.totals.PendingBalance.Open.Subtotals[].SubTotals[].TransactionType` **Changed** (Breaking ⚠️)\n* `Client.Balances.ListTransactions()`:  `response.Embedded.BalanceTransactions[].Type` **Changed** (Breaking ⚠️)\n* `Client.Captures.Create()`: \n  *  `request.entityCapture.Testmode` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln
