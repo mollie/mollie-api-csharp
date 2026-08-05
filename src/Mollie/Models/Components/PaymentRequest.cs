@@ -247,7 +247,7 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The date the bank transfer payment should expire, in `YYYY-MM-DD` format. The minimum date is tomorrow, and the<br/>
-        /// maximum date is 100 days after tomorrow.<br/>
+        /// maximum date is 100 days after tomorrow. Sending `null` has the same effect as omitting the field.<br/>
         /// <br/>
         /// After you created the payment, you can still update the `dueDate` via <a href="update-payment">Update payment</a>.<br/>
         /// <br/>
@@ -259,7 +259,7 @@ namespace Mollie.Models.Components
         /// &lt;/Callout&gt;
         /// </summary>
         [JsonProperty("dueDate")]
-        public string? DueDate { get; set; }
+        public string? DueDate { get; set; } = null;
 
         /// <summary>
         /// Whether the card details should be stored for the customer after a successful payment. This will create a mandate for the customer, <br/>
