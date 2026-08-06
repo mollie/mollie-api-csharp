@@ -1,4 +1,4 @@
-# Locale
+# Locale2
 
 Sets the language for customer-facing content and communications.
 
@@ -7,7 +7,7 @@ Sets the language for customer-facing content and communications.
 ```csharp
 using Mollie.Models.Components;
 
-var value = Locale.CaES;
+var value = Locale2.CaES;
 ```
 
 

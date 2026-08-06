@@ -97,13 +97,13 @@ namespace Mollie.Models.Components
         public PaymentRequestBillingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public PaymentAddress? ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// Sets the language for customer-facing content and communications.
         /// </summary>
         [JsonProperty("locale")]
-        public Locale? Locale { get; set; } = null;
+        public Locale2? Locale { get; set; } = null;
 
         /// <summary>
         /// Normally, a payment method screen is shown. However, when using this parameter, you can choose a specific<br/>

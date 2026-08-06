@@ -40,7 +40,7 @@ var res = await sdk.Sessions.CreateAsync(
         RequiredCustomerDetails = new List<SessionRequiredCustomerDetails>() {
             SessionRequiredCustomerDetails.BillingAddress,
         },
-        BillingAddress = new PaymentAddress() {
+        BillingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -54,7 +54,7 @@ var res = await sdk.Sessions.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",

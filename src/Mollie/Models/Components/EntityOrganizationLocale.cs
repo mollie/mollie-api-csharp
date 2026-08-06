@@ -49,7 +49,6 @@ namespace Mollie.Models.Components
         public static readonly EntityOrganizationLocale Ptpt = new EntityOrganizationLocale("pt_PT");
         public static readonly EntityOrganizationLocale Sksk = new EntityOrganizationLocale("sk_SK");
         public static readonly EntityOrganizationLocale SvSE = new EntityOrganizationLocale("sv_SE");
-        public static readonly EntityOrganizationLocale Null = new EntityOrganizationLocale("null");
 
         private static readonly Dictionary <string, EntityOrganizationLocale> _knownValues =
             new Dictionary <string, EntityOrganizationLocale> ()
@@ -79,8 +78,7 @@ namespace Mollie.Models.Components
                 ["pl_PL"] = Plpl,
                 ["pt_PT"] = Ptpt,
                 ["sk_SK"] = Sksk,
-                ["sv_SE"] = SvSE,
-                ["null"] = Null
+                ["sv_SE"] = SvSE
             };
 
         private static readonly ConcurrentDictionary<string, EntityOrganizationLocale> _values =

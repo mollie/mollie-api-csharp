@@ -92,10 +92,10 @@ namespace Mollie.Models.Components
         public List<SessionRequiredCustomerDetailsResponse>? RequiredCustomerDetails { get; set; }
 
         [JsonProperty("billingAddress")]
-        public PaymentAddress? BillingAddress { get; set; }
+        public ShippingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public PaymentAddress? ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }

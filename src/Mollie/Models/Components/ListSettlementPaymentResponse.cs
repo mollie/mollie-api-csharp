@@ -130,7 +130,7 @@ namespace Mollie.Models.Components
         public ListSettlementPaymentResponseBillingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public PaymentAddress? ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// Sets the language for customer-facing content and communications.

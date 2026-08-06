@@ -96,10 +96,10 @@ namespace Mollie.Models.Components
         public List<PaymentLineItemResponse>? Lines { get; set; } = null;
 
         [JsonProperty("billingAddress")]
-        public PaymentAddress? BillingAddress { get; set; }
+        public ShippingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public PaymentAddress? ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// The identifier referring to the <a href="get-profile">profile</a> this entity belongs to.<br/>
