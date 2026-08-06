@@ -88,7 +88,7 @@ namespace Mollie.Models.Requests
         /// Sets the language for customer-facing content and communications.
         /// </summary>
         [JsonProperty("locale")]
-        public Locale? Locale { get; set; } = null;
+        public Locale2? Locale { get; set; } = null;
 
         /// <summary>
         /// The date by which the payment should be completed in `YYYY-MM-DD` format. Sending `null` has the same effect<br/>
@@ -153,7 +153,7 @@ namespace Mollie.Models.Requests
         public BillingAddress? BillingAddress { get; set; }
 
         [JsonProperty("shippingAddress")]
-        public PaymentAddress? ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         [JsonProperty("billingEmail")]
         public string? BillingEmail { get; set; }

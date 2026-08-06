@@ -44,4 +44,3 @@ var custom = LocaleResponse.Of("custom_value");
 | `Ptpt` | pt_PT  |
 | `Sksk` | sk_SK  |
 | `SvSE` | sv_SE  |
-| `Null` | null   |

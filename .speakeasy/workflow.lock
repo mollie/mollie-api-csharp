@@ -1,9 +1,9 @@
-speakeasyVersion: 1.791.3
+speakeasyVersion: 1.791.4
 sources:
     Mollie API:
         sourceNamespace: mollie-api
-        sourceRevisionDigest: sha256:ab715021b0f1165a7cd80abcd7ac6417c6286de26deebead26505ade9404d387
-        sourceBlobDigest: sha256:db5fec0ccbafbc54f4853c7d1c44562cfa5f1a5eb1c9b3a3f427d44ec988b91c
+        sourceRevisionDigest: sha256:6d0088e667458b6200dec54d32d75aaed74ff5110187c5f5ce015f804d5ec2aa
+        sourceBlobDigest: sha256:539221990bb115640f6d295d29ebda2c61ea99d6da2670b55ae60e0efd8cbd62
         tags:
             - latest
             - 1.0.0
@@ -11,10 +11,10 @@ targets:
     client:
         source: Mollie API
         sourceNamespace: mollie-api
-        sourceRevisionDigest: sha256:ab715021b0f1165a7cd80abcd7ac6417c6286de26deebead26505ade9404d387
-        sourceBlobDigest: sha256:db5fec0ccbafbc54f4853c7d1c44562cfa5f1a5eb1c9b3a3f427d44ec988b91c
+        sourceRevisionDigest: sha256:6d0088e667458b6200dec54d32d75aaed74ff5110187c5f5ce015f804d5ec2aa
+        sourceBlobDigest: sha256:539221990bb115640f6d295d29ebda2c61ea99d6da2670b55ae60e0efd8cbd62
         codeSamplesNamespace: mollie-api-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:cad0a5e56a5b1bd65116d4afa707a4131354409512c0b2fc10b1d700c7bf040f
+        codeSamplesRevisionDigest: sha256:ef652a518eb6caa3a453560aa1f594a132450e4a3474279c2d75ed5c64d9a317
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

@@ -32,7 +32,7 @@ namespace Mollie.Models.Components
         /// The description that will appear on the bank statement for this payout.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string? Description { get; set; } = null;
 
         /// <summary>
         /// Whether to create the entity in test mode or live mode.<br/>

@@ -106,7 +106,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -120,7 +120,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -253,7 +253,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -267,7 +267,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -400,7 +400,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -414,7 +414,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -547,7 +547,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -561,7 +561,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -693,7 +693,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -707,7 +707,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -840,7 +840,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -854,7 +854,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -987,7 +987,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1001,7 +1001,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1134,7 +1134,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1148,7 +1148,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1281,7 +1281,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1295,7 +1295,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1428,7 +1428,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1442,7 +1442,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1575,7 +1575,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1589,7 +1589,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1722,7 +1722,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1736,7 +1736,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -1869,7 +1869,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -1883,7 +1883,7 @@ var res = await sdk.Payments.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         Method = Method.CreateMethodEnum(
             MethodEnum.Ideal
         ),
@@ -2206,7 +2206,7 @@ var res = await sdk.Payments.UpdateAsync(
         Method = MethodRequest.CreateMethodEnum(
             MethodEnum.Ideal
         ),
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
@@ -2224,7 +2224,7 @@ var res = await sdk.Payments.UpdateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -2267,7 +2267,7 @@ var res = await sdk.Payments.UpdateAsync(
         Method = MethodRequest.CreateMethodEnum(
             MethodEnum.Ideal
         ),
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
@@ -2285,7 +2285,7 @@ var res = await sdk.Payments.UpdateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
@@ -2328,7 +2328,7 @@ var res = await sdk.Payments.UpdateAsync(
         Method = MethodRequest.CreateMethodEnum(
             MethodEnum.Ideal
         ),
-        Locale = Locale.EnUS,
+        Locale = Locale2.EnUS,
         DueDate = "2025-01-01",
         RestrictPaymentMethodsToCountry = "NL",
         Testmode = false,
@@ -2346,7 +2346,7 @@ var res = await sdk.Payments.UpdateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
-        ShippingAddress = new PaymentAddress() {
+        ShippingAddress = new ShippingAddress() {
             Title = "Mr.",
             GivenName = "Piet",
             FamilyName = "Mondriaan",
