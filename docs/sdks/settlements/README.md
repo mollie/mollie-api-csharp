@@ -131,7 +131,22 @@ documentation.
 For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the
 [balance transactions](list-balance-transactions) endpoint.
 
-### Example Usage
+### Example Usage: get-open-settlement-200-1
+
+<!-- UsageSnippet language="csharp" operationID="get-open-settlement" method="get" path="/v2/settlements/open" example="get-open-settlement-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Settlements.GetOpenAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
+
+// handle response
+```
+### Example Usage: get-settlement-200-1
 
 <!-- UsageSnippet language="csharp" operationID="get-open-settlement" method="get" path="/v2/settlements/open" example="get-settlement-200-1" -->
 ```csharp
@@ -174,7 +189,22 @@ documentation.
 For more accurate bookkeeping, refer to the [balance report](get-balance-report) endpoint or the
 [balance transactions](list-balance-transactions) endpoint.
 
-### Example Usage
+### Example Usage: get-next-settlement-200-1
+
+<!-- UsageSnippet language="csharp" operationID="get-next-settlement" method="get" path="/v2/settlements/next" example="get-next-settlement-200-1" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+
+var sdk = new Client(security: new Security() {
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Settlements.GetNextAsync(idempotencyKey: "123e4567-e89b-12d3-a456-426");
+
+// handle response
+```
+### Example Usage: get-settlement-200-1
 
 <!-- UsageSnippet language="csharp" operationID="get-next-settlement" method="get" path="/v2/settlements/next" example="get-settlement-200-1" -->
 ```csharp
