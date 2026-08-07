@@ -30,7 +30,9 @@ namespace Mollie.Models.Components
         public static readonly LocaleResponse DeCH = new LocaleResponse("de_CH");
         public static readonly LocaleResponse Dede = new LocaleResponse("de_DE");
         public static readonly LocaleResponse DeLU = new LocaleResponse("de_LU");
+        public static readonly LocaleResponse EnBE = new LocaleResponse("en_BE");
         public static readonly LocaleResponse EnGB = new LocaleResponse("en_GB");
+        public static readonly LocaleResponse EnNL = new LocaleResponse("en_NL");
         public static readonly LocaleResponse EnUS = new LocaleResponse("en_US");
         public static readonly LocaleResponse Eses = new LocaleResponse("es_ES");
         public static readonly LocaleResponse Fifi = new LocaleResponse("fi_FI");
@@ -60,7 +62,9 @@ namespace Mollie.Models.Components
                 ["de_CH"] = DeCH,
                 ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
+                ["en_BE"] = EnBE,
                 ["en_GB"] = EnGB,
+                ["en_NL"] = EnNL,
                 ["en_US"] = EnUS,
                 ["es_ES"] = Eses,
                 ["fi_FI"] = Fifi,

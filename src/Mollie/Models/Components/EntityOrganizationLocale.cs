@@ -30,7 +30,9 @@ namespace Mollie.Models.Components
         public static readonly EntityOrganizationLocale DeCH = new EntityOrganizationLocale("de_CH");
         public static readonly EntityOrganizationLocale Dede = new EntityOrganizationLocale("de_DE");
         public static readonly EntityOrganizationLocale DeLU = new EntityOrganizationLocale("de_LU");
+        public static readonly EntityOrganizationLocale EnBE = new EntityOrganizationLocale("en_BE");
         public static readonly EntityOrganizationLocale EnGB = new EntityOrganizationLocale("en_GB");
+        public static readonly EntityOrganizationLocale EnNL = new EntityOrganizationLocale("en_NL");
         public static readonly EntityOrganizationLocale EnUS = new EntityOrganizationLocale("en_US");
         public static readonly EntityOrganizationLocale Eses = new EntityOrganizationLocale("es_ES");
         public static readonly EntityOrganizationLocale Fifi = new EntityOrganizationLocale("fi_FI");
@@ -60,7 +62,9 @@ namespace Mollie.Models.Components
                 ["de_CH"] = DeCH,
                 ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
+                ["en_BE"] = EnBE,
                 ["en_GB"] = EnGB,
+                ["en_NL"] = EnNL,
                 ["en_US"] = EnUS,
                 ["es_ES"] = Eses,
                 ["fi_FI"] = Fifi,

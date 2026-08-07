@@ -33,8 +33,12 @@ namespace Mollie.Models.Components
         Dede,
         [JsonProperty("de_LU")]
         DeLU,
+        [JsonProperty("en_BE")]
+        EnBE,
         [JsonProperty("en_GB")]
         EnGB,
+        [JsonProperty("en_NL")]
+        EnNL,
         [JsonProperty("en_US")]
         EnUS,
         [JsonProperty("es_ES")]
