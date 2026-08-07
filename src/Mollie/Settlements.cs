@@ -821,14 +821,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntitySettlement obj;
+                    GetOpenSettlementResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntitySettlement>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetOpenSettlementResponseBody>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntitySettlement.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into GetOpenSettlementResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetOpenSettlementResponse()
@@ -839,7 +839,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySettlement = obj;
+                    response.Object = obj;
                     return response;
                 }
 
@@ -1009,14 +1009,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntitySettlement obj;
+                    GetNextSettlementResponseBody obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntitySettlement>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<GetNextSettlementResponseBody>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntitySettlement.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into GetNextSettlementResponseBody.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetNextSettlementResponse()
@@ -1027,7 +1027,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntitySettlement = obj;
+                    response.Object = obj;
                     return response;
                 }
 

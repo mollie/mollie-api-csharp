@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// of the settlement object, refer to the <a href="get-settlement">Get settlement endpoint</a> documentation.
         /// </summary>
         [JsonProperty("settlements")]
-        public List<ListEntitySettlement> Settlements { get; set; } = default!;
+        public List<EntitySettlement> Settlements { get; set; } = default!;
     }
 }

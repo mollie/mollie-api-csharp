@@ -11,6 +11,7 @@
 namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
+    using Mollie.Models.Requests;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
@@ -23,6 +24,6 @@ namespace Mollie.Models.Requests
         /// A settlement object describing your current balance. For a complete reference of the settlement object, refer to<br/>
         /// the <a href="get-settlement">Get settlement</a> endpoint documentation.
         /// </summary>
-        public EntitySettlement? EntitySettlement { get; set; }
+        public GetOpenSettlementResponseBody? Object { get; set; }
     }
 }
