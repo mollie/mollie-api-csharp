@@ -25,7 +25,9 @@ var custom = EntityOrganizationLocale.Of("custom_value");
 | `DeCH` | de_CH  |
 | `Dede` | de_DE  |
 | `DeLU` | de_LU  |
+| `EnBE` | en_BE  |
 | `EnGB` | en_GB  |
+| `EnNL` | en_NL  |
 | `EnUS` | en_US  |
 | `Eses` | es_ES  |
 | `Fifi` | fi_FI  |
