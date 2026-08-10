@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the business account.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class AccountStatus : IEquatable<AccountStatus>
+    public class AccountStatus : IEquatable<AccountStatus>, IOpenEnum<string>
     {
         public static readonly AccountStatus Active = new AccountStatus("active");
         public static readonly AccountStatus Blocked = new AccountStatus("blocked");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The transfer scheme to be used for the transfer. The transfer scheme determines the processing time and method of the transfer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class TransferSchemeTypeResponse : IEquatable<TransferSchemeTypeResponse>
+    public class TransferSchemeTypeResponse : IEquatable<TransferSchemeTypeResponse>, IOpenEnum<string>
     {
         public static readonly TransferSchemeTypeResponse SepaCreditInst = new TransferSchemeTypeResponse("sepa-credit-inst");
         public static readonly TransferSchemeTypeResponse SepaCredit = new TransferSchemeTypeResponse("sepa-credit");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Specifies the reference type.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class RefundExternalReferenceTypeResponse : IEquatable<RefundExternalReferenceTypeResponse>
+    public class RefundExternalReferenceTypeResponse : IEquatable<RefundExternalReferenceTypeResponse>, IOpenEnum<string>
     {
         public static readonly RefundExternalReferenceTypeResponse AcquirerReference = new RefundExternalReferenceTypeResponse("acquirer-reference");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

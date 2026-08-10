@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceReportGrouping : IEquatable<BalanceReportGrouping>
+    public class BalanceReportGrouping : IEquatable<BalanceReportGrouping>, IOpenEnum<string>
     {
         public static readonly BalanceReportGrouping StatusBalances = new BalanceReportGrouping("status-balances");
         public static readonly BalanceReportGrouping TransactionCategories = new BalanceReportGrouping("transaction-categories");
@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

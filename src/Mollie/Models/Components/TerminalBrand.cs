@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The brand of the terminal.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class TerminalBrand : IEquatable<TerminalBrand>
+    public class TerminalBrand : IEquatable<TerminalBrand>, IOpenEnum<string>
     {
         public static readonly TerminalBrand Pax = new TerminalBrand("PAX");
         public static readonly TerminalBrand Tap = new TerminalBrand("Tap");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

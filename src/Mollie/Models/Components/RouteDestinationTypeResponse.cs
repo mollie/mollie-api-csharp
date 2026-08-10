@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The type of destination. Currently only the destination type `organization` is supported.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class RouteDestinationTypeResponse : IEquatable<RouteDestinationTypeResponse>
+    public class RouteDestinationTypeResponse : IEquatable<RouteDestinationTypeResponse>, IOpenEnum<string>
     {
         public static readonly RouteDestinationTypeResponse Organization = new RouteDestinationTypeResponse("organization");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

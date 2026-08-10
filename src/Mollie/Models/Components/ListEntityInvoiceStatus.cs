@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Status of the invoice.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListEntityInvoiceStatus : IEquatable<ListEntityInvoiceStatus>
+    public class ListEntityInvoiceStatus : IEquatable<ListEntityInvoiceStatus>, IOpenEnum<string>
     {
         public static readonly ListEntityInvoiceStatus Open = new ListEntityInvoiceStatus("open");
         public static readonly ListEntityInvoiceStatus Paid = new ListEntityInvoiceStatus("paid");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

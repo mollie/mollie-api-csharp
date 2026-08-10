@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The result of the Verification of Payee check.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationResultEnum : IEquatable<VerificationResultEnum>
+    public class VerificationResultEnum : IEquatable<VerificationResultEnum>, IOpenEnum<string>
     {
         public static readonly VerificationResultEnum Match = new VerificationResultEnum("match");
         public static readonly VerificationResultEnum NoMatch = new VerificationResultEnum("no-match");
@@ -61,7 +61,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

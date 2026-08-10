@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The wallet used when creating the payment.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsWalletResponse : IEquatable<PaymentDetailsWalletResponse>
+    public class PaymentDetailsWalletResponse : IEquatable<PaymentDetailsWalletResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsWalletResponse Applepay = new PaymentDetailsWalletResponse("applepay");
         public static readonly PaymentDetailsWalletResponse Googlepay = new PaymentDetailsWalletResponse("googlepay");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

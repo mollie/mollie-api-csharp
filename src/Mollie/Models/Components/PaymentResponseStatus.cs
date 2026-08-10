@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// statuses occur at what point.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentResponseStatus : IEquatable<PaymentResponseStatus>
+    public class PaymentResponseStatus : IEquatable<PaymentResponseStatus>, IOpenEnum<string>
     {
         public static readonly PaymentResponseStatus Open = new PaymentResponseStatus("open");
         public static readonly PaymentResponseStatus Pending = new PaymentResponseStatus("pending");
@@ -68,7 +68,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

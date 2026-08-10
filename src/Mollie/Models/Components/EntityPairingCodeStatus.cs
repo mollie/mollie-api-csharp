@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the pairing code.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityPairingCodeStatus : IEquatable<EntityPairingCodeStatus>
+    public class EntityPairingCodeStatus : IEquatable<EntityPairingCodeStatus>, IOpenEnum<string>
     {
         public static readonly EntityPairingCodeStatus Active = new EntityPairingCodeStatus("active");
         public static readonly EntityPairingCodeStatus Expired = new EntityPairingCodeStatus("expired");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

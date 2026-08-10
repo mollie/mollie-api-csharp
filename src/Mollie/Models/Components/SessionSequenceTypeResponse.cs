@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SessionSequenceTypeResponse : IEquatable<SessionSequenceTypeResponse>
+    public class SessionSequenceTypeResponse : IEquatable<SessionSequenceTypeResponse>, IOpenEnum<string>
     {
         public static readonly SessionSequenceTypeResponse Oneoff = new SessionSequenceTypeResponse("oneoff");
         public static readonly SessionSequenceTypeResponse First = new SessionSequenceTypeResponse("first");
@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

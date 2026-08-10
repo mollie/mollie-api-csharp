@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The payment method used for this subscription. If omitted, any of the customer's valid mandates may be used.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SubscriptionMethodResponse : IEquatable<SubscriptionMethodResponse>
+    public class SubscriptionMethodResponse : IEquatable<SubscriptionMethodResponse>, IOpenEnum<string>
     {
         public static readonly SubscriptionMethodResponse Creditcard = new SubscriptionMethodResponse("creditcard");
         public static readonly SubscriptionMethodResponse Directdebit = new SubscriptionMethodResponse("directdebit");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

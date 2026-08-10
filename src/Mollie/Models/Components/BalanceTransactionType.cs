@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransactionType : IEquatable<BalanceTransactionType>
+    public class BalanceTransactionType : IEquatable<BalanceTransactionType>, IOpenEnum<string>
     {
         public static readonly BalanceTransactionType BalanceChargeFee = new BalanceTransactionType("balance-charge-fee");
         public static readonly BalanceTransactionType BalanceCorrection = new BalanceTransactionType("balance-correction");
@@ -138,7 +138,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

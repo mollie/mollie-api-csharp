@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// A machine-readable code indicating the reason for the transfer's terminal status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class StatusReasonCodeResponse : IEquatable<StatusReasonCodeResponse>
+    public class StatusReasonCodeResponse : IEquatable<StatusReasonCodeResponse>, IOpenEnum<string>
     {
         public static readonly StatusReasonCodeResponse InsufficientFunds = new StatusReasonCodeResponse("insufficient-funds");
         public static readonly StatusReasonCodeResponse Rejected = new StatusReasonCodeResponse("rejected");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

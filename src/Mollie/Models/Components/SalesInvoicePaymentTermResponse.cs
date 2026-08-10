@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The payment term to be set on the invoice.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoicePaymentTermResponse : IEquatable<SalesInvoicePaymentTermResponse>
+    public class SalesInvoicePaymentTermResponse : IEquatable<SalesInvoicePaymentTermResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoicePaymentTermResponse Sevendays = new SalesInvoicePaymentTermResponse("7 days");
         public static readonly SalesInvoicePaymentTermResponse Fourteendays = new SalesInvoicePaymentTermResponse("14 days");
@@ -67,7 +67,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

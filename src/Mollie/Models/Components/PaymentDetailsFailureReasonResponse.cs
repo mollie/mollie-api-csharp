@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// A failure code to help understand why the payment failed.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsFailureReasonResponse : IEquatable<PaymentDetailsFailureReasonResponse>
+    public class PaymentDetailsFailureReasonResponse : IEquatable<PaymentDetailsFailureReasonResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsFailureReasonResponse AuthenticationAbandoned = new PaymentDetailsFailureReasonResponse("authentication_abandoned");
         public static readonly PaymentDetailsFailureReasonResponse AuthenticationFailed = new PaymentDetailsFailureReasonResponse("authentication_failed");
@@ -83,7 +83,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

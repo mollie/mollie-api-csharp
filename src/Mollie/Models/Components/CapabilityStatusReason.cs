@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class CapabilityStatusReason : IEquatable<CapabilityStatusReason>
+    public class CapabilityStatusReason : IEquatable<CapabilityStatusReason>, IOpenEnum<string>
     {
         public static readonly CapabilityStatusReason RequirementPastDue = new CapabilityStatusReason("requirement-past-due");
         public static readonly CapabilityStatusReason OnboardingInformationNeeded = new CapabilityStatusReason("onboarding-information-needed");
@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

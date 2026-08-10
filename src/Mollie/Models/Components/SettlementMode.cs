@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Whether this entity was created in live mode or in test mode. Settlements are always in live mode.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SettlementMode : IEquatable<SettlementMode>
+    public class SettlementMode : IEquatable<SettlementMode>, IOpenEnum<string>
     {
         public static readonly SettlementMode Live = new SettlementMode("live");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

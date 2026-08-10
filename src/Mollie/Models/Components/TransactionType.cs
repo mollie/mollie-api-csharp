@@ -24,7 +24,7 @@ namespace Mollie.Models.Components
     /// to handle unexpected values gracefully, so nothing breaks when that happens.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class TransactionType : IEquatable<TransactionType>
+    public class TransactionType : IEquatable<TransactionType>, IOpenEnum<string>
     {
         public static readonly TransactionType CardPayment = new TransactionType("card-payment");
         public static readonly TransactionType BankTransfer = new TransactionType("bank-transfer");
@@ -74,7 +74,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
