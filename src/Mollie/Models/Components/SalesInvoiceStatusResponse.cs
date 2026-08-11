@@ -30,7 +30,7 @@ namespace Mollie.Models.Components
     ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceStatusResponse : IEquatable<SalesInvoiceStatusResponse>
+    public class SalesInvoiceStatusResponse : IEquatable<SalesInvoiceStatusResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceStatusResponse Draft = new SalesInvoiceStatusResponse("draft");
         public static readonly SalesInvoiceStatusResponse Issued = new SalesInvoiceStatusResponse("issued");
@@ -68,7 +68,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -23,7 +23,7 @@ namespace Mollie.Models.Components
     /// SEPA Direct Debit and PayPal mandates can be created directly.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class MandateMethodResponse : IEquatable<MandateMethodResponse>
+    public class MandateMethodResponse : IEquatable<MandateMethodResponse>, IOpenEnum<string>
     {
         public static readonly MandateMethodResponse Creditcard = new MandateMethodResponse("creditcard");
         public static readonly MandateMethodResponse Directdebit = new MandateMethodResponse("directdebit");
@@ -61,7 +61,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

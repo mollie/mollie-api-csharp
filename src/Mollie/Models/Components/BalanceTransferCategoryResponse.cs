@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The type of the transfer. Different fees may apply to different types of transfers.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransferCategoryResponse : IEquatable<BalanceTransferCategoryResponse>
+    public class BalanceTransferCategoryResponse : IEquatable<BalanceTransferCategoryResponse>, IOpenEnum<string>
     {
         public static readonly BalanceTransferCategoryResponse InvoiceCollection = new BalanceTransferCategoryResponse("invoice_collection");
         public static readonly BalanceTransferCategoryResponse Purchase = new BalanceTransferCategoryResponse("purchase");
@@ -69,7 +69,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

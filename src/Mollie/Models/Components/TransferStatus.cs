@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the transfer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class TransferStatus : IEquatable<TransferStatus>
+    public class TransferStatus : IEquatable<TransferStatus>, IOpenEnum<string>
     {
         public static readonly TransferStatus Requested = new TransferStatus("requested");
         public static readonly TransferStatus Initiated = new TransferStatus("initiated");
@@ -67,7 +67,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

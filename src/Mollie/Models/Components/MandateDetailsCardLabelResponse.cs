@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The card's label. Available for card mandates, if the card label could be detected.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class MandateDetailsCardLabelResponse : IEquatable<MandateDetailsCardLabelResponse>
+    public class MandateDetailsCardLabelResponse : IEquatable<MandateDetailsCardLabelResponse>, IOpenEnum<string>
     {
         public static readonly MandateDetailsCardLabelResponse AmericanExpress = new MandateDetailsCardLabelResponse("American Express");
         public static readonly MandateDetailsCardLabelResponse CartaSi = new MandateDetailsCardLabelResponse("Carta Si");
@@ -77,7 +77,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

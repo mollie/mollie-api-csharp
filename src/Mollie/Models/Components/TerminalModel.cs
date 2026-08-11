@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The model of the terminal. For example for a PAX A920, this field's value will be `A920`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class TerminalModel : IEquatable<TerminalModel>
+    public class TerminalModel : IEquatable<TerminalModel>, IOpenEnum<string>
     {
         public static readonly TerminalModel A35 = new TerminalModel("A35");
         public static readonly TerminalModel A77 = new TerminalModel("A77");
@@ -65,7 +65,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

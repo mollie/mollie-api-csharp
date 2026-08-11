@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the terminal.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityTerminalStatus : IEquatable<EntityTerminalStatus>
+    public class EntityTerminalStatus : IEquatable<EntityTerminalStatus>, IOpenEnum<string>
     {
         public static readonly EntityTerminalStatus Pending = new EntityTerminalStatus("pending");
         public static readonly EntityTerminalStatus Active = new EntityTerminalStatus("active");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

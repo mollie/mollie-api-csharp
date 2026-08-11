@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The payment method, if applicable.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentMethod : IEquatable<PaymentMethod>
+    public class PaymentMethod : IEquatable<PaymentMethod>, IOpenEnum<string>
     {
         public static readonly PaymentMethod Alma = new PaymentMethod("alma");
         public static readonly PaymentMethod Bacs = new PaymentMethod("bacs");
@@ -141,7 +141,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

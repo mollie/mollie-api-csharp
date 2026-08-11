@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// when we did not received the IBAN yet from the first payment.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListMandateResponseStatus : IEquatable<ListMandateResponseStatus>
+    public class ListMandateResponseStatus : IEquatable<ListMandateResponseStatus>, IOpenEnum<string>
     {
         public static readonly ListMandateResponseStatus Valid = new ListMandateResponseStatus("valid");
         public static readonly ListMandateResponseStatus Pending = new ListMandateResponseStatus("pending");
@@ -60,7 +60,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

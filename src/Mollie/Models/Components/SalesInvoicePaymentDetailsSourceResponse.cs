@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The way through which the invoice is to be set to paid.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoicePaymentDetailsSourceResponse : IEquatable<SalesInvoicePaymentDetailsSourceResponse>
+    public class SalesInvoicePaymentDetailsSourceResponse : IEquatable<SalesInvoicePaymentDetailsSourceResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoicePaymentDetailsSourceResponse Manual = new SalesInvoicePaymentDetailsSourceResponse("manual");
         public static readonly SalesInvoicePaymentDetailsSourceResponse PaymentLink = new SalesInvoicePaymentDetailsSourceResponse("payment-link");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

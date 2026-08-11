@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// If the status is `pending-issuer`, an additional action from your side may be required with the issuer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class GiftcardStatus : IEquatable<GiftcardStatus>
+    public class GiftcardStatus : IEquatable<GiftcardStatus>, IOpenEnum<string>
     {
         public static readonly GiftcardStatus Activated = new GiftcardStatus("activated");
         public static readonly GiftcardStatus PendingIssuer = new GiftcardStatus("pending-issuer");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

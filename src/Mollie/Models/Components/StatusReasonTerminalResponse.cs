@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class StatusReasonTerminalResponse : IEquatable<StatusReasonTerminalResponse>
+    public class StatusReasonTerminalResponse : IEquatable<StatusReasonTerminalResponse>, IOpenEnum<string>
     {
         public static readonly StatusReasonTerminalResponse TerminalBusy = new StatusReasonTerminalResponse("terminal_busy");
         public static readonly StatusReasonTerminalResponse TerminalUnreachable = new StatusReasonTerminalResponse("terminal_unreachable");
@@ -54,7 +54,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

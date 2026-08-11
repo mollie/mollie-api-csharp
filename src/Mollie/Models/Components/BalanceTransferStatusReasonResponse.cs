@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// A machine-readable code that indicates the reason for the transfer's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransferStatusReasonResponse : IEquatable<BalanceTransferStatusReasonResponse>
+    public class BalanceTransferStatusReasonResponse : IEquatable<BalanceTransferStatusReasonResponse>, IOpenEnum<string>
     {
         public static readonly BalanceTransferStatusReasonResponse RequestCreated = new BalanceTransferStatusReasonResponse("request_created");
         public static readonly BalanceTransferStatusReasonResponse Success = new BalanceTransferStatusReasonResponse("success");
@@ -71,7 +71,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
