@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class NextSettlementId : IEquatable<NextSettlementId>
+    public class NextSettlementId : IEquatable<NextSettlementId>, IOpenEnum<string>
     {
         public static readonly NextSettlementId Next = new NextSettlementId("next");
 
@@ -52,7 +52,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

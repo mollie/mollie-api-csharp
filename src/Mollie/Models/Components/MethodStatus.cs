@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The payment method's activation status for this profile.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class MethodStatus : IEquatable<MethodStatus>
+    public class MethodStatus : IEquatable<MethodStatus>, IOpenEnum<string>
     {
         public static readonly MethodStatus Activated = new MethodStatus("activated");
         public static readonly MethodStatus PendingBoarding = new MethodStatus("pending-boarding");
@@ -63,7 +63,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

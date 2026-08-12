@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// price. `inclusive` means the prices you are providing to us already contain the VAT you want to apply.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceVatModeResponse : IEquatable<SalesInvoiceVatModeResponse>
+    public class SalesInvoiceVatModeResponse : IEquatable<SalesInvoiceVatModeResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceVatModeResponse Exclusive = new SalesInvoiceVatModeResponse("exclusive");
         public static readonly SalesInvoiceVatModeResponse Inclusive = new SalesInvoiceVatModeResponse("inclusive");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

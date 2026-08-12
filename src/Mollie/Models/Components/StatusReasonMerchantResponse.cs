@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class StatusReasonMerchantResponse : IEquatable<StatusReasonMerchantResponse>
+    public class StatusReasonMerchantResponse : IEquatable<StatusReasonMerchantResponse>, IOpenEnum<string>
     {
         public static readonly StatusReasonMerchantResponse MerchantIdNotFound = new StatusReasonMerchantResponse("merchant_id_not_found");
         public static readonly StatusReasonMerchantResponse MerchantAccountClosed = new StatusReasonMerchantResponse("merchant_account_closed");
@@ -80,7 +80,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

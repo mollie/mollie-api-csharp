@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The session's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SessionResponseStatus : IEquatable<SessionResponseStatus>
+    public class SessionResponseStatus : IEquatable<SessionResponseStatus>, IOpenEnum<string>
     {
         public static readonly SessionResponseStatus Open = new SessionResponseStatus("open");
         public static readonly SessionResponseStatus Completed = new SessionResponseStatus("completed");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

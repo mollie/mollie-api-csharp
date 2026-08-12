@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// payments, and if the information is made available by PayPal.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsSellerProtectionResponse : IEquatable<PaymentDetailsSellerProtectionResponse>
+    public class PaymentDetailsSellerProtectionResponse : IEquatable<PaymentDetailsSellerProtectionResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsSellerProtectionResponse EligibleUpper = new PaymentDetailsSellerProtectionResponse("ELIGIBLE");
         public static readonly PaymentDetailsSellerProtectionResponse PartiallyEligibleUpper = new PaymentDetailsSellerProtectionResponse("PARTIALLY_ELIGIBLE");
@@ -76,7 +76,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

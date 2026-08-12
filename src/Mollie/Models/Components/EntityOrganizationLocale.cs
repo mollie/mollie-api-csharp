@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The preferred locale of the merchant, as set in their Mollie dashboard.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityOrganizationLocale : IEquatable<EntityOrganizationLocale>
+    public class EntityOrganizationLocale : IEquatable<EntityOrganizationLocale>, IOpenEnum<string>
     {
         public static readonly EntityOrganizationLocale CaES = new EntityOrganizationLocale("ca_ES");
         public static readonly EntityOrganizationLocale CsCZ = new EntityOrganizationLocale("cs_CZ");
@@ -109,7 +109,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

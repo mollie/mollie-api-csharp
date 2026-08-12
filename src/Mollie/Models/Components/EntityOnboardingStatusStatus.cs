@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The current status of the organization's onboarding process.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityOnboardingStatusStatus : IEquatable<EntityOnboardingStatusStatus>
+    public class EntityOnboardingStatusStatus : IEquatable<EntityOnboardingStatusStatus>, IOpenEnum<string>
     {
         public static readonly EntityOnboardingStatusStatus NeedsData = new EntityOnboardingStatusStatus("needs-data");
         public static readonly EntityOnboardingStatusStatus InReview = new EntityOnboardingStatusStatus("in-review");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

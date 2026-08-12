@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Customer details that should be collected during checkout.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SessionRequiredCustomerDetailsResponse : IEquatable<SessionRequiredCustomerDetailsResponse>
+    public class SessionRequiredCustomerDetailsResponse : IEquatable<SessionRequiredCustomerDetailsResponse>, IOpenEnum<string>
     {
         public static readonly SessionRequiredCustomerDetailsResponse Email = new SessionRequiredCustomerDetailsResponse("email");
         public static readonly SessionRequiredCustomerDetailsResponse BillingAddress = new SessionRequiredCustomerDetailsResponse("billing-address");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

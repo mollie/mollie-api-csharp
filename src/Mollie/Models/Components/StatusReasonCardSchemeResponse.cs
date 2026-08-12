@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class StatusReasonCardSchemeResponse : IEquatable<StatusReasonCardSchemeResponse>
+    public class StatusReasonCardSchemeResponse : IEquatable<StatusReasonCardSchemeResponse>, IOpenEnum<string>
     {
         public static readonly StatusReasonCardSchemeResponse ApprovedOrCompletedSuccessfully = new StatusReasonCardSchemeResponse("approved_or_completed_successfully");
         public static readonly StatusReasonCardSchemeResponse ReferToCardIssuer = new StatusReasonCardSchemeResponse("refer_to_card_issuer");
@@ -216,7 +216,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

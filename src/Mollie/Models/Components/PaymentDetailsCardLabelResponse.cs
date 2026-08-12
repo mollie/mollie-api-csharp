@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The card's label, if known.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsCardLabelResponse : IEquatable<PaymentDetailsCardLabelResponse>
+    public class PaymentDetailsCardLabelResponse : IEquatable<PaymentDetailsCardLabelResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsCardLabelResponse AmericanExpress = new PaymentDetailsCardLabelResponse("American Express");
         public static readonly PaymentDetailsCardLabelResponse CartaSi = new PaymentDetailsCardLabelResponse("Carta Si");
@@ -79,7 +79,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

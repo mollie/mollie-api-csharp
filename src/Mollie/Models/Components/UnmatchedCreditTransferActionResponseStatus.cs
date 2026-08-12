@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The current status of the action.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class UnmatchedCreditTransferActionResponseStatus : IEquatable<UnmatchedCreditTransferActionResponseStatus>
+    public class UnmatchedCreditTransferActionResponseStatus : IEquatable<UnmatchedCreditTransferActionResponseStatus>, IOpenEnum<string>
     {
         public static readonly UnmatchedCreditTransferActionResponseStatus Pending = new UnmatchedCreditTransferActionResponseStatus("pending");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

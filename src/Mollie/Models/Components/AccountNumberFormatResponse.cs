@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The format of the account number.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class AccountNumberFormatResponse : IEquatable<AccountNumberFormatResponse>
+    public class AccountNumberFormatResponse : IEquatable<AccountNumberFormatResponse>, IOpenEnum<string>
     {
         public static readonly AccountNumberFormatResponse Iban = new AccountNumberFormatResponse("iban");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class LineCategoriesResponse : IEquatable<LineCategoriesResponse>
+    public class LineCategoriesResponse : IEquatable<LineCategoriesResponse>, IOpenEnum<string>
     {
         public static readonly LineCategoriesResponse Eco = new LineCategoriesResponse("eco");
         public static readonly LineCategoriesResponse Gift = new LineCategoriesResponse("gift");
@@ -62,7 +62,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
