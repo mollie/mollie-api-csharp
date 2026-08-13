@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalancePrepaymentPartType : IEquatable<BalancePrepaymentPartType>
+    public class BalancePrepaymentPartType : IEquatable<BalancePrepaymentPartType>, IOpenEnum<string>
     {
         public static readonly BalancePrepaymentPartType Fee = new BalancePrepaymentPartType("fee");
         public static readonly BalancePrepaymentPartType FeeReimbursement = new BalancePrepaymentPartType("fee-reimbursement");
@@ -60,7 +60,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

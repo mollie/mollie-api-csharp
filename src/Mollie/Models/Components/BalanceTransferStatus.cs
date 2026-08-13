@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the transfer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransferStatus : IEquatable<BalanceTransferStatus>
+    public class BalanceTransferStatus : IEquatable<BalanceTransferStatus>, IOpenEnum<string>
     {
         public static readonly BalanceTransferStatus Created = new BalanceTransferStatus("created");
         public static readonly BalanceTransferStatus Failed = new BalanceTransferStatus("failed");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

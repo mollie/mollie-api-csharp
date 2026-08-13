@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// enabling the subscription.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SubscriptionResponseStatus : IEquatable<SubscriptionResponseStatus>
+    public class SubscriptionResponseStatus : IEquatable<SubscriptionResponseStatus>, IOpenEnum<string>
     {
         public static readonly SubscriptionResponseStatus Pending = new SubscriptionResponseStatus("pending");
         public static readonly SubscriptionResponseStatus Active = new SubscriptionResponseStatus("active");
@@ -64,7 +64,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

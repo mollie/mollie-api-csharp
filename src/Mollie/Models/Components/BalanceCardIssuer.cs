@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceCardIssuer : IEquatable<BalanceCardIssuer>
+    public class BalanceCardIssuer : IEquatable<BalanceCardIssuer>, IOpenEnum<string>
     {
         public static readonly BalanceCardIssuer Amex = new BalanceCardIssuer("amex");
         public static readonly BalanceCardIssuer Maestro = new BalanceCardIssuer("maestro");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -25,7 +25,7 @@ namespace Mollie.Models.Components
     /// * `blocked`: The profile is blocked and can no longer be used or changed.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListProfileResponseStatus : IEquatable<ListProfileResponseStatus>
+    public class ListProfileResponseStatus : IEquatable<ListProfileResponseStatus>, IOpenEnum<string>
     {
         public static readonly ListProfileResponseStatus Unverified = new ListProfileResponseStatus("unverified");
         public static readonly ListProfileResponseStatus Verified = new ListProfileResponseStatus("verified");
@@ -63,7 +63,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

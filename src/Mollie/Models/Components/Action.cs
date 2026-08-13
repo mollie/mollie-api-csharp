@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The action performed on the unmatched credit transfer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class Action : IEquatable<Action>
+    public class Action : IEquatable<Action>, IOpenEnum<string>
     {
         public static readonly Action Match = new Action("match");
         public static readonly Action Return = new Action("return");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

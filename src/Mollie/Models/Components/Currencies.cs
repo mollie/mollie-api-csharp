@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class Currencies : IEquatable<Currencies>
+    public class Currencies : IEquatable<Currencies>, IOpenEnum<string>
     {
         public static readonly Currencies Eur = new Currencies("EUR");
         public static readonly Currencies Gbp = new Currencies("GBP");
@@ -76,7 +76,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -24,7 +24,7 @@ namespace Mollie.Models.Components
     /// The field is not present for merchants residing in other countries.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class OrganizationVatRegulation : IEquatable<OrganizationVatRegulation>
+    public class OrganizationVatRegulation : IEquatable<OrganizationVatRegulation>, IOpenEnum<string>
     {
         public static readonly OrganizationVatRegulation Dutch = new OrganizationVatRegulation("dutch");
         public static readonly OrganizationVatRegulation British = new OrganizationVatRegulation("british");
@@ -62,7 +62,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

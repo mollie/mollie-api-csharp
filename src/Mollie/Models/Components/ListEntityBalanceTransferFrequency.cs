@@ -24,7 +24,7 @@ namespace Mollie.Models.Components
     /// Settlements created during weekends or on bank holidays will take place on the next business day.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListEntityBalanceTransferFrequency : IEquatable<ListEntityBalanceTransferFrequency>
+    public class ListEntityBalanceTransferFrequency : IEquatable<ListEntityBalanceTransferFrequency>, IOpenEnum<string>
     {
         public static readonly ListEntityBalanceTransferFrequency EveryDay = new ListEntityBalanceTransferFrequency("every-day");
         public static readonly ListEntityBalanceTransferFrequency Daily = new ListEntityBalanceTransferFrequency("daily");
@@ -76,7 +76,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

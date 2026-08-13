@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The card's target audience, if known.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsCardAuditionResponse : IEquatable<PaymentDetailsCardAuditionResponse>
+    public class PaymentDetailsCardAuditionResponse : IEquatable<PaymentDetailsCardAuditionResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsCardAuditionResponse Consumer = new PaymentDetailsCardAuditionResponse("consumer");
         public static readonly PaymentDetailsCardAuditionResponse Business = new PaymentDetailsCardAuditionResponse("business");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

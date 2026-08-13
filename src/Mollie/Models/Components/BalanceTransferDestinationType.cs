@@ -23,7 +23,7 @@ namespace Mollie.Models.Components
     /// * `bank-account` — Transfer the balance amount to an external bank account.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransferDestinationType : IEquatable<BalanceTransferDestinationType>
+    public class BalanceTransferDestinationType : IEquatable<BalanceTransferDestinationType>, IOpenEnum<string>
     {
         public static readonly BalanceTransferDestinationType BankAccount = new BalanceTransferDestinationType("bank-account");
 
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The payment's status. Settlement payments always have a status of `paid`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SettlementPaymentStatus : IEquatable<SettlementPaymentStatus>
+    public class SettlementPaymentStatus : IEquatable<SettlementPaymentStatus>, IOpenEnum<string>
     {
         public static readonly SettlementPaymentStatus Paid = new SettlementPaymentStatus("paid");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

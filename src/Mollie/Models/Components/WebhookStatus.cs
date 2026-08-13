@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The subscription's current status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class WebhookStatus : IEquatable<WebhookStatus>
+    public class WebhookStatus : IEquatable<WebhookStatus>, IOpenEnum<string>
     {
         public static readonly WebhookStatus Enabled = new WebhookStatus("enabled");
         public static readonly WebhookStatus Blocked = new WebhookStatus("blocked");
@@ -61,7 +61,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

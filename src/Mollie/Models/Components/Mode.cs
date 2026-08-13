@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Whether this entity was created in live mode or in test mode.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class Mode : IEquatable<Mode>
+    public class Mode : IEquatable<Mode>, IOpenEnum<string>
     {
         public static readonly Mode Live = new Mode("live");
         public static readonly Mode Test = new Mode("test");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

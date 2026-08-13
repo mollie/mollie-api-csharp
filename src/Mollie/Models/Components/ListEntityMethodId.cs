@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// method selection screen will be skipped.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListEntityMethodId : IEquatable<ListEntityMethodId>
+    public class ListEntityMethodId : IEquatable<ListEntityMethodId>, IOpenEnum<string>
     {
         public static readonly ListEntityMethodId Alma = new ListEntityMethodId("alma");
         public static readonly ListEntityMethodId Applepay = new ListEntityMethodId("applepay");
@@ -124,7 +124,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
