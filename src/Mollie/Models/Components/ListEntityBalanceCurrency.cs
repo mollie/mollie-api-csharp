@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The balance's ISO 4217 currency code.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListEntityBalanceCurrency : IEquatable<ListEntityBalanceCurrency>
+    public class ListEntityBalanceCurrency : IEquatable<ListEntityBalanceCurrency>, IOpenEnum<string>
     {
         public static readonly ListEntityBalanceCurrency Eur = new ListEntityBalanceCurrency("EUR");
         public static readonly ListEntityBalanceCurrency Gbp = new ListEntityBalanceCurrency("GBP");
@@ -79,7 +79,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

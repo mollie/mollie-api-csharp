@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// If the status is `pending-issuer`, an additional action from your side may be required with the issuer.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VoucherStatus : IEquatable<VoucherStatus>
+    public class VoucherStatus : IEquatable<VoucherStatus>, IOpenEnum<string>
     {
         public static readonly VoucherStatus Activated = new VoucherStatus("activated");
         public static readonly VoucherStatus PendingIssuer = new VoucherStatus("pending-issuer");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

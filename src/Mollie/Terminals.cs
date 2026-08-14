@@ -112,7 +112,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the `profileId` field is missing or invalid. Thrown when the API returns a 422 or 429 response.</exception>
+        /// <exception cref="ErrorResponse">Your organization is not eligible for terminal pairing codes. Complete onboarding, then try again. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
             string? include = null,
@@ -130,7 +130,10 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This endpoint currently does not support test mode yet.<br/>
         /// <br/>
-        /// Returns all pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// Returns your pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// <br/>
+        /// We keep a pairing code for one month after it is revoked or expires, then delete it. Deleted codes drop out of<br/>
+        /// this list. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="TerminalsListPairingCodesRequest"/> parameter.</param>
@@ -160,6 +163,9 @@ namespace Mollie
         /// <br/>
         /// The response includes a human-readable `code` for manual entry on the terminal and, optionally, a QR Code as a<br/>
         /// base64 encoded SVG data URI when you use the `include` query parameter with value `details.qrCode`.<br/>
+        /// <br/>
+        /// We keep a pairing code for one month after it is revoked or expires, then delete it. Once deleted, this endpoint<br/>
+        /// returns a 404. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
@@ -193,6 +199,8 @@ namespace Mollie
         /// Revoke a pairing code, preventing the onboarding of new point-of-sale terminals.<br/>
         /// <br/>
         /// Terminals that have already paired with this code are not affected.<br/>
+        /// <br/>
+        /// We keep a revoked pairing code for one month, then delete it. Once deleted, this endpoint returns a 404.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
@@ -678,7 +686,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">The request contains issues. For example, if the `profileId` field is missing or invalid. Thrown when the API returns a 422 or 429 response.</exception>
+        /// <exception cref="ErrorResponse">Your organization is not eligible for terminal pairing codes. Complete onboarding, then try again. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
             string? include = null,
@@ -817,7 +825,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{422, 429}.Contains(responseStatusCode))
+            else if(new List<int>{403, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -864,7 +872,10 @@ namespace Mollie
         /// &gt;<br/>
         /// &gt; This endpoint currently does not support test mode yet.<br/>
         /// <br/>
-        /// Returns all pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// Returns your pairing codes: `active`, `expired`, and `revoked`. Results are paginated.<br/>
+        /// <br/>
+        /// We keep a pairing code for one month after it is revoked or expires, then delete it. Deleted codes drop out of<br/>
+        /// this list. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="TerminalsListPairingCodesRequest"/> parameter.</param>
@@ -1055,6 +1066,9 @@ namespace Mollie
         /// <br/>
         /// The response includes a human-readable `code` for manual entry on the terminal and, optionally, a QR Code as a<br/>
         /// base64 encoded SVG data URI when you use the `include` query parameter with value `details.qrCode`.<br/>
+        /// <br/>
+        /// We keep a pairing code for one month after it is revoked or expires, then delete it. Once deleted, this endpoint<br/>
+        /// returns a 404. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
@@ -1252,6 +1266,8 @@ namespace Mollie
         /// Revoke a pairing code, preventing the onboarding of new point-of-sale terminals.<br/>
         /// <br/>
         /// Terminals that have already paired with this code are not affected.<br/>
+        /// <br/>
+        /// We keep a revoked pairing code for one month, then delete it. Once deleted, this endpoint returns a 404.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>

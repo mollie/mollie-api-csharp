@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Sets the language for customer-facing content and communications.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class LocaleResponse : IEquatable<LocaleResponse>
+    public class LocaleResponse : IEquatable<LocaleResponse>, IOpenEnum<string>
     {
         public static readonly LocaleResponse CaES = new LocaleResponse("ca_ES");
         public static readonly LocaleResponse CsCZ = new LocaleResponse("cs_CZ");
@@ -109,7 +109,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

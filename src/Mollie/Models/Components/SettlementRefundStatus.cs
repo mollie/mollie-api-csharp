@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The refund's status. Settlement refunds always have a status of `refunded`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SettlementRefundStatus : IEquatable<SettlementRefundStatus>
+    public class SettlementRefundStatus : IEquatable<SettlementRefundStatus>, IOpenEnum<string>
     {
         public static readonly SettlementRefundStatus Refunded = new SettlementRefundStatus("refunded");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

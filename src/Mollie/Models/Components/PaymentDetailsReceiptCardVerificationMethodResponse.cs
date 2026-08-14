@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The method used to verify the cardholder's identity.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsReceiptCardVerificationMethodResponse : IEquatable<PaymentDetailsReceiptCardVerificationMethodResponse>
+    public class PaymentDetailsReceiptCardVerificationMethodResponse : IEquatable<PaymentDetailsReceiptCardVerificationMethodResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsReceiptCardVerificationMethodResponse NoCvmRequired = new PaymentDetailsReceiptCardVerificationMethodResponse("no-cvm-required");
         public static readonly PaymentDetailsReceiptCardVerificationMethodResponse OnlinePin = new PaymentDetailsReceiptCardVerificationMethodResponse("online-pin");
@@ -71,7 +71,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

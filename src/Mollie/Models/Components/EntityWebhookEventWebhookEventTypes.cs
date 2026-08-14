@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// that require explicit selection.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityWebhookEventWebhookEventTypes : IEquatable<EntityWebhookEventWebhookEventTypes>
+    public class EntityWebhookEventWebhookEventTypes : IEquatable<EntityWebhookEventWebhookEventTypes>, IOpenEnum<string>
     {
         public static readonly EntityWebhookEventWebhookEventTypes PaymentPaid = new EntityWebhookEventWebhookEventTypes("payment.paid");
         public static readonly EntityWebhookEventWebhookEventTypes PaymentAuthorized = new EntityWebhookEventWebhookEventTypes("payment.authorized");
@@ -128,7 +128,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

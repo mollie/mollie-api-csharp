@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EntityRefundResponseStatus : IEquatable<EntityRefundResponseStatus>
+    public class EntityRefundResponseStatus : IEquatable<EntityRefundResponseStatus>, IOpenEnum<string>
     {
         public static readonly EntityRefundResponseStatus Queued = new EntityRefundResponseStatus("queued");
         public static readonly EntityRefundResponseStatus Pending = new EntityRefundResponseStatus("pending");
@@ -62,7 +62,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Indicates whether the entry is a credit or debit from the perspective of the account holder.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class CreditDebitIndicator : IEquatable<CreditDebitIndicator>
+    public class CreditDebitIndicator : IEquatable<CreditDebitIndicator>, IOpenEnum<string>
     {
         public static readonly CreditDebitIndicator Credit = new CreditDebitIndicator("credit");
         public static readonly CreditDebitIndicator Debit = new CreditDebitIndicator("debit");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

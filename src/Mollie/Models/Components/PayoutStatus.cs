@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the payout.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PayoutStatus : IEquatable<PayoutStatus>
+    public class PayoutStatus : IEquatable<PayoutStatus>, IOpenEnum<string>
     {
         public static readonly PayoutStatus Requested = new PayoutStatus("requested");
         public static readonly PayoutStatus Initiated = new PayoutStatus("initiated");
@@ -65,7 +65,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

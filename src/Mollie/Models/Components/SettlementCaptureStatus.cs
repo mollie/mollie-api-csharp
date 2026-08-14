@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The capture's status. Settlement captures always have a status of `succeeded`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SettlementCaptureStatus : IEquatable<SettlementCaptureStatus>
+    public class SettlementCaptureStatus : IEquatable<SettlementCaptureStatus>, IOpenEnum<string>
     {
         public static readonly SettlementCaptureStatus Succeeded = new SettlementCaptureStatus("succeeded");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
