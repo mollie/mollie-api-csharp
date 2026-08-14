@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The applicable card fee region.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsFeeRegionResponse : IEquatable<PaymentDetailsFeeRegionResponse>
+    public class PaymentDetailsFeeRegionResponse : IEquatable<PaymentDetailsFeeRegionResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsFeeRegionResponse AmericanExpress = new PaymentDetailsFeeRegionResponse("american-express");
         public static readonly PaymentDetailsFeeRegionResponse AmexIntraEea = new PaymentDetailsFeeRegionResponse("amex-intra-eea");
@@ -101,7 +101,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

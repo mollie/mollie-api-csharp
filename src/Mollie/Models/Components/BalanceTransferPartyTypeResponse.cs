@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// Defines the type of the party. At the moment, only `organization` is supported.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceTransferPartyTypeResponse : IEquatable<BalanceTransferPartyTypeResponse>
+    public class BalanceTransferPartyTypeResponse : IEquatable<BalanceTransferPartyTypeResponse>, IOpenEnum<string>
     {
         public static readonly BalanceTransferPartyTypeResponse Organization = new BalanceTransferPartyTypeResponse("organization");
 
@@ -55,7 +55,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

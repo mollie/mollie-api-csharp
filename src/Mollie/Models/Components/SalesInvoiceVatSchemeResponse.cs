@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The VAT scheme to create the invoice for. You must be enrolled with One Stop Shop enabled to use it.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceVatSchemeResponse : IEquatable<SalesInvoiceVatSchemeResponse>
+    public class SalesInvoiceVatSchemeResponse : IEquatable<SalesInvoiceVatSchemeResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceVatSchemeResponse Standard = new SalesInvoiceVatSchemeResponse("standard");
         public static readonly SalesInvoiceVatSchemeResponse OneStopShop = new SalesInvoiceVatSchemeResponse("one-stop-shop");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

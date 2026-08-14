@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class StatusReasonVoucherResponse : IEquatable<StatusReasonVoucherResponse>
+    public class StatusReasonVoucherResponse : IEquatable<StatusReasonVoucherResponse>, IOpenEnum<string>
     {
         public static readonly StatusReasonVoucherResponse ServiceFailed = new StatusReasonVoucherResponse("service_failed");
         public static readonly StatusReasonVoucherResponse InvalidOperation = new StatusReasonVoucherResponse("invalid_operation");
@@ -90,7 +90,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

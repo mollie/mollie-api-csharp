@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class MethodResponse : IEquatable<MethodResponse>
+    public class MethodResponse : IEquatable<MethodResponse>, IOpenEnum<string>
     {
         public static readonly MethodResponse Alma = new MethodResponse("alma");
         public static readonly MethodResponse Applepay = new MethodResponse("applepay");
@@ -128,7 +128,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

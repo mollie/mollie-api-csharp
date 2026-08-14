@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// required on the `recipient` object.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceRecipientTypeResponse : IEquatable<SalesInvoiceRecipientTypeResponse>
+    public class SalesInvoiceRecipientTypeResponse : IEquatable<SalesInvoiceRecipientTypeResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceRecipientTypeResponse Consumer = new SalesInvoiceRecipientTypeResponse("consumer");
         public static readonly SalesInvoiceRecipientTypeResponse Business = new SalesInvoiceRecipientTypeResponse("business");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class BalanceCardRegion : IEquatable<BalanceCardRegion>
+    public class BalanceCardRegion : IEquatable<BalanceCardRegion>, IOpenEnum<string>
     {
         public static readonly BalanceCardRegion IntraEea = new BalanceCardRegion("intra-eea");
         public static readonly BalanceCardRegion IntraEu = new BalanceCardRegion("intra-eu");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

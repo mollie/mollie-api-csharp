@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The capture's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class CaptureResponseStatus : IEquatable<CaptureResponseStatus>
+    public class CaptureResponseStatus : IEquatable<CaptureResponseStatus>, IOpenEnum<string>
     {
         public static readonly CaptureResponseStatus Pending = new CaptureResponseStatus("pending");
         public static readonly CaptureResponseStatus Succeeded = new CaptureResponseStatus("succeeded");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// If no due date is given, the status will be `requested`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class CapabilityRequirementStatus : IEquatable<CapabilityRequirementStatus>
+    public class CapabilityRequirementStatus : IEquatable<CapabilityRequirementStatus>, IOpenEnum<string>
     {
         public static readonly CapabilityRequirementStatus CurrentlyDue = new CapabilityRequirementStatus("currently-due");
         public static readonly CapabilityRequirementStatus PastDue = new CapabilityRequirementStatus("past-due");
@@ -60,7 +60,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

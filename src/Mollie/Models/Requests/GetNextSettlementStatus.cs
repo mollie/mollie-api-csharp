@@ -21,7 +21,7 @@ namespace Mollie.Models.Requests
     /// The status of the settlement.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class GetNextSettlementStatus : IEquatable<GetNextSettlementStatus>
+    public class GetNextSettlementStatus : IEquatable<GetNextSettlementStatus>, IOpenEnum<string>
     {
         public static readonly GetNextSettlementStatus Open = new GetNextSettlementStatus("open");
         public static readonly GetNextSettlementStatus Pending = new GetNextSettlementStatus("pending");
@@ -63,7 +63,7 @@ namespace Mollie.Models.Requests
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

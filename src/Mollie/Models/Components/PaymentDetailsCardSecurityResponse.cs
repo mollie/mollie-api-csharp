@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The level of security applied during card processing.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsCardSecurityResponse : IEquatable<PaymentDetailsCardSecurityResponse>
+    public class PaymentDetailsCardSecurityResponse : IEquatable<PaymentDetailsCardSecurityResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsCardSecurityResponse Normal = new PaymentDetailsCardSecurityResponse("normal");
         public static readonly PaymentDetailsCardSecurityResponse Threedsecure = new PaymentDetailsCardSecurityResponse("3dsecure");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

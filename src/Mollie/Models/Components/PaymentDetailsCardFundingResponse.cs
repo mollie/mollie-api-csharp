@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The card type.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsCardFundingResponse : IEquatable<PaymentDetailsCardFundingResponse>
+    public class PaymentDetailsCardFundingResponse : IEquatable<PaymentDetailsCardFundingResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsCardFundingResponse Debit = new PaymentDetailsCardFundingResponse("debit");
         public static readonly PaymentDetailsCardFundingResponse Credit = new PaymentDetailsCardFundingResponse("credit");
@@ -61,7 +61,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

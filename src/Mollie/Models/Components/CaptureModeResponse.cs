@@ -24,7 +24,7 @@ namespace Mollie.Models.Components
     /// This field needs to be set to `manual` for method `riverty`.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class CaptureModeResponse : IEquatable<CaptureModeResponse>
+    public class CaptureModeResponse : IEquatable<CaptureModeResponse>, IOpenEnum<string>
     {
         public static readonly CaptureModeResponse Automatic = new CaptureModeResponse("automatic");
         public static readonly CaptureModeResponse Manual = new CaptureModeResponse("manual");
@@ -60,7 +60,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

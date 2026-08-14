@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the balance.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListEntityBalanceStatus : IEquatable<ListEntityBalanceStatus>
+    public class ListEntityBalanceStatus : IEquatable<ListEntityBalanceStatus>, IOpenEnum<string>
     {
         public static readonly ListEntityBalanceStatus Active = new ListEntityBalanceStatus("active");
         public static readonly ListEntityBalanceStatus Inactive = new ListEntityBalanceStatus("inactive");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

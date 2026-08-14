@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The status of the requested changes.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ProfileReviewStatusResponse : IEquatable<ProfileReviewStatusResponse>
+    public class ProfileReviewStatusResponse : IEquatable<ProfileReviewStatusResponse>, IOpenEnum<string>
     {
         public static readonly ProfileReviewStatusResponse Pending = new ProfileReviewStatusResponse("pending");
         public static readonly ProfileReviewStatusResponse Rejected = new ProfileReviewStatusResponse("rejected");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

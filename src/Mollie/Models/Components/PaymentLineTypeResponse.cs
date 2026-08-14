@@ -23,7 +23,7 @@ namespace Mollie.Models.Components
     /// The `tip` payment line type is not available when creating a payment.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentLineTypeResponse : IEquatable<PaymentLineTypeResponse>
+    public class PaymentLineTypeResponse : IEquatable<PaymentLineTypeResponse>, IOpenEnum<string>
     {
         public static readonly PaymentLineTypeResponse Physical = new PaymentLineTypeResponse("physical");
         public static readonly PaymentLineTypeResponse Digital = new PaymentLineTypeResponse("digital");
@@ -71,7 +71,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

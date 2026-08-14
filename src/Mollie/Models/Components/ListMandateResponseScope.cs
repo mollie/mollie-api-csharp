@@ -22,7 +22,7 @@ namespace Mollie.Models.Components
     /// present and can contain one or both of the following values:
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class ListMandateResponseScope : IEquatable<ListMandateResponseScope>
+    public class ListMandateResponseScope : IEquatable<ListMandateResponseScope>, IOpenEnum<string>
     {
         public static readonly ListMandateResponseScope CustomerPresent = new ListMandateResponseScope("customer-present");
         public static readonly ListMandateResponseScope CustomerNotPresent = new ListMandateResponseScope("customer-not-present");
@@ -58,7 +58,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

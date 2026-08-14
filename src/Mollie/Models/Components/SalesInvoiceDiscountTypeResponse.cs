@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The type of discount.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceDiscountTypeResponse : IEquatable<SalesInvoiceDiscountTypeResponse>
+    public class SalesInvoiceDiscountTypeResponse : IEquatable<SalesInvoiceDiscountTypeResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceDiscountTypeResponse Amount = new SalesInvoiceDiscountTypeResponse("amount");
         public static readonly SalesInvoiceDiscountTypeResponse Percentage = new SalesInvoiceDiscountTypeResponse("percentage");
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

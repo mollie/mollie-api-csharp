@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The e-invoice submission status for the invoice, if it was configured to be an e-invoice.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class SalesInvoiceEInvoiceStatus : IEquatable<SalesInvoiceEInvoiceStatus>
+    public class SalesInvoiceEInvoiceStatus : IEquatable<SalesInvoiceEInvoiceStatus>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceEInvoiceStatus Issuing = new SalesInvoiceEInvoiceStatus("issuing");
         public static readonly SalesInvoiceEInvoiceStatus Issued = new SalesInvoiceEInvoiceStatus("issued");
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

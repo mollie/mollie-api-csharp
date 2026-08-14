@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// A machine-readable code describing the reason for the payout's current status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PayoutStatusReasonCode : IEquatable<PayoutStatusReasonCode>
+    public class PayoutStatusReasonCode : IEquatable<PayoutStatusReasonCode>, IOpenEnum<string>
     {
         public static readonly PayoutStatusReasonCode Requested = new PayoutStatusReasonCode("requested");
         public static readonly PayoutStatusReasonCode Initiated = new PayoutStatusReasonCode("initiated");
@@ -81,7 +81,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

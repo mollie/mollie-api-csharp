@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
     /// The method by which the card was read by the terminal.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class PaymentDetailsReceiptCardReadMethodResponse : IEquatable<PaymentDetailsReceiptCardReadMethodResponse>
+    public class PaymentDetailsReceiptCardReadMethodResponse : IEquatable<PaymentDetailsReceiptCardReadMethodResponse>, IOpenEnum<string>
     {
         public static readonly PaymentDetailsReceiptCardReadMethodResponse Chip = new PaymentDetailsReceiptCardReadMethodResponse("chip");
         public static readonly PaymentDetailsReceiptCardReadMethodResponse MagneticStripe = new PaymentDetailsReceiptCardReadMethodResponse("magnetic-stripe");
@@ -63,7 +63,7 @@ namespace Mollie.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {
