@@ -20,6 +20,7 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class BalanceTransactionType : IEquatable<BalanceTransactionType>, IOpenEnum<string>
     {
+        public static readonly BalanceTransactionType ApplicationFee = new BalanceTransactionType("application-fee");
         public static readonly BalanceTransactionType BalanceChargeFee = new BalanceTransactionType("balance-charge-fee");
         public static readonly BalanceTransactionType BalanceCorrection = new BalanceTransactionType("balance-correction");
         public static readonly BalanceTransactionType BalanceReserve = new BalanceTransactionType("balance-reserve");
@@ -45,6 +46,7 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransactionType OutgoingCustomAmountTransfer = new BalanceTransactionType("outgoing-custom-amount-transfer");
         public static readonly BalanceTransactionType OutgoingTransfer = new BalanceTransactionType("outgoing-transfer");
         public static readonly BalanceTransactionType Payment = new BalanceTransactionType("payment");
+        public static readonly BalanceTransactionType PaymentFee = new BalanceTransactionType("payment-fee");
         public static readonly BalanceTransactionType PendingRollingReserve = new BalanceTransactionType("pending-rolling-reserve");
         public static readonly BalanceTransactionType PlatformPaymentChargeback = new BalanceTransactionType("platform-payment-chargeback");
         public static readonly BalanceTransactionType PlatformPaymentRefund = new BalanceTransactionType("platform-payment-refund");
@@ -68,6 +70,7 @@ namespace Mollie.Models.Components
         private static readonly Dictionary <string, BalanceTransactionType> _knownValues =
             new Dictionary <string, BalanceTransactionType> ()
             {
+                ["application-fee"] = ApplicationFee,
                 ["balance-charge-fee"] = BalanceChargeFee,
                 ["balance-correction"] = BalanceCorrection,
                 ["balance-reserve"] = BalanceReserve,
@@ -93,6 +96,7 @@ namespace Mollie.Models.Components
                 ["outgoing-custom-amount-transfer"] = OutgoingCustomAmountTransfer,
                 ["outgoing-transfer"] = OutgoingTransfer,
                 ["payment"] = Payment,
+                ["payment-fee"] = PaymentFee,
                 ["pending-rolling-reserve"] = PendingRollingReserve,
                 ["platform-payment-chargeback"] = PlatformPaymentChargeback,
                 ["platform-payment-refund"] = PlatformPaymentRefund,

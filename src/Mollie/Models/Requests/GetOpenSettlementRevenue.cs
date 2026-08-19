@@ -13,10 +13,6 @@ namespace Mollie.Models.Requests
     using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class GetOpenSettlementRevenue
     {
@@ -27,10 +23,11 @@ namespace Mollie.Models.Requests
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// The payment method, if applicable.
+        /// The method the cost or revenue subtotal applies to. This is usually a payment method, but can also represent a<br/>
+        /// correction or transaction type that is not tied to a specific payment method.
         /// </summary>
         [JsonProperty("method", NullValueHandling = NullValueHandling.Include)]
-        public PaymentMethod? Method { get; set; }
+        public SettlementMethod? Method { get; set; }
 
         /// <summary>
         /// The number of payments.

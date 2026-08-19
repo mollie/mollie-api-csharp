@@ -5,7 +5,7 @@
 ```csharp
 using Mollie.Models.Components;
 
-var value = BalanceTransactionType.BalanceChargeFee;
+var value = BalanceTransactionType.ApplicationFee;
 
 // Open enum: use .Of() to create instances from custom string values
 var custom = BalanceTransactionType.Of("custom_value");
@@ -16,6 +16,7 @@ var custom = BalanceTransactionType.Of("custom_value");
 
 | Name                                 | Value                                |
 | ------------------------------------ | ------------------------------------ |
+| `ApplicationFee`                     | application-fee                      |
 | `BalanceChargeFee`                   | balance-charge-fee                   |
 | `BalanceCorrection`                  | balance-correction                   |
 | `BalanceReserve`                     | balance-reserve                      |
@@ -41,6 +42,7 @@ var custom = BalanceTransactionType.Of("custom_value");
 | `OutgoingCustomAmountTransfer`       | outgoing-custom-amount-transfer      |
 | `OutgoingTransfer`                   | outgoing-transfer                    |
 | `Payment`                            | payment                              |
+| `PaymentFee`                         | payment-fee                          |
 | `PendingRollingReserve`              | pending-rolling-reserve              |
 | `PlatformPaymentChargeback`          | platform-payment-chargeback          |
 | `PlatformPaymentRefund`              | platform-payment-refund              |
