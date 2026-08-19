@@ -31,7 +31,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 1.4.0
+  version: 1.4.1
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
@@ -67,6 +67,7 @@ csharp:
   presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
+  schemaValidation: strict
   sourceDirectory: src
   targetFramework: dotnetVersion
   unionStrategy: left-to-right
