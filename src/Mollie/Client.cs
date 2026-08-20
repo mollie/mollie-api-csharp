@@ -87,6 +87,8 @@ namespace Mollie
 
         public IVerifyPayee VerifyPayee { get; }
 
+        public IDraftTransfers DraftTransfers { get; }
+
         public IPayouts Payouts { get; }
     }
 
@@ -225,6 +227,10 @@ namespace Mollie
         /// </summary>
         public IVerifyPayee VerifyPayee { get; private set; }
         /// <summary>
+        /// The DraftTransfers sub-SDK.
+        /// </summary>
+        public IDraftTransfers DraftTransfers { get; private set; }
+        /// <summary>
         /// The Payouts sub-SDK.
         /// </summary>
         public IPayouts Payouts { get; private set; }
@@ -301,6 +307,8 @@ namespace Mollie
             Transfers = new Transfers(SDKConfiguration);
 
             VerifyPayee = new VerifyPayee(SDKConfiguration);
+
+            DraftTransfers = new DraftTransfers(SDKConfiguration);
 
             Payouts = new Payouts(SDKConfiguration);
         }
@@ -446,6 +454,8 @@ namespace Mollie
             Transfers = new Transfers(SDKConfiguration);
 
             VerifyPayee = new VerifyPayee(SDKConfiguration);
+
+            DraftTransfers = new DraftTransfers(SDKConfiguration);
 
             Payouts = new Payouts(SDKConfiguration);
         }
