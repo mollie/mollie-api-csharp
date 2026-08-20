@@ -1,0 +1,11 @@
+# ListDraftTransferResponseDebtor
+
+The debtor (sender) of the draft transfer, resolved from `debtorIban` at creation time.
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     | Example                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `FullName`                                                                                      | *string*                                                                                        | :heavy_check_mark:                                                                              | The full name of the account holder.                                                            | Jan Jansen                                                                                      |
+| `Account`                                                                                       | [ListDraftTransferResponseAccount](../../Models/Components/ListDraftTransferResponseAccount.md) | :heavy_check_mark:                                                                              | The bank account details of the party.                                                          |                                                                                                 |

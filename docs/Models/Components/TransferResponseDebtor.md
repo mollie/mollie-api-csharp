@@ -1,4 +1,4 @@
-# Debtor
+# TransferResponseDebtor
 
 The debtor (sender) of the transfer, including their name and account details.
 
