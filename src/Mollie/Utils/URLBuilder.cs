@@ -15,6 +15,7 @@ namespace Mollie.Utils
     using System.Collections.Generic;
     using System.Net;
     using System.Reflection;
+    using System.Text;
 
     internal static class URLBuilder
     {
@@ -35,10 +36,11 @@ namespace Mollie.Utils
 
             url += pathAndFragment[0];
 
-            var parameters = GetPathParameters(request);
-            url = ReplaceParameters(url, parameters);
+            var parameters = GetPathParameters(request, out var allowReservedPathNames);
+            url = ReplaceParameters(url, parameters, allowReservedPathNames);
 
-            var queryParams = SerializeQueryParams(TrySerializeQueryParams(request, allowEmptyValue));
+            var serializedQuery = TrySerializeQueryParams(request, allowEmptyValue, out var allowReservedQueryPositions);
+            var queryParams = SerializeQueryParams(serializedQuery, allowReservedQueryPositions);
             if (queryParams != "")
             {
                 url += $"?{queryParams}";
@@ -52,33 +54,95 @@ namespace Mollie.Utils
             return url;
         }
 
-        public static string ReplaceParameters(string url, Dictionary<string, string> parameters)
+        public static string ReplaceParameters(string url, Dictionary<string, string> parameters, HashSet<string>? allowReservedNames = null)
         {
             foreach (var key in parameters.Keys)
             {
-                url = url.Replace($"{{{key}}}", Uri.EscapeDataString(parameters[key]));
+                var escaped = allowReservedNames != null && allowReservedNames.Contains(key)
+                    ? EscapeExceptReserved(parameters[key])
+                    : Uri.EscapeDataString(parameters[key]);
+                url = url.Replace($"{{{key}}}", escaped);
             }
 
             return url;
         }
 
-        public static string SerializeQueryParams(Dictionary<string, List<string>> queryParams) {
+        public static string SerializeQueryParams(Dictionary<string, List<string>> queryParams, Dictionary<string, HashSet<int>>? allowReservedPositions = null)
+        {
             var queries = new List<string>();
 
             foreach (var key in queryParams.Keys)
             {
-                foreach (var value in queryParams[key])
+                var values = queryParams[key];
+                HashSet<int>? reservedPositions = null;
+                allowReservedPositions?.TryGetValue(key, out reservedPositions);
+
+                for (var i = 0; i < values.Count; i++)
                 {
-                    queries.Add($"{key}={WebUtility.UrlEncode(Utilities.ToString(value))}");
+                    var stringValue = Utilities.ToString(values[i]);
+                    var encoded = reservedPositions != null && reservedPositions.Contains(i)
+                        ? EscapeExceptReserved(stringValue)
+                        : WebUtility.UrlEncode(stringValue);
+                    queries.Add($"{key}={encoded}");
                 }
             }
 
             return string.Join("&", queries);
         }
 
-        private static Dictionary<string, string> GetPathParameters(object? request)
+        private static void AddQueryValues(Dictionary<string, List<string>> parameters, string key, IEnumerable<string> values, bool allowReserved, Dictionary<string, HashSet<int>> allowReservedPositions)
+        {
+            if (!parameters.TryGetValue(key, out var existing))
+            {
+                existing = new List<string>();
+                parameters[key] = existing;
+            }
+
+            var start = existing.Count;
+            existing.AddRange(values);
+
+            if (!allowReserved)
+            {
+                return;
+            }
+
+            if (!allowReservedPositions.TryGetValue(key, out var positions))
+            {
+                positions = new HashSet<int>();
+                allowReservedPositions[key] = positions;
+            }
+
+            for (var i = start; i < existing.Count; i++)
+            {
+                positions.Add(i);
+            }
+        }
+
+        internal static string EscapeExceptReserved(string value)
+        {
+            const string reservedChars = ":/?#[]@!$&'()*+,;=";
+            var sb = new StringBuilder(value.Length);
+            foreach (var b in Encoding.UTF8.GetBytes(value))
+            {
+                var isUnreserved =
+                    (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z') || (b >= '0' && b <= '9')
+                    || b == '-' || b == '.' || b == '_' || b == '~';
+                if (isUnreserved || reservedChars.IndexOf((char)b) >= 0)
+                {
+                    sb.Append((char)b);
+                }
+                else
+                {
+                    sb.Append('%').Append(b.ToString("X2"));
+                }
+            }
+            return sb.ToString();
+        }
+
+        private static Dictionary<string, string> GetPathParameters(object? request, out HashSet<string> allowReservedNames)
         {
             var parameters = new Dictionary<string, string>();
+            allowReservedNames = new HashSet<string>();
 
             if (request == null)
             {
@@ -102,6 +166,11 @@ namespace Mollie.Utils
                 if (metadata == null)
                 {
                     continue;
+                }
+
+                if (metadata.AllowReserved)
+                {
+                    allowReservedNames.Add(metadata.Name ?? prop.Name);
                 }
 
                 // Handle null values and empty arrays as empty query parameters
@@ -151,9 +220,10 @@ namespace Mollie.Utils
             return parameters;
         }
 
-        private static Dictionary<string, List<string>> TrySerializeQueryParams(object? request, List<string>? allowEmptyValue = null)
+        private static Dictionary<string, List<string>> TrySerializeQueryParams(object? request, List<string>? allowEmptyValue, out Dictionary<string, HashSet<int>> allowReservedPositions)
         {
             var parameters = new Dictionary<string, List<string>>();
+            allowReservedPositions = new Dictionary<string, HashSet<int>>();
 
             if (request == null)
             {
@@ -197,13 +267,12 @@ namespace Mollie.Utils
                     switch (metadata.Serialization)
                     {
                         case "json":
-                            if (!parameters.ContainsKey(metadata.Name ?? prop.Name))
-                            {
-                                parameters.Add(metadata.Name ?? prop.Name, new List<string>());
-                            }
-
-                            parameters[metadata.Name ?? prop.Name].Add(
-                                Utilities.SerializeJSON(val)
+                            AddQueryValues(
+                                parameters,
+                                metadata.Name ?? prop.Name,
+                                new[] { Utilities.SerializeJSON(val) },
+                                metadata.AllowReserved,
+                                allowReservedPositions
                             );
                             break;
                         default:
@@ -226,15 +295,7 @@ namespace Mollie.Utils
                             );
                             foreach (var key in formParams.Keys)
                             {
-                                if (!parameters.ContainsKey(key))
-                                {
-                                    parameters.Add(key, new List<string>());
-                                }
-
-                                foreach (var v in formParams[key])
-                                {
-                                    parameters[key].Add(v);
-                                }
+                                AddQueryValues(parameters, key, formParams[key], metadata.AllowReserved, allowReservedPositions);
                             }
                             break;
                         case "deepObject":
@@ -244,15 +305,7 @@ namespace Mollie.Utils
                             );
                             foreach (var key in deepObjParams.Keys)
                             {
-                                if (!parameters.ContainsKey(key))
-                                {
-                                    parameters.Add(key, new List<string>());
-                                }
-
-                                foreach (var v in deepObjParams[key])
-                                {
-                                    parameters[key].Add(v);
-                                }
+                                AddQueryValues(parameters, key, deepObjParams[key], metadata.AllowReserved, allowReservedPositions);
                             }
                             break;
                         case "pipeDelimited":
@@ -265,15 +318,7 @@ namespace Mollie.Utils
                             );
                             foreach (var key in pipeParams.Keys)
                             {
-                                if (!parameters.ContainsKey(key))
-                                {
-                                    parameters.Add(key, new List<string>());
-                                }
-
-                                foreach (var v in pipeParams[key])
-                                {
-                                    parameters[key].Add(v);
-                                }
+                                AddQueryValues(parameters, key, pipeParams[key], metadata.AllowReserved, allowReservedPositions);
                             }
                             break;
                         default:

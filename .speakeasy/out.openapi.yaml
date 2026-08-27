@@ -28959,6 +28959,7 @@ components:
     balance-transaction-type:
       type: string
       enum:
+        - api-payment-rolling-reserve-release
         - application-fee
         - balance-charge-fee
         - balance-correction
@@ -28989,6 +28990,7 @@ components:
         - pending-rolling-reserve
         - platform-payment-chargeback
         - platform-payment-refund
+        - post-payment-split-payment
         - refund
         - refund-compensation
         - released-rolling-reserve

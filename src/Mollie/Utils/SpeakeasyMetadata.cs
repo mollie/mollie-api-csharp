@@ -43,6 +43,7 @@ namespace Mollie.Utils
             public bool Explode { get; set; } = false;
             public string Name { get; set; } = "";
             public string? Serialization { get; set; } = null;
+            public bool AllowReserved { get; set; } = false;
         }
 
         internal class QueryParamMetadata
@@ -51,6 +52,7 @@ namespace Mollie.Utils
             public bool Explode { get; set; } = true;
             public string Name { get; set; } = "";
             public string? Serialization { get; set; } = null;
+            public bool AllowReserved { get; set; } = false;
         }
 
         internal class HeaderMetadata
