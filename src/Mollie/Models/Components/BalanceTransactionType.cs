@@ -20,6 +20,7 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class BalanceTransactionType : IEquatable<BalanceTransactionType>, IOpenEnum<string>
     {
+        public static readonly BalanceTransactionType ApiPaymentRollingReserveRelease = new BalanceTransactionType("api-payment-rolling-reserve-release");
         public static readonly BalanceTransactionType ApplicationFee = new BalanceTransactionType("application-fee");
         public static readonly BalanceTransactionType BalanceChargeFee = new BalanceTransactionType("balance-charge-fee");
         public static readonly BalanceTransactionType BalanceCorrection = new BalanceTransactionType("balance-correction");
@@ -50,6 +51,7 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransactionType PendingRollingReserve = new BalanceTransactionType("pending-rolling-reserve");
         public static readonly BalanceTransactionType PlatformPaymentChargeback = new BalanceTransactionType("platform-payment-chargeback");
         public static readonly BalanceTransactionType PlatformPaymentRefund = new BalanceTransactionType("platform-payment-refund");
+        public static readonly BalanceTransactionType PostPaymentSplitPayment = new BalanceTransactionType("post-payment-split-payment");
         public static readonly BalanceTransactionType Refund = new BalanceTransactionType("refund");
         public static readonly BalanceTransactionType RefundCompensation = new BalanceTransactionType("refund-compensation");
         public static readonly BalanceTransactionType ReleasedRollingReserve = new BalanceTransactionType("released-rolling-reserve");
@@ -70,6 +72,7 @@ namespace Mollie.Models.Components
         private static readonly Dictionary <string, BalanceTransactionType> _knownValues =
             new Dictionary <string, BalanceTransactionType> ()
             {
+                ["api-payment-rolling-reserve-release"] = ApiPaymentRollingReserveRelease,
                 ["application-fee"] = ApplicationFee,
                 ["balance-charge-fee"] = BalanceChargeFee,
                 ["balance-correction"] = BalanceCorrection,
@@ -100,6 +103,7 @@ namespace Mollie.Models.Components
                 ["pending-rolling-reserve"] = PendingRollingReserve,
                 ["platform-payment-chargeback"] = PlatformPaymentChargeback,
                 ["platform-payment-refund"] = PlatformPaymentRefund,
+                ["post-payment-split-payment"] = PostPaymentSplitPayment,
                 ["refund"] = Refund,
                 ["refund-compensation"] = RefundCompensation,
                 ["released-rolling-reserve"] = ReleasedRollingReserve,
