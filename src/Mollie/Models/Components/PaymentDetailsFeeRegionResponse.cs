@@ -26,6 +26,8 @@ namespace Mollie.Models.Components
         public static readonly PaymentDetailsFeeRegionResponse AmericanExpress = new PaymentDetailsFeeRegionResponse("american-express");
         public static readonly PaymentDetailsFeeRegionResponse AmexIntraEea = new PaymentDetailsFeeRegionResponse("amex-intra-eea");
         public static readonly PaymentDetailsFeeRegionResponse CarteBancaire = new PaymentDetailsFeeRegionResponse("carte-bancaire");
+        public static readonly PaymentDetailsFeeRegionResponse CartesBancairesBusiness = new PaymentDetailsFeeRegionResponse("cartes-bancaires-business");
+        public static readonly PaymentDetailsFeeRegionResponse CartesBancairesConsumer = new PaymentDetailsFeeRegionResponse("cartes-bancaires-consumer");
         public static readonly PaymentDetailsFeeRegionResponse Domestic = new PaymentDetailsFeeRegionResponse("domestic");
         public static readonly PaymentDetailsFeeRegionResponse Inter = new PaymentDetailsFeeRegionResponse("inter");
         public static readonly PaymentDetailsFeeRegionResponse IntraEu = new PaymentDetailsFeeRegionResponse("intra-eu");
@@ -38,6 +40,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentDetailsFeeRegionResponse MastercardDebitBusinessDomestic = new PaymentDetailsFeeRegionResponse("mastercard-debit-business-domestic");
         public static readonly PaymentDetailsFeeRegionResponse MastercardDebitBusinessIntraEea = new PaymentDetailsFeeRegionResponse("mastercard-debit-business-intra-eea");
         public static readonly PaymentDetailsFeeRegionResponse MastercardDebitConsumerDomestic = new PaymentDetailsFeeRegionResponse("mastercard-debit-consumer-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse MastercardDebitConsumerInter = new PaymentDetailsFeeRegionResponse("mastercard-debit-consumer-inter");
         public static readonly PaymentDetailsFeeRegionResponse MastercardDebitConsumerIntraEea = new PaymentDetailsFeeRegionResponse("mastercard-debit-consumer-intra-eea");
         public static readonly PaymentDetailsFeeRegionResponse Other = new PaymentDetailsFeeRegionResponse("other");
         public static readonly PaymentDetailsFeeRegionResponse VisaCreditBusinessDomestic = new PaymentDetailsFeeRegionResponse("visa-credit-business-domestic");
@@ -47,6 +50,8 @@ namespace Mollie.Models.Components
         public static readonly PaymentDetailsFeeRegionResponse VisaDebitBusinessDomestic = new PaymentDetailsFeeRegionResponse("visa-debit-business-domestic");
         public static readonly PaymentDetailsFeeRegionResponse VisaDebitBusinessIntraEea = new PaymentDetailsFeeRegionResponse("visa-debit-business-intra-eea");
         public static readonly PaymentDetailsFeeRegionResponse VisaDebitConsumerDomestic = new PaymentDetailsFeeRegionResponse("visa-debit-consumer-domestic");
+        public static readonly PaymentDetailsFeeRegionResponse VisaDebitConsumerInter = new PaymentDetailsFeeRegionResponse("visa-debit-consumer-inter");
+        public static readonly PaymentDetailsFeeRegionResponse VisaDebitConsumerIntraEea = new PaymentDetailsFeeRegionResponse("visa-debit-consumer-intra-eea");
 
         private static readonly Dictionary <string, PaymentDetailsFeeRegionResponse> _knownValues =
             new Dictionary <string, PaymentDetailsFeeRegionResponse> ()
@@ -54,6 +59,8 @@ namespace Mollie.Models.Components
                 ["american-express"] = AmericanExpress,
                 ["amex-intra-eea"] = AmexIntraEea,
                 ["carte-bancaire"] = CarteBancaire,
+                ["cartes-bancaires-business"] = CartesBancairesBusiness,
+                ["cartes-bancaires-consumer"] = CartesBancairesConsumer,
                 ["domestic"] = Domestic,
                 ["inter"] = Inter,
                 ["intra-eu"] = IntraEu,
@@ -66,6 +73,7 @@ namespace Mollie.Models.Components
                 ["mastercard-debit-business-domestic"] = MastercardDebitBusinessDomestic,
                 ["mastercard-debit-business-intra-eea"] = MastercardDebitBusinessIntraEea,
                 ["mastercard-debit-consumer-domestic"] = MastercardDebitConsumerDomestic,
+                ["mastercard-debit-consumer-inter"] = MastercardDebitConsumerInter,
                 ["mastercard-debit-consumer-intra-eea"] = MastercardDebitConsumerIntraEea,
                 ["other"] = Other,
                 ["visa-credit-business-domestic"] = VisaCreditBusinessDomestic,
@@ -74,7 +82,9 @@ namespace Mollie.Models.Components
                 ["visa-credit-consumer-intra-eea"] = VisaCreditConsumerIntraEea,
                 ["visa-debit-business-domestic"] = VisaDebitBusinessDomestic,
                 ["visa-debit-business-intra-eea"] = VisaDebitBusinessIntraEea,
-                ["visa-debit-consumer-domestic"] = VisaDebitConsumerDomestic
+                ["visa-debit-consumer-domestic"] = VisaDebitConsumerDomestic,
+                ["visa-debit-consumer-inter"] = VisaDebitConsumerInter,
+                ["visa-debit-consumer-intra-eea"] = VisaDebitConsumerIntraEea
             };
 
         private static readonly ConcurrentDictionary<string, PaymentDetailsFeeRegionResponse> _values =

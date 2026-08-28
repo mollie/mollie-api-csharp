@@ -21,6 +21,7 @@ var custom = PaymentDetailsCardLabelResponse.Of("custom_value");
 | `AmericanExpress` | American Express  |
 | `CartaSi`         | Carta Si          |
 | `CarteBleue`      | Carte Bleue       |
+| `CartesBancaires` | Cartes Bancaires  |
 | `Dankort`         | Dankort           |
 | `DinersClub`      | Diners Club       |
 | `Discover`        | Discover          |
