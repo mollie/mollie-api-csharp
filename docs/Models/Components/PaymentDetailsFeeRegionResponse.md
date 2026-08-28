@@ -21,6 +21,8 @@ var custom = PaymentDetailsFeeRegionResponse.Of("custom_value");
 | `AmericanExpress`                    | american-express                     |
 | `AmexIntraEea`                       | amex-intra-eea                       |
 | `CarteBancaire`                      | carte-bancaire                       |
+| `CartesBancairesBusiness`            | cartes-bancaires-business            |
+| `CartesBancairesConsumer`            | cartes-bancaires-consumer            |
 | `Domestic`                           | domestic                             |
 | `Inter`                              | inter                                |
 | `IntraEu`                            | intra-eu                             |
@@ -33,6 +35,7 @@ var custom = PaymentDetailsFeeRegionResponse.Of("custom_value");
 | `MastercardDebitBusinessDomestic`    | mastercard-debit-business-domestic   |
 | `MastercardDebitBusinessIntraEea`    | mastercard-debit-business-intra-eea  |
 | `MastercardDebitConsumerDomestic`    | mastercard-debit-consumer-domestic   |
+| `MastercardDebitConsumerInter`       | mastercard-debit-consumer-inter      |
 | `MastercardDebitConsumerIntraEea`    | mastercard-debit-consumer-intra-eea  |
 | `Other`                              | other                                |
 | `VisaCreditBusinessDomestic`         | visa-credit-business-domestic        |
@@ -42,3 +45,5 @@ var custom = PaymentDetailsFeeRegionResponse.Of("custom_value");
 | `VisaDebitBusinessDomestic`          | visa-debit-business-domestic         |
 | `VisaDebitBusinessIntraEea`          | visa-debit-business-intra-eea        |
 | `VisaDebitConsumerDomestic`          | visa-debit-consumer-domestic         |
+| `VisaDebitConsumerInter`             | visa-debit-consumer-inter            |
+| `VisaDebitConsumerIntraEea`          | visa-debit-consumer-intra-eea        |

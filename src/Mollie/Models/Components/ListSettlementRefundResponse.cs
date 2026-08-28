@@ -72,7 +72,8 @@ namespace Mollie.Models.Components
         public string? SettlementId { get; set; } = null;
 
         /// <summary>
-        /// The refund's status. Settlement refunds always have a status of `refunded`.
+        /// The refund's status. Settlement refunds are normally `refunded`, but can be `failed` if the refund<br/>
+        /// could not be processed.
         /// </summary>
         [JsonProperty("status")]
         public SettlementRefundStatus Status { get; set; } = default!;

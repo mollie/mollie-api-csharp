@@ -26,6 +26,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentDetailsCardLabelResponse AmericanExpress = new PaymentDetailsCardLabelResponse("American Express");
         public static readonly PaymentDetailsCardLabelResponse CartaSi = new PaymentDetailsCardLabelResponse("Carta Si");
         public static readonly PaymentDetailsCardLabelResponse CarteBleue = new PaymentDetailsCardLabelResponse("Carte Bleue");
+        public static readonly PaymentDetailsCardLabelResponse CartesBancaires = new PaymentDetailsCardLabelResponse("Cartes Bancaires");
         public static readonly PaymentDetailsCardLabelResponse Dankort = new PaymentDetailsCardLabelResponse("Dankort");
         public static readonly PaymentDetailsCardLabelResponse DinersClub = new PaymentDetailsCardLabelResponse("Diners Club");
         public static readonly PaymentDetailsCardLabelResponse Discover = new PaymentDetailsCardLabelResponse("Discover");
@@ -43,6 +44,7 @@ namespace Mollie.Models.Components
                 ["American Express"] = AmericanExpress,
                 ["Carta Si"] = CartaSi,
                 ["Carte Bleue"] = CarteBleue,
+                ["Cartes Bancaires"] = CartesBancaires,
                 ["Dankort"] = Dankort,
                 ["Diners Club"] = DinersClub,
                 ["Discover"] = Discover,

@@ -18,17 +18,20 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     /// <summary>
-    /// The refund's status. Settlement refunds always have a status of `refunded`.
+    /// The refund's status. Settlement refunds are normally `refunded`, but can be `failed` if the refund<br/>
+    /// could not be processed.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SettlementRefundStatus : IEquatable<SettlementRefundStatus>, IOpenEnum<string>
     {
         public static readonly SettlementRefundStatus Refunded = new SettlementRefundStatus("refunded");
+        public static readonly SettlementRefundStatus Failed = new SettlementRefundStatus("failed");
 
         private static readonly Dictionary <string, SettlementRefundStatus> _knownValues =
             new Dictionary <string, SettlementRefundStatus> ()
             {
-                ["refunded"] = Refunded
+                ["refunded"] = Refunded,
+                ["failed"] = Failed
             };
 
         private static readonly ConcurrentDictionary<string, SettlementRefundStatus> _values =
