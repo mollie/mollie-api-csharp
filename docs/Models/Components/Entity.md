@@ -9,10 +9,10 @@
 Entity.CreatePaymentResponse(/* values here */);
 ```
 
-### EntityRefundResponse
+### RefundResponse
 
 ```csharp
-Entity.CreateEntityRefundResponse(/* values here */);
+Entity.CreateRefundResponse(/* values here */);
 ```
 
 ### EntityChargeback

@@ -320,14 +320,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityRefundResponse obj;
+                    RefundResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityRefundResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RefundResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityRefundResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into RefundResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new CreateRefundResponse()
@@ -338,7 +338,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityRefundResponse = obj;
+                    response.RefundResponse = obj;
                     return response;
                 }
 
@@ -728,14 +728,14 @@ namespace Mollie
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    EntityRefundResponse obj;
+                    RefundResponse obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<EntityRefundResponse>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<RefundResponse>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into EntityRefundResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into RefundResponse.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetRefundResponse()
@@ -746,7 +746,7 @@ namespace Mollie
                             Request = httpRequest
                         }
                     };
-                    response.EntityRefundResponse = obj;
+                    response.RefundResponse = obj;
                     return response;
                 }
 

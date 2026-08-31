@@ -21,7 +21,7 @@ namespace Mollie.Models.Components
         /// The description of the refund that may be shown to your customer, depending on the payment method used.
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; } = default!;
+        public string? Description { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
@@ -34,7 +34,7 @@ namespace Mollie.Models.Components
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
-        public Metadata? Metadata { get; set; }
+        public Metadata? Metadata { get; set; } = null;
 
         [JsonProperty("externalReference")]
         public RefundRequestExternalReference? ExternalReference { get; set; }

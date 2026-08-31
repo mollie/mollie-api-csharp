@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of refund objects.
         /// </summary>
         [JsonProperty("refunds")]
-        public List<ListEntityRefund> Refunds { get; set; } = default!;
+        public List<ListRefundResponse> Refunds { get; set; } = default!;
     }
 }

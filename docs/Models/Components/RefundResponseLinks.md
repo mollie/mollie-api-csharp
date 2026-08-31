@@ -1,4 +1,4 @@
-# EntityRefundResponseLinks
+# RefundResponseLinks
 
 An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
 

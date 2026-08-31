@@ -14867,7 +14867,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/entity-refund-response'
+                $ref: '#/components/schemas/refund-response'
               examples:
                 create-refund-201-1:
                   $ref: '#/components/examples/get-refund'
@@ -15079,7 +15079,7 @@ paths:
                         description: An array of refund objects.
                         type: array
                         items:
-                          $ref: '#/components/schemas/list-entity-refund'
+                          $ref: '#/components/schemas/list-refund-response'
                   _links:
                     $ref: '#/components/schemas/list-links'
               examples:
@@ -15214,7 +15214,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/entity-refund-response'
+                $ref: '#/components/schemas/refund-response'
               examples:
                 get-refund-200-1:
                   $ref: '#/components/examples/get-refund'
@@ -15415,7 +15415,7 @@ paths:
                         description: An array of refund objects.
                         type: array
                         items:
-                          $ref: '#/components/schemas/list-entity-refund'
+                          $ref: '#/components/schemas/list-refund-response'
                   _links:
                     $ref: '#/components/schemas/list-links'
               examples:
@@ -32445,17 +32445,6 @@ components:
       example: organization
     entity-refund:
       type: object
-      required:
-        - resource
-        - id
-        - mode
-        - amount
-        - status
-        - createdAt
-        - description
-        - metadata
-        - paymentId
-        - _links
       properties:
         resource:
           type: string
@@ -32586,6 +32575,21 @@ components:
             documentation:
               $ref: '#/components/schemas/url'
           readOnly: true
+    refund-response:
+      type: object
+      required:
+        - resource
+        - id
+        - mode
+        - createdAt
+        - amount
+        - description
+        - status
+        - paymentId
+        - metadata
+        - _links
+      allOf:
+        - $ref: '#/components/schemas/entity-refund-response'
     settlement-refund-status:
       type: string
       description: |-
@@ -32602,7 +32606,7 @@ components:
       x-speakeasy-unknown-values: allow
     settlement-refund-response:
       allOf:
-        - $ref: '#/components/schemas/entity-refund'
+        - $ref: '#/components/schemas/refund-response'
         - type: object
           properties:
             mode:
@@ -34669,6 +34673,11 @@ components:
 
             E-invoicing is only available for merchants based in Belgium, Germany, and the Netherlands, and only when
             the recipient is also located in one of these countries.
+
+            When set to true, the invoice will be delivered via the Peppol network. In this case, the organizationNumber
+            or vatNumber provided must match the identifier the recipient is actually registered with on Peppol,
+            otherwise delivery will fail. Note: for recipients in Germany, the vatNumber is the required identifier
+            for Peppol registration.
           example: false
         amountDue:
           allOf:
@@ -35081,7 +35090,7 @@ components:
                 - title: payment.*
                   $ref: '#/components/schemas/payment-response'
                 - title: refund.*
-                  $ref: '#/components/schemas/entity-refund-response'
+                  $ref: '#/components/schemas/refund-response'
                 - title: chargeback.*
                   $ref: '#/components/schemas/entity-chargeback'
                 - title: capture.*
@@ -37756,9 +37765,16 @@ components:
           type: boolean
           description: |-
             This indicates whether the invoice is an e-invoice. The default value is `false` and can't be changed
-            after the invoice has been issued.
+            after the invoice has been issued. When `emailDetails` is provided, an additional email is sent to the
+            recipient.
 
-            When `emailDetails` is provided, an additional email is sent to the recipient.
+            E-invoicing is only available for merchants based in Belgium, Germany, and the Netherlands, and only when
+            the recipient is also located in one of these countries.
+
+            When set to true, the invoice will be delivered via the Peppol network. In this case, the organizationNumber
+            or vatNumber provided must match the identifier the recipient is actually registered with on Peppol,
+            otherwise delivery will fail. Note: for recipients in Germany, the vatNumber is the required identifier
+            for Peppol registration.
           example: false
     businessAccountToken:
       type: string
@@ -39086,17 +39102,6 @@ components:
               readOnly: true
     list-entity-refund:
       type: object
-      required:
-        - resource
-        - id
-        - mode
-        - amount
-        - status
-        - createdAt
-        - description
-        - metadata
-        - paymentId
-        - _links
       properties:
         resource:
           type: string
@@ -39224,9 +39229,24 @@ components:
                 The API resource URL of the [settlement](get-settlement) this refund has been settled with. Not present if not
                 yet settled.
           readOnly: true
-    list-settlement-refund-response:
+    list-refund-response:
+      type: object
+      required:
+        - resource
+        - id
+        - mode
+        - createdAt
+        - amount
+        - description
+        - status
+        - paymentId
+        - metadata
+        - _links
       allOf:
         - $ref: '#/components/schemas/list-entity-refund'
+    list-settlement-refund-response:
+      allOf:
+        - $ref: '#/components/schemas/list-refund-response'
         - type: object
           properties:
             mode:
@@ -40798,6 +40818,11 @@ components:
 
             E-invoicing is only available for merchants based in Belgium, Germany, and the Netherlands, and only when
             the recipient is also located in one of these countries.
+
+            When set to true, the invoice will be delivered via the Peppol network. In this case, the organizationNumber
+            or vatNumber provided must match the identifier the recipient is actually registered with on Peppol,
+            otherwise delivery will fail. Note: for recipients in Germany, the vatNumber is the required identifier
+            for Peppol registration.
           example: false
         amountDue:
           allOf:
@@ -42537,17 +42562,6 @@ components:
       x-speakeasy-unknown-values: allow
     entity-refund-response:
       type: object
-      required:
-        - resource
-        - id
-        - mode
-        - amount
-        - status
-        - createdAt
-        - description
-        - metadata
-        - paymentId
-        - _links
       properties:
         resource:
           type: string
@@ -43346,6 +43360,11 @@ components:
 
             E-invoicing is only available for merchants based in Belgium, Germany, and the Netherlands, and only when
             the recipient is also located in one of these countries.
+
+            When set to true, the invoice will be delivered via the Peppol network. In this case, the organizationNumber
+            or vatNumber provided must match the identifier the recipient is actually registered with on Peppol,
+            otherwise delivery will fail. Note: for recipients in Germany, the vatNumber is the required identifier
+            for Peppol registration.
           example: false
         amountDue:
           allOf:
