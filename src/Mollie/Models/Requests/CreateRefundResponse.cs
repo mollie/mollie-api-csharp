@@ -22,6 +22,6 @@ namespace Mollie.Models.Requests
         /// <summary>
         /// The newly created refund object.
         /// </summary>
-        public EntityRefundResponse? EntityRefundResponse { get; set; }
+        public RefundResponse? RefundResponse { get; set; }
     }
 }

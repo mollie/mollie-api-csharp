@@ -27,7 +27,7 @@ namespace Mollie.Models.Components
 
         public static EntityType PaymentResponse { get { return new EntityType("payment-response"); } }
 
-        public static EntityType EntityRefundResponse { get { return new EntityType("entity-refund-response"); } }
+        public static EntityType RefundResponse { get { return new EntityType("refund-response"); } }
 
         public static EntityType EntityChargeback { get { return new EntityType("entity-chargeback"); } }
 
@@ -46,7 +46,7 @@ namespace Mollie.Models.Components
         public static EntityType FromString(string v) {
             switch(v) {
                 case "payment-response": return PaymentResponse;
-                case "entity-refund-response": return EntityRefundResponse;
+                case "refund-response": return RefundResponse;
                 case "entity-chargeback": return EntityChargeback;
                 case "capture-response": return CaptureResponse;
                 case "payment-link-response": return PaymentLinkResponse;
@@ -83,7 +83,7 @@ namespace Mollie.Models.Components
         public PaymentResponse? PaymentResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public EntityRefundResponse? EntityRefundResponse { get; set; }
+        public RefundResponse? RefundResponse { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public EntityChargeback? EntityChargeback { get; set; }
@@ -112,12 +112,12 @@ namespace Mollie.Models.Components
             res.PaymentResponse = paymentResponse;
             return res;
         }
-        public static Entity CreateEntityRefundResponse(EntityRefundResponse entityRefundResponse)
+        public static Entity CreateRefundResponse(RefundResponse refundResponse)
         {
-            EntityType typ = EntityType.EntityRefundResponse;
+            EntityType typ = EntityType.RefundResponse;
 
             Entity res = new Entity(typ);
-            res.EntityRefundResponse = entityRefundResponse;
+            res.RefundResponse = refundResponse;
             return res;
         }
         public static Entity CreateEntityChargeback(EntityChargeback entityChargeback)
@@ -227,14 +227,14 @@ namespace Mollie.Models.Components
 
                 try
                 {
-                    return new Entity(EntityType.EntityRefundResponse)
+                    return new Entity(EntityType.RefundResponse)
                     {
-                        EntityRefundResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EntityRefundResponse>(json)
+                        RefundResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<RefundResponse>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(EntityRefundResponse), new Entity(EntityType.EntityRefundResponse), "EntityRefundResponse"));
+                    fallbackCandidates.Add((typeof(RefundResponse), new Entity(EntityType.RefundResponse), "RefundResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -383,9 +383,9 @@ namespace Mollie.Models.Components
                     return;
                 }
 
-                if (res.EntityRefundResponse != null)
+                if (res.RefundResponse != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.EntityRefundResponse));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.RefundResponse));
                     return;
                 }
 

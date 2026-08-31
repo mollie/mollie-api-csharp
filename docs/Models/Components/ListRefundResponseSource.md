@@ -1,4 +1,4 @@
-# EntityRefundResponseSource
+# ListRefundResponseSource
 
 Where the funds will be pulled back from.
 

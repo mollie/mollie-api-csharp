@@ -133,7 +133,12 @@ namespace Mollie.Models.Components
         /// recipient.<br/>
         /// <br/>
         /// E-invoicing is only available for merchants based in Belgium, Germany, and the Netherlands, and only when<br/>
-        /// the recipient is also located in one of these countries.
+        /// the recipient is also located in one of these countries.<br/>
+        /// <br/>
+        /// When set to true, the invoice will be delivered via the Peppol network. In this case, the organizationNumber<br/>
+        /// or vatNumber provided must match the identifier the recipient is actually registered with on Peppol,<br/>
+        /// otherwise delivery will fail. Note: for recipients in Germany, the vatNumber is the required identifier<br/>
+        /// for Peppol registration.
         /// </summary>
         [JsonProperty("isEInvoice")]
         public bool? IsEInvoice { get; set; }

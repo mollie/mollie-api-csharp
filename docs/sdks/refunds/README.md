@@ -36,11 +36,6 @@ var res = await sdk.Refunds.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
-        Metadata = Metadata.CreateMapOfAny(
-            new Dictionary<string, object>() {
-
-            }
-        ),
         ExternalReference = new RefundRequestExternalReference() {
             Type = RefundExternalReferenceType.AcquirerReference,
             Id = "123456789012345",
@@ -85,11 +80,6 @@ var res = await sdk.Refunds.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
-        Metadata = Metadata.CreateMapOfAny(
-            new Dictionary<string, object>() {
-
-            }
-        ),
         ExternalReference = new RefundRequestExternalReference() {
             Type = RefundExternalReferenceType.AcquirerReference,
             Id = "123456789012345",

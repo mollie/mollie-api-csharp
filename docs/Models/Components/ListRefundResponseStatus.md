@@ -1,14 +1,14 @@
-# ListEntityRefundStatus
+# ListRefundResponseStatus
 
 ## Example Usage
 
 ```csharp
 using Mollie.Models.Components;
 
-var value = ListEntityRefundStatus.Queued;
+var value = ListRefundResponseStatus.Queued;
 
 // Open enum: use .Of() to create instances from custom string values
-var custom = ListEntityRefundStatus.Of("custom_value");
+var custom = ListRefundResponseStatus.Of("custom_value");
 ```
 
 
