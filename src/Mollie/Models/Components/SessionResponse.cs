@@ -27,8 +27,9 @@ namespace Mollie.Models.Components
         public string Resource { get; set; } = default!;
 
         /// <summary>
-        /// The identifier uniquely referring to this session. Mollie assigns this identifier at session creation time. Mollie<br/>
-        /// will always refer to the session by this ID. Example: `sess_5B8cwPMGnU6qLbRvo7qEZo`.
+        /// The identifier uniquely referring to this Checkout Session. Mollie assigns this identifier at Checkout<br/>
+        /// Session creation time. Mollie will always refer to the Checkout Session by this ID. Example:<br/>
+        /// `sess_5B8cwPMGnU6qLbRvo7qEZo`.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
@@ -40,7 +41,7 @@ namespace Mollie.Models.Components
         public Mode Mode { get; set; } = default!;
 
         /// <summary>
-        /// The client access token for the session. Use the client access token to initialize Mollie Components.
+        /// The client access token for the Checkout Session. Use the client access token to initialize Mollie Components.
         /// </summary>
         [JsonProperty("clientAccessToken")]
         public string ClientAccessToken { get; set; } = default!;
@@ -55,18 +56,18 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// A user-friendly description of the session that may be shown to the customer during the checkout process. <br/>
+        /// A user-friendly description of the Checkout Session that may be shown to the customer during the checkout process.<br/>
         /// <br/>
-        /// Any payment created for the session will use the same description.
+        /// Any payment created for the Checkout Session will use the same description.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// List of items the customer will pay for in this session. The sum of all line items must equal the<br/>
-        /// session's amount.<br/>
+        /// List of items the customer will pay for in this Checkout Session. The sum of all line items must equal the<br/>
+        /// Checkout Session's amount.<br/>
         /// <br/>
-        /// All lines must have the same currency as the session.
+        /// All lines must have the same currency as the Checkout Session.
         /// </summary>
         [JsonProperty("lines")]
         public List<SessionLineItemResponse> Lines { get; set; } = default!;
@@ -86,7 +87,8 @@ namespace Mollie.Models.Components
         /// &gt; This property is currently in private beta, and the final specification may still change.<br/>
         /// <br/>
         /// Declare which customer details should be collected during checkout. Mollie can collect these details for you<br/>
-        /// with the Express Component and returns them on the session's and payment's `billingAddress` and `shippingAddress`.
+        /// with the Express Component and returns them on the Checkout Session's and payment's `billingAddress` and<br/>
+        /// `shippingAddress`.
         /// </summary>
         [JsonProperty("requiredCustomerDetails")]
         public List<SessionRequiredCustomerDetailsResponse>? RequiredCustomerDetails { get; set; }
@@ -107,7 +109,7 @@ namespace Mollie.Models.Components
         /// Provide any data you like in a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.<br/>
         /// <br/>
-        /// Any payment created for the session will use the same metadata.
+        /// Any payment created for the Checkout Session will use the same metadata.
         /// </summary>
         [JsonProperty("metadata")]
         public Dictionary<string, object>? Metadata { get; set; }
@@ -132,15 +134,15 @@ namespace Mollie.Models.Components
         public string CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// The date and time the session expired, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.<br/>
-        /// Omitted if the session has not expired.
+        /// The date and time the Checkout Session expired, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.<br/>
+        /// Omitted if the Checkout Session has not expired.
         /// </summary>
         [JsonProperty("expiredAt")]
         public string? ExpiredAt { get; set; } = null;
 
         /// <summary>
-        /// The date and time the session was completed, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.<br/>
-        /// Omitted if the session has not been completed.
+        /// The date and time the Checkout Session was completed, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
+        /// format. Omitted if the Checkout Session has not been completed.
         /// </summary>
         [JsonProperty("completedAt")]
         public string? CompletedAt { get; set; } = null;

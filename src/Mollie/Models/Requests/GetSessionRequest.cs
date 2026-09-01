@@ -15,7 +15,7 @@ namespace Mollie.Models.Requests
     public class GetSessionRequest
     {
         /// <summary>
-        /// Provide the ID of the related session.
+        /// Provide the ID of the related Checkout Session.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sessionId")]
         public string SessionId { get; set; } = default!;

@@ -24,18 +24,18 @@ namespace Mollie.Models.Components
         public Amount Amount { get; set; } = default!;
 
         /// <summary>
-        /// A user-friendly description of the session that may be shown to the customer during the checkout process. <br/>
+        /// A user-friendly description of the Checkout Session that may be shown to the customer during the checkout process.<br/>
         /// <br/>
-        /// Any payment created for the session will use the same description.
+        /// Any payment created for the Checkout Session will use the same description.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; } = default!;
 
         /// <summary>
-        /// List of items the customer will pay for in this session. The sum of all line items must equal the<br/>
-        /// session's amount.<br/>
+        /// List of items the customer will pay for in this Checkout Session. The sum of all line items must equal the<br/>
+        /// Checkout Session's amount.<br/>
         /// <br/>
-        /// All lines must have the same currency as the session.
+        /// All lines must have the same currency as the Checkout Session.
         /// </summary>
         [JsonProperty("lines")]
         public List<SessionLineItem> Lines { get; set; } = default!;
@@ -55,7 +55,8 @@ namespace Mollie.Models.Components
         /// &gt; This property is currently in private beta, and the final specification may still change.<br/>
         /// <br/>
         /// Declare which customer details should be collected during checkout. Mollie can collect these details for you<br/>
-        /// with the Express Component and returns them on the session's and payment's `billingAddress` and `shippingAddress`.
+        /// with the Express Component and returns them on the Checkout Session's and payment's `billingAddress` and<br/>
+        /// `shippingAddress`.
         /// </summary>
         [JsonProperty("requiredCustomerDetails")]
         public List<SessionRequiredCustomerDetails>? RequiredCustomerDetails { get; set; }
@@ -76,7 +77,7 @@ namespace Mollie.Models.Components
         /// Provide any data you like in a JSON object. We will save the data alongside the entity. Whenever<br/>
         /// you fetch the entity with our API, we will also include the metadata. You can use up to approximately 1kB.<br/>
         /// <br/>
-        /// Any payment created for the session will use the same metadata.
+        /// Any payment created for the Checkout Session will use the same metadata.
         /// </summary>
         [JsonProperty("metadata")]
         public Dictionary<string, object>? Metadata { get; set; }
