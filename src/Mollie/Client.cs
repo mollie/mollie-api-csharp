@@ -55,7 +55,7 @@ namespace Mollie
 
         public IUnmatchedCreditTransfers UnmatchedCreditTransfers { get; }
 
-        public ISessions Sessions { get; }
+        public ICheckoutSessions CheckoutSessions { get; }
 
         public IMethods Methods { get; }
 
@@ -163,9 +163,9 @@ namespace Mollie
         /// </summary>
         public IUnmatchedCreditTransfers UnmatchedCreditTransfers { get; private set; }
         /// <summary>
-        /// The Sessions sub-SDK.
+        /// The CheckoutSessions sub-SDK.
         /// </summary>
-        public ISessions Sessions { get; private set; }
+        public ICheckoutSessions CheckoutSessions { get; private set; }
         /// <summary>
         /// The Methods sub-SDK.
         /// </summary>
@@ -276,7 +276,7 @@ namespace Mollie
 
             UnmatchedCreditTransfers = new UnmatchedCreditTransfers(SDKConfiguration);
 
-            Sessions = new Sessions(SDKConfiguration);
+            CheckoutSessions = new CheckoutSessions(SDKConfiguration);
 
             Methods = new Methods(SDKConfiguration);
 
@@ -423,7 +423,7 @@ namespace Mollie
 
             UnmatchedCreditTransfers = new UnmatchedCreditTransfers(SDKConfiguration);
 
-            Sessions = new Sessions(SDKConfiguration);
+            CheckoutSessions = new CheckoutSessions(SDKConfiguration);
 
             Methods = new Methods(SDKConfiguration);
 

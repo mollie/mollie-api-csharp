@@ -20,7 +20,7 @@ namespace Mollie.Models.Requests
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// The newly created session object.
+        /// The newly created Checkout Session object.
         /// </summary>
         public SessionResponse? SessionResponse { get; set; }
     }

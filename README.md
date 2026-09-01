@@ -283,6 +283,11 @@ var sdk = new Mollie.Client(
 * [Get](docs/sdks/chargebacks/README.md#get) - Get payment chargeback
 * [All](docs/sdks/chargebacks/README.md#all) - List all chargebacks
 
+### [CheckoutSessions](docs/sdks/checkoutsessions/README.md)
+
+* [Create](docs/sdks/checkoutsessions/README.md#create) - Create Checkout Session
+* [Get](docs/sdks/checkoutsessions/README.md#get) - Get Checkout Session
+
 ### [ClientLinks](docs/sdks/clientlinks/README.md)
 
 * [Create](docs/sdks/clientlinks/README.md#create) - Create client link
@@ -407,11 +412,6 @@ var sdk = new Mollie.Client(
 * [Get](docs/sdks/salesinvoices/README.md#get) - Get sales invoice
 * [Update](docs/sdks/salesinvoices/README.md#update) - Update sales invoice
 * [Delete](docs/sdks/salesinvoices/README.md#delete) - Delete sales invoice
-
-### [Sessions](docs/sdks/sessions/README.md)
-
-* [Create](docs/sdks/sessions/README.md#create) - Create session
-* [Get](docs/sdks/sessions/README.md#get) - Get session
 
 ### [Settlements](docs/sdks/settlements/README.md)
 

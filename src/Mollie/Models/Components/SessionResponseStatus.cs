@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     /// <summary>
-    /// The session's status.
+    /// The Checkout Session's status.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SessionResponseStatus : IEquatable<SessionResponseStatus>, IOpenEnum<string>

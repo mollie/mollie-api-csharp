@@ -18,7 +18,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The webhook URL where we will send payment status updates to.<br/>
         /// <br/>
-        /// This URL will be automatically set as the webhook URL for all payments created for this session.
+        /// This URL will be automatically set as the webhook URL for all payments created for this Checkout Session.
         /// </summary>
         [JsonProperty("webhookUrl")]
         public string? WebhookUrl { get; set; }
