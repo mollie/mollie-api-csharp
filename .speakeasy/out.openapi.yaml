@@ -26857,7 +26857,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is only available to Mollie partners with a signed agreement for Business Accounts. [Get in touch](https://www.mollie.com/contact) if you'd like to integrate with it.\n\nRetrieve all business accounts for the authenticated organization.\n\nThe results are paginated."
+      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve all business accounts for the authenticated organization.\n\nThe results are paginated."
       parameters:
         - name: from
           in: query
@@ -26970,7 +26970,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is only available to Mollie partners with a signed agreement for Business Accounts. [Get in touch](https://www.mollie.com/contact) if you'd like to integrate with it.\n\nRetrieve a single business account object by its account ID. This allows you to check the current status,\nbalance, and account details."
+      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve a single business account object by its account ID. This allows you to check the current status,\nbalance, and account details."
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
@@ -27037,7 +27037,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is only available to Mollie partners with a signed agreement for Business Accounts. [Get in touch](https://www.mollie.com/contact) if you'd like to integrate with it.\n\nRetrieve all transactions for a specific business account.\n\nThe results are paginated."
+      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve all transactions for a specific business account.\n\nThe results are paginated."
       parameters:
         - name: from
           in: query
@@ -27182,7 +27182,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is only available to Mollie partners with a signed agreement for Business Accounts. [Get in touch](https://www.mollie.com/contact) if you'd like to integrate with it.\n\nRetrieve a single transaction object by its transaction ID. This allows you to check the details,\namount, counterparty, and balance impact of a specific transaction."
+      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve a single transaction object by its transaction ID. This allows you to check the details,\namount, counterparty, and balance impact of a specific transaction."
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: f1c6fa804ad0988edded362dee08e775
+  docChecksum: 60ffe96b8571be987bf35f703775ae90
   docVersion: 1.0.0
   speakeasyVersion: 1.796.2
   generationVersion: 2.933.0
-  releaseVersion: 1.4.6
-  configChecksum: 3d30c99fa7c4e538ffcf02c10c1d312b
+  releaseVersion: 1.4.7
+  configChecksum: d34a567311b1ef91590d9fb4a9255fe2
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 381a3338-49d5-4ef1-b13e-adcd415454db
-  pristine_commit_hash: f516e105e06882cad0701bd2e738a812df5abf5e
-  pristine_tree_hash: b5f2c135144055f9f251c87240ab7f52a0c6781e
+  generation_id: 8ad4d258-280d-48cb-a2f9-3626b2e6ffd7
+  pristine_commit_hash: 43e47f50ebb6e3fac9f4222c6164facbe658dbdc
+  pristine_tree_hash: a57b2a391dc42a6cb7ef2441bac228c5955a80cd
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -3828,8 +3828,8 @@ trackedFiles:
     pristine_git_object: 2b7ea119818283c4229c580ce1a3391fd7e363db
   docs/sdks/accounts/README.md:
     id: d6c754b1ca96
-    last_write_checksum: sha1:7fc9eb6d201384621b6d734b9239cd3c1d34e117
-    pristine_git_object: 2349683b1d269aaab629f9ed6094f426078a3171
+    last_write_checksum: sha1:327ed389ab18ab6ff6fe5ab6d77029a8e2881afa
+    pristine_git_object: 0112549cae5cbc71615b5ab8b349e858aba0dd3e
   docs/sdks/balances/README.md:
     id: 6ca85866f00d
     last_write_checksum: sha1:980560c3066e559d2e64bb04b80c49df7a4afa5f
@@ -3968,8 +3968,8 @@ trackedFiles:
     pristine_git_object: ef3195af86a7d6ef1e34296c380fd52d85b696fd
   src/Mollie/Accounts.cs:
     id: 42e47a549799
-    last_write_checksum: sha1:24b2aef9ebb939ae1c5501a528ee62d101a4121b
-    pristine_git_object: cb63505a0470f2609bad13b30124eab1d97826df
+    last_write_checksum: sha1:3bbea1ea52909ee95728b55ef10c71f8c6afcf57
+    pristine_git_object: fc944ec0eb3d214fc54d07ab86d58b561c38f330
   src/Mollie/BalanceTransfers.cs:
     id: b9f1abfee5d6
     last_write_checksum: sha1:2bf3d73890ba9ce49114a263b14d7a288cf2ef9a
@@ -7824,8 +7824,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:d5507952624e1114c301b6efa95e7304652758f5
-    pristine_git_object: a6882d13104129fbf295b91542e056e38e888bf2
+    last_write_checksum: sha1:edc7917fbfa358fd0abfd06a8e681df56111b8ef
+    pristine_git_object: 34c80471f4f25dfb3de8fcbb147c09ea56483cc9
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7864,8 +7864,8 @@ trackedFiles:
     pristine_git_object: c55c2bd2348515010203336dc14017a8e198a21e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:425983ab17ff58de004ede0b19fed4795bd91bd0
-    pristine_git_object: 408c7afed2522c04cb14860b8074d0a966f4bb91
+    last_write_checksum: sha1:5dce3bd9012ec21b1d539fb0080243473b6c514f
+    pristine_git_object: 00a2803bdfa64e0fb8a20a8887a0b9e061d1bb8b
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7900,8 +7900,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:a69a307dfa65dd6d67de67950fcee64244553ac0
-    pristine_git_object: 3d17361a618d5e9f94eae3c97a0d7af6d349243e
+    last_write_checksum: sha1:391ea0fc078f840ab7305b62375c030afb0557c1
+    pristine_git_object: 198fe0027990df62c250e291fa43c7ab8392e6ff
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -12280,12 +12280,6 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Csharp SDK Changes:
-  * `Client.CheckoutSessions.Create()`: **Added**
-  * `Client.CheckoutSessions.Get()`: **Added**
-  * `Client.Sessions.Create()`: **Removed** (Breaking ⚠️)
-  * `Client.Sessions.Get()`: **Removed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - Mollie.sln
