@@ -34,7 +34,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
@@ -64,7 +64,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
@@ -102,7 +102,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
@@ -133,7 +133,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
@@ -187,7 +187,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
@@ -419,7 +419,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
@@ -622,7 +622,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
@@ -853,7 +853,7 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🔒 Restricted access<br/>
         /// &gt;<br/>
-        /// &gt; This API is only available to Mollie partners with a signed agreement for Business Accounts. <a href="https://www.mollie.com/contact">Get in touch</a> if you'd like to integrate with it.<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
         /// <br/>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
