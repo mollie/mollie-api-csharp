@@ -34,7 +34,7 @@ namespace Mollie.Models.Components
         /// The given name (first name) of the person should be at least two characters and cannot contain only<br/>
         /// numbers.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("givenName")]
         public string? GivenName { get; set; }
@@ -43,7 +43,7 @@ namespace Mollie.Models.Components
         /// The given family name (surname) of the person should be at least two characters and cannot contain only<br/>
         /// numbers.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("familyName")]
         public string? FamilyName { get; set; }
@@ -59,7 +59,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// A street and street number.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("streetAndNumber")]
         public string? StreetAndNumber { get; set; }
@@ -73,7 +73,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// A postal code. This field may be required if the provided country has a postal code system.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("postalCode")]
         public string? PostalCode { get; set; }
@@ -84,7 +84,7 @@ namespace Mollie.Models.Components
         /// If you provide the email address for a `banktransfer` payment, we will automatically send the instructions<br/>
         /// email upon payment creation. The language of the email will follow the locale parameter of the payment.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.<br/>
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.<br/>
         /// <br/>
         /// If the domain contains non-ASCII characters, encode it as Punycode per <a href="https://www.rfc-editor.org/rfc/rfc3492">RFC 3492</a>.
         /// </summary>
@@ -100,7 +100,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// A city name.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("city")]
         public string? City { get; set; }
@@ -114,7 +114,7 @@ namespace Mollie.Models.Components
         /// <summary>
         /// A country code in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> format.<br/>
         /// <br/>
-        /// Required for payment methods `billie`, `in3`, `klarna` and `riverty`.
+        /// Required for payment methods `alma`, `billie`, `in3`, `klarna` and `riverty`.
         /// </summary>
         [JsonProperty("country")]
         public string? Country { get; set; }
