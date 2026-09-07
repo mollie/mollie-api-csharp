@@ -48,3 +48,4 @@ var value = MethodEnum.Alma;
 | `Twint`        | twint          |
 | `Vipps`        | vipps          |
 | `Voucher`      | voucher        |
+| `Wero`         | wero           |

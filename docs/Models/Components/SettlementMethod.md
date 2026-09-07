@@ -66,3 +66,4 @@ var value = SettlementMethod.Alma;
 | `Twint`                 | twint                   |
 | `Vipps`                 | vipps                   |
 | `Voucher`               | voucher                 |
+| `Wero`                  | wero                    |

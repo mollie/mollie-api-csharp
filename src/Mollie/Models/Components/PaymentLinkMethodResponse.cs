@@ -49,6 +49,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentLinkMethodResponse Trustly = new PaymentLinkMethodResponse("trustly");
         public static readonly PaymentLinkMethodResponse Twint = new PaymentLinkMethodResponse("twint");
         public static readonly PaymentLinkMethodResponse Voucher = new PaymentLinkMethodResponse("voucher");
+        public static readonly PaymentLinkMethodResponse Wero = new PaymentLinkMethodResponse("wero");
 
         private static readonly Dictionary <string, PaymentLinkMethodResponse> _knownValues =
             new Dictionary <string, PaymentLinkMethodResponse> ()
@@ -81,7 +82,8 @@ namespace Mollie.Models.Components
                 ["swish"] = Swish,
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
-                ["voucher"] = Voucher
+                ["voucher"] = Voucher,
+                ["wero"] = Wero
             };
 
         private static readonly ConcurrentDictionary<string, PaymentLinkMethodResponse> _values =

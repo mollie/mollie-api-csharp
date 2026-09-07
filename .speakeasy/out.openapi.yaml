@@ -29004,6 +29004,7 @@ components:
         - twint
         - vipps
         - voucher
+        - wero
       x-deprecated-enum:
         - payconiq
       x-speakeasy-enum-descriptions:
@@ -30077,6 +30078,7 @@ components:
         - twint
         - vipps
         - voucher
+        - wero
       x-deprecated-enum:
         - payconiq
       x-speakeasy-enum-descriptions:
@@ -32354,6 +32356,7 @@ components:
         - twint
         - vipps
         - voucher
+        - wero
     payment-response:
       type: object
       required:
@@ -34023,6 +34026,7 @@ components:
         - trustly
         - twint
         - voucher
+        - wero
       example: ideal
     payment-link-methods:
       type:
@@ -36326,6 +36330,7 @@ components:
         - twint
         - vipps
         - voucher
+        - wero
       x-deprecated-enum:
         - klarnapaylater
         - klarnapaynow
@@ -42580,6 +42585,7 @@ components:
         - twint
         - vipps
         - voucher
+        - wero
         - klarnapaylater
         - klarnapaynow
         - klarnasliceit
@@ -43263,6 +43269,7 @@ components:
         - trustly
         - twint
         - voucher
+        - wero
       example: ideal
       x-speakeasy-unknown-values: allow
     payment-link-sequence-type-response:

@@ -59,6 +59,7 @@ namespace Mollie.Models.Components
         public static readonly EntityMethodGetId Twint = new EntityMethodGetId("twint");
         public static readonly EntityMethodGetId Vipps = new EntityMethodGetId("vipps");
         public static readonly EntityMethodGetId Voucher = new EntityMethodGetId("voucher");
+        public static readonly EntityMethodGetId Wero = new EntityMethodGetId("wero");
         public static readonly EntityMethodGetId Klarnapaylater = new EntityMethodGetId("klarnapaylater");
         public static readonly EntityMethodGetId Klarnapaynow = new EntityMethodGetId("klarnapaynow");
         public static readonly EntityMethodGetId Klarnasliceit = new EntityMethodGetId("klarnasliceit");
@@ -102,6 +103,7 @@ namespace Mollie.Models.Components
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
                 ["voucher"] = Voucher,
+                ["wero"] = Wero,
                 ["klarnapaylater"] = Klarnapaylater,
                 ["klarnapaynow"] = Klarnapaynow,
                 ["klarnasliceit"] = Klarnasliceit,

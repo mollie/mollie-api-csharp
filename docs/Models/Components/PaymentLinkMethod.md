@@ -42,3 +42,4 @@ var value = PaymentLinkMethod.Applepay;
 | `Trustly`      | trustly        |
 | `Twint`        | twint          |
 | `Voucher`      | voucher        |
+| `Wero`         | wero           |

@@ -59,6 +59,7 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodAllId Twint = new ListEntityMethodAllId("twint");
         public static readonly ListEntityMethodAllId Vipps = new ListEntityMethodAllId("vipps");
         public static readonly ListEntityMethodAllId Voucher = new ListEntityMethodAllId("voucher");
+        public static readonly ListEntityMethodAllId Wero = new ListEntityMethodAllId("wero");
 
         private static readonly Dictionary <string, ListEntityMethodAllId> _knownValues =
             new Dictionary <string, ListEntityMethodAllId> ()
@@ -97,7 +98,8 @@ namespace Mollie.Models.Components
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
-                ["voucher"] = Voucher
+                ["voucher"] = Voucher,
+                ["wero"] = Wero
             };
 
         private static readonly ConcurrentDictionary<string, ListEntityMethodAllId> _values =
