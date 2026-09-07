@@ -67,6 +67,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentMethod Twint = new PaymentMethod("twint");
         public static readonly PaymentMethod Vipps = new PaymentMethod("vipps");
         public static readonly PaymentMethod Voucher = new PaymentMethod("voucher");
+        public static readonly PaymentMethod Wero = new PaymentMethod("wero");
 
         private static readonly Dictionary <string, PaymentMethod> _knownValues =
             new Dictionary <string, PaymentMethod> ()
@@ -114,7 +115,8 @@ namespace Mollie.Models.Components
                 ["trustly"] = Trustly,
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
-                ["voucher"] = Voucher
+                ["voucher"] = Voucher,
+                ["wero"] = Wero
             };
 
         private static readonly ConcurrentDictionary<string, PaymentMethod> _values =

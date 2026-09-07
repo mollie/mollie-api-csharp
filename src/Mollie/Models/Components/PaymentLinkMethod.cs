@@ -74,6 +74,8 @@ namespace Mollie.Models.Components
         Twint,
         [JsonProperty("voucher")]
         Voucher,
+        [JsonProperty("wero")]
+        Wero,
     }
 
     public static class PaymentLinkMethodExtension

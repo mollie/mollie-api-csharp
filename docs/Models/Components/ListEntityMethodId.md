@@ -54,3 +54,4 @@ var custom = ListEntityMethodId.Of("custom_value");
 | `Twint`        | twint          |
 | `Vipps`        | vipps          |
 | `Voucher`      | voucher        |
+| `Wero`         | wero           |

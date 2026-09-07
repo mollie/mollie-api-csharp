@@ -55,6 +55,7 @@ namespace Mollie.Models.Components
         public static readonly MethodResponse Twint = new MethodResponse("twint");
         public static readonly MethodResponse Vipps = new MethodResponse("vipps");
         public static readonly MethodResponse Voucher = new MethodResponse("voucher");
+        public static readonly MethodResponse Wero = new MethodResponse("wero");
         public static readonly MethodResponse Klarnapaylater = new MethodResponse("klarnapaylater");
         public static readonly MethodResponse Klarnapaynow = new MethodResponse("klarnapaynow");
         public static readonly MethodResponse Klarnasliceit = new MethodResponse("klarnasliceit");
@@ -98,6 +99,7 @@ namespace Mollie.Models.Components
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
                 ["voucher"] = Voucher,
+                ["wero"] = Wero,
                 ["klarnapaylater"] = Klarnapaylater,
                 ["klarnapaynow"] = Klarnapaynow,
                 ["klarnasliceit"] = Klarnasliceit,

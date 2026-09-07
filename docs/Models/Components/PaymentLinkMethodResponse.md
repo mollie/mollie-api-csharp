@@ -45,3 +45,4 @@ var custom = PaymentLinkMethodResponse.Of("custom_value");
 | `Trustly`      | trustly        |
 | `Twint`        | twint          |
 | `Voucher`      | voucher        |
+| `Wero`         | wero           |

@@ -86,6 +86,8 @@ namespace Mollie.Models.Components
         Vipps,
         [JsonProperty("voucher")]
         Voucher,
+        [JsonProperty("wero")]
+        Wero,
     }
 
     public static class MethodEnumExtension
