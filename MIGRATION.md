@@ -150,7 +150,7 @@ var sdk = new Client(security: new Security() {
 
 ### Global defaults (`profileId`, `testmode`)
 
-The old SDK already supported `Testmode` and `ProfileId` on `MollieClientOptions`, plus per-method `testmode`/`profileId` optional parameters on many calls. The new SDK supports the same functionality but moves both onto named constructor parameters of the unified client, and consistently exposes them as overridable fields on every request:
+The old SDK already supported `Testmode` and `ProfileId` on `MollieClientOptions`, plus per-method `testmode`/`profileId` optional parameters on many calls. The new SDK supports the same functionality but moves both onto named constructor parameters of the unified client, and consistently exposes them as overridable fields on every request. As before, `Testmode` and `ProfileId` (globally or per request) only work with an Advanced Access Token or OAuth — they are rejected when authenticating with a plain API key:
 
 ```
 -var options = new MollieClientOptions {
@@ -228,17 +228,17 @@ The old SDK had a dedicated client class per nested resource, each taking the pa
 | Old | New |
 | --- | --- |
 | `customerClient.CreateCustomerPayment(customerId, paymentRequest)` | `sdk.Customers.CreatePaymentAsync(customerId: customerId, paymentRequest: ...)` |
-| `customerClient.GetCustomerPaymentListAsync(customerId)` | `sdk.Customers.ListPaymentsAsync(customerId: customerId)` |
+| `customerClient.GetCustomerPaymentListAsync(customerId)` | `sdk.Customers.ListPaymentsAsync(new ListCustomerPaymentsRequest { CustomerId = customerId })` |
 | `mandateClient.CreateMandateAsync(customerId, request)` | `sdk.Mandates.CreateAsync(customerId: customerId, mandateRequest: ...)` |
 | `mandateClient.GetMandateListAsync(customerId)` | `sdk.Mandates.ListAsync(new ListMandatesRequest { CustomerId = customerId })` |
 | `mandateClient.RevokeMandate(customerId, mandateId)` | `sdk.Mandates.RevokeAsync(customerId: customerId, mandateId: mandateId)` |
 | `subscriptionClient.CreateSubscriptionAsync(customerId, request)` | `sdk.Subscriptions.CreateAsync(customerId: customerId, subscriptionRequest: ...)` |
 | `subscriptionClient.GetAllSubscriptionList()` | `sdk.Subscriptions.AllAsync()` |
-| `subscriptionClient.GetSubscriptionPaymentListAsync(customerId, subscriptionId)` | `sdk.Subscriptions.ListPaymentsAsync(customerId: customerId, subscriptionId: subscriptionId)` |
+| `subscriptionClient.GetSubscriptionPaymentListAsync(customerId, subscriptionId)` | `sdk.Subscriptions.ListPaymentsAsync(new ListSubscriptionPaymentsRequest { CustomerId = customerId, SubscriptionId = subscriptionId })` |
 | `refundClient.CreatePaymentRefundAsync(paymentId, request)` | `sdk.Refunds.CreateAsync(paymentId: paymentId, refundRequest: ...)` |
 | `chargebackClient.GetChargebackListAsync(paymentId)` | `sdk.Chargebacks.ListAsync(new ListChargebacksRequest { PaymentId = paymentId })` |
-| `captureClient.CreateCapture(paymentId, request)` | `sdk.Captures.CreateAsync(paymentId: paymentId, captureRequest: ...)` |
-| `walletClient.RequestApplePaySessionAsync(request)` | `sdk.Wallets.RequestApplePaySessionAsync(applePaySessionRequest: ...)` |
+| `captureClient.CreateCapture(paymentId, request)` | `sdk.Captures.CreateAsync(paymentId: paymentId, entityCapture: ...)` |
+| `walletClient.RequestApplePaySessionAsync(request)` | `sdk.Wallets.RequestApplePaySessionAsync(requestBody: ...)` |
 
 ---
 
@@ -308,7 +308,9 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
 ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
 
 while (res != null) {
-    // handle items
+    foreach (var payment in res.Object?.Embedded?.Payments ?? new()) {
+        // handle item
+    }
 
     res = await res.Next!();
 }
@@ -451,7 +453,7 @@ var sdk = new Client(client: new LoggingHttpClient());
 | `CapabilityClient` | `Capabilities` |
 | `DelayedRoutingClient` | `DelayedRouting` |
 | `SalesInvoiceClient` | `SalesInvoices` |
-| `SessionClient` | `Sessions` |
+| `SessionClient` | `CheckoutSessions` |
 | `PayoutClient` | `Payouts` |
 | `WebhookClient` | `Webhooks` |
 | `WebhookEventClient` | `WebhookEvents` |
@@ -466,5 +468,6 @@ var sdk = new Client(client: new LoggingHttpClient());
 | `Transfers` | Transfer management |
 | `UnmatchedCreditTransfers` | Unmatched credit transfer handling |
 | `VerifyPayee` | Payee verification |
+| `DraftTransfers` | Draft transfer management |
 
 For a complete list of all resources and operations with usage examples, see the [Available Resources and Operations](https://github.com/mollie/mollie-api-csharp#available-resources-and-operations) section in the SDK's README.
