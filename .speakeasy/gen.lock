@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 568d2281e30aca4695514d770644284b
+  docChecksum: aba9e47770e260a19521851ea2a43005
   docVersion: 1.0.0
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 1.4.9
-  configChecksum: 7143ff974fd77afb455e8f50886c3586
+  releaseVersion: 1.4.10
+  configChecksum: 0a7118c40fc0fb8a8623aec4e0140dfa
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: d0b53aed-6f05-431e-84c6-93e6c86d088d
-  pristine_commit_hash: b752626a0ad85b6f350bc875a2dfd9aa3855cb69
-  pristine_tree_hash: 6a76546c575446493eef6676bc35fb9326e00ade
+  generation_id: 5433f831-4e18-452f-9d70-6ea31d6e1b19
+  pristine_commit_hash: 0a4752e0d55204ab03e3a76a6ea559a027fc9bdb
+  pristine_tree_hash: ed86cb895aeb8301dd5d86120ae8549a78ba1f89
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -48,8 +48,8 @@ trackedFiles:
     pristine_git_object: 54077ab88a87820b5a6b267dbe904c1f0e9c8a89
   NUGET.md:
     id: f4c8a442a6e5
-    last_write_checksum: sha1:2e154e15216b4812df12d251bb5ad8b0805f093d
-    pristine_git_object: 73507ce2ae32dc18846ce0f0a46e606e2686e48a
+    last_write_checksum: sha1:0616aef8892a56584e4fe8d8d17cbc1909b41fcc
+    pristine_git_object: 33dbe02b071fbe647367ea5e4bf44b81895c93d8
   USAGE.md:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:441533aeaed99c66a8aee05c11c3b8e95c54071b
@@ -3884,8 +3884,8 @@ trackedFiles:
     pristine_git_object: 84034d680f3542cef8a547bbc20fc1c24d854ad0
   docs/sdks/methods/README.md:
     id: 430c1db41d45
-    last_write_checksum: sha1:5f0aa640933391eb2189f0ac879ddc55682a55c6
-    pristine_git_object: d65a7409b0075ec8248c163abe5f4854fb999621
+    last_write_checksum: sha1:3dd557faada5a59bbed43c24a0a06b7d485ccb9d
+    pristine_git_object: d9756494f6833cb95dae0ea90086922519e00472
   docs/sdks/oauth/README.md:
     id: 80ad2c1a7b62
     last_write_checksum: sha1:864f0cdc349e1681f889bbb86b89bf51c1dabf2e
@@ -4036,8 +4036,8 @@ trackedFiles:
     pristine_git_object: 5d0baec79c3cf4227235f7846627521093a98983
   src/Mollie/Methods.cs:
     id: 2d4f0a94e990
-    last_write_checksum: sha1:a1c7c6dee4bc39e6e9fc365b259e3ae678e4e618
-    pristine_git_object: 0cf9607477b0fb37a9d8b7fe8aa292191800352b
+    last_write_checksum: sha1:a9dd1db9e36ee5fa2c4a925b5095029575063668
+    pristine_git_object: ca4ee081c29c57b59672d47f33134536eebc3ffd
   src/Mollie/Models/Components/AccountDetails.cs:
     id: 544ce463d473
     last_write_checksum: sha1:a9d165bbe50294da7b331d5801464ea2af4619a4
@@ -7824,8 +7824,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:843ca8445c15ee82011955561c48ad8c64c0b777
-    pristine_git_object: a64904a6f40baebf4f9b53121926c2302dbb2801
+    last_write_checksum: sha1:3b812b30b3521c39628188b3c521e01f1bc20d11
+    pristine_git_object: f8a7eb2af823f8d45ec28f5a3c76a40e7097be99
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7864,8 +7864,8 @@ trackedFiles:
     pristine_git_object: c55c2bd2348515010203336dc14017a8e198a21e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:4b160722afb9225f3a585585c860bb0b09e7eab9
-    pristine_git_object: 95acae5f6ee118a7bcd8df9d08cea0db4bfc43d1
+    last_write_checksum: sha1:af9c4cf84dfe07689b001f490f29580f821e4800
+    pristine_git_object: 94e5c3b79af88c9e07b9d4673a102b9b910f6136
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7900,8 +7900,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:635891fc2d103ab755deb926c632ec3ddcee57b7
-    pristine_git_object: 748255f7e965100c53a71df5a32239851d90d53e
+    last_write_checksum: sha1:bb5c9b6a51fed874ca68feedefb1ce497d13d720
+    pristine_git_object: 63f5330b9a3d91675ab3e39d1f6c3ab45899eb94
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -12195,6 +12195,8 @@ examples:
       responses:
         "200":
           application/hal+json: {"resource": "method", "id": "ideal", "description": "iDEAL", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "50000.00"}, "image": {"size1x": "https://mollie.com/external/icons/payment-methods/ideal.png", "size2x": "https://mollie.com/external/icons/payment-methods/ideal%402x.png", "svg": "https://mollie.com/external/icons/payment-methods/ideal.svg"}, "status": "activated", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+        "201":
+          application/hal+json: {"resource": "method", "id": "ideal", "description": "iDEAL", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "50000.00"}, "image": {"size1x": "https://mollie.com/external/icons/payment-methods/ideal.png", "size2x": "https://mollie.com/external/icons/payment-methods/ideal%402x.png", "svg": "https://mollie.com/external/icons/payment-methods/ideal.svg"}, "status": "activated", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     enable-method-200-2:
       parameters:
         path:
@@ -12205,6 +12207,8 @@ examples:
       responses:
         "200":
           application/hal+json: {"resource": "method", "id": "creditcard", "description": "Credit card", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "500.00"}, "image": {"size1x": "https://www.mollie.com/external/icons/payment-methods/creditcard.png", "size2x": "https://www.mollie.com/external/icons/payment-methods/creditcard%402x.png", "svg": "https://www.mollie.com/external/icons/payment-methods/creditcard.svg"}, "status": "pending-review", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+        "201":
+          application/hal+json: {"resource": "method", "id": "creditcard", "description": "Credit card", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "500.00"}, "image": {"size1x": "https://www.mollie.com/external/icons/payment-methods/creditcard.png", "size2x": "https://www.mollie.com/external/icons/payment-methods/creditcard%402x.png", "svg": "https://www.mollie.com/external/icons/payment-methods/creditcard.svg"}, "status": "pending-review", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     enable-method-200-3:
       parameters:
         path:
@@ -12214,6 +12218,8 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
+          application/hal+json: {"resource": "method", "id": "ideal", "description": "iDEAL", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "50000.00"}, "image": {"size1x": "https://www.mollie.com/external/icons/payment-methods/ideal.png", "size2x": "https://www.mollie.com/external/icons/payment-methods/ideal%402x.png", "svg": "https://www.mollie.com/external/icons/payment-methods/ideal.svg"}, "status": "pending-review", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+        "201":
           application/hal+json: {"resource": "method", "id": "ideal", "description": "iDEAL", "minimumAmount": {"currency": "EUR", "value": "0.01"}, "maximumAmount": {"currency": "EUR", "value": "50000.00"}, "image": {"size1x": "https://www.mollie.com/external/icons/payment-methods/ideal.png", "size2x": "https://www.mollie.com/external/icons/payment-methods/ideal%402x.png", "svg": "https://www.mollie.com/external/icons/payment-methods/ideal.svg"}, "status": "pending-review", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-enable-method:
       parameters:
@@ -12227,6 +12233,8 @@ examples:
           application/hal+json: {"resource": "method", "id": "ideal", "description": "iDeal", "minimumAmount": {"currency": "EUR", "value": "10.00"}, "maximumAmount": null, "image": {"size1x": "https://...", "size2x": "https://...", "svg": "https://..."}, "status": "activated", "issuers": [{"resource": "issuer", "id": "ideal_ABNANL2A", "name": "ING Bank", "image": {"size1x": "https://...", "size2x": "https://...", "svg": "https://..."}}], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+        "201":
+          application/hal+json: {"resource": "method", "id": "ideal", "description": "iDeal", "minimumAmount": {"currency": "EUR", "value": "10.00"}, "maximumAmount": null, "image": {"size1x": "https://...", "size2x": "https://...", "svg": "https://..."}, "status": "activated", "issuers": [{"resource": "issuer", "id": "ideal_ABNANL2A", "name": "ING Bank", "image": {"size1x": "https://...", "size2x": "https://...", "svg": "https://..."}}], "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
   disable-method:
     speakeasy-default-disable-method:
       parameters:
@@ -12252,6 +12260,8 @@ examples:
       responses:
         "200":
           application/hal+json: {"resource": "issuer", "id": "festivalcadeau", "description": "FestivalCadeau Giftcard", "status": "pending-issuer", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
+        "201":
+          application/hal+json: {"resource": "issuer", "id": "festivalcadeau", "description": "FestivalCadeau Giftcard", "status": "pending-issuer", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "text/html"}}}
     speakeasy-default-enable-method-issuer:
       parameters:
         path:
@@ -12267,6 +12277,8 @@ examples:
           application/hal+json: {"resource": "issuer", "id": "festivalcadeau", "description": "FestivalCadeau Giftcard", "status": "activated", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
+        "201":
+          application/hal+json: {"resource": "issuer", "id": "festivalcadeau", "description": "FestivalCadeau Giftcard", "status": "activated", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
   disable-method-issuer:
     speakeasy-default-disable-method-issuer:
       parameters:
@@ -12280,7 +12292,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Settlements.GetNext()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(wero)` **Added** (Breaking ⚠️)\n* `Client.Settlements.List()`:  `response.Embedded.Settlements[].Periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(wero)` **Added** (Breaking ⚠️)\n* `Client.Settlements.Get()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(wero)` **Added** (Breaking ⚠️)\n* `Client.Settlements.GetOpen()`:  `response.periods.Map<Map<periods>>.Map<periods>.Costs[].Method.Enum(wero)` **Added** (Breaking ⚠️)\n* `Client.Methods.List()`:  `response.Embedded.Methods[].Id.Enum(wero)` **Added**\n* `Client.Settlements.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(wero)` **Added**\n* `Client.WebhookEvents.Get()`:  `response.Embedded.Entity` **Changed**\n* `Client.Payments.Create()`: \n  *  `request.paymentRequest.Method.union(method).Enum(wero)` **Added**\n  *  `response.method.Enum(wero)` **Added**\n* `Client.Payments.List()`:  `response.Embedded.Payments[].Method.Enum(wero)` **Added**\n* `Client.Payments.Get()`:  `response.method.Enum(wero)` **Added**\n* `Client.Payments.Update()`: \n  *  `requestBody.Method.union(method).Enum(wero)` **Added**\n  *  `response.method.Enum(wero)` **Added**\n* `Client.Payments.Cancel()`:  `response.method.Enum(wero)` **Added**\n* `Client.Balances.GetReport()`:  `response.totals.PendingBalance.Open.Subtotals[].SubTotals[].Method.Enum(wero)` **Added**\n* `Client.Methods.All()`:  `response.Embedded.Methods[].Id.Enum(wero)` **Added**\n* `Client.Methods.Get()`: \n  *  `request.MethodId` **Changed**\n  *  `response.id.Enum(wero)` **Added**\n* `Client.Methods.Enable()`: \n  *  `request.methodId` **Changed**\n  *  `response.id.Enum(wero)` **Added**\n* `Client.Methods.Disable()`:  `request.methodId` **Changed**\n* `Client.PaymentLinks.Create()`: \n  *  `requestBody.AllowedMethods[].Enum(wero)` **Added**\n  *  `response.allowedMethods[].Enum(wero)` **Added**\n* `Client.PaymentLinks.List()`:  `response.Embedded.PaymentLinks[].AllowedMethods[].Enum(wero)` **Added**\n* `Client.PaymentLinks.Get()`:  `response.allowedMethods[].Enum(wero)` **Added**\n* `Client.PaymentLinks.Update()`: \n  *  `requestBody.AllowedMethods[].Enum(wero)` **Added**\n  *  `response.allowedMethods[].Enum(wero)` **Added**\n* `Client.PaymentLinks.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(wero)` **Added**\n* `Client.Customers.CreatePayment()`: \n  *  `request.paymentRequest.Method.union(method).Enum(wero)` **Added**\n  *  `response.method.Enum(wero)` **Added**\n* `Client.Customers.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(wero)` **Added**\n* `Client.Subscriptions.ListPayments()`:  `response.Embedded.Payments[].Method.Enum(wero)` **Added**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Methods.Enable()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Client.Methods.EnableIssuer()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Client.Methods.DisableIssuer()`:  `error.status[422]` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

@@ -14593,7 +14593,7 @@ paths:
 
         To enable voucher or gift card issuers, refer to the [Enable payment method issuer](enable-method-issuer) endpoint.
       responses:
-        '200':
+        '201':
           description: The payment method object.
           content:
             application/hal+json:
@@ -14652,6 +14652,20 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '422':
+          description: The request contains issues. For example, if the method is unavailable, or credit card must be enabled first.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 422
+                title: Unprocessable Entity
+                detail: Couldn't enable creditcard, method is unavailable.
+                _links:
+                  documentation:
+                    href: '...'
+                    type: text/html
         '429':
           $ref: '#/components/responses/429-rate-limit'
       x-readme:
@@ -14824,7 +14838,7 @@ paths:
                     different contract ID.
                   example: ideal
       responses:
-        '200':
+        '201':
           description: The payment method issuer object.
           content:
             application/hal+json:
@@ -14849,6 +14863,21 @@ paths:
                         type: text/html
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '422':
+          description: The request contains issues. For example, if the contract ID is invalid.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 422
+                title: Unprocessable Entity
+                detail: Contract ID is required, please obtain this first.
+                field: contractId
+                _links:
+                  documentation:
+                    href: '...'
+                    type: text/html
         '429':
           $ref: '#/components/responses/429-rate-limit'
       x-readme:
@@ -14921,6 +14950,21 @@ paths:
           description: An empty response.
         '404':
           $ref: '#/components/responses/404-invalid-id'
+        '422':
+          description: The request contains issues. For example, if the issuer's payment method does not support deactivation.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 422
+                title: Unprocessable Entity
+                detail: Can not disable vouchers.
+                field: issuer
+                _links:
+                  documentation:
+                    href: '...'
+                    type: text/html
         '429':
           $ref: '#/components/responses/429-rate-limit'
       x-readme:
