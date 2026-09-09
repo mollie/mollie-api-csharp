@@ -458,7 +458,7 @@ var res = await sdk.Methods.EnableAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## Disable
@@ -557,7 +557,7 @@ var res = await sdk.Methods.EnableIssuerAsync(req);
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
 
 ## DisableIssuer
@@ -607,5 +607,5 @@ var res = await sdk.Methods.DisableIssuerAsync(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| Mollie.Models.Errors.ErrorResponse | 404, 429                           | application/hal+json               |
+| Mollie.Models.Errors.ErrorResponse | 404, 422, 429                      | application/hal+json               |
 | Mollie.Models.Errors.APIException  | 4XX, 5XX                           | \*/\*                              |
