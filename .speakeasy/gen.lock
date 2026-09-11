@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: aba9e47770e260a19521851ea2a43005
+  docChecksum: 359b8dd8d8e1c0c492f2dc61f181da8f
   docVersion: 1.0.0
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 1.4.10
-  configChecksum: 0a7118c40fc0fb8a8623aec4e0140dfa
+  releaseVersion: 1.4.11
+  configChecksum: 5ca39fc8ce6b3bf086284f3556181b66
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 5433f831-4e18-452f-9d70-6ea31d6e1b19
-  pristine_commit_hash: 0a4752e0d55204ab03e3a76a6ea559a027fc9bdb
-  pristine_tree_hash: ed86cb895aeb8301dd5d86120ae8549a78ba1f89
+  generation_id: e42e2472-9a0c-4e68-8b47-a06f9ff9981d
+  pristine_commit_hash: dac8daec31f894f8400c4a067db030d298e7e1eb
+  pristine_tree_hash: 97a1f1cd782a30610d13fdd404d0404e54e4dcaa
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -7824,8 +7824,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:3b812b30b3521c39628188b3c521e01f1bc20d11
-    pristine_git_object: f8a7eb2af823f8d45ec28f5a3c76a40e7097be99
+    last_write_checksum: sha1:e7ddd6627f93a162e083b61a769b01f0c3e79737
+    pristine_git_object: 61461db5bbe1405442760a4f97ea9da8266a2a9a
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7864,8 +7864,8 @@ trackedFiles:
     pristine_git_object: c55c2bd2348515010203336dc14017a8e198a21e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:af9c4cf84dfe07689b001f490f29580f821e4800
-    pristine_git_object: 94e5c3b79af88c9e07b9d4673a102b9b910f6136
+    last_write_checksum: sha1:01bcc8493500bc10aabc93df7c7644c0426c8cab
+    pristine_git_object: 2269d8a65d418934ecd5bd54db51e547a4d88071
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7900,8 +7900,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:bb5c9b6a51fed874ca68feedefb1ce497d13d720
-    pristine_git_object: 63f5330b9a3d91675ab3e39d1f6c3ab45899eb94
+    last_write_checksum: sha1:f638d9b280da238361443d9b87bcd75b32c92938
+    pristine_git_object: cd3f3fb4ce2412e299fa7e2d8b7a3a04dcc0629c
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -12292,7 +12292,6 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Methods.Enable()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Client.Methods.EnableIssuer()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Client.Methods.DisableIssuer()`:  `error.status[422]` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln

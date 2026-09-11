@@ -2551,7 +2551,7 @@ paths:
               $settlements = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlements = await mollieClient.settlements.iterate();
@@ -2728,7 +2728,7 @@ paths:
               $settlement = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlements.get('stl_jDk30akdN');
@@ -2892,7 +2892,7 @@ paths:
               $settlement = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlements.getOpen();
@@ -3055,7 +3055,7 @@ paths:
               $settlement = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlements.getNext();
@@ -3208,7 +3208,7 @@ paths:
               $payments = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlementPayments.iterate({
@@ -3370,7 +3370,7 @@ paths:
               $captures = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlementCaptures.iterate({
@@ -3533,7 +3533,7 @@ paths:
               $refunds = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlementRefunds.iterate({
@@ -3783,7 +3783,7 @@ paths:
               $chargebacks = $mollie->send($request);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.settlementChargebacks.iterate({
@@ -5241,7 +5241,7 @@ paths:
               $permissions = $mollie->permissions->all();
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const permissions = await mollieClient.permissions.iterate();
@@ -5336,7 +5336,7 @@ paths:
               $permission = $mollie->permissions->get("payments.read");
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const permission = await mollieClient.permissions.get('payments.read');
@@ -5869,7 +5869,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const profile = await mollieClient.profiles.create({
@@ -6021,7 +6021,7 @@ paths:
               $profiles = $mollie->send(new GetPaginatedProfilesRequest());
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const profiles = await mollieClient.profiles.iterate();
@@ -6108,7 +6108,7 @@ paths:
               $profile = $mollie->send(new GetProfileRequest("pfl_QkEhN94Ba"));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const profile = await mollieClient.profiles.get('pfl_QkEhN94Ba');
@@ -6365,7 +6365,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               await mollieClient.profiles.update('pfl_QkEhN94Ba', {
@@ -6451,7 +6451,7 @@ paths:
               $mollie->send(new DeleteProfileRequest("pfl_QkEhN94Ba"));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const profile = await mollieClient.profiles.delete('pfl_QkEhN94Ba');
@@ -6557,7 +6557,7 @@ paths:
               $profile = $mollie->send(new GetCurrentProfileRequest());
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const profile = await mollieClient.profiles.getCurrent();
@@ -9122,7 +9122,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = await mollieClient.payments.create({
@@ -11339,7 +11339,7 @@ paths:
               $next_payments = $payments->next();
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payments = mollieClient.payments.iterate();
@@ -11551,7 +11551,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = await mollieClient.payments.get('tr_5B8cwPMGnU6qLbRvo7qEZo');
@@ -11801,7 +11801,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = mollieClient.payments.update('tr_5B8cwPMGnU6qLbRvo7qEZo', {
@@ -11926,7 +11926,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const canceledPayment = await mollieClient.payments.cancel('tr_Eq8xzWUPA4');
@@ -12547,7 +12547,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const session = await mollieClient.sessions.create({
@@ -12656,7 +12656,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const session = await mollieClient.sessions.get('sess_CQBQJqxubaq4w6oresxMJ');
@@ -13200,7 +13200,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               // Methods for the Payments API
@@ -14531,7 +14531,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               // Methods for the Payments API
@@ -14699,7 +14699,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const method = await mollieClient.methods.enable({
@@ -14775,7 +14775,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const method = await mollieClient.methods.disable({
@@ -14903,7 +14903,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = await mollieClient.profileGiftcardIssuers.enable({
@@ -14990,7 +14990,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = await mollieClient.profileGiftcardIssuers.disable({
@@ -15143,7 +15143,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const refund = await mollieClient.paymentRefunds.create({
@@ -15329,7 +15329,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const refunds = mollieClient.paymentRefunds.iterate({ paymentId: 'tr_5B8cwPMGnU6qLbRvo7qEZo' });
@@ -15420,7 +15420,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const refund = await mollieClient.paymentRefunds.get('re_4qqhO89gsT', {
@@ -15498,7 +15498,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               await mollieClient.paymentRefunds.cancel('re_4qqhO89gsT', {
@@ -15662,7 +15662,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const refunds = mollieClient.refunds.iterate();
@@ -15909,7 +15909,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const chargebacks = mollieClient.paymentChargebacks.iterate({ paymentId: 'tr_5B8cwPMGnU6qLbRvo7qEZo' });
@@ -16047,7 +16047,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const chargeback = await mollieClient.paymentChargebacks.get('chb_xFzwUN4ci8HAmSGUACS4J', {
@@ -16412,7 +16412,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const chargebacks = mollieClient.chargebacks.iterate();
@@ -16750,7 +16750,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const captures = mollieClient.paymentCaptures.iterate({ paymentId: 'tr_5B8cwPMGnU6qLbRvo7qEZo' });
@@ -16871,7 +16871,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const capture = await mollieClient.paymentCaptures.get('cpt_vytxeTZskVKR7C7WgdSP3d', {
@@ -17428,7 +17428,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const paymentLink = await mollieClient.paymentLinks.create({
@@ -17691,7 +17691,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const paymentLinks = await mollieClient.paymentLinks.iterate();
@@ -17757,7 +17757,7 @@ paths:
               $paymentLink = $mollie->send(new GetPaymentLinkRequest("pl_4Y0eZitmBnQ6IDoMqZQKh"));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const paymentLink = await mollieClient.paymentLinks.get('pl_4Y0eZitmBnQ6IDoMqZQKh');
@@ -19247,7 +19247,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const customer = await mollieClient.customers.create({
@@ -19395,7 +19395,7 @@ paths:
               $customers = $mollie->send(new GetPaginatedCustomerRequest());
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const customers = mollieClient.customers.iterate();
@@ -19470,7 +19470,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const customer = await mollieClient.customers.get('cst_8wmqcHMN4U');
@@ -19599,7 +19599,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const customer = await mollieClient.customers.update('cst_8wmqcHMN4U', {
@@ -19681,7 +19681,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const customer = await mollieClient.customers.delete('cst_8wmqcHMN4U');
@@ -20313,7 +20313,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payment = await mollieClient.customerPayments.create({
@@ -22534,7 +22534,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payments = mollieClient.customerPayments.iterate({ customerId: 'cst_8wmqcHMN4U' });
@@ -22657,7 +22657,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const mandate = await mollieClient.customerMandates.create({
@@ -22836,7 +22836,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const mandates = mollieClient.customerMandates.iterate({ customerId: 'cst_4qqhO89gsT' });
@@ -22917,7 +22917,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const mandate = await mollieClient.customerMandates.get('mdt_h3gAaD5zP', {
@@ -22993,7 +22993,7 @@ paths:
               ));
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               await mollieClient.customerMandates.revoke('mdt_h3gAaD5zP', {
@@ -23113,7 +23113,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscription = await mollieClient.customerSubscriptions.create({
@@ -23300,7 +23300,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscriptions = await mollieClient.customerSubscriptions.all({ customerId: 'cst_stTC2WHAuS' });
@@ -23380,7 +23380,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscription = await mollieClient.customerSubscriptions.get('sub_rVKGtNd6s3', {
@@ -23606,7 +23606,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscription = await mollieClient.customerSubscriptions.update('sub_rVKGtNd6s3', {
@@ -23744,7 +23744,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscription = mollieClient.customerSubscriptions.delete('sub_rVKGtNd6s3', {
@@ -23916,7 +23916,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'live_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const subscriptions = mollieClient.subscriptions.iterate();
@@ -26108,7 +26108,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ accessToken: 'access_Wwvu7egPcJLLJ9Kb7J632x8wJ2zMeJ' });
 
               const settlement = await mollieClient.subscriptionPayments.iterate({
@@ -26312,7 +26312,7 @@ paths:
 
               $salesInvoice = $mollie->send($request);
           - language: node
-            install: npm install @mollie/api-client
+            install: npm install mollie-api-typescript
             code: |-
               # We don't have a Node.js code example for this
               # API call yet.
@@ -26321,7 +26321,7 @@ paths:
               # share suggestions on our Discord:
               # https://discord.gg/VaTVkXB4aQ
           - language: python
-            install: pip install mollie-api-python
+            install: pip install mollie-api-py
             code: |-
               # We don't have a Python code example for this
               # API call yet.
@@ -26467,7 +26467,7 @@ paths:
 
               $salesInvoices = $mollie->send($request);
           - language: node
-            install: npm install @mollie/api-client
+            install: npm install mollie-api-typescript
             code: |-
               # We don't have a Node.js code example for this
               # API call yet.
@@ -26476,7 +26476,7 @@ paths:
               # share suggestions on our Discord:
               # https://discord.gg/VaTVkXB4aQ
           - language: python
-            install: pip install mollie-api-python
+            install: pip install mollie-api-py
             code: |-
               # We don't have a Python code example for this
               # API call yet.
@@ -26597,7 +26597,7 @@ paths:
 
               $salesInvoice = $mollie->send($request);
           - language: node
-            install: npm install @mollie/api-client
+            install: npm install mollie-api-typescript
             code: |-
               # We don't have a Node.js code example for this
               # API call yet.
@@ -26606,7 +26606,7 @@ paths:
               # share suggestions on our Discord:
               # https://discord.gg/VaTVkXB4aQ
           - language: python
-            install: pip install mollie-api-python
+            install: pip install mollie-api-py
             code: |-
               # We don't have a Python code example for this
               # API call yet.
@@ -26764,7 +26764,7 @@ paths:
 
               $salesInvoice = $mollie->send($request);
           - language: node
-            install: npm install @mollie/api-client
+            install: npm install mollie-api-typescript
             code: |-
               /*
               We don't have a Node.js code example for this
@@ -26775,7 +26775,7 @@ paths:
               https://discord.gg/VaTVkXB4aQ
               */
           - language: python
-            install: pip install mollie-api-python
+            install: pip install mollie-api-py
             code: |-
               '''
               We don't have a Python code example for this
@@ -26858,7 +26858,7 @@ paths:
 
               $mollie->send($request);
           - language: node
-            install: npm install @mollie/api-client
+            install: npm install mollie-api-typescript
             code: |-
               /*
               We don't have a Node.js code example for this
@@ -26869,7 +26869,7 @@ paths:
               https://discord.gg/VaTVkXB4aQ
               */
           - language: python
-            install: pip install mollie-api-python
+            install: pip install mollie-api-py
             code: |-
               '''
               We don't have a Python code example for this
@@ -26980,7 +26980,7 @@ paths:
               $accounts = $mollie->businessAccounts->page();
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const accounts = await mollieClient.businessAccounts.list();
@@ -27047,7 +27047,7 @@ paths:
               $account = $mollie->businessAccounts->get("ba_nopqrstuvwxyz23456789A");
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const account = await mollieClient.businessAccounts.get('ba_nopqrstuvwxyz23456789A');
@@ -27185,7 +27185,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const transactions = await mollieClient.businessAccountTransactions.list({
@@ -27284,7 +27284,7 @@ paths:
               );
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const transaction = await mollieClient.businessAccountTransactions.get(
@@ -27467,7 +27467,7 @@ paths:
               ]);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const transfer = await mollieClient.businessAccountTransfers.create({
@@ -27619,7 +27619,7 @@ paths:
               $transfer = $mollie->businessAccountTransfers->get("batrf_87GByBuj4UCcUTEbs6aGJ");
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const transfer = await mollieClient.businessAccountTransfers.get('batrf_87GByBuj4UCcUTEbs6aGJ');
@@ -27778,7 +27778,7 @@ paths:
               ]);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const verification = await mollieClient.businessAccountPayeeVerifications.create({
@@ -28244,7 +28244,7 @@ paths:
               ]);
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payout = await mollieClient.payouts.create({
@@ -28372,7 +28372,7 @@ paths:
               $payouts = $mollie->payouts->page();
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payouts = await mollieClient.payouts.page();
@@ -28444,7 +28444,7 @@ paths:
               $payout = $mollie->payouts->get("payout_j8NvRAM2WNZtsykpLEX8J");
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payout = await mollieClient.payouts.get('payout_j8NvRAM2WNZtsykpLEX8J');
@@ -28529,7 +28529,7 @@ paths:
               $payout = $mollie->payouts->cancel("payout_j8NvRAM2WNZtsykpLEX8J");
           - language: node
             code: |-
-              const { createMollieClient } = require('@mollie/api-client');
+              const { createMollieClient } = require('mollie-api-typescript');
               const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
 
               const payout = await mollieClient.payouts.cancel('payout_j8NvRAM2WNZtsykpLEX8J');
