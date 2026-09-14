@@ -12,6 +12,11 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class ListBusinessAccountTransactionsRequest
     {
@@ -22,8 +27,34 @@ namespace Mollie.Models.Requests
         public string BusinessAccountId { get; set; } = default!;
 
         /// <summary>
+        /// Filter the transactions by whether they credited or debited the account balance.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=creditDebitIndicator")]
+        public CreditDebitIndicator? CreditDebitIndicator { get; set; }
+
+        /// <summary>
+        /// Filter the transactions to only include those processed on or after this date and time. Filters on the<br/>
+        /// `processedAt` property.<br/>
+        /// <br/>
+        /// Cannot be combined with `from`.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=processedAfter")]
+        public DateTime? ProcessedAfter { get; set; }
+
+        /// <summary>
+        /// Filter the transactions to only include those processed on or before this date and time. Filters on the<br/>
+        /// `processedAt` property.<br/>
+        /// <br/>
+        /// Cannot be combined with `from`.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=processedBefore")]
+        public DateTime? ProcessedBefore { get; set; }
+
+        /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate<br/>
-        /// the result set.
+        /// the result set.<br/>
+        /// <br/>
+        /// Cannot be combined with `processedAfter` or `processedBefore`.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=from")]
         public string? From { get; set; }

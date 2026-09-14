@@ -16,6 +16,12 @@ namespace Mollie.Models.Requests
     public class ListBusinessAccountsRequest
     {
         /// <summary>
+        /// Filter the results by IBAN. Only the business account with an exact match is returned.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=iban")]
+        public string? Iban { get; set; }
+
+        /// <summary>
         /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate<br/>
         /// the result set.
         /// </summary>

@@ -328,6 +328,7 @@ namespace Mollie
 
                 var newRequest = new ListBusinessAccountsRequest
                 {
+                    Iban = request?.Iban,
                     From = request?.From,
                     Limit = request?.Limit,
                     Sort = request?.Sort,
@@ -762,6 +763,9 @@ namespace Mollie
                 var newRequest = new ListBusinessAccountTransactionsRequest
                 {
                     BusinessAccountId = request.BusinessAccountId,
+                    CreditDebitIndicator = request.CreditDebitIndicator,
+                    ProcessedAfter = request.ProcessedAfter,
+                    ProcessedBefore = request.ProcessedBefore,
                     From = request.From,
                     Limit = request.Limit,
                     Sort = request.Sort,

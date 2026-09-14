@@ -41,6 +41,8 @@ namespace Mollie.Models.Components
 
         public static EntityType TransferResponse { get { return new EntityType("transfer-response"); } }
 
+        public static EntityType DraftTransferResponse { get { return new EntityType("draft-transfer-response"); } }
+
         public override string ToString() { return Value; }
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
@@ -53,6 +55,7 @@ namespace Mollie.Models.Components
                 case "entity-payout-response": return EntityPayoutResponse;
                 case "sales-invoice-response": return SalesInvoiceResponse;
                 case "transfer-response": return TransferResponse;
+                case "draft-transfer-response": return DraftTransferResponse;
                 default: throw new ArgumentException("Invalid value for EntityType");
             }
         }
@@ -102,6 +105,9 @@ namespace Mollie.Models.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public TransferResponse? TransferResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public DraftTransferResponse? DraftTransferResponse { get; set; }
 
         public EntityType Type { get; set; }
         public static Entity CreatePaymentResponse(PaymentResponse paymentResponse)
@@ -166,6 +172,14 @@ namespace Mollie.Models.Components
 
             Entity res = new Entity(typ);
             res.TransferResponse = transferResponse;
+            return res;
+        }
+        public static Entity CreateDraftTransferResponse(DraftTransferResponse draftTransferResponse)
+        {
+            EntityType typ = EntityType.DraftTransferResponse;
+
+            Entity res = new Entity(typ);
+            res.DraftTransferResponse = draftTransferResponse;
             return res;
         }
 
@@ -275,6 +289,26 @@ namespace Mollie.Models.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(TransferResponse), new Entity(EntityType.TransferResponse), "TransferResponse"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Entity(EntityType.DraftTransferResponse)
+                    {
+                        DraftTransferResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<DraftTransferResponse>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(DraftTransferResponse), new Entity(EntityType.DraftTransferResponse), "DraftTransferResponse"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -422,6 +456,12 @@ namespace Mollie.Models.Components
                 if (res.TransferResponse != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.TransferResponse));
+                    return;
+                }
+
+                if (res.DraftTransferResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.DraftTransferResponse));
                     return;
                 }
 

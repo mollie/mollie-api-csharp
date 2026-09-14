@@ -18,11 +18,10 @@ namespace Mollie.Models.Components
     public class CreateDraftTransferRequest
     {
         /// <summary>
-        /// The IBAN of the debtor's (sender) Mollie Business Account. Defaults to your organization's primary account<br/>
-        /// if omitted.
+        /// The IBAN of the debtor's (sender) Mollie Business Account.
         /// </summary>
         [JsonProperty("debtorIban")]
-        public string? DebtorIban { get; set; }
+        public string DebtorIban { get; set; } = default!;
 
         /// <summary>
         /// A party involved in the draft transfer, representing either the debtor (sender) or creditor<br/>

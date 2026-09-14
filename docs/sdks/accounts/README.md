@@ -35,6 +35,7 @@ var sdk = new Client(
 );
 
 ListBusinessAccountsRequest req = new ListBusinessAccountsRequest() {
+    Iban = "NL95MLLE1234567890",
     From = "ba_nopqrstuvwxyz23456789A",
     Limit = 50,
     Sort = Sorting.Desc,
@@ -135,6 +136,7 @@ The results are paginated.
 using Mollie;
 using Mollie.Models.Components;
 using Mollie.Models.Requests;
+using System;
 
 var sdk = new Client(
     testmode: true,
@@ -145,6 +147,9 @@ var sdk = new Client(
 
 ListBusinessAccountTransactionsRequest req = new ListBusinessAccountTransactionsRequest() {
     BusinessAccountId = "ba_nopqrstuvwxyz23456789A",
+    CreditDebitIndicator = CreditDebitIndicator.Debit,
+    ProcessedAfter = System.DateTime.Parse("2025-02-01T00:00:00+00:00").ToUniversalTime(),
+    ProcessedBefore = System.DateTime.Parse("2025-02-26T23:59:59+00:00").ToUniversalTime(),
     From = "batr_87GByBuj4UCcUTEbs6aGJ",
     Limit = 50,
     Sort = Sorting.Desc,
