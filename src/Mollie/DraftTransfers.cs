@@ -42,15 +42,17 @@ namespace Mollie
         /// <br/>
         /// ### Test mode<br/>
         /// <br/>
-        /// Creating a draft transfer always returns a synthetic draft in `pending-review`, using synthetic data,<br/>
+        /// Creating a draft transfer always returns a synthetic draft in `pending-review` status, using synthetic data,<br/>
         /// same as in live mode. No real funds move and nothing is sent to Mollie Apps.<br/>
         /// <br/>
-        /// Shortly after, you can simulate the initiator's decision by adjusting the transfer amount:<br/>
+        /// Editing a draft transfer after creation is not supported via the API. Instead, depending on the amount, you<br/>
+        /// can simulate different outcomes for the initiator's decision at creation time:<br/>
         /// <br/>
         /// | Amount  | Simulated outcome                                    | Webhook sequence                                                                                  |<br/>
         /// |---------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------|<br/>
         /// | `13.00` | Declined by the initiator, with a free-text reason     | `business-account-draft-transfer.created` → `business-account-draft-transfer.declined`             |<br/>
-        /// | Other   | Approved by the initiator                              | `business-account-draft-transfer.created` → `business-account-draft-transfer.approved`              |<br/>
+        /// | `14.00` | Approved                                               | `business-account-draft-transfer.created` → `business-account-draft-transfer.approved`             |<br/>
+        /// | Other   | Default behavior (pending review)                      | `business-account-draft-transfer.created`                                                          |<br/>
         /// <br/>
         /// The webhooks fire asynchronously, with a short delay between them to mimic real timing. <a href="get-draft-transfer">Get</a>
         /// and <a href="list-draft-transfers">list</a> reflect the simulated outcome once it lands.<br/>
@@ -67,10 +69,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">
-        /// The request contains issues. For example, if a required field is missing, or if the creditor IBAN is&lt;br/&gt;<br/>
-        /// invalid. Thrown when the API returns a 422 or 429 response.
-        /// </exception>
+        /// <exception cref="ErrorResponse">The request is missing a required field. Thrown when the API returns a 400, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateDraftTransferResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -91,8 +90,7 @@ namespace Mollie
         /// <br/>
         /// The results are paginated.<br/>
         /// <br/>
-        /// In test mode, this returns synthetic draft transfers only, not your real data. See <a href="create-draft-transfer">Create draft<br/>
-        /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
+        /// In test mode, this returns synthetic draft transfers only, not your real data.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListDraftTransfersRequest"/> parameter.</param>
@@ -221,15 +219,17 @@ namespace Mollie
         /// <br/>
         /// ### Test mode<br/>
         /// <br/>
-        /// Creating a draft transfer always returns a synthetic draft in `pending-review`, using synthetic data,<br/>
+        /// Creating a draft transfer always returns a synthetic draft in `pending-review` status, using synthetic data,<br/>
         /// same as in live mode. No real funds move and nothing is sent to Mollie Apps.<br/>
         /// <br/>
-        /// Shortly after, you can simulate the initiator's decision by adjusting the transfer amount:<br/>
+        /// Editing a draft transfer after creation is not supported via the API. Instead, depending on the amount, you<br/>
+        /// can simulate different outcomes for the initiator's decision at creation time:<br/>
         /// <br/>
         /// | Amount  | Simulated outcome                                    | Webhook sequence                                                                                  |<br/>
         /// |---------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------|<br/>
         /// | `13.00` | Declined by the initiator, with a free-text reason     | `business-account-draft-transfer.created` → `business-account-draft-transfer.declined`             |<br/>
-        /// | Other   | Approved by the initiator                              | `business-account-draft-transfer.created` → `business-account-draft-transfer.approved`              |<br/>
+        /// | `14.00` | Approved                                               | `business-account-draft-transfer.created` → `business-account-draft-transfer.approved`             |<br/>
+        /// | Other   | Default behavior (pending review)                      | `business-account-draft-transfer.created`                                                          |<br/>
         /// <br/>
         /// The webhooks fire asynchronously, with a short delay between them to mimic real timing. <a href="get-draft-transfer">Get</a>
         /// and <a href="list-draft-transfers">list</a> reflect the simulated outcome once it lands.<br/>
@@ -246,10 +246,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">
-        /// The request contains issues. For example, if a required field is missing, or if the creditor IBAN is&lt;br/&gt;<br/>
-        /// invalid. Thrown when the API returns a 422 or 429 response.
-        /// </exception>
+        /// <exception cref="ErrorResponse">The request is missing a required field. Thrown when the API returns a 400, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateDraftTransferResponse> CreateAsync(
             string? idempotencyKey = null,
@@ -386,7 +383,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{422, 429}.Contains(responseStatusCode))
+            else if(new List<int>{400, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {
@@ -437,8 +434,7 @@ namespace Mollie
         /// <br/>
         /// The results are paginated.<br/>
         /// <br/>
-        /// In test mode, this returns synthetic draft transfers only, not your real data. See <a href="create-draft-transfer">Create draft<br/>
-        /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
+        /// In test mode, this returns synthetic draft transfers only, not your real data.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListDraftTransfersRequest"/> parameter.</param>

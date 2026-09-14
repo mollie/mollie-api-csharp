@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of draft transfer objects.
         /// </summary>
         [JsonProperty("draft_transfers")]
-        public List<ListDraftTransferResponse> DraftTransfers { get; set; } = default!;
+        public List<DraftTransferResponse> DraftTransfers { get; set; } = default!;
     }
 }

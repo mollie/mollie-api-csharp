@@ -92,6 +92,12 @@ namespace Mollie.Models.Components
         BusinessAccountTransferBlocked,
         [JsonProperty("business-account-transfer.returned")]
         BusinessAccountTransferReturned,
+        [JsonProperty("business-account-draft-transfer.created")]
+        BusinessAccountDraftTransferCreated,
+        [JsonProperty("business-account-draft-transfer.approved")]
+        BusinessAccountDraftTransferApproved,
+        [JsonProperty("business-account-draft-transfer.declined")]
+        BusinessAccountDraftTransferDeclined,
         [JsonProperty("*")]
         Wildcard,
     }

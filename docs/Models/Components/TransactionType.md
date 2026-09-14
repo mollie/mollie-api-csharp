@@ -30,3 +30,4 @@ var custom = TransactionType.Of("custom_value");
 | `Correction`        | correction          |
 | `DirectDebit`       | direct-debit        |
 | `DirectDebitRefund` | direct-debit-refund |
+| `RewardsPayout`     | rewards-payout      |

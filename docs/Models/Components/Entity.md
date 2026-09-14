@@ -50,3 +50,9 @@ Entity.CreateSalesInvoiceResponse(/* values here */);
 ```csharp
 Entity.CreateTransferResponse(/* values here */);
 ```
+
+### DraftTransferResponse
+
+```csharp
+Entity.CreateDraftTransferResponse(/* values here */);
+```

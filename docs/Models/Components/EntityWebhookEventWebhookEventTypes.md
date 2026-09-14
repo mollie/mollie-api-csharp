@@ -55,4 +55,7 @@ var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
 | `BusinessAccountTransferFailed`          | business-account-transfer.failed         |
 | `BusinessAccountTransferBlocked`         | business-account-transfer.blocked        |
 | `BusinessAccountTransferReturned`        | business-account-transfer.returned       |
+| `BusinessAccountDraftTransferCreated`    | business-account-draft-transfer.created  |
+| `BusinessAccountDraftTransferApproved`   | business-account-draft-transfer.approved |
+| `BusinessAccountDraftTransferDeclined`   | business-account-draft-transfer.declined |
 | `Wildcard`                               | *                                        |

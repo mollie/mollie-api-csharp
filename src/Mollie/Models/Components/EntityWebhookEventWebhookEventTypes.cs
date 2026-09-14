@@ -60,6 +60,9 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferFailed = new EntityWebhookEventWebhookEventTypes("business-account-transfer.failed");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferBlocked = new EntityWebhookEventWebhookEventTypes("business-account-transfer.blocked");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountTransferReturned = new EntityWebhookEventWebhookEventTypes("business-account-transfer.returned");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferCreated = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.created");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferApproved = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.approved");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferDeclined = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.declined");
         public static readonly EntityWebhookEventWebhookEventTypes Wildcard = new EntityWebhookEventWebhookEventTypes("*");
 
         private static readonly Dictionary <string, EntityWebhookEventWebhookEventTypes> _knownValues =
@@ -101,6 +104,9 @@ namespace Mollie.Models.Components
                 ["business-account-transfer.failed"] = BusinessAccountTransferFailed,
                 ["business-account-transfer.blocked"] = BusinessAccountTransferBlocked,
                 ["business-account-transfer.returned"] = BusinessAccountTransferReturned,
+                ["business-account-draft-transfer.created"] = BusinessAccountDraftTransferCreated,
+                ["business-account-draft-transfer.approved"] = BusinessAccountDraftTransferApproved,
+                ["business-account-draft-transfer.declined"] = BusinessAccountDraftTransferDeclined,
                 ["*"] = Wildcard
             };
 

@@ -24,11 +24,5 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("self")]
         public DraftTransferResponseSelf Self { get; set; } = default!;
-
-        /// <summary>
-        /// The URL to the documentation of this endpoint.
-        /// </summary>
-        [JsonProperty("documentation")]
-        public DraftTransferResponseDocumentation? Documentation { get; set; }
     }
 }

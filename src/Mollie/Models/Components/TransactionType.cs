@@ -35,6 +35,7 @@ namespace Mollie.Models.Components
         public static readonly TransactionType Correction = new TransactionType("correction");
         public static readonly TransactionType DirectDebit = new TransactionType("direct-debit");
         public static readonly TransactionType DirectDebitRefund = new TransactionType("direct-debit-refund");
+        public static readonly TransactionType RewardsPayout = new TransactionType("rewards-payout");
 
         private static readonly Dictionary <string, TransactionType> _knownValues =
             new Dictionary <string, TransactionType> ()
@@ -47,7 +48,8 @@ namespace Mollie.Models.Components
                 ["fee"] = Fee,
                 ["correction"] = Correction,
                 ["direct-debit"] = DirectDebit,
-                ["direct-debit-refund"] = DirectDebitRefund
+                ["direct-debit-refund"] = DirectDebitRefund,
+                ["rewards-payout"] = RewardsPayout
             };
 
         private static readonly ConcurrentDictionary<string, TransactionType> _values =
