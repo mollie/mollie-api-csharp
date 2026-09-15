@@ -18,30 +18,35 @@ namespace Mollie.Models.Components
     using System.Linq;
 
     /// <summary>
-    /// The status for the invoice to end up in.<br/>
-    /// <br/>
-    /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
-    /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
-    /// mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
-    /// <br/>
-    /// Dependent parameters:<br/>
-    ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
-    ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
-    ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
+    /// The current status of the invoice.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
     public class SalesInvoiceStatusResponse : IEquatable<SalesInvoiceStatusResponse>, IOpenEnum<string>
     {
         public static readonly SalesInvoiceStatusResponse Draft = new SalesInvoiceStatusResponse("draft");
+        public static readonly SalesInvoiceStatusResponse Issuing = new SalesInvoiceStatusResponse("issuing");
         public static readonly SalesInvoiceStatusResponse Issued = new SalesInvoiceStatusResponse("issued");
+        public static readonly SalesInvoiceStatusResponse PendingPayment = new SalesInvoiceStatusResponse("pending-payment");
         public static readonly SalesInvoiceStatusResponse Paid = new SalesInvoiceStatusResponse("paid");
+        public static readonly SalesInvoiceStatusResponse Overdue = new SalesInvoiceStatusResponse("overdue");
+        public static readonly SalesInvoiceStatusResponse PaymentReversed = new SalesInvoiceStatusResponse("payment_reversed");
+        public static readonly SalesInvoiceStatusResponse Cancelled = new SalesInvoiceStatusResponse("cancelled");
+        public static readonly SalesInvoiceStatusResponse Expired = new SalesInvoiceStatusResponse("expired");
+        public static readonly SalesInvoiceStatusResponse Failed = new SalesInvoiceStatusResponse("failed");
 
         private static readonly Dictionary <string, SalesInvoiceStatusResponse> _knownValues =
             new Dictionary <string, SalesInvoiceStatusResponse> ()
             {
                 ["draft"] = Draft,
+                ["issuing"] = Issuing,
                 ["issued"] = Issued,
-                ["paid"] = Paid
+                ["pending-payment"] = PendingPayment,
+                ["paid"] = Paid,
+                ["overdue"] = Overdue,
+                ["payment_reversed"] = PaymentReversed,
+                ["cancelled"] = Cancelled,
+                ["expired"] = Expired,
+                ["failed"] = Failed
             };
 
         private static readonly ConcurrentDictionary<string, SalesInvoiceStatusResponse> _values =

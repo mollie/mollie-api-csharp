@@ -70,7 +70,7 @@ namespace Mollie.Models.Components
         /// All lines must have the same currency as the Checkout Session.
         /// </summary>
         [JsonProperty("lines")]
-        public List<SessionLineItemResponse> Lines { get; set; } = default!;
+        public List<SessionLineItemResponse>? Lines { get; set; }
 
         /// <summary>
         /// The URL your customer will be redirected to after the payment process.<br/>

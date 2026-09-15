@@ -55,4 +55,5 @@ var value = WebhookEventTypes.PaymentPaid;
 | `BusinessAccountDraftTransferCreated`    | business-account-draft-transfer.created  |
 | `BusinessAccountDraftTransferApproved`   | business-account-draft-transfer.approved |
 | `BusinessAccountDraftTransferDeclined`   | business-account-draft-transfer.declined |
+| `UnmatchedCreditTransferReceived`        | unmatched-credit-transfer.received       |
 | `Wildcard`                               | *                                        |
