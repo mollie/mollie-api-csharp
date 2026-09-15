@@ -98,6 +98,8 @@ namespace Mollie.Models.Components
         BusinessAccountDraftTransferApproved,
         [JsonProperty("business-account-draft-transfer.declined")]
         BusinessAccountDraftTransferDeclined,
+        [JsonProperty("unmatched-credit-transfer.received")]
+        UnmatchedCreditTransferReceived,
         [JsonProperty("*")]
         Wildcard,
     }

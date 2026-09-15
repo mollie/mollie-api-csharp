@@ -20,6 +20,7 @@ var custom = GetNextSettlementStatus.Of("custom_value");
 | ------------------ | ------------------ |
 | `Open`             | open               |
 | `Pending`          | pending            |
+| `Processing`       | processing         |
 | `ProcessingAtBank` | processing-at-bank |
 | `Paidout`          | paidout            |
 | `Failed`           | failed             |

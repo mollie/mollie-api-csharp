@@ -56,16 +56,7 @@ namespace Mollie.Models.Components
         public string? ProfileId { get; set; } = null;
 
         /// <summary>
-        /// The status for the invoice to end up in.<br/>
-        /// <br/>
-        /// A `draft` invoice is not paid or not sent and can be updated after creation. Setting it to `issued` sends it to<br/>
-        /// the recipient so they may then pay through our payment system. To skip our payment process, set this to `paid` to<br/>
-        /// mark it as paid. It can then subsequently be sent as well, same as with `issued`.<br/>
-        /// <br/>
-        /// Dependent parameters:<br/>
-        ///   - `paymentDetails` is required if invoice should be set directly to `paid`<br/>
-        ///   - `customerId` and `mandateId` are required if a recurring payment should be used to set the invoice to `paid`<br/>
-        ///   - `emailDetails` optional for `issued` and `paid` to send the invoice by email.
+        /// The current status of the invoice.
         /// </summary>
         [JsonProperty("status")]
         public SalesInvoiceStatusResponse? Status { get; set; }

@@ -25,6 +25,7 @@ namespace Mollie.Models.Requests
     {
         public static readonly GetNextSettlementStatus Open = new GetNextSettlementStatus("open");
         public static readonly GetNextSettlementStatus Pending = new GetNextSettlementStatus("pending");
+        public static readonly GetNextSettlementStatus Processing = new GetNextSettlementStatus("processing");
         public static readonly GetNextSettlementStatus ProcessingAtBank = new GetNextSettlementStatus("processing-at-bank");
         public static readonly GetNextSettlementStatus Paidout = new GetNextSettlementStatus("paidout");
         public static readonly GetNextSettlementStatus Failed = new GetNextSettlementStatus("failed");
@@ -34,6 +35,7 @@ namespace Mollie.Models.Requests
             {
                 ["open"] = Open,
                 ["pending"] = Pending,
+                ["processing"] = Processing,
                 ["processing-at-bank"] = ProcessingAtBank,
                 ["paidout"] = Paidout,
                 ["failed"] = Failed
