@@ -27,6 +27,7 @@ var custom = PaymentLinkMethodResponse.Of("custom_value");
 | `Creditcard`   | creditcard     |
 | `Eps`          | eps            |
 | `Giftcard`     | giftcard       |
+| `Googlepay`    | googlepay      |
 | `Ideal`        | ideal          |
 | `In3`          | in3            |
 | `Kbc`          | kbc            |

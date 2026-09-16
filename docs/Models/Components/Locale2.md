@@ -22,6 +22,7 @@ var value = Locale2.CaES;
 | `DeCH` | de_CH  |
 | `Dede` | de_DE  |
 | `DeLU` | de_LU  |
+| `ElGR` | el_GR  |
 | `EnBE` | en_BE  |
 | `EnGB` | en_GB  |
 | `EnNL` | en_NL  |
@@ -42,4 +43,6 @@ var value = Locale2.CaES;
 | `Plpl` | pl_PL  |
 | `Ptpt` | pt_PT  |
 | `Sksk` | sk_SK  |
+| `SlSI` | sl_SI  |
 | `SvSE` | sv_SE  |
+| `Trtr` | tr_TR  |

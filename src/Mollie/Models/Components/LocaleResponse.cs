@@ -30,6 +30,7 @@ namespace Mollie.Models.Components
         public static readonly LocaleResponse DeCH = new LocaleResponse("de_CH");
         public static readonly LocaleResponse Dede = new LocaleResponse("de_DE");
         public static readonly LocaleResponse DeLU = new LocaleResponse("de_LU");
+        public static readonly LocaleResponse ElGR = new LocaleResponse("el_GR");
         public static readonly LocaleResponse EnBE = new LocaleResponse("en_BE");
         public static readonly LocaleResponse EnGB = new LocaleResponse("en_GB");
         public static readonly LocaleResponse EnNL = new LocaleResponse("en_NL");
@@ -50,7 +51,9 @@ namespace Mollie.Models.Components
         public static readonly LocaleResponse Plpl = new LocaleResponse("pl_PL");
         public static readonly LocaleResponse Ptpt = new LocaleResponse("pt_PT");
         public static readonly LocaleResponse Sksk = new LocaleResponse("sk_SK");
+        public static readonly LocaleResponse SlSI = new LocaleResponse("sl_SI");
         public static readonly LocaleResponse SvSE = new LocaleResponse("sv_SE");
+        public static readonly LocaleResponse Trtr = new LocaleResponse("tr_TR");
 
         private static readonly Dictionary <string, LocaleResponse> _knownValues =
             new Dictionary <string, LocaleResponse> ()
@@ -62,6 +65,7 @@ namespace Mollie.Models.Components
                 ["de_CH"] = DeCH,
                 ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
+                ["el_GR"] = ElGR,
                 ["en_BE"] = EnBE,
                 ["en_GB"] = EnGB,
                 ["en_NL"] = EnNL,
@@ -82,7 +86,9 @@ namespace Mollie.Models.Components
                 ["pl_PL"] = Plpl,
                 ["pt_PT"] = Ptpt,
                 ["sk_SK"] = Sksk,
-                ["sv_SE"] = SvSE
+                ["sl_SI"] = SlSI,
+                ["sv_SE"] = SvSE,
+                ["tr_TR"] = Trtr
             };
 
         private static readonly ConcurrentDictionary<string, LocaleResponse> _values =

@@ -100,6 +100,20 @@ namespace Mollie.Models.Components
         BusinessAccountDraftTransferDeclined,
         [JsonProperty("unmatched-credit-transfer.received")]
         UnmatchedCreditTransferReceived,
+        [JsonProperty("unmatched-credit-transfer.matched")]
+        UnmatchedCreditTransferMatched,
+        [JsonProperty("unmatched-credit-transfer.returned")]
+        UnmatchedCreditTransferReturned,
+        [JsonProperty("unmatched-credit-transfer.expired")]
+        UnmatchedCreditTransferExpired,
+        [JsonProperty("unmatched-credit-transfer.match.completed")]
+        UnmatchedCreditTransferMatchCompleted,
+        [JsonProperty("unmatched-credit-transfer.match.failed")]
+        UnmatchedCreditTransferMatchFailed,
+        [JsonProperty("unmatched-credit-transfer.return.completed")]
+        UnmatchedCreditTransferReturnCompleted,
+        [JsonProperty("unmatched-credit-transfer.return.failed")]
+        UnmatchedCreditTransferReturnFailed,
         [JsonProperty("*")]
         Wildcard,
     }

@@ -30,6 +30,7 @@ namespace Mollie.Models.Components
         public static readonly EntityOrganizationLocale DeCH = new EntityOrganizationLocale("de_CH");
         public static readonly EntityOrganizationLocale Dede = new EntityOrganizationLocale("de_DE");
         public static readonly EntityOrganizationLocale DeLU = new EntityOrganizationLocale("de_LU");
+        public static readonly EntityOrganizationLocale ElGR = new EntityOrganizationLocale("el_GR");
         public static readonly EntityOrganizationLocale EnBE = new EntityOrganizationLocale("en_BE");
         public static readonly EntityOrganizationLocale EnGB = new EntityOrganizationLocale("en_GB");
         public static readonly EntityOrganizationLocale EnNL = new EntityOrganizationLocale("en_NL");
@@ -50,7 +51,9 @@ namespace Mollie.Models.Components
         public static readonly EntityOrganizationLocale Plpl = new EntityOrganizationLocale("pl_PL");
         public static readonly EntityOrganizationLocale Ptpt = new EntityOrganizationLocale("pt_PT");
         public static readonly EntityOrganizationLocale Sksk = new EntityOrganizationLocale("sk_SK");
+        public static readonly EntityOrganizationLocale SlSI = new EntityOrganizationLocale("sl_SI");
         public static readonly EntityOrganizationLocale SvSE = new EntityOrganizationLocale("sv_SE");
+        public static readonly EntityOrganizationLocale Trtr = new EntityOrganizationLocale("tr_TR");
 
         private static readonly Dictionary <string, EntityOrganizationLocale> _knownValues =
             new Dictionary <string, EntityOrganizationLocale> ()
@@ -62,6 +65,7 @@ namespace Mollie.Models.Components
                 ["de_CH"] = DeCH,
                 ["de_DE"] = Dede,
                 ["de_LU"] = DeLU,
+                ["el_GR"] = ElGR,
                 ["en_BE"] = EnBE,
                 ["en_GB"] = EnGB,
                 ["en_NL"] = EnNL,
@@ -82,7 +86,9 @@ namespace Mollie.Models.Components
                 ["pl_PL"] = Plpl,
                 ["pt_PT"] = Ptpt,
                 ["sk_SK"] = Sksk,
-                ["sv_SE"] = SvSE
+                ["sl_SI"] = SlSI,
+                ["sv_SE"] = SvSE,
+                ["tr_TR"] = Trtr
             };
 
         private static readonly ConcurrentDictionary<string, EntityOrganizationLocale> _values =

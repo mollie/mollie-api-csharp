@@ -38,6 +38,8 @@ namespace Mollie.Models.Components
         Eps,
         [JsonProperty("giftcard")]
         Giftcard,
+        [JsonProperty("googlepay")]
+        Googlepay,
         [JsonProperty("ideal")]
         Ideal,
         [JsonProperty("in3")]

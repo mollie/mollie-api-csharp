@@ -25,6 +25,7 @@ var custom = LocaleResponse.Of("custom_value");
 | `DeCH` | de_CH  |
 | `Dede` | de_DE  |
 | `DeLU` | de_LU  |
+| `ElGR` | el_GR  |
 | `EnBE` | en_BE  |
 | `EnGB` | en_GB  |
 | `EnNL` | en_NL  |
@@ -45,4 +46,6 @@ var custom = LocaleResponse.Of("custom_value");
 | `Plpl` | pl_PL  |
 | `Ptpt` | pt_PT  |
 | `Sksk` | sk_SK  |
+| `SlSI` | sl_SI  |
 | `SvSE` | sv_SE  |
+| `Trtr` | tr_TR  |
