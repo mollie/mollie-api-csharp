@@ -31,6 +31,7 @@ namespace Mollie.Models.Components
         public static readonly PaymentLinkMethodResponse Creditcard = new PaymentLinkMethodResponse("creditcard");
         public static readonly PaymentLinkMethodResponse Eps = new PaymentLinkMethodResponse("eps");
         public static readonly PaymentLinkMethodResponse Giftcard = new PaymentLinkMethodResponse("giftcard");
+        public static readonly PaymentLinkMethodResponse Googlepay = new PaymentLinkMethodResponse("googlepay");
         public static readonly PaymentLinkMethodResponse Ideal = new PaymentLinkMethodResponse("ideal");
         public static readonly PaymentLinkMethodResponse In3 = new PaymentLinkMethodResponse("in3");
         public static readonly PaymentLinkMethodResponse Kbc = new PaymentLinkMethodResponse("kbc");
@@ -65,6 +66,7 @@ namespace Mollie.Models.Components
                 ["creditcard"] = Creditcard,
                 ["eps"] = Eps,
                 ["giftcard"] = Giftcard,
+                ["googlepay"] = Googlepay,
                 ["ideal"] = Ideal,
                 ["in3"] = In3,
                 ["kbc"] = Kbc,

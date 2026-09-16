@@ -64,6 +64,13 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferApproved = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.approved");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferDeclined = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.declined");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReceived = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.received");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferMatched = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.matched");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturned = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.returned");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferExpired = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.expired");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferMatchCompleted = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.match.completed");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferMatchFailed = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.match.failed");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturnCompleted = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.return.completed");
+        public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturnFailed = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.return.failed");
         public static readonly EntityWebhookEventWebhookEventTypes Wildcard = new EntityWebhookEventWebhookEventTypes("*");
 
         private static readonly Dictionary <string, EntityWebhookEventWebhookEventTypes> _knownValues =
@@ -109,6 +116,13 @@ namespace Mollie.Models.Components
                 ["business-account-draft-transfer.approved"] = BusinessAccountDraftTransferApproved,
                 ["business-account-draft-transfer.declined"] = BusinessAccountDraftTransferDeclined,
                 ["unmatched-credit-transfer.received"] = UnmatchedCreditTransferReceived,
+                ["unmatched-credit-transfer.matched"] = UnmatchedCreditTransferMatched,
+                ["unmatched-credit-transfer.returned"] = UnmatchedCreditTransferReturned,
+                ["unmatched-credit-transfer.expired"] = UnmatchedCreditTransferExpired,
+                ["unmatched-credit-transfer.match.completed"] = UnmatchedCreditTransferMatchCompleted,
+                ["unmatched-credit-transfer.match.failed"] = UnmatchedCreditTransferMatchFailed,
+                ["unmatched-credit-transfer.return.completed"] = UnmatchedCreditTransferReturnCompleted,
+                ["unmatched-credit-transfer.return.failed"] = UnmatchedCreditTransferReturnFailed,
                 ["*"] = Wildcard
             };
 

@@ -33,6 +33,8 @@ namespace Mollie.Models.Components
         Dede,
         [JsonProperty("de_LU")]
         DeLU,
+        [JsonProperty("el_GR")]
+        ElGR,
         [JsonProperty("en_BE")]
         EnBE,
         [JsonProperty("en_GB")]
@@ -73,8 +75,12 @@ namespace Mollie.Models.Components
         Ptpt,
         [JsonProperty("sk_SK")]
         Sksk,
+        [JsonProperty("sl_SI")]
+        SlSI,
         [JsonProperty("sv_SE")]
         SvSE,
+        [JsonProperty("tr_TR")]
+        Trtr,
     }
 
     public static class Locale2Extension

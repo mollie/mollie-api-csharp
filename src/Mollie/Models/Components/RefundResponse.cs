@@ -42,8 +42,8 @@ namespace Mollie.Models.Components
         /// <summary>
         /// The description of the refund that may be shown to your customer, depending on the payment method used.
         /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; } = default!;
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
+        public string? Description { get; set; }
 
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
