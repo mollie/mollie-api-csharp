@@ -21,7 +21,7 @@ namespace Mollie.Models.Requests
         /// An array of sales invoice objects. For a complete reference of the sales invoice object, refer to<br/>
         /// the <a href="get-sales-invoice">Get sales invoice endpoint</a> documentation.
         /// </summary>
-        [JsonProperty("sales_invoices")]
-        public List<ListSalesInvoiceResponse>? SalesInvoices { get; set; }
+        [JsonProperty("invoices")]
+        public List<ListSalesInvoiceResponse>? Invoices { get; set; }
     }
 }
