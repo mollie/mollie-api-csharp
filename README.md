@@ -1,3 +1,7 @@
+> **Mollie is transitioning to new, automatically generated SDKs.**  
+>
+> As a part of this transition, new features will be developed exclusively for the [new C# SDK](https://github.com/mollie/mollie-api-csharp). We encourage you to migrate to this version by 31 October 2026, after which the legacy SDK will enter maintenance mode and receive no further updates.
+
 # Mollie
 
 Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Mollie* API.
