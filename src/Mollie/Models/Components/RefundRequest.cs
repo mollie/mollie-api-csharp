@@ -36,9 +36,6 @@ namespace Mollie.Models.Components
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Include)]
         public Metadata? Metadata { get; set; } = null;
 
-        [JsonProperty("externalReference")]
-        public RefundRequestExternalReference? ExternalReference { get; set; }
-
         /// <summary>
         /// *This feature is only available to marketplace operators.*<br/>
         /// <br/>

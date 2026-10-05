@@ -36,10 +36,6 @@ var res = await sdk.Refunds.CreateAsync(
             Currency = "EUR",
             Value = "10.00",
         },
-        ExternalReference = new RefundRequestExternalReference() {
-            Type = RefundExternalReferenceType.AcquirerReference,
-            Id = "123456789012345",
-        },
         ReverseRouting = false,
         RoutingReversals = new List<RefundRequestRoutingReversal>() {
             new RefundRequestRoutingReversal() {
@@ -79,10 +75,6 @@ var res = await sdk.Refunds.CreateAsync(
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
-        },
-        ExternalReference = new RefundRequestExternalReference() {
-            Type = RefundExternalReferenceType.AcquirerReference,
-            Id = "123456789012345",
         },
         ReverseRouting = false,
         RoutingReversals = new List<RefundRequestRoutingReversal>() {
