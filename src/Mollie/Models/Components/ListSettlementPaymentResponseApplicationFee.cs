@@ -31,13 +31,13 @@ namespace Mollie.Models.Components
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
         [JsonProperty("amount")]
-        public Amount? Amount { get; set; }
+        public Amount Amount { get; set; } = default!;
 
         /// <summary>
         /// The description of the application fee. This will appear on settlement reports towards both you and the<br/>
         /// connected merchant.
         /// </summary>
         [JsonProperty("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = default!;
     }
 }

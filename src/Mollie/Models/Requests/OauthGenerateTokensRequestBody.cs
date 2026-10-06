@@ -35,10 +35,7 @@ namespace Mollie.Models.Requests
 
         /// <summary>
         /// The URL the merchant is sent back to once the request has been authorized. It must match the URL you set<br/>
-        /// when registering your app.<br/>
-        /// <br/>
-        /// For consecutive refresh token requests, this parameter is required only if the initial authorization<br/>
-        /// code grant request also contained a `redirect_uri`.
+        /// when registering your app.
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string? RedirectUri { get; set; }

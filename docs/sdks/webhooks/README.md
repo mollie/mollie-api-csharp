@@ -118,9 +118,63 @@ while(res != null)
 
 Updates the webhook. You may edit the name, url and the list of subscribed event types.
 
-### Example Usage
+### Example Usage: create-webhook-200
 
 <!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/v2/webhooks/{webhookId}" example="create-webhook-200" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Webhooks.UpdateAsync(
+    webhookId: "hook_1234567890",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new UpdateWebhookRequestBody() {
+        Name = "Webhook #1",
+        Url = "https://mollie.com/",
+        EventTypes = EventTypes.CreateWebhookEventTypes(
+            WebhookEventTypes.PaymentLinkPaid
+        ),
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: get-webhook-200
+
+<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/v2/webhooks/{webhookId}" example="get-webhook-200" -->
+```csharp
+using Mollie;
+using Mollie.Models.Components;
+using Mollie.Models.Requests;
+
+var sdk = new Client(security: new Security() {
+    AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+var res = await sdk.Webhooks.UpdateAsync(
+    webhookId: "hook_1234567890",
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    requestBody: new UpdateWebhookRequestBody() {
+        Name = "Webhook #1",
+        Url = "https://mollie.com/",
+        EventTypes = EventTypes.CreateWebhookEventTypes(
+            WebhookEventTypes.PaymentLinkPaid
+        ),
+        Testmode = false,
+    }
+);
+
+// handle response
+```
+### Example Usage: get-webhook-200-1
+
+<!-- UsageSnippet language="csharp" operationID="update-webhook" method="patch" path="/v2/webhooks/{webhookId}" example="get-webhook-200-1" -->
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
