@@ -99,6 +99,19 @@ namespace Mollie.Models.Components
         [JsonProperty("shippingAddress")]
         public ShippingAddress? ShippingAddress { get; set; }
 
+        /// <summary>
+        /// &gt; 🚧 Private beta<br/>
+        /// &gt;<br/>
+        /// &gt; This property is currently in private beta, and the final specification may still change.<br/>
+        /// <br/>
+        /// Shipping information for the Checkout Session. Provide either `options` or `callbackUrl`, not both.<br/>
+        /// <br/>
+        /// The `lines` of the Checkout Session must not contain a line with type `shipping_fee`. When `shipping` is set,<br/>
+        /// `requiredCustomerDetails` must contain `shipping-address`.
+        /// </summary>
+        [JsonProperty("shipping", NullValueHandling = NullValueHandling.Include)]
+        public SessionResponseShippingUnion? Shipping { get; set; }
+
         [JsonProperty("customerId")]
         public string? CustomerId { get; set; }
 
