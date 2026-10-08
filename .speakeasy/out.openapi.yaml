@@ -31309,34 +31309,6 @@ components:
         - NOT_ELIGIBLE
       example: ELIGIBLE
       x-methodSpecific: true
-    payment-details-receipt-card-read-method:
-      type:
-        - string
-        - 'null'
-      description: The method by which the card was read by the terminal.
-      enum:
-        - chip
-        - magnetic-stripe
-        - near-field-communication
-        - contactless
-        - moto
-      example: contactless
-    payment-details-receipt-card-verification-method:
-      type:
-        - string
-        - 'null'
-      description: The method used to verify the cardholder's identity.
-      enum:
-        - no-cvm-required
-        - online-pin
-        - offline-pin
-        - consumer-device
-        - signature
-        - signature-and-online-pin
-        - online-pin-and-signature
-        - none
-        - failed
-      example: no-cvm-required
     payment-details:
       type:
         - object
@@ -31678,40 +31650,6 @@ components:
             - 'null'
           description: The first 6 digits & last 4 digits of the customer's masked card number.
           example: '...'
-          x-methodSpecific: true
-          x-method: point-of-sale
-        receipt:
-          type: object
-          x-heading-suffix: (⚠️ Beta feature, reach out to [Support](https://www.mollie.com/contact/merchants))
-          description: |-
-            The Point of sale receipt object.
-
-            * `authorizationCode` _string|null_ - a unique code provided by the cardholder's bank to confirm that the
-              transaction was successfully approved.
-            * `applicationIdentifier` _string|null_ - the unique number that identifies a specific payment application
-              on a chip card.
-            * `cardReadMethod` _string|null_ - the method by which the card was read by the terminal. Possible values:
-              `chip` | `magnetic-stripe` | `near-field-communication` | `contactless` | `moto`.
-            * `cardVerificationMethod` _string|null_ - the method used to verify the cardholder's identity. Possible
-              values: `no-cvm-required` | `online-pin` | `offline-pin` | `consumer-device` | `signature` |
-              `signature-and-online-pin` | `online-pin-and-signature` | `none` | `failed`.
-          properties:
-            authorizationCode:
-              type:
-                - string
-                - 'null'
-              description: A unique code provided by the cardholder's bank to confirm that the transaction was successfully approved.
-              example: '...'
-            applicationIdentifier:
-              type:
-                - string
-                - 'null'
-              description: The unique number that identifies a specific payment application on a chip card.
-              example: '...'
-            cardReadMethod:
-              $ref: '#/components/schemas/payment-details-receipt-card-read-method-response'
-            cardVerificationMethod:
-              $ref: '#/components/schemas/payment-details-receipt-card-verification-method-response'
           x-methodSpecific: true
           x-method: point-of-sale
         creditorIdentifier:
@@ -36486,6 +36424,48 @@ components:
           description: |-
             The customer's shipping address details. We advise to provide these details to improve fraud protection and
             conversion.
+        shipping:
+          type: object
+          description: "> \U0001F6A7 Private beta\n>\n> This property is currently in private beta, and the final specification may still change.\n\nShipping information for the Checkout Session. Provide either `options` or `callbackUrl`, not both.\n\nThe `lines` of the Checkout Session must not contain a line with type `shipping_fee`. When `shipping` is set,\n`requiredCustomerDetails` must contain `shipping-address`."
+          oneOf:
+            - required:
+                - options
+            - required:
+                - callbackUrl
+          properties:
+            options:
+              type: array
+              minItems: 1
+              maxItems: 10
+              description: |-
+                A fixed list of shipping options to show your customer during checkout. Use `callbackUrl` instead if your
+                options depend on the customer's shipping address.
+              items:
+                type: object
+                required:
+                  - description
+                  - reference
+                  - amount
+                properties:
+                  description:
+                    type: string
+                    description: The name of the shipping option, as shown to your customer.
+                    example: Next day delivery
+                  reference:
+                    type: string
+                    description: Your own identifier for the shipping option.
+                    example: express
+                  amount:
+                    $ref: '#/components/schemas/amount'
+            callbackUrl:
+              type: string
+              description: |-
+                The URL Mollie calls to retrieve shipping options whenever your customer selects or changes their shipping
+                address. Requires `https://` for live mode. In test mode, `http://` is also allowed.
+
+                See the [shipping options guide](https://docs.mollie.com/docs/handle-shipping-options-with-express-component)
+                for the callback request and response.
+              example: https://example.org/shipping-options
         customerId:
           type:
             - string
@@ -42535,36 +42515,6 @@ components:
       example: ELIGIBLE
       x-methodSpecific: true
       x-speakeasy-unknown-values: allow
-    payment-details-receipt-card-read-method-response:
-      type:
-        - string
-        - 'null'
-      description: The method by which the card was read by the terminal.
-      enum:
-        - chip
-        - magnetic-stripe
-        - near-field-communication
-        - contactless
-        - moto
-      example: contactless
-      x-speakeasy-unknown-values: allow
-    payment-details-receipt-card-verification-method-response:
-      type:
-        - string
-        - 'null'
-      description: The method used to verify the cardholder's identity.
-      enum:
-        - no-cvm-required
-        - online-pin
-        - offline-pin
-        - consumer-device
-        - signature
-        - signature-and-online-pin
-        - online-pin-and-signature
-        - none
-        - failed
-      example: no-cvm-required
-      x-speakeasy-unknown-values: allow
     method-response:
       type:
         - string
@@ -44350,6 +44300,48 @@ components:
           description: |-
             The customer's shipping address details. We advise to provide these details to improve fraud protection and
             conversion.
+        shipping:
+          type: object
+          description: "> \U0001F6A7 Private beta\n>\n> This property is currently in private beta, and the final specification may still change.\n\nShipping information for the Checkout Session. Provide either `options` or `callbackUrl`, not both.\n\nThe `lines` of the Checkout Session must not contain a line with type `shipping_fee`. When `shipping` is set,\n`requiredCustomerDetails` must contain `shipping-address`."
+          oneOf:
+            - required:
+                - options
+            - required:
+                - callbackUrl
+          properties:
+            options:
+              type: array
+              minItems: 1
+              maxItems: 10
+              description: |-
+                A fixed list of shipping options to show your customer during checkout. Use `callbackUrl` instead if your
+                options depend on the customer's shipping address.
+              items:
+                type: object
+                required:
+                  - description
+                  - reference
+                  - amount
+                properties:
+                  description:
+                    type: string
+                    description: The name of the shipping option, as shown to your customer.
+                    example: Next day delivery
+                  reference:
+                    type: string
+                    description: Your own identifier for the shipping option.
+                    example: express
+                  amount:
+                    $ref: '#/components/schemas/amount'
+            callbackUrl:
+              type: string
+              description: |-
+                The URL Mollie calls to retrieve shipping options whenever your customer selects or changes their shipping
+                address. Requires `https://` for live mode. In test mode, `http://` is also allowed.
+
+                See the [shipping options guide](https://docs.mollie.com/docs/handle-shipping-options-with-express-component)
+                for the callback request and response.
+              example: https://example.org/shipping-options
         customerId:
           type:
             - string

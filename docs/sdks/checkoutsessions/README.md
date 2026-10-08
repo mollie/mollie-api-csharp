@@ -68,6 +68,21 @@ var res = await sdk.CheckoutSessions.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
+        Shipping = SessionRequestShippingUnion.CreateSessionRequestShipping1(
+            new SessionRequestShipping1() {
+                Options = new List<SessionRequestOption1>() {
+                    new SessionRequestOption1() {
+                        Description = "Next day delivery",
+                        Reference = "express",
+                        Amount = new Amount() {
+                            Currency = "EUR",
+                            Value = "10.00",
+                        },
+                    },
+                },
+                CallbackUrl = "https://example.org/shipping-options",
+            }
+        ),
         CustomerId = "cst_5B8cwPMGnU",
         SequenceType = SessionSequenceType.Oneoff,
         Payment = new SessionRequestPayment() {
@@ -133,6 +148,21 @@ var res = await sdk.CheckoutSessions.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
+        Shipping = SessionRequestShippingUnion.CreateSessionRequestShipping1(
+            new SessionRequestShipping1() {
+                Options = new List<SessionRequestOption1>() {
+                    new SessionRequestOption1() {
+                        Description = "Next day delivery",
+                        Reference = "express",
+                        Amount = new Amount() {
+                            Currency = "EUR",
+                            Value = "10.00",
+                        },
+                    },
+                },
+                CallbackUrl = "https://example.org/shipping-options",
+            }
+        ),
         CustomerId = "cst_5B8cwPMGnU",
         SequenceType = SessionSequenceType.Oneoff,
         Payment = new SessionRequestPayment() {
@@ -198,6 +228,21 @@ var res = await sdk.CheckoutSessions.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
+        Shipping = SessionRequestShippingUnion.CreateSessionRequestShipping1(
+            new SessionRequestShipping1() {
+                Options = new List<SessionRequestOption1>() {
+                    new SessionRequestOption1() {
+                        Description = "Next day delivery",
+                        Reference = "express",
+                        Amount = new Amount() {
+                            Currency = "EUR",
+                            Value = "10.00",
+                        },
+                    },
+                },
+                CallbackUrl = "https://example.org/shipping-options",
+            }
+        ),
         CustomerId = "cst_5B8cwPMGnU",
         SequenceType = SessionSequenceType.Oneoff,
         Payment = new SessionRequestPayment() {
@@ -263,6 +308,21 @@ var res = await sdk.CheckoutSessions.CreateAsync(
             Region = "Noord-Holland",
             Country = "NL",
         },
+        Shipping = SessionRequestShippingUnion.CreateSessionRequestShipping1(
+            new SessionRequestShipping1() {
+                Options = new List<SessionRequestOption1>() {
+                    new SessionRequestOption1() {
+                        Description = "Next day delivery",
+                        Reference = "express",
+                        Amount = new Amount() {
+                            Currency = "EUR",
+                            Value = "10.00",
+                        },
+                    },
+                },
+                CallbackUrl = "https://example.org/shipping-options",
+            }
+        ),
         CustomerId = "cst_5B8cwPMGnU",
         SequenceType = SessionSequenceType.Oneoff,
         Payment = new SessionRequestPayment() {

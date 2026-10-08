@@ -248,22 +248,6 @@ namespace Mollie.Models.Components
         public string? MaskedNumber { get; set; } = null;
 
         /// <summary>
-        /// The Point of sale receipt object.<br/>
-        /// <br/>
-        /// * `authorizationCode` _string|null_ - a unique code provided by the cardholder's bank to confirm that the<br/>
-        ///   transaction was successfully approved.<br/>
-        /// * `applicationIdentifier` _string|null_ - the unique number that identifies a specific payment application<br/>
-        ///   on a chip card.<br/>
-        /// * `cardReadMethod` _string|null_ - the method by which the card was read by the terminal. Possible values:<br/>
-        ///   `chip` | `magnetic-stripe` | `near-field-communication` | `contactless` | `moto`.<br/>
-        /// * `cardVerificationMethod` _string|null_ - the method used to verify the cardholder's identity. Possible<br/>
-        ///   values: `no-cvm-required` | `online-pin` | `offline-pin` | `consumer-device` | `signature` |<br/>
-        ///   `signature-and-online-pin` | `online-pin-and-signature` | `none` | `failed`.
-        /// </summary>
-        [JsonProperty("receipt")]
-        public Receipt? Receipt { get; set; }
-
-        /// <summary>
         /// The creditor identifier indicates who is authorized to execute the payment. In this case, it is a reference<br/>
         /// to Mollie.
         /// </summary>
