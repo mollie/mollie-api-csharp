@@ -12369,7 +12369,7 @@ paths:
             - sessions.write
         - oAuth:
             - sessions.write
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in private beta, and the final specification may still change.\n\nCreate a Checkout Session to start a checkout process with Mollie Components."
+      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta.\n>\n> The `shipping` and `requiredCustomerDetails` properties are still in private beta.\n\nCreate a Checkout Session to start a checkout process with Mollie Components."
       requestBody:
         content:
           application/json:
@@ -12632,7 +12632,7 @@ paths:
     get:
       summary: Get Checkout Session
       x-speakeasy-name-override: get
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in private beta, and the final specification may still change.\n\nRetrieve a Checkout Session to view its details and status to inform your customers about the checkout process."
+      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta.\n>\n> The `shipping` and `requiredCustomerDetails` properties are still in private beta.\n\nRetrieve a Checkout Session to view its details and status to inform your customers about the checkout process."
       tags:
         - Checkout Sessions API
       operationId: get-session

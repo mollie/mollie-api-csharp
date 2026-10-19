@@ -32,7 +32,9 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in private beta, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in beta.<br/>
+        /// &gt;<br/>
+        /// &gt; The `shipping` and `requiredCustomerDetails` properties are still in private beta.<br/>
         /// <br/>
         /// Create a Checkout Session to start a checkout process with Mollie Components.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
@@ -60,7 +62,9 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in private beta, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in beta.<br/>
+        /// &gt;<br/>
+        /// &gt; The `shipping` and `requiredCustomerDetails` properties are still in private beta.<br/>
         /// <br/>
         /// Retrieve a Checkout Session to view its details and status to inform your customers about the checkout process.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
@@ -103,7 +107,9 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in private beta, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in beta.<br/>
+        /// &gt;<br/>
+        /// &gt; The `shipping` and `requiredCustomerDetails` properties are still in private beta.<br/>
         /// <br/>
         /// Create a Checkout Session to start a checkout process with Mollie Components.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
@@ -298,7 +304,9 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in private beta, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in beta.<br/>
+        /// &gt;<br/>
+        /// &gt; The `shipping` and `requiredCustomerDetails` properties are still in private beta.<br/>
         /// <br/>
         /// Retrieve a Checkout Session to view its details and status to inform your customers about the checkout process.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
