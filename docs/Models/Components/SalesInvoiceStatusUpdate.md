@@ -22,9 +22,10 @@ var value = SalesInvoiceStatusUpdate.Draft;
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `Draft`     | draft       |
-| `Issued`    | issued      |
-| `Paid`      | paid        |
-| `Cancelled` | cancelled   |
+| Name              | Value             |
+| ----------------- | ----------------- |
+| `Draft`           | draft             |
+| `Issued`          | issued            |
+| `Paid`            | paid              |
+| `Cancelled`       | cancelled         |
+| `PaymentReversed` | payment_reversed  |

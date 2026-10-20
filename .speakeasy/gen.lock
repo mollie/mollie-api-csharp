@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: c4b7b18febaee75844b0cf36919c8d4a
+  docChecksum: 9f53598eda6a9dd651db8b0107a4a93d
   docVersion: 1.0.0
-  speakeasyVersion: 1.802.0
-  generationVersion: 2.948.4
-  releaseVersion: 1.4.19
-  configChecksum: 9e46fe467a256cbec0542eadfca892c4
+  speakeasyVersion: 1.803.0
+  generationVersion: 2.950.2
+  releaseVersion: 1.4.20
+  configChecksum: 0731c719cf53d281d7ec18520e2a4f2c
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 08ffa5f0-4a3b-479f-b6b3-c7fb934bd380
-  pristine_commit_hash: 8f9647a97c37f918b8b16ab0658902d8590ee08a
-  pristine_tree_hash: 5ea003bf66e4c7314826a2770132bc6705c39341
+  generation_id: e79b0740-2b02-43cb-b5c5-f997ff65d3e4
+  pristine_commit_hash: 8e39cba53ad0a58fe32c3b26ac4d3564474a8481
+  pristine_tree_hash: eca4ad76924380d2a29e0b58104ecd35d4c61dfc
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -31,7 +31,7 @@ features:
     methodSecurity: 2.82.5
     nameOverrides: 2.81.4
     nullables: 0.1.1
-    openEnums: 0.2.0
+    openEnums: 0.2.1
     pagination: 0.2.12
     responseFormat: 0.0.4
     retries: 0.0.4
@@ -124,8 +124,8 @@ trackedFiles:
     pristine_git_object: 8d1c7e35e19dca99902eb724ca51e07b7d606be2
   docs/Models/Components/BalanceTransactionType.md:
     id: 625538c3d323
-    last_write_checksum: sha1:f813d035eef2a4125eb7d5c33cfa0d28532b0391
-    pristine_git_object: 12a7efaf32febaff430995ac46597b458ae854d9
+    last_write_checksum: sha1:cf06bad6b8cd930a6a5c737cc2e119e219c7d74a
+    pristine_git_object: 8a0bc4a4c0121f62307c14a4b40754d07155d6b8
   docs/Models/Components/BalanceTransferCategory.md:
     id: 240f8f680dc8
     last_write_checksum: sha1:981c232828224b3b66c4e72d69838c1e5f2c7a5a
@@ -1824,8 +1824,8 @@ trackedFiles:
     pristine_git_object: c8c31dc6af77360fbd8ed89c6fafddc80173c46a
   docs/Models/Components/SalesInvoiceStatusUpdate.md:
     id: 22a092ded424
-    last_write_checksum: sha1:abc7ebc5de8ed73666b8555726edd3c7deca4c3c
-    pristine_git_object: 5ae4879be8d3b6a80128e378c25aba1c5ffdf5e1
+    last_write_checksum: sha1:df77c25b4808a72dc86661f609dd60d60644061d
+    pristine_git_object: d8401b0d5ea1ecd27310590a7519223bc37f1152
   docs/Models/Components/SalesInvoiceVatMode.md:
     id: a994e173ad04
     last_write_checksum: sha1:dc5e843fdd691eac1a54abbc6f9be4f8e74c5a11
@@ -4100,8 +4100,8 @@ trackedFiles:
     pristine_git_object: 166d39820e9d3a631911112ebf43802d91e3daae
   src/Mollie/Models/Components/BalanceTransactionType.cs:
     id: 1ed8dea8b979
-    last_write_checksum: sha1:0499687d34425df08b1b04ed421a0509909158d0
-    pristine_git_object: 4288d3946276114aef828a8a0792a6503851f415
+    last_write_checksum: sha1:d2f1dd0138c8f9a18209364fcae0261acd624aac
+    pristine_git_object: 7703813af14a02d0744d0594576eadb1492c76e2
   src/Mollie/Models/Components/BalanceTransferCategory.cs:
     id: 3a0cd7a738f5
     last_write_checksum: sha1:24eb1d59d1b5fffe0ef295b6f939ac01f6fe5b05
@@ -5800,8 +5800,8 @@ trackedFiles:
     pristine_git_object: 44455135c99bf6376f8a98b20af41efe888fc4b8
   src/Mollie/Models/Components/SalesInvoiceStatusUpdate.cs:
     id: 697bc2ae0e65
-    last_write_checksum: sha1:fbb3c93983c32fe54f64bec85b9234dae5f0f2a5
-    pristine_git_object: 3abe3835f4b2949b723b9da05e3b0f8c403ba9b3
+    last_write_checksum: sha1:76b6612d1f095928b5b98af8e9f9acf7bf827b3f
+    pristine_git_object: 7fb18ccbd891520e990fcfeedb7c5983d36b1f0d
   src/Mollie/Models/Components/SalesInvoiceVatMode.cs:
     id: f0e1fdeefb32
     last_write_checksum: sha1:e26f58a2d47f0ce936dd1f2696211dde509e8572
@@ -7808,8 +7808,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:a3ccd612d0e4732683977dac470dfdeab4a2875b
-    pristine_git_object: 4df08eb38be9b7757b754011d100397564faff6e
+    last_write_checksum: sha1:b3e9489042d7c21ebaf24372ddc924666b152448
+    pristine_git_object: 171c2ee800b48cb33a919cb2e8188e49852f5682
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7848,8 +7848,8 @@ trackedFiles:
     pristine_git_object: c55c2bd2348515010203336dc14017a8e198a21e
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:63f98b2f7c3a4d7c3adfa218b03762bf90ce6c75
-    pristine_git_object: 5a29a81b9b10a1f487c65f8968902033bc3ec414
+    last_write_checksum: sha1:c8ade1254e279541868205a8757b387e5466453f
+    pristine_git_object: 06379aafe143f212f7cacaaba8c752f7c19bb733
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7884,8 +7884,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:d8de0978f9a088d79a4ee31a1072f385f4b69bef
-    pristine_git_object: 9ffe373894752ba33af12b84db3d7f0937dc3be9
+    last_write_checksum: sha1:d924beb994cd5b854da6eddb37bc6f7da81d5f8d
+    pristine_git_object: dae5b766495800fad0f08eae1e1ae3b62f8917cb
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -12308,6 +12308,7 @@ examples:
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
+releaseNotes: "## Csharp SDK Changes:\n* `Client.Balances.GetReport()`:  `response.totals.PendingBalance.Open.Subtotals[].SubTotals[].TransactionType` **Changed**\n* `Client.Balances.ListTransactions()`:  `response.Embedded.BalanceTransactions[].Type` **Changed**\n* `Client.SalesInvoices.Update()`: \n  *  `requestBody.Status.Enum(paymentReversed)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Mollie.sln
