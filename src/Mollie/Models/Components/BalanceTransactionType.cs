@@ -27,6 +27,7 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransactionType BalanceReserve = new BalanceTransactionType("balance-reserve");
         public static readonly BalanceTransactionType BalanceReserveReturn = new BalanceTransactionType("balance-reserve-return");
         public static readonly BalanceTransactionType BalanceTopup = new BalanceTransactionType("balance-topup");
+        public static readonly BalanceTransactionType BankChargedFailureFee = new BalanceTransactionType("bank-charged-failure-fee");
         public static readonly BalanceTransactionType CanceledTransfer = new BalanceTransactionType("canceled-transfer");
         public static readonly BalanceTransactionType Capture = new BalanceTransactionType("capture");
         public static readonly BalanceTransactionType CashCollateralIssuance = new BalanceTransactionType("cash-collateral-issuance");
@@ -35,6 +36,7 @@ namespace Mollie.Models.Components
         public static readonly BalanceTransactionType ChargebackCompensation = new BalanceTransactionType("chargeback-compensation");
         public static readonly BalanceTransactionType ChargebackReversal = new BalanceTransactionType("chargeback-reversal");
         public static readonly BalanceTransactionType FailedPayment = new BalanceTransactionType("failed-payment");
+        public static readonly BalanceTransactionType FailedPaymentFee = new BalanceTransactionType("failed-payment-fee");
         public static readonly BalanceTransactionType FailedPlatformSplitPayment = new BalanceTransactionType("failed-platform-split-payment");
         public static readonly BalanceTransactionType FailedSplitPaymentCompensation = new BalanceTransactionType("failed-split-payment-compensation");
         public static readonly BalanceTransactionType FeePrepayment = new BalanceTransactionType("fee-prepayment");
@@ -79,6 +81,7 @@ namespace Mollie.Models.Components
                 ["balance-reserve"] = BalanceReserve,
                 ["balance-reserve-return"] = BalanceReserveReturn,
                 ["balance-topup"] = BalanceTopup,
+                ["bank-charged-failure-fee"] = BankChargedFailureFee,
                 ["canceled-transfer"] = CanceledTransfer,
                 ["capture"] = Capture,
                 ["cash-collateral-issuance"] = CashCollateralIssuance,
@@ -87,6 +90,7 @@ namespace Mollie.Models.Components
                 ["chargeback-compensation"] = ChargebackCompensation,
                 ["chargeback-reversal"] = ChargebackReversal,
                 ["failed-payment"] = FailedPayment,
+                ["failed-payment-fee"] = FailedPaymentFee,
                 ["failed-platform-split-payment"] = FailedPlatformSplitPayment,
                 ["failed-split-payment-compensation"] = FailedSplitPaymentCompensation,
                 ["fee-prepayment"] = FeePrepayment,

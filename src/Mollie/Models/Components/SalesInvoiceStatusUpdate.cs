@@ -36,6 +36,8 @@ namespace Mollie.Models.Components
         Paid,
         [JsonProperty("cancelled")]
         Cancelled,
+        [JsonProperty("payment_reversed")]
+        PaymentReversed,
     }
 
     public static class SalesInvoiceStatusUpdateExtension
