@@ -28,4 +28,4 @@ var value = SalesInvoiceStatusUpdate.Draft;
 | `Issued`          | issued            |
 | `Paid`            | paid              |
 | `Cancelled`       | cancelled         |
-| `PaymentReversed` | payment_reversed  |
+| `PaymentReversed` | payment-reversed  |

@@ -29,7 +29,7 @@ namespace Mollie.Models.Components
         public static readonly SalesInvoiceStatusResponse PendingPayment = new SalesInvoiceStatusResponse("pending-payment");
         public static readonly SalesInvoiceStatusResponse Paid = new SalesInvoiceStatusResponse("paid");
         public static readonly SalesInvoiceStatusResponse Overdue = new SalesInvoiceStatusResponse("overdue");
-        public static readonly SalesInvoiceStatusResponse PaymentReversed = new SalesInvoiceStatusResponse("payment_reversed");
+        public static readonly SalesInvoiceStatusResponse PaymentReversed = new SalesInvoiceStatusResponse("payment-reversed");
         public static readonly SalesInvoiceStatusResponse Cancelled = new SalesInvoiceStatusResponse("cancelled");
         public static readonly SalesInvoiceStatusResponse Expired = new SalesInvoiceStatusResponse("expired");
         public static readonly SalesInvoiceStatusResponse Failed = new SalesInvoiceStatusResponse("failed");
@@ -43,7 +43,7 @@ namespace Mollie.Models.Components
                 ["pending-payment"] = PendingPayment,
                 ["paid"] = Paid,
                 ["overdue"] = Overdue,
-                ["payment_reversed"] = PaymentReversed,
+                ["payment-reversed"] = PaymentReversed,
                 ["cancelled"] = Cancelled,
                 ["expired"] = Expired,
                 ["failed"] = Failed
