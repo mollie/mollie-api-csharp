@@ -114,6 +114,10 @@ namespace Mollie.Models.Components
         UnmatchedCreditTransferReturnCompleted,
         [JsonProperty("unmatched-credit-transfer.return.failed")]
         UnmatchedCreditTransferReturnFailed,
+        [JsonProperty("report.completed")]
+        ReportCompleted,
+        [JsonProperty("report.failed")]
+        ReportFailed,
         [JsonProperty("*")]
         Wildcard,
     }

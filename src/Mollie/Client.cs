@@ -27,6 +27,8 @@ namespace Mollie
 
         public IBalances Balances { get; }
 
+        public IReports Reports { get; }
+
         public ISettlements Settlements { get; }
 
         public IInvoices Invoices { get; }
@@ -106,6 +108,10 @@ namespace Mollie
         /// The Balances sub-SDK.
         /// </summary>
         public IBalances Balances { get; private set; }
+        /// <summary>
+        /// The Reports sub-SDK.
+        /// </summary>
+        public IReports Reports { get; private set; }
         /// <summary>
         /// The Settlements sub-SDK.
         /// </summary>
@@ -247,6 +253,8 @@ namespace Mollie
             Oauth = new Oauth(SDKConfiguration);
 
             Balances = new Balances(SDKConfiguration);
+
+            Reports = new Reports(SDKConfiguration);
 
             Settlements = new Settlements(SDKConfiguration);
 
@@ -394,6 +402,8 @@ namespace Mollie
             Oauth = new Oauth(SDKConfiguration);
 
             Balances = new Balances(SDKConfiguration);
+
+            Reports = new Reports(SDKConfiguration);
 
             Settlements = new Settlements(SDKConfiguration);
 

@@ -37,7 +37,10 @@ namespace Mollie.Models.Requests
         public long Count { get; set; } = default!;
 
         /// <summary>
-        /// The service rates, further divided into `fixed` and `percentage` costs.
+        /// The service rates, further divided into `fixed` and `percentage` costs.<br/>
+        /// <br/>
+        /// For pass-through fees, which are charged by an external party rather than at an agreed Mollie<br/>
+        /// rate, both `fixed` and `percentage` are `null`.
         /// </summary>
         [JsonProperty("rate")]
         public GetOpenSettlementRate Rate { get; set; } = default!;

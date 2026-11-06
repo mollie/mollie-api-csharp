@@ -71,6 +71,8 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferMatchFailed = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.match.failed");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturnCompleted = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.return.completed");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturnFailed = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.return.failed");
+        public static readonly EntityWebhookEventWebhookEventTypes ReportCompleted = new EntityWebhookEventWebhookEventTypes("report.completed");
+        public static readonly EntityWebhookEventWebhookEventTypes ReportFailed = new EntityWebhookEventWebhookEventTypes("report.failed");
         public static readonly EntityWebhookEventWebhookEventTypes Wildcard = new EntityWebhookEventWebhookEventTypes("*");
 
         private static readonly Dictionary <string, EntityWebhookEventWebhookEventTypes> _knownValues =
@@ -123,6 +125,8 @@ namespace Mollie.Models.Components
                 ["unmatched-credit-transfer.match.failed"] = UnmatchedCreditTransferMatchFailed,
                 ["unmatched-credit-transfer.return.completed"] = UnmatchedCreditTransferReturnCompleted,
                 ["unmatched-credit-transfer.return.failed"] = UnmatchedCreditTransferReturnFailed,
+                ["report.completed"] = ReportCompleted,
+                ["report.failed"] = ReportFailed,
                 ["*"] = Wildcard
             };
 

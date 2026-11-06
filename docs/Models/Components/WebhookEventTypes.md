@@ -63,4 +63,6 @@ var value = WebhookEventTypes.PaymentPaid;
 | `UnmatchedCreditTransferMatchFailed`       | unmatched-credit-transfer.match.failed     |
 | `UnmatchedCreditTransferReturnCompleted`   | unmatched-credit-transfer.return.completed |
 | `UnmatchedCreditTransferReturnFailed`      | unmatched-credit-transfer.return.failed    |
+| `ReportCompleted`                          | report.completed                           |
+| `ReportFailed`                             | report.failed                              |
 | `Wildcard`                                 | *                                          |
