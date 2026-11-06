@@ -15,17 +15,20 @@ namespace Mollie.Models.Requests
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The service rates, further divided into `fixed` and `percentage` costs.
+    /// The service rates, further divided into `fixed` and `percentage` costs.<br/>
+    /// <br/>
+    /// For pass-through fees, which are charged by an external party rather than at an agreed Mollie<br/>
+    /// rate, both `fixed` and `percentage` are `null`.
     /// </summary>
     public class GetOpenSettlementRate
     {
         /// <summary>
         /// In v2 endpoints, monetary amounts are represented as objects with a `currency` and `value` field.
         /// </summary>
-        [JsonProperty("fixed")]
-        public Amount? Fixed { get; set; }
+        [JsonProperty("fixed", NullValueHandling = NullValueHandling.Include)]
+        public AmountNullable? Fixed { get; set; }
 
-        [JsonProperty("percentage")]
+        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Include)]
         public string? Percentage { get; set; }
     }
 }

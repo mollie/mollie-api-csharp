@@ -1,0 +1,11 @@
+# ReportStatusReason
+
+Present when `status` is `failed`. Explains what went wrong.
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            | Example                                                                                                |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Code`                                                                                                 | *string*                                                                                               | :heavy_check_mark:                                                                                     | A machine-readable code for the failure reason.                                                        | generation_failed                                                                                      |
+| `Message`                                                                                              | *string*                                                                                               | :heavy_check_mark:                                                                                     | A human-readable explanation of why the report failed.                                                 | Something went wrong while generating the report. Try again, or contact support if it keeps happening. |

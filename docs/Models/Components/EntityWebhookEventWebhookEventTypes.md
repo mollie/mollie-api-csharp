@@ -66,4 +66,6 @@ var custom = EntityWebhookEventWebhookEventTypes.Of("custom_value");
 | `UnmatchedCreditTransferMatchFailed`       | unmatched-credit-transfer.match.failed     |
 | `UnmatchedCreditTransferReturnCompleted`   | unmatched-credit-transfer.return.completed |
 | `UnmatchedCreditTransferReturnFailed`      | unmatched-credit-transfer.return.failed    |
+| `ReportCompleted`                          | report.completed                           |
+| `ReportFailed`                             | report.failed                              |
 | `Wildcard`                                 | *                                          |
