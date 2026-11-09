@@ -18,7 +18,9 @@ namespace Mollie
     using Mollie.Utils.Retries;
     using Newtonsoft.Json;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading;
@@ -167,7 +169,7 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<EnableMethodResponse> EnableAsync(
             string profileId,
-            MethodEnum? methodId = null,
+            MethodId? methodId = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -197,7 +199,7 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<DisableMethodResponse> DisableAsync(
             string profileId,
-            MethodEnum? methodId = null,
+            MethodId? methodId = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -903,7 +905,7 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<EnableMethodResponse> EnableAsync(
             string profileId,
-            MethodEnum? methodId = null,
+            MethodId? methodId = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -1098,7 +1100,7 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<DisableMethodResponse> DisableAsync(
             string profileId,
-            MethodEnum? methodId = null,
+            MethodId? methodId = null,
             string? idempotencyKey = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null

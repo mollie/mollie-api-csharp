@@ -46,6 +46,7 @@ var custom = ListEntityMethodId.Of("custom_value");
 | `Paybybank`    | paybybank      |
 | `Paypal`       | paypal         |
 | `Paysafecard`  | paysafecard    |
+| `Pointofsale`  | pointofsale    |
 | `Przelewy24`   | przelewy24     |
 | `Riverty`      | riverty        |
 | `Satispay`     | satispay       |

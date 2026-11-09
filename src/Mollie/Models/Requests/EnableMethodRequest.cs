@@ -12,6 +12,11 @@ namespace Mollie.Models.Requests
 {
     using Mollie.Models.Components;
     using Mollie.Utils;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class EnableMethodRequest
     {
@@ -25,7 +30,7 @@ namespace Mollie.Models.Requests
         /// Provide the ID of the related payment method.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=methodId")]
-        public MethodEnum? MethodId { get; set; }
+        public MethodId? MethodId { get; set; }
 
         /// <summary>
         /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
