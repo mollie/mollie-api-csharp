@@ -341,7 +341,7 @@ var sdk = new Client(
 );
 
 GetMethodRequest req = new GetMethodRequest() {
-    MethodId = MethodEnum.Ideal,
+    MethodId = MethodId.Ideal,
     Locale = Locale.EnUS,
     Currency = "EUR",
     Include = "issuers",
@@ -397,7 +397,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Methods.EnableAsync(
     profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodEnum.Ideal,
+    methodId: MethodId.Ideal,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -416,7 +416,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Methods.EnableAsync(
     profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodEnum.Ideal,
+    methodId: MethodId.Ideal,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -435,7 +435,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Methods.EnableAsync(
     profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodEnum.Ideal,
+    methodId: MethodId.Ideal,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -447,7 +447,7 @@ var res = await sdk.Methods.EnableAsync(
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
-| `MethodId`                                                                       | [MethodEnum](../../Models/Components/MethodEnum.md)                              | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
+| `MethodId`                                                                       | [MethodId](../../Models/Components/MethodId.md)                                  | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response
@@ -481,7 +481,7 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Methods.DisableAsync(
     profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodEnum.Ideal,
+    methodId: MethodId.Ideal,
     idempotencyKey: "123e4567-e89b-12d3-a456-426"
 );
 
@@ -493,7 +493,7 @@ var res = await sdk.Methods.DisableAsync(
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
-| `MethodId`                                                                       | [MethodEnum](../../Models/Components/MethodEnum.md)                              | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
+| `MethodId`                                                                       | [MethodId](../../Models/Components/MethodId.md)                                  | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
 | `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
 
 ### Response

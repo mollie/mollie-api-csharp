@@ -10,7 +10,6 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
-    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
 
@@ -64,97 +63,52 @@ namespace Mollie.Models.Components
     /// </summary>
     public class Context
     {
-        [JsonProperty("payment")]
-        public EntityBalanceTransactionPayment? Payment { get; set; } = null;
+        [JsonProperty("paymentId")]
+        public string? PaymentId { get; set; }
 
-        [JsonProperty("capture")]
-        public Capture? Capture { get; set; } = null;
+        [JsonProperty("paymentDescription")]
+        public string? PaymentDescription { get; set; }
 
-        [JsonProperty("capture-commision")]
-        public CaptureCommision? CaptureCommision { get; set; } = null;
+        [JsonProperty("captureId")]
+        public string? CaptureId { get; set; }
 
-        [JsonProperty("capture-rolling-reserve-release")]
-        public CaptureRollingReserveRelease? CaptureRollingReserveRelease { get; set; } = null;
+        [JsonProperty("captureDescription")]
+        public string? CaptureDescription { get; set; }
 
-        [JsonProperty("unauthorized-direct-debit")]
-        public UnauthorizedDirectDebit? UnauthorizedDirectDebit { get; set; } = null;
+        [JsonProperty("refundId")]
+        public string? RefundId { get; set; }
 
-        [JsonProperty("failed-payment")]
-        public FailedPayment? FailedPayment { get; set; } = null;
+        [JsonProperty("refundDescription")]
+        public string? RefundDescription { get; set; }
 
-        [JsonProperty("refund")]
-        public Refund? Refund { get; set; } = null;
+        [JsonProperty("chargebackId")]
+        public string? ChargebackId { get; set; }
 
-        [JsonProperty("refund-compensation")]
-        public RefundCompensation? RefundCompensation { get; set; } = null;
+        [JsonProperty("chargebackDescription")]
+        public string? ChargebackDescription { get; set; }
 
-        [JsonProperty("returned-refund")]
-        public ReturnedRefund? ReturnedRefund { get; set; } = null;
+        [JsonProperty("transferId")]
+        public string? TransferId { get; set; }
 
-        [JsonProperty("returned-refund-compensation")]
-        public ReturnedRefundCompensation? ReturnedRefundCompensation { get; set; } = null;
+        [JsonProperty("settlementId")]
+        public string? SettlementId { get; set; }
 
-        [JsonProperty("chargeback")]
-        public Chargeback? Chargeback { get; set; } = null;
+        [JsonProperty("invoiceId")]
+        public string? InvoiceId { get; set; }
 
-        [JsonProperty("chargeback-reversal")]
-        public ChargebackReversal? ChargebackReversal { get; set; } = null;
+        [JsonProperty("payingOwner")]
+        public string? PayingOwner { get; set; }
 
-        [JsonProperty("chargeback-compensation")]
-        public ChargebackCompensation? ChargebackCompensation { get; set; } = null;
+        [JsonProperty("paymentOwner")]
+        public string? PaymentOwner { get; set; }
 
-        [JsonProperty("reversed-chargeback-compensation")]
-        public ReversedChargebackCompensation? ReversedChargebackCompensation { get; set; } = null;
+        [JsonProperty("organizationId")]
+        public string? OrganizationId { get; set; }
 
-        [JsonProperty("outgoing-transfer")]
-        public OutgoingTransfer? OutgoingTransfer { get; set; } = null;
+        [JsonProperty("feeType")]
+        public string? FeeType { get; set; }
 
-        [JsonProperty("canceled-outgoing-transfer")]
-        public CanceledOutgoingTransfer? CanceledOutgoingTransfer { get; set; } = null;
-
-        [JsonProperty("returned-transfer")]
-        public ReturnedTransfer? ReturnedTransfer { get; set; } = null;
-
-        [JsonProperty("invoice-compensation")]
-        public InvoiceCompensation? InvoiceCompensation { get; set; } = null;
-
-        [JsonProperty("application-fee")]
-        public EntityBalanceTransactionApplicationFee? ApplicationFee { get; set; } = null;
-
-        [JsonProperty("split-payment")]
-        public SplitPayment? SplitPayment { get; set; } = null;
-
-        [JsonProperty("platform-payment-refund")]
-        public PlatformPaymentRefund? PlatformPaymentRefund { get; set; } = null;
-
-        [JsonProperty("returned-platform-payment-refund")]
-        public ReturnedPlatformPaymentRefund? ReturnedPlatformPaymentRefund { get; set; } = null;
-
-        [JsonProperty("platform-payment-chargeback")]
-        public PlatformPaymentChargeback? PlatformPaymentChargeback { get; set; } = null;
-
-        [JsonProperty("reversed-platform-payment-chargeback")]
-        public ReversedPlatformPaymentChargeback? ReversedPlatformPaymentChargeback { get; set; } = null;
-
-        [JsonProperty("payment-commission")]
-        public PaymentCommission? PaymentCommission { get; set; } = null;
-
-        [JsonProperty("reimbursement-fee")]
-        public ReimbursementFee? ReimbursementFee { get; set; } = null;
-
-        [JsonProperty("failed-payment-fee")]
-        public FailedPaymentFee? FailedPaymentFee { get; set; } = null;
-
-        [JsonProperty("payment-fee")]
-        public PaymentFee? PaymentFee { get; set; } = null;
-
-        [JsonProperty("managed-fee")]
-        public ManagedFee? ManagedFee { get; set; } = null;
-
-        [JsonProperty("returned-managed-fee")]
-        public ReturnedManagedFee? ReturnedManagedFee { get; set; } = null;
-
-        [JsonProperty("post-payment-split-payment")]
-        public PostPaymentSplitPayment? PostPaymentSplitPayment { get; set; } = null;
+        [JsonProperty("feeId")]
+        public string? FeeId { get; set; }
     }
 }

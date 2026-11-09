@@ -32,7 +32,8 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in private beta, and the final specification may still change. To<br/>
+        /// &gt; join the beta program, reach out to <a href="mailto:partners@mollie.com">partners@mollie.com</a>.<br/>
         /// <br/>
         /// Create a report. Mollie generates it in the background, so you get a `pending` status back right away.<br/>
         /// <br/>
@@ -71,7 +72,8 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in private beta, and the final specification may still change. To<br/>
+        /// &gt; join the beta program, reach out to <a href="mailto:partners@mollie.com">partners@mollie.com</a>.<br/>
         /// <br/>
         /// Retrieve a single report by its ID. Poll this to check on a report you created, and to grab a download<br/>
         /// link once it's ready.<br/>
@@ -124,7 +126,8 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in private beta, and the final specification may still change. To<br/>
+        /// &gt; join the beta program, reach out to <a href="mailto:partners@mollie.com">partners@mollie.com</a>.<br/>
         /// <br/>
         /// Create a report. Mollie generates it in the background, so you get a `pending` status back right away.<br/>
         /// <br/>
@@ -314,7 +317,8 @@ namespace Mollie
         /// <remarks>
         /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// &gt; This feature is currently in private beta, and the final specification may still change. To<br/>
+        /// &gt; join the beta program, reach out to <a href="mailto:partners@mollie.com">partners@mollie.com</a>.<br/>
         /// <br/>
         /// Retrieve a single report by its ID. Poll this to check on a report you created, and to grab a download<br/>
         /// link once it's ready.<br/>

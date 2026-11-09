@@ -39,6 +39,7 @@ namespace Mollie.Models.Components
         public static readonly EntityMethodGetId Directdebit = new EntityMethodGetId("directdebit");
         public static readonly EntityMethodGetId Eps = new EntityMethodGetId("eps");
         public static readonly EntityMethodGetId Giftcard = new EntityMethodGetId("giftcard");
+        public static readonly EntityMethodGetId Googlepay = new EntityMethodGetId("googlepay");
         public static readonly EntityMethodGetId Ideal = new EntityMethodGetId("ideal");
         public static readonly EntityMethodGetId In3 = new EntityMethodGetId("in3");
         public static readonly EntityMethodGetId Kbc = new EntityMethodGetId("kbc");
@@ -60,10 +61,6 @@ namespace Mollie.Models.Components
         public static readonly EntityMethodGetId Vipps = new EntityMethodGetId("vipps");
         public static readonly EntityMethodGetId Voucher = new EntityMethodGetId("voucher");
         public static readonly EntityMethodGetId Wero = new EntityMethodGetId("wero");
-        public static readonly EntityMethodGetId Klarnapaylater = new EntityMethodGetId("klarnapaylater");
-        public static readonly EntityMethodGetId Klarnapaynow = new EntityMethodGetId("klarnapaynow");
-        public static readonly EntityMethodGetId Klarnasliceit = new EntityMethodGetId("klarnasliceit");
-        public static readonly EntityMethodGetId Payconiq = new EntityMethodGetId("payconiq");
 
         private static readonly Dictionary <string, EntityMethodGetId> _knownValues =
             new Dictionary <string, EntityMethodGetId> ()
@@ -83,6 +80,7 @@ namespace Mollie.Models.Components
                 ["directdebit"] = Directdebit,
                 ["eps"] = Eps,
                 ["giftcard"] = Giftcard,
+                ["googlepay"] = Googlepay,
                 ["ideal"] = Ideal,
                 ["in3"] = In3,
                 ["kbc"] = Kbc,
@@ -103,11 +101,7 @@ namespace Mollie.Models.Components
                 ["twint"] = Twint,
                 ["vipps"] = Vipps,
                 ["voucher"] = Voucher,
-                ["wero"] = Wero,
-                ["klarnapaylater"] = Klarnapaylater,
-                ["klarnapaynow"] = Klarnapaynow,
-                ["klarnasliceit"] = Klarnasliceit,
-                ["payconiq"] = Payconiq
+                ["wero"] = Wero
             };
 
         private static readonly ConcurrentDictionary<string, EntityMethodGetId> _values =

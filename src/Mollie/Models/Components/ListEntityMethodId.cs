@@ -51,6 +51,7 @@ namespace Mollie.Models.Components
         public static readonly ListEntityMethodId Paybybank = new ListEntityMethodId("paybybank");
         public static readonly ListEntityMethodId Paypal = new ListEntityMethodId("paypal");
         public static readonly ListEntityMethodId Paysafecard = new ListEntityMethodId("paysafecard");
+        public static readonly ListEntityMethodId Pointofsale = new ListEntityMethodId("pointofsale");
         public static readonly ListEntityMethodId Przelewy24 = new ListEntityMethodId("przelewy24");
         public static readonly ListEntityMethodId Riverty = new ListEntityMethodId("riverty");
         public static readonly ListEntityMethodId Satispay = new ListEntityMethodId("satispay");
@@ -91,6 +92,7 @@ namespace Mollie.Models.Components
                 ["paybybank"] = Paybybank,
                 ["paypal"] = Paypal,
                 ["paysafecard"] = Paysafecard,
+                ["pointofsale"] = Pointofsale,
                 ["przelewy24"] = Przelewy24,
                 ["riverty"] = Riverty,
                 ["satispay"] = Satispay,
