@@ -32,10 +32,11 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 1.4.23
+  version: 1.4.24
   additionalDependencies: []
   author: Speakeasy
   baseErrorName: BaseException
+  bodyVariantOverloads: false
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIException
   disableNamespacePascalCasingApr2024: true
@@ -65,11 +66,13 @@ csharp:
   outputModelSuffix: output
   packageName: Mollie
   packageTags: sdk api client
+  partialTypes: false
   presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   schemaValidation: strict
   sourceDirectory: src
   targetFramework: dotnetVersion
+  unionImplicitConversions: false
   unionStrategy: left-to-right
   useNodatime: true

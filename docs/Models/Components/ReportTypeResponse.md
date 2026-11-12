@@ -19,4 +19,4 @@ var custom = ReportTypeResponse.Of("custom_value");
 
 | Name                | Value               |
 | ------------------- | ------------------- |
-| `TransactionMargin` | transaction_margin  |
+| `TransactionMargin` | transaction-margin  |

@@ -20,7 +20,7 @@ namespace Mollie.Models.Components
     /// </summary>
     public enum ReportType
     {
-        [JsonProperty("transaction_margin")]
+        [JsonProperty("transaction-margin")]
         TransactionMargin,
     }
 

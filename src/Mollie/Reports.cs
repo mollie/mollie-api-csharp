@@ -39,11 +39,6 @@ namespace Mollie
         /// <br/>
         /// Poll <a href="get-report">Get report</a> to check on progress, and grab a download link once it's ready.<br/>
         /// <br/>
-        /// This needs an organization access token. A token scoped to a single website profile can't be used,<br/>
-        /// since report data spans the whole organization.<br/>
-        /// <br/>
-        /// Test mode credentials are rejected, since report data has no live/test distinction.<br/>
-        /// <br/>
         /// Creating a report with the exact same parameters while one is already pending or completed doesn't create<br/>
         /// a new one. You get the existing report back instead, whatever status it currently has.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
@@ -81,11 +76,6 @@ namespace Mollie
         /// The download link is pre-signed and freshly generated on every call, and expires 15 minutes after you get<br/>
         /// it. If it expires before you download the file, just call this endpoint again for a new one. Expiry of<br/>
         /// the link doesn't affect the report itself.<br/>
-        /// <br/>
-        /// A report that belongs to another organization gets a `404`, same as one that doesn't exist. The same goes<br/>
-        /// for a credential scoped to a single website profile, or a test mode credential. Reports are<br/>
-        /// organization-wide with no live/test distinction, so neither can ever own a real report. That keeps the<br/>
-        /// rule simple: any credential that can't own this report gets a `404`, and we never leak whether it exists.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="reportId">Provide the ID of the related report.</param>
@@ -97,7 +87,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues, or was made with a test mode credential. Thrown when the API returns a 400, 403, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetReportResponse> GetAsync(
             string reportId,
@@ -132,11 +122,6 @@ namespace Mollie
         /// Create a report. Mollie generates it in the background, so you get a `pending` status back right away.<br/>
         /// <br/>
         /// Poll <a href="get-report">Get report</a> to check on progress, and grab a download link once it's ready.<br/>
-        /// <br/>
-        /// This needs an organization access token. A token scoped to a single website profile can't be used,<br/>
-        /// since report data spans the whole organization.<br/>
-        /// <br/>
-        /// Test mode credentials are rejected, since report data has no live/test distinction.<br/>
         /// <br/>
         /// Creating a report with the exact same parameters while one is already pending or completed doesn't create<br/>
         /// a new one. You get the existing report back instead, whatever status it currently has.<br/>
@@ -326,11 +311,6 @@ namespace Mollie
         /// The download link is pre-signed and freshly generated on every call, and expires 15 minutes after you get<br/>
         /// it. If it expires before you download the file, just call this endpoint again for a new one. Expiry of<br/>
         /// the link doesn't affect the report itself.<br/>
-        /// <br/>
-        /// A report that belongs to another organization gets a `404`, same as one that doesn't exist. The same goes<br/>
-        /// for a credential scoped to a single website profile, or a test mode credential. Reports are<br/>
-        /// organization-wide with no live/test distinction, so neither can ever own a real report. That keeps the<br/>
-        /// rule simple: any credential that can't own this report gets a `404`, and we never leak whether it exists.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="reportId">Provide the ID of the related report.</param>
@@ -342,7 +322,7 @@ namespace Mollie
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
+        /// <exception cref="ErrorResponse">The request contains issues, or was made with a test mode credential. Thrown when the API returns a 400, 403, 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetReportResponse> GetAsync(
             string reportId,
@@ -475,7 +455,7 @@ namespace Mollie
 
                 throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 429}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
                 {

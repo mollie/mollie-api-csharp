@@ -16,4 +16,4 @@ var value = ReportType.TransactionMargin;
 
 | Name                | Value               |
 | ------------------- | ------------------- |
-| `TransactionMargin` | transaction_margin  |
+| `TransactionMargin` | transaction-margin  |
