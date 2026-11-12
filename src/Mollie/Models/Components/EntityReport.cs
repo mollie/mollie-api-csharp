@@ -39,16 +39,16 @@ namespace Mollie.Models.Components
         public ReportTypeResponse ReportType { get; set; } = default!;
 
         /// <summary>
-        /// The start date of the report period. Set for date-range report types, `null` otherwise.
+        /// The start date of the report period. Only present for date-range report types.
         /// </summary>
         [JsonProperty("fromDate")]
-        public LocalDate? FromDate { get; set; } = null;
+        public LocalDate? FromDate { get; set; }
 
         /// <summary>
-        /// The end date of the report period. Set for date-range report types, `null` otherwise.
+        /// The end date of the report period. Only present for date-range report types.
         /// </summary>
         [JsonProperty("untilDate")]
-        public LocalDate? UntilDate { get; set; } = null;
+        public LocalDate? UntilDate { get; set; }
 
         [JsonProperty("status")]
         public EntityReportStatus Status { get; set; } = default!;
@@ -57,7 +57,7 @@ namespace Mollie.Models.Components
         /// Present when `status` is `failed`. Explains what went wrong.
         /// </summary>
         [JsonProperty("statusReason")]
-        public ReportStatusReason? StatusReason { get; set; } = null;
+        public ReportStatusReason? StatusReason { get; set; }
 
         /// <summary>
         /// The entity's date and time of creation, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
@@ -70,14 +70,14 @@ namespace Mollie.Models.Components
         /// format. Only present once `status` is `completed`.
         /// </summary>
         [JsonProperty("completedAt")]
-        public DateTime? CompletedAt { get; set; } = null;
+        public DateTime? CompletedAt { get; set; }
 
         /// <summary>
         /// The date and time the report failed to generate, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
         /// format. Only present once `status` is `failed`.
         /// </summary>
         [JsonProperty("failedAt")]
-        public DateTime? FailedAt { get; set; } = null;
+        public DateTime? FailedAt { get; set; }
 
         /// <summary>
         /// The date and time the `_links.download` link expires, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
@@ -85,7 +85,7 @@ namespace Mollie.Models.Components
         /// again once this one expires.
         /// </summary>
         [JsonProperty("downloadExpiresAt")]
-        public DateTime? DownloadExpiresAt { get; set; } = null;
+        public DateTime? DownloadExpiresAt { get; set; }
 
         /// <summary>
         /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.

@@ -10,8 +10,13 @@
 #nullable enable
 namespace Mollie.Models.Components
 {
+    using Mollie.Models.Components;
     using Mollie.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Present when `status` is `failed`. Explains what went wrong.
@@ -22,7 +27,7 @@ namespace Mollie.Models.Components
         /// A machine-readable code for the failure reason.
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; set; } = default!;
+        public ReportStatusReasonCode Code { get; set; } = default!;
 
         /// <summary>
         /// A human-readable explanation of why the report failed.

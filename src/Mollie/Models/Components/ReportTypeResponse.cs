@@ -24,12 +24,12 @@ namespace Mollie.Models.Components
     [JsonConverter(typeof(OpenEnumConverter))]
     public class ReportTypeResponse : IEquatable<ReportTypeResponse>, IOpenEnum<string>
     {
-        public static readonly ReportTypeResponse TransactionMargin = new ReportTypeResponse("transaction_margin");
+        public static readonly ReportTypeResponse TransactionMargin = new ReportTypeResponse("transaction-margin");
 
         private static readonly Dictionary <string, ReportTypeResponse> _knownValues =
             new Dictionary <string, ReportTypeResponse> ()
             {
-                ["transaction_margin"] = TransactionMargin
+                ["transaction-margin"] = TransactionMargin
             };
 
         private static readonly ConcurrentDictionary<string, ReportTypeResponse> _values =
