@@ -16,8 +16,8 @@ var custom = ReportStatusReasonCode.Of("custom_value");
 
 ## Values
 
-| Name                     | Value                    |
-| ------------------------ | ------------------------ |
-| `GenerationFailed`       | generation-failed        |
-| `EmptyReport`            | empty-report             |
-| `ReportValidationFailed` | report-validation-failed |
+| Name               | Value              |
+| ------------------ | ------------------ |
+| `GenerationFailed` | generation-failed  |
+| `ValidationFailed` | validation-failed  |
+| `EmptyReport`      | empty-report       |

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 1a7966a4abdf5a4cd409a0cf33a7d591
+  docChecksum: d8989d7bde105940e729f37baf040120
   docVersion: 1.0.0
   speakeasyVersion: 1.808.1
   generationVersion: 2.960.8
-  releaseVersion: 1.4.24
-  configChecksum: aad10bf4a94e6c824f452d1c996c6d49
+  releaseVersion: 1.4.25
+  configChecksum: d5be39cde8c69c7e2b8325dc1ca06d7d
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 61042bde-3306-447c-b91b-bb88293095d8
-  pristine_commit_hash: d92792d76dfd13bb7f3188014900631aa9be7898
-  pristine_tree_hash: 80b444919e32021c690f34945a000eb7dd86fd2e
+  generation_id: 7c843f7e-02a0-4cdf-b275-2990e7f6cba1
+  pristine_commit_hash: efd658dd30a8c9e861d01a71f2c6546a5e7a2d70
+  pristine_tree_hash: 02bb84212cedc53475544121252d82699a99bd2f
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -592,8 +592,8 @@ trackedFiles:
     pristine_git_object: 45b7ea63f8b85d649066efe63499fc3df03a6f76
   docs/Models/Components/EntityReport.md:
     id: 11b2eb99c262
-    last_write_checksum: sha1:49ad2f3ee0184312b8320b67accf3d140430f522
-    pristine_git_object: e1eb6d28ec8bbf4e77d5cd5da9ea5452132463eb
+    last_write_checksum: sha1:da1e7fd87dfbc78a55cf753371f28c81f572f5a6
+    pristine_git_object: 5d7ce74d7e4b2be55b9b27b70d389e669ca5a7ce
   docs/Models/Components/EntityReportLinks.md:
     id: 15054e0117e4
     last_write_checksum: sha1:e5bc836c011967c8b0c76b55d0b16a36a71aacaa
@@ -1404,8 +1404,8 @@ trackedFiles:
     pristine_git_object: fe2453cdb63aa057df5107c6c6954214465964e3
   docs/Models/Components/PaymentRequest.md:
     id: a175dcb2c335
-    last_write_checksum: sha1:5a8e59dea38082215e13dbaf95c47d27c82449f0
-    pristine_git_object: d2a90cadc87eea049710a3b8bdd3b26db67e84ca
+    last_write_checksum: sha1:1e98981a6d1dd8bd31f8e956c4b9b6d0b70a36b2
+    pristine_git_object: 823a98910e102ebd127ed3a2ad26a31df407bfd6
   docs/Models/Components/PaymentRequestApplicationFee.md:
     id: 7672cf334072
     last_write_checksum: sha1:5ac83b8ce2afb4637ba9ea75ec424bbd4c68d4f2
@@ -1572,8 +1572,8 @@ trackedFiles:
     pristine_git_object: 29a9b4afb2f014068a814c5566b3c72a26cc905b
   docs/Models/Components/ReportStatusReasonCode.md:
     id: cb95609ed7c5
-    last_write_checksum: sha1:87e07676af862edfa7cb13756529fe729b8a307f
-    pristine_git_object: 8f1e9cea6d81c98bf7e23af70c9400733d2c244e
+    last_write_checksum: sha1:850ce6bd327524595277a2d4245f1a078a78fbfb
+    pristine_git_object: 6644a23fd2e9a93c4e7a7946438b41b0c1f271ed
   docs/Models/Components/ReportType.md:
     id: ac974f34db52
     last_write_checksum: sha1:a90d3014d17bcebd9cbf7515a86ca8fa9c9684f6
@@ -4500,8 +4500,8 @@ trackedFiles:
     pristine_git_object: fcd3fb235d14920f275c23dcabd49a9cad79e5c0
   src/Mollie/Models/Components/EntityReport.cs:
     id: 2f3fe3fc11b5
-    last_write_checksum: sha1:88cd7aa1dde0ba7f733fb23d4a2254c78c62c0a4
-    pristine_git_object: 390d60cb85f1d616c7f5a1940b05e63581918fc5
+    last_write_checksum: sha1:d45006b6336f96334b53b1ca98df681f2a1b53d2
+    pristine_git_object: e762ce14dc42b7915f426361d7c6558b58b2326b
   src/Mollie/Models/Components/EntityReportLinks.cs:
     id: 41e4e55bbd84
     last_write_checksum: sha1:fffea90e1277b37f9ae718a0faf201aca3a442f9
@@ -5312,8 +5312,8 @@ trackedFiles:
     pristine_git_object: 945dc6610783e2f2b1193333d50ee50a1db13285
   src/Mollie/Models/Components/PaymentRequest.cs:
     id: 52fea74f3421
-    last_write_checksum: sha1:95a58ba77fb17360c144849411672eac7694292b
-    pristine_git_object: 0e7e6200c9c4e87c3b60f058a0ff53f4c2125f84
+    last_write_checksum: sha1:9f41bbe78a91ea31bc3de360c5f4c0d53fbd00fe
+    pristine_git_object: 324b13d2a4b1246fc8de2f2b8e04548ebc7b140d
   src/Mollie/Models/Components/PaymentRequestApplicationFee.cs:
     id: 90dd75733e72
     last_write_checksum: sha1:f0db2c782753aed2a2b3ec7970984cfd7394842d
@@ -5480,8 +5480,8 @@ trackedFiles:
     pristine_git_object: 204ff56958c5753d1fb79ad4b7927e8be0c45f3f
   src/Mollie/Models/Components/ReportStatusReasonCode.cs:
     id: 62802bc95bd4
-    last_write_checksum: sha1:04edbea819430fc67ac86ee5dd690b085df1ab14
-    pristine_git_object: f8ac820e19c3da7f6368313098d67d7330322b60
+    last_write_checksum: sha1:3388c6d1a23cf0a1f36c0d615eecef514da5f632
+    pristine_git_object: f06d24cde7eb8a2e667c6a85e00d7dc81800b30c
   src/Mollie/Models/Components/ReportType.cs:
     id: 0a31b9eaba87
     last_write_checksum: sha1:603f74f43b5d33fe183ad2fb404c0a414360e689
@@ -7668,8 +7668,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:9ec2878b476dd091e0b87a1e12afda2915724db8
-    pristine_git_object: 4d9fc60535801d7bec828096b15cace8d3145c74
+    last_write_checksum: sha1:cc5da18f0d072ea89fa6f91f56d40512f0dfc138
+    pristine_git_object: 9d0e2f405cdd67eda530608d78a0604c8fc646d0
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7712,8 +7712,8 @@ trackedFiles:
     pristine_git_object: c90e7bb2b732582a94728604f73158bae7116bcb
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:ba1ac67f89f4fed0fe22d5b2e3107769534f443d
-    pristine_git_object: 9082cf8364f15b408acc39bcf7d8431b14a1fbe1
+    last_write_checksum: sha1:96a075f066d5ef7e81cbf0302858d215da5e022c
+    pristine_git_object: cb6a697d1f0b4bbad0eaf2021a0da34f24f2acac
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:55a4e20b798c4ceead2d9b333a0a595476a88938
@@ -7748,8 +7748,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:49720298493ffa6625926d09e1140504d1504519
-    pristine_git_object: a2f62eb29f6b41f009e4fa3ed792b7bf6cc3e952
+    last_write_checksum: sha1:b2524316c76e5e1618f13785b2f89b33180c5eb3
+    pristine_git_object: a3c091f10968527b438949155ff8eeadd03d1e92
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
@@ -12217,13 +12217,15 @@ examples:
           idempotency-key: "123e4567-e89b-12d3-a456-426"
       responses:
         "200":
-          application/hal+json: {"resource": "report", "id": "rpt_XRAG3v9EUyCDcX99pJ2Vc", "reportType": "transaction-margin", "fromDate": "2026-08-01", "untilDate": "2026-08-31", "status": "completed", "statusReason": {"code": "report-validation-failed", "message": "Something went wrong while generating the report. Try again, or contact support if it keeps happening."}, "createdAt": "2024-03-20T09:13:37+00:00", "completedAt": "2026-09-01T09:01:12+00:00", "failedAt": "2026-09-01T09:03:00+00:00", "downloadExpiresAt": "2026-09-01T09:16:12+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "download": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
+          application/hal+json: {"resource": "report", "id": "rpt_XRAG3v9EUyCDcX99pJ2Vc", "reportType": "transaction-margin", "fromDate": "2026-08-01", "untilDate": "2026-08-31", "status": "completed", "statusReason": {"code": "empty-report", "message": "Something went wrong while generating the report. Try again, or contact support if it keeps happening."}, "createdAt": "2024-03-20T09:13:37+00:00", "completedAt": "2026-09-01T09:01:12+00:00", "failedAt": "2026-09-01T09:03:00+00:00", "downloadExpiresAt": "2026-09-01T09:16:12+00:00", "_links": {"self": {"href": "https://...", "type": "application/hal+json"}, "download": {"href": "https://...", "type": "application/hal+json"}, "documentation": {"href": "https://...", "type": "application/hal+json"}}}
         "404":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
         "400":
           application/hal+json: {"status": 404, "title": "Not Found", "detail": "The resource does not exist", "field": "description", "_links": {"documentation": {"href": "https://docs.mollie.com/errors", "type": "text/html"}}}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Client.Reports.Create()`: \n  *  `request.createReportRequest.ReportType` **Changed** (Breaking ⚠️)\n* `Client.Reports.Get()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `Client.Reports.Get()`:  `response.statusReason.Code` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - Mollie.sln

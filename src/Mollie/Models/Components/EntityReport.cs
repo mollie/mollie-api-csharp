@@ -67,22 +67,21 @@ namespace Mollie.Models.Components
 
         /// <summary>
         /// The date and time the report finished generating, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
-        /// format. Only present once `status` is `completed`.
+        /// format. Only present when `status` is `completed`.
         /// </summary>
         [JsonProperty("completedAt")]
         public DateTime? CompletedAt { get; set; }
 
         /// <summary>
         /// The date and time the report failed to generate, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
-        /// format. Only present once `status` is `failed`.
+        /// format. Only present when `status` is `failed`.
         /// </summary>
         [JsonProperty("failedAt")]
         public DateTime? FailedAt { get; set; }
 
         /// <summary>
         /// The date and time the `_links.download` link expires, in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
-        /// format. We issue a fresh link and expiry on every call to <a href="get-report">Get report</a>, so just call it<br/>
-        /// again once this one expires.
+        /// format. Only present when `status` is `completed`.
         /// </summary>
         [JsonProperty("downloadExpiresAt")]
         public DateTime? DownloadExpiresAt { get; set; }
