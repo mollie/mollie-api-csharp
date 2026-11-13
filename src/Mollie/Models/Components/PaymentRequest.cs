@@ -321,8 +321,7 @@ namespace Mollie.Models.Components
         public string? GooglePayPaymentToken { get; set; }
 
         /// <summary>
-        /// The card token you received from the card component of Mollie Components. The token represents the customer's<br/>
-        /// card information needed to complete the payment.
+        /// Number of the voucher.
         /// </summary>
         [JsonProperty("voucherNumber")]
         public string? VoucherNumber { get; set; }

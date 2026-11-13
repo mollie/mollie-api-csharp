@@ -24,15 +24,15 @@ namespace Mollie.Models.Components
     public class ReportStatusReasonCode : IEquatable<ReportStatusReasonCode>, IOpenEnum<string>
     {
         public static readonly ReportStatusReasonCode GenerationFailed = new ReportStatusReasonCode("generation-failed");
+        public static readonly ReportStatusReasonCode ValidationFailed = new ReportStatusReasonCode("validation-failed");
         public static readonly ReportStatusReasonCode EmptyReport = new ReportStatusReasonCode("empty-report");
-        public static readonly ReportStatusReasonCode ReportValidationFailed = new ReportStatusReasonCode("report-validation-failed");
 
         private static readonly Dictionary <string, ReportStatusReasonCode> _knownValues =
             new Dictionary <string, ReportStatusReasonCode> ()
             {
                 ["generation-failed"] = GenerationFailed,
-                ["empty-report"] = EmptyReport,
-                ["report-validation-failed"] = ReportValidationFailed
+                ["validation-failed"] = ValidationFailed,
+                ["empty-report"] = EmptyReport
             };
 
         private static readonly ConcurrentDictionary<string, ReportStatusReasonCode> _values =
