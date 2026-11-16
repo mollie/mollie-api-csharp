@@ -45,6 +45,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="createReportRequest">A <see cref="Mollie.Models.Components.CreateReportRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateReportResponse"/> response envelope when completed.</returns>
@@ -57,6 +59,8 @@ namespace Mollie
         public  Task<CreateReportResponse> CreateAsync(
             Models.Components.CreateReportRequest createReportRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -80,6 +84,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="reportId">Provide the ID of the related report.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetReportResponse"/> response envelope when completed.</returns>
@@ -92,6 +98,8 @@ namespace Mollie
         public  Task<GetReportResponse> GetAsync(
             string reportId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -129,6 +137,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="createReportRequest">A <see cref="Mollie.Models.Components.CreateReportRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateReportResponse"/> response envelope when completed.</returns>
@@ -141,6 +151,8 @@ namespace Mollie
         public async  Task<CreateReportResponse> CreateAsync(
             Models.Components.CreateReportRequest createReportRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -151,6 +163,8 @@ namespace Mollie
             {
                 CreateReportRequestValue = createReportRequest,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -315,6 +329,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="reportId">Provide the ID of the related report.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetReportResponse"/> response envelope when completed.</returns>
@@ -327,6 +343,8 @@ namespace Mollie
         public async  Task<GetReportResponse> GetAsync(
             string reportId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -337,6 +355,8 @@ namespace Mollie
             {
                 ReportId = reportId,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

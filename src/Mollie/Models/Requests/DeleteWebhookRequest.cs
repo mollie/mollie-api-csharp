@@ -27,6 +27,18 @@ namespace Mollie.Models.Requests
         [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
         public string? IdempotencyKey { get; set; }
 
+        /// <summary>
+        /// A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=X-Client-Signature")]
+        public string? XClientSignature { get; set; }
+
+        /// <summary>
+        /// The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.
+        /// </summary>
+        [SpeakeasyMetadata("header:style=simple,explode=false,name=X-Client-Signed-At")]
+        public string? XClientSignedAt { get; set; }
+
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public DeleteWebhookRequestBody? RequestBody { get; set; }
     }

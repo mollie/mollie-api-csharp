@@ -62,6 +62,8 @@ namespace Mollie
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="createDraftTransferRequest">A <see cref="Mollie.Models.Components.CreateDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -73,6 +75,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateDraftTransferResponse> CreateAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             Models.Components.CreateDraftTransferRequest? createDraftTransferRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -127,28 +131,18 @@ namespace Mollie
         /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="draftTransferId">Provide the ID of the related draft transfer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetDraftTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="draftTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetDraftTransferResponse> GetAsync(
-            string draftTransferId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetDraftTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -171,22 +165,18 @@ namespace Mollie
         /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="draftTransferId">Provide the ID of the related draft transfer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="CancelDraftTransferRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="CancelDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelDraftTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="draftTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CancelDraftTransferResponse> CancelAsync(
-            string draftTransferId,
-            string? idempotencyKey = null,
-            CancelDraftTransferRequestBody? requestBody = null,
+            CancelDraftTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -239,6 +229,8 @@ namespace Mollie
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="createDraftTransferRequest">A <see cref="Mollie.Models.Components.CreateDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -250,6 +242,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateDraftTransferResponse> CreateAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             Models.Components.CreateDraftTransferRequest? createDraftTransferRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -258,6 +252,8 @@ namespace Mollie
             var request = new Models.Requests.CreateDraftTransferRequest()
             {
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
                 CreateDraftTransferRequestValue = createDraftTransferRequest,
             };
 
@@ -575,7 +571,9 @@ namespace Mollie
                     Limit = request?.Limit,
                     Status = request?.Status,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -673,40 +671,23 @@ namespace Mollie
         /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="draftTransferId">Provide the ID of the related draft transfer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetDraftTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="draftTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetDraftTransferResponse> GetAsync(
-            string draftTransferId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetDraftTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (draftTransferId == null) throw new ArgumentNullException(nameof(draftTransferId));
-
-            var request = new GetDraftTransferRequest()
-            {
-                DraftTransferId = draftTransferId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -882,34 +863,23 @@ namespace Mollie
         /// transfer</a> for how to simulate `approved` and `declined` outcomes.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="draftTransferId">Provide the ID of the related draft transfer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="CancelDraftTransferRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="CancelDraftTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelDraftTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="draftTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CancelDraftTransferResponse> CancelAsync(
-            string draftTransferId,
-            string? idempotencyKey = null,
-            CancelDraftTransferRequestBody? requestBody = null,
+            CancelDraftTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (draftTransferId == null) throw new ArgumentNullException(nameof(draftTransferId));
-
-            var request = new CancelDraftTransferRequest()
-            {
-                DraftTransferId = draftTransferId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/business-accounts/draft-transfers/{draftTransferId}", request, null);

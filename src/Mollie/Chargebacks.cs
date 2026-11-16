@@ -264,7 +264,9 @@ namespace Mollie
                     Limit = request.Limit,
                     Embed = request.Embed,
                     Testmode = request.Testmode,
-                    IdempotencyKey = request.IdempotencyKey
+                    IdempotencyKey = request.IdempotencyKey,
+                    XClientSignature = request.XClientSignature,
+                    XClientSignedAt = request.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -676,7 +678,9 @@ namespace Mollie
                     Sort = request?.Sort,
                     ProfileId = request?.ProfileId,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await AllAsync (

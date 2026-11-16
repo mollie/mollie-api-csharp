@@ -67,6 +67,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="invoiceId">Provide the ID of the related invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetInvoiceResponse"/> response envelope when completed.</returns>
@@ -79,6 +81,8 @@ namespace Mollie
         public  Task<GetInvoiceResponse> GetAsync(
             string invoiceId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -240,7 +244,9 @@ namespace Mollie
                     From = request?.From,
                     Limit = request?.Limit,
                     Sort = request?.Sort,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -333,6 +339,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="invoiceId">Provide the ID of the related invoice.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetInvoiceResponse"/> response envelope when completed.</returns>
@@ -345,6 +353,8 @@ namespace Mollie
         public async  Task<GetInvoiceResponse> GetAsync(
             string invoiceId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -355,6 +365,8 @@ namespace Mollie
             {
                 InvoiceId = invoiceId,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

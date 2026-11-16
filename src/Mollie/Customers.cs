@@ -39,6 +39,8 @@ namespace Mollie
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="entityCustomer">A <see cref="EntityCustomer"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -50,6 +52,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateCustomerResponse> CreateAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             EntityCustomer? entityCustomer = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -88,28 +92,18 @@ namespace Mollie
         /// Retrieve a single customer by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetCustomerResponse> GetAsync(
-            string customerId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -123,22 +117,18 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="UpdateCustomerRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="UpdateCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateCustomerResponse> UpdateAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            UpdateCustomerRequestBody? requestBody = null,
+            UpdateCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -150,22 +140,18 @@ namespace Mollie
         /// Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="DeleteCustomerRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="DeleteCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<DeleteCustomerResponse> DeleteAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            DeleteCustomerRequestBody? requestBody = null,
+            DeleteCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -187,13 +173,11 @@ namespace Mollie
         /// parameter predefined.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="paymentRequest">A <see cref="PaymentRequest"/> parameter.</param>
+        /// <param name="request">A <see cref="CreateCustomerPaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateCustomerPaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
@@ -203,9 +187,7 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateCustomerPaymentResponse> CreatePaymentAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            PaymentRequest? paymentRequest = null,
+            CreateCustomerPaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -260,6 +242,8 @@ namespace Mollie
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="entityCustomer">A <see cref="EntityCustomer"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -271,6 +255,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateCustomerResponse> CreateAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             EntityCustomer? entityCustomer = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
@@ -279,6 +265,8 @@ namespace Mollie
             var request = new CreateCustomerRequest()
             {
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
                 EntityCustomer = entityCustomer,
             };
 
@@ -590,7 +578,9 @@ namespace Mollie
                     Limit = request?.Limit,
                     Sort = request?.Sort,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -678,40 +668,23 @@ namespace Mollie
         /// Retrieve a single customer by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetCustomerResponse> GetAsync(
-            string customerId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
-
-            var request = new GetCustomerRequest()
-            {
-                CustomerId = customerId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -878,34 +851,23 @@ namespace Mollie
         /// For an in-depth explanation of each parameter, refer to the <a href="create-customer">Create customer</a> endpoint.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="UpdateCustomerRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="UpdateCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateCustomerResponse> UpdateAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            UpdateCustomerRequestBody? requestBody = null,
+            UpdateCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
-
-            var request = new UpdateCustomerRequest()
-            {
-                CustomerId = customerId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/customers/{customerId}", request, null);
@@ -1075,34 +1037,23 @@ namespace Mollie
         /// Delete a customer. All mandates and subscriptions created for this customer will be canceled as well.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="DeleteCustomerRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="DeleteCustomerRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteCustomerResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<DeleteCustomerResponse> DeleteAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            DeleteCustomerRequestBody? requestBody = null,
+            DeleteCustomerRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
-
-            var request = new DeleteCustomerRequest()
-            {
-                CustomerId = customerId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/customers/{customerId}", request, null);
@@ -1264,13 +1215,11 @@ namespace Mollie
         /// parameter predefined.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="customerId">Provide the ID of the related customer.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="paymentRequest">A <see cref="PaymentRequest"/> parameter.</param>
+        /// <param name="request">A <see cref="CreateCustomerPaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateCustomerPaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="customerId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
@@ -1280,21 +1229,12 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateCustomerPaymentResponse> CreatePaymentAsync(
-            string customerId,
-            string? idempotencyKey = null,
-            PaymentRequest? paymentRequest = null,
+            CreateCustomerPaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
-
-            var request = new CreateCustomerPaymentRequest()
-            {
-                CustomerId = customerId,
-                IdempotencyKey = idempotencyKey,
-                PaymentRequest = paymentRequest,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/customers/{customerId}/payments", request, null);
@@ -1629,7 +1569,9 @@ namespace Mollie
                     Sort = request.Sort,
                     ProfileId = request.ProfileId,
                     Testmode = request.Testmode,
-                    IdempotencyKey = request.IdempotencyKey
+                    IdempotencyKey = request.IdempotencyKey,
+                    XClientSignature = request.XClientSignature,
+                    XClientSignedAt = request.XClientSignedAt
                 };
 
                 return await ListPaymentsAsync (

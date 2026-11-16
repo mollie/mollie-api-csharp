@@ -69,7 +69,9 @@ var res = await sdk.Payouts.CreateAsync(
         Description = "My payout description",
         Testmode = false,
     },
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z"
 );
 
 // handle response
@@ -77,10 +79,12 @@ var res = await sdk.Payouts.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PayoutRequest`                                                                  | [PayoutRequest](../../Models/Components/PayoutRequest.md)                        | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                                                                                                                                               | Type                                                                                                                                                                                    | Required                                                                                                                                                                                | Description                                                                                                                                                                             | Example                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PayoutRequest`                                                                                                                                                                         | [PayoutRequest](../../Models/Components/PayoutRequest.md)                                                                                                                               | :heavy_check_mark:                                                                                                                                                                      | N/A                                                                                                                                                                                     |                                                                                                                                                                                         |
+| `IdempotencyKey`                                                                                                                                                                        | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                                             |
+| `XClientSignature`                                                                                                                                                                      | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.        | MEUCIQDx8sJvK3z...                                                                                                                                                                      |
+| `XClientSignedAt`                                                                                                                                                                       | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration. | 2025-01-01T12:00:00Z                                                                                                                                                                    |
 
 ### Response
 
@@ -123,6 +127,8 @@ ListPayoutsRequest req = new ListPayoutsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListPayoutsResponse? res = await sdk.Payouts.ListAsync(req);
@@ -162,6 +168,7 @@ Retrieve a single payout by its ID.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: true,
@@ -170,10 +177,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payouts.GetAsync(
-    payoutId: "payout_j8NvRAM2WNZtsykpLEX8J",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetPayoutRequest req = new GetPayoutRequest() {
+    PayoutId = "payout_j8NvRAM2WNZtsykpLEX8J",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Payouts.GetAsync(req);
 
 // handle response
 ```
@@ -183,6 +194,7 @@ var res = await sdk.Payouts.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -191,10 +203,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payouts.GetAsync(
-    payoutId: "payout_j8NvRAM2WNZtsykpLEX8J",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetPayoutRequest req = new GetPayoutRequest() {
+    PayoutId = "payout_j8NvRAM2WNZtsykpLEX8J",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Payouts.GetAsync(req);
 
 // handle response
 ```
@@ -204,6 +220,7 @@ var res = await sdk.Payouts.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: true,
@@ -212,21 +229,23 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payouts.GetAsync(
-    payoutId: "payout_j8NvRAM2WNZtsykpLEX8J",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetPayoutRequest req = new GetPayoutRequest() {
+    PayoutId = "payout_j8NvRAM2WNZtsykpLEX8J",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Payouts.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PayoutId`                                                                                                                                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the payout.                                                                                                                                                                                                                                                                                                                                                            | payout_j8NvRAM2WNZtsykpLEX8J                                                                                                                                                                                                                                                                                                                                                             |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                     | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `request`                                                     | [GetPayoutRequest](../../Models/Requests/GetPayoutRequest.md) | :heavy_check_mark:                                            | The request object to use for the request.                    |
 
 ### Response
 
@@ -252,6 +271,7 @@ The canceled payout object is returned with the status set to `canceled`.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: true,
@@ -260,21 +280,23 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Payouts.CancelAsync(
-    payoutId: "payout_j8NvRAM2WNZtsykpLEX8J",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+CancelPayoutRequest req = new CancelPayoutRequest() {
+    PayoutId = "payout_j8NvRAM2WNZtsykpLEX8J",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Payouts.CancelAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PayoutId`                                                                                                                                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the payout.                                                                                                                                                                                                                                                                                                                                                            | payout_j8NvRAM2WNZtsykpLEX8J                                                                                                                                                                                                                                                                                                                                                             |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [CancelPayoutRequest](../../Models/Requests/CancelPayoutRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 

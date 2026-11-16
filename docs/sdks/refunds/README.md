@@ -21,16 +21,19 @@ transfer or by refunding the amount to your customer's credit card.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Refunds.CreateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    refundRequest: new RefundRequest() {
+CreateRefundRequest req = new CreateRefundRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RefundRequest = new RefundRequest() {
         Description = "Refunding a Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -50,8 +53,10 @@ var res = await sdk.Refunds.CreateAsync(
             },
         },
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Refunds.CreateAsync(req);
 
 // handle response
 ```
@@ -61,16 +66,19 @@ var res = await sdk.Refunds.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using System.Collections.Generic;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Refunds.CreateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    refundRequest: new RefundRequest() {
+CreateRefundRequest req = new CreateRefundRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RefundRequest = new RefundRequest() {
         Description = "Refunding a Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -90,19 +98,19 @@ var res = await sdk.Refunds.CreateAsync(
             },
         },
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Refunds.CreateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RefundRequest`                                                                  | [RefundRequest](../../Models/Components/RefundRequest.md)                        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [CreateRefundRequest](../../Models/Requests/CreateRefundRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 
@@ -142,6 +150,8 @@ ListRefundsRequest req = new ListRefundsRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListRefundsResponse? res = await sdk.Refunds.ListAsync(req);
@@ -195,6 +205,8 @@ GetRefundRequest req = new GetRefundRequest() {
     RefundId = "re_5B8cwPMGnU",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Refunds.GetAsync(req);
@@ -233,6 +245,7 @@ A refund can only be canceled while its `status` field is either `queued` or `pe
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -241,23 +254,24 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Refunds.CancelAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    refundId: "re_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+CancelRefundRequest req = new CancelRefundRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    RefundId = "re_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Refunds.CancelAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PaymentId`                                                                                                                                                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related payment.                                                                                                                                                                                                                                                                                                                                                   | tr_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                            |
-| `RefundId`                                                                                                                                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related refund.                                                                                                                                                                                                                                                                                                                                                    | re_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                            |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [CancelRefundRequest](../../Models/Requests/CancelRefundRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 
@@ -298,6 +312,8 @@ ListAllRefundsRequest req = new ListAllRefundsRequest() {
     Sort = Sorting.Desc,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListAllRefundsResponse? res = await sdk.Refunds.AllAsync(req);

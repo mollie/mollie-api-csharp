@@ -32,6 +32,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.PaymentLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     requestBody: new CreatePaymentLinkRequestBody() {
         Description = "Chess Board",
         Amount = new AmountNullable() {
@@ -138,6 +140,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.PaymentLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     requestBody: new CreatePaymentLinkRequestBody() {
         Description = "Chess Board",
         Amount = new AmountNullable() {
@@ -244,6 +248,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.PaymentLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     requestBody: new CreatePaymentLinkRequestBody() {
         Description = "Chess Board",
         Amount = new AmountNullable() {
@@ -350,6 +356,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.PaymentLinks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     requestBody: new CreatePaymentLinkRequestBody() {
         Description = "Chess Board",
         Amount = new AmountNullable() {
@@ -444,10 +452,12 @@ var res = await sdk.PaymentLinks.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `IdempotencyKey`                                                                      | *string*                                                                              | :heavy_minus_sign:                                                                    | A unique key to ensure idempotent requests. This key should be a UUID v4 string.      | 123e4567-e89b-12d3-a456-426                                                           |
-| `RequestBody`                                                                         | [CreatePaymentLinkRequestBody](../../Models/Requests/CreatePaymentLinkRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |
+| Parameter                                                                                                                                                                               | Type                                                                                                                                                                                    | Required                                                                                                                                                                                | Description                                                                                                                                                                             | Example                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                                                                                                                        | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                                             |
+| `XClientSignature`                                                                                                                                                                      | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.        | MEUCIQDx8sJvK3z...                                                                                                                                                                      |
+| `XClientSignedAt`                                                                                                                                                                       | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration. | 2025-01-01T12:00:00Z                                                                                                                                                                    |
+| `RequestBody`                                                                                                                                                                           | [CreatePaymentLinkRequestBody](../../Models/Requests/CreatePaymentLinkRequestBody.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                                                      | N/A                                                                                                                                                                                     |                                                                                                                                                                                         |
 
 ### Response
 
@@ -481,11 +491,15 @@ var sdk = new Client(
     }
 );
 
-ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(
-    fromP: "pl_d9fQur83kFdhH8hIhaZfq",
-    limit: 50,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+ListPaymentLinksRequest req = new ListPaymentLinksRequest() {
+    From = "pl_d9fQur83kFdhH8hIhaZfq",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(req);
 
 while(res != null)
 {
@@ -509,11 +523,15 @@ var sdk = new Client(
     }
 );
 
-ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(
-    fromP: "pl_d9fQur83kFdhH8hIhaZfq",
-    limit: 50,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+ListPaymentLinksRequest req = new ListPaymentLinksRequest() {
+    From = "pl_d9fQur83kFdhH8hIhaZfq",
+    Limit = 50,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+ListPaymentLinksResponse? res = await sdk.PaymentLinks.ListAsync(req);
 
 while(res != null)
 {
@@ -525,12 +543,9 @@ while(res != null)
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`                                                                                                                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>result set.                                                                                                                                                                                                                                                       | pl_d9fQur83kFdhH8hIhaZfq                                                                                                                                                                                                                                                                                                                                                                 |
-| `Limit`                                                                                                                                                                                                                                                                                                                                                                                  | *long*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | The maximum number of items to return. Defaults to 50 items.                                                                                                                                                                                                                                                                                                                             | 50                                                                                                                                                                                                                                                                                                                                                                                       |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [ListPaymentLinksRequest](../../Models/Requests/ListPaymentLinksRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
@@ -553,6 +568,7 @@ Retrieve a single payment link by its ID.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -561,21 +577,23 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.PaymentLinks.GetAsync(
-    paymentLinkId: "pl_d9fQur83kFdhH8hIhaZfq",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetPaymentLinkRequest req = new GetPaymentLinkRequest() {
+    PaymentLinkId = "pl_d9fQur83kFdhH8hIhaZfq",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.PaymentLinks.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PaymentLinkId`                                                                                                                                                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related payment link.                                                                                                                                                                                                                                                                                                                                              | pl_d9fQur83kFdhH8hIhaZfq                                                                                                                                                                                                                                                                                                                                                                 |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `request`                                                               | [GetPaymentLinkRequest](../../Models/Requests/GetPaymentLinkRequest.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
 
 ### Response
 
@@ -605,10 +623,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.PaymentLinks.UpdateAsync(
-    paymentLinkId: "pl_d9fQur83kFdhH8hIhaZfq",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdatePaymentLinkRequestBody() {
+UpdatePaymentLinkRequest req = new UpdatePaymentLinkRequest() {
+    PaymentLinkId = "pl_d9fQur83kFdhH8hIhaZfq",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdatePaymentLinkRequestBody() {
         Description = "Chess Board",
         MinimumAmount = new Amount() {
             Currency = "EUR",
@@ -648,19 +668,19 @@ var res = await sdk.PaymentLinks.UpdateAsync(
             Country = "NL",
         },
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.PaymentLinks.UpdateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `PaymentLinkId`                                                                       | *string*                                                                              | :heavy_check_mark:                                                                    | Provide the ID of the related payment link.                                           | pl_d9fQur83kFdhH8hIhaZfq                                                              |
-| `IdempotencyKey`                                                                      | *string*                                                                              | :heavy_minus_sign:                                                                    | A unique key to ensure idempotent requests. This key should be a UUID v4 string.      | 123e4567-e89b-12d3-a456-426                                                           |
-| `RequestBody`                                                                         | [UpdatePaymentLinkRequestBody](../../Models/Requests/UpdatePaymentLinkRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [UpdatePaymentLinkRequest](../../Models/Requests/UpdatePaymentLinkRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
 
 ### Response
 
@@ -695,24 +715,26 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.PaymentLinks.DeleteAsync(
-    paymentLinkId: "pl_d9fQur83kFdhH8hIhaZfq",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new DeletePaymentLinkRequestBody() {
+DeletePaymentLinkRequest req = new DeletePaymentLinkRequest() {
+    PaymentLinkId = "pl_d9fQur83kFdhH8hIhaZfq",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new DeletePaymentLinkRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.PaymentLinks.DeleteAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `PaymentLinkId`                                                                       | *string*                                                                              | :heavy_check_mark:                                                                    | Provide the ID of the related payment link.                                           | pl_d9fQur83kFdhH8hIhaZfq                                                              |
-| `IdempotencyKey`                                                                      | *string*                                                                              | :heavy_minus_sign:                                                                    | A unique key to ensure idempotent requests. This key should be a UUID v4 string.      | 123e4567-e89b-12d3-a456-426                                                           |
-| `RequestBody`                                                                         | [DeletePaymentLinkRequestBody](../../Models/Requests/DeletePaymentLinkRequestBody.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [DeletePaymentLinkRequest](../../Models/Requests/DeletePaymentLinkRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
 
 ### Response
 
@@ -752,6 +774,8 @@ GetPaymentLinkPaymentsRequest req = new GetPaymentLinkPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 GetPaymentLinkPaymentsResponse? res = await sdk.PaymentLinks.ListPaymentsAsync(req);

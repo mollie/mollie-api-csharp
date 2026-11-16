@@ -72,6 +72,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreatePayoutResponse"/> response envelope when completed.</returns>
@@ -84,6 +86,8 @@ namespace Mollie
         public  Task<CreatePayoutResponse> CreateAsync(
             PayoutRequest payoutRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -125,28 +129,18 @@ namespace Mollie
         /// Retrieve a single payout by its ID.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="payoutId">Provide the ID of the payout.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetPayoutRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetPayoutResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="payoutId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetPayoutResponse> GetAsync(
-            string payoutId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetPayoutRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -161,28 +155,18 @@ namespace Mollie
         /// The canceled payout object is returned with the status set to `canceled`.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="payoutId">Provide the ID of the payout.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="CancelPayoutRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelPayoutResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="payoutId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 409 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CancelPayoutResponse> CancelAsync(
-            string payoutId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            CancelPayoutRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -245,6 +229,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="payoutRequest">A <see cref="PayoutRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreatePayoutResponse"/> response envelope when completed.</returns>
@@ -257,6 +243,8 @@ namespace Mollie
         public async  Task<CreatePayoutResponse> CreateAsync(
             PayoutRequest payoutRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -267,6 +255,8 @@ namespace Mollie
             {
                 PayoutRequest = payoutRequest,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -582,7 +572,9 @@ namespace Mollie
                     Limit = request?.Limit,
                     Sort = request?.Sort,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -670,40 +662,23 @@ namespace Mollie
         /// Retrieve a single payout by its ID.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="payoutId">Provide the ID of the payout.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetPayoutRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetPayoutResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="payoutId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetPayoutResponse> GetAsync(
-            string payoutId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetPayoutRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (payoutId == null) throw new ArgumentNullException(nameof(payoutId));
-
-            var request = new GetPayoutRequest()
-            {
-                PayoutId = payoutId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -871,40 +846,23 @@ namespace Mollie
         /// The canceled payout object is returned with the status set to `canceled`.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="payoutId">Provide the ID of the payout.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="CancelPayoutRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelPayoutResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="payoutId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 409 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CancelPayoutResponse> CancelAsync(
-            string payoutId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            CancelPayoutRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (payoutId == null) throw new ArgumentNullException(nameof(payoutId));
-
-            var request = new CancelPayoutRequest()
-            {
-                PayoutId = payoutId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

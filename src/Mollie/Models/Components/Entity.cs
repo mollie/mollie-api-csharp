@@ -43,6 +43,8 @@ namespace Mollie.Models.Components
 
         public static EntityType DraftTransferResponse { get { return new EntityType("draft-transfer-response"); } }
 
+        public static EntityType BusinessAccountResponse { get { return new EntityType("business-account-response"); } }
+
         public override string ToString() { return Value; }
         public static implicit operator String(EntityType v) { return v.Value; }
         public static EntityType FromString(string v) {
@@ -56,6 +58,7 @@ namespace Mollie.Models.Components
                 case "sales-invoice-response": return SalesInvoiceResponse;
                 case "transfer-response": return TransferResponse;
                 case "draft-transfer-response": return DraftTransferResponse;
+                case "business-account-response": return BusinessAccountResponse;
                 default: throw new ArgumentException("Invalid value for EntityType");
             }
         }
@@ -108,6 +111,9 @@ namespace Mollie.Models.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public DraftTransferResponse? DraftTransferResponse { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public BusinessAccountResponse? BusinessAccountResponse { get; set; }
 
         public EntityType Type { get; set; }
         public static Entity CreatePaymentResponse(PaymentResponse paymentResponse)
@@ -182,6 +188,14 @@ namespace Mollie.Models.Components
             res.DraftTransferResponse = draftTransferResponse;
             return res;
         }
+        public static Entity CreateBusinessAccountResponse(BusinessAccountResponse businessAccountResponse)
+        {
+            EntityType typ = EntityType.BusinessAccountResponse;
+
+            Entity res = new Entity(typ);
+            res.BusinessAccountResponse = businessAccountResponse;
+            return res;
+        }
 
         public class EntityConverter : JsonConverter
         {
@@ -198,6 +212,26 @@ namespace Mollie.Models.Components
 
                 var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new Entity(EntityType.BusinessAccountResponse)
+                    {
+                        BusinessAccountResponse = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<BusinessAccountResponse>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(BusinessAccountResponse), new Entity(EntityType.BusinessAccountResponse), "BusinessAccountResponse"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
                 try
                 {
@@ -462,6 +496,12 @@ namespace Mollie.Models.Components
                 if (res.DraftTransferResponse != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.DraftTransferResponse));
+                    return;
+                }
+
+                if (res.BusinessAccountResponse != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.BusinessAccountResponse));
                     return;
                 }
 

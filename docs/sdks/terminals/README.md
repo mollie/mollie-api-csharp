@@ -37,6 +37,8 @@ ListTerminalsRequest req = new ListTerminalsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListTerminalsResponse? res = await sdk.Terminals.ListAsync(req);
@@ -68,6 +70,8 @@ ListTerminalsRequest req = new ListTerminalsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListTerminalsResponse? res = await sdk.Terminals.ListAsync(req);
@@ -107,6 +111,7 @@ Retrieve a single terminal by its ID.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -115,21 +120,23 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Terminals.GetAsync(
-    terminalId: "term_vytxeTZskVKR7C7WgdSP3d",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetTerminalRequest req = new GetTerminalRequest() {
+    TerminalId = "term_vytxeTZskVKR7C7WgdSP3d",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Terminals.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TerminalId`                                                                                                                                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related terminal.                                                                                                                                                                                                                                                                                                                                                  | term_vytxeTZskVKR7C7WgdSP3d                                                                                                                                                                                                                                                                                                                                                              |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `request`                                                         | [GetTerminalRequest](../../Models/Requests/GetTerminalRequest.md) | :heavy_check_mark:                                                | The request object to use for the request.                        |
 
 ### Response
 
@@ -167,23 +174,25 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Terminals.TerminalsRequestPairingCodeAsync(
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new TerminalsRequestPairingCodeRequestBody() {
+TerminalsRequestPairingCodeRequest req = new TerminalsRequestPairingCodeRequest() {
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new TerminalsRequestPairingCodeRequestBody() {
         ProfileId = "pfl_jA9bC4DkFj3G",
-    }
-);
+    },
+};
+
+var res = await sdk.Terminals.TerminalsRequestPairingCodeAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `Include`                                                                                                 | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | Include additional information in the response.                                                           |                                                                                                           |
-| `IdempotencyKey`                                                                                          | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                          | 123e4567-e89b-12d3-a456-426                                                                               |
-| `RequestBody`                                                                                             | [TerminalsRequestPairingCodeRequestBody](../../Models/Requests/TerminalsRequestPairingCodeRequestBody.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |                                                                                                           |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `request`                                                                                         | [TerminalsRequestPairingCodeRequest](../../Models/Requests/TerminalsRequestPairingCodeRequest.md) | :heavy_check_mark:                                                                                | The request object to use for the request.                                                        |
 
 ### Response
 
@@ -226,6 +235,8 @@ TerminalsListPairingCodesRequest req = new TerminalsListPairingCodesRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Terminals.TerminalsListPairingCodesAsync(req);
@@ -270,26 +281,29 @@ returns a 404. Active pairing codes are never deleted.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Terminals.TerminalsGetPairingCodeAsync(
-    pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+TerminalsGetPairingCodeRequest req = new TerminalsGetPairingCodeRequest() {
+    PairingCodeId = "termpc_R7gX5Ea9bC4DkFj3G",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Terminals.TerminalsGetPairingCodeAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PairingCodeId`                                                                  | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the terminal pairing code.                                     | termpc_R7gX5Ea9bC4DkFj3G                                                         |
-| `Include`                                                                        | *string*                                                                         | :heavy_minus_sign:                                                               | Include additional information in the response.                                  |                                                                                  |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `request`                                                                                 | [TerminalsGetPairingCodeRequest](../../Models/Requests/TerminalsGetPairingCodeRequest.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
 
 ### Response
 
@@ -327,7 +341,9 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Terminals.TerminalsRevokePairingCodeAsync(
     pairingCodeId: "termpc_R7gX5Ea9bC4DkFj3G",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
+    idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z"
 );
 
 // handle response
@@ -335,10 +351,12 @@ var res = await sdk.Terminals.TerminalsRevokePairingCodeAsync(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PairingCodeId`                                                                  | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the terminal pairing code.                                     | termpc_R7gX5Ea9bC4DkFj3G                                                         |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                                                                                                                                               | Type                                                                                                                                                                                    | Required                                                                                                                                                                                | Description                                                                                                                                                                             | Example                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PairingCodeId`                                                                                                                                                                         | *string*                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                      | Provide the ID of the terminal pairing code.                                                                                                                                            | termpc_R7gX5Ea9bC4DkFj3G                                                                                                                                                                |
+| `IdempotencyKey`                                                                                                                                                                        | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                                             |
+| `XClientSignature`                                                                                                                                                                      | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.        | MEUCIQDx8sJvK3z...                                                                                                                                                                      |
+| `XClientSignedAt`                                                                                                                                                                       | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration. | 2025-01-01T12:00:00Z                                                                                                                                                                    |
 
 ### Response
 

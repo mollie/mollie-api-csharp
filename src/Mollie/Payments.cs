@@ -46,9 +46,7 @@ namespace Mollie
         /// guide on <a href="extra-payment-parameters">method-specific parameters</a>.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="include">This endpoint allows you to include additional information via the `include` query string parameter.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="paymentRequest">A <see cref="PaymentRequest"/> parameter.</param>
+        /// <param name="request">A <see cref="CreatePaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreatePaymentResponse"/> response envelope when completed.</returns>
@@ -61,9 +59,7 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreatePaymentResponse> CreateAsync(
-            string? include = null,
-            string? idempotencyKey = null,
-            PaymentRequest? paymentRequest = null,
+            CreatePaymentRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -126,22 +122,18 @@ namespace Mollie
         /// Updating the payment details will not result in a webhook call.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="UpdatePaymentRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="UpdatePaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdatePaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdatePaymentResponse> UpdateAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            UpdatePaymentRequestBody? requestBody = null,
+            UpdatePaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -158,22 +150,18 @@ namespace Mollie
         /// The `isCancelable` property on the <a href="get-payment">Payment object</a> will indicate if the payment can be canceled.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="CancelPaymentRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="CancelPaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelPaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CancelPaymentResponse> CancelAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            CancelPaymentRequestBody? requestBody = null,
+            CancelPaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -192,22 +180,18 @@ namespace Mollie
         /// If there is a successful capture, the payment will transition to `paid`.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="ReleaseAuthorizationRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="ReleaseAuthorizationRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ReleaseAuthorizationResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            ReleaseAuthorizationRequestBody? requestBody = null,
+            ReleaseAuthorizationRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -244,9 +228,7 @@ namespace Mollie
         /// guide on <a href="extra-payment-parameters">method-specific parameters</a>.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="include">This endpoint allows you to include additional information via the `include` query string parameter.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="paymentRequest">A <see cref="PaymentRequest"/> parameter.</param>
+        /// <param name="request">A <see cref="CreatePaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreatePaymentResponse"/> response envelope when completed.</returns>
@@ -259,20 +241,11 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreatePaymentResponse> CreateAsync(
-            string? include = null,
-            string? idempotencyKey = null,
-            PaymentRequest? paymentRequest = null,
+            CreatePaymentRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            var request = new CreatePaymentRequest()
-            {
-                Include = include,
-                IdempotencyKey = idempotencyKey,
-                PaymentRequest = paymentRequest,
-            };
-
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/payments", request, null);
 
@@ -609,7 +582,9 @@ namespace Mollie
                     Sort = request?.Sort,
                     ProfileId = request?.ProfileId,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -880,34 +855,23 @@ namespace Mollie
         /// Updating the payment details will not result in a webhook call.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="UpdatePaymentRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="UpdatePaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdatePaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdatePaymentResponse> UpdateAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            UpdatePaymentRequestBody? requestBody = null,
+            UpdatePaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (paymentId == null) throw new ArgumentNullException(nameof(paymentId));
-
-            var request = new UpdatePaymentRequest()
-            {
-                PaymentId = paymentId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}", request, null);
@@ -1082,34 +1046,23 @@ namespace Mollie
         /// The `isCancelable` property on the <a href="get-payment">Payment object</a> will indicate if the payment can be canceled.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="CancelPaymentRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="CancelPaymentRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CancelPaymentResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CancelPaymentResponse> CancelAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            CancelPaymentRequestBody? requestBody = null,
+            CancelPaymentRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (paymentId == null) throw new ArgumentNullException(nameof(paymentId));
-
-            var request = new CancelPaymentRequest()
-            {
-                PaymentId = paymentId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}", request, null);
@@ -1286,34 +1239,23 @@ namespace Mollie
         /// If there is a successful capture, the payment will transition to `paid`.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="paymentId">Provide the ID of the related payment.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="ReleaseAuthorizationRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="ReleaseAuthorizationRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="ReleaseAuthorizationResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="paymentId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ReleaseAuthorizationResponse> ReleaseAuthorizationAsync(
-            string paymentId,
-            string? idempotencyKey = null,
-            ReleaseAuthorizationRequestBody? requestBody = null,
+            ReleaseAuthorizationRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (paymentId == null) throw new ArgumentNullException(nameof(paymentId));
-
-            var request = new ReleaseAuthorizationRequest()
-            {
-                PaymentId = paymentId,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/payments/{paymentId}/release-authorization", request, null);

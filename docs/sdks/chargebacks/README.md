@@ -35,6 +35,8 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
@@ -67,6 +69,8 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
@@ -99,6 +103,8 @@ ListChargebacksRequest req = new ListChargebacksRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListChargebacksResponse? res = await sdk.Chargebacks.ListAsync(req);
@@ -152,6 +158,8 @@ GetChargebackRequest req = new GetChargebackRequest() {
     ChargebackId = "chb_xFzwUN4ci8HAmSGUACS4J",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Chargebacks.GetAsync(req);
@@ -178,6 +186,8 @@ GetChargebackRequest req = new GetChargebackRequest() {
     ChargebackId = "chb_xFzwUN4ci8HAmSGUACS4J",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Chargebacks.GetAsync(req);
@@ -230,6 +240,8 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     Embed = "payment",
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);
@@ -263,6 +275,8 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     Embed = "payment",
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);
@@ -296,6 +310,8 @@ ListAllChargebacksRequest req = new ListAllChargebacksRequest() {
     Embed = "payment",
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListAllChargebacksResponse? res = await sdk.Chargebacks.AllAsync(req);

@@ -63,6 +63,8 @@ ListMethodsRequest req = new ListMethodsRequest() {
     OrderLineCategories = LineCategories.Eco,
     Include = "issuers",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.ListAsync(req);
@@ -98,6 +100,8 @@ ListMethodsRequest req = new ListMethodsRequest() {
     OrderLineCategories = LineCategories.Eco,
     Include = "issuers",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.ListAsync(req);
@@ -133,6 +137,8 @@ ListMethodsRequest req = new ListMethodsRequest() {
     OrderLineCategories = LineCategories.Eco,
     Include = "issuers",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.ListAsync(req);
@@ -192,6 +198,8 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.AllAsync(req);
@@ -223,6 +231,8 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.AllAsync(req);
@@ -254,6 +264,8 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.AllAsync(req);
@@ -285,6 +297,8 @@ ListAllMethodsRequest req = new ListAllMethodsRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.AllAsync(req);
@@ -347,6 +361,8 @@ GetMethodRequest req = new GetMethodRequest() {
     Include = "issuers",
     SequenceType = SequenceType.Oneoff,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Methods.GetAsync(req);
@@ -390,16 +406,21 @@ To enable voucher or gift card issuers, refer to the [Enable payment method issu
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Methods.EnableAsync(
-    profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodId.Ideal,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+EnableMethodRequest req = new EnableMethodRequest() {
+    ProfileId = "pfl_5B8cwPMGnU",
+    MethodId = MethodId.Ideal,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Methods.EnableAsync(req);
 
 // handle response
 ```
@@ -409,16 +430,21 @@ var res = await sdk.Methods.EnableAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Methods.EnableAsync(
-    profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodId.Ideal,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+EnableMethodRequest req = new EnableMethodRequest() {
+    ProfileId = "pfl_5B8cwPMGnU",
+    MethodId = MethodId.Ideal,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Methods.EnableAsync(req);
 
 // handle response
 ```
@@ -428,27 +454,30 @@ var res = await sdk.Methods.EnableAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Methods.EnableAsync(
-    profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodId.Ideal,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+EnableMethodRequest req = new EnableMethodRequest() {
+    ProfileId = "pfl_5B8cwPMGnU",
+    MethodId = MethodId.Ideal,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Methods.EnableAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
-| `MethodId`                                                                       | [MethodId](../../Models/Components/MethodId.md)                                  | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [EnableMethodRequest](../../Models/Requests/EnableMethodRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 
@@ -474,27 +503,30 @@ instead of the profile ID to refer to the current profile.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Methods.DisableAsync(
-    profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodId.Ideal,
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+DisableMethodRequest req = new DisableMethodRequest() {
+    ProfileId = "pfl_5B8cwPMGnU",
+    MethodId = MethodId.Ideal,
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Methods.DisableAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
-| `MethodId`                                                                       | [MethodId](../../Models/Components/MethodId.md)                                  | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | ideal                                                                            |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [DisableMethodRequest](../../Models/Requests/DisableMethodRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -533,6 +565,8 @@ EnableMethodIssuerRequest req = new EnableMethodIssuerRequest() {
     MethodId = MethodIdWithIssuer.Voucher,
     IssuerId = "edenred-france-sports",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
     RequestBody = new EnableMethodIssuerRequestBody() {
         ContractId = "ideal",
     },
@@ -575,29 +609,31 @@ current profile.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Methods.DisableIssuerAsync(
-    profileId: "pfl_5B8cwPMGnU",
-    methodId: MethodIdWithIssuer.Voucher,
-    issuerId: "edenred-france-sports",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+DisableMethodIssuerRequest req = new DisableMethodIssuerRequest() {
+    ProfileId = "pfl_5B8cwPMGnU",
+    MethodId = MethodIdWithIssuer.Voucher,
+    IssuerId = "edenred-france-sports",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Methods.DisableIssuerAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ProfileId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related profile.                                           | pfl_5B8cwPMGnU                                                                   |
-| `MethodId`                                                                       | [MethodIdWithIssuer](../../Models/Components/MethodIdWithIssuer.md)              | :heavy_check_mark:                                                               | Provide the ID of the related payment method.                                    | voucher                                                                          |
-| `IssuerId`                                                                       | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related issuer.                                            | edenred-france-sports                                                            |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `request`                                                                         | [DisableMethodIssuerRequest](../../Models/Requests/DisableMethodIssuerRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
 
 ### Response
 

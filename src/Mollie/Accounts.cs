@@ -29,6 +29,53 @@ namespace Mollie
     public interface IAccounts
     {
         /// <summary>
+        /// Create business account.
+        /// </summary>
+        /// <remarks>
+        /// &gt; 🔒 Restricted access<br/>
+        /// &gt;<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// <br/>
+        /// Create a new business account for the authenticated organization.<br/>
+        /// <br/>
+        /// The response contains the newly created business account.<br/>
+        /// <br/>
+        /// Each organization can have up to 5 active business accounts. Need more? <a href="https://www.mollie.com/contact">Contact us</a>
+        /// and we'll help you out.<br/>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="idempotencyKey">
+        /// A unique value that identifies this request, so you can safely retry it without creating a second account.<br/>
+        /// Retrying with the same key within one hour returns the original response. We recommend a UUIDv4.<br/>
+        /// <br/>
+        /// Keys are tied to the credential that sent the original request, so a refreshed OAuth token won't match<br/>
+        /// earlier keys. View the <a href="https://docs.mollie.com/reference/api-idempotency">public documentation</a> to learn<br/>
+        /// more.
+        /// </param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
+        /// <param name="requestBody">A <see cref="CreateBusinessAccountRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateBusinessAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request is malformed. For example, the body isn't valid JSON, a required field such as `name` is missing,&lt;br/&gt;<br/>
+        /// or the `Idempotency-Key` was already used for a request with different parameters. Thrown when the API returns a 400, 409, 422 or 429 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateBusinessAccountResponse> CreateAccountAsync(
+            string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
+            CreateBusinessAccountRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        );
+
+        /// <summary>
         /// List business accounts.
         /// </summary>
         /// <remarks>
@@ -70,28 +117,18 @@ namespace Mollie
         /// balance, and account details.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountId">Provide the ID of the related business account.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetBusinessAccountRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetBusinessAccountResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="businessAccountId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetBusinessAccountResponse> GetAccountAsync(
-            string businessAccountId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetBusinessAccountRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -139,30 +176,18 @@ namespace Mollie
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountId">Provide the ID of the related business account.</param>
-        /// <param name="transactionId">Provide the ID of the related transaction.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetBusinessAccountTransactionRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetBusinessAccountTransactionResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">One of <paramref name="businessAccountId"/> or <paramref name="transactionId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetBusinessAccountTransactionResponse> GetAsync(
-            string businessAccountId,
-            string transactionId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetBusinessAccountTransactionRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -180,6 +205,222 @@ namespace Mollie
         {
             SDKConfiguration = config;
         }
+
+        /// <summary>
+        /// Create business account.
+        /// </summary>
+        /// <remarks>
+        /// &gt; 🔒 Restricted access<br/>
+        /// &gt;<br/>
+        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// <br/>
+        /// Create a new business account for the authenticated organization.<br/>
+        /// <br/>
+        /// The response contains the newly created business account.<br/>
+        /// <br/>
+        /// Each organization can have up to 5 active business accounts. Need more? <a href="https://www.mollie.com/contact">Contact us</a>
+        /// and we'll help you out.<br/>
+        /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="idempotencyKey">
+        /// A unique value that identifies this request, so you can safely retry it without creating a second account.<br/>
+        /// Retrying with the same key within one hour returns the original response. We recommend a UUIDv4.<br/>
+        /// <br/>
+        /// Keys are tied to the credential that sent the original request, so a refreshed OAuth token won't match<br/>
+        /// earlier keys. View the <a href="https://docs.mollie.com/reference/api-idempotency">public documentation</a> to learn<br/>
+        /// more.
+        /// </param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
+        /// <param name="requestBody">A <see cref="CreateBusinessAccountRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateBusinessAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorResponse">
+        /// The request is malformed. For example, the body isn't valid JSON, a required field such as `name` is missing,&lt;br/&gt;<br/>
+        /// or the `Idempotency-Key` was already used for a request with different parameters. Thrown when the API returns a 400, 409, 422 or 429 response.
+        /// </exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateBusinessAccountResponse> CreateAccountAsync(
+            string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
+            CreateBusinessAccountRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null,
+            CancellationToken? cancellationToken = null
+        )
+        {
+            var request = new CreateBusinessAccountRequest()
+            {
+                IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
+                RequestBody = requestBody,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = baseUrl + "/v2/business-accounts/accounts";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/hal+json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OAuth" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "create-business-account", null, SDKConfiguration.SecuritySource, cancellationToken);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 7500L,
+                        exponent: 2
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "429",
+                "5xx",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest, cancellationToken);
+            };
+            var retries = new Mollie.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 201)
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    BusinessAccountResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<BusinessAccountResponse>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into BusinessAccountResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new CreateBusinessAccountResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.BusinessAccountResponse = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 409, 422, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/hal+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrorResponsePayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorResponsePayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrorResponsePayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    payload.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+
+                    throw new ErrorResponse(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
 
         /// <summary>
         /// List business accounts.
@@ -333,7 +574,9 @@ namespace Mollie
                     Limit = request?.Limit,
                     Sort = request?.Sort,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAccountsAsync (
@@ -426,40 +669,23 @@ namespace Mollie
         /// balance, and account details.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountId">Provide the ID of the related business account.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetBusinessAccountRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetBusinessAccountResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="businessAccountId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetBusinessAccountResponse> GetAccountAsync(
-            string businessAccountId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetBusinessAccountRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (businessAccountId == null) throw new ArgumentNullException(nameof(businessAccountId));
-
-            var request = new GetBusinessAccountRequest()
-            {
-                BusinessAccountId = businessAccountId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -770,7 +996,9 @@ namespace Mollie
                     Limit = request.Limit,
                     Sort = request.Sort,
                     Testmode = request.Testmode,
-                    IdempotencyKey = request.IdempotencyKey
+                    IdempotencyKey = request.IdempotencyKey,
+                    XClientSignature = request.XClientSignature,
+                    XClientSignedAt = request.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -863,44 +1091,23 @@ namespace Mollie
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountId">Provide the ID of the related business account.</param>
-        /// <param name="transactionId">Provide the ID of the related transaction.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetBusinessAccountTransactionRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetBusinessAccountTransactionResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">One of <paramref name="businessAccountId"/> or <paramref name="transactionId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetBusinessAccountTransactionResponse> GetAsync(
-            string businessAccountId,
-            string transactionId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetBusinessAccountTransactionRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (businessAccountId == null) throw new ArgumentNullException(nameof(businessAccountId));
-            if (transactionId == null) throw new ArgumentNullException(nameof(transactionId));
-
-            var request = new GetBusinessAccountTransactionRequest()
-            {
-                BusinessAccountId = businessAccountId,
-                TransactionId = transactionId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

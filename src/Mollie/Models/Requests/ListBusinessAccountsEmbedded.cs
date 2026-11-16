@@ -21,6 +21,6 @@ namespace Mollie.Models.Requests
         /// An array of business account objects.
         /// </summary>
         [JsonProperty("businessAccounts")]
-        public List<BusinessAccountResponse>? BusinessAccounts { get; set; }
+        public List<ListBusinessAccountResponse>? BusinessAccounts { get; set; }
     }
 }
