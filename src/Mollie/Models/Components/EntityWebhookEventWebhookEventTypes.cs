@@ -63,6 +63,7 @@ namespace Mollie.Models.Components
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferCreated = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.created");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferApproved = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.approved");
         public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountDraftTransferDeclined = new EntityWebhookEventWebhookEventTypes("business-account-draft-transfer.declined");
+        public static readonly EntityWebhookEventWebhookEventTypes BusinessAccountCreated = new EntityWebhookEventWebhookEventTypes("business-account.created");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReceived = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.received");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferMatched = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.matched");
         public static readonly EntityWebhookEventWebhookEventTypes UnmatchedCreditTransferReturned = new EntityWebhookEventWebhookEventTypes("unmatched-credit-transfer.returned");
@@ -117,6 +118,7 @@ namespace Mollie.Models.Components
                 ["business-account-draft-transfer.created"] = BusinessAccountDraftTransferCreated,
                 ["business-account-draft-transfer.approved"] = BusinessAccountDraftTransferApproved,
                 ["business-account-draft-transfer.declined"] = BusinessAccountDraftTransferDeclined,
+                ["business-account.created"] = BusinessAccountCreated,
                 ["unmatched-credit-transfer.received"] = UnmatchedCreditTransferReceived,
                 ["unmatched-credit-transfer.matched"] = UnmatchedCreditTransferMatched,
                 ["unmatched-credit-transfer.returned"] = UnmatchedCreditTransferReturned,

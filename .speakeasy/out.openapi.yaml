@@ -325,6 +325,8 @@ paths:
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -546,6 +548,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The balance object.
@@ -751,6 +755,8 @@ paths:
       x-speakeasy-group: balances
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/balances/{balanceId}/report:
     parameters:
       - $ref: '#/components/parameters/parent-balance-id'
@@ -807,6 +813,8 @@ paths:
             $ref: '#/components/schemas/balance-report-grouping'
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The balance report object.
@@ -1613,6 +1621,8 @@ paths:
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of balance transaction objects.
@@ -2496,6 +2506,8 @@ paths:
       x-speakeasy-group: reports
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/reports/{reportId}:
     parameters:
       - $ref: '#/components/parameters/parent-report-id'
@@ -2587,6 +2599,8 @@ paths:
       x-speakeasy-group: reports
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/settlements:
     get:
       summary: List settlements
@@ -2647,6 +2661,8 @@ paths:
               - EUR
               - EUR,GBP
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -2957,6 +2973,8 @@ paths:
       x-speakeasy-group: settlements
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/settlements/open:
     get:
       summary: Get open settlement
@@ -3121,6 +3139,8 @@ paths:
       x-speakeasy-group: settlements
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/settlements/next:
     get:
       summary: Get next settlement
@@ -3284,6 +3304,8 @@ paths:
       x-speakeasy-group: settlements
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/settlements/{settlementId}/payments:
     parameters:
       - $ref: '#/components/parameters/parent-settlement-id'
@@ -3319,6 +3341,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment objects.
@@ -3479,6 +3503,8 @@ paths:
               payment: Embed the payments that the captures were created for.
             example: payment
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of capture objects.
@@ -3641,6 +3667,8 @@ paths:
               payment: Embed the payment related to this refund.
             example: payment
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of refund objects.
@@ -3803,6 +3831,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of chargeback objects.
@@ -4058,6 +4088,8 @@ paths:
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -5142,6 +5174,8 @@ paths:
       x-speakeasy-group: invoices
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/permissions:
     get:
       summary: List permissions
@@ -5470,6 +5504,8 @@ paths:
       x-speakeasy-group: permissions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/permissions/{permissionId}:
     parameters:
       - $ref: '#/components/parameters/parent-permission-id'
@@ -5486,6 +5522,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The permission object.
@@ -5587,6 +5625,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The organization object.
@@ -5778,6 +5818,8 @@ paths:
       x-speakeasy-group: organizations
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/organizations/me/partner:
     get:
       summary: Get partner status
@@ -5938,6 +5980,8 @@ paths:
       x-speakeasy-group: organizations
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/profiles:
     post:
       summary: Create profile
@@ -6119,6 +6163,8 @@ paths:
       x-speakeasy-group: profiles
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List profiles
       x-speakeasy-name-override: list
@@ -6141,6 +6187,8 @@ paths:
             example: pfl_QkEhN94Ba
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of profile objects.
@@ -6266,6 +6314,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The profile object.
@@ -6604,6 +6654,8 @@ paths:
       x-speakeasy-group: profiles
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Delete profile
       x-speakeasy-name-override: delete
@@ -6680,6 +6732,8 @@ paths:
       x-speakeasy-group: profiles
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/profiles/me:
     get:
       summary: Get current profile
@@ -6786,6 +6840,8 @@ paths:
       x-speakeasy-group: profiles
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/onboarding/me:
     get:
       summary: Get onboarding status
@@ -6868,6 +6924,8 @@ paths:
       x-speakeasy-group: onboarding
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     post:
       summary: Submit onboarding data
       x-speakeasy-name-override: submit
@@ -7064,6 +7122,8 @@ paths:
       x-speakeasy-group: onboarding
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/capabilities:
     get:
       summary: List capabilities
@@ -7174,6 +7234,8 @@ paths:
       x-speakeasy-group: capabilities
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/clients:
     get:
       summary: List clients
@@ -7211,6 +7273,8 @@ paths:
             example: org_12345678
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -7352,6 +7416,8 @@ paths:
               - 'null'
             example: organization
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The client object.
@@ -7667,6 +7733,8 @@ paths:
       x-speakeasy-group: client-links
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/webhooks:
     post:
       summary: Create a webhook
@@ -7789,6 +7857,8 @@ paths:
       x-speakeasy-group: webhooks
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List all webhooks
       x-speakeasy-name-override: list
@@ -7815,6 +7885,8 @@ paths:
             $ref: '#/components/schemas/webhook-event-types'
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -8070,6 +8142,8 @@ paths:
       x-speakeasy-group: webhooks
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: Get a webhook
       x-speakeasy-name-override: get
@@ -8085,6 +8159,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The webhook object.
@@ -8241,6 +8317,8 @@ paths:
       x-speakeasy-group: webhooks
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/webhooks/{webhookId}/ping:
     parameters:
       - $ref: '#/components/parameters/parent-webhook-id'
@@ -8310,6 +8388,8 @@ paths:
       x-speakeasy-group: webhooks
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/events/{webhookEventId}:
     parameters:
       - $ref: '#/components/parameters/parent-webhook-event-id'
@@ -8328,6 +8408,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The webhook event object.
@@ -8518,6 +8600,8 @@ paths:
       x-speakeasy-group: balance-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List all Connect balance transfers
       x-speakeasy-name-override: list
@@ -8539,6 +8623,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -8667,6 +8753,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/oauth-testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The Connect balance transfer object.
@@ -8761,6 +8849,8 @@ paths:
               details.qrCode: Include a QR code object. Only available for iDEAL, Bancontact and bank transfer payments.
             example: details.qrCode
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       requestBody:
         content:
           application/json:
@@ -9431,6 +9521,8 @@ paths:
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment objects.
@@ -11644,6 +11736,8 @@ paths:
             example: captures
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The payment object.
@@ -12075,6 +12169,8 @@ paths:
       x-speakeasy-group: payments
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Cancel payment
       x-speakeasy-name-override: cancel
@@ -12175,6 +12271,8 @@ paths:
       x-speakeasy-group: payments
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/payments/{paymentId}/release-authorization:
     parameters:
       - $ref: '#/components/parameters/parent-payment-id'
@@ -12260,6 +12358,8 @@ paths:
       x-speakeasy-group: payments
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/unmatched-credit-transfers:
     get:
       summary: List unmatched credit transfers
@@ -12281,6 +12381,8 @@ paths:
             example: uct_abcDEFghij123456789
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of unmatched credit transfer objects.
@@ -12447,6 +12549,8 @@ paths:
       x-speakeasy-group: unmatched-credit-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/unmatched-credit-transfers/{unmatchedCreditTransferId}/match:
     parameters:
       - $ref: '#/components/parameters/parent-unmatched-credit-transfer-id'
@@ -12462,7 +12566,7 @@ paths:
             - unmatched-credit-transfers.write
         - oAuth:
             - unmatched-credit-transfers.write
-      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in private beta, and the final specification may still change.\n\nMatches an unmatched credit transfer to one or more payments, settling the funds accordingly."
+      description: "> \U0001F6A7\n>\n> To get access to this functionality, a virtual IBAN must be assigned to your webshop. We are currently rolling out virtual IBANs to our merchant base. Contact our support team or your account/sales manager to request access today.\n\nMatches an unmatched credit transfer to one or more payments, settling the funds accordingly."
       requestBody:
         content:
           application/json:
@@ -12517,6 +12621,8 @@ paths:
       x-speakeasy-group: unmatched-credit-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/unmatched-credit-transfers/{unmatchedCreditTransferId}/return:
     parameters:
       - $ref: '#/components/parameters/parent-unmatched-credit-transfer-id'
@@ -12564,6 +12670,8 @@ paths:
       x-speakeasy-group: unmatched-credit-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/sessions:
     post:
       summary: Create Checkout Session
@@ -12834,6 +12942,8 @@ paths:
       x-speakeasy-group: checkout-sessions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/sessions/{sessionId}:
     parameters:
       - $ref: '#/components/parameters/parent-session-id'
@@ -12892,6 +13002,8 @@ paths:
       x-speakeasy-group: checkout-sessions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/methods:
     get:
       summary: List payment methods
@@ -13004,6 +13116,8 @@ paths:
             example: issuers
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -13523,6 +13637,8 @@ paths:
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -14695,6 +14811,8 @@ paths:
             $ref: '#/components/schemas/sequence-type'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The payment method object.
@@ -14945,6 +15063,8 @@ paths:
       x-speakeasy-group: methods
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Disable payment method
       x-speakeasy-name-override: disable
@@ -15021,6 +15141,8 @@ paths:
       x-speakeasy-group: methods
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/profiles/{profileId}/methods/{methodId}/issuers/{issuerId}:
     parameters:
       - $ref: '#/components/parameters/parent-profile-and-me-id'
@@ -15151,6 +15273,8 @@ paths:
       x-speakeasy-group: methods
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Disable payment method issuer
       x-speakeasy-name-override: disable-issuer
@@ -15238,6 +15362,8 @@ paths:
       x-speakeasy-group: methods
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/payments/{paymentId}/refunds:
     parameters:
       - $ref: '#/components/parameters/parent-payment-id'
@@ -15416,6 +15542,8 @@ paths:
       x-speakeasy-group: refunds
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List payment refunds
       x-speakeasy-name-override: list
@@ -15454,6 +15582,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -15608,6 +15738,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The payment object.
@@ -15694,6 +15826,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '204':
           description: An empty response if the refund was successfully canceled.
@@ -15792,6 +15926,8 @@ paths:
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of refund objects
@@ -15948,6 +16084,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of chargeback objects.
@@ -16188,6 +16326,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The chargeback object.
@@ -16356,6 +16496,8 @@ paths:
             $ref: '#/components/schemas/profileToken'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of chargeback objects.
@@ -16800,6 +16942,8 @@ paths:
       x-speakeasy-group: captures
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List captures
       x-speakeasy-name-override: list
@@ -16838,6 +16982,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of capture objects.
@@ -17031,6 +17177,8 @@ paths:
             example: payment
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The capture object.
@@ -17263,6 +17411,8 @@ paths:
       x-speakeasy-group: wallets
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/payment-links:
     post:
       summary: Create payment link
@@ -17697,6 +17847,8 @@ paths:
       x-speakeasy-group: payment-links
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List payment links
       x-speakeasy-name-override: list
@@ -17724,6 +17876,8 @@ paths:
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment link objects.
@@ -17950,6 +18104,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The payment link object.
@@ -18164,6 +18320,8 @@ paths:
       x-speakeasy-group: payment-links
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Delete payment link
       x-speakeasy-name-override: delete
@@ -18238,6 +18396,8 @@ paths:
       x-speakeasy-group: payment-links
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/payment-links/{paymentLinkId}/payments:
     parameters:
       - $ref: '#/components/parameters/parent-payment-link-id'
@@ -18269,6 +18429,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment objects.
@@ -18392,6 +18554,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of terminal objects.
@@ -18579,6 +18743,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The terminal object.
@@ -18675,6 +18841,8 @@ paths:
               details.qrCode: Include a QR code object.
             example: details.qrCode
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       requestBody:
         content:
           application/json:
@@ -18803,6 +18971,8 @@ paths:
             type: string
             example: pfl_QkEhN94Ba
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -18954,6 +19124,8 @@ paths:
               details.qrCode: Include a QR code object.
             example: details.qrCode
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The requested terminal pairing code object.
@@ -19028,6 +19200,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/parent-terminal-pairing-code-id'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The revoked terminal pairing code object.
@@ -19187,6 +19361,8 @@ paths:
       x-speakeasy-group: delayed-routing
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       operationId: payment-list-routes
       summary: List payment routes
@@ -19203,6 +19379,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of route objects.
@@ -19412,6 +19590,8 @@ paths:
       x-speakeasy-group: delayed-routing
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/customers:
     post:
       summary: Create customer
@@ -19505,6 +19685,8 @@ paths:
       x-speakeasy-group: customers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List customers
       x-speakeasy-name-override: list
@@ -19533,6 +19715,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of customer objects.
@@ -19661,6 +19845,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The customer object.
@@ -19858,6 +20044,8 @@ paths:
       x-speakeasy-group: customers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Delete customer
       x-speakeasy-name-override: delete
@@ -19930,6 +20118,8 @@ paths:
       x-speakeasy-group: customers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/customers/{customerId}/payments:
     parameters:
       - $ref: '#/components/parameters/parent-customer-id'
@@ -20598,6 +20788,8 @@ paths:
       x-speakeasy-group: customers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List customer payments
       x-speakeasy-name-override: list-payments
@@ -20626,6 +20818,8 @@ paths:
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment objects.
@@ -22930,6 +23124,8 @@ paths:
       x-speakeasy-group: mandates
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List mandates
       x-speakeasy-name-override: list
@@ -22965,6 +23161,8 @@ paths:
               $ref: '#/components/schemas/mandate-scopes'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of mandate objects.
@@ -23107,6 +23305,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The mandate object.
@@ -23245,6 +23445,8 @@ paths:
       x-speakeasy-group: mandates
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/customers/{customerId}/subscriptions:
     parameters:
       - $ref: '#/components/parameters/parent-customer-id'
@@ -23392,6 +23594,8 @@ paths:
       x-speakeasy-group: subscriptions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List customer subscriptions
       x-speakeasy-name-override: list
@@ -23420,6 +23624,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of subscription objects.
@@ -23569,6 +23775,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The subscription object.
@@ -23877,6 +24085,8 @@ paths:
       x-speakeasy-group: subscriptions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Cancel subscription
       x-speakeasy-name-override: cancel
@@ -23999,6 +24209,8 @@ paths:
       x-speakeasy-group: subscriptions
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/subscriptions:
     get:
       summary: List all subscriptions
@@ -24038,6 +24250,8 @@ paths:
             example: pfl_QkEhN94Ba
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of subscription objects.
@@ -24198,6 +24412,8 @@ paths:
         - $ref: '#/components/parameters/profile-id'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of payment objects.
@@ -26566,6 +26782,8 @@ paths:
       x-speakeasy-group: sales-invoices
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List sales invoices
       x-speakeasy-name-override: list
@@ -26590,6 +26808,8 @@ paths:
         - $ref: '#/components/parameters/list-limit'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -26851,6 +27071,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       x-speakeasy-group: sales-invoices
     patch:
       summary: Update sales invoice
@@ -27022,6 +27244,8 @@ paths:
       x-speakeasy-group: sales-invoices
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     delete:
       summary: Delete sales invoice
       x-speakeasy-name-override: delete
@@ -27116,7 +27340,194 @@ paths:
       x-speakeasy-group: sales-invoices
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/business-accounts/accounts:
+    post:
+      summary: Create business account
+      x-speakeasy-name-override: create-account
+      tags:
+        - Accounts API
+      operationId: create-business-account
+      security:
+        - oAuth:
+            - business-accounts.write
+      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nCreate a new business account for the authenticated organization.\n\nThe response contains the newly created business account.\n\nEach organization can have up to 5 active business accounts. Need more? [Contact us](https://www.mollie.com/contact)\nand we'll help you out."
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          description: |-
+            A unique value that identifies this request, so you can safely retry it without creating a second account.
+            Retrying with the same key within one hour returns the original response. We recommend a UUIDv4.
+
+            Keys are tied to the credential that sent the original request, so a refreshed OAuth token won't match
+            earlier keys. View the [public documentation](https://docs.mollie.com/reference/api-idempotency) to learn
+            more.
+          required: false
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - currency
+              properties:
+                name:
+                  type: string
+                  description: The name of the business account, as shown to the account holder.
+                  minLength: 1
+                  maxLength: 80
+                  example: Main Checking Account
+                currency:
+                  $ref: '#/components/schemas/account-currency'
+                testmode:
+                  $ref: '#/components/schemas/oauth-testmode-create'
+      responses:
+        '201':
+          description: The newly created business account object.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/business-account-response'
+              examples:
+                create-business-account-201:
+                  summary: The newly created business account
+                  value:
+                    resource: business-account
+                    id: ba_nopqrstuvwxyz23456789A
+                    mode: live
+                    accountDetails:
+                      accountHolderName: Mollie B.V.
+                      name: Main Checking Account
+                      currency: EUR
+                      iban: NL95MLLE1234567890
+                      bic: MLLENL2AXXX
+                    status: active
+                    balance:
+                      total:
+                        currency: EUR
+                        value: '0.00'
+                    createdAt: '2024-03-20T09:13:37+00:00'
+                    _links:
+                      self:
+                        href: https://api.mollie.com/v2/business-accounts/accounts/ba_nopqrstuvwxyz23456789A
+                        type: application/hal+json
+                      documentation:
+                        href: https://docs.mollie.com/reference/create-business-account
+                        type: text/html
+        '400':
+          description: |-
+            The request is malformed. For example, the body isn't valid JSON, a required field such as `name` is missing,
+            or the `Idempotency-Key` was already used for a request with different parameters.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 400
+                title: Bad Request
+                detail: The 'name' field is missing
+                field: name
+                _links:
+                  documentation:
+                    href: https://docs.mollie.com/overview/handling-errors
+                    type: text/html
+        '409':
+          description: |-
+            Your organization already has a business account with this name, or a request with the same
+            `Idempotency-Key` is still being processed.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 409
+                title: Conflict
+                detail: A business account with the name 'Main Checking Account' already exists
+                field: name
+                _links:
+                  documentation:
+                    href: https://docs.mollie.com/overview/handling-errors
+                    type: text/html
+        '422':
+          description: |-
+            The request is well-formed, but Mollie can't create the account. For example, your organization already
+            has 5 active business accounts, the maximum allowed. [Contact us](https://www.mollie.com/contact) if you
+            need more.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/error-response'
+              example:
+                status: 422
+                title: Unprocessable Entity
+                detail: Your organization has reached the maximum of 5 active business accounts
+                _links:
+                  documentation:
+                    href: https://docs.mollie.com/overview/handling-errors
+                    type: text/html
+        '429':
+          $ref: '#/components/responses/429-rate-limit'
+      x-readme:
+        code-samples:
+          - language: shell
+            code: |-
+              curl -X POST https://api.mollie.com/v2/business-accounts/accounts \
+                  -H "Authorization: Bearer access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM" \
+                  -H "Content-Type: application/json" \
+                  -d '{
+                    "name": "Main Checking Account",
+                    "currency": "EUR"
+                  }'
+          - language: php
+            code: |-
+              <?php
+              $mollie = new \Mollie\Api\MollieApiClient();
+              $mollie->setAccessToken("access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM");
+
+              $account = $mollie->businessAccounts->create([
+                  "name" => "Main Checking Account",
+                  "currency" => "EUR",
+              ]);
+          - language: node
+            code: |-
+              const { createMollieClient } = require('mollie-api-typescript');
+              const mollieClient = createMollieClient({ apiKey: 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM' });
+
+              const account = await mollieClient.businessAccounts.create({
+                name: 'Main Checking Account',
+                currency: 'EUR',
+              });
+          - language: python
+            code: |-
+              from mollie.api.client import Client
+
+              mollie_client = Client()
+              mollie_client.set_access_token("access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM")
+
+              account = mollie_client.business_accounts.create({
+                  "name": "Main Checking Account",
+                  "currency": "EUR",
+              })
+          - language: ruby
+            code: |-
+              require 'mollie-api-ruby'
+
+              Mollie::Client.configure do |config|
+                config.api_key = 'access_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM'
+              end
+
+              account = Mollie::BusinessAccount.create(
+                name: 'Main Checking Account',
+                currency: 'EUR'
+              )
+      x-speakeasy-group: accounts
     get:
       summary: List business accounts
       x-speakeasy-name-override: list-accounts
@@ -27145,6 +27556,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of business account objects.
@@ -27165,7 +27578,7 @@ paths:
                         description: An array of business account objects.
                         type: array
                         items:
-                          $ref: '#/components/schemas/business-account-response'
+                          $ref: '#/components/schemas/list-business-account-response'
               examples:
                 list-business-accounts-200:
                   summary: A list of business accounts
@@ -27188,6 +27601,22 @@ paths:
                               currency: EUR
                               value: '5000.00'
                           createdAt: '2024-03-20T09:13:37+00:00'
+                          _links:
+                            self:
+                              href: https://api.mollie.com/v2/business-accounts/accounts/ba_nopqrstuvwxyz23456789A
+                              type: application/hal+json
+                            documentation:
+                              href: https://docs.mollie.com/reference/get-business-account
+                              type: text/html
+                    _links:
+                      self:
+                        href: https://api.mollie.com/v2/business-accounts/accounts?limit=50
+                        type: application/hal+json
+                      previous: null
+                      next: null
+                      documentation:
+                        href: https://docs.mollie.com/reference/list-business-accounts
+                        type: text/html
         '400':
           $ref: '#/components/responses/400-invalid-list-request'
         '429':
@@ -27249,6 +27678,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The business account object.
@@ -27354,6 +27785,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of transaction objects.
@@ -27490,6 +27923,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The transaction object.
@@ -27615,7 +28050,6 @@ paths:
           schema:
             type: string
           example: 12345678-abcd
-        - $ref: '#/components/parameters/idempotency-key'
       requestBody:
         content:
           application/json:
@@ -27815,6 +28249,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The transfer object.
@@ -28080,6 +28516,8 @@ paths:
       x-speakeasy-group: verify-payee
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/business-accounts/draft-transfers:
     post:
       summary: Create draft transfer
@@ -28168,6 +28606,8 @@ paths:
       x-speakeasy-group: draft-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List draft transfers
       x-speakeasy-name-override: list
@@ -28193,6 +28633,8 @@ paths:
             $ref: '#/components/schemas/draft-transfer-status'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: A list of draft transfer objects.
@@ -28302,6 +28744,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The draft transfer object.
@@ -28402,6 +28846,8 @@ paths:
       x-speakeasy-group: draft-transfers
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
   /v2/payouts:
     post:
       summary: Create payout
@@ -28560,6 +29006,8 @@ paths:
       x-speakeasy-group: payouts
       parameters:
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
     get:
       summary: List payouts
       x-speakeasy-name-override: list
@@ -28587,6 +29035,8 @@ paths:
         - $ref: '#/components/parameters/list-sort'
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: |-
@@ -28682,6 +29132,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The payout object.
@@ -28755,6 +29207,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
+        - $ref: '#/components/parameters/x-client-signature'
+        - $ref: '#/components/parameters/x-client-signed-at'
       responses:
         '200':
           description: The canceled payout object.
@@ -33916,6 +34370,7 @@ components:
         - business-account-draft-transfer.created
         - business-account-draft-transfer.approved
         - business-account-draft-transfer.declined
+        - business-account.created
         - unmatched-credit-transfer.received
         - unmatched-credit-transfer.matched
         - unmatched-credit-transfer.returned
@@ -33969,6 +34424,7 @@ components:
         business-account-draft-transfer.created: The draft transfer is created and awaiting review by a human initiator in Mollie Apps.
         business-account-draft-transfer.approved: The draft transfer is approved by the initiator.
         business-account-draft-transfer.declined: The draft transfer is declined, either by the initiator, the creator, or because the debtor account was closed.
+        business-account.created: Occurs when a business account has been created.
         unmatched-credit-transfer.received: An incoming credit transfer has been received and could not be automatically matched to a payment.
         unmatched-credit-transfer.matched: An unmatched credit transfer resource has transitioned to the matched state after a successful match.
         unmatched-credit-transfer.returned: An unmatched credit transfer resource has transitioned to the returned state after a successful return.
@@ -35525,6 +35981,116 @@ components:
         - status
         - createdAt
         - _links
+    businessAccountToken:
+      type: string
+      pattern: ^ba_.+$
+      example: ba_nopqrstuvwxyz23456789A
+    account-details:
+      type: object
+      description: The account holder details and bank account information for the business account.
+      required:
+        - accountHolderName
+        - currency
+        - iban
+      properties:
+        accountHolderName:
+          type: string
+          description: The name of the account holder.
+          example: Mollie B.V.
+        name:
+          type: string
+          description: A name of the account.
+          example: Main Checking Account
+        currency:
+          type: string
+          description: The currency of the account in ISO 4217 format.
+          example: EUR
+        iban:
+          type: string
+          description: The IBAN (International Bank Account Number) of the account.
+          example: NL95MLLE1234567890
+        bic:
+          type: string
+          description: The BIC (Bank Identifier Code) of the account.
+          example: MLLENL2AXXX
+    balance:
+      type: object
+      description: The balance of the business account.
+      required:
+        - total
+      properties:
+        total:
+          $ref: '#/components/schemas/amount'
+          description: The total available balance of the business account.
+    account-status:
+      type: string
+      description: The status of the business account.
+      enum:
+        - active
+        - blocked
+        - closed
+      x-enumDescriptions:
+        active: The account is active and operational.
+        blocked: The account is blocked and cannot be used for transactions.
+        closed: The account has been closed.
+      readOnly: true
+      example: active
+      x-speakeasy-unknown-values: allow
+    entity-business-account:
+      type: object
+      properties:
+        resource:
+          type: string
+          description: |-
+            Indicates the response contains a business account object. Will always contain the string `business-account`
+            for this endpoint.
+          readOnly: true
+          example: business-account
+        id:
+          allOf:
+            - $ref: '#/components/schemas/businessAccountToken'
+          description: |-
+            The identifier uniquely referring to this business account. Mollie assigns this identifier at account creation
+            time.
+          readOnly: true
+        accountDetails:
+          $ref: '#/components/schemas/account-details'
+        balance:
+          $ref: '#/components/schemas/balance'
+        status:
+          $ref: '#/components/schemas/account-status'
+        mode:
+          $ref: '#/components/schemas/mode'
+        createdAt:
+          $ref: '#/components/schemas/created-at'
+    business-account-response:
+      allOf:
+        - $ref: '#/components/schemas/entity-business-account'
+        - type: object
+          properties:
+            _links:
+              type: object
+              description: An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+              readOnly: true
+              required:
+                - self
+                - documentation
+              properties:
+                self:
+                  $ref: '#/components/schemas/url'
+                  description: The URL to this business account.
+                documentation:
+                  $ref: '#/components/schemas/url'
+                  description: The URL to the business account endpoint documentation.
+      required:
+        - resource
+        - id
+        - mode
+        - accountDetails
+        - status
+        - balance
+        - createdAt
+        - _links
     entity-webhook-event:
       type: object
       required:
@@ -35586,6 +36152,8 @@ components:
                   $ref: '#/components/schemas/transfer-response'
                 - title: business-account-draft-transfer.*
                   $ref: '#/components/schemas/draft-transfer-response'
+                - title: business-account.*
+                  $ref: '#/components/schemas/business-account-response'
         _links:
           type: object
           description: An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
@@ -38328,100 +38896,17 @@ components:
             otherwise delivery will fail. Note: for recipients in Germany, the `vatNumber` is the required identifier
             for Peppol registration.
           example: false
-    businessAccountToken:
+    account-currency:
       type: string
-      pattern: ^ba_.+$
-      example: ba_nopqrstuvwxyz23456789A
-    account-details:
-      type: object
-      description: The account holder details and bank account information for the business account.
-      required:
-        - accountHolderName
-        - currency
-        - iban
-      properties:
-        accountHolderName:
-          type: string
-          description: The name of the account holder.
-          example: Mollie B.V.
-        name:
-          type: string
-          description: A name of the account.
-          example: Main Checking Account
-        currency:
-          type: string
-          description: The currency of the account in ISO 4217 format.
-          example: EUR
-        iban:
-          type: string
-          description: The IBAN (International Bank Account Number) of the account.
-          example: NL95MLLE1234567890
-        bic:
-          type: string
-          description: The BIC (Bank Identifier Code) of the account.
-          example: MLLENL2AXXX
-    balance:
-      type: object
-      description: The balance of the business account.
-      required:
-        - total
-      properties:
-        total:
-          $ref: '#/components/schemas/amount'
-          description: The total available balance of the business account.
-    account-status:
-      type: string
-      description: The status of the business account.
+      description: |-
+        The currency of the business account, as an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code.
+
+        Only `EUR` is supported for now. We're working on more currencies, and they'll be available soon.
       enum:
-        - active
-        - blocked
-        - closed
+        - EUR
       x-enumDescriptions:
-        active: The account is active and operational.
-        blocked: The account is blocked and cannot be used for transactions.
-        closed: The account has been closed.
-      readOnly: true
-      example: active
-      x-speakeasy-unknown-values: allow
-    entity-business-account:
-      type: object
-      properties:
-        resource:
-          type: string
-          description: |-
-            Indicates the response contains a business account object. Will always contain the string `business-account`
-            for this endpoint.
-          readOnly: true
-          example: business-account
-        id:
-          allOf:
-            - $ref: '#/components/schemas/businessAccountToken'
-          description: |-
-            The identifier uniquely referring to this business account. Mollie assigns this identifier at account creation
-            time.
-          readOnly: true
-        accountDetails:
-          $ref: '#/components/schemas/account-details'
-        balance:
-          $ref: '#/components/schemas/balance'
-        status:
-          $ref: '#/components/schemas/account-status'
-        mode:
-          $ref: '#/components/schemas/mode'
-        createdAt:
-          $ref: '#/components/schemas/created-at'
-    business-account-response:
-      allOf:
-        - $ref: '#/components/schemas/entity-business-account'
-        - type: object
-          required:
-            - resource
-            - id
-            - mode
-            - accountDetails
-            - status
-            - balance
-            - createdAt
+        EUR: Euro
+      example: EUR
     transaction-type:
       type: string
       description: "Indicates what kind of transaction this is.\n\nWe may introduce new transaction types as we expand the product. We recommend building your integration\nto handle unexpected values gracefully, so nothing breaks when that happens. "
@@ -41278,6 +41763,34 @@ components:
                 provided details. Required for `paid` status.
               items:
                 $ref: '#/components/schemas/sales-invoice-payment-details-response'
+    list-business-account-response:
+      allOf:
+        - $ref: '#/components/schemas/entity-business-account'
+        - type: object
+          properties:
+            _links:
+              type: object
+              description: An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+              readOnly: true
+              required:
+                - self
+                - documentation
+              properties:
+                self:
+                  $ref: '#/components/schemas/url'
+                  description: The URL to this business account.
+                documentation:
+                  $ref: '#/components/schemas/url'
+                  description: The URL to the business account endpoint documentation.
+      required:
+        - resource
+        - id
+        - mode
+        - accountDetails
+        - status
+        - balance
+        - createdAt
+        - _links
     list-entity-payout:
       type: object
       required:
@@ -43273,6 +43786,7 @@ components:
         - business-account-draft-transfer.created
         - business-account-draft-transfer.approved
         - business-account-draft-transfer.declined
+        - business-account.created
         - unmatched-credit-transfer.received
         - unmatched-credit-transfer.matched
         - unmatched-credit-transfer.returned
@@ -43326,6 +43840,7 @@ components:
         business-account-draft-transfer.created: The draft transfer is created and awaiting review by a human initiator in Mollie Apps.
         business-account-draft-transfer.approved: The draft transfer is approved by the initiator.
         business-account-draft-transfer.declined: The draft transfer is declined, either by the initiator, the creator, or because the debtor account was closed.
+        business-account.created: Occurs when a business account has been created.
         unmatched-credit-transfer.received: An incoming credit transfer has been received and could not be automatically matched to a payment.
         unmatched-credit-transfer.matched: An unmatched credit transfer resource has transitioned to the matched state after a successful match.
         unmatched-credit-transfer.returned: An unmatched credit transfer resource has transitioned to the returned state after a successful return.
@@ -45314,6 +45829,22 @@ components:
       schema:
         type: string
         example: 123e4567-e89b-12d3-a456-426
+    x-client-signature:
+      name: X-Client-Signature
+      in: header
+      description: A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.
+      required: false
+      schema:
+        type: string
+        example: MEUCIQDx8sJvK3z...
+    x-client-signed-at:
+      name: X-Client-Signed-At
+      in: header
+      description: The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.
+      required: false
+      schema:
+        type: string
+        example: '2025-01-01T12:00:00Z'
   examples:
     get-report-pending:
       summary: A report that is still being generated
@@ -45855,6 +46386,13 @@ components:
             currency: EUR
             value: '5000.00'
         createdAt: '2024-03-20T09:13:37+00:00'
+        _links:
+          self:
+            href: https://api.mollie.com/v2/business-accounts/accounts/ba_nopqrstuvwxyz23456789A
+            type: application/hal+json
+          documentation:
+            href: https://docs.mollie.com/reference/get-business-account
+            type: text/html
     get-transaction:
       summary: The transaction object
       value:

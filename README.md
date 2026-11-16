@@ -121,6 +121,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
@@ -252,6 +254,7 @@ var sdk = new Mollie.Client(
 
 ### [Accounts](docs/sdks/accounts/README.md)
 
+* [CreateAccount](docs/sdks/accounts/README.md#createaccount) - Create business account
 * [ListAccounts](docs/sdks/accounts/README.md#listaccounts) - List business accounts
 * [GetAccount](docs/sdks/accounts/README.md#getaccount) - Get business account
 * [List](docs/sdks/accounts/README.md#list) - List transactions
@@ -527,6 +530,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
@@ -565,6 +570,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);

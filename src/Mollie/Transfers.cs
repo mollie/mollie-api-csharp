@@ -57,11 +57,24 @@ namespace Mollie
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request payload, used to verify the authenticity of the transfer request.</param>
+        /// <param name="xClientSignedAt">
+        /// The timestamp (in ISO 8601 format) indicating when the client signed the request. Used in conjunction with<br/>
+        /// `X-Client-Signature` for request verification.
+        /// </param>
+        /// <param name="idempotencyKey">
+        /// A unique value used to identify this request and prevent duplicate transfers. UUIDv4 is recommended to<br/>
+        /// guarantee uniqueness across multiple processes or servers. If two requests are received with the same<br/>
+        /// idempotency key, the second request will be discarded.<br/>
+        /// <br/>
+        /// View the <a href="https://docs.mollie.com/reference/api-idempotency#using-an-idempotency-key">public documentation</a>
+        /// to learn more.
+        /// </param>
+        /// <param name="transferRequest">A <see cref="TransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">One of <paramref name="xClientSignature"/>, <paramref name="xClientSignedAt"/> or <paramref name="idempotencyKey"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
@@ -71,7 +84,10 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateTransferResponse> CreateAsync(
-            CreateTransferRequest request,
+            string xClientSignature,
+            string xClientSignedAt,
+            string idempotencyKey,
+            TransferRequest? transferRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -88,28 +104,18 @@ namespace Mollie
         /// and details of a previously created transfer.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="businessAccountsTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetTransferResponse> GetAsync(
-            string businessAccountsTransferId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -159,11 +165,24 @@ namespace Mollie
         /// | Other   | Default: transfer is processed                      | `business-account-transfer.requested` → `business-account-transfer.initiated` → `business-account-transfer.processed`                                              |<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request payload, used to verify the authenticity of the transfer request.</param>
+        /// <param name="xClientSignedAt">
+        /// The timestamp (in ISO 8601 format) indicating when the client signed the request. Used in conjunction with<br/>
+        /// `X-Client-Signature` for request verification.
+        /// </param>
+        /// <param name="idempotencyKey">
+        /// A unique value used to identify this request and prevent duplicate transfers. UUIDv4 is recommended to<br/>
+        /// guarantee uniqueness across multiple processes or servers. If two requests are received with the same<br/>
+        /// idempotency key, the second request will be discarded.<br/>
+        /// <br/>
+        /// View the <a href="https://docs.mollie.com/reference/api-idempotency#using-an-idempotency-key">public documentation</a>
+        /// to learn more.
+        /// </param>
+        /// <param name="transferRequest">A <see cref="TransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">One of <paramref name="xClientSignature"/>, <paramref name="xClientSignedAt"/> or <paramref name="idempotencyKey"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
@@ -173,12 +192,25 @@ namespace Mollie
         /// </exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateTransferResponse> CreateAsync(
-            CreateTransferRequest request,
+            string xClientSignature,
+            string xClientSignedAt,
+            string idempotencyKey,
+            TransferRequest? transferRequest = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (xClientSignature == null) throw new ArgumentNullException(nameof(xClientSignature));
+            if (xClientSignedAt == null) throw new ArgumentNullException(nameof(xClientSignedAt));
+            if (idempotencyKey == null) throw new ArgumentNullException(nameof(idempotencyKey));
+
+            var request = new CreateTransferRequest()
+            {
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
+                IdempotencyKey = idempotencyKey,
+                TransferRequest = transferRequest,
+            };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/v2/business-accounts/transfers";
@@ -379,40 +411,23 @@ namespace Mollie
         /// and details of a previously created transfer.<br/>
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> from the global security.</para>
         /// </remarks>
-        /// <param name="businessAccountsTransferId">Provide the ID of the related transfer.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetTransferResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="businessAccountsTransferId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetTransferResponse> GetAsync(
-            string businessAccountsTransferId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetTransferRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (businessAccountsTransferId == null) throw new ArgumentNullException(nameof(businessAccountsTransferId));
-
-            var request = new GetTransferRequest()
-            {
-                BusinessAccountsTransferId = businessAccountsTransferId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

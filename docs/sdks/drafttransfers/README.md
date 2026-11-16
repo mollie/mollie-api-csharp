@@ -53,6 +53,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.DraftTransfers.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     createDraftTransferRequest: new Mollie.Models.Components.CreateDraftTransferRequest() {
         DebtorIban = "NL55MLLE0123456789",
         Creditor = new DraftTransferParty() {
@@ -76,10 +78,12 @@ var res = await sdk.DraftTransfers.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `IdempotencyKey`                                                                                      | *string*                                                                                              | :heavy_minus_sign:                                                                                    | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                      | 123e4567-e89b-12d3-a456-426                                                                           |
-| `CreateDraftTransferRequest`                                                                          | [Models.Components.CreateDraftTransferRequest](../../Models/Components/CreateDraftTransferRequest.md) | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |                                                                                                       |
+| Parameter                                                                                                                                                                               | Type                                                                                                                                                                                    | Required                                                                                                                                                                                | Description                                                                                                                                                                             | Example                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                                                                                                                        | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                                             |
+| `XClientSignature`                                                                                                                                                                      | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.        | MEUCIQDx8sJvK3z...                                                                                                                                                                      |
+| `XClientSignedAt`                                                                                                                                                                       | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration. | 2025-01-01T12:00:00Z                                                                                                                                                                    |
+| `CreateDraftTransferRequest`                                                                                                                                                            | [Models.Components.CreateDraftTransferRequest](../../Models/Components/CreateDraftTransferRequest.md)                                                                                   | :heavy_minus_sign:                                                                                                                                                                      | N/A                                                                                                                                                                                     |                                                                                                                                                                                         |
 
 ### Response
 
@@ -123,6 +127,8 @@ ListDraftTransfersRequest req = new ListDraftTransfersRequest() {
     Limit = 50,
     Status = DraftTransferStatus.Approved,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListDraftTransfersResponse? res = await sdk.DraftTransfers.ListAsync(req);
@@ -172,6 +178,7 @@ transfer](create-draft-transfer) for how to simulate `approved` and `declined` o
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: true,
@@ -180,10 +187,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.DraftTransfers.GetAsync(
-    draftTransferId: "badrt_87GByBuj4UCcUTEbs6aGJ",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetDraftTransferRequest req = new GetDraftTransferRequest() {
+    DraftTransferId = "badrt_87GByBuj4UCcUTEbs6aGJ",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.DraftTransfers.GetAsync(req);
 
 // handle response
 ```
@@ -193,6 +204,7 @@ var res = await sdk.DraftTransfers.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -201,10 +213,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.DraftTransfers.GetAsync(
-    draftTransferId: "badrt_87GByBuj4UCcUTEbs6aGJ",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetDraftTransferRequest req = new GetDraftTransferRequest() {
+    DraftTransferId = "badrt_87GByBuj4UCcUTEbs6aGJ",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.DraftTransfers.GetAsync(req);
 
 // handle response
 ```
@@ -214,6 +230,7 @@ var res = await sdk.DraftTransfers.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -222,10 +239,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.DraftTransfers.GetAsync(
-    draftTransferId: "badrt_87GByBuj4UCcUTEbs6aGJ",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetDraftTransferRequest req = new GetDraftTransferRequest() {
+    DraftTransferId = "badrt_87GByBuj4UCcUTEbs6aGJ",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.DraftTransfers.GetAsync(req);
 
 // handle response
 ```
@@ -235,6 +256,7 @@ var res = await sdk.DraftTransfers.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: true,
@@ -243,21 +265,21 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.DraftTransfers.GetAsync(
-    draftTransferId: "badrt_87GByBuj4UCcUTEbs6aGJ",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetDraftTransferRequest req = new GetDraftTransferRequest() {
+    DraftTransferId = "badrt_87GByBuj4UCcUTEbs6aGJ",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+};
+
+var res = await sdk.DraftTransfers.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DraftTransferId`                                                                                                                                                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related draft transfer.                                                                                                                                                                                                                                                                                                                                            | badrt_87GByBuj4UCcUTEbs6aGJ                                                                                                                                                                                                                                                                                                                                                              |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [GetDraftTransferRequest](../../Models/Requests/GetDraftTransferRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
@@ -297,24 +319,26 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.DraftTransfers.CancelAsync(
-    draftTransferId: "badrt_87GByBuj4UCcUTEbs6aGJ",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new CancelDraftTransferRequestBody() {
+CancelDraftTransferRequest req = new CancelDraftTransferRequest() {
+    DraftTransferId = "badrt_87GByBuj4UCcUTEbs6aGJ",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new CancelDraftTransferRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.DraftTransfers.CancelAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `DraftTransferId`                                                                         | *string*                                                                                  | :heavy_check_mark:                                                                        | Provide the ID of the related draft transfer.                                             | badrt_87GByBuj4UCcUTEbs6aGJ                                                               |
-| `IdempotencyKey`                                                                          | *string*                                                                                  | :heavy_minus_sign:                                                                        | A unique key to ensure idempotent requests. This key should be a UUID v4 string.          | 123e4567-e89b-12d3-a456-426                                                               |
-| `RequestBody`                                                                             | [CancelDraftTransferRequestBody](../../Models/Requests/CancelDraftTransferRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `request`                                                                         | [CancelDraftTransferRequest](../../Models/Requests/CancelDraftTransferRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
 
 ### Response
 

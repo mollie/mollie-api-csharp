@@ -39,12 +39,6 @@ namespace Mollie.Models.Requests
         [SpeakeasyMetadata("header:style=simple,explode=false,name=Idempotency-Key")]
         public string IdempotencyKey { get; set; } = default!;
 
-        /// <summary>
-        /// A unique key to ensure idempotent requests. This key should be a UUID v4 string.
-        /// </summary>
-        [SpeakeasyMetadata("header:style=simple,explode=false,name=idempotency-key")]
-        public string? IdempotencyKey1 { get; set; }
-
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public TransferRequest? TransferRequest { get; set; }
     }

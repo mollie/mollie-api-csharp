@@ -40,6 +40,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateProfileResponse"/> response envelope when completed.</returns>
@@ -52,6 +54,8 @@ namespace Mollie
         public  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -65,12 +69,7 @@ namespace Mollie
         /// The results are paginated.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="fromP">
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// result set.
-        /// </param>
-        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="ListProfilesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -81,9 +80,7 @@ namespace Mollie
         /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListProfilesResponse> ListAsync(
-            string? fromP = null,
-            long? limit = null,
-            string? idempotencyKey = null,
+            ListProfilesRequest? request = null,
             RetryConfig? retryConfig = null,
             string? urlOverride = null,
             CancellationToken? cancellationToken = null
@@ -96,26 +93,18 @@ namespace Mollie
         /// Retrieve a single profile by its ID.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="profileId">Provide the ID of the related profile.</param>
-        /// <param name="testmode">
-        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetProfileResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetProfileResponse> GetAsync(
-            string profileId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetProfileRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -130,22 +119,18 @@ namespace Mollie
         /// Alternatively, you can use this endpoint to automate profile management.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="profileId">Provide the ID of the related profile.</param>
-        /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="UpdateProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateProfileResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">One of <paramref name="profileId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateProfileResponse> UpdateAsync(
-            string profileId,
-            UpdateProfileRequestBody requestBody,
-            string? idempotencyKey = null,
+            UpdateProfileRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -159,6 +144,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteProfileResponse"/> response envelope when completed.</returns>
@@ -171,6 +158,8 @@ namespace Mollie
         public  Task<DeleteProfileResponse> DeleteAsync(
             string profileId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -187,6 +176,8 @@ namespace Mollie
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.ApiKey"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCurrentProfileResponse"/> response envelope when completed.</returns>
@@ -197,6 +188,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetCurrentProfileResponse> GetCurrentAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -227,6 +220,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="profileRequest">A <see cref="ProfileRequest"/> parameter.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateProfileResponse"/> response envelope when completed.</returns>
@@ -239,6 +234,8 @@ namespace Mollie
         public async  Task<CreateProfileResponse> CreateAsync(
             ProfileRequest profileRequest,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -249,6 +246,8 @@ namespace Mollie
             {
                 ProfileRequest = profileRequest,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -421,12 +420,7 @@ namespace Mollie
         /// The results are paginated.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="fromP">
-        /// Provide an ID to start the result set from the item with the given ID and onwards. This allows you to paginate the<br/>
-        /// result set.
-        /// </param>
-        /// <param name="limit">The maximum number of items to return. Defaults to 50 items.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="ListProfilesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="urlOverride">The URL to use for the next page of results.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
@@ -437,21 +431,12 @@ namespace Mollie
         /// <exception cref="ErrorResponse">The request contains issues. For example, if the specified `from` value is not a valid ID. Thrown when the API returns a 400 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListProfilesResponse> ListAsync(
-            string? fromP = null,
-            long? limit = null,
-            string? idempotencyKey = null,
+            ListProfilesRequest? request = null,
             RetryConfig? retryConfig = null,
             string? urlOverride = null,
             CancellationToken? cancellationToken = null
         )
         {
-            var request = new ListProfilesRequest()
-            {
-                From = fromP,
-                Limit = limit,
-                IdempotencyKey = idempotencyKey,
-            };
-
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/profiles", request, null);
             if (urlOverride != null)
@@ -561,10 +546,17 @@ namespace Mollie
                     nextURL = baseUrl + nextURL;
                 }
 
+                var newRequest = new ListProfilesRequest
+                {
+                    From = request?.From,
+                    Limit = request?.Limit,
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
+                };
+
                 return await ListAsync (
-                    fromP: request?.From,
-                    limit: request?.Limit,
-                    idempotencyKey: request?.IdempotencyKey,
+                    request: newRequest,
                     retryConfig: retryConfig,
                     urlOverride: nextURL
                 );
@@ -648,38 +640,23 @@ namespace Mollie
         /// Retrieve a single profile by its ID.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="profileId">Provide the ID of the related profile.</param>
-        /// <param name="testmode">
-        /// You can enable test mode by setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetProfileResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="profileId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404, 410 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetProfileResponse> GetAsync(
-            string profileId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetProfileRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (profileId == null) throw new ArgumentNullException(nameof(profileId));
-
-            var request = new GetProfileRequest()
-            {
-                ProfileId = profileId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.ProfileId ??= SDKConfiguration.ProfileId;
             request.Testmode ??= SDKConfiguration.Testmode;
 
@@ -848,35 +825,23 @@ namespace Mollie
         /// Alternatively, you can use this endpoint to automate profile management.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="profileId">Provide the ID of the related profile.</param>
-        /// <param name="requestBody">A <see cref="UpdateProfileRequestBody"/> parameter.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="UpdateProfileRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateProfileResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">One of <paramref name="profileId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">This profile cannot be edited because it belongs to a demo account. Thrown when the API returns a 403, 404, 410, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateProfileResponse> UpdateAsync(
-            string profileId,
-            UpdateProfileRequestBody requestBody,
-            string? idempotencyKey = null,
+            UpdateProfileRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (profileId == null) throw new ArgumentNullException(nameof(profileId));
-            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
-
-            var request = new UpdateProfileRequest()
-            {
-                ProfileId = profileId,
-                RequestBody = requestBody,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.ProfileId ??= SDKConfiguration.ProfileId;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -1049,6 +1014,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="profileId">Provide the ID of the related profile.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteProfileResponse"/> response envelope when completed.</returns>
@@ -1061,6 +1028,8 @@ namespace Mollie
         public async  Task<DeleteProfileResponse> DeleteAsync(
             string profileId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -1071,6 +1040,8 @@ namespace Mollie
             {
                 ProfileId = profileId,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
             request.ProfileId ??= SDKConfiguration.ProfileId;
 
@@ -1223,6 +1194,8 @@ namespace Mollie
         /// <para>If set, this operation will use <see cref="Mollie.Models.Components.Security.ApiKey"/> from the global security.</para>
         /// </remarks>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetCurrentProfileResponse"/> response envelope when completed.</returns>
@@ -1233,6 +1206,8 @@ namespace Mollie
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetCurrentProfileResponse> GetCurrentAsync(
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -1240,6 +1215,8 @@ namespace Mollie
             var request = new GetCurrentProfileRequest()
             {
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();

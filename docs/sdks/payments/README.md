@@ -32,6 +32,7 @@ guide on [method-specific parameters](extra-payment-parameters).
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -39,10 +40,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -168,8 +171,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -179,6 +184,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -186,10 +192,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -315,8 +323,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -326,6 +336,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -333,10 +344,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -462,8 +475,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -473,6 +488,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -480,10 +496,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -609,8 +627,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -620,6 +640,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -627,9 +648,11 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -755,8 +778,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -766,6 +791,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -773,10 +799,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -902,8 +930,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -913,6 +943,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -920,10 +951,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1049,8 +1082,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1060,6 +1095,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1067,10 +1103,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1196,8 +1234,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1207,6 +1247,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1214,10 +1255,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1343,8 +1386,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1354,6 +1399,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1361,10 +1407,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1490,8 +1538,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1501,6 +1551,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1508,10 +1559,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1637,8 +1690,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1648,6 +1703,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1655,10 +1711,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1784,8 +1842,10 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
@@ -1795,6 +1855,7 @@ var res = await sdk.Payments.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 using NodaTime;
 using System.Collections.Generic;
 
@@ -1802,10 +1863,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CreateAsync(
-    include: "details.qrCode",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    paymentRequest: new PaymentRequest() {
+CreatePaymentRequest req = new CreatePaymentRequest() {
+    Include = "details.qrCode",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    PaymentRequest = new PaymentRequest() {
         Description = "Chess Board",
         Amount = new Amount() {
             Currency = "EUR",
@@ -1931,19 +1994,19 @@ var res = await sdk.Payments.CreateAsync(
         DigitalGoods = true,
         CustomerReference = "1234567890",
         TerminalId = "term_1234567890",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CreateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `Include`                                                                                            | *string*                                                                                             | :heavy_minus_sign:                                                                                   | This endpoint allows you to include additional information via the `include` query string parameter. |                                                                                                      |
-| `IdempotencyKey`                                                                                     | *string*                                                                                             | :heavy_minus_sign:                                                                                   | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                     | 123e4567-e89b-12d3-a456-426                                                                          |
-| `PaymentRequest`                                                                                     | [PaymentRequest](../../Models/Components/PaymentRequest.md)                                          | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |                                                                                                      |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [CreatePaymentRequest](../../Models/Requests/CreatePaymentRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -1984,6 +2047,8 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
@@ -2016,6 +2081,8 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
@@ -2048,6 +2115,8 @@ ListPaymentsRequest req = new ListPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListPaymentsResponse? res = await sdk.Payments.ListAsync(req);
@@ -2101,6 +2170,8 @@ GetPaymentRequest req = new GetPaymentRequest() {
     Include = "details.qrCode",
     Embed = "captures",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Payments.GetAsync(req);
@@ -2127,6 +2198,8 @@ GetPaymentRequest req = new GetPaymentRequest() {
     Include = "details.qrCode",
     Embed = "captures",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Payments.GetAsync(req);
@@ -2153,6 +2226,8 @@ GetPaymentRequest req = new GetPaymentRequest() {
     Include = "details.qrCode",
     Embed = "captures",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Payments.GetAsync(req);
@@ -2195,10 +2270,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.UpdateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdatePaymentRequestBody() {
+UpdatePaymentRequest req = new UpdatePaymentRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdatePaymentRequestBody() {
         Description = "Chess Board",
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
@@ -2239,8 +2316,10 @@ var res = await sdk.Payments.UpdateAsync(
             Country = "NL",
         },
         BillingEmail = "test@example.com",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.UpdateAsync(req);
 
 // handle response
 ```
@@ -2256,10 +2335,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.UpdateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdatePaymentRequestBody() {
+UpdatePaymentRequest req = new UpdatePaymentRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdatePaymentRequestBody() {
         Description = "Chess Board",
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
@@ -2300,8 +2381,10 @@ var res = await sdk.Payments.UpdateAsync(
             Country = "NL",
         },
         BillingEmail = "test@example.com",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.UpdateAsync(req);
 
 // handle response
 ```
@@ -2317,10 +2400,12 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.UpdateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdatePaymentRequestBody() {
+UpdatePaymentRequest req = new UpdatePaymentRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdatePaymentRequestBody() {
         Description = "Chess Board",
         RedirectUrl = "https://example.org/redirect",
         CancelUrl = "https://example.org/cancel",
@@ -2361,19 +2446,19 @@ var res = await sdk.Payments.UpdateAsync(
             Country = "NL",
         },
         BillingEmail = "test@example.com",
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.UpdateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [UpdatePaymentRequestBody](../../Models/Requests/UpdatePaymentRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [UpdatePaymentRequest](../../Models/Requests/UpdatePaymentRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -2407,24 +2492,26 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.CancelAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new CancelPaymentRequestBody() {
+CancelPaymentRequest req = new CancelPaymentRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new CancelPaymentRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.CancelAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [CancelPaymentRequestBody](../../Models/Requests/CancelPaymentRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [CancelPaymentRequest](../../Models/Requests/CancelPaymentRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -2460,25 +2547,27 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Payments.ReleaseAuthorizationAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new ReleaseAuthorizationRequestBody() {
+ReleaseAuthorizationRequest req = new ReleaseAuthorizationRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new ReleaseAuthorizationRequestBody() {
         ProfileId = "pfl_5B8cwPMGnU",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Payments.ReleaseAuthorizationAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `PaymentId`                                                                                 | *string*                                                                                    | :heavy_check_mark:                                                                          | Provide the ID of the related payment.                                                      | tr_5B8cwPMGnU                                                                               |
-| `IdempotencyKey`                                                                            | *string*                                                                                    | :heavy_minus_sign:                                                                          | A unique key to ensure idempotent requests. This key should be a UUID v4 string.            | 123e4567-e89b-12d3-a456-426                                                                 |
-| `RequestBody`                                                                               | [ReleaseAuthorizationRequestBody](../../Models/Requests/ReleaseAuthorizationRequestBody.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |                                                                                             |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [ReleaseAuthorizationRequest](../../Models/Requests/ReleaseAuthorizationRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
 
 ### Response
 

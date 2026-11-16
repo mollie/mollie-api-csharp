@@ -91,6 +91,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
@@ -170,6 +172,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);
@@ -208,6 +212,8 @@ ListBalancesRequest req = new ListBalancesRequest() {
     From = "bal_gVMhHKqSSRYJyPsuoPNFH",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListBalancesResponse? res = await sdk.Balances.ListAsync(req);

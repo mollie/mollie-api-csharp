@@ -25,23 +25,28 @@ having collected the customer's authorization.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Captures.CreateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityCapture: new EntityCapture() {
+CreateCaptureRequest req = new CreateCaptureRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    EntityCapture = new EntityCapture() {
         Description = "Capture for cart #12345",
         Amount = new AmountNullable() {
             Currency = "EUR",
             Value = "10.00",
         },
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Captures.CreateAsync(req);
 
 // handle response
 ```
@@ -51,34 +56,37 @@ var res = await sdk.Captures.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Captures.CreateAsync(
-    paymentId: "tr_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    entityCapture: new EntityCapture() {
+CreateCaptureRequest req = new CreateCaptureRequest() {
+    PaymentId = "tr_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    EntityCapture = new EntityCapture() {
         Description = "Capture for cart #12345",
         Amount = new AmountNullable() {
             Currency = "EUR",
             Value = "10.00",
         },
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Captures.CreateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `PaymentId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related payment.                                           | tr_5B8cwPMGnU                                                                    |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `EntityCapture`                                                                  | [EntityCapture](../../Models/Components/EntityCapture.md)                        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [CreateCaptureRequest](../../Models/Requests/CreateCaptureRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -118,6 +126,8 @@ ListCapturesRequest req = new ListCapturesRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListCapturesResponse? res = await sdk.Captures.ListAsync(req);
@@ -150,6 +160,8 @@ ListCapturesRequest req = new ListCapturesRequest() {
     Limit = 50,
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListCapturesResponse? res = await sdk.Captures.ListAsync(req);
@@ -204,6 +216,8 @@ GetCaptureRequest req = new GetCaptureRequest() {
     CaptureId = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Captures.GetAsync(req);
@@ -230,6 +244,8 @@ GetCaptureRequest req = new GetCaptureRequest() {
     CaptureId = "cpt_vytxeTZskVKR7C7WgdSP3d",
     Embed = "payment",
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 var res = await sdk.Captures.GetAsync(req);

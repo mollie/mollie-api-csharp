@@ -23,15 +23,18 @@ mandates for cards, your customers need to perform a 'first payment' with their 
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Mandates.CreateAsync(
-    customerId: "cst_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    mandateRequest: new MandateRequest() {
+CreateMandateRequest req = new CreateMandateRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    MandateRequest = new MandateRequest() {
         Id = "mdt_5B8cwPMGnU",
         Method = MandateMethod.Directdebit,
         ConsumerName = "John Doe",
@@ -43,8 +46,10 @@ var res = await sdk.Mandates.CreateAsync(
         PaypalBillingAgreementId = "B-12A34567B8901234CD",
         PayPalVaultId = "8kk8451t",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Mandates.CreateAsync(req);
 
 // handle response
 ```
@@ -54,15 +59,18 @@ var res = await sdk.Mandates.CreateAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Mandates.CreateAsync(
-    customerId: "cst_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    mandateRequest: new MandateRequest() {
+CreateMandateRequest req = new CreateMandateRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    MandateRequest = new MandateRequest() {
         Id = "mdt_5B8cwPMGnU",
         Method = MandateMethod.Directdebit,
         ConsumerName = "John Doe",
@@ -74,19 +82,19 @@ var res = await sdk.Mandates.CreateAsync(
         PaypalBillingAgreementId = "B-12A34567B8901234CD",
         PayPalVaultId = "8kk8451t",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Mandates.CreateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `CustomerId`                                                                     | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related customer.                                          | cst_5B8cwPMGnU                                                                   |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `MandateRequest`                                                                 | [MandateRequest](../../Models/Components/MandateRequest.md)                      | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [CreateMandateRequest](../../Models/Requests/CreateMandateRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -130,6 +138,8 @@ ListMandatesRequest req = new ListMandatesRequest() {
         MandateScopes.CustomerPresent,
     },
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListMandatesResponse? res = await sdk.Mandates.ListAsync(req);
@@ -170,6 +180,7 @@ account details, card details, or PayPal account details.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -178,23 +189,24 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Mandates.GetAsync(
-    customerId: "cst_5B8cwPMGnU",
-    mandateId: "mdt_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetMandateRequest req = new GetMandateRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    MandateId = "mdt_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Mandates.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CustomerId`                                                                                                                                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                  | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                           |
-| `MandateId`                                                                                                                                                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related mandate.                                                                                                                                                                                                                                                                                                                                                   | mdt_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                           |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `request`                                                       | [GetMandateRequest](../../Models/Requests/GetMandateRequest.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
 
 ### Response
 
@@ -224,26 +236,27 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Mandates.RevokeAsync(
-    customerId: "cst_5B8cwPMGnU",
-    mandateId: "mdt_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new RevokeMandateRequestBody() {
+RevokeMandateRequest req = new RevokeMandateRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    MandateId = "mdt_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new RevokeMandateRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Mandates.RevokeAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `CustomerId`                                                                     | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related customer.                                          | cst_5B8cwPMGnU                                                                   |
-| `MandateId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related mandate.                                           | mdt_5B8cwPMGnU                                                                   |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [RevokeMandateRequestBody](../../Models/Requests/RevokeMandateRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [RevokeMandateRequest](../../Models/Requests/RevokeMandateRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 

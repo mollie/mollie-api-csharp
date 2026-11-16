@@ -56,3 +56,9 @@ Entity.CreateTransferResponse(/* values here */);
 ```csharp
 Entity.CreateDraftTransferResponse(/* values here */);
 ```
+
+### BusinessAccountResponse
+
+```csharp
+Entity.CreateBusinessAccountResponse(/* values here */);
+```

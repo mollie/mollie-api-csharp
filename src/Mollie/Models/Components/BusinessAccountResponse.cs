@@ -63,5 +63,11 @@ namespace Mollie.Models.Components
         /// </summary>
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// An object with several relevant URLs. Every URL object will contain an `href` and a `type` field.
+        /// </summary>
+        [JsonProperty("_links")]
+        public BusinessAccountResponseLinks Links { get; set; } = default!;
     }
 }

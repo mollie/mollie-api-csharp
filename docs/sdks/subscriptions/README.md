@@ -40,15 +40,18 @@ Your customer will be charged €10 on the last day of each month, starting in A
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Subscriptions.CreateAsync(
-    customerId: "cst_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    subscriptionRequest: new SubscriptionRequest() {
+CreateSubscriptionRequest req = new CreateSubscriptionRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    SubscriptionRequest = new SubscriptionRequest() {
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -69,19 +72,19 @@ var res = await sdk.Subscriptions.CreateAsync(
         MandateId = "mdt_5B8cwPMGnU",
         ProfileId = "pfl_5B8cwPMGnU",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Subscriptions.CreateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `CustomerId`                                                                     | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related customer.                                          | cst_5B8cwPMGnU                                                                   |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `SubscriptionRequest`                                                            | [SubscriptionRequest](../../Models/Components/SubscriptionRequest.md)            | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `request`                                                                       | [CreateSubscriptionRequest](../../Models/Requests/CreateSubscriptionRequest.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
 
 ### Response
 
@@ -121,6 +124,8 @@ ListSubscriptionsRequest req = new ListSubscriptionsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListSubscriptionsResponse? res = await sdk.Subscriptions.ListAsync(req);
@@ -160,6 +165,7 @@ Retrieve a single subscription by its ID and the ID of its parent customer.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -168,23 +174,24 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Subscriptions.GetAsync(
-    customerId: "cst_5B8cwPMGnU",
-    subscriptionId: "sub_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetSubscriptionRequest req = new GetSubscriptionRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Subscriptions.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CustomerId`                                                                                                                                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related customer.                                                                                                                                                                                                                                                                                                                                                  | cst_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                           |
-| `SubscriptionId`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                       | Provide the ID of the related subscription.                                                                                                                                                                                                                                                                                                                                              | sub_5B8cwPMGnU                                                                                                                                                                                                                                                                                                                                                                           |
-| `Testmode`                                                                                                                                                                                                                                                                                                                                                                               | *bool*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                                                                                                                                                                                                                                          |
-| `IdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                       | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                                                                                                                                                                                                                         | 123e4567-e89b-12d3-a456-426                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [GetSubscriptionRequest](../../Models/Requests/GetSubscriptionRequest.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
 
 ### Response
 
@@ -217,11 +224,13 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Subscriptions.UpdateAsync(
-    customerId: "cst_5B8cwPMGnU",
-    subscriptionId: "sub_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdateSubscriptionRequestBody() {
+UpdateSubscriptionRequest req = new UpdateSubscriptionRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdateSubscriptionRequestBody() {
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -233,8 +242,10 @@ var res = await sdk.Subscriptions.UpdateAsync(
         WebhookUrl = "https://example.com/webhook",
         MandateId = "mdt_5B8cwPMGnU",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Subscriptions.UpdateAsync(req);
 
 // handle response
 ```
@@ -250,11 +261,13 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Subscriptions.UpdateAsync(
-    customerId: "cst_5B8cwPMGnU",
-    subscriptionId: "sub_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdateSubscriptionRequestBody() {
+UpdateSubscriptionRequest req = new UpdateSubscriptionRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdateSubscriptionRequestBody() {
         Amount = new Amount() {
             Currency = "EUR",
             Value = "10.00",
@@ -266,20 +279,19 @@ var res = await sdk.Subscriptions.UpdateAsync(
         WebhookUrl = "https://example.com/webhook",
         MandateId = "mdt_5B8cwPMGnU",
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Subscriptions.UpdateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
-| `SubscriptionId`                                                                        | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related subscription.                                             | sub_5B8cwPMGnU                                                                          |
-| `IdempotencyKey`                                                                        | *string*                                                                                | :heavy_minus_sign:                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.        | 123e4567-e89b-12d3-a456-426                                                             |
-| `RequestBody`                                                                           | [UpdateSubscriptionRequestBody](../../Models/Requests/UpdateSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `request`                                                                       | [UpdateSubscriptionRequest](../../Models/Requests/UpdateSubscriptionRequest.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
 
 ### Response
 
@@ -308,26 +320,27 @@ var sdk = new Client(security: new Security() {
     ApiKey = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Subscriptions.CancelAsync(
-    customerId: "cst_5B8cwPMGnU",
-    subscriptionId: "sub_5B8cwPMGnU",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new CancelSubscriptionRequestBody() {
+CancelSubscriptionRequest req = new CancelSubscriptionRequest() {
+    CustomerId = "cst_5B8cwPMGnU",
+    SubscriptionId = "sub_5B8cwPMGnU",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new CancelSubscriptionRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Subscriptions.CancelAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `CustomerId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related customer.                                                 | cst_5B8cwPMGnU                                                                          |
-| `SubscriptionId`                                                                        | *string*                                                                                | :heavy_check_mark:                                                                      | Provide the ID of the related subscription.                                             | sub_5B8cwPMGnU                                                                          |
-| `IdempotencyKey`                                                                        | *string*                                                                                | :heavy_minus_sign:                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.        | 123e4567-e89b-12d3-a456-426                                                             |
-| `RequestBody`                                                                           | [CancelSubscriptionRequestBody](../../Models/Requests/CancelSubscriptionRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `request`                                                                       | [CancelSubscriptionRequest](../../Models/Requests/CancelSubscriptionRequest.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
 
 ### Response
 
@@ -456,6 +469,8 @@ ListAllSubscriptionsRequest req = new ListAllSubscriptionsRequest() {
     From = "sub_rVKGtNd6s3",
     Limit = 50,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListAllSubscriptionsResponse? res = await sdk.Subscriptions.AllAsync(req);
@@ -514,6 +529,8 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);
@@ -548,6 +565,8 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);
@@ -582,6 +601,8 @@ ListSubscriptionPaymentsRequest req = new ListSubscriptionPaymentsRequest() {
     Limit = 50,
     Sort = Sorting.Desc,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListSubscriptionPaymentsResponse? res = await sdk.Subscriptions.ListPaymentsAsync(req);

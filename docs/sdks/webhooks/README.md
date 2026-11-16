@@ -29,6 +29,8 @@ var sdk = new Client(security: new Security() {
 
 var res = await sdk.Webhooks.CreateAsync(
     idempotencyKey: "123e4567-e89b-12d3-a456-426",
+    xClientSignature: "MEUCIQDx8sJvK3z...",
+    xClientSignedAt: "2025-01-01T12:00:00Z",
     requestBody: new CreateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
@@ -44,10 +46,12 @@ var res = await sdk.Webhooks.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [CreateWebhookRequestBody](../../Models/Requests/CreateWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                                                                                                                                               | Type                                                                                                                                                                                    | Required                                                                                                                                                                                | Description                                                                                                                                                                             | Example                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                                                                                                                        | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                                             |
+| `XClientSignature`                                                                                                                                                                      | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.        | MEUCIQDx8sJvK3z...                                                                                                                                                                      |
+| `XClientSignedAt`                                                                                                                                                                       | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration. | 2025-01-01T12:00:00Z                                                                                                                                                                    |
+| `RequestBody`                                                                                                                                                                           | [CreateWebhookRequestBody](../../Models/Requests/CreateWebhookRequestBody.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                      | N/A                                                                                                                                                                                     |                                                                                                                                                                                         |
 
 ### Response
 
@@ -85,6 +89,8 @@ ListWebhooksRequest req = new ListWebhooksRequest() {
     Sort = Sorting.Desc,
     EventTypes = WebhookEventTypes.PaymentLinkPaid,
     IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
 };
 
 ListWebhooksResponse? res = await sdk.Webhooks.ListAsync(req);
@@ -130,18 +136,20 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Webhooks.UpdateAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdateWebhookRequestBody() {
+UpdateWebhookRequest req = new UpdateWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    RequestBody = new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
         EventTypes = EventTypes.CreateWebhookEventTypes(
             WebhookEventTypes.PaymentLinkPaid
         ),
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Webhooks.UpdateAsync(req);
 
 // handle response
 ```
@@ -157,18 +165,22 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Webhooks.UpdateAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdateWebhookRequestBody() {
+UpdateWebhookRequest req = new UpdateWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
         EventTypes = EventTypes.CreateWebhookEventTypes(
             WebhookEventTypes.PaymentLinkPaid
         ),
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Webhooks.UpdateAsync(req);
 
 // handle response
 ```
@@ -184,29 +196,31 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Webhooks.UpdateAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new UpdateWebhookRequestBody() {
+UpdateWebhookRequest req = new UpdateWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new UpdateWebhookRequestBody() {
         Name = "Webhook #1",
         Url = "https://mollie.com/",
         EventTypes = EventTypes.CreateWebhookEventTypes(
             WebhookEventTypes.PaymentLinkPaid
         ),
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Webhooks.UpdateAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [UpdateWebhookRequestBody](../../Models/Requests/UpdateWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [UpdateWebhookRequest](../../Models/Requests/UpdateWebhookRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -229,6 +243,7 @@ Retrieve a single webhook object by its ID.
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -237,10 +252,14 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Webhooks.GetAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetWebhookRequest req = new GetWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Webhooks.GetAsync(req);
 
 // handle response
 ```
@@ -250,6 +269,7 @@ var res = await sdk.Webhooks.GetAsync(
 ```csharp
 using Mollie;
 using Mollie.Models.Components;
+using Mollie.Models.Requests;
 
 var sdk = new Client(
     testmode: false,
@@ -258,21 +278,23 @@ var sdk = new Client(
     }
 );
 
-var res = await sdk.Webhooks.GetAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426"
-);
+GetWebhookRequest req = new GetWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+};
+
+var res = await sdk.Webhooks.GetAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                               | Type                                                                                                                                                                    | Required                                                                                                                                                                | Description                                                                                                                                                             | Example                                                                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `WebhookId`                                                                                                                                                             | *string*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Provide the ID of the related webhook.                                                                                                                                  | hook_1234567890                                                                                                                                                         |
-| `Testmode`                                                                                                                                                              | *bool*                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                      | You can enable test mode by setting the `testmode` query parameter to `true`.<br/><br/>Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa. |                                                                                                                                                                         |
-| `IdempotencyKey`                                                                                                                                                        | *string*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                      | A unique key to ensure idempotent requests. This key should be a UUID v4 string.                                                                                        | 123e4567-e89b-12d3-a456-426                                                                                                                                             |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `request`                                                       | [GetWebhookRequest](../../Models/Requests/GetWebhookRequest.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
 
 ### Response
 
@@ -301,24 +323,26 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Webhooks.DeleteAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new DeleteWebhookRequestBody() {
+DeleteWebhookRequest req = new DeleteWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new DeleteWebhookRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Webhooks.DeleteAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [DeleteWebhookRequestBody](../../Models/Requests/DeleteWebhookRequestBody.md)    | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [DeleteWebhookRequest](../../Models/Requests/DeleteWebhookRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -347,24 +371,26 @@ var sdk = new Client(security: new Security() {
     AdvancedAccessToken = "<YOUR_BEARER_TOKEN_HERE>",
 });
 
-var res = await sdk.Webhooks.TestAsync(
-    webhookId: "hook_1234567890",
-    idempotencyKey: "123e4567-e89b-12d3-a456-426",
-    requestBody: new TestWebhookRequestBody() {
+TestWebhookRequest req = new TestWebhookRequest() {
+    WebhookId = "hook_1234567890",
+    IdempotencyKey = "123e4567-e89b-12d3-a456-426",
+    XClientSignature = "MEUCIQDx8sJvK3z...",
+    XClientSignedAt = "2025-01-01T12:00:00Z",
+    RequestBody = new TestWebhookRequestBody() {
         Testmode = false,
-    }
-);
+    },
+};
+
+var res = await sdk.Webhooks.TestAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `WebhookId`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | Provide the ID of the related webhook.                                           | hook_1234567890                                                                  |
-| `IdempotencyKey`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | A unique key to ensure idempotent requests. This key should be a UUID v4 string. | 123e4567-e89b-12d3-a456-426                                                      |
-| `RequestBody`                                                                    | [TestWebhookRequestBody](../../Models/Requests/TestWebhookRequestBody.md)        | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `request`                                                         | [TestWebhookRequest](../../Models/Requests/TestWebhookRequest.md) | :heavy_check_mark:                                                | The request object to use for the request.                        |
 
 ### Response
 

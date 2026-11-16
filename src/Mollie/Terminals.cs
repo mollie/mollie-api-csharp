@@ -61,28 +61,18 @@ namespace Mollie
         /// Retrieve a single terminal by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="terminalId">Provide the ID of the related terminal.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetTerminalRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetTerminalResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="terminalId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetTerminalResponse> GetAsync(
-            string terminalId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetTerminalRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -103,9 +93,7 @@ namespace Mollie
         /// Pairing codes expire after 90 days (see `expiresAt`) and can be used multiple times.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="include">Include additional information in the response.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="TerminalsRequestPairingCodeRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="TerminalsRequestPairingCodeRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsRequestPairingCodeResponse"/> response envelope when completed.</returns>
@@ -115,9 +103,7 @@ namespace Mollie
         /// <exception cref="ErrorResponse">Your organization is not eligible for terminal pairing codes. Complete onboarding, then try again. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
-            string? include = null,
-            string? idempotencyKey = null,
-            TerminalsRequestPairingCodeRequestBody? requestBody = null,
+            TerminalsRequestPairingCodeRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -168,22 +154,18 @@ namespace Mollie
         /// returns a 404. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
-        /// <param name="include">Include additional information in the response.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="TerminalsGetPairingCodeRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsGetPairingCodeResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<TerminalsGetPairingCodeResponse> TerminalsGetPairingCodeAsync(
-            string pairingCodeId,
-            string? include = null,
-            string? idempotencyKey = null,
+            TerminalsGetPairingCodeRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -205,6 +187,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsRevokePairingCodeResponse"/> response envelope when completed.</returns>
@@ -217,6 +201,8 @@ namespace Mollie
         public  Task<TerminalsRevokePairingCodeResponse> TerminalsRevokePairingCodeAsync(
             string pairingCodeId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         );
@@ -382,7 +368,9 @@ namespace Mollie
                     Limit = request?.Limit,
                     Sort = request?.Sort,
                     Testmode = request?.Testmode,
-                    IdempotencyKey = request?.IdempotencyKey
+                    IdempotencyKey = request?.IdempotencyKey,
+                    XClientSignature = request?.XClientSignature,
+                    XClientSignedAt = request?.XClientSignedAt
                 };
 
                 return await ListAsync (
@@ -470,40 +458,23 @@ namespace Mollie
         /// Retrieve a single terminal by its ID.<br/>
         /// <para>If set, this operation will use one of <see cref="Mollie.Models.Components.Security.ApiKey"/>, <see cref="Mollie.Models.Components.Security.AdvancedAccessToken"/>, or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="terminalId">Provide the ID of the related terminal.</param>
-        /// <param name="testmode">
-        /// Most API credentials are specifically created for either live mode or test mode. In those cases the `testmode` query<br/>
-        /// parameter must not be sent. For organization-level credentials such as OAuth access tokens, you can enable test mode by<br/>
-        /// setting the `testmode` query parameter to `true`.<br/>
-        /// <br/>
-        /// Test entities cannot be retrieved when the endpoint is set to live mode, and vice versa.
-        /// </param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="GetTerminalRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="GetTerminalResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="terminalId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetTerminalResponse> GetAsync(
-            string terminalId,
-            bool? testmode = null,
-            string? idempotencyKey = null,
+            GetTerminalRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (terminalId == null) throw new ArgumentNullException(nameof(terminalId));
-
-            var request = new GetTerminalRequest()
-            {
-                TerminalId = terminalId,
-                Testmode = testmode,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
             request.Testmode ??= SDKConfiguration.Testmode;
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -677,9 +648,7 @@ namespace Mollie
         /// Pairing codes expire after 90 days (see `expiresAt`) and can be used multiple times.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="include">Include additional information in the response.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
-        /// <param name="requestBody">A <see cref="TerminalsRequestPairingCodeRequestBody"/> parameter.</param>
+        /// <param name="request">A <see cref="TerminalsRequestPairingCodeRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsRequestPairingCodeResponse"/> response envelope when completed.</returns>
@@ -689,20 +658,11 @@ namespace Mollie
         /// <exception cref="ErrorResponse">Your organization is not eligible for terminal pairing codes. Complete onboarding, then try again. Thrown when the API returns a 403, 422 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<TerminalsRequestPairingCodeResponse> TerminalsRequestPairingCodeAsync(
-            string? include = null,
-            string? idempotencyKey = null,
-            TerminalsRequestPairingCodeRequestBody? requestBody = null,
+            TerminalsRequestPairingCodeRequest? request = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            var request = new TerminalsRequestPairingCodeRequest()
-            {
-                Include = include,
-                IdempotencyKey = idempotencyKey,
-                RequestBody = requestBody,
-            };
-
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes", request, null);
 
@@ -1071,34 +1031,23 @@ namespace Mollie
         /// returns a 404. Active pairing codes are never deleted.<br/>
         /// <para>If set, this operation will use either <see cref="Mollie.Models.Components.Security.ApiKey"/> or <see cref="Mollie.Models.Components.Security.OAuth"/> from the global security.</para>
         /// </remarks>
-        /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
-        /// <param name="include">Include additional information in the response.</param>
-        /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="request">A <see cref="TerminalsGetPairingCodeRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsGetPairingCodeResponse"/> response envelope when completed.</returns>
-        /// <exception cref="ArgumentNullException">The required parameter <paramref name="pairingCodeId"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="OperationCanceledException">The operation was aborted via the provided cancellation token.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ErrorResponse">No entity with this ID exists. Thrown when the API returns a 404 or 429 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<TerminalsGetPairingCodeResponse> TerminalsGetPairingCodeAsync(
-            string pairingCodeId,
-            string? include = null,
-            string? idempotencyKey = null,
+            TerminalsGetPairingCodeRequest request,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
         {
-            if (pairingCodeId == null) throw new ArgumentNullException(nameof(pairingCodeId));
-
-            var request = new TerminalsGetPairingCodeRequest()
-            {
-                PairingCodeId = pairingCodeId,
-                Include = include,
-                IdempotencyKey = idempotencyKey,
-            };
+            if (request == null) throw new ArgumentNullException(nameof(request));
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/v2/terminals/pairing-codes/{pairingCodeId}", request, null);
@@ -1272,6 +1221,8 @@ namespace Mollie
         /// </remarks>
         /// <param name="pairingCodeId">Provide the ID of the terminal pairing code.</param>
         /// <param name="idempotencyKey">A unique key to ensure idempotent requests. This key should be a UUID v4 string.</param>
+        /// <param name="xClientSignature">A cryptographic signature of the request, used to verify that it was sent by you and hasn't been tampered with. Required if you've enabled request signing for your integration.</param>
+        /// <param name="xClientSignedAt">The timestamp, in ISO 8601 format, at which you generated the `X-Client-Signature`. Required together with `X-Client-Signature` if you've enabled request signing for your integration.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <param name="cancellationToken">An optional cancellation token to signal when the operation should be aborted.</param>
         /// <returns>An awaitable task that returns a <see cref="TerminalsRevokePairingCodeResponse"/> response envelope when completed.</returns>
@@ -1284,6 +1235,8 @@ namespace Mollie
         public async  Task<TerminalsRevokePairingCodeResponse> TerminalsRevokePairingCodeAsync(
             string pairingCodeId,
             string? idempotencyKey = null,
+            string? xClientSignature = null,
+            string? xClientSignedAt = null,
             RetryConfig? retryConfig = null,
             CancellationToken? cancellationToken = null
         )
@@ -1294,6 +1247,8 @@ namespace Mollie
             {
                 PairingCodeId = pairingCodeId,
                 IdempotencyKey = idempotencyKey,
+                XClientSignature = xClientSignature,
+                XClientSignedAt = xClientSignedAt,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
