@@ -32,9 +32,17 @@ namespace Mollie
         /// Create business account.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// <br/>
+        /// &gt; 🔐 **Request signing required**<br/>
+        /// &gt;<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Create a new business account for the authenticated organization.<br/>
         /// <br/>
@@ -79,9 +87,13 @@ namespace Mollie
         /// List business accounts.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
@@ -109,9 +121,13 @@ namespace Mollie
         /// Get business account.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
@@ -137,9 +153,13 @@ namespace Mollie
         /// List transactions.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
@@ -168,9 +188,13 @@ namespace Mollie
         /// Get transaction.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>
@@ -210,9 +234,17 @@ namespace Mollie
         /// Create business account.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🚧 Beta feature<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; This feature is currently in beta testing, and the final specification may still change.<br/>
+        /// <br/>
+        /// &gt; 🔐 **Request signing required**<br/>
+        /// &gt;<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Create a new business account for the authenticated organization.<br/>
         /// <br/>
@@ -426,9 +458,13 @@ namespace Mollie
         /// List business accounts.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve all business accounts for the authenticated organization.<br/>
         /// <br/>
@@ -661,9 +697,13 @@ namespace Mollie
         /// Get business account.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve a single business account object by its account ID. This allows you to check the current status,<br/>
         /// balance, and account details.<br/>
@@ -847,9 +887,13 @@ namespace Mollie
         /// List transactions.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve all transactions for a specific business account.<br/>
         /// <br/>
@@ -1083,9 +1127,13 @@ namespace Mollie
         /// Get transaction.
         /// </summary>
         /// <remarks>
-        /// &gt; 🔒 Restricted access<br/>
+        /// &gt; 🔐 **Request signing required**<br/>
         /// &gt;<br/>
-        /// &gt; This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.<br/>
+        /// &gt; Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.<br/>
+        /// &gt;<br/>
+        /// &gt; Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.<br/>
+        /// &gt;<br/>
+        /// &gt; <a href="https://docs.mollie.com/reference/request-signing">Learn how to sign requests</a>
         /// <br/>
         /// Retrieve a single transaction object by its transaction ID. This allows you to check the details,<br/>
         /// amount, counterparty, and balance impact of a specific transaction.<br/>

@@ -27352,7 +27352,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.write
-      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nCreate a new business account for the authenticated organization.\n\nThe response contains the newly created business account.\n\nEach organization can have up to 5 active business accounts. Need more? [Contact us](https://www.mollie.com/contact)\nand we'll help you out."
+      description: "> \U0001F6A7 Beta feature\n>\n> This feature is currently in beta testing, and the final specification may still change.\n\n> \U0001F510 **Request signing required**\n>\n> Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.\n>\n> Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.\n>\n> [Learn how to sign requests](https://docs.mollie.com/reference/request-signing)\n\nCreate a new business account for the authenticated organization.\n\nThe response contains the newly created business account.\n\nEach organization can have up to 5 active business accounts. Need more? [Contact us](https://www.mollie.com/contact)\nand we'll help you out."
       parameters:
         - name: Idempotency-Key
           in: header
@@ -27537,7 +27537,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve all business accounts for the authenticated organization.\n\nThe results are paginated."
+      description: "> \U0001F510 **Request signing required**\n>\n> Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.\n>\n> Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.\n>\n> [Learn how to sign requests](https://docs.mollie.com/reference/request-signing)\n\nRetrieve all business accounts for the authenticated organization.\n\nThe results are paginated."
       parameters:
         - name: iban
           in: query
@@ -27674,7 +27674,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve a single business account object by its account ID. This allows you to check the current status,\nbalance, and account details."
+      description: "> \U0001F510 **Request signing required**\n>\n> Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.\n>\n> Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.\n>\n> [Learn how to sign requests](https://docs.mollie.com/reference/request-signing)\n\nRetrieve a single business account object by its account ID. This allows you to check the current status,\nbalance, and account details."
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
@@ -27743,7 +27743,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve all transactions for a specific business account.\n\nThe results are paginated."
+      description: "> \U0001F510 **Request signing required**\n>\n> Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.\n>\n> Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.\n>\n> [Learn how to sign requests](https://docs.mollie.com/reference/request-signing)\n\nRetrieve all transactions for a specific business account.\n\nThe results are paginated."
       parameters:
         - name: creditDebitIndicator
           in: query
@@ -27919,7 +27919,7 @@ paths:
       security:
         - oAuth:
             - business-accounts.read
-      description: "> \U0001F512 Restricted access\n>\n> This API is currently only available to Mollie's authorized partners via OAuth. Direct access for individual businesses isn't available yet, but it's on our roadmap — check back here for updates.\n\nRetrieve a single transaction object by its transaction ID. This allows you to check the details,\namount, counterparty, and balance impact of a specific transaction."
+      description: "> \U0001F510 **Request signing required**\n>\n> Signature enforcement is mandatory for Direct Customer API users for `live` mode requests.\n>\n> Sign every request with the `X-Client-Signature` and `X-Client-Signed-At` headers.\n>\n> [Learn how to sign requests](https://docs.mollie.com/reference/request-signing)\n\nRetrieve a single transaction object by its transaction ID. This allows you to check the details,\namount, counterparty, and balance impact of a specific transaction."
       parameters:
         - $ref: '#/components/parameters/testmode'
         - $ref: '#/components/parameters/idempotency-key'
