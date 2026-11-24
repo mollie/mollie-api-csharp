@@ -27366,7 +27366,7 @@ paths:
           required: false
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 00000000-0000-0000-0000-000000000000
         - $ref: '#/components/parameters/x-client-signature'
         - $ref: '#/components/parameters/x-client-signed-at'
       requestBody:

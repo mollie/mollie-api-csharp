@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 976c8649-45e4-46d8-8361-1ba937e9882e
 management:
-  docChecksum: 0c30cff900367b0f1374459d0f5325a0
+  docChecksum: 23a9927d6441bdcdd6198a956fb649ee
   docVersion: 1.0.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 1.4.27
-  configChecksum: 21ca5c5ba96887b7968b704057d59d3a
+  releaseVersion: 1.4.28
+  configChecksum: 30b9274bab0aab454706a567ab1cb459
   repoURL: https://github.com/mollie/mollie-api-csharp.git
   installationURL: https://github.com/mollie/mollie-api-csharp
   published: true
 persistentEdits:
-  generation_id: 38cc22f2-f95a-408d-87e0-53f01ca9046b
-  pristine_commit_hash: 593f8edf2b1ce71b010c64eef437da9832be52fc
-  pristine_tree_hash: 0cc2bc57b5c7268322d68fe2edcee9fbcf029643
+  generation_id: 6b4fd4b7-fd99-490d-b97d-20f02b547e2d
+  pristine_commit_hash: ff0f03dc62644466987793456c7c0c79ce0711c2
+  pristine_tree_hash: 55a91cd216ebdc0da18218732277a61d0f5f1181
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -2216,8 +2216,8 @@ trackedFiles:
     pristine_git_object: f1bbfbbfb070fa29529cb8259e2e90f38dd490e8
   docs/Models/Requests/CreateBusinessAccountRequest.md:
     id: bb2caf3cadaa
-    last_write_checksum: sha1:26a85c7a2a70d35de3c0edd86ca77bf6bcaf9815
-    pristine_git_object: 3933aeae54ea3d4ec6ef1457648b67d8c6fe43aa
+    last_write_checksum: sha1:f2bae9c93361e22dc2302bd99404a5c17bb63e21
+    pristine_git_object: a51f62e4a16ca64334129b3ab5b8c38ec4ab6a6b
   docs/Models/Requests/CreateBusinessAccountRequestBody.md:
     id: 1c636f5d87e6
     last_write_checksum: sha1:2ecaceda667810b7bc63ab2129ca4fb2a76d5a93
@@ -3776,8 +3776,8 @@ trackedFiles:
     pristine_git_object: 2b7ea119818283c4229c580ce1a3391fd7e363db
   docs/sdks/accounts/README.md:
     id: d6c754b1ca96
-    last_write_checksum: sha1:37869d84233f41cb2458864d1954aff37b50c7e2
-    pristine_git_object: cdf3f4c8b86b6794056bde86e853e2f08c1a7a13
+    last_write_checksum: sha1:51f3afb85e2491545c939335c4a05197ac886be3
+    pristine_git_object: 2e893825b9e6f29f214309bd4bb43a3ac696973b
   docs/sdks/balances/README.md:
     id: 6ca85866f00d
     last_write_checksum: sha1:1e436b2c3e4334c9f2dc0db4977f68dba1678ef4
@@ -7724,8 +7724,8 @@ trackedFiles:
     pristine_git_object: 6ced5efc260fe6df498f7ef4b07a703491471f56
   src/Mollie/Mollie.csproj:
     id: 4e1ba3c4c19f
-    last_write_checksum: sha1:b5be3cb545c7f98d0a77ae86bbb504dbaf488417
-    pristine_git_object: a498e2cf482469e372fd36ea4374aad45efa93dd
+    last_write_checksum: sha1:f5cf55904d2ac190d998b0493fab79d09c78776d
+    pristine_git_object: aa5eea79542ba92489e169c0cebf476a43a015fd
   src/Mollie/Oauth.cs:
     id: 30e84731aeeb
     last_write_checksum: sha1:f89597e2b6da089a3924ea44ac12435ead1e5794
@@ -7768,8 +7768,8 @@ trackedFiles:
     pristine_git_object: 0c77cc38b8a077ad5d82acf40358ca2b5fd8455d
   src/Mollie/SDKConfig.cs:
     id: bb24f47797f4
-    last_write_checksum: sha1:bdcf07656dec9071d0307bbae6107d7e05e99d45
-    pristine_git_object: aebf2ced1cebc0fc27d545938e51df16d7b94f76
+    last_write_checksum: sha1:acd93401e1362e2ec871b3586096a1d4f7ccb353
+    pristine_git_object: fee56e87e0c475a755b2985fe2d942352b2b573e
   src/Mollie/SalesInvoices.cs:
     id: d2caeb4c8a1f
     last_write_checksum: sha1:324f5006dd81ffce56fab58295f161537cb77618
@@ -7804,8 +7804,8 @@ trackedFiles:
     pristine_git_object: cbdd3e7e8aaafc3894ea7854f92b4da5be492cbb
   src/Mollie/Utils/Constants.cs:
     id: af7ef427b9ab
-    last_write_checksum: sha1:66387d93a5aa4b3f95669b8914ea33cb8a0513c1
-    pristine_git_object: 5aef6945b8e6af58cccb7c9b50c19f8d4631522c
+    last_write_checksum: sha1:649836e9a858ecf4f47b57fe5bba0a5f3a442367
+    pristine_git_object: 4e31681f6bc9e94176be4baf4c70619bbb942799
   src/Mollie/Utils/DecimalStrConverter.cs:
     id: 879a0d1b288a
     last_write_checksum: sha1:dc9581c05fb4f79c6ce9595cc9de4befc2d43a79
