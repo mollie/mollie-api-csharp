@@ -29,13 +29,16 @@ namespace Mollie.Utils
             throw new NotSupportedException();
         }
 
-        public override object ReadJson(
+        public override object? ReadJson(
             JsonReader reader,
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
         )
         {
+            if (reader.TokenType == JsonToken.Null) {
+                return null;
+            }
             if (reader.TokenType == JsonToken.StartObject) {
                 return ParseTokenIntoDictionary(JToken.Load(reader));
             }
